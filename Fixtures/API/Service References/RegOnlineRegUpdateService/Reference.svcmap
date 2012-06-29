@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="57952c45-eef2-49e3-b558-9d9a03dd6797" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RegistrationUpdateService.wsdl" MetadataType="Wsdl" ID="cfa9dbf3-3dd0-4769-ae7b-76fb87b58988" SourceId="1" SourceUrl="http://beta.regonline.com/webservices/2007/08/RegistrationUpdateService.wsdl" />
+    <MetadataFile FileName="RegistrationUpdateService.disco" MetadataType="Disco" ID="8aad1290-9081-4835-86bf-ef8edb2bdb98" SourceId="1" SourceUrl="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx?disco" />
+    <MetadataFile FileName="RegistrationUpdateService1.wsdl" MetadataType="Wsdl" ID="f809b187-0a1f-453e-9557-1df15c952052" SourceId="1" SourceUrl="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx?wsdl" />
+    <MetadataFile FileName="RegistrationUpdateService.xsd" MetadataType="Schema" ID="43ffa6ac-a653-42a6-89d9-6dc5e0960087" SourceId="1" SourceUrl="http://beta.regonline.com/webservices/2007/08/RegistrationUpdateServiceTypes.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

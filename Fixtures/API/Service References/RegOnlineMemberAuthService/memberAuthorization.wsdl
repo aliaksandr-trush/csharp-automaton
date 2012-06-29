@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.regonline.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.regonline.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/webservices/">
+      <s:element name="authorizeMember">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="authorizeMemberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authorizeMemberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="authorizeMemberWithEmailAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="authorizeMemberWithEmailAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authorizeMemberWithEmailAddressResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="authorizeMemberSoapIn">
+    <wsdl:part name="parameters" element="tns:authorizeMember" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberSoapOut">
+    <wsdl:part name="parameters" element="tns:authorizeMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:authorizeMemberWithEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:authorizeMemberWithEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="emailAddress" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="emailAddress" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authorizeMemberWithEmailAddressHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="memberAuthorizationSoap">
+    <wsdl:operation name="authorizeMember">
+      <wsdl:input message="tns:authorizeMemberSoapIn" />
+      <wsdl:output message="tns:authorizeMemberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <wsdl:input message="tns:authorizeMemberWithEmailAddressSoapIn" />
+      <wsdl:output message="tns:authorizeMemberWithEmailAddressSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="memberAuthorizationHttpGet">
+    <wsdl:operation name="authorizeMember">
+      <wsdl:input message="tns:authorizeMemberHttpGetIn" />
+      <wsdl:output message="tns:authorizeMemberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <wsdl:input message="tns:authorizeMemberWithEmailAddressHttpGetIn" />
+      <wsdl:output message="tns:authorizeMemberWithEmailAddressHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="memberAuthorizationHttpPost">
+    <wsdl:operation name="authorizeMember">
+      <wsdl:input message="tns:authorizeMemberHttpPostIn" />
+      <wsdl:output message="tns:authorizeMemberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <wsdl:input message="tns:authorizeMemberWithEmailAddressHttpPostIn" />
+      <wsdl:output message="tns:authorizeMemberWithEmailAddressHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="memberAuthorizationSoap" type="tns:memberAuthorizationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authorizeMember">
+      <soap:operation soapAction="http://www.regonline.com/webservices/authorizeMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <soap:operation soapAction="http://www.regonline.com/webservices/authorizeMemberWithEmailAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="memberAuthorizationSoap12" type="tns:memberAuthorizationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authorizeMember">
+      <soap12:operation soapAction="http://www.regonline.com/webservices/authorizeMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <soap12:operation soapAction="http://www.regonline.com/webservices/authorizeMemberWithEmailAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="memberAuthorizationHttpGet" type="tns:memberAuthorizationHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="authorizeMember">
+      <http:operation location="/authorizeMember" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <http:operation location="/authorizeMemberWithEmailAddress" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="memberAuthorizationHttpPost" type="tns:memberAuthorizationHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="authorizeMember">
+      <http:operation location="/authorizeMember" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authorizeMemberWithEmailAddress">
+      <http:operation location="/authorizeMemberWithEmailAddress" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="memberAuthorization">
+    <wsdl:port name="memberAuthorizationSoap" binding="tns:memberAuthorizationSoap">
+      <soap:address location="http://beta.regonline.com/webServices/memberAuthorization.asmx" />
+    </wsdl:port>
+    <wsdl:port name="memberAuthorizationSoap12" binding="tns:memberAuthorizationSoap12">
+      <soap12:address location="http://beta.regonline.com/webServices/memberAuthorization.asmx" />
+    </wsdl:port>
+    <wsdl:port name="memberAuthorizationHttpGet" binding="tns:memberAuthorizationHttpGet">
+      <http:address location="http://beta.regonline.com/webServices/memberAuthorization.asmx" />
+    </wsdl:port>
+    <wsdl:port name="memberAuthorizationHttpPost" binding="tns:memberAuthorizationHttpPost">
+      <http:address location="http://beta.regonline.com/webServices/memberAuthorization.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

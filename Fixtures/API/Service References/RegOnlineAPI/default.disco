@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://beta.regonline.com/api/default.asmx?wsdl" docRef="http://beta.regonline.com/api/default.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://beta.regonline.com/api/default.asmx" xmlns:q1="http://www.regonline.com/api" binding="q1:RegOnline_x005F_x0020_APISoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://beta.regonline.com/api/default.asmx" xmlns:q2="http://www.regonline.com/api" binding="q2:RegOnline_x005F_x0020_APISoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

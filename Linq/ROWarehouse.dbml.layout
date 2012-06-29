@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ROWarehouse">
+  <DataContextMoniker Name="/ROWarehouseDataContext" />
+  <nestedChildShapes>
+    <classShape Id="270ef498-be22-4adf-972a-eb2bf9cfe101" absoluteBounds="0.75, 0.75, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/ROWarehouseDataContext/InvoiceItems_AdHoc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="55f4a94e-a43b-4e52-b1b2-580af47a6356" absoluteBounds="0.765, 1.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73850dde-bf73-40bc-a947-c2f910479adb" absoluteBounds="3.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ROWarehouseDataContext/ALLDATE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4be75035-c694-41c7-a2f8-854913c624cc" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.regonline.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.regonline.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/webservices/">
+      <s:element name="RetrieveSingleRegistration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="registrationID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveSingleRegistrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveSingleRegistrationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RetrieveSingleRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveSingleRegistration" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveSingleRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveSingleRegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveSingleRegistrationHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="registrationID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveSingleRegistrationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveSingleRegistrationHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="registrationID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveSingleRegistrationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="RetrieveSingleRegistrationManagerSoap">
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <wsdl:input message="tns:RetrieveSingleRegistrationSoapIn" />
+      <wsdl:output message="tns:RetrieveSingleRegistrationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RetrieveSingleRegistrationManagerHttpGet">
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <wsdl:input message="tns:RetrieveSingleRegistrationHttpGetIn" />
+      <wsdl:output message="tns:RetrieveSingleRegistrationHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RetrieveSingleRegistrationManagerHttpPost">
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <wsdl:input message="tns:RetrieveSingleRegistrationHttpPostIn" />
+      <wsdl:output message="tns:RetrieveSingleRegistrationHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RetrieveSingleRegistrationManagerSoap" type="tns:RetrieveSingleRegistrationManagerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <soap:operation soapAction="http://www.regonline.com/webservices/RetrieveSingleRegistration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveSingleRegistrationManagerSoap12" type="tns:RetrieveSingleRegistrationManagerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <soap12:operation soapAction="http://www.regonline.com/webservices/RetrieveSingleRegistration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveSingleRegistrationManagerHttpGet" type="tns:RetrieveSingleRegistrationManagerHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <http:operation location="/RetrieveSingleRegistration" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveSingleRegistrationManagerHttpPost" type="tns:RetrieveSingleRegistrationManagerHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RetrieveSingleRegistration">
+      <http:operation location="/RetrieveSingleRegistration" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RetrieveSingleRegistrationManager">
+    <wsdl:port name="RetrieveSingleRegistrationManagerSoap" binding="tns:RetrieveSingleRegistrationManagerSoap">
+      <soap:address location="http://beta.regonline.com/webservices/RetrieveSingleRegistration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveSingleRegistrationManagerSoap12" binding="tns:RetrieveSingleRegistrationManagerSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/RetrieveSingleRegistration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveSingleRegistrationManagerHttpGet" binding="tns:RetrieveSingleRegistrationManagerHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/RetrieveSingleRegistration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveSingleRegistrationManagerHttpPost" binding="tns:RetrieveSingleRegistrationManagerHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/RetrieveSingleRegistration.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

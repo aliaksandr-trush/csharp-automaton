@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ROWarehouse" Class="ROWarehouseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=ROWarehouse;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.Linq.Properties.Settings" SettingsPropertyName="ROWarehouseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.InvoiceItems_AdHoc" Member="InvoiceItems_AdHocs">
+    <Type Name="InvoiceItems_AdHoc">
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CCAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CCCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="RegCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="INVOICE_COMMENT" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DBNAME" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="isOrder" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ALLDATES" Member="ALLDATEs">
+    <Type Name="ALLDATE">
+      <Column Name="DAYNOW" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BUILDSTATUS" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ROWMONTH" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ROWYEAR" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+</Database>

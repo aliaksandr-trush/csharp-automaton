@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ROMaster">
+  <DataContextMoniker Name="/ROMasterDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5afff751-b42b-46e9-a53c-14f447e8c19c" isExpanded="false" absoluteBounds="0.75, 1.375, 2, 0.45">
+      <DataClassMoniker Name="/ROMasterDataContext/CustomerInvoiceItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4e44a153-9452-4370-8c93-90a850632896" absoluteBounds="0.76500000000000012, 1.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c19ca7da-6884-429f-8191-8be4611c029b" isExpanded="false" absoluteBounds="0.75, 0.625, 2, 0.45">
+      <DataClassMoniker Name="/ROMasterDataContext/CustomerInvoice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f33c9d15-1548-4ad6-9df2-7f6c6190942d" absoluteBounds="0.765, 1.085, 1.9700000000000002, 11.018269856770832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="44b369ce-a686-4279-b68a-674fac379c1c" isExpanded="false" absoluteBounds="3, 0.625, 2, 0.45">
+      <DataClassMoniker Name="/ROMasterDataContext/CustomerTransaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="59831dba-2a45-4e64-b6b7-769876324e4b" absoluteBounds="3.0149999999999997, 1.085, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 1.075); (1.75 : 1.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ROMasterDataContext/CustomerInvoice/CustomerInvoice_CustomerInvoiceItem" />
+      <nodes>
+        <classShapeMoniker Id="c19ca7da-6884-429f-8191-8be4611c029b" />
+        <classShapeMoniker Id="5afff751-b42b-46e9-a53c-14f447e8c19c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="26136c56-3cbd-4800-8ca5-61cbab6f3a8f" isExpanded="false" absoluteBounds="3, 1.375, 2, 0.45">
+      <DataClassMoniker Name="/ROMasterDataContext/Session" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20f9f5eb-c016-4104-a8bd-a3b1d47e9867" absoluteBounds="3.015, 1.835, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a15e88f2-70c5-48b5-8314-3f0371ddc661" isExpanded="false" absoluteBounds="0.75, 2.125, 2, 0.45">
+      <DataClassMoniker Name="/ROMasterDataContext/Shortcut" />
+      <nestedChildShapes>
+        <elementListCompartment Id="482d0006-028e-4417-807d-5542c8b694c5" absoluteBounds="0.76500000000000012, 2.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,115 @@
+﻿namespace RegOnline.RegressionTest.PageObject.Manager
+{
+    using System;
+    using System.Collections.Generic;
+    using OpenQA.Selenium;
+    using RegOnline.RegressionTest.UIUtility;
+    using RegOnline.RegressionTest.Utilities;
+    using RegOnline.RegressionTest.WebElements;
+
+    public class Events : Window
+    {
+        public ButtonOrLink AddEvent = new ButtonOrLink("//div[@id='createNewEvent']//img[@class='rmLeftImage'][1]", LocateBy.XPath);
+
+        public void AddEvent_Click()
+        {
+            this.AddEvent.WaitForDisplay();
+            this.AddEvent.Click();
+            Utility.ThreadSleep(1);
+            WaitForAJAX();
+        }
+
+        public void EventType_Select(string eventType)
+        {
+            ButtonOrLink EventType = new ButtonOrLink(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", eventType), LocateBy.XPath);
+
+            EventType.WaitForDisplay();
+            EventType.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+        }
+
+        public void Folder_Click(string folderName)
+        {
+            string folderLocator = string.Format("//div[@id='tree']//span[text()='{0}']", folderName);
+            ButtonOrLink Folder = new ButtonOrLink(folderLocator, LocateBy.XPath);
+            Folder.WaitForDisplay();
+            string folderDivClassAttribute = UIUtilityProvider.UIHelper.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
+
+            if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
+            {
+                Folder.WaitForDisplay();
+                Folder.Click();
+                WaitForAJAX();
+                Utility.ThreadSleep(1);
+            }
+        }
+    }
+
+    public class EventList_EventRow : Window
+    {
+        private WebElement Tr;
+        private ButtonOrLink OKButton_EventDeletePopup = new ButtonOrLink("//span[text()='OK']", LocateBy.XPath);
+        public int RowIndex;
+        public int EventId;
+        public ButtonOrLink Title;
+        public ButtonOrLink Delete;
+
+        public EventList_EventRow(int eventId)
+        {
+            this.EventId = eventId;
+
+            this.Tr = new WebElement(
+                string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr[@data-id='{0}']", eventId),
+                LocateBy.XPath);
+
+            string[] idAttribute = Tr.GetAttribute("id").Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            this.RowIndex = Convert.ToInt32(idAttribute[idAttribute.Length - 1]) + 1;
+
+            this.Title = new ButtonOrLink(
+                string.Format("{0}/td/a[@class='listEventTile']", this.Tr.Locator),
+                LocateBy.XPath);
+
+            this.Delete = new ButtonOrLink(
+                string.Format("{0}/td/div[@class='actions']/a[@title='Delete event']", this.Tr.Locator),
+                LocateBy.XPath);
+        }
+
+        public static List<EventList_EventRow> GetEventRows(string eventName)
+        {
+            List<IWebElement> elements = UIUtilityProvider.UIHelper.GetElements(
+                string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr/td/a[text()='{0}']/parent::td/parent::tr", eventName),
+                LocateBy.XPath);
+
+            List<EventList_EventRow> rows = new List<EventList_EventRow>();
+
+            foreach (IWebElement element in elements)
+            {
+                rows.Add(new EventList_EventRow(Convert.ToInt32(element.GetAttribute("data-id"))));
+            }
+
+            return rows;
+        }
+
+        public void DeleteEvent()
+        {
+            this.Delete.WaitForDisplay();
+            this.Delete.Click();
+            this.OKButton_EventDeletePopup.WaitForDisplay();
+            this.OKButton_EventDeletePopup.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+        }
+
+        public void ClickTitleToOpenDashboard()
+        {
+            this.Title.WaitForDisplay();
+            this.Title.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+    }
+}

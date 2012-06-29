@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.regonline.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.regonline.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/webservices/">
+      <s:element name="RetrieveAllRegistrations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveAllRegistrationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveAllRegistrationsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RetrieveAllRegistrationsSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveAllRegistrations" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveAllRegistrationsSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveAllRegistrationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveAllRegistrationsHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveAllRegistrationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveAllRegistrationsHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveAllRegistrationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="RetrieveAllRegistrationsManagerSoap">
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <wsdl:input message="tns:RetrieveAllRegistrationsSoapIn" />
+      <wsdl:output message="tns:RetrieveAllRegistrationsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RetrieveAllRegistrationsManagerHttpGet">
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <wsdl:input message="tns:RetrieveAllRegistrationsHttpGetIn" />
+      <wsdl:output message="tns:RetrieveAllRegistrationsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RetrieveAllRegistrationsManagerHttpPost">
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <wsdl:input message="tns:RetrieveAllRegistrationsHttpPostIn" />
+      <wsdl:output message="tns:RetrieveAllRegistrationsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RetrieveAllRegistrationsManagerSoap" type="tns:RetrieveAllRegistrationsManagerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <soap:operation soapAction="http://www.regonline.com/webservices/RetrieveAllRegistrations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveAllRegistrationsManagerSoap12" type="tns:RetrieveAllRegistrationsManagerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <soap12:operation soapAction="http://www.regonline.com/webservices/RetrieveAllRegistrations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveAllRegistrationsManagerHttpGet" type="tns:RetrieveAllRegistrationsManagerHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <http:operation location="/RetrieveAllRegistrations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetrieveAllRegistrationsManagerHttpPost" type="tns:RetrieveAllRegistrationsManagerHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RetrieveAllRegistrations">
+      <http:operation location="/RetrieveAllRegistrations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RetrieveAllRegistrationsManager">
+    <wsdl:port name="RetrieveAllRegistrationsManagerSoap" binding="tns:RetrieveAllRegistrationsManagerSoap">
+      <soap:address location="http://beta.regonline.com/webservices/retrieveallregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveAllRegistrationsManagerSoap12" binding="tns:RetrieveAllRegistrationsManagerSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/retrieveallregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveAllRegistrationsManagerHttpGet" binding="tns:RetrieveAllRegistrationsManagerHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/retrieveallregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetrieveAllRegistrationsManagerHttpPost" binding="tns:RetrieveAllRegistrationsManagerHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/retrieveallregistrations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

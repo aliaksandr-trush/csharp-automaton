@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="RetrieveRegistrationInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveRegistrationInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveRegistrationInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RetrieveRegistrationInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveRegistrationInfo" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveRegistrationInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveRegistrationInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveRegistrationInfoHttpGetIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveRegistrationInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveRegistrationInfoHttpPostIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveRegistrationInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="getEventRegistrationsSoap">
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <wsdl:input message="tns:RetrieveRegistrationInfoSoapIn" />
+      <wsdl:output message="tns:RetrieveRegistrationInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getEventRegistrationsHttpGet">
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <wsdl:input message="tns:RetrieveRegistrationInfoHttpGetIn" />
+      <wsdl:output message="tns:RetrieveRegistrationInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getEventRegistrationsHttpPost">
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <wsdl:input message="tns:RetrieveRegistrationInfoHttpPostIn" />
+      <wsdl:output message="tns:RetrieveRegistrationInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="getEventRegistrationsSoap" type="tns:getEventRegistrationsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <soap:operation soapAction="http://tempuri.org/RetrieveRegistrationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventRegistrationsSoap12" type="tns:getEventRegistrationsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <soap12:operation soapAction="http://tempuri.org/RetrieveRegistrationInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventRegistrationsHttpGet" type="tns:getEventRegistrationsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <http:operation location="/RetrieveRegistrationInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventRegistrationsHttpPost" type="tns:getEventRegistrationsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RetrieveRegistrationInfo">
+      <http:operation location="/RetrieveRegistrationInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="getEventRegistrations">
+    <wsdl:port name="getEventRegistrationsSoap" binding="tns:getEventRegistrationsSoap">
+      <soap:address location="http://beta.regonline.com/webservices/geteventregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventRegistrationsSoap12" binding="tns:getEventRegistrationsSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/geteventregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventRegistrationsHttpGet" binding="tns:getEventRegistrationsHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/geteventregistrations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventRegistrationsHttpPost" binding="tns:getEventRegistrationsHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/geteventregistrations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

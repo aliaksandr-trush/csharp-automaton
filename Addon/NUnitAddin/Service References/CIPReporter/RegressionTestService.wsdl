@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="RegressionTestService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="RegressionTestService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="RegressionTestService">
+      <s:element name="InsertTestResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="runBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultDescription" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="runTime" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertTestResultResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertTestResultSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertTestResult" />
+  </wsdl:message>
+  <wsdl:message name="InsertTestResultSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertTestResultResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegressionTestServiceSoap">
+    <wsdl:operation name="InsertTestResult">
+      <wsdl:input message="tns:InsertTestResultSoapIn" />
+      <wsdl:output message="tns:InsertTestResultSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegressionTestServiceSoap" type="tns:RegressionTestServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertTestResult">
+      <soap:operation soapAction="RegressionTestService/InsertTestResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegressionTestServiceSoap12" type="tns:RegressionTestServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertTestResult">
+      <soap12:operation soapAction="RegressionTestService/InsertTestResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegressionTestService">
+    <wsdl:port name="RegressionTestServiceSoap" binding="tns:RegressionTestServiceSoap">
+      <soap:address location="http://10.119.33.66:8080/Services/RegressionTestService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegressionTestServiceSoap12" binding="tns:RegressionTestServiceSoap12">
+      <soap12:address location="http://10.119.33.66:8080/Services/RegressionTestService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

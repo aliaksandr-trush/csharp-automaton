@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://10.119.33.66:8080/Services/RegressionTestService.asmx?wsdl" docRef="http://10.119.33.66:8080/Services/RegressionTestService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://10.119.33.66:8080/Services/RegressionTestService.asmx" xmlns:q1="RegressionTestService" binding="q1:RegressionTestServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://10.119.33.66:8080/Services/RegressionTestService.asmx" xmlns:q2="RegressionTestService" binding="q2:RegressionTestServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

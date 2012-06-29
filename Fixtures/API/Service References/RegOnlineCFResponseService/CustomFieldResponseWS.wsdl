@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Modify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cfId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="registrationId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="dnaCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AssignSeat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cfId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="registrationId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="levelId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sectionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rowId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="seatId" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="blockCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssignSeatResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ModifySoapIn">
+    <wsdl:part name="parameters" element="tns:Modify" />
+  </wsdl:message>
+  <wsdl:message name="ModifySoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssignSeatSoapIn">
+    <wsdl:part name="parameters" element="tns:AssignSeat" />
+  </wsdl:message>
+  <wsdl:message name="AssignSeatSoapOut">
+    <wsdl:part name="parameters" element="tns:AssignSeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="cfId" type="s:string" />
+    <wsdl:part name="registrationId" type="s:string" />
+    <wsdl:part name="eventId" type="s:string" />
+    <wsdl:part name="dnaCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpGetOut" />
+  <wsdl:message name="AssignSeatHttpGetIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="cfId" type="s:string" />
+    <wsdl:part name="registrationId" type="s:string" />
+    <wsdl:part name="eventId" type="s:string" />
+    <wsdl:part name="levelId" type="s:string" />
+    <wsdl:part name="sectionId" type="s:string" />
+    <wsdl:part name="rowId" type="s:string" />
+    <wsdl:part name="seatId" type="s:string" />
+    <wsdl:part name="blockCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignSeatHttpGetOut" />
+  <wsdl:message name="ModifyHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="cfId" type="s:string" />
+    <wsdl:part name="registrationId" type="s:string" />
+    <wsdl:part name="eventId" type="s:string" />
+    <wsdl:part name="dnaCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpPostOut" />
+  <wsdl:message name="AssignSeatHttpPostIn">
+    <wsdl:part name="customerUserName" type="s:string" />
+    <wsdl:part name="customerPassword" type="s:string" />
+    <wsdl:part name="cfId" type="s:string" />
+    <wsdl:part name="registrationId" type="s:string" />
+    <wsdl:part name="eventId" type="s:string" />
+    <wsdl:part name="levelId" type="s:string" />
+    <wsdl:part name="sectionId" type="s:string" />
+    <wsdl:part name="rowId" type="s:string" />
+    <wsdl:part name="seatId" type="s:string" />
+    <wsdl:part name="blockCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignSeatHttpPostOut" />
+  <wsdl:portType name="CustomFieldResponseWSSoap">
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifySoapIn" />
+      <wsdl:output message="tns:ModifySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <wsdl:input message="tns:AssignSeatSoapIn" />
+      <wsdl:output message="tns:AssignSeatSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CustomFieldResponseWSHttpGet">
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifyHttpGetIn" />
+      <wsdl:output message="tns:ModifyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <wsdl:input message="tns:AssignSeatHttpGetIn" />
+      <wsdl:output message="tns:AssignSeatHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CustomFieldResponseWSHttpPost">
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifyHttpPostIn" />
+      <wsdl:output message="tns:ModifyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <wsdl:input message="tns:AssignSeatHttpPostIn" />
+      <wsdl:output message="tns:AssignSeatHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomFieldResponseWSSoap" type="tns:CustomFieldResponseWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Modify">
+      <soap:operation soapAction="http://tempuri.org/Modify" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <soap:operation soapAction="http://tempuri.org/AssignSeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomFieldResponseWSSoap12" type="tns:CustomFieldResponseWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Modify">
+      <soap12:operation soapAction="http://tempuri.org/Modify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <soap12:operation soapAction="http://tempuri.org/AssignSeat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomFieldResponseWSHttpGet" type="tns:CustomFieldResponseWSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Modify">
+      <http:operation location="/Modify" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <http:operation location="/AssignSeat" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomFieldResponseWSHttpPost" type="tns:CustomFieldResponseWSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Modify">
+      <http:operation location="/Modify" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AssignSeat">
+      <http:operation location="/AssignSeat" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomFieldResponseWS">
+    <wsdl:port name="CustomFieldResponseWSSoap" binding="tns:CustomFieldResponseWSSoap">
+      <soap:address location="http://beta.regonline.com/webservices/CustomFieldResponseWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CustomFieldResponseWSSoap12" binding="tns:CustomFieldResponseWSSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/CustomFieldResponseWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CustomFieldResponseWSHttpGet" binding="tns:CustomFieldResponseWSHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/CustomFieldResponseWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CustomFieldResponseWSHttpPost" binding="tns:CustomFieldResponseWSHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/CustomFieldResponseWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

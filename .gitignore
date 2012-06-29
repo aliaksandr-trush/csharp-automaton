@@ -1,0 +1,7 @@
+bin/
+obj/
+*.suo
+*.user
+*log.txt
+*.log
+*Publish.xml

@@ -1,0 +1,1246 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Beta" Class="ClientDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=Beta;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.Linq.Properties.Settings" SettingsPropertyName="BetaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Custom_Field_Responses" Member="Custom_Field_Responses">
+    <Type Name="Custom_Field_Response">
+      <Column Name="CFId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AttendeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rRegisterId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Response" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ItemId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DNACode" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="SeatEmailSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WaitListOrder" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CFStatusId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="IsEarlyBird" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="TaxRate1" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="TaxRate2" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="TaxRateTypeID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="GroupDiscountCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DiscountCodeCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DiscountCodeCreditSaved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Registration_Custom_Field_Response" Member="Registration" ThisKey="rRegisterId" OtherKey="Register_Id" Type="Registration" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Custom_Field_Custom_Field_Response" Member="Custom_Field" ThisKey="EventId,CFId" OtherKey="EventId,Id" Type="Custom_Field" IsForeignKey="true" />
+      <Association Name="Custom_Field_List_Item_Custom_Field_Response" Member="Custom_Field_List_Item" ThisKey="EventId,CFId,ItemId" OtherKey="EventId,CFId,Id" Type="Custom_Field_List_Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Attendees" Member="Attendees">
+    <Type Name="Attendee">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OldAttendeeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ListId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DoNotSend" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BadEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SessionId" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="Prefix" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="First_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Middle_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Last_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Suffix" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Company" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address_1" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Address_2" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Address_3" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Postal_Code" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HomePhone" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Extension" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CellPhone" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Email_Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ccEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BadgeName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MembershipID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SSNId" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContactPhone" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ContactEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmergencyContactName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmergencyContactPhone" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="LoginPassword" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CC_Number" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CC_Expiration_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CC_Name_If_Different" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF3" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF4" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF5" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF6" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF7" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF8" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF9" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CF10" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="xxxTrv_Primary_FF_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="xxxTrv_Passport_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="xxxTrv_Seating_Pref_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="xxxtrv_smoking_pref_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="xxxLdg_Room_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="xxxLdg_Bed_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="xxxLdg_Smoking_Pref_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="xxxGrd_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Disability_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Diet_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Allergy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastEventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Photo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VATRegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VATNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsSSNEncrypted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="NationalityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllowNewsLetter" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowPartnersCommunication" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsXAuth" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExternalUserID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Other_Allergies" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Other_Disabilities" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Other_Dietary_Needs" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="xxxGrd_Other_Info" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="Attendee_Registration" Member="Registrations" ThisKey="Id" OtherKey="Attendee_Id" Type="Registration" />
+      <Association Name="Attendee_EmailTransaction" Member="EmailTransactions" ThisKey="Id" OtherKey="MemberId" Type="EmailTransaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmailJobs" Member="EmailJobs">
+    <Type Name="EmailJob">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IncludeInactive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IncludeDoNotSend" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EliminateDuplicates" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ListId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MessageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReferringJobId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TempJob" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Subject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SenderEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SenderName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SenderDomain" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BounceEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PreviousStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InviteEventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InviteNonRSVP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SubmitDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SubmitTimeZoneId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Submits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Successes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BadEmails" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dups" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateSent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IncludeFooter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TestRecipient" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TestSubject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TestContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SendToSender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PhysicalAddress" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ThemeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VisibleDefault" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EmailCampaignId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LogoUrl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ThemeConfigurationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Event_EmailJob" Member="Event" ThisKey="InviteEventId" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventRegTypes" Member="EventRegTypes">
+    <Type Name="EventRegType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RegStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fieldname" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ReportDescription" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RegTypeInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Limit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LimitMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MinRegs" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="MinRegsMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MaxRegs" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AdminVisible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OnsiteVisible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LdgVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TrvVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="HideSmartCard" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ConfirmEmailFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="ConfirmEmailSubject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmEmailHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ConfirmEmailTEXT" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="zOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PasskeyRegType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaxAge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinAge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="SharedFeePct" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="CollectTeamName" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RegConfirmationMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ShowDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HideDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GroupLimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="XAuthEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="EventRegType_Registration" Member="Registrations" ThisKey="Id,EventId" OtherKey="RegTypeId,Event_Id" Type="Registration" />
+      <Association Name="Event_EventRegType" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Events" Member="Events">
+    <Type Name="Event">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Customer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsParent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsTemplate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsCart" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ActiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RegStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClientEventId" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="WaitListId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SessionTimeout" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DoNotBill" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Event_Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SurveyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuthMethodId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Loc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Room" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Building" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Address_1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Address_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_City" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Region" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Postal_Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Start_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="End_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeZoneId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="TimeZoneDisplayName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TimeZoneOther" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DateInputFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Cancel_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Capacity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CapacityEmailSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableWaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WaitListProcPayments" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaEnableWaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="InvitationOnly" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="InvitationPassword" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="InvitationListId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capture_Payment" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CapturePaymentOnZero" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="InvoiceCompany" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AllowPartialPayment" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MinPartialPayment" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Display_Fee_Schedule" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Display_Sessions" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DisplayRecalcButton" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RequireQuantity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RequireSession" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Capture_Session" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Charge_Online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CurrencyCode" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="SendReminder" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ReminderSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="renewalRate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="autoRenew" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="EnableStaticRenewalDate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StaticRenewalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="promotionPeriodUnitType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promotionPeriodUnitCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="canChangePaymentRate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="defaultPayRate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prorateMembershipUpdates" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="startingMembershipID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SelfReminder" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NotifyMe" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NotifyUpdates" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NotifyCancels" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableRecall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableCrossAccountRecall" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowUpdates" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowPartialUpdates" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowCancels" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowRenewals" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RequirePassword" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MapInConfirmPage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MapInConfirmEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShowLocationsOnStart" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GroupRegs" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="GenerateInvoice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TellaFriend" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Capture_Travel" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TravelPurpose" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="TrvConfirmLink" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Capture_Lodging" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AssignSeparateRoom" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Capture_Ground_Trans" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Capture_Activity" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Capture_Disability" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Capture_Diet" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Capture_Allergy" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Banner_Ad_On_Reg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RegTypeCaption" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RegTypeCaptionReport" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RegTypeTypeId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="HomeLink" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EventLink" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HomeEmail" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="ColorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColorHeaderbg" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="ColorHeaderFont" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="Colorbg" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="ColorLink" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="ImageFile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ImageLink" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ImageAlignment" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="FooterImageFile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FooterImageLink" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FooterImageAlignment" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="TabPersonal" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TabAgenda" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TabPrefs" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TabGroup" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TabFees" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TabPayment" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="TrvDateValidFrom" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrvDateValidTo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LdgDateValidFrom" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LdgDateValidTo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AgendaIncludeRegLink" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeLogo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeFooterLogo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeTitleDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeDescription" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeAgenda" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeHotelInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludePaymentInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeHeader" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AgendaIncludeFooter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UseEmployeeId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NotifyUseronIncompletes" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NotifyAdminonIncompletes" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AllowDirectoryOptOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PrefixFormatId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="VEID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VEPhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="VEPassword" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="VERealtime" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AllowDuplicateSmartCard" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AllowSmartCardNameChange" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Keywords" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="allowCCDownload" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="forceSameRegTypes" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="storeCCNumbers" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TabConfirmation" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="eCheckChargeOnline" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="storeECheckInfo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="allowECheckDownload" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowSubstitutions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="pricingOptionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="customerMerchantId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IncludeDirectoryConfirmPage" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IncludeDirectoryEventDetails" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DontChargeCC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EventBillingId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CollectVAT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DynamicDescriptor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="taxRate1" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="taxCaption1" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="taxRate2" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="taxCaption2" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="taxIdentificationDesc" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CloseDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ClosedStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="initialState" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ThemeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayPageTips" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayEventLink" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowRegTypeUpdates" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Show_Talking_Head" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="includedirectory" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="colorFont" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="colorPageBG" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="SalesForceStatusId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="DisableDupEmails" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableScheduleDownload" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ChannelId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SharedFeePct" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="ProcessingFeeLabel" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsSample" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableScheduleConflictChecking" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OrderAgendaItemsByZOrder" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="WaitlistTimeLimit" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsWaitlisted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ApplyTaxesCountries" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RedirectConfirmationURL" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Loc_Phone" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="AutoAssignBibNumbers" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShareTeamBibNumbers" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UpgradeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CultureID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BypassConfirmationPage" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShowExternalUrlButton" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExternalUrlButtonText" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HttpPostData" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EventIndustryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventCategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeFormat24Hr" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnableLodgingCharges" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LdgBookingFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShowLdgCCFields" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnableRegProtection" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TargetAttendance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnableHotelSearch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ViewedBuilderPages" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="VEUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="VEUrlParameters" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="RegistrationMarkupVersion" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="MediaTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThemeConfigurationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LapsedStatusGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FloorMap" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="HideContactInfo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsPrivate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RequireAccessCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Event_EmailJob" Member="EmailJobs" ThisKey="Id" OtherKey="InviteEventId" Type="EmailJob" />
+      <Association Name="Event_EventRegType" Member="EventRegTypes" ThisKey="Id" OtherKey="EventId" Type="EventRegType" />
+      <Association Name="Event_Event" Member="Events" ThisKey="Id" OtherKey="ParentId" Type="Event" />
+      <Association Name="Event_Registration" Member="Registrations" ThisKey="Id" OtherKey="Event_Id" Type="Registration" />
+      <Association Name="Event_RegMailResponder" Member="RegMailResponders" ThisKey="Id" OtherKey="EventId" Type="RegMailResponder" />
+      <Association Name="Event_Custom_Field" Member="Custom_Fields" ThisKey="Id" OtherKey="EventId" Type="Custom_Field" />
+      <Association Name="Event_EventCollectionField" Member="EventCollectionField" ThisKey="Id" OtherKey="EventId" Type="EventCollectionField" Cardinality="One" />
+      <Association Name="Event_Event_Payment_Method" Member="Event_Payment_Methods" ThisKey="Id" OtherKey="Event_Id" Type="Event_Payment_Method" />
+      <Association Name="Event_EventLocation" Member="EventLocations" ThisKey="Id" OtherKey="EventId" Type="EventLocation" />
+      <Association Name="Event_Fee" Member="Fees" ThisKey="Id" OtherKey="EventId" Type="Fee" />
+      <Association Name="Event_BibNumber" Member="BibNumbers" ThisKey="Id" OtherKey="EventId" Type="BibNumber" />
+      <Association Name="Event_EmailTransaction" Member="EmailTransactions" ThisKey="Id" OtherKey="EventID" Type="EmailTransaction" />
+      <Association Name="Event_EventText" Member="EventText" ThisKey="Id" OtherKey="EventId" Type="EventText" Cardinality="One" />
+      <Association Name="Event_DiscountRule" Member="DiscountRules" ThisKey="Id" OtherKey="EventId" Type="DiscountRule" />
+      <Association Name="Event_Integrations_SalesForce" Member="Integrations_SalesForces" ThisKey="Id" OtherKey="EventID" Type="Integrations_SalesForce" />
+      <Association Name="Event_NodesCustom" Member="NodesCustoms" ThisKey="Id" OtherKey="EventID" Type="NodesCustom" />
+      <Association Name="Event_Event" Member="Event1" ThisKey="ParentId" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transactions" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegisterId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TransAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ExchangeRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CurrencyCode" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="BaseExchangeRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BaseCurrencyCode" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="TransDoc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ccNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="encryptedccNumber" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ccExpDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ccName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ccType" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ManualCharge" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MerchantId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CSIMerchant" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="eCheckSettlementDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="eCheckStatusCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eCheckMerchantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eCheckRegonlineMerchant" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="last4CCDigits" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="userNotes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="authCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eCheckClearingRequestSent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ccUpdate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SharedFeePct" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="MerchAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NonMerchAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PricingOptionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerMerchantId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BillableAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="GatewayTransactionId" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+      <Column Name="VoidToken" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="RenewalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="amsAccountID" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="BillingExchangeRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BillingCurrencyCode" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Association Name="Registration_Transaction" Member="Registration" ThisKey="RegisterId" OtherKey="Register_Id" Type="Registration" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Registrations" Member="Registrations">
+    <Type Name="Registration">
+      <Column Name="Attendee_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Event_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Register_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OldRegisterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SessionId" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="SessionTypeId" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Order_Id" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RegTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ResourceGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="roomSharerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MembershipID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="lastRenewalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RegistrationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AutoRenew" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Checkedin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="InternalReg" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PaymentAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ApplyPaymentNow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Refund_Order_Id" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Refund_Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Refund_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Refund_Approved_by" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Cancel_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Payment_Method_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CC_Number" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="encryptedCCNumber" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CC_Expiration_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CC_Name_If_Different" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ccType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ccAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ccCity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ccState" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ccZip" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ccCountry" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Payment_Doc_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Trv_Booking_Status_Id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Trv_Booking_Agent_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ldg_Booking_Status_Id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Ldg_Booking_Agent_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrvArrAirline" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvArrFlightNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TrvArrAirport" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvArrAirportCity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvArrDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrvDptAirline" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvDptFlightNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TrvDptAirport" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvDptAirportCity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvDptDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrvccNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvccExpDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TrvccName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TrvccType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="TrvConfirmNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LdgLocation1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LdgLocation2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LdgArrDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LdgDptDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LdgSharing" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LdgAdjoining" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LdgConfirmNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LdgccNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LdgccExpDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="LdgccName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LdgccType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DirectoryOptOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SmartCardId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SmartCardNameOnCard" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AlemBrandId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AlemDealershipId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReminderSent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSubstitute" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="paymentAmountDisallowed" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Validated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="WriteToLog" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BridgeID" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="PassKeyReservationID" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ccUpdate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NextBillDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Trv_Primary_FF_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Trv_Passport_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Trv_Seating_Pref_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="trv_smoking_pref_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ldg_Room_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ldg_Bed_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ldg_Smoking_Pref_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Grd_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GroupDiscountRuleId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ccAddress2" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="SharedFeePct" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Billing_Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DebitCardIssueNum" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DebitCardStartDate" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="BookingFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TransferredFromRegisterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InternalStatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cancel_Reason" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Groups" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="TrvArrConnectInfo" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="TrvDptConnectInfo" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="TrvOtherInfo" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="LdgOtherInfo" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Grd_Other_Info" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="amsAccountID" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="Registration_Custom_Field_Response" Member="Custom_Field_Responses" ThisKey="Register_Id" OtherKey="rRegisterId" Type="Custom_Field_Response" />
+      <Association Name="Registration_Transaction" Member="Transactions" ThisKey="Register_Id" OtherKey="RegisterId" Type="Transaction" />
+      <Association Name="Registration_Registration" Member="Registrations" ThisKey="Register_Id" OtherKey="GroupId" Type="Registration" />
+      <Association Name="Registration_Registration1" Member="Registrations1" ThisKey="Register_Id" OtherKey="ResourceGroupId" Type="Registration" />
+      <Association Name="Attendee_Registration" Member="Attendee" ThisKey="Attendee_Id" OtherKey="Id" Type="Attendee" IsForeignKey="true" />
+      <Association Name="Event_Registration" Member="Event" ThisKey="Event_Id" OtherKey="Id" Type="Event" IsForeignKey="true" />
+      <Association Name="Registration_Registration" Member="Registration1" ThisKey="GroupId" OtherKey="Register_Id" Type="Registration" IsForeignKey="true" />
+      <Association Name="EventRegType_Registration" Member="EventRegType" ThisKey="RegTypeId,Event_Id" OtherKey="Id,EventId" Type="EventRegType" IsForeignKey="true" />
+      <Association Name="Registration_Registration1" Member="Registration2" ThisKey="ResourceGroupId" OtherKey="Register_Id" Type="Registration" IsForeignKey="true" />
+      <Association Name="DiscountRule_Registration" Member="DiscountRule" ThisKey="GroupDiscountRuleId" OtherKey="Id" Type="DiscountRule" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RegMailResponder" Member="RegMailResponders">
+    <Type Name="RegMailResponder">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegMailTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegMailTriggerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SendConfirmation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SendNotification" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationAsSummary" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationRecipients" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Subject" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTMLContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TextContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SendFromAddress" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="SendFromName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="add_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="mod_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EnableTheme" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Event_RegMailResponder" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Custom_Field_Types" Member="Custom_Field_Types">
+    <Type Name="Custom_Field_Type">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CFTypeZOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ButtonImageName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="Custom_Field_Type_Custom_Field" Member="Custom_Fields" ThisKey="Id" OtherKey="TypeId" Type="Custom_Field" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Custom_Fields" Member="Custom_Fields">
+    <Type Name="Custom_Field">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsSession" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReportDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Fieldname" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="GroupName" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="Length" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Required" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Internal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="InternalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaxQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AgendaEnableWaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DisplaySoldOut" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SoldOutMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ShowDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HideDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MinVarAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MaxVarAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PasswordRequired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DiscountCodeTitle" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SessionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SessionEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Room" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SessionInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SessionLink" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ResourceName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatingCol1Name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatingCol1Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SeatingCol2Name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatingCol2Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SeatingCol3Name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatingCol3Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SeatingCol4Name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SeatingCol4Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SeatingEmailText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SeatingEmailHtml" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SeatingEmailFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="SeatingEmailSubject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NonWaitlistConfirmationFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="NonWaitlistConfirmationHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NonWaitlistConfirmationTEXT" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NonWaitlistReminderFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="NonWaitlistReminderHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NonWaitlistReminderTEXT" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaitlistConfirmationFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="WaitlistConfirmationHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaitlistConfirmationTEXT" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaitlistReminderFormatId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="WaitlistReminderHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaitlistReminderTEXT" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AgendaLevelReminderSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MinimumRegs" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="MinimumRegsText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Position" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Separator" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="zOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IncludeOnBadge" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IncludeOnAgenda" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IncludeOnEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IncludeOnCart" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DisplayCalendar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isRecurring" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Credits" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Keywords" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="disallowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="BadgeCaption" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="DefaultStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaxRateTypeID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="SalesForceField" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateFrequencyID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="DateFrequencyValue" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsMembershipFee" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DiscountOnce" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdminVisible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateFormatId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InitialState" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CustomFieldsSessionId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AdminOnly" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExcludeFromCCDataScan" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShowRemainingCapacity" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsPrePopulateEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Custom_Field_Custom_Field_Response" Member="Custom_Field_Responses" ThisKey="EventId,Id" OtherKey="EventId,CFId" Type="Custom_Field_Response" />
+      <Association Name="Custom_Field_Custom_Field_List_Item" Member="Custom_Field_List_Items" ThisKey="EventId,Id" OtherKey="EventId,CFId" Type="Custom_Field_List_Item" />
+      <Association Name="Custom_Field_Custom_Fields_Pricing" Member="Custom_Fields_Pricings" ThisKey="EventId,Id" OtherKey="eventId,cfId" Type="Custom_Fields_Pricing" />
+      <Association Name="Custom_Field_Type_Custom_Field" Member="Custom_Field_Type" ThisKey="TypeId" OtherKey="Id" Type="Custom_Field_Type" IsForeignKey="true" />
+      <Association Name="Event_Custom_Field" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Custom_Field_List_Items" Member="Custom_Field_List_Items">
+    <Type Name="Custom_Field_List_Item">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CFId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fieldname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MaxQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnableWaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="zOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PerGroupLimit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Custom_Field_List_Item_Custom_Field_Response" Member="Custom_Field_Responses" ThisKey="EventId,CFId,Id" OtherKey="EventId,CFId,ItemId" Type="Custom_Field_Response" />
+      <Association Name="Custom_Field_Custom_Field_List_Item" Member="Custom_Field" ThisKey="EventId,CFId" OtherKey="EventId,Id" Type="Custom_Field" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventCollectionFields" Member="EventCollectionFields">
+    <Type Name="EventCollectionField">
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cCVVCode" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cGuest" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cSpouse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cPrefix" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cFirstName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cMiddleName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLastName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cSuffix" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTitle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCompany" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cAddress1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cAddress2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cAddress3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cState" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cPostalCode" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCountry" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cHomePhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cWorkPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cExtension" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cFax" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCellPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cVerifyEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCCEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cMembershipId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cSmartCardId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cDealershipId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cCustId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cSSNId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cBadgeName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cContactInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cEmergencyContactName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cEmergencyContactPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rGuest" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rSpouse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rPrefix" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rFirstName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rMiddleName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLastName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rSuffix" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTitle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCompany" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rAddress1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rAddress2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rAddress3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rState" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rPostalCode" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCountry" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rHomePhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rWorkPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rExtension" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rFax" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCellPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCCEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rMembershipId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rSmartCardId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rDealershipId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCustId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rSSNId" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rBadgeName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rContactInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rEmergencyContactName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rEmergencyContactPhone" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrAirline" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrFlightNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrAirport" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrAirportCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvArrConnectInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptAirline" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptFlightNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptAirport" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptAirportCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvDptConnectInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvFFNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvSeating" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvPassportNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvccinfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvAdditionalInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTrvGroundTrans" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrAirline" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrFlightNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrAirport" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrAirportCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvArrConnectInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptAirline" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptFlightNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptAirport" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptAirportCity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvDptConnectInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvFFNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvSeating" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvPassportNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvccInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvAdditionalInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTrvGroundTrans" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgLocation1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgLocation2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgRoomType" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgBedType" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgSmoking" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgSharing" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgAdjoining" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgArrDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgDptDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgccInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cLdgAdditionalInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgLocation1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgLocation2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgRoomType" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgBedType" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgSmoking" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgSharing" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgAdjoining" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgArrDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgDptDate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgAdditionalInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rLdgccInfo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rCVVCode" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rMemberLoginForContent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PublicizePublic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PublicizeAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RequireAutoRecallPassword" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="cTermsAndConditions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Feedback" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnableAddToMyCalendar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IncludeContactInfo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="showTalkingHead" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="rPhoto" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="cPhoto" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="rDateOfBirth" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cDateOfBirth" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rGender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cGender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rNationality" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cNationality" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cTaxIdentificationNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rTaxIdentificationNumber" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PublicizeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_EventCollectionField" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Event_Payment_Methods" Member="Event_Payment_Methods">
+    <Type Name="Event_Payment_Method">
+      <Column Name="Event_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Payment_Method_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PublicReg" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdminReg" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OnsiteReg" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="customDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayTextbox" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Event_Event_Payment_Method" Member="Event" ThisKey="Event_Id" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventLocations" Member="EventLocations">
+    <Type Name="EventLocation">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmEmail" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ConfirmEmailSubject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CutoffDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Loc_Info" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DefaultSingleRoomRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DefaultDoubleroomRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DefaultTaxRate" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IncludeOnWebsite" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnableRoomBlockRestriction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Event_EventLocation" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Location_EventLocation" Member="Location" ThisKey="LocationId" OtherKey="Id" Type="Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Loc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Room" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Building" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Address_1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Address_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Region" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Postal_Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Confirm_URL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Info" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContactPhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContactFax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContactEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DefaultSingleRoomRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DefaultDoubleroomRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DefaultTaxRate" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ConfirmEmail" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ConfirmEmailSubject" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="HideMap" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DisplayLinkInRegistration" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Location_EventLocation" Member="EventLocations" ThisKey="Id" OtherKey="LocationId" Type="EventLocation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fees" Member="Fees">
+    <Type Name="Fee">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReportDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Fieldname" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="AmountTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="isRecurring" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="serviceCharge" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Pct" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="MinVarAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MaxVarAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="HideAmount" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Required" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MaxQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinAllowed" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="MaxAllowed" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="EnableWaitList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EnableQuantity" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PasswordRequired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AttendeeRelated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShowDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HideDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="zOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="disallowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TaxRateTypeID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="Event_Fee" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BibNumbers" Member="BibNumbers">
+    <Type Name="BibNumber">
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RegTypeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Prefix" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="StartingNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_BibNumber" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmailTransactions" Member="EmailTransactions">
+    <Type Name="EmailTransaction">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="JobId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EventID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TypeId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="DateSent" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Subject" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Response" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="ReminderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Event_EmailTransaction" Member="Event" ThisKey="EventID" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Attendee_EmailTransaction" Member="Attendee" ThisKey="MemberId" OtherKey="Id" Type="Attendee" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventTexts" Member="EventTexts">
+    <Type Name="EventText">
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StatusMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="WaitListInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AgendaWaitListInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PaymentInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PartialPaymentText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Event_Info" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Event_InfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Confirm_Info" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RefundInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="HomeContactInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgStartupInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgStartupInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPersonalInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPersonalInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgTravelInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgTravelInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgLodgingInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgLodgingInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgLdgTrvInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgLdgTrvInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPrefsInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPrefsInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgCFsInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgCFsInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgSessionsInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgSessionsInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgFeesInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgFeesInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgGroupInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgGroupInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPymtVerifyInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgPymtVerifyInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgTrvccInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgLdgccInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgInvoiceInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgRenewalInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgRenewalInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="pgRenewalConfirmInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="VEpgConfirm" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RecurringFeeRenewMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RecurringFeeCCDeclinedMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TermsAndConditions" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="vCalendarInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="GroupRegistrationInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RegistrationRecordInfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RegistrationRecordInfoF" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="closingStatusMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="GlobalHeader" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="GlobalFooter" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="WaitlistInstructions" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Event_EventText" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DiscountRules" Member="DiscountRules">
+    <Type Name="DiscountRule">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountRuleTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="isPercentage" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Enabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isCurrent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="GroupSize" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EffectedSize" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpirationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppliesToAllItems" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Limit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Reg_Intro" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Reg_Description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="AppliesToTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isGroupSizeOrMore" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="DiscountRule_Registration" Member="Registrations" ThisKey="Id" OtherKey="GroupDiscountRuleId" Type="Registration" />
+      <Association Name="Event_DiscountRule" Member="Event" ThisKey="EventId" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Countries" Member="Countries">
+    <Type Name="Country">
+      <Column Name="CountryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="CountryCode" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="CountryCodeChar3" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="CountryCodeInt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Blacklisted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Integrations_SalesForce" Member="Integrations_SalesForces">
+    <Type Name="Integrations_SalesForce">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IntegrationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Login" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Event_Integrations_SalesForce" Member="Event" ThisKey="EventID" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NodesCustom" Member="NodesCustoms">
+    <Type Name="NodesCustom">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ParentNodeCustomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ParentNodeStaticID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="zOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EntityTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContextMenuID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TreeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Event_NodesCustom" Member="Event" ThisKey="EventID" OtherKey="Id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Currencies" Member="Currencies">
+    <Type Name="Currency">
+      <Column Name="CurrencyCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CurrencyName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Symbol" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SymbolPosition" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="SymbolNonHtml" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LCID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsBilling" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Custom_Fields_Pricing" Member="Custom_Fields_Pricings">
+    <Type Name="Custom_Fields_Pricing">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="eventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cfId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="startDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="endDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="isEarlyBird" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="add_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="add_by" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="mod_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="mod_by" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="priceOption" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Custom_Field_Custom_Fields_Pricing" Member="Custom_Field" ThisKey="eventId,cfId" OtherKey="EventId,Id" Type="Custom_Field" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

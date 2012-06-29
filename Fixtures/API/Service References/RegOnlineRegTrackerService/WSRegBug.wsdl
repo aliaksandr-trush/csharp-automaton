@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Validate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerDateTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetServerDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetServerDateTimeResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserForms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserFormsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserFormsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserFormsStatistics">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="EventIds" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LastUpdateDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserFormsStatisticsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserFormsStatisticsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWebSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWebSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateWebSessionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectAccess" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLoginUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSnapshotReportUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectAccess" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSnapshotReportUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSnapshotReportUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttendeeReportUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectAccess" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttendeeReportUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAttendeeReportUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttendeeReportUrlWithDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectAccess" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateFilter" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttendeeReportUrlWithDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAttendeeReportUrlWithDateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHelpUrl">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetHelpUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHelpUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="dateTime" type="s:dateTime" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:Validate" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerDateTime" />
+  </wsdl:message>
+  <wsdl:message name="GetServerDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserForms" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserFormsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserFormsStatistics" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserFormsStatisticsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWebSession" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWebSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoginUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSnapshotReportUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSnapshotReportUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAttendeeReportUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAttendeeReportUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAttendeeReportUrlWithDate" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAttendeeReportUrlWithDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHelpUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHelpUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateHttpGetIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetServerDateTimeHttpGetIn" />
+  <wsdl:message name="GetServerDateTimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsHttpGetIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsHttpGetIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="EventIds" type="s:string" />
+    <wsdl:part name="LastUpdateDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionHttpGetIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlHttpGetIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlHttpGetIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlHttpGetIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateHttpGetIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="DateFilter" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpUrlHttpGetIn" />
+  <wsdl:message name="GetHelpUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateHttpPostIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetServerDateTimeHttpPostIn" />
+  <wsdl:message name="GetServerDateTimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsHttpPostIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsHttpPostIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="EventIds" type="s:string" />
+    <wsdl:part name="LastUpdateDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserFormsStatisticsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionHttpPostIn">
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateWebSessionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlHttpPostIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginUrlHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlHttpPostIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSnapshotReportUrlHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlHttpPostIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateHttpPostIn">
+    <wsdl:part name="DirectAccess" type="s:string" />
+    <wsdl:part name="EventID" type="s:string" />
+    <wsdl:part name="DateFilter" type="s:string" />
+    <wsdl:part name="AccountId" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttendeeReportUrlWithDateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpUrlHttpPostIn" />
+  <wsdl:message name="GetHelpUrlHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSRegBugSoap">
+    <wsdl:operation name="Validate">
+      <wsdl:input message="tns:ValidateSoapIn" />
+      <wsdl:output message="tns:ValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <wsdl:input message="tns:GetServerDateTimeSoapIn" />
+      <wsdl:output message="tns:GetServerDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <wsdl:input message="tns:GetUserFormsSoapIn" />
+      <wsdl:output message="tns:GetUserFormsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <wsdl:input message="tns:GetUserFormsStatisticsSoapIn" />
+      <wsdl:output message="tns:GetUserFormsStatisticsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <wsdl:input message="tns:CreateWebSessionSoapIn" />
+      <wsdl:output message="tns:CreateWebSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <wsdl:input message="tns:GetLoginUrlSoapIn" />
+      <wsdl:output message="tns:GetLoginUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <wsdl:input message="tns:GetSnapshotReportUrlSoapIn" />
+      <wsdl:output message="tns:GetSnapshotReportUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <wsdl:input message="tns:GetAttendeeReportUrlSoapIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <wsdl:input message="tns:GetAttendeeReportUrlWithDateSoapIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlWithDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <wsdl:input message="tns:GetHelpUrlSoapIn" />
+      <wsdl:output message="tns:GetHelpUrlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSRegBugHttpGet">
+    <wsdl:operation name="Validate">
+      <wsdl:input message="tns:ValidateHttpGetIn" />
+      <wsdl:output message="tns:ValidateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <wsdl:input message="tns:GetServerDateTimeHttpGetIn" />
+      <wsdl:output message="tns:GetServerDateTimeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <wsdl:input message="tns:GetUserFormsHttpGetIn" />
+      <wsdl:output message="tns:GetUserFormsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <wsdl:input message="tns:GetUserFormsStatisticsHttpGetIn" />
+      <wsdl:output message="tns:GetUserFormsStatisticsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <wsdl:input message="tns:CreateWebSessionHttpGetIn" />
+      <wsdl:output message="tns:CreateWebSessionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <wsdl:input message="tns:GetLoginUrlHttpGetIn" />
+      <wsdl:output message="tns:GetLoginUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <wsdl:input message="tns:GetSnapshotReportUrlHttpGetIn" />
+      <wsdl:output message="tns:GetSnapshotReportUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <wsdl:input message="tns:GetAttendeeReportUrlHttpGetIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <wsdl:input message="tns:GetAttendeeReportUrlWithDateHttpGetIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlWithDateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <wsdl:input message="tns:GetHelpUrlHttpGetIn" />
+      <wsdl:output message="tns:GetHelpUrlHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSRegBugHttpPost">
+    <wsdl:operation name="Validate">
+      <wsdl:input message="tns:ValidateHttpPostIn" />
+      <wsdl:output message="tns:ValidateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <wsdl:input message="tns:GetServerDateTimeHttpPostIn" />
+      <wsdl:output message="tns:GetServerDateTimeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <wsdl:input message="tns:GetUserFormsHttpPostIn" />
+      <wsdl:output message="tns:GetUserFormsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <wsdl:input message="tns:GetUserFormsStatisticsHttpPostIn" />
+      <wsdl:output message="tns:GetUserFormsStatisticsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <wsdl:input message="tns:CreateWebSessionHttpPostIn" />
+      <wsdl:output message="tns:CreateWebSessionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <wsdl:input message="tns:GetLoginUrlHttpPostIn" />
+      <wsdl:output message="tns:GetLoginUrlHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <wsdl:input message="tns:GetSnapshotReportUrlHttpPostIn" />
+      <wsdl:output message="tns:GetSnapshotReportUrlHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <wsdl:input message="tns:GetAttendeeReportUrlHttpPostIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <wsdl:input message="tns:GetAttendeeReportUrlWithDateHttpPostIn" />
+      <wsdl:output message="tns:GetAttendeeReportUrlWithDateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <wsdl:input message="tns:GetHelpUrlHttpPostIn" />
+      <wsdl:output message="tns:GetHelpUrlHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSRegBugSoap" type="tns:WSRegBugSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Validate">
+      <soap:operation soapAction="http://tempuri.org/Validate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <soap:operation soapAction="http://tempuri.org/GetServerDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <soap:operation soapAction="http://tempuri.org/GetUserForms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <soap:operation soapAction="http://tempuri.org/GetUserFormsStatistics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <soap:operation soapAction="http://tempuri.org/CreateWebSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <soap:operation soapAction="http://tempuri.org/GetLoginUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <soap:operation soapAction="http://tempuri.org/GetSnapshotReportUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <soap:operation soapAction="http://tempuri.org/GetAttendeeReportUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <soap:operation soapAction="http://tempuri.org/GetAttendeeReportUrlWithDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <soap:operation soapAction="http://tempuri.org/GetHelpUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSRegBugSoap12" type="tns:WSRegBugSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Validate">
+      <soap12:operation soapAction="http://tempuri.org/Validate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <soap12:operation soapAction="http://tempuri.org/GetServerDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <soap12:operation soapAction="http://tempuri.org/GetUserForms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <soap12:operation soapAction="http://tempuri.org/GetUserFormsStatistics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <soap12:operation soapAction="http://tempuri.org/CreateWebSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <soap12:operation soapAction="http://tempuri.org/GetLoginUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <soap12:operation soapAction="http://tempuri.org/GetSnapshotReportUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <soap12:operation soapAction="http://tempuri.org/GetAttendeeReportUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <soap12:operation soapAction="http://tempuri.org/GetAttendeeReportUrlWithDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <soap12:operation soapAction="http://tempuri.org/GetHelpUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSRegBugHttpGet" type="tns:WSRegBugHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Validate">
+      <http:operation location="/Validate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <http:operation location="/GetServerDateTime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <http:operation location="/GetUserForms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <http:operation location="/GetUserFormsStatistics" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <http:operation location="/CreateWebSession" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <http:operation location="/GetLoginUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <http:operation location="/GetSnapshotReportUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <http:operation location="/GetAttendeeReportUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <http:operation location="/GetAttendeeReportUrlWithDate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <http:operation location="/GetHelpUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSRegBugHttpPost" type="tns:WSRegBugHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Validate">
+      <http:operation location="/Validate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerDateTime">
+      <http:operation location="/GetServerDateTime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserForms">
+      <http:operation location="/GetUserForms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFormsStatistics">
+      <http:operation location="/GetUserFormsStatistics" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWebSession">
+      <http:operation location="/CreateWebSession" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginUrl">
+      <http:operation location="/GetLoginUrl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshotReportUrl">
+      <http:operation location="/GetSnapshotReportUrl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrl">
+      <http:operation location="/GetAttendeeReportUrl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttendeeReportUrlWithDate">
+      <http:operation location="/GetAttendeeReportUrlWithDate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelpUrl">
+      <http:operation location="/GetHelpUrl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSRegBug">
+    <wsdl:port name="WSRegBugSoap" binding="tns:WSRegBugSoap">
+      <soap:address location="http://beta.regonline.com/webservices/WSRegBug.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSRegBugSoap12" binding="tns:WSRegBugSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/WSRegBug.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSRegBugHttpGet" binding="tns:WSRegBugHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/WSRegBug.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSRegBugHttpPost" binding="tns:WSRegBugHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/WSRegBug.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

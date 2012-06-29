@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ROMaster" Class="ROMasterDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=ROMaster;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.Linq.Properties.Settings" SettingsPropertyName="ROMasterConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CustomerInvoiceItems" Member="CustomerInvoiceItems">
+    <Type Name="CustomerInvoiceItem">
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CCAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CCCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="RegCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="INVOICE_COMMENT" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CustomerInvoice_CustomerInvoiceItem" Member="CustomerInvoice" ThisKey="InvoiceId" OtherKey="Id" Type="CustomerInvoice" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerInvoices" Member="CustomerInvoices">
+    <Type Name="CustomerInvoice">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Bill_Company" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Bill_First_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Last_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Address_1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Address_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Region" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Bill_Postal_Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Payment_Method_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CC_Number" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CC_Expiration_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CC_Name_If_Different" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fee_CC_Visa_Pct" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Fee_CC_Visa_Flat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_CC_MC_PCT" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Fee_CC_MC_Flat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_CC_Amex_Pct" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Fee_CC_Amex_Flat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_CC_Discover_Pct" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Fee_CC_Discover_Flat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_CC_Diners_Pct" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Fee_CC_Diners_Flat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_CC_Minimum" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_Event_Setup" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_Waitlist_Setup" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_1" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_2" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_Survey" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_One_Time" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_Apply_Flat" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fee_Reminder" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Fee_Email" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="Fee_Email_Flat" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fee_Charge_For_Parent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fee_Chargeback_Fee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BaseCurrencyCode" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="Fee_PayWithCreditCard" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Add_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mod_By" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EventBillingId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ukAccount" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="collectVatTax" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VatTaxId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InvoiceEmailDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="CustomerInvoice_CustomerInvoiceItem" Member="CustomerInvoiceItems" ThisKey="Id" OtherKey="InvoiceId" Type="CustomerInvoiceItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerTransactions" Member="CustomerTransactions">
+    <Type Name="CustomerTransaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InvoiceNumbers" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="TransAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TransDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ccNumber" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ccExpDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ccName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ccRefNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Voided" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VoidedAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Add_By" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_By" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LoggedInQB" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OrderId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Oracle_sentto" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Oracle_CashReceiptID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Oracle_ReceiptNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Oracle_InvoiceNum" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Oracle_CheckNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="amsMerchantAccountID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="processor" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sessions" Member="Sessions">
+    <Type Name="Session">
+      <Column Name="Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsUpdate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="regTypePassed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MethodId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="InternalReg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AdminReg" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AttendeeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegisterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OldRegisterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsGroup" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsMember" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsCart" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isDuplicateLogin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="useNewSecurity" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AmountDue" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PaymentAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PasswordCount" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="SendConfirm" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DBReadId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DBWriteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Add_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RegonlineSuperAdmin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shortcuts" Member="Shortcuts">
+    <Type Name="Shortcut">
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PageID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="CustomLink" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="nonCustomize" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

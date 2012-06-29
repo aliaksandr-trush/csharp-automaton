@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RegOnline.RegressionTest.Managers</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.Managers</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\Reference\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backend\BackendManager.cs" />
+    <Compile Include="Backend\BackendManagerEdit.cs" />
+    <Compile Include="Backend\BackendManagerMenuOptions.cs" />
+    <Compile Include="Backend\BackendManagerTransaction.cs" />
+    <Compile Include="Backend\BackendManagerVerify.cs" />
+    <Compile Include="Backend\BackendPaymentMethodManager.cs" />
+    <Compile Include="Builder\BibNumberingToolManager.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\AgendaMultiChoiceItemManager.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\AgendaPredefinedMultiChoiceItemManager.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\CFMultiChoiceItemManager.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\CFPredefinedMultiChoiceItemManager.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\MultiChoiceItemManagerBase.cs" />
+    <Compile Include="Builder\CFMultiChoiceItem\PredifinedMultiChoiceItemManagerBase.cs" />
+    <Compile Include="Builder\CF\AgendaItemManager.cs" />
+    <Compile Include="Builder\CF\CFManagerBase.cs" />
+    <Compile Include="Builder\CF\CustomFieldManager.cs" />
+    <Compile Include="Builder\CF\OtherEventTypeAgendaCFManager.cs" />
+    <Compile Include="Builder\CreditCardOptionsManager.cs" />
+    <Compile Include="Builder\DiscountCodeManager.cs" />
+    <Compile Include="Builder\EventAdvancedSettingsManager.cs" />
+    <Compile Include="Builder\EventFeeManager.cs" />
+    <Compile Include="Builder\FeeManager.cs" />
+    <Compile Include="Builder\FeeTaxManager.cs" />
+    <Compile Include="Builder\FormDetail\FormDetail.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailAgendaPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailCheckoutPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailConfirmationPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailCustomFields.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailEmails.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailLodgingTravelPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailMerchandisePage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailOtherEventTypeAgendaCFPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailPIPage.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailPreview.cs" />
+    <Compile Include="Builder\FormDetail\FormDetailStartPage.cs" />
+    <Compile Include="Builder\FormDetail\SurveyManager.cs" />
+    <Compile Include="Builder\GroupDiscountRuleManager.cs" />
+    <Compile Include="Builder\HotelManager.cs" />
+    <Compile Include="Builder\HotelTemplateManager.cs" />
+    <Compile Include="Builder\LodgingSettingsAndPaymentOptionsManager.cs" />
+    <Compile Include="Builder\LodgingStandardFieldsManager.cs" />
+    <Compile Include="Builder\MembershipIntegrationManager.cs" />
+    <Compile Include="Builder\MerchandiseManager.cs" />
+    <Compile Include="Builder\MerchandiseMultiChoiceItemManager.cs" />
+    <Compile Include="Builder\PaymentMethodManager.cs" />
+    <Compile Include="Builder\PricingScheduleManager.cs" />
+    <Compile Include="Builder\RegTypeManager.cs" />
+    <Compile Include="Builder\TaxManager.cs" />
+    <Compile Include="Builder\TravelSettingsAndPaymentOptionsManager.cs" />
+    <Compile Include="Builder\TravelStandardAdditionalFieldsManager.cs" />
+    <Compile Include="Manager\XAuthManager.cs" />
+    <Compile Include="DataHelper.cs" />
+    <Compile Include="Emails\ContactListManager.cs" />
+    <Compile Include="Emails\EmailContentManager.cs" />
+    <Compile Include="Emails\EmailInvitationWizardManager.cs" />
+    <Compile Include="Emails\EmailManager.cs" />
+    <Compile Include="Emails\RegistrationEmailsManager.cs" />
+    <Compile Include="ManagerBase.cs" />
+    <Compile Include="ManagerProvider.cs" />
+    <Compile Include="Manager\Account\AccountInformationManager.cs" />
+    <Compile Include="Manager\Account\AccountManager.cs" />
+    <Compile Include="Manager\Account\EditUserManager.cs" />
+    <Compile Include="Manager\Account\PaymentGateway\CCVerificationManager.cs" />
+    <Compile Include="Manager\Account\PaymentGateway\GatewaySetupManager.cs" />
+    <Compile Include="Manager\Account\PaymentGateway\PaymentGatewayManager.cs" />
+    <Compile Include="Manager\CreateNewManager.cs" />
+    <Compile Include="Manager\Dashboard\ActivateEventManager.cs" />
+    <Compile Include="Manager\Dashboard\AttendeeDirectoryCreator.cs" />
+    <Compile Include="Manager\Dashboard\ButtonDesignerManager.cs" />
+    <Compile Include="Manager\Dashboard\CustomReportCreator.cs" />
+    <Compile Include="Manager\Dashboard\DashboardManager.cs" />
+    <Compile Include="Manager\GetStartedManager.cs" />
+    <Compile Include="Manager\ManagerSiteManager.cs" />
+    <Compile Include="RADContentEditorHelper.cs" />
+    <Compile Include="Register\EventCalendarManager.cs" />
+    <Compile Include="Register\PaymentManager.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManager.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerAgendaPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerAttendeeCheckPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerCheckinPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerCheckoutPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerConfirmationPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerCustomFields.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerDataTracking.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerErrorMessage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerEventDataHelper.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerLodgingTravelPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerMerchandisePage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerNavigation.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerPIPage.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerRenewMembership.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerSeleniumHelper.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerSelfRegistrationKiosk.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerStartRegistration.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerUpdateAlreadyRegistered.cs" />
+    <Compile Include="Register\RegisterManager\RegisterManagerXAuth.cs" />
+    <Compile Include="Manager\SelfRegistraionKiosk\SelfRegistrationKioskManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\DirectoryReportManager.cs" />
+    <Compile Include="Report\OnSiteCheckinManager.cs" />
+    <Compile Include="Report\ReportManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Attributes\Attributes.csproj">
+      <Project>{5F381378-8D75-4A9B-8CED-CC714285B5D9}</Project>
+      <Name>Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataCollection\DataCollection.csproj">
+      <Project>{1177E70D-E106-4B37-97F6-7295F8FF41AC}</Project>
+      <Name>DataCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PageObject\PageObject.csproj">
+      <Project>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</Project>
+      <Name>PageObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UIUtility\UIUtility.csproj">
+      <Project>{80BBF187-B2B4-4CAC-9C5E-19165E2C2F41}</Project>
+      <Name>UIUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebElements\WebElements.csproj">
+      <Project>{58A621EF-54DC-418C-B002-A8083712B243}</Project>
+      <Name>WebElements</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

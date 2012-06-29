@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://10.119.33.66/SpiraTeam/Services/v2_2/ImportExport.asmx?wsdl" docRef="http://10.119.33.66/SpiraTeam/Services/v2_2/ImportExport.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://10.119.33.66/SpiraTeam/Services/v2_2/ImportExport.asmx" xmlns:q1="http://www.inflectra.com/SpiraTest/Services/v2.2/" binding="q1:ImportExportSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://10.119.33.66/SpiraTeam/Services/v2_2/ImportExport.asmx" xmlns:q2="http://www.inflectra.com/SpiraTest/Services/v2.2/" binding="q2:ImportExportSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

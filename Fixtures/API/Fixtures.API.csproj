@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5B5D732-6971-4BF8-86D5-60974A435D09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RegOnline.RegressionTest.Fixtures.API</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.Fixtures.API</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\Reference\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIFixtureBase.cs" />
+    <Compile Include="APISoapClients.cs" />
+    <Compile Include="LoginServiceFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationServiceFixture.cs" />
+    <Compile Include="RegOnlineAPIFixture.cs" />
+    <Compile Include="RegOnlineCheckInRegServiceFixture.cs" />
+    <Compile Include="RegOnlineCheckinServiceFixture.cs" />
+    <Compile Include="RegOnlineGetEventFieldsServiceFixture.cs" />
+    <Compile Include="RegOnlineGetEventRegistrationsServiceFixture.cs" />
+    <Compile Include="RegOnlineGetEventsServiceFixture.cs" />
+    <Compile Include="RegOnlineMemberAuthServiceFixture.cs" />
+    <Compile Include="RegOnlineRegTrackerServiceFixture.cs" />
+    <Compile Include="RegOnlineRegUpdateServiceFixture.cs" />
+    <Compile Include="RegOnlineReportsServiceFixture.cs" />
+    <Compile Include="RegOnlineRetrieveAllRegsServiceFixture.cs" />
+    <Compile Include="RegOnlineRetrieveSingleRegServiceFixture.cs" />
+    <Compile Include="RegOnlineXmlUpdaterServiceFixture.cs" />
+    <Compile Include="Service References\EventService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LoginService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegistrationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineAPI\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineCFResponseService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineCheckInRegService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineCheckinService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineGetEventFieldsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineGetEventRegistrationsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineGetEventsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineMemberAuthService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineRegTrackerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineRegUpdateService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineReportsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineRetrieveAllRegsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineRetrieveSingleRegService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RegOnlineXmlUpdaterService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TennisAustraliaServicesFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Attributes\Attributes.csproj">
+      <Project>{5F381378-8D75-4A9B-8CED-CC714285B5D9}</Project>
+      <Name>Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Base\Fixtures.Base.csproj">
+      <Project>{00D2681A-E779-4805-8F26-735B3ED4C151}</Project>
+      <Name>Fixtures.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Linq\Linq.csproj">
+      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Managers\Managers.csproj">
+      <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
+      <Name>Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UIUtility\UIUtility.csproj">
+      <Project>{80BBF187-B2B4-4CAC-9C5E-19165E2C2F41}</Project>
+      <Name>UIUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Service References\EventService\EventService.wsdl" />
+    <None Include="Service References\EventService\RegOnline.RegressionTest.Fixtures.API.EventService.RegOnlineResponseOfBoolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EventService\RegOnline.RegressionTest.Fixtures.API.EventService.RegOnlineResponseOfInt32.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LoginService\login.wsdl" />
+    <None Include="Service References\LoginService\RegOnline.RegressionTest.Fixtures.API.LoginService.RegOnlineResponseOfInt32.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegistrationService\RegistrationService.wsdl" />
+    <None Include="Service References\RegistrationService\RegOnline.RegressionTest.Fixtures.API.RegistrationService.RegOnlineResponseOfInitializeRegistrationSessionResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegistrationService\RegOnline.RegressionTest.Fixtures.API.RegistrationService.RegOnlineResponseOfInt32.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\default.wsdl" />
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfAttendeeMobileAppSettings.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfBoolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfBoolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomField.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomFieldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomReport.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfEvent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfRegistration.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfTransaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfLoginResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineCFResponseService\CustomFieldResponseWS.wsdl" />
+    <None Include="Service References\RegOnlineCheckInRegService\CheckInReg.wsdl" />
+    <None Include="Service References\RegOnlineCheckinService\Checkin.wsdl" />
+    <None Include="Service References\RegOnlineGetEventFieldsService\geteventfields.wsdl" />
+    <None Include="Service References\RegOnlineGetEventRegistrationsService\geteventregistrations.wsdl" />
+    <None Include="Service References\RegOnlineGetEventsService\getEvents.wsdl" />
+    <None Include="Service References\RegOnlineMemberAuthService\memberAuthorization.wsdl" />
+    <None Include="Service References\RegOnlineRegTrackerService\WSRegBug.wsdl" />
+    <None Include="Service References\RegOnlineRegUpdateService\RegistrationUpdateService.wsdl" />
+    <None Include="Service References\RegOnlineRegUpdateService\RegistrationUpdateService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RegOnlineRegUpdateService\RegistrationUpdateService1.wsdl" />
+    <None Include="Service References\RegOnlineRegUpdateService\RegOnline.RegressionTest.Fixtures.API.RegOnlineRegUpdateService.updateRegistrationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineReportsService\regOnline.wsdl" />
+    <None Include="Service References\RegOnlineRetrieveAllRegsService\retrieveallregistrations.wsdl" />
+    <None Include="Service References\RegOnlineRetrieveSingleRegService\RetrieveSingleRegistration.wsdl" />
+    <None Include="Service References\RegOnlineXmlUpdaterService\XmlUpdater.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EventService\" />
+    <WCFMetadataStorage Include="Service References\LoginService\" />
+    <WCFMetadataStorage Include="Service References\RegistrationService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineAPI\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineCFResponseService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineCheckInRegService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineCheckinService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineGetEventFieldsService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineGetEventRegistrationsService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineGetEventsService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineMemberAuthService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineRegTrackerService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineRegUpdateService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineReportsService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineRetrieveAllRegsService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineRetrieveSingleRegService\" />
+    <WCFMetadataStorage Include="Service References\RegOnlineXmlUpdaterService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EventService\EventService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EventService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EventService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EventService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginService\login.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegistrationService\RegistrationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegistrationService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegistrationService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegistrationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineAPI\default.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineAPI\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineAPI\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCFResponseService\CustomFieldResponseWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCFResponseService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCFResponseService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCFResponseService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckInRegService\CheckInReg.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckInRegService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckInRegService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckInRegService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckinService\Checkin.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckinService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckinService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineCheckinService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventFieldsService\geteventfields.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventFieldsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventFieldsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventFieldsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventRegistrationsService\geteventregistrations.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventRegistrationsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventRegistrationsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventRegistrationsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventsService\getEvents.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineGetEventsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineMemberAuthService\memberAuthorization.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineMemberAuthService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineMemberAuthService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineMemberAuthService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegTrackerService\WSRegBug.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegTrackerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegTrackerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegTrackerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegUpdateService\RegistrationUpdateService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegUpdateService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegUpdateService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRegUpdateService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineReportsService\regOnline.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineReportsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineReportsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineReportsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveAllRegsService\retrieveallregistrations.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveAllRegsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveAllRegsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveAllRegsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveSingleRegService\RetrieveSingleRegistration.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveSingleRegService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveSingleRegService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineRetrieveSingleRegService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineXmlUpdaterService\XmlUpdater.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineXmlUpdaterService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineXmlUpdaterService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RegOnlineXmlUpdaterService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

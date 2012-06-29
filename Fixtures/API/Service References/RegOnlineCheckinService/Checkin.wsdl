@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CheckInRegistration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegisterID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckInRegistrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckInRegistrationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckInRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckInRegistration" />
+  </wsdl:message>
+  <wsdl:message name="CheckInRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckInRegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckInRegistrationHttpGetIn">
+    <wsdl:part name="RegisterID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckInRegistrationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckInRegistrationHttpPostIn">
+    <wsdl:part name="RegisterID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckInRegistrationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="CheckInSoap">
+    <wsdl:operation name="CheckInRegistration">
+      <wsdl:input message="tns:CheckInRegistrationSoapIn" />
+      <wsdl:output message="tns:CheckInRegistrationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CheckInHttpGet">
+    <wsdl:operation name="CheckInRegistration">
+      <wsdl:input message="tns:CheckInRegistrationHttpGetIn" />
+      <wsdl:output message="tns:CheckInRegistrationHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CheckInHttpPost">
+    <wsdl:operation name="CheckInRegistration">
+      <wsdl:input message="tns:CheckInRegistrationHttpPostIn" />
+      <wsdl:output message="tns:CheckInRegistrationHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CheckInSoap" type="tns:CheckInSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckInRegistration">
+      <soap:operation soapAction="http://tempuri.org/CheckInRegistration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CheckInSoap12" type="tns:CheckInSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckInRegistration">
+      <soap12:operation soapAction="http://tempuri.org/CheckInRegistration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CheckInHttpGet" type="tns:CheckInHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CheckInRegistration">
+      <http:operation location="/CheckInRegistration" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CheckInHttpPost" type="tns:CheckInHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CheckInRegistration">
+      <http:operation location="/CheckInRegistration" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CheckIn">
+    <wsdl:port name="CheckInSoap" binding="tns:CheckInSoap">
+      <soap:address location="http://beta.regonline.com/webservices/Checkin.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CheckInSoap12" binding="tns:CheckInSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/Checkin.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CheckInHttpGet" binding="tns:CheckInHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/Checkin.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CheckInHttpPost" binding="tns:CheckInHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/Checkin.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

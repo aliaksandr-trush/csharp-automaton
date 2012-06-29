@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RegOnline.RegressionTest.PageObject</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.PageObject</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=2.18.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <HintPath>..\Reference\WebDriver\WebDriver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builder\Agenda.cs" />
+    <Compile Include="Builder\BulkLoadCodesDefine.cs" />
+    <Compile Include="Builder\Checkout.cs" />
+    <Compile Include="Builder\GroupDiscountDefine.cs" />
+    <Compile Include="Builder\LodgingTravel.cs" />
+    <Compile Include="Builder\Merchandise.cs" />
+    <Compile Include="Builder\MerchandiseDefine.cs" />
+    <Compile Include="Builder\PageObjectHelper.cs" />
+    <Compile Include="Builder\PersonalInfo.cs" />
+    <Compile Include="Builder\XAuthOld.cs" />
+    <Compile Include="Manager\Dashboard\EventDtails.cs" />
+    <Compile Include="Manager\Dashboard\Reports.cs" />
+    <Compile Include="Manager\Events.cs" />
+    <Compile Include="Manager\IXAuth.cs" />
+    <Compile Include="Manager\PageObjectHelper.cs" />
+    <Compile Include="Builder\HtmlEditor.cs" />
+    <Compile Include="Builder\CodeDefine.cs" />
+    <Compile Include="Builder\EventDetails.cs" />
+    <Compile Include="Builder\EventFeeDefine.cs" />
+    <Compile Include="Builder\RegTypeDefine.cs" />
+    <Compile Include="Builder\TaxRateDefine.cs" />
+    <Compile Include="Manager\SignIn.cs" />
+    <Compile Include="Manager\XAuth.cs" />
+    <Compile Include="PageObjectHelper.cs" />
+    <Compile Include="PopupFrameHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register\Agenda.cs" />
+    <Compile Include="Register\AttendeeCheck.cs" />
+    <Compile Include="Register\Checkin.cs" />
+    <Compile Include="Register\Checkout.cs" />
+    <Compile Include="Register\Confirmation.cs" />
+    <Compile Include="Register\Login.cs" />
+    <Compile Include="Register\PageObjectHelper.cs" />
+    <Compile Include="Register\PersonalInfo.cs" />
+    <Compile Include="Reports\StandardReports.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataCollection\DataCollection.csproj">
+      <Project>{1177E70D-E106-4B37-97F6-7295F8FF41AC}</Project>
+      <Name>DataCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UIUtility\UIUtility.csproj">
+      <Project>{80BBF187-B2B4-4CAC-9C5E-19165E2C2F41}</Project>
+      <Name>UIUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebElements\WebElements.csproj">
+      <Project>{58A621EF-54DC-418C-B002-A8083712B243}</Project>
+      <Name>WebElements</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

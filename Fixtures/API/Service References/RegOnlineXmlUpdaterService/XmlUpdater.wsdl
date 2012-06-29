@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="UpdateRegistrations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRegistrationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateRegistrationsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateRegistrationsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateRegistrations" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRegistrationsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateRegistrationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRegistrationsHttpGetIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="xmlData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRegistrationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRegistrationsHttpPostIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="xmlData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRegistrationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="XmlUpdaterSoap">
+    <wsdl:operation name="UpdateRegistrations">
+      <wsdl:input message="tns:UpdateRegistrationsSoapIn" />
+      <wsdl:output message="tns:UpdateRegistrationsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="XmlUpdaterHttpGet">
+    <wsdl:operation name="UpdateRegistrations">
+      <wsdl:input message="tns:UpdateRegistrationsHttpGetIn" />
+      <wsdl:output message="tns:UpdateRegistrationsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="XmlUpdaterHttpPost">
+    <wsdl:operation name="UpdateRegistrations">
+      <wsdl:input message="tns:UpdateRegistrationsHttpPostIn" />
+      <wsdl:output message="tns:UpdateRegistrationsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="XmlUpdaterSoap" type="tns:XmlUpdaterSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateRegistrations">
+      <soap:operation soapAction="http://tempuri.org/UpdateRegistrations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XmlUpdaterSoap12" type="tns:XmlUpdaterSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateRegistrations">
+      <soap12:operation soapAction="http://tempuri.org/UpdateRegistrations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XmlUpdaterHttpGet" type="tns:XmlUpdaterHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="UpdateRegistrations">
+      <http:operation location="/UpdateRegistrations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XmlUpdaterHttpPost" type="tns:XmlUpdaterHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="UpdateRegistrations">
+      <http:operation location="/UpdateRegistrations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="XmlUpdater">
+    <wsdl:port name="XmlUpdaterSoap" binding="tns:XmlUpdaterSoap">
+      <soap:address location="http://beta.regonline.com/webservices/XmlUpdater.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XmlUpdaterSoap12" binding="tns:XmlUpdaterSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/XmlUpdater.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XmlUpdaterHttpGet" binding="tns:XmlUpdaterHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/XmlUpdater.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XmlUpdaterHttpPost" binding="tns:XmlUpdaterHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/XmlUpdater.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

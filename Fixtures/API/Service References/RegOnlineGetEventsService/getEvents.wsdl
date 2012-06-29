@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ByAccountID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ByAccountIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ByAccountIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ByAccountIDWithFilters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlFilterData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FilterOperator" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LikeMatching" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ByAccountIDWithFiltersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ByAccountIDWithFiltersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ByAccountIDEventID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ByAccountIDEventIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ByAccountIDEventIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ByAccountIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ByAccountID" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ByAccountIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersSoapIn">
+    <wsdl:part name="parameters" element="tns:ByAccountIDWithFilters" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersSoapOut">
+    <wsdl:part name="parameters" element="tns:ByAccountIDWithFiltersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ByAccountIDEventID" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ByAccountIDEventIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDHttpGetIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersHttpGetIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="xmlFilterData" type="s:string" />
+    <wsdl:part name="FilterOperator" type="s:string" />
+    <wsdl:part name="LikeMatching" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDHttpGetIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="EventId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDHttpPostIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersHttpPostIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="xmlFilterData" type="s:string" />
+    <wsdl:part name="FilterOperator" type="s:string" />
+    <wsdl:part name="LikeMatching" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDWithFiltersHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDHttpPostIn">
+    <wsdl:part name="AccountID" type="s:string" />
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="EventId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ByAccountIDEventIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="getEventsSoap">
+    <wsdl:operation name="ByAccountID">
+      <wsdl:input message="tns:ByAccountIDSoapIn" />
+      <wsdl:output message="tns:ByAccountIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <wsdl:input message="tns:ByAccountIDWithFiltersSoapIn" />
+      <wsdl:output message="tns:ByAccountIDWithFiltersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <wsdl:input message="tns:ByAccountIDEventIDSoapIn" />
+      <wsdl:output message="tns:ByAccountIDEventIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getEventsHttpGet">
+    <wsdl:operation name="ByAccountID">
+      <wsdl:input message="tns:ByAccountIDHttpGetIn" />
+      <wsdl:output message="tns:ByAccountIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <wsdl:input message="tns:ByAccountIDWithFiltersHttpGetIn" />
+      <wsdl:output message="tns:ByAccountIDWithFiltersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <wsdl:input message="tns:ByAccountIDEventIDHttpGetIn" />
+      <wsdl:output message="tns:ByAccountIDEventIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getEventsHttpPost">
+    <wsdl:operation name="ByAccountID">
+      <wsdl:input message="tns:ByAccountIDHttpPostIn" />
+      <wsdl:output message="tns:ByAccountIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <wsdl:input message="tns:ByAccountIDWithFiltersHttpPostIn" />
+      <wsdl:output message="tns:ByAccountIDWithFiltersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <wsdl:input message="tns:ByAccountIDEventIDHttpPostIn" />
+      <wsdl:output message="tns:ByAccountIDEventIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="getEventsSoap" type="tns:getEventsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ByAccountID">
+      <soap:operation soapAction="http://tempuri.org/ByAccountID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <soap:operation soapAction="http://tempuri.org/ByAccountIDWithFilters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <soap:operation soapAction="http://tempuri.org/ByAccountIDEventID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventsSoap12" type="tns:getEventsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ByAccountID">
+      <soap12:operation soapAction="http://tempuri.org/ByAccountID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <soap12:operation soapAction="http://tempuri.org/ByAccountIDWithFilters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <soap12:operation soapAction="http://tempuri.org/ByAccountIDEventID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventsHttpGet" type="tns:getEventsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ByAccountID">
+      <http:operation location="/ByAccountID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <http:operation location="/ByAccountIDWithFilters" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <http:operation location="/ByAccountIDEventID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getEventsHttpPost" type="tns:getEventsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ByAccountID">
+      <http:operation location="/ByAccountID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDWithFilters">
+      <http:operation location="/ByAccountIDWithFilters" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ByAccountIDEventID">
+      <http:operation location="/ByAccountIDEventID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="getEvents">
+    <wsdl:port name="getEventsSoap" binding="tns:getEventsSoap">
+      <soap:address location="http://beta.regonline.com/webservices/getEvents.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventsSoap12" binding="tns:getEventsSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/getEvents.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventsHttpGet" binding="tns:getEventsHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/getEvents.asmx" />
+    </wsdl:port>
+    <wsdl:port name="getEventsHttpPost" binding="tns:getEventsHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/getEvents.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

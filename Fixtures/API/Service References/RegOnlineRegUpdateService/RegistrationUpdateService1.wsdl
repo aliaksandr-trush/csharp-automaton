@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.regonline.com/webservices/2007/08/RegistrationUpdateService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.regonline.com/webservices/2007/08/RegistrationUpdateService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.regonline.com/webservices/2007/08/RegistrationUpdateService" location="2007/08/RegistrationUpdateService.wsdl" />
+  <wsdl:types />
+  <wsdl:portType name="RegistrationUpdateServiceHttpGet" />
+  <wsdl:portType name="RegistrationUpdateServiceHttpPost" />
+  <wsdl:binding name="RegistrationUpdateServiceHttpGet" type="tns:RegistrationUpdateServiceHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="RegistrationUpdateServiceHttpPost" type="tns:RegistrationUpdateServiceHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="RegistrationUpdateService">
+    <wsdl:port name="RegistrationUpdateServiceSoap" binding="tns:RegistrationUpdateServiceSoap">
+      <soap:address location="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationUpdateServiceSoap1" binding="tns:RegistrationUpdateServiceSoap">
+      <soap12:address location="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationUpdateServiceHttpGet" binding="tns:RegistrationUpdateServiceHttpGet">
+      <http:address location="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationUpdateServiceHttpPost" binding="tns:RegistrationUpdateServiceHttpPost">
+      <http:address location="http://beta.regonline.com/webservices/RegistrationUpdateService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

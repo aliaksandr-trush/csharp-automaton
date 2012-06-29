@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://www.regonline.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://www.regonline.com/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://www.regonline.com/webservices/2009/02/StandardPersonalInformation.Generated.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://www.regonline.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://www.regonline.com/webservices/">
+      <s:import namespace="http://www.regonline.com/webservices/" />
+      <s:import namespace="http://www.regonline.com/webservices/2009/02/StandardPersonalInformation.Generated.xsd" />
+      <s:element name="CheckRegistrationStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrationID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckRegistrationStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckRegistrationStatusResult" type="tns:RegOnlineResponseOfInt32" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegOnlineResponseOfInt32">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s1:ResponseStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InitializeRegistrationSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:personalInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitializeRegistrationSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InitializeRegistrationSessionResult" type="tns:RegOnlineResponseOfInitializeRegistrationSessionResponseType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegOnlineResponseOfInitializeRegistrationSessionResponseType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:InitializeRegistrationSessionResponseType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s1:ResponseStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InitializeRegistrationSessionResponseType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RegistrationId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetBibNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="eventId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="registerId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="regTypeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetBibNumberResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/webservices/">
+      <s:complexType name="ResponseStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticationHeader" type="s1:AuthenticationHeader" />
+      <s:complexType name="AuthenticationHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/webservices/2009/02/StandardPersonalInformation.Generated.xsd">
+      <s:element name="personalInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="middleName" nillable="true" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="birthDate" nillable="true" type="s:date" />
+            <s:element minOccurs="1" maxOccurs="1" name="gender" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="address1" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="address2" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="city" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="state" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="postalCode" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="country" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="homePhone" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="workPhone" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="mobilePhone" nillable="true" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="additionalDetails" nillable="true" type="s2:ArrayOfNameValueSet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNameValueSet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="additionalDetails" type="s2:nameValueSet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="nameValueSet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckRegistrationStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckRegistrationStatus" />
+  </wsdl:message>
+  <wsdl:message name="CheckRegistrationStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckRegistrationStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckRegistrationStatusAuthenticationHeader">
+    <wsdl:part name="AuthenticationHeader" element="s1:AuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="InitializeRegistrationSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:InitializeRegistrationSession" />
+  </wsdl:message>
+  <wsdl:message name="InitializeRegistrationSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:InitializeRegistrationSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="InitializeRegistrationSessionAuthenticationHeader">
+    <wsdl:part name="AuthenticationHeader" element="s1:AuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="SetBibNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:SetBibNumber" />
+  </wsdl:message>
+  <wsdl:message name="SetBibNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:SetBibNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetBibNumberAuthenticationHeader">
+    <wsdl:part name="AuthenticationHeader" element="s1:AuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:portType name="RegistrationServiceSoap">
+    <wsdl:operation name="CheckRegistrationStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Can be called after redirect to TP site to confirm that RegOnline has completed and committed the payment and recorded the participant record.</wsdl:documentation>
+      <wsdl:input message="tns:CheckRegistrationStatusSoapIn" />
+      <wsdl:output message="tns:CheckRegistrationStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitializeRegistrationSession">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Called to pass participant information to RegOnline prior to payment.</wsdl:documentation>
+      <wsdl:input message="tns:InitializeRegistrationSessionSoapIn" />
+      <wsdl:output message="tns:InitializeRegistrationSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBibNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets a bib number to the next available one for a given registraiton id</wsdl:documentation>
+      <wsdl:input message="tns:SetBibNumberSoapIn" />
+      <wsdl:output message="tns:SetBibNumberSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistrationServiceSoap" type="tns:RegistrationServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckRegistrationStatus">
+      <soap:operation soapAction="https://www.regonline.com/webservices/CheckRegistrationStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CheckRegistrationStatusAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeRegistrationSession">
+      <soap:operation soapAction="https://www.regonline.com/webservices/InitializeRegistrationSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:InitializeRegistrationSessionAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBibNumber">
+      <soap:operation soapAction="https://www.regonline.com/webservices/SetBibNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetBibNumberAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistrationServiceSoap12" type="tns:RegistrationServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckRegistrationStatus">
+      <soap12:operation soapAction="https://www.regonline.com/webservices/CheckRegistrationStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CheckRegistrationStatusAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeRegistrationSession">
+      <soap12:operation soapAction="https://www.regonline.com/webservices/InitializeRegistrationSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:InitializeRegistrationSessionAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBibNumber">
+      <soap12:operation soapAction="https://www.regonline.com/webservices/SetBibNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SetBibNumberAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegistrationService">
+    <wsdl:port name="RegistrationServiceSoap" binding="tns:RegistrationServiceSoap">
+      <soap:address location="http://beta.regonline.com/webservices/Registrations/RegistrationService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationServiceSoap12" binding="tns:RegistrationServiceSoap12">
+      <soap12:address location="http://beta.regonline.com/webservices/Registrations/RegistrationService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.regonline.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.regonline.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Regonline web services for the retrieval of custom report data.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.regonline.com/">
+      <s:element name="getReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="customerID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="reportID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bAddDate" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getNonCompressedReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="customerID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="reportID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bAddDate" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getNonCompressedReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getNonCompressedReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getReportSoapIn">
+    <wsdl:part name="parameters" element="tns:getReport" />
+  </wsdl:message>
+  <wsdl:message name="getReportSoapOut">
+    <wsdl:part name="parameters" element="tns:getReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportSoapIn">
+    <wsdl:part name="parameters" element="tns:getNonCompressedReport" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportSoapOut">
+    <wsdl:part name="parameters" element="tns:getNonCompressedReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="getReportHttpGetIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+    <wsdl:part name="customerID" type="s:string" />
+    <wsdl:part name="reportID" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="bAddDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportHttpGetIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+    <wsdl:part name="customerID" type="s:string" />
+    <wsdl:part name="reportID" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="bAddDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getReportHttpPostIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+    <wsdl:part name="customerID" type="s:string" />
+    <wsdl:part name="reportID" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="bAddDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportHttpPostIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+    <wsdl:part name="customerID" type="s:string" />
+    <wsdl:part name="reportID" type="s:string" />
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="bAddDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonCompressedReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="Regonline_x0020_Web_x0020_ServicesSoap">
+    <wsdl:operation name="getReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getReportSoapIn" />
+      <wsdl:output message="tns:getReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getNonCompressedReportSoapIn" />
+      <wsdl:output message="tns:getNonCompressedReportSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Regonline_x0020_Web_x0020_ServicesHttpGet">
+    <wsdl:operation name="getReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getReportHttpGetIn" />
+      <wsdl:output message="tns:getReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getNonCompressedReportHttpGetIn" />
+      <wsdl:output message="tns:getNonCompressedReportHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Regonline_x0020_Web_x0020_ServicesHttpPost">
+    <wsdl:operation name="getReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getReportHttpPostIn" />
+      <wsdl:output message="tns:getReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">function for retrieval of custom report data.</wsdl:documentation>
+      <wsdl:input message="tns:getNonCompressedReportHttpPostIn" />
+      <wsdl:output message="tns:getNonCompressedReportHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Regonline_x0020_Web_x0020_ServicesSoap" type="tns:Regonline_x0020_Web_x0020_ServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getReport">
+      <soap:operation soapAction="http://www.regonline.com/getReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <soap:operation soapAction="http://www.regonline.com/getNonCompressedReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Regonline_x0020_Web_x0020_ServicesSoap12" type="tns:Regonline_x0020_Web_x0020_ServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getReport">
+      <soap12:operation soapAction="http://www.regonline.com/getReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <soap12:operation soapAction="http://www.regonline.com/getNonCompressedReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Regonline_x0020_Web_x0020_ServicesHttpGet" type="tns:Regonline_x0020_Web_x0020_ServicesHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getReport">
+      <http:operation location="/getReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <http:operation location="/getNonCompressedReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Regonline_x0020_Web_x0020_ServicesHttpPost" type="tns:Regonline_x0020_Web_x0020_ServicesHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getReport">
+      <http:operation location="/getReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNonCompressedReport">
+      <http:operation location="/getNonCompressedReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Regonline_x0020_Web_x0020_Services">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Regonline web services for the retrieval of custom report data.</wsdl:documentation>
+    <wsdl:port name="Regonline_x0020_Web_x0020_ServicesSoap" binding="tns:Regonline_x0020_Web_x0020_ServicesSoap">
+      <soap:address location="http://beta.regonline.com/activeReports/regOnline.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Regonline_x0020_Web_x0020_ServicesSoap12" binding="tns:Regonline_x0020_Web_x0020_ServicesSoap12">
+      <soap12:address location="http://beta.regonline.com/activeReports/regOnline.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Regonline_x0020_Web_x0020_ServicesHttpGet" binding="tns:Regonline_x0020_Web_x0020_ServicesHttpGet">
+      <http:address location="http://beta.regonline.com/activeReports/regOnline.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Regonline_x0020_Web_x0020_ServicesHttpPost" binding="tns:Regonline_x0020_Web_x0020_ServicesHttpPost">
+      <http:address location="http://beta.regonline.com/activeReports/regOnline.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
