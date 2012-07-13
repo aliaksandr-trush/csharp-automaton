@@ -64,20 +64,25 @@
 
         private void StartWebDriver()
         {
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.Name.Equals(XmlConfiguration.Browser.Firefox.ToString()))
+            XmlConfiguration.Browser browser;
+            Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            IGetWebDriver br;
+
+            switch (browser)
             {
-                Browser_Firefox firefox = new Browser_Firefox();
-                this.driver = firefox.GetWebDriver();
+                case XmlConfiguration.Browser.Firefox:
+                    br = new Browser_Firefox();
+                    break;
+
+                case XmlConfiguration.Browser.Chrome:
+                    br = new Browser_Chrome();
+                    break;
+
+                default:
+                    throw new Exception(string.Format("No matching browser for current browser name: {0}", browser.ToString()));
             }
-            else if (ConfigurationProvider.XmlConfig.CurrentBrowser.Name.Equals(XmlConfiguration.Browser.Chrome.ToString()))
-            {
-                Browser_Chrome chrome = new Browser_Chrome();
-                this.driver = chrome.GetWebDriver();
-            }
-            else
-            {
-                throw new Exception("No matching browser for current browser name!");
-            }
+
+            this.driver = br.GetWebDriver();
         }
 
         public void Exit()
@@ -454,6 +459,11 @@
             catch (TimeoutException) {/*ignore*/}
         }
 
+        public void GoBackToPreviousPage()
+        {
+            driver.Navigate().Back();
+        }
+
         public bool UrlContainsPath(string path)
         {
             return GetLocation().Contains(path.ToLower());
@@ -554,9 +564,7 @@
 
         public string GetValue(string locator, LocateBy locateBy)
         {
-            By by = this.GetLocatorFinder(locator, locateBy);
-            this.WaitForElementPresent(by);
-            return driver.FindElement(by).GetAttribute("value");
+            return this.GetAttribute(locator, "value", locateBy);
         }
 
         public string GetText(string locator, LocateBy locateBy)

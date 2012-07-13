@@ -5,7 +5,8 @@
         public enum Folders
         {
             RegistrationInventory,
-            Regression
+            Regression,
+            SSO
         }
     }
 }

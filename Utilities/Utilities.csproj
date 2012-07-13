@@ -68,9 +68,9 @@
       <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
       <Name>Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Linq\Linq.csproj">
+    <ProjectReference Include="..\Linq\DataAccess.csproj">
       <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
-      <Name>Linq</Name>
+      <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

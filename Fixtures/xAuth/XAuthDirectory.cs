@@ -14,7 +14,7 @@
     ///   2)Require loin to access directory
     /// </summary>
     [TestFixture]
-    public class XAuthDirectory : FixtureBase
+    public class XAuthDirectory : ExternalAuthenticationFixtureBase
     {
         private string testEventName = "XAuth_Directories";
         private string xauthRegTypeName = "XAuth_RegType";

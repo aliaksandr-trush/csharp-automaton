@@ -6,5 +6,13 @@
     {
         public RadioButton(string locator, LocateBy locatorType)
             : base(locator, locatorType) { }
+
+        public virtual bool IsChecked
+        {
+            get
+            {
+                return UIUtilityProvider.UIHelper.IsChecked(Locator, TypeOfLocator);
+            }
+        }
     }
 }

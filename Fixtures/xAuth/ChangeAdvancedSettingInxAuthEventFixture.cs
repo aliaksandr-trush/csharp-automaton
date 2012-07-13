@@ -7,7 +7,7 @@
     using RegOnline.RegressionTest.Managers.Register;
 
     [TestFixture]
-    public class ChangeAdvancedSettingInxAuthEventFixture : FixtureBase
+    public class ChangeAdvancedSettingInxAuthEventFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "XAuthFixture_ChangeAdvancedSettingInxAuthEvent";
         private const string OtherEventName = "XAuthFixture_ChangeAdvancedSettingInxAuthEvent_Prepare";

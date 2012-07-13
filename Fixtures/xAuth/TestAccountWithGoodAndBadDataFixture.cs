@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Fixtures.Base;
 
     [TestFixture]
-    public class TestAccountWithGoodAndBadDataFixture : FixtureBase
+    public class TestAccountWithGoodAndBadDataFixture : ExternalAuthenticationFixtureBase
     {
         string eventName = "XAuth_TestAccountWithBadAndGoodData";
 

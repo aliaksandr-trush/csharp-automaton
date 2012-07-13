@@ -27,6 +27,7 @@
         {
             public const string Regression = "Regression";
             public const string XAuth = "XAuth";
+            public const string SSO = "SSO";
         }
 
         protected static ManagerSiteManager ManagerSiteMgr;

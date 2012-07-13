@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.UIUtility;
 
     [TestFixture]
-    public class SetupWithOnlyEmailAddressAndPasswordFixture : FixtureBase
+    public class SetupWithOnlyEmailAddressAndPasswordFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "XAuthFixture_SetupWithOnlyEmailAddressAndPassword";
 

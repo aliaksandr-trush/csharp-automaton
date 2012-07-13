@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <RegOnline.RegressionTestConfig>
   <Environments>
-    <Preferred Environment="CBeta" PrivateLabel="Default" />
+    <Preferred Environment="Beta" PrivateLabel="SSO" />
 
     <Environment Name="Alpha"
            ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -229,13 +229,13 @@
   </WebServices>
 
   <Browsers Current="Firefox">
-    <ChromeDriverPath>C:\RegOnlineStuff\Install\Selenium\ChromeDriver</ChromeDriverPath>
+    <ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
     <Browser Name="Firefox">
-      <BinaryPath Enable="true">D:\FirefoxProgram\Firefox9\firefox.exe</BinaryPath>
+      <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF9.0.1\firefox.exe</BinaryPath>
       <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
     </Browser>
     <Browser Name="Chrome">
-      <BinaryPath Enable="true">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
+      <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
       <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
     </Browser>
   </Browsers>

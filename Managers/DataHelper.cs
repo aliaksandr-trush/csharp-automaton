@@ -4,7 +4,7 @@
     using System.Linq;
     using NUnit.Framework;
     using RegOnline.RegressionTest.Configuration;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
 
     /// <summary>
     /// Database related
@@ -32,6 +32,19 @@
             var db = new ClientDataContext();
             int rowsAffected;
             string command = string.Format("UPDATE Registrations SET Test = 1 WHERE Event_Id = {0}", eventId);
+            rowsAffected = db.ExecuteCommand(command);
+        }
+
+        public void RemoveXAuthLiveRegistration(int accountId)
+        {
+            var db = new ClientDataContext();
+            int rowsAffected;
+            string command = string.Format("update Registrations set Test=1 "
+            +"from Registrations r "
+            +"inner join Events e on r.Event_Id=e.Id "
+            +"inner join event_statuses es on e.StatusId=es.Id "
+            +"inner join EventRegTypes ert on ert.Id=r.RegTypeId and r.Event_Id=ert.EventId "
+            +"where e.Customer_Id={0} and r.Test=0", accountId);
             rowsAffected = db.ExecuteCommand(command);
         }
 

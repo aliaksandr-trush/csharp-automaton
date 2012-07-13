@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using NUnit.Framework;
     using RegOnline.RegressionTest.Fixtures.Base;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.Managers.Manager;
     using RegOnline.RegressionTest.Managers.Register;

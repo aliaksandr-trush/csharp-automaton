@@ -12,5 +12,13 @@
         {
             UIUtilityProvider.UIHelper.SetCheckbox(Locator, check, TypeOfLocator);
         }
+
+        public virtual bool IsChecked
+        {
+            get
+            {
+                return UIUtilityProvider.UIHelper.IsChecked(Locator, TypeOfLocator);
+            }
+        }
     }
 }

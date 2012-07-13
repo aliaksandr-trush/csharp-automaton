@@ -78,5 +78,26 @@
         {
             return UIUtilityProvider.UIHelper.GetAttribute(Locator, att, TypeOfLocator);
         }
+
+        public bool HasAttribute(string att)
+        {
+            try
+            {
+                string attri = GetAttribute(att);
+
+                if (attri == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

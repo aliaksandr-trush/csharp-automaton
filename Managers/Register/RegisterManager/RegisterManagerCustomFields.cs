@@ -5,7 +5,7 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;

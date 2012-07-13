@@ -7,7 +7,7 @@
     using RegOnline.RegressionTest.DataCollection;
 
     [TestFixture]
-    public class SetupWithOnlyEmailAddressFixtureFixture : FixtureBase
+    public class SetupWithOnlyEmailAddressFixtureFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "SetupWithOnlyEmailAddressTest";
         private int eventID;

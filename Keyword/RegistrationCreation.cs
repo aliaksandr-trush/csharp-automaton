@@ -9,18 +9,20 @@
 
     public class RegistrationCreation
     {
-        private PageObjectHelper RegisterHelper = new PageObjectHelper();
-        private Checkin CheckinPage = new Checkin();
-        private Login LoginPage = new Login();
-        private PersonalInfo PersonalInfoPage = new PersonalInfo();
-        private Agenda AgendaItem = new Agenda();
-        private Checkout CheckoutPage = new Checkout();
-        private Confirmation Confirmation = new Confirmation();
-
         public void CreateRegistration(Registrant reg)
         {
             Checkin(reg);
-            PersonalInfo(reg);
+
+            if (reg.RegType != null && reg.RegType.IsSSO)
+            {
+                SSOLogin(reg);
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            }
+            else
+            {
+                PersonalInfo(reg);
+            }
+
             Agenda(reg);
             Checkout(reg);
         }
@@ -33,32 +35,32 @@
             {
                 PersonalInfo(regs[i]);
                 //Click add another person on checkout page
-                RegisterHelper.AddAnotherPerson_Click();
-                CheckinPage.EmailAddress.Type(regs[i + 1].Email);
+                PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(regs[i + 1].Email);
                 if (regs[i + 1].RegType != null)
                 {
                     if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.HasValue)
                     {
                         if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
                         {
-                            CheckinPage.RegTypeDropDown.SelectWithText(regs[i + 1].RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(regs[i + 1].RegType.RegTypeName);
                         }
                         else
                         {
-                            CheckinPage.SelectRegTypeRadioButton(regs[i + 1].RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
                         }
                     }
                     else
                     {
-                        CheckinPage.SelectRegTypeRadioButton(regs[i + 1].RegType.RegTypeName);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
                     }
 
                     if (regs[i + 1].RegType.DiscountCode.Count != 0)
                     {
-                        CheckinPage.EventFeeDiscountCode.Type(regs[i + 1].RegType.DiscountCode[0].Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(regs[i + 1].RegType.DiscountCode[0].Code);
                     }
                 }
-                RegisterHelper.Continue_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
 
             PersonalInfo(regs[regs.Count - 1]);
@@ -67,46 +69,46 @@
 
         public void Checkin(Registrant reg)
         {
-            KeywordProvider.RegisterDefault.OpenRegisterPage(reg.Event.Id);
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(reg.Event.Id);
 
-            if (KeywordProvider.RegisterDefault.IsOnLoginPage())
+            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
             {
-                LoginPage.StartNewRegistration_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
             }
 
-            CheckinPage.EmailAddress.Type(reg.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
 
-            if (CheckinPage.VerifyEmailAddress.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.IsPresent)
             {
-                CheckinPage.VerifyEmailAddress.WaitForDisplay();
-                CheckinPage.VerifyEmailAddress.Type(reg.Email);
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.WaitForDisplay();
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type(reg.Email);
             }
 
             if (reg.RegType != null)
             {
-                KeywordProvider.RegisterDefault.SelectRegType(reg.RegType.RegTypeName);
+                KeywordProvider.RegisterDefault.SelectRegType(reg.RegType);
 
                 if (reg.RegType.DiscountCode.Count != 0)
                 {
-                    CheckinPage.EventFeeDiscountCode.Type(reg.RegType.DiscountCode[0].Code);
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.RegType.DiscountCode[0].Code);
                 }
             }
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
         public void Login(Registrant reg)
         {
             if (reg.Password != null)
             {
-                LoginPage.Password.Type(reg.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(reg.Password);
             }
             else
             {
-                LoginPage.Password.Type(Registrant.Default.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(Registrant.Default.Password);
             }
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
         public void PersonalInfo(Registrant reg)
@@ -115,97 +117,96 @@
             
             if (reg.FirstName != null)
             {
-                PersonalInfoPage.FirstName.Type(reg.FirstName);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
             }
             else
             {
-                PersonalInfoPage.FirstName.Type(Registrant.Default.FirstName);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(Registrant.Default.FirstName);
             }
             if (reg.MiddleName != null)
             {
-                PersonalInfoPage.MiddleName.Type(reg.MiddleName);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(reg.MiddleName);
             }
             else
             {
-                PersonalInfoPage.MiddleName.Type(Registrant.Default.MiddleName);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(Registrant.Default.MiddleName);
             }
-            
-            PersonalInfoPage.LastName.Type(lastName);
+
+            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(lastName);
             
             if (reg.JobTitle != null)
             {
-                PersonalInfoPage.JobTitle.Type(reg.JobTitle);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
             }
             else
             {
-                PersonalInfoPage.JobTitle.Type(Registrant.Default.JobTitle);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(Registrant.Default.JobTitle);
             }
             if (reg.Company != null)
             {
-                PersonalInfoPage.Company.Type(reg.Company);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(reg.Company);
             }
             else
             {
-                PersonalInfoPage.Company.Type(Registrant.Default.Company);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(Registrant.Default.Company);
             }
             if (reg.AddressLineOne != null)
             {
-                PersonalInfoPage.AddressOne.Type(reg.AddressLineOne);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(reg.AddressLineOne);
             }
             else
             {
-                PersonalInfoPage.AddressOne.Type(Registrant.Default.AddressLineOne);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(Registrant.Default.AddressLineOne);
             }
             if (reg.City != null)
             {
-                PersonalInfoPage.City.Type(reg.City);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(reg.City);
             }
             else
             {
-                PersonalInfoPage.City.Type(Registrant.Default.City);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
             }
             if (reg.State != null)
             {
-                PersonalInfoPage.State.SelectWithText(reg.State);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(reg.State);
             }
             else
             {
-                PersonalInfoPage.State.SelectWithText(Registrant.Default.State);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(Registrant.Default.State);
             }
             if (reg.ZipCode != null)
             {
-                PersonalInfoPage.Zip.Type(reg.ZipCode);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(reg.ZipCode);
             }
             else
             {
-                PersonalInfoPage.Zip.Type(Registrant.Default.ZipCode);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(Registrant.Default.ZipCode);
             }
             if (reg.WorkPhone != null)
             {
-                PersonalInfoPage.WorkPhone.Type(reg.WorkPhone);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(reg.WorkPhone);
             }
             else
             {
-                PersonalInfoPage.WorkPhone.Type(Registrant.Default.WorkPhone);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
             }
             if (reg.Password != null)
             {
-                PersonalInfoPage.Password.Type(reg.Password);
-                PersonalInfoPage.PasswordReEnter.Type(reg.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
             }
             else
             {
-                PersonalInfoPage.Password.Type(Registrant.Default.Password);
-                PersonalInfoPage.PasswordReEnter.Type(Registrant.Default.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(Registrant.Default.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(Registrant.Default.Password);
             }
-
-            if (CheckoutPage.Finish.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish.IsPresent)
             {
-                CheckoutPage.Finish_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
             }
             else
             {
-                RegisterHelper.Continue_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
         }
 
@@ -218,7 +219,7 @@
                     switch (agenda.Type)
                     {
                         case FormData.CustomFieldType.CheckBox:
-                            ((CheckBox)AgendaItem.GetAgendaItem(agenda).AgendaType).Set(true);
+                            ((CheckBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agenda).AgendaType).Set(true);
                             break;
                         case FormData.CustomFieldType.RadioButton:
                             {
@@ -240,7 +241,7 @@
                                 {
                                     if (choice.Select)
                                     {
-                                        ((MultiChoiceDropdown)AgendaItem.GetAgendaItem(agenda).AgendaType).SelectWithValue(choice.Id.ToString());
+                                        ((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agenda).AgendaType).SelectWithValue(choice.Id.ToString());
                                     }
                                 }
                             }
@@ -250,7 +251,7 @@
                     }
                 }
 
-                RegisterHelper.Continue_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
         }
 
@@ -258,9 +259,9 @@
         {
             if (reg.PaymentMethod != null)
             {
-                if (CheckoutPage.PaymentMethodList.IsPresent)
+                if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.IsPresent)
                 {
-                    CheckoutPage.PaymentMethodList.SelectWithText(
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.SelectWithText(
                         FormData.PaymentMethodCheckouLabelAttribute.GetPaymentMethodCheckouLabel(reg.PaymentMethod.PMethod));
                 }
 
@@ -276,14 +277,28 @@
                 }
             }
 
-            CheckoutPage.Finish_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
 
-            if (KeywordProvider.RegisterDefault.IsOnConfirmationRedirectPage())
+            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.ConfirmationRedirect))
             {
-                CheckoutPage.AANoThanks_Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AANoThanks_Click();
             }
 
-            reg.Id = Convert.ToInt32(Confirmation.RegistrationId.Text);
+            reg.Id = Convert.ToInt32(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.RegistrationId.Text);
+        }
+
+        public void SSOLogin(Registrant reg)
+        {
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Email.SelectWithText(reg.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Password.SelectWithText(reg.Password);
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Login_Click();
+        }
+
+        public void SSOLogin(string email, string password)
+        {
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Email.SelectWithText(email);
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Password.SelectWithText(password);
+            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Login_Click();
         }
     }
 }

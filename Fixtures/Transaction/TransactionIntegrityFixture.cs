@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Fixtures.Base;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers.Manager;
     using RegOnline.RegressionTest.Managers.Manager.Dashboard;
     using RegOnline.RegressionTest.Managers.Register;
@@ -609,7 +609,16 @@
                 ProEvent.DiscountCode);
 
             RegisterMgr.ClickRecalculateTotal();
-            RegisterMgr.VerifyAgendaPageTotalAmount(ProEvent.FeeCalculation_SingleReg.Default.AgendaFeeTotal.Value);
+
+            if (Type == EventType.Endurance_Pound)
+            {
+                RegisterMgr.VerifyAgendaPageTotalAmount(EnduranceEvent_Pound.FeeCalculation_SingleReg.Default.AgendaFeeTotal.Value, MoneyTool.CurrencyCode.GBP);
+            }
+            else
+            {
+                RegisterMgr.VerifyAgendaPageTotalAmount(ProEvent.FeeCalculation_SingleReg.Default.AgendaFeeTotal.Value);
+            }
+
             RegisterMgr.Continue();
         }
 
@@ -713,8 +722,14 @@
                     break;
 
                 case RegisterType.EnduranceEvent_Single_USD:
-                case RegisterType.EnduranceEvent_Single_Pound:
                     this.VerifyCheckoutFeeTotals(feeCalculation);
+                    RegisterMgr.ClickCheckoutActiveWaiver();
+                    RegisterMgr.PayMoney(paymentMethod);
+                    RegisterMgr.FinishRegistration();
+                    break;
+
+                case RegisterType.EnduranceEvent_Single_Pound:
+                    this.VerifyCheckoutFeeTotals(feeCalculation, MoneyTool.CurrencyCode.GBP);
                     RegisterMgr.ClickCheckoutActiveWaiver();
                     RegisterMgr.PayMoney(paymentMethod);
                     RegisterMgr.FinishRegistration();
@@ -723,31 +738,33 @@
         }
 
         // Verify Fees on Checkout page, pulls data from TransactionIntegrityData
-        private void VerifyCheckoutFeeTotals(IFeeCalculation feeCalculation)
+        private void VerifyCheckoutFeeTotals(
+            IFeeCalculation feeCalculation, 
+            Utilities.MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            RegisterMgr.VerifyCheckoutTotal(feeCalculation.TotalCharges.Value);
-            RegisterMgr.VerifyCheckoutSubTotal(feeCalculation.Subtotal.Value);
-            RegisterMgr.VerifyCheckoutTax(feeCalculation.Tax1Amount.Value, ProEvent.Tax.Name.TaxOne);
-            RegisterMgr.VerifyCheckoutTax(feeCalculation.Tax2Amount.Value, ProEvent.Tax.Name.TaxTwo);
+            RegisterMgr.VerifyCheckoutTotal(feeCalculation.TotalCharges.Value, currency);
+            RegisterMgr.VerifyCheckoutSubTotal(feeCalculation.Subtotal.Value, currency);
+            RegisterMgr.VerifyCheckoutTax(feeCalculation.Tax1Amount.Value, ProEvent.Tax.Name.TaxOne, currency);
+            RegisterMgr.VerifyCheckoutTax(feeCalculation.Tax2Amount.Value, ProEvent.Tax.Name.TaxTwo, currency);
 
             if (feeCalculation.ServiceFeeTotal.HasValue)
             {
-                RegisterMgr.VerifyCheckoutSerivceFee(feeCalculation.ServiceFeeTotal.Value);
+                RegisterMgr.VerifyCheckoutSerivceFee(feeCalculation.ServiceFeeTotal.Value, currency);
             }
 
             if (feeCalculation.ShippingFeeTotal.HasValue)
             {
-                RegisterMgr.VerifyCheckoutShippingFee(feeCalculation.ShippingFeeTotal.Value);
+                RegisterMgr.VerifyCheckoutShippingFee(feeCalculation.ShippingFeeTotal.Value, currency);
             }
 
             if (feeCalculation.LodgingSubtotal.HasValue)
             {
-                RegisterMgr.VerifyCheckoutLodgingFeeTotal(feeCalculation.LodgingSubtotal.Value);
+                RegisterMgr.VerifyCheckoutLodgingFeeTotal(feeCalculation.LodgingSubtotal.Value, currency);
             }
 
             if (feeCalculation.LodgingBookingFee.HasValue)
             {
-                RegisterMgr.VerifyCheckoutLodgingBookingFeeTotal(feeCalculation.LodgingBookingFee.Value);
+                RegisterMgr.VerifyCheckoutLodgingBookingFeeTotal(feeCalculation.LodgingBookingFee.Value, currency);
             }
 
             if (feeCalculation.DiscountCodeSavings.HasValue)
@@ -755,37 +772,40 @@
                 if (feeCalculation.GroupDiscountSavings.HasValue)
                 {
                     RegisterMgr.VerifyCheckoutGroupAndDiscountSaving(
-                    feeCalculation.GroupDiscountSavings.Value, feeCalculation.DiscountCodeSavings.Value);
+                        feeCalculation.GroupDiscountSavings.Value,
+                        feeCalculation.DiscountCodeSavings.Value, 
+                        currency);
                 }
+
                 if (!feeCalculation.GroupDiscountSavings.HasValue)
                 {
-                    RegisterMgr.VerifyCheckoutSaving(feeCalculation.DiscountCodeSavings.Value);
+                    RegisterMgr.VerifyCheckoutSaving(feeCalculation.DiscountCodeSavings.Value, currency);
                 }
             }
 
             if (feeCalculation.RecurringSubtotal.HasValue)
             {
-                RegisterMgr.VerifyCheckoutMembershipRecurringSubtotal(feeCalculation.RecurringSubtotal.Value);
+                RegisterMgr.VerifyCheckoutMembershipRecurringSubtotal(feeCalculation.RecurringSubtotal.Value, currency);
             }
 
             if (feeCalculation.RecurringTax1Amount.HasValue)
             {
-                RegisterMgr.VerifyCheckoutMembershipReccuringTax(feeCalculation.RecurringTax1Amount.Value, ProEvent.Tax.Name.TaxOne);
+                RegisterMgr.VerifyCheckoutMembershipReccuringTax(feeCalculation.RecurringTax1Amount.Value, ProEvent.Tax.Name.TaxOne, currency);
             }
 
             if (feeCalculation.RecurringTax2Amount.HasValue)
             {
-                RegisterMgr.VerifyCheckoutMembershipReccuringTax(feeCalculation.RecurringTax2Amount.Value, ProEvent.Tax.Name.TaxTwo);
+                RegisterMgr.VerifyCheckoutMembershipReccuringTax(feeCalculation.RecurringTax2Amount.Value, ProEvent.Tax.Name.TaxTwo, currency);
             }
 
             if (feeCalculation.YearlyFees.HasValue)
             {
-                RegisterMgr.VerifyCheckoutMembershipRecurringTotal(feeCalculation.YearlyFees.Value);
+                RegisterMgr.VerifyCheckoutMembershipRecurringTotal(feeCalculation.YearlyFees.Value, currency);
             }
 
             if (feeCalculation.YearlyFeesDiscount.HasValue)
             {
-                RegisterMgr.VerifyCheckoutMembershipRecurringSaving(feeCalculation.YearlyFeesDiscount.Value);
+                RegisterMgr.VerifyCheckoutMembershipRecurringSaving(feeCalculation.YearlyFeesDiscount.Value, currency);
             }
         }
 
@@ -805,38 +825,43 @@
                 case RegisterType.Membership:
                 case RegisterType.ProEvent_Simple:
                 case RegisterType.EnduranceEvent_Single_USD:
-                case RegisterType.EnduranceEvent_Single_Pound:
                     this.VerifyConfirmationFeeTotals(feeCalculation);
+                    break;
+
+                case RegisterType.EnduranceEvent_Single_Pound:
+                    this.VerifyConfirmationFeeTotals(feeCalculation, MoneyTool.CurrencyCode.GBP);
                     break;
             }
         }
 
         // Verify Fees on Confirmation page, pulls data from TransactionIntegrityData
-        private void VerifyConfirmationFeeTotals(IFeeCalculation feeCalculation)
+        private void VerifyConfirmationFeeTotals(
+            IFeeCalculation feeCalculation, 
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
             RegisterMgr.ConfirmRegistration();
-            RegisterMgr.VerifyConfirmationSubTotal(feeCalculation.Subtotal.Value);
-            RegisterMgr.VerifyConfirmationTax(feeCalculation.Tax1Amount.Value, ProEvent.Tax.Name.TaxOne);
-            RegisterMgr.VerifyConfirmationTax(feeCalculation.Tax2Amount.Value, ProEvent.Tax.Name.TaxTwo);
+            RegisterMgr.VerifyConfirmationSubTotal(feeCalculation.Subtotal.Value, currency);
+            RegisterMgr.VerifyConfirmationTax(feeCalculation.Tax1Amount.Value, ProEvent.Tax.Name.TaxOne, currency);
+            RegisterMgr.VerifyConfirmationTax(feeCalculation.Tax2Amount.Value, ProEvent.Tax.Name.TaxTwo, currency);
 
             if (feeCalculation.ServiceFeeTotal.HasValue)
             {
-                RegisterMgr.VerifyConfirmationSerivceFee(feeCalculation.ServiceFeeTotal.Value);
+                RegisterMgr.VerifyConfirmationSerivceFee(feeCalculation.ServiceFeeTotal.Value, currency);
             }
 
             if (feeCalculation.ShippingFeeTotal.HasValue)
             {
-                RegisterMgr.VerifyConfirmationShippingFee(feeCalculation.ShippingFeeTotal.Value);
+                RegisterMgr.VerifyConfirmationShippingFee(feeCalculation.ShippingFeeTotal.Value, currency);
             }
 
             if (feeCalculation.LodgingSubtotal.HasValue)
             {
-                RegisterMgr.VerifyConfirmationLodgingFeeTotal(feeCalculation.LodgingSubtotal.Value);
+                RegisterMgr.VerifyConfirmationLodgingFeeTotal(feeCalculation.LodgingSubtotal.Value, currency);
             }
 
             if (feeCalculation.LodgingBookingFee.HasValue)
             {
-                RegisterMgr.VerifyConfirmationLodgingBookingFeeTotal(feeCalculation.LodgingBookingFee.Value);
+                RegisterMgr.VerifyConfirmationLodgingBookingFeeTotal(feeCalculation.LodgingBookingFee.Value, currency);
             }
 
             if (feeCalculation.DiscountCodeSavings.HasValue)
@@ -844,40 +869,48 @@
                 if (feeCalculation.GroupDiscountSavings.HasValue)
                 {
                     RegisterMgr.VerifyConfirmationGroupAndDiscountSaving(
-                    feeCalculation.GroupDiscountSavings.Value, feeCalculation.DiscountCodeSavings.Value);
+                    feeCalculation.GroupDiscountSavings.Value, 
+                    feeCalculation.DiscountCodeSavings.Value,
+                    currency);
                 }
-                if (!feeCalculation.GroupDiscountSavings.HasValue)
+                else
                 {
-                    RegisterMgr.VerifyConfirmationSaving(feeCalculation.DiscountCodeSavings.Value);
+                    RegisterMgr.VerifyConfirmationSaving(feeCalculation.DiscountCodeSavings.Value, currency);
                 }
             }
 
             if (feeCalculation.RecurringSubtotal.HasValue)
             {
-                RegisterMgr.VerifyConfirmationMembershipRecurringSubtotal(feeCalculation.RecurringSubtotal.Value);
+                RegisterMgr.VerifyConfirmationMembershipRecurringSubtotal(feeCalculation.RecurringSubtotal.Value, currency);
             }
 
             if (feeCalculation.RecurringTax1Amount.HasValue)
             {
-                RegisterMgr.VerifyConfirmationMembershipReccuringTax(feeCalculation.RecurringTax1Amount.Value, ProEvent.Tax.Name.TaxOne);
+                RegisterMgr.VerifyConfirmationMembershipReccuringTax(
+                    feeCalculation.RecurringTax1Amount.Value, 
+                    ProEvent.Tax.Name.TaxOne,
+                    currency);
             }
 
             if (feeCalculation.RecurringTax2Amount.HasValue)
             {
-                RegisterMgr.VerifyConfirmationMembershipReccuringTax(feeCalculation.RecurringTax2Amount.Value, ProEvent.Tax.Name.TaxTwo);
+                RegisterMgr.VerifyConfirmationMembershipReccuringTax(
+                    feeCalculation.RecurringTax2Amount.Value, 
+                    ProEvent.Tax.Name.TaxTwo,
+                    currency);
             }
 
             if (feeCalculation.YearlyFees.HasValue)
             {
-                RegisterMgr.VerifyConfirmationMembershipRecurringTotal(feeCalculation.YearlyFees.Value);
+                RegisterMgr.VerifyConfirmationMembershipRecurringTotal(feeCalculation.YearlyFees.Value, currency);
             }
 
             if (feeCalculation.YearlyFeesDiscount.HasValue)
             {
-                RegisterMgr.VerifyConfirmationMembershipRecurringSaving(feeCalculation.YearlyFeesDiscount.Value);
+                RegisterMgr.VerifyConfirmationMembershipRecurringSaving(feeCalculation.YearlyFeesDiscount.Value, currency);
             }
 
-            RegisterMgr.VerifyConfirmationTotal(feeCalculation.TotalCharges.Value);
+            RegisterMgr.VerifyConfirmationTotal(feeCalculation.TotalCharges.Value, currency);
         }
 
         // Renews the membership 
@@ -974,7 +1007,7 @@
         private void PerformBackendCharge()
         {
             LoginAndGoToRegressionFolder();
-            BackendMgr.OpenAttendeeInfoURL(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, eventSessionId, regId);
+            BackendMgr.OpenAttendeeInfoURL(eventSessionId, regId);
             BackendMgr.EditPaymentMethodCreditCard();
             BackendMgr.ChargeRemainingBalance(ProEvent.FeeCalculation_SimpleReg.Default.TotalCharges.Value);
         }
@@ -991,7 +1024,7 @@
         [Verify]
         public void VerifyTransactionDataInDB(string[] TransactionAmount, string[] BillableAmount, string[] addAndModBy, string SharedFeePct, EventType type)
         {
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var transactions = (from t in db.Transactions where t.RegisterId == regId && t.TypeId == 2 select t).ToList();
 
             for (int i = 0; i < transactions.Count; i++)
@@ -1132,7 +1165,7 @@
         [Verify]
         private void VerifyBilling(EventType type)
         {
-            var db = new Linq.ROWarehouseDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROWarehouseConnection);
+            var db = new DataAccess.ROWarehouseDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROWarehouseConnection);
             var billing = (from i in db.InvoiceItems_AdHocs where i.StartDate == DateTime.Today && i.EventId == eventId select i).ToList();
             if (billing.Count == 0)
             {
@@ -1209,7 +1242,7 @@
         [Verify]
         public void VerifyFinalizeBilling(EventType type)
         {
-            var db = new Linq.ROMasterDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
+            var db = new DataAccess.ROMasterDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
             var finalBilling = (from i in db.CustomerInvoiceItems where i.EventId == eventId select i).ToList();
             if (finalBilling.Count == 0)
             {
@@ -1298,7 +1331,7 @@
 
         public void ClearPreviousInvoiceData()
         {
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
             int rowsAffected;
             string Command = string.Format(
                 "DELETE FROM ct FROM dbo.CustomerTransactions ct INNER JOIN dbo.CustomerInvoices ci ON ci.EndDate = ct.TransDate AND ci.EndDate BETWEEN '{0}' AND '{1}'",

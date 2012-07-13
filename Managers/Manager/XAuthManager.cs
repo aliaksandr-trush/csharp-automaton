@@ -5,10 +5,8 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.DataCollection;
-    using RegOnline.RegressionTest.Linq;
-    using RegOnline.RegressionTest.PageObject.Builder;
-    using RegOnline.RegressionTest.PageObject.Manager;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
 
@@ -43,7 +41,7 @@
             New
         }
 
-        private XAuthLocator xAuth = null;
+        private PageObject.Manager.XAuthLocator xAuth = null;
         private XAuthVersion defaultVersion = XAuthVersion.Old;
 
         public XAuthManager()
@@ -60,11 +58,11 @@
         {
             if (version == XAuthVersion.Old)
             {
-                xAuth = new XAuthOld();
+                xAuth =  PageObject.PageObjectProvider.Builder.EventDetails.FormPages.XAuthOld;
             }
             else
             {
-                xAuth = new XAuth();
+                xAuth = PageObject.PageObjectProvider.Manager.XAuth;
             }
 
             ErrorLocator = xAuth.ErrorDIVLocator.Locator + "/ul";

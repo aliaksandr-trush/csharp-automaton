@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
+    using RegOnline.RegressionTest.Configuration;
 
     public class Checkin : Window
     {
@@ -23,15 +24,68 @@
         public ButtonOrLink AddToWaitlist = new ButtonOrLink("//div[@class='buttonGroup']/button[text()='Add Yourself to Waitlist']", LocateBy.XPath);
         public Label AddedToWaitlistOfEvent = new Label("//*[text()='You have been added to the waitlist for this event.']", LocateBy.XPath);
 
-        public RadioButton RegTypeRadio(string regTypeName)
+        public void OpenUrl(DataCollection.RegisterMethod method, DataCollection.Registrant reg)
         {
-            return new RadioButton(
-                string.Format("//ol[@id='radRegTypes']/li/label[contains(text(),'{0}')]/../input", regTypeName), LocateBy.XPath);
+            string url = string.Empty;
+
+            switch (method)
+            {
+                case RegisterMethod.EventId:
+
+                    url = string.Format(
+                        "{0}{1}", 
+                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, 
+                        reg.Event.Id);
+
+                    break;
+
+                case RegisterMethod.Shortcut:
+                case RegisterMethod.EventWebsite:
+                case RegisterMethod.EventCalendar:
+
+                    url = string.Format(
+                        "{0}{1}",
+                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                        reg.Event.Shortcut);
+
+                    break;
+
+                case RegisterMethod.RegTypeDirectUrl:
+
+                    url = string.Format(string.Format(
+                        "{0}?eventID={1}&rTypeID={2}", 
+                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                        reg.Event.Id, 
+                        reg.RegType.RegTypeId));
+
+                    break;
+
+                case RegisterMethod.Admin:
+
+                    url = string.Format(
+                        "{0}register/checkin.aspx?MethodId=1&eventsessionId={1}&eventID={2}",
+                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps,
+                        DataCollection.FormData.EventSessionId,
+                        reg.Event.Id);
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            UIUtilityProvider.UIHelper.OpenUrl(url);
         }
 
-        public void SelectRegTypeRadioButton(string regTypeName)
+        public RadioButton RegTypeRadio(RegType regType)
         {
-            RadioButton RegTypeRadioButton = this.RegTypeRadio(regTypeName);
+            return new RadioButton(
+                string.Format("//input[@value='{0}']", regType.RegTypeId), LocateBy.XPath);
+        }
+
+        public void SelectRegTypeRadioButton(RegType regType)
+        {
+            RadioButton RegTypeRadioButton = this.RegTypeRadio(regType);
 
             RegTypeRadioButton.WaitForDisplay();
             RegTypeRadioButton.Click();

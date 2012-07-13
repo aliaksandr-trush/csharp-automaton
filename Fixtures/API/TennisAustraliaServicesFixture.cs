@@ -159,7 +159,7 @@
                     Assert.That(regResponse.Value.RegistrationId > 0);
                     Assert.That(regResponse.Value.URL.Length > 0);
 
-                    var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+                    var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
                     var regs = (from r in db.Registrations where r.Register_Id == regResponse.Value.RegistrationId select r).ToList();
                     Assert.That(regs[0].Test == false);
                 }

@@ -2,65 +2,31 @@
 {
     using System;
     using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
 
     public class RegisterDefault
     {
-        private PageObject.Register.Checkin Checkin = new PageObject.Register.Checkin();
-        private PageObject.Register.Confirmation Confirmation = new PageObject.Register.Confirmation();
-        private PageObject.Register.PageObjectHelper RegisterHelper = new PageObject.Register.PageObjectHelper();
-        private PageObject.PageObjectHelper PageObjectHelper = new PageObject.PageObjectHelper();
-
-        public void OpenRegisterPage(int eventId)
+        public void OpenRegisterPageUrl(int eventId)
         {
             UIUtilityProvider.UIHelper.OpenUrl(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + eventId);
-            PageObjectHelper.Allow_Click();
+            PageObject.PageObjectHelper.AllowCookie_Click();
         }
 
         public void OpenRegTypeDirectUrl(int eventId, int regTypeId)
         {
             UIUtilityProvider.UIHelper.OpenUrl(string.Format(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
-            PageObjectHelper.Allow_Click();
+            PageObject.PageObjectHelper.AllowCookie_Click();
         }
 
-        public bool IsOnLoginPage()
+        public void OpenRegisterPageUrl(string shortcut)
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/login.aspx");
-        }
+            UIUtilityProvider.UIHelper.OpenUrl(string.Format(
+                "{0}{1}", 
+                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                shortcut));
 
-        public bool IsOnCheckinPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/checkin.aspx");
-        }
-
-        public bool IsOnPersonalInfoPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/PersonalInfo.aspx");
-        }
-
-        public bool IsOnAgendaPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/agenda.aspx");
-        }
-
-        public bool IsOnAttendeeCheckPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("Register/AttendeeCheck.aspx");
-        }
-
-        public bool IsOnCheckoutPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx");
-        }
-
-        public bool IsOnConfirmationRedirectPage()
-        {
-            return (UIUtilityProvider.UIHelper.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (UIUtilityProvider.UIHelper.IsTextPresent("Active Advantage"));
-        }
-
-        public bool IsOnConfirmationPage()
-        {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/confirmation.aspx");
+            PageObject.PageObjectHelper.AllowCookie_Click();
         }
 
         public string GenerateCurrentRegistrantLastName()
@@ -79,7 +45,7 @@
 
         public double GetConfirmationTotal()
         {
-            string amount = Confirmation.Total.Text;
+            string amount = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.Text;
             string a = "";
 
             for (int i = 0; i < amount.Length; i++)
@@ -93,15 +59,15 @@
             return Convert.ToDouble(a);
         }
 
-        public void SelectRegType(string regTypeName)
+        public void SelectRegType(RegType regType)
         {
-            if (Checkin.RegTypeRadioButton.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent)
             {
-                Checkin.SelectRegTypeRadioButton(regTypeName);
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType);
             }
             else
             {
-                Checkin.RegTypeDropDown.SelectWithText(regTypeName);
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(regType.RegTypeName);
             }
         }
 
@@ -109,13 +75,13 @@
         {
             bool found = false;
 
-            int count = RegisterHelper.ErrorMessages.Count;
+            int count = PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Count;
             string[] errorList = new string[count];
 
             for (int i = 1; i <= count; i++)
             {
                 errorList[i - 1] = UIUtilityProvider.UIHelper.GetText(string.Format(
-                    RegisterHelper.ErrorMessages.Locator + "[{0}]", i), LocateBy.XPath);
+                    PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Locator + "[{0}]", i), LocateBy.XPath);
             }
 
             foreach (string error in errorList)

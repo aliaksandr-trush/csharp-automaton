@@ -8,6 +8,7 @@
         public int Id;
         public string Title;
         public string Shortcut = Guid.NewGuid().ToString();
+        public bool IsActive;
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();
@@ -15,6 +16,8 @@
         public LodgingTravelPage LodgingTravelPage;
         public MerchandisePage MerchandisePage;
         public CheckoutPage CheckoutPage = new CheckoutPage();
+
+        public EventWebsite EventWebsite;
 
         public Event(string title)
         {
@@ -63,13 +66,25 @@
         public bool? Required;
     }
 
+    public class EventAdvancedSettings
+    {
+        public bool? ThisIsAParentEvent;
+        public bool? ThisIsAChildEvent;
+        public Event ParentEvent;
+    }
+
     public class StartPage
     {
         public EventLevelLimit EventLimit;
         public GroupDiscount GroupDiscount;
         public bool? ForceSelectSameRegType;
         public bool? AllowGroupReg;
+        public bool? AllowChangeRegType;
         public FormData.RegTypeDisplayOption? RegTypeDisplayOption;
+        public DateTime? StartDate;
+        public DateTime? EndDate;
+        public DateTime? StartTime;
+        public DateTime? EndTime;
         public string Location;
         public string Phone;
         public string Country;
@@ -82,6 +97,7 @@
         public string EventHome;
         public string PageHeader;
         public string PageFooter;
+        public EventAdvancedSettings AdvancedSettings;
 
         public List<RegType> RegTypes = new List<RegType>();
     }
@@ -119,5 +135,10 @@
         public List<PaymentMethod> PaymentMethods = new List<PaymentMethod>();
         public string PageHeader;
         public string PageFooter;
+    }
+
+    public class EventWebsite
+    {
+        public bool? UseEventWebsiteAsTheStartingPageForEvent;
     }
 }

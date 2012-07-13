@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Managers.Manager;
 
     [TestFixture]
-    public class UpdateGroupRegistrationFixture : FixtureBase
+    public class UpdateGroupRegistrationFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "UpdateGroupRegistration";
         private int eventID;

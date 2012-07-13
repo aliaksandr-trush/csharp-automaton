@@ -8,15 +8,13 @@
 
     public class BuilderDefault
     {
-        private PageObject.Builder.Agenda Agenda = new PageObject.Builder.Agenda();
-
         public List<ChoiceItem> GetAgendaChoiceItem()
         {
             List<ChoiceItem> choiceItems = new List<ChoiceItem>();
 
-            for (int i = 1; i <= Agenda.AgendaChoiceItemCount.Count; i++)
+            for (int i = 1; i <= PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Count; i++)
             {
-                ButtonOrLink choiceItem = new ButtonOrLink(Agenda.AgendaChoiceItemCount.Locator + "[" +i+ "]//a", LocateBy.XPath);
+                ButtonOrLink choiceItem = new ButtonOrLink(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Locator + "[" + i + "]//a", LocateBy.XPath);
                 string tmp = choiceItem.GetAttribute("href").Trim();
                 tmp = tmp.Replace("%20", "");
                 tmp = tmp.Split(new string[] { "(" }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();

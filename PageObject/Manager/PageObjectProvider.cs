@@ -4,7 +4,8 @@
     {
         public SignIn SignIn = new SignIn();
         public Events Events = new Events();
-        public Dashboard Dashboard = new Dashboard();
-        public PageObjectHelper ManagerHelper = new PageObjectHelper();
+        public Dashboard.Dashboard Dashboard = new Dashboard.Dashboard();
+        public XAuth XAuth = new XAuth();
+        public SSOBase SSOBase = new SSOBase("plain");
     }
 }

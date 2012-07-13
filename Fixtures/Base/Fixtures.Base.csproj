@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertHelper.cs" />
+    <Compile Include="ExternalAuthenticationFixtureBase.cs" />
     <Compile Include="FixtureBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,9 +61,21 @@
       <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
       <Name>Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataCollection\DataCollection.csproj">
+      <Project>{1177E70D-E106-4B37-97F6-7295F8FF41AC}</Project>
+      <Name>DataCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Keyword\Keyword.csproj">
+      <Project>{2E1AE510-459D-489B-AAB7-420EAFF75BDB}</Project>
+      <Name>Keyword</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Managers\Managers.csproj">
       <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
       <Name>Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PageObject\PageObject.csproj">
+      <Project>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</Project>
+      <Name>PageObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UIUtility\UIUtility.csproj">
       <Project>{80BBF187-B2B4-4CAC-9C5E-19165E2C2F41}</Project>
@@ -70,6 +84,10 @@
     <ProjectReference Include="..\..\Utilities\Utilities.csproj">
       <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
       <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WebElements\WebElements.csproj">
+      <Project>{58A621EF-54DC-418C-B002-A8083712B243}</Project>
+      <Name>WebElements</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

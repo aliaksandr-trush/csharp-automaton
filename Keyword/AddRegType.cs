@@ -2,80 +2,78 @@
 {
     using System;
     using RegOnline.RegressionTest.DataCollection;
-    using RegOnline.RegressionTest.PageObject.Builder;
 
     public class AddRegType
     {
-        private EventDetails EventDetails = new EventDetails();
-        private PageObjectHelper BuilderHelper = new PageObjectHelper();
-
         public void AddRegTypes(RegType regType)
         {
             if (regType.AdditionalDetails != null)
             {
-                EventDetails.Title.Type(DateTime.Now.Ticks.ToString());
-                EventDetails.Shortcut.Type("char" + DateTime.Now.Ticks.ToString());
-                BuilderHelper.SaveAndStay_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(DateTime.Now.Ticks.ToString());
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type("char" + DateTime.Now.Ticks.ToString());
+                PageObject.PageObjectProvider.Builder.EventDetails.SaveAndStay_Click();
             }
 
-            if (EventDetails.EmptyAddRegType.IsPresent)
+            if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EmptyAddRegType.IsPresent)
             {
-                EventDetails.EmptyAddRegType_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EmptyAddRegType_Click();
             }
             else
             {
-                EventDetails.AddRegType_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddRegType_Click();
             }
 
-            EventDetails.RegTypeDefine.SelectByName();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdjustRADWindowPositionAndResize();
+
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
 
             #region RegTypeBasics
-            EventDetails.RegTypeDefine.NameOnForm.Type(regType.RegTypeName);
-            EventDetails.RegTypeDefine.NameOnReports.Type(regType.RegTypeName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType.RegTypeName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType.RegTypeName);
 
             if (regType.RegTypeLimit != null)
             {
-                EventDetails.RegTypeDefine.RegTypeLimit.Set(true);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeLimit.Set(true);
 
                 switch (regType.RegTypeLimit.LimitType)
                 {
                     case FormData.RegLimitType.Individual:
-                        EventDetails.RegTypeDefine.LimitToIndividual_Click();
-                        EventDetails.RegTypeDefine.IndividualLimit.Type(regType.RegTypeLimit.LimitTo);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.LimitToIndividual_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.IndividualLimit.Type(regType.RegTypeLimit.LimitTo);
                         break;
                     case FormData.RegLimitType.Group:
-                        EventDetails.RegTypeDefine.LimitToGroup_Click();
-                        EventDetails.RegTypeDefine.GroupLimit.Type(regType.RegTypeLimit.LimitTo);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.LimitToGroup_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.GroupLimit.Type(regType.RegTypeLimit.LimitTo);
                         break;
                     default:
                         break;
                 }
 
-                EventDetails.RegTypeDefine.SoldOutMessage.Type(regType.RegTypeLimit.SoldOutMessage);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SoldOutMessage.Type(regType.RegTypeLimit.SoldOutMessage);
             }
             if (regType.AdditionalDetails != null)
             {
-                EventDetails.RegTypeDefine.AdditionalDetails_Click();
-                EventDetails.RegTypeDefine.AdditionalDetailsEditor.SelectByName();
-                EventDetails.RegTypeDefine.AdditionalDetailsEditor.HtmlMode_Click();
-                EventDetails.RegTypeDefine.AdditionalDetailsEditor.Content_Type(regType.AdditionalDetails);
-                EventDetails.RegTypeDefine.AdditionalDetailsEditor.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetails_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.HtmlMode_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.Content_Type(regType.AdditionalDetails);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.SaveAndClose_Click();
             }
             if (regType.IsPublic.HasValue)
             {
-                EventDetails.RegTypeDefine.Public.Set(regType.IsPublic.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.Public.Set(regType.IsPublic.Value);
             }
             if (regType.IsAdmin.HasValue)
             {
-                EventDetails.RegTypeDefine.Admin.Set(regType.IsAdmin.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.Admin.Set(regType.IsAdmin.Value);
             }
             if (regType.IsOnSite.HasValue)
             {
-                EventDetails.RegTypeDefine.OnSite.Set(regType.IsOnSite.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.OnSite.Set(regType.IsOnSite.Value);
             }
             if (regType.Price.HasValue)
             {
-                EventDetails.RegTypeDefine.EventFee.Type(regType.Price.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFee.Type(regType.Price.Value);
             }
             #endregion
 
@@ -83,22 +81,22 @@
                 (regType.LatePrice != null) || (regType.TaxRateOne != null) ||
                 (regType.TaxRateTwo != null))
             {
-                EventDetails.RegTypeDefine.EventFeeAdvanced_Click();
-                EventDetails.RegTypeDefine.EventFeeDefine.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeAdvanced_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SelectByName();
 
                 if (regType.FeeName != null)
                 {
-                    EventDetails.RegTypeDefine.EventFeeDefine.NameOnReceipt.Type(regType.FeeName);
-                    EventDetails.RegTypeDefine.EventFeeDefine.NameOnReports.Type(regType.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReceipt.Type(regType.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReports.Type(regType.FeeName);
                 }
                 else
                 {
-                    EventDetails.EventFeeDefine.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
-                    EventDetails.EventFeeDefine.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
                 }
 
-                EventDetails.EventFeeDefine.StandardPrice.Type(regType.Price);
-                EventDetails.EventFeeDefine.Options_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.StandardPrice.Type(regType.Price);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Click();
 
                 #region AddEarlyLatePrice
                 if (regType.EarlyPrice != null)
@@ -109,16 +107,16 @@
                 if (regType.LatePrice != null)
                 {
                     KeywordProvider.AddEarlyLatePrice.AddLatePrice(regType.LatePrice, FormData.Location.RegType);
-                    EventDetails.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
                 }
                 #endregion
 
                 #region AddDiscountCode
                 if (regType.DiscountCode.Count != 0)
                 {
-                    if (!EventDetails.RegTypeDefine.EventFeeDefine.AddDiscountCode.IsPresent)
+                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddDiscountCode.IsPresent)
                     {
-                        EventDetails.RegTypeDefine.EventFeeDefine.Options_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
                     }
 
                     foreach (DiscountCode dc in regType.DiscountCode)
@@ -128,7 +126,7 @@
 
                     if (regType.RequireDC.HasValue)
                     {
-                        EventDetails.RegTypeDefine.EventFeeDefine.RequireCode.Set(regType.RequireDC.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.RequireCode.Set(regType.RequireDC.Value);
                     }
                 }
                 #endregion
@@ -136,60 +134,73 @@
                 #region AddTaxRate
                 if ((regType.TaxRateOne != null) || (regType.TaxRateTwo != null))
                 {
-                    if (!EventDetails.RegTypeDefine.EventFeeDefine.AddTaxRate.IsPresent)
+                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddTaxRate.IsPresent)
                     {
-                        EventDetails.RegTypeDefine.EventFeeDefine.Options_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
                     }
 
                     KeywordProvider.AddTaxRate.AddTaxRates(regType.TaxRateOne, regType.TaxRateTwo, FormData.Location.RegType);
-                    EventDetails.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
-                    EventDetails.RegTypeDefine.EventFeeDefine.Options_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
 
-                    if ((regType.TaxRateOne.Apply.HasValue) || (regType.TaxRateTwo.Apply.HasValue))
+                    if (regType.TaxRateOne != null && regType.TaxRateOne.Apply.HasValue)
                     {
-                        if (regType.TaxRateOne.Apply.HasValue)
-                        {
-                            EventDetails.RegTypeDefine.EventFeeDefine.ApplyTaxOne.Set(regType.TaxRateOne.Apply.Value);
-                        }
-                        if (regType.TaxRateTwo.Apply.HasValue)
-                        {
-                            EventDetails.RegTypeDefine.EventFeeDefine.ApplyTaxTwo.Set(regType.TaxRateTwo.Apply.Value);
-                        }
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxOne.Set(regType.TaxRateOne.Apply.Value);
+                    }
+
+                    if (regType.TaxRateTwo != null && regType.TaxRateTwo.Apply.HasValue)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxTwo.Set(regType.TaxRateTwo.Apply.Value);
                     }
                 }
                 #endregion
 
-                EventDetails.RegTypeDefine.EventFeeDefine.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndClose_Click();
             }
 
             #region RegTypeAdvanced
             if (regType.ShowStarting != null)
             {
-                EventDetails.RegTypeDefine.ShowDate.Type(regType.ShowStarting.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ShowDate.Type(regType.ShowStarting.Value);
             }
             if (regType.HideStarting != null)
             {
-                EventDetails.RegTypeDefine.HideDate_Type(regType.HideStarting.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.HideDate_Type(regType.HideStarting.Value);
             }
             if (regType.MinGroupSize.HasValue)
             {
-                EventDetails.RegTypeDefine.MinGroupSize.Type(regType.MinGroupSize.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinGroupSize.Type(regType.MinGroupSize.Value);
             }
             if (regType.MaxGroupSize.HasValue)
             {
-                EventDetails.RegTypeDefine.MaxGroupSize.Type(regType.MaxGroupSize.Value);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MaxGroupSize.Type(regType.MaxGroupSize.Value);
             }
             if (regType.MinRegistrantMessage != null)
             {
-                EventDetails.RegTypeDefine.AddMinRegMessage_Click();
-                EventDetails.RegTypeDefine.MinRegMessageEditor.SelectByName();
-                EventDetails.RegTypeDefine.MinRegMessageEditor.HtmlMode_Click();
-                EventDetails.RegTypeDefine.MinRegMessageEditor.Content_Type(regType.MinRegistrantMessage);
-                EventDetails.RegTypeDefine.MinRegMessageEditor.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AddMinRegMessage_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.HtmlMode_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.Content_Type(regType.MinRegistrantMessage);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.SaveAndClose_Click();
+            }
+            if (regType.IsSSO)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthentication_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SSORadio.Click();
+
+                if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.HasAttribute("value"))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.LoginURL.Type(ExternalAuthenticationData.SSOLoginURL);
+                }
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             }
             #endregion
 
-            EventDetails.RegTypeDefine.SaveAndClose_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SaveAndClose_Click();
         }
     }
 }

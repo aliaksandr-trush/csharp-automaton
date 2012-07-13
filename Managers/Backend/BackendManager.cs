@@ -371,21 +371,12 @@
             }
         }
 
-        public void OpenAttendeeInfoURL(string baseURL, string sessionID, int regID)
-        {
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(
-                "{0}reports/Attendee.aspx?EventSessionId={1}&registerId={2}",
-                baseURL, 
-                sessionID, 
-                regID));
-        }
-
         [Step]
         public void OpenAttendeeInfoURL(string sessionID, int regID)
         {
             UIUtilityProvider.UIHelper.OpenUrl(HttpUtility.UrlDecode(string.Format(
                 "{0}reports/Attendee.aspx?EventSessionId={1}&registerId={2}", 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, 
+                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps, 
                 sessionID, 
                 regID)));
         }

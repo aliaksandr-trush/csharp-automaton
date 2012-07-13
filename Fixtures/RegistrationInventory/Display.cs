@@ -10,8 +10,6 @@
     [Category(FixtureCategory.Regression)]
     public class Display : FixtureBase
     {
-        private PageObject.Register.PageObjectHelper RegisterHelper = new PageObject.Register.PageObjectHelper();
-
         [Test]
         [Category(Priority.Three)]
         [Description("1325")]
@@ -67,7 +65,7 @@
             Registrant reg = new Registrant();
             reg.Event = Event;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPage(Event.Id);
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(Event.Id);
             VerifyFooterResults footerResults = KeywordProvider.Display.VerifyCompanyFooter();
             VerifyEventDetailsResult eventDetailsResults = KeywordProvider.Display.VerifyEventDetails();
             VerifyPageResults pageResults = KeywordProvider.Display.VerifyPage();
@@ -109,19 +107,19 @@
             Assert.True(pageResults.PageHeader.Contains(Event.AgendaPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.AgendaPage.PageFooter));
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             pageResults = KeywordProvider.Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.LodgingTravelPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.LodgingTravelPage.PageFooter));
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             pageResults = KeywordProvider.Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.MerchandisePage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.MerchandisePage.PageFooter));
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             pageResults = KeywordProvider.Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.CheckoutPage.PageHeader));

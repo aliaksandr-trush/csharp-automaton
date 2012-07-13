@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using RegOnline.RegressionTest.Configuration;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;

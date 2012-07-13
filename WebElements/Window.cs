@@ -42,6 +42,11 @@
             UIUtilityProvider.UIHelper.CloseWindow();
         }
 
+        public void GoBackToPreviousPage()
+        {
+            UIUtilityProvider.UIHelper.GoBackToPreviousPage();
+        }
+
         public void CloseAndBackToPrevious()
         {
             this.Close();
@@ -62,6 +67,11 @@
         public void WaitForAJAX()
         {
             UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+        }
+
+        public void Refresh()
+        {
+            UIUtilityProvider.UIHelper.RefreshPage();
         }
     }
 }

@@ -121,7 +121,7 @@
         {
             int regMailTriggerId = RegMailTriggerIdAttribute.GetRegMailTriggerId(category);
             string emailId = string.Empty;
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var id = (from i in db.RegMailResponders where i.EventId == eventId && i.RegMailTypeId == 2 && i.RegMailTriggerId == regMailTriggerId orderby i.Id descending select i.Id).ToList();
             emailId = id[0].ToString();
             return emailId;
@@ -130,7 +130,7 @@
         public string FetchInvitationEmailId(string emailName)
         {
             string emailId = string.Empty;
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var id = (from i in db.EmailJobs where i.CustomerId == Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id) && i.Description == emailName select i.Id).ToList();
             emailId = id[0].ToString();
             return emailId;
@@ -139,7 +139,7 @@
         public string FetchAttendeeId(int registrationId)
         {
             string attendeeID = string.Empty;
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var id = (from i in db.Registrations where i.Register_Id == registrationId select i.Attendee_Id).ToList();
             attendeeID = id[0].ToString();
             return attendeeID;

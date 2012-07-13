@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Text;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
 
     public class MoneyTool
     {
@@ -36,13 +36,18 @@
             return moneyString.ToString();
         }
 
-        public static double ConvertAmount(double amount, CurrencyCode originalCurrencyCode, CurrencyCode targetCurrencyCode)
+        public static double ConvertAmount(
+            double amount, 
+            CurrencyCode originalCurrencyCode, 
+            CurrencyCode targetCurrencyCode,
+            int decimalDigits = 2,
+            MidpointRounding midPointRounding = MidpointRounding.AwayFromZero)
         {
             double originalExchangeRate = GetExchangeRate(originalCurrencyCode);
             double targetExchangeRate = GetExchangeRate(targetCurrencyCode);
 
             double amount_USD = amount / originalExchangeRate;
-            double amount_TargetCurrency = Math.Round(amount_USD * targetExchangeRate, 2);
+            double amount_TargetCurrency = Math.Round(amount_USD * targetExchangeRate, decimalDigits, midPointRounding);
 
             return amount_TargetCurrency;
         }

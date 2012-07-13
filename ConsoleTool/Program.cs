@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
     using RegOnline.RegressionTest.Utilities;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers;
     using RegOnline.RegressionTest.Configuration;
 
@@ -13,8 +13,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(string.Format("https://{0}/", "beta.regonline.com"));
-            Console.WriteLine(string.Format("http://{0}/", "cbeta.regonline.com"));
+            XmlConfiguration.Browser browser;
+            Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            DataHelper helper = new DataHelper();
+            helper.RemoveXAuthLiveRegistration(245012);
+            Console.WriteLine(browser.ToString());
             Console.Read();
         }
     }

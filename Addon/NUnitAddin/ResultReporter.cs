@@ -130,11 +130,11 @@
             spiraTestExecuteProxy.Connection_Disconnect();
 
             // Report result to CIP
-            CIPReporter.RegressionTestServiceSoapClient soap = new CIPReporter.RegressionTestServiceSoapClient(
-                "RegressionTestServiceSoap", 
-                "http://10.119.33.66:8080/Services/RegressionTestService.asmx");
+            ////CIPReporter.RegressionTestServiceSoapClient soap = new CIPReporter.RegressionTestServiceSoapClient(
+            ////    "RegressionTestServiceSoap", 
+            ////    "http://10.119.33.66:8080/Services/RegressionTestService.asmx");
 
-            soap.InsertTestResult(result.FullName, "Automation", result.IsSuccess, result.StackTrace, result.Time);
+            ////soap.InsertTestResult(result.FullName, "Automation", result.IsSuccess, result.StackTrace, result.Time);
         }
     }
 }

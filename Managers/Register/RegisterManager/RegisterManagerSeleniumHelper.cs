@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.UIUtility;
 

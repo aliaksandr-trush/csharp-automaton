@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Managers.Manager;
 
     [TestFixture]
-    public class InvitationsFixture : FixtureBase
+    public class InvitationsFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "InvitationsCodeTest";
         private const string EventNameListTest = "InvitationsListTest";

@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Fixtures.Base;
 
     [TestFixture]
-    public class ChangeMessageToRegistrationFixture : FixtureBase
+    public class ChangeMessageToRegistrationFixture : ExternalAuthenticationFixtureBase
     {
         string eventName = "XAuth_Change_MessageToRegistration";
         string customizedMessageToRegistration = "This is modified message with GUID: {0}";

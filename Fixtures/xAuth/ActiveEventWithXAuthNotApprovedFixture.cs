@@ -5,13 +5,15 @@
     using RegOnline.RegressionTest.Fixtures.Base;
 
     [TestFixture]
-    public class ActiveEventWithXAuthNotApprovedFixture : FixtureBase
+    public class ActiveEventWithXAuthNotApprovedFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "XAuth_ActiveEventWithXAuthNotApproved";
 
         [Test]
         public void ActiveEventWithXAuthNotApproved()
         {
+            Managers.ManagerProvider.XAuthMgr.ApprovedXAuthRoleForCustomer(false);
+
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
@@ -58,6 +60,8 @@
 
             ManagerSiteMgr.DashboardMgr.SelectActivateEventFrame();
             ManagerSiteMgr.DashboardMgr.ActivateEventMgr.VerifyUnableToActivateEventMessageShown(true);
+
+            Managers.ManagerProvider.XAuthMgr.ApprovedXAuthRoleForCustomer(true);
         }
     }
 }

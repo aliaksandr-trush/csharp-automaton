@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Managers.Manager.Dashboard;
 
     [TestFixture]
-    public class DeleteTestRegistrationsFixture : FixtureBase
+    public class DeleteTestRegistrationsFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "DeleteTestRegistrations";
         private int eventID;

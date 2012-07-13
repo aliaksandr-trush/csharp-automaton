@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.UIUtility;
 
     [TestFixture]
-    public class SetupWithOnlyUserIdFixture : FixtureBase
+    public class SetupWithOnlyUserIdFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "xAuthFixture_SetupWithOnlyUserId";
         private int eventId;

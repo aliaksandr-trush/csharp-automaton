@@ -12,25 +12,18 @@
         private Event evt = new Event("RI-SingleRegistration");
         private string emailAddress;
 
-        private PageObject.Register.Checkin Checkin = new PageObject.Register.Checkin();
-        private PageObject.Register.Login Login = new PageObject.Register.Login();
-        private PageObject.Register.PersonalInfo PersonalInfo = new PageObject.Register.PersonalInfo();
-        private PageObject.Register.Confirmation Confirmation = new PageObject.Register.Confirmation();
-        private PageObject.Register.AttendeeCheck AttendeeCheck = new PageObject.Register.AttendeeCheck();
-        private PageObject.Register.PageObjectHelper RegisterHelper = new PageObject.Register.PageObjectHelper();
-
         public void UniqueEmail()
         {
             string EmailAddress = string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString());
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant registrant = new Registrant(EmailAddress);
             registrant.Event = evt;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
             KeywordProvider.RegistrationCreation.Checkout(registrant);
@@ -50,14 +43,14 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(Login.Password.IsPresent);
-            Assert.True(Login.PasswordOnDupEmail.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnDupEmail.IsPresent);
 
             KeywordProvider.RegistrationCreation.Login(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnAttendeeCheckPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -73,23 +66,23 @@
 
             Registrant registrant = new Registrant(emailAddress);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, DiffEvent, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, DiffEvent);
 
             registrant.Event = DiffEvent;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(Login.Password.IsPresent);
-            Assert.True(Login.PasswordOnAutoRecall.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnAutoRecall.IsPresent);
 
             KeywordProvider.RegistrationCreation.Login(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
         }
 
@@ -103,7 +96,7 @@
             eventLimit.EnableWaitList = true;
             EventWithLimit.StartPage.EventLimit = eventLimit;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithLimit, false, true);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithLimit);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventWithLimit;
@@ -115,15 +108,15 @@
             Registrant registrantWhenFull = new Registrant();
             registrantWhenFull.Event = EventWithLimit;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPage(EventWithLimit.Id);
-            Login.StartNewRegistration_Click();
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(EventWithLimit.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
 
-            Assert.True(Checkin.EventLimitReachedMessage.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventLimitReachedMessage.IsPresent);
 
-            Checkin.EmailAddress.Type(registrantWhenFull.Email);
-            Checkin.AddToWaitlist_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(registrantWhenFull.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AddToWaitlist_Click();
 
-            Assert.True(Checkin.AddedToWaitlistOfEvent.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AddedToWaitlistOfEvent.IsPresent);
         }
 
         [Test]
@@ -133,13 +126,13 @@
         {
             this.UniqueEmail();
 
-            Confirmation.ChangeMyRegistration_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 
-            Assert.True(Login.Password.IsPresent);
-            Assert.True(KeywordProvider.RegisterDefault.IsOnLoginPage());
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
         }
 
-        public void RegistrationWithRegType()
+        public Event RegistrationWithRegType()
         {
             Event EventWithRegType = new Event("RI-SingleRegistrationWithRegType");
             RegType RegType1 = new RegType("First");
@@ -147,7 +140,7 @@
             EventWithRegType.StartPage.RegTypes.Add(RegType1);
             EventWithRegType.StartPage.RegTypes.Add(RegType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithRegType, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithRegType);
 
             string EmailAddress = string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString());
             Registrant registrant = new Registrant(EmailAddress);
@@ -156,12 +149,14 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
             emailAddress = EmailAddress;
+
+            return EventWithRegType;
         }
 
         [Test]
@@ -177,7 +172,7 @@
             DiffEventWithRegType.StartPage.RegTypes.Add(RegType1);
             DiffEventWithRegType.StartPage.RegTypes.Add(RegType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, DiffEventWithRegType, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, DiffEventWithRegType);
 
             Registrant registrant = new Registrant(emailAddress);
             registrant.Event = DiffEventWithRegType;
@@ -185,17 +180,17 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(Login.Password.IsPresent);
-            Assert.True(Login.PasswordOnAutoRecall.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnAutoRecall.IsPresent);
 
             KeywordProvider.RegistrationCreation.Login(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                             FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
-            Assert.True(PersonalInfo.PersonalInfoFields(
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
         }
 
@@ -204,27 +199,22 @@
         [Description("1296")]
         public void RegistrationWithRegTypeSameEvent()
         {
-            this.RegistrationWithRegType();
-
-            Event EventWithRegType = new Event("RI-SingleRegistrationWithRegType");
-            RegType RegType = new RegType("First");
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithRegType, false, false);
+            Event EventWithRegType = this.RegistrationWithRegType();
 
             Registrant registrant = new Registrant(emailAddress);
             registrant.Event = EventWithRegType;
-            registrant.RegType = RegType;
+            registrant.RegType = EventWithRegType.StartPage.RegTypes[0];
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(Login.Password.IsPresent);
-            Assert.True(Login.PasswordOnDupEmail.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnDupEmail.IsPresent);
 
             KeywordProvider.RegistrationCreation.Login(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnAttendeeCheckPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
 
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -246,7 +236,7 @@
             GroupDiscount.AddtionalRegOption = FormData.AdditionalRegOption.AnyAdditional;
             EventWithFeeGroupDiscount.StartPage.GroupDiscount = GroupDiscount;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeGroupDiscount, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeGroupDiscount);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventWithFeeGroupDiscount;
@@ -254,7 +244,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
         }
 
         [Test]
@@ -275,7 +265,7 @@
             EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType1);
             EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventWithFeeDCDollar;
@@ -283,18 +273,18 @@
 
             Registrant reg = new Registrant(string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
 
-            KeywordProvider.RegisterDefault.OpenRegisterPage(EventWithFeeDCDollar.Id);
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(EventWithFeeDCDollar.Id);
 
-            Checkin.EmailAddress.Type(reg.Email);
-            Checkin.SelectRegTypeRadioButton(EventWithFeeDCDollar.StartPage.RegTypes[1].RegTypeName);
-            Checkin.EventFeeDiscountCode.Type("abc");
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(EventWithFeeDCDollar.StartPage.RegTypes[1]);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type("abc");
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.InvalidCode));
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
         }
 
         [Test]
@@ -315,7 +305,7 @@
             EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType1);
             EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventWithFeeDCDollar;
@@ -323,10 +313,10 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.IsOnPersonalInfoPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
         }
 
-        public void RegistrationEventFeeCodeRequired(FormData.DiscountCodeType type)
+        public Event RegistrationEventFeeCodeRequired(FormData.DiscountCodeType type)
         {
             Event EventFeeDCRequired = new Event(string.Format("RI-SingleRegistrationEventFee{0}Required", type.ToString()));
             RegType RegType1 = new RegType("First");
@@ -345,19 +335,21 @@
             EventFeeDCRequired.StartPage.RegTypes.Add(RegType2);
             EventFeeDCRequired.CheckoutPage.PaymentMethods.Add(PaymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeDCRequired, false, true);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeDCRequired);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventFeeDCRequired;
             registrant.RegType = EventFeeDCRequired.StartPage.RegTypes[1];
             registrant.PaymentMethod = PaymentMethod;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPage(registrant.Event.Id);
-            Checkin.SelectRegTypeRadioButton(registrant.RegType.RegTypeName);
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(registrant.Event.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.RegType);
 
-            Assert.True(Checkin.DiscountCodeRequired.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(registrant);
+
+            return EventFeeDCRequired;
         }
 
         [Test]
@@ -365,19 +357,12 @@
         [Description("1300")]
         public void RegistrationEventFeeDCRequiredLimit()
         {
-            this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.DiscountCode);
-
-            Event EventFeeDCRequiredLimit = new Event(string.Format("RI-SingleRegistrationEventFee{0}Required",
-                FormData.DiscountCodeType.DiscountCode.ToString()));
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeDCRequiredLimit, false, false);
+            Event EventFeeDCRequiredLimit = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.DiscountCode);
 
             DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
-            RegType RegType = new RegType("Second");
-            RegType.DiscountCode.Add(DiscountCode);
             Registrant registrantWhenFull = new Registrant();
             registrantWhenFull.Event = EventFeeDCRequiredLimit;
-            registrantWhenFull.RegType = RegType;
+            registrantWhenFull.RegType = EventFeeDCRequiredLimit.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
@@ -389,19 +374,12 @@
         [Description("1301")]
         public void RegistrationEventFeeACRequiredLimit()
         {
-            this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.AccessCode);
-
-            Event EventFeeACRequiredLimit = new Event(string.Format("RI-SingleRegistrationEventFee{0}Required",
-                FormData.DiscountCodeType.AccessCode.ToString()));
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeACRequiredLimit, false, false);
+            Event EventFeeACRequiredLimit = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.AccessCode);
 
             DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
-            RegType RegType = new RegType("Second");
-            RegType.DiscountCode.Add(DiscountCode);
             Registrant registrantWhenFull = new Registrant();
             registrantWhenFull.Event = EventFeeACRequiredLimit;
-            registrantWhenFull.RegType = RegType;
+            registrantWhenFull.RegType = EventFeeACRequiredLimit.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
@@ -425,7 +403,7 @@
             PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             EventFeeEaylyPrice_Registrants.CheckoutPage.PaymentMethods.Add(PaymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeEaylyPrice_Registrants, false, true);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeEaylyPrice_Registrants);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventFeeEaylyPrice_Registrants;
@@ -470,7 +448,7 @@
             PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             EventEarlyPrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventEarlyPrice, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventEarlyPrice);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventEarlyPrice;
@@ -502,7 +480,7 @@
             PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             EventLatePrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventLatePrice, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventLatePrice);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventLatePrice;
@@ -540,7 +518,7 @@
             PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             EventMiddlePrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventMiddlePrice, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventMiddlePrice);
 
             Registrant registrant = new Registrant();
             registrant.Event = EventMiddlePrice;
@@ -565,13 +543,13 @@
             Registrant reg = new Registrant(emailAddress);
             reg.Event = evt;
 
-            Confirmation.ChangeMyRegistration_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             KeywordProvider.RegistrationCreation.Login(reg);
-            AttendeeCheck.SubstituteLink_Click(0);
-            PersonalInfo.Email.Type(string.Format(
+            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.SubstituteLink_Click(0);
+            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Email.Type(string.Format(
                 "selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            Assert.True(KeywordProvider.RegisterDefault.IsOnConfirmationPage());
+            AssertHelper.VerifyOnPage(FormData.RegisterPage.Confirmation, true);
         }
 
         [Test]
@@ -590,7 +568,7 @@
             evt.StartPage.RegTypes.Add(regType);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant();
             reg.Event = evt;
@@ -612,16 +590,16 @@
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant();
             reg.Event = evt;
 
             KeywordProvider.RegisterDefault.OpenRegTypeDirectUrl(evt.Id, regType1.RegTypeId);
-            Assert.False(Checkin.RegTypeRadioButton.IsPresent);
-            Assert.False(Checkin.RegTypeDropDown.IsPresent);
-            Checkin.EmailAddress.Type(reg.Email);
-            RegisterHelper.Continue_Click();
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
             KeywordProvider.RegistrationCreation.Checkout(reg);
         }

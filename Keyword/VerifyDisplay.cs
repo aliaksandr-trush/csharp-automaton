@@ -6,51 +6,49 @@
 
     public class VerifyDisplay
     {
-        private PageObjectHelper RegisterHelper = new PageObjectHelper();
-
         public VerifyFooterResults VerifyCompanyFooter()
         {
             VerifyFooterResults results = new VerifyFooterResults();
 
-            RegisterHelper.Trustwave_Click();
-            results.Trustwave = RegisterHelper.TrustwaveWeb.URLContains("sealserver.trustwave.com");
-            RegisterHelper.TrustwaveWeb.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.Trustwave_Click();
+            results.Trustwave = PageObject.PageObjectProvider.Register.RegistationSite.TrustwaveWeb.URLContains("sealserver.trustwave.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.TrustwaveWeb.CloseAndBackToPrevious();
 
-            RegisterHelper.Facebook_Click();
-            results.Facebook = RegisterHelper.FacebookWeb.URLContains("facebook.com");
-            RegisterHelper.FacebookWeb.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.Facebook_Click();
+            results.Facebook = PageObject.PageObjectProvider.Register.RegistationSite.FacebookWeb.URLContains("facebook.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.FacebookWeb.CloseAndBackToPrevious();
 
-            RegisterHelper.Twitter_Click();
-            results.Twitter = RegisterHelper.TwitterWeb.URLContains("twitter.com");
-            RegisterHelper.TwitterWeb.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.Twitter_Click();
+            results.Twitter = PageObject.PageObjectProvider.Register.RegistationSite.TwitterWeb.URLContains("twitter.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.TwitterWeb.CloseAndBackToPrevious();
 
-            RegisterHelper.Linkedin_Click();
-            results.Linkedin = RegisterHelper.LinkedinWeb.URLContains("linkedin.com");
-            RegisterHelper.LinkedinWeb.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.Linkedin_Click();
+            results.Linkedin = PageObject.PageObjectProvider.Register.RegistationSite.LinkedinWeb.URLContains("linkedin.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.LinkedinWeb.CloseAndBackToPrevious();
 
-            results.Copyright = RegisterHelper.Copyright.Text;
+            results.Copyright = PageObject.PageObjectProvider.Register.RegistationSite.Copyright.Text;
 
-            RegisterHelper.TermsOfUse_Click();
-            results.TermsOfUse = RegisterHelper.TermsOfUseWindow.URLContains("www.activenetwork.com/information/terms-of-use");
-            RegisterHelper.TermsOfUseWindow.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUse_Click();
+            results.TermsOfUse = PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUseWindow.URLContains("www.activenetwork.com/information/terms-of-use");
+            PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUseWindow.CloseAndBackToPrevious();
 
-            RegisterHelper.PrivacyPolicy_Click();
-            results.PrivacyPolicy = RegisterHelper.PrivacyPolicyWindow.URLContains("regonline.com/privacy");
-            RegisterHelper.PrivacyPolicyWindow.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicy_Click();
+            results.PrivacyPolicy = PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicyWindow.URLContains("regonline.com/privacy");
+            PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicyWindow.CloseAndBackToPrevious();
 
-            RegisterHelper.CookiePolicy_Click();
-            results.CookiePolicy = RegisterHelper.CookiePolicyWindow.URLContains("activenetwork.com/information/cookie-policy");
-            RegisterHelper.CookiePolicyWindow.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicy_Click();
+            results.CookiePolicy = PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicyWindow.URLContains("activenetwork.com/information/cookie-policy");
+            PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicyWindow.CloseAndBackToPrevious();
 
-            string Href = RegisterHelper.About.GetAttribute("href");
-            RegisterHelper.About_Click();
-            results.About = (RegisterHelper.AboutWindow.URLContains("activenetwork.com/software/solutions"))
+            string Href = PageObject.PageObjectProvider.Register.RegistationSite.About.GetAttribute("href");
+            PageObject.PageObjectProvider.Register.RegistationSite.About_Click();
+            results.About = (PageObject.PageObjectProvider.Register.RegistationSite.AboutWindow.URLContains("activenetwork.com/software/solutions"))
                 && (Href == "http://www.activenetwork.com/technology/overview.htm");
-            RegisterHelper.AboutWindow.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.AboutWindow.CloseAndBackToPrevious();
 
-            RegisterHelper.ActiveCom_Click();
-            results.ActiveCom = RegisterHelper.ActiveComWeb.URLContains("www.active.com");
-            RegisterHelper.ActiveComWeb.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.ActiveCom_Click();
+            results.ActiveCom = PageObject.PageObjectProvider.Register.RegistationSite.ActiveComWeb.URLContains("www.active.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.ActiveComWeb.CloseAndBackToPrevious();
 
             return results;
         }
@@ -59,61 +57,61 @@
         {
             VerifyEventDetailsResult results = new VerifyEventDetailsResult();
 
-            if (RegisterHelper.EventDetails.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.EventDetails.IsPresent)
             {
-                RegisterHelper.EventDetails.Click();
+                PageObject.PageObjectProvider.Register.RegistationSite.EventDetails.Click();
             }
 
-            if (RegisterHelper.Location.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Location.IsPresent)
             {
-                results.Location = RegisterHelper.Location.Text;
+                results.Location = PageObject.PageObjectProvider.Register.RegistationSite.Location.Text;
             }
-            if (RegisterHelper.AddressOne.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.AddressOne.IsPresent)
             {
-                results.Address1 = RegisterHelper.AddressOne.Text;
+                results.Address1 = PageObject.PageObjectProvider.Register.RegistationSite.AddressOne.Text;
             }
-            if (RegisterHelper.AddressTwo.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.AddressTwo.IsPresent)
             {
-                results.Address2 = RegisterHelper.AddressTwo.Text;
+                results.Address2 = PageObject.PageObjectProvider.Register.RegistationSite.AddressTwo.Text;
             }
-            if (RegisterHelper.City.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.City.IsPresent)
             {
-                results.City = RegisterHelper.City.Text;
+                results.City = PageObject.PageObjectProvider.Register.RegistationSite.City.Text;
             }
-            if (RegisterHelper.State.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.State.IsPresent)
             {
-                results.State = RegisterHelper.State.Text;
+                results.State = PageObject.PageObjectProvider.Register.RegistationSite.State.Text;
             }
-            if (RegisterHelper.Zip.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Zip.IsPresent)
             {
-                results.Zip = RegisterHelper.Zip.Text;
+                results.Zip = PageObject.PageObjectProvider.Register.RegistationSite.Zip.Text;
             }
-            if (RegisterHelper.Country.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Country.IsPresent)
             {
-                results.Country = RegisterHelper.Country.Text;
+                results.Country = PageObject.PageObjectProvider.Register.RegistationSite.Country.Text;
             }
-            if (RegisterHelper.Phone.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Phone.IsPresent)
             {
-                results.Phone = RegisterHelper.Phone.Text;
+                results.Phone = PageObject.PageObjectProvider.Register.RegistationSite.Phone.Text;
             }
-            if (RegisterHelper.Contact.IsPresent)
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Contact.IsPresent)
             {
-                results.Contact = RegisterHelper.Contact.Text;
+                results.Contact = PageObject.PageObjectProvider.Register.RegistationSite.Contact.Text;
             }
 
-            RegisterHelper.EventHome_Click();
-            results.EventHome = RegisterHelper.EventHomeWindow.URL;
-            RegisterHelper.EventHomeWindow.CloseAndBackToPrevious();
+            PageObject.PageObjectProvider.Register.RegistationSite.EventHome_Click();
+            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.URL;
+            PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CloseAndBackToPrevious();
 
-            RegisterHelper.EventContactInfo_Click();
-            RegisterHelper.PopupContactInfo.SelectByIndex();
-            results.EventContactInfo = RegisterHelper.PopupContactInfo.PopupContactInfo.Text;
+            PageObject.PageObjectProvider.Register.RegistationSite.EventContactInfo_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.SelectByIndex();
+            results.EventContactInfo = PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.PopupContactInfo.Text;
             UIUtilityProvider.UIHelper.SwitchToMainContent();
-            RegisterHelper.PopupContactInfoClose.WaitForPresent();
+            PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.WaitForPresent();
             Utility.ThreadSleep(1);
-            RegisterHelper.PopupContactInfoClose.Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.Click();
 
-            results.EventTitle = RegisterHelper.EventTitle.Text;
+            results.EventTitle = PageObject.PageObjectProvider.Register.RegistationSite.EventTitle.Text;
 
             return results;
         }
@@ -122,8 +120,8 @@
         {
             VerifyPageResults results = new VerifyPageResults();
 
-            results.PageHeader = RegisterHelper.PageHeader.Text;
-            results.PageFooter = RegisterHelper.PageFooter.Text;
+            results.PageHeader = PageObject.PageObjectProvider.Register.RegistationSite.PageHeader.Text;
+            results.PageFooter = PageObject.PageObjectProvider.Register.RegistationSite.PageFooter.Text;
 
             return results;
         }

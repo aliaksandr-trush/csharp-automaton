@@ -6,6 +6,8 @@
 
     public class FormData
     {
+        public static string EventSessionId;
+
         #region Enums
         public enum EarlyPriceType
         {
@@ -425,7 +427,61 @@
             [CustomString("Yes/No")]
             YesOrNo
         }
+
+        public enum RegisterPage
+        {
+            Checkin,
+            Login,
+            SSOLogin,
+            PersonalInfo,
+            Agenda,
+            LodgingTravel,
+            Merchandise,
+            Checkout,
+            ConfirmationRedirect,
+            Confirmation,
+            AttendeeCheck
+        }
+
+        public enum EventCalendarView
+        {
+            Calendar,
+            Location,
+            Month,
+            Day,
+            Category
+        }
+
+        public enum EventStatus
+        {
+            [CustomString("Inactive")]
+            Inactive,
+
+            [CustomString("Sold Out")]
+            SoldOut,
+
+            [CustomString("Cancelled")]
+            Cancelled,
+
+            [CustomString("Testing")]
+            Testing,
+
+            [CustomString("On-site")]
+            OnSite,
+
+            [CustomString("Update Only")]
+            UpdateOnly,
+
+            [CustomString("Archived")]
+            Archived,
+
+            [CustomString("Active")]
+            Active
+        }
         #endregion
+
+        public static DateTime DefaultStartDate = new DateTime(2020, 10, 10);
+        public static DateTime DefaultEndDate = new DateTime(2020, 10, 15);
 
         public class PaymentMethodCheckouLabelAttribute : Attribute
         {

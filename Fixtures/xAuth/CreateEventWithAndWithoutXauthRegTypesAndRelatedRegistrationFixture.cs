@@ -12,7 +12,7 @@
     using RegOnline.RegressionTest.Managers.Register;
 
     [TestFixture]
-    public class CreateEventWithAndWithoutXauthRegTypesAndRelatedRegistrationFixture : FixtureBase
+    public class CreateEventWithAndWithoutXauthRegTypesAndRelatedRegistrationFixture : ExternalAuthenticationFixtureBase
     {
         string folderName = "xAuth";
         private const string EventName = "XAuth_WithAndWithoutXauthRegTypesAndRelatedRegistration";

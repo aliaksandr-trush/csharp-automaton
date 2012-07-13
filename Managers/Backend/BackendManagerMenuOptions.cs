@@ -4,7 +4,7 @@
     using System.Linq;
     using NUnit.Framework;
     using RegOnline.RegressionTest.Attributes;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using System.Text.RegularExpressions;

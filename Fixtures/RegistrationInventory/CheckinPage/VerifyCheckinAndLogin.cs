@@ -10,11 +10,6 @@
     [Category(FixtureCategory.Regression)]
     public class VerifyCheckinAndLogin : FixtureBase
     {
-        private PageObject.Register.Checkin Checkin = new PageObject.Register.Checkin();
-        private PageObject.Register.Login Login = new PageObject.Register.Login();
-        private PageObject.Register.Confirmation Confirmation = new PageObject.Register.Confirmation();
-        private PageObject.Register.PageObjectHelper RegisterHelper = new PageObject.Register.PageObjectHelper();
-
         [Test]
         [Category(Priority.Three)]
         [Description("1291")]
@@ -47,10 +42,10 @@
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
-            Confirmation.ChangeMyRegistration_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 
-            Login.Password.Type("abcdefg");
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type("abcdefg");
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.InvalidPassword));
         }
@@ -71,7 +66,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            RegisterHelper.AddAnotherPerson_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             KeywordProvider.RegistrationCreation.Checkin(reg1);
 
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.YouMustEnterValidEmailAddress));
@@ -96,10 +91,10 @@
 
             KeywordProvider.RegistrationCreation.GroupRegistration(regs);
 
-            Confirmation.ChangeMyRegistration_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 
-            Login.Password.Type("abcdefg");
-            RegisterHelper.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type("abcdefg");
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.InvalidPassword));
         }
@@ -119,9 +114,9 @@
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
-            Login.ForgotPassword_Click();
-            Login.ForgotPasswordPopup.SelectByIndex();
-            string email = Login.ForgotPasswordPopup.EmailAddress.GetAttribute("value");
+            PageObject.PageObjectProvider.Register.RegistationSite.Login.ForgotPassword_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Login.ForgotPasswordPopup.SelectByIndex();
+            string email = PageObject.PageObjectProvider.Register.RegistationSite.Login.ForgotPasswordPopup.EmailAddress.GetAttribute("value");
             Assert.True(reg.Email == email);
         }
 
@@ -138,11 +133,11 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            KeywordProvider.RegisterDefault.OpenRegisterPage(evt.Id);
-            Assert.True(Checkin.VerifyEmailAddress.IsPresent);
-            Checkin.EmailAddress.Type("a@b.com");
-            Checkin.VerifyEmailAddress.Type("a@c.com");
-            RegisterHelper.Continue_Click();
+            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Id);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type("a@b.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type("a@c.com");
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.EmailAddressesDoNotMatch));
         }
     }

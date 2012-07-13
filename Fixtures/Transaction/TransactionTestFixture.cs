@@ -1,7 +1,7 @@
 ﻿namespace RegOnline.RegressionTest.Fixtures.Transaction
 {
     using NUnit.Framework;
-    using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.Managers.Backend;
     using RegOnline.RegressionTest.Managers.Builder;
@@ -11,7 +11,6 @@
     using RegOnline.RegressionTest.Managers.Report;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
-    using RegOnline.RegressionTest.Attributes;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -20,7 +19,7 @@
         private int eventId = 0;
         private int regId = 0;
         private string sessionId = string.Empty;
-        private string eventName = "TransactionTest";
+        private string EventName = "TransactionTest";
         private string managerURL = string.Empty;
         private BackendManager.TransactionResponse transaction = new BackendManager.TransactionResponse();
         
@@ -39,7 +38,7 @@
         public void TransactionTestRegWithCheck()
         {
             //Create Event and Reg With Check
-            CreateNewTransactionEvent(eventName);
+            CreateNewTransactionEvent();
             
             //string totalToVerify = U.MoneyTools.FormatMoney(eventId, expectedTotalFee, CurrentConfig.ClientDbConnection);
             RegForTransactionTest(expectedTotalFee, RegisterManager.PaymentMethod.Check);
@@ -54,7 +53,7 @@
         public void TransactionTestRegWithCreditCard()
         {
             //Creat Event and Reg With Credit Card
-            CreateNewTransactionEvent(eventName);
+            CreateNewTransactionEvent();
             
             //string totalToVerify = U.MoneyTools.FormatMoney(eventId, expectedTotalFee, CurrentConfig.ClientDbConnection);
             RegForTransactionTest(expectedTotalFee, RegisterManager.PaymentMethod.CreditCard);
@@ -66,12 +65,12 @@
 
         #region Create Event Methods
         [Step]
-        private void CreateNewTransactionEvent(string eventName)
+        private void CreateNewTransactionEvent()
         {
             LoginAndGoToEventTab();
 
             // (always build the event for now)
-            ManagerSiteMgr.DeleteExpiredDuplicateEvents(eventName);
+            ManagerSiteMgr.DeleteEventByName(EventName);
 
             // get sessionId
             this.sessionId = BuilderMgr.GetEventSessionId();
@@ -79,62 +78,44 @@
             // get manager URL
             this.managerURL = ManagerSiteMgr.GetManagerURL(this.sessionId);
 
-            // if event doesn't exist, create new one
-            if (!ManagerSiteMgr.EventExists(eventName))
-            {
-                // select "Pro Event" from drop down
-                ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
+            // select "Pro Event" from drop down
+            ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
 
-                // get event id
-                eventId = BuilderMgr.GetEventId();
+            // get event id
+            eventId = BuilderMgr.GetEventId();
 
-                // test start page
-                BuildEventStartPage(eventName, regTypeName,regTypeFee);
+            // test start page
+            BuildEventStartPage(EventName, regTypeName, regTypeFee);
 
-                // go to next page
-                BuilderMgr.Next();
+            // go to next page
+            BuilderMgr.Next();
 
-                // go to next page
-                BuilderMgr.Next();
+            // go to next page
+            BuilderMgr.Next();
 
-                // test agenda page
-                BuildAgendaPage(agendaItemName, agendaItemFee);
+            // test agenda page
+            BuildAgendaPage(agendaItemName, agendaItemFee);
 
-                // go to next page
-                BuilderMgr.Next();
+            // go to next page
+            BuilderMgr.Next();
 
-                // go to next page
-                BuilderMgr.Next();
+            // go to next page
+            BuilderMgr.Next();
 
-                // test merchandise page
-                BuildMerchandisePage(merchandiseItemName, merchandiseItemFee);
+            // test merchandise page
+            BuildMerchandisePage(merchandiseItemName, merchandiseItemFee);
 
-                // go to next page
-                BuilderMgr.Next();
+            // go to next page
+            BuilderMgr.Next();
 
-                // test checkout page
-                BuildCheckoutPage();
+            // test checkout page
+            BuildCheckoutPage();
 
-                // go to next page
-                BuilderMgr.Next();
-
-                // test confirmation page
-                BuildConfirmationPage();
+            // go to next page
+            BuilderMgr.Next();
                                 
-                // save and close
-                BuilderMgr.SaveAndClose();
-            }
-            else
-            {
-                eventId = ManagerSiteMgr.GetFirstEventId(eventName);
-                ManagerSiteMgr.OpenEventDashboard(eventName);
-                ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
-                ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-                ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                ManagerSiteMgr.DashboardMgr.ReturnToList();
-            }
+            // save and close
+            BuilderMgr.SaveAndClose();
         }
 
         private void BuildEventStartPage(string eventName, string regtypeName, double eventFee)
@@ -185,18 +166,6 @@
             // save and stay
             BuilderMgr.SaveAndStay();
         }
-
-        private void BuildConfirmationPage()
-        {
-            // enter event checkout page info
-            BuilderMgr.SetEventConfirmationPage();
-
-            // save and stay
-            BuilderMgr.SaveAndStay();
-
-            // verify event checkout page info
-            BuilderMgr.VerifyEventConfirmationPage();
-        }
         #endregion
 
         #region Registrations
@@ -239,7 +208,7 @@
             ManagerSiteMgr.OpenLogin();
             this.sessionId = ManagerSiteMgr.Login();
             this.managerURL = ManagerSiteMgr.GetManagerURL(this.sessionId);
-            BackendMgr.OpenAttendeeInfoURL(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, sessionId, regId);
+            BackendMgr.OpenAttendeeInfoURL(sessionId, regId);
 
             if (method == RegisterManager.PaymentMethod.Check)
             {
@@ -249,19 +218,19 @@
                 ManagerSiteMgr.OpenLogin();
                 this.sessionId = ManagerSiteMgr.Login();
                 this.managerURL = ManagerSiteMgr.GetManagerURL(this.sessionId);
-                BackendMgr.OpenAttendeeInfoURL(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, sessionId, regId);
+                BackendMgr.OpenAttendeeInfoURL(sessionId, regId);
                 TransactionCancelTest();
                 ManagerSiteMgr.OpenLogin();
                 this.sessionId = ManagerSiteMgr.Login();
                 this.managerURL = ManagerSiteMgr.GetManagerURL(this.sessionId);
-                BackendMgr.OpenAttendeeInfoURL(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, sessionId, regId);
+                BackendMgr.OpenAttendeeInfoURL(sessionId, regId);
                 NewTransactionTest();
-                VerifyAttendeeReport(eventName,eventId,RegisterManager.PaymentMethod.Check);
+                VerifyAttendeeReport(EventName,eventId,RegisterManager.PaymentMethod.Check);
             }
             else
             {
                 CreditCardTest();
-                VerifyAttendeeReport(eventName,eventId,RegisterManager.PaymentMethod.CreditCard);
+                VerifyAttendeeReport(EventName,eventId,RegisterManager.PaymentMethod.CreditCard);
             }
         }
 

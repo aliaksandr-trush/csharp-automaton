@@ -7,7 +7,7 @@
     using RegOnline.RegressionTest.UIUtility;
 
     [TestFixture]
-    public class OnsiteKioskWithxAuthRegTypeFixture : FixtureBase
+    public class OnsiteKioskWithxAuthRegTypeFixture : ExternalAuthenticationFixtureBase
     {
         [TestCase(FormData.XAuthType.ByEmailPassword)]
         [TestCase(FormData.XAuthType.ByUserNamePassword)]

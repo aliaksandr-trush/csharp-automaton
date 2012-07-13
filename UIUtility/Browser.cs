@@ -1,11 +1,18 @@
 ﻿namespace RegOnline.RegressionTest.UIUtility
 {
+    using System;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.Remote;
     using RegOnline.RegressionTest.Configuration;
 
-    internal class Browser_Firefox
+    internal interface IGetWebDriver
+    {
+        IWebDriver GetWebDriver();
+    }
+
+    internal class Browser_Firefox : IGetWebDriver
     {
         private FirefoxBinary binary;
         private FirefoxProfile profile;
@@ -40,9 +47,30 @@
             this.ResetBinary();
             return new FirefoxDriver(this.binary, this.profile);
         }
+
+        ////public IWebDriver GetWebDriver()
+        ////{
+        ////    DesiredCapabilities capa = DesiredCapabilities.Firefox();
+
+        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+        ////    {
+        ////        capa.SetCapability(
+        ////            "firefox_binary",
+        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
+        ////    }
+
+        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+        ////    {
+        ////        capa.SetCapability(
+        ////            "firefox_profile",
+        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value);
+        ////    }
+
+        ////    return new RemoteWebDriver(capa);
+        ////}
     }
 
-    internal class Browser_Chrome
+    internal class Browser_Chrome : IGetWebDriver
     {
         private ChromeOptions options = new ChromeOptions();
 
@@ -71,8 +99,29 @@
             this.ResetBinary();
 
             return new ChromeDriver(
-                ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.ChromeDriverPath, 
+                ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.ChromeDriverPath,
                 this.options);
         }
+
+        ////public IWebDriver GetWebDriver()
+        ////{
+        ////    DesiredCapabilities capa = DesiredCapabilities.Chrome();
+
+        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+        ////    {
+        ////        capa.SetCapability(
+        ////            "chrome.binary",
+        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
+        ////    }
+
+        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+        ////    {
+        ////        capa.SetCapability(
+        ////            "chrome.switches",
+        ////            string.Format("user-data-dir={0}", ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value));
+        ////    }
+
+        ////    return new RemoteWebDriver(new Uri("http://127.0.0.1:9515"), capa);
+        ////}
     }
 }

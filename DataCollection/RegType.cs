@@ -25,6 +25,7 @@
         public bool? IsOnSite;
         public RegTypeLimit RegTypeLimit;
         public string AdditionalDetails;
+        public bool IsSSO;
 
         public static RegType Default = RegType.GetDefault();
 

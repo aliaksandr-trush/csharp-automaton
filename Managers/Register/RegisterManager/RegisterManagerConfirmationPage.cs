@@ -5,7 +5,7 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
 
@@ -219,9 +219,9 @@
             return actResponse.ToArray();
         }
 
-        public void VerifyConfirmationTotal(double totalToVerify)
+        public void VerifyConfirmationTotal(double totalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(totalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -231,9 +231,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationTotal : {0}");
         }
 
-        public void VerifyConfirmationSubTotal(double subTotalToVerify)
+        public void VerifyConfirmationSubTotal(double subTotalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -243,9 +243,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSubTotal : {0}");
         }
 
-        public void VerifyConfirmationShippingFee(double subTotalToVerify)
+        public void VerifyConfirmationShippingFee(double subTotalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -255,9 +255,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "Confirmation Shipping Fee : {0}");
         }
 
-        public void VerifyConfirmationLodgingFeeTotal(double subTotalToVerify)
+        public void VerifyConfirmationLodgingFeeTotal(double subTotalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -267,9 +267,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Subtotal : {0}");
         }
 
-        public void VerifyConfirmationLodgingBookingFeeTotal(double subTotalToVerify)
+        public void VerifyConfirmationLodgingBookingFeeTotal(double subTotalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -279,9 +279,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Booking Fee : {0}");
         }
 
-        public void VerifyConfirmationSerivceFee(double subTotalToVerify)
+        public void VerifyConfirmationSerivceFee(double subTotalToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -291,9 +291,9 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "Service Fee : {0}");
         }
 
-        public void VerifyConfirmationSaving(double savingToVerify)
+        public void VerifyConfirmationSaving(double savingToVerify, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string amount = MoneyTool.FormatMoney(savingToVerify);
+            string amount = MoneyTool.FormatMoney(savingToVerify, currency);
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 
@@ -304,10 +304,13 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSaving : {0}");
         }
 
-        public void VerifyConfirmationGroupAndDiscountSaving(double groupSavingToVerify, double codeSavingToVerify)
+        public void VerifyConfirmationGroupAndDiscountSaving(
+            double groupSavingToVerify, 
+            double codeSavingToVerify,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string groupAmount = MoneyTool.FormatMoney(groupSavingToVerify);
-            string codeAmount = MoneyTool.FormatMoney(codeSavingToVerify);
+            string groupAmount = MoneyTool.FormatMoney(groupSavingToVerify, currency);
+            string codeAmount = MoneyTool.FormatMoney(codeSavingToVerify, currency);
             string expectedValue = string.Format("Your total includes a group discount savings of {0} and a discount code savings of {1}.", groupAmount, codeAmount);
             string actualValue = string.Empty;
 
@@ -318,16 +321,21 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSaving : {0}");
         }
 
-        public void VerifyConfirmationTax(double taxAmountToVerify, string taxLabel)
+        public void VerifyConfirmationTax(
+            double taxAmountToVerify, 
+            string taxLabel,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify);
+            string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
             string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(TaxLocatorConfirmation, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
-        public void VerifyConfirmationMembershipRecurringSubtotal(double subTotalToVerify)
+        public void VerifyConfirmationMembershipRecurringSubtotal(
+            double subTotalToVerify,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -337,16 +345,21 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "Recurring Subtotal: {0}");
         }
 
-        public void VerifyConfirmationMembershipReccuringTax(double taxAmountToVerify, string taxLabel)
+        public void VerifyConfirmationMembershipReccuringTax(
+            double taxAmountToVerify, 
+            string taxLabel,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify);
+            string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
             string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(ConfirmationRecurringTax, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
-        public void VerifyConfirmationMembershipRecurringTotal(double totalToVerify)
+        public void VerifyConfirmationMembershipRecurringTotal(
+            double totalToVerify,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedValue = MoneyTool.FormatMoney(totalToVerify);
+            string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
             UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
@@ -356,9 +369,11 @@
             VerifyTool.VerifyValue(expectedValue, actualValue, "MembershipYearlyFees : {0}");
         }
 
-        public void VerifyConfirmationMembershipRecurringSaving(double savingToVerify)
+        public void VerifyConfirmationMembershipRecurringSaving(
+            double savingToVerify,
+            MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string amount = MoneyTool.FormatMoney(savingToVerify);
+            string amount = MoneyTool.FormatMoney(savingToVerify, currency);
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 

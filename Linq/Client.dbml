@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Beta" Class="ClientDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=Beta;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.Linq.Properties.Settings" SettingsPropertyName="BetaConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=Beta;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.DataAccess.Properties.Settings" SettingsPropertyName="BetaConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Custom_Field_Responses" Member="Custom_Field_Responses">
     <Type Name="Custom_Field_Response">
       <Column Name="CFId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

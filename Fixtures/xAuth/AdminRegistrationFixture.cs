@@ -5,7 +5,7 @@
     using RegOnline.RegressionTest.Fixtures.Base;
 
     [TestFixture]
-    public class AdminRegistrationFixture : FixtureBase
+    public class AdminRegistrationFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "AdminRegistration";
         private int eventID;

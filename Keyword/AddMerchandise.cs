@@ -5,31 +5,29 @@
 
     public class AddMerchandise
     {
-        private PageObject.Builder.Merchandise Merchandise = new PageObject.Builder.Merchandise();
-
         public void AddMerchandises(DataCollection.Merchandise merch)
         {
-            if (Merchandise.EmptyAddMerchandise.IsPresent)
+            if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.EmptyAddMerchandise.IsPresent)
             {
-                Merchandise.EmptyAddMerchandise_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.EmptyAddMerchandise_Click();
             }
             else
             {
-                Merchandise.AddMerchandise_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.AddMerchandise_Click();
             }
 
-            Merchandise.MerchandiseDefine.SelectByName();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.SelectByName();
 
-            Merchandise.MerchandiseDefine.MerchandiseType_Select(((int)merch.MerchandiseType).ToString());
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.MerchandiseType_Select(((int)merch.MerchandiseType).ToString());
 
             switch (merch.MerchandiseType)
             {
                 case FormData.MerchandiseType.Fixed:
-                    Merchandise.MerchandiseDefine.FeeAmount.Type(merch.MerchandiseFee);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.FeeAmount.Type(merch.MerchandiseFee);
                     break;
                 case FormData.MerchandiseType.Variable:
-                    Merchandise.MerchandiseDefine.VariableFeeMinAmount.Type(merch.MinMerchandiseFee);
-                    Merchandise.MerchandiseDefine.VariableFeeMaxAmount.Type(merch.MaxMerchandiseFee);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMinAmount.Type(merch.MinMerchandiseFee);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMaxAmount.Type(merch.MaxMerchandiseFee);
                     break;
                 case FormData.MerchandiseType.Header:
                     break;
@@ -37,11 +35,11 @@
                     break;
             }
 
-            Merchandise.MerchandiseDefine.NameOnForm.Type(merch.MerchandiseName);
-            Merchandise.MerchandiseDefine.NameOnReceipt.Type(merch.MerchandiseName);
-            Merchandise.MerchandiseDefine.NameOnReports.Type(merch.MerchandiseName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnForm.Type(merch.MerchandiseName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnReceipt.Type(merch.MerchandiseName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnReports.Type(merch.MerchandiseName);
 
-            Merchandise.MerchandiseDefine.SaveAndClose_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.SaveAndClose_Click();
         }
     }
 }

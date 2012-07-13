@@ -1767,9 +1767,10 @@
         public const double ServiceFeePercentage = ProEvent.ServiceFeePercentage;
         public const double PerRegFee_USD = 3.95;
 
-        public readonly static double PerRegFee = Math.Round(
-            MoneyTool.ConvertAmount(PerRegFee_USD, MoneyTool.CurrencyCode.USD, MoneyTool.CurrencyCode.GBP),
-            2);
+        public readonly static double PerRegFee = MoneyTool.ConvertAmount(
+            PerRegFee_USD, 
+            MoneyTool.CurrencyCode.USD, 
+            MoneyTool.CurrencyCode.GBP);
 
         public class CCChargePercentage
         {
@@ -1959,12 +1960,19 @@
             private readonly static double TransactionFees = TransactionFees_NonMerch + TransactionFees_Merch;
             private readonly static double TransactionFees_USD = TransactionFees_NonMerch_USD + TransactionFees_Merch_USD;
 
+            private readonly static double TransactionFees_Converted = MoneyTool.ConvertAmount(
+                TransactionFees,
+                MoneyTool.CurrencyCode.GBP,
+                MoneyTool.CurrencyCode.USD);
+
             private readonly static double ServiceFee_USD = PerRegFee_USD + TransactionFees_USD;
 
-            private readonly static double ServiceFee = MoneyTool.ConvertAmount(
-                ServiceFee_USD, 
-                MoneyTool.CurrencyCode.USD, 
-                MoneyTool.CurrencyCode.GBP);
+            private readonly static double ServiceFee = PerRegFee + TransactionFees;
+
+            private readonly static double ServiceFee_Converted = MoneyTool.ConvertAmount(
+                ServiceFee,
+                MoneyTool.CurrencyCode.GBP,
+                MoneyTool.CurrencyCode.USD);
 
             private readonly static double TotalFee = SubTotal + ShippingFee + TaxOne + TaxTwo + LodgingFeeTotal + ServiceFee;
             private readonly static double TotalFee_USD = NonMerchAmount_USD + MerchAmount_USD + ServiceFee_USD;
@@ -1978,11 +1986,11 @@
 
             private readonly static string[] _ExpectedTransactionFeesReportData = new string[18]
             { 
-                MoneyTool.FormatMoney(-TotalFee_USD), //1.Total Amount Collected
-                MoneyTool.FormatMoney(TransactionFees_USD), //2.Transaction Fees
+                MoneyTool.FormatMoney(-ConvertedAmount), //1.Total Amount Collected
+                MoneyTool.FormatMoney(TransactionFees_Converted), //2.Transaction Fees
                 "1", //3.Registrants in group
                 MoneyTool.FormatMoney(PerRegFee_USD), //4.Total per Reg Fee
-                MoneyTool.FormatMoney(-(TotalFee_USD - ServiceFee_USD)), //5.Net Amount Due/Owed
+                MoneyTool.FormatMoney(-(ConvertedAmount - ServiceFee_Converted)), //5.Net Amount Due/Owed
                 string.Format("{0} %", (CCChargePercentage.NonMerch * 100).ToString("0.00")), //6.Non Merchandise %
                 MoneyTool.FormatMoney(-NonMerchAmount_USD), //7.Event/Activity Price
                 MoneyTool.FormatMoney(TransactionFees_NonMerch_USD), //8.Event/Activity Transaction Fee
@@ -1992,9 +2000,9 @@
                 MoneyTool.FormatMoney(0), //9.Flat Fee
                 MoneyTool.FormatMoney(PerRegFee_USD), //10.Per Reg Fee
                 "1", //11.Group Count
-                MoneyTool.FormatMoney(ServiceFee_USD), //12.Total Fees
+                MoneyTool.FormatMoney(ServiceFee_Converted), //12.Total Fees
                 string.Format("{0} %", (ServiceFeePercentage * 100).ToString("0.00")), //13.% Passed To Participant
-                MoneyTool.FormatMoney(-ServiceFee_USD), //14.Total Paid By Participant
+                MoneyTool.FormatMoney(-ServiceFee_Converted), //14.Total Paid By Participant
                 MoneyTool.FormatMoney(0) //15.Fees Due
             };
 
@@ -2021,7 +2029,7 @@
             {
                 get
                 {
-                    return null;
+                    return _AgendaFeeTotal;
                 }
             }
 

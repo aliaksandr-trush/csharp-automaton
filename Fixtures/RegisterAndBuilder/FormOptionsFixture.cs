@@ -179,7 +179,7 @@
         [Verify]
         private void VerifyActiveDateInDB()
         {
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var activeDate = (from e in db.Events where e.Id == eventID select e.ActiveDate).ToList();
             string date = activeDate[0].ToString();
             string[] dateAndTime = date.Split(new char[] { ' ' });

@@ -6,8 +6,6 @@
 
     public class ManagerDefault
     {
-        private PageObject.Builder.PageObjectHelper BuilderHelper = new PageObject.Builder.PageObjectHelper();
-
         public bool DoesEventExist(string eventName)
         {
             bool exist = false;
@@ -64,13 +62,13 @@
         {
             bool found = false;
 
-            int count = BuilderHelper.AgendaErrorMessage.Count;
+            int count = PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaErrorMessage.Count;
             string[] errorList = new string[count];
 
             for (int i = 1; i <= count; i++)
             {
                 errorList[i - 1] = UIUtilityProvider.UIHelper.GetText(string.Format(
-                    BuilderHelper.AgendaErrorMessage.Locator + "[{0}]", i), LocateBy.XPath);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaErrorMessage.Locator + "[{0}]", i), LocateBy.XPath);
             }
 
             foreach (string error in errorList)

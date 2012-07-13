@@ -12,7 +12,7 @@
     using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
-    public class UpdatesFixture : FixtureBase
+    public class UpdatesFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "UpdatesFixture";
         private const string DescriptionForIdentifer = "User ID";

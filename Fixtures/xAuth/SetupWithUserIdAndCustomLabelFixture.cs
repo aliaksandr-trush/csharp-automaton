@@ -7,7 +7,7 @@
     using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
-    public class SetupWithUserIdAndCustomLabelFixture : FixtureBase
+    public class SetupWithUserIdAndCustomLabelFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "SetupWithUserIdAndCustomLabel";
         private const string DescriptionForIdentifer = "Active Regonline User ID";       

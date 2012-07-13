@@ -13,14 +13,6 @@
     [Category(FixtureCategory.Regression)]
     public class AgendaBasics : FixtureBase
     {
-        private PageObject.Register.Agenda RegisterAgenda = new PageObject.Register.Agenda();
-        private PageObject.Manager.PageObjectHelper PageObjectHelper = new PageObject.Manager.PageObjectHelper();
-        private PageObject.Manager.Dashboard.Reports Reports = new PageObject.Manager.Dashboard.Reports();
-        private PageObject.Register.Confirmation Confirmation = new PageObject.Register.Confirmation();
-        private PageObject.Builder.PageObjectHelper BuilderHelper = new PageObject.Builder.PageObjectHelper();
-        private PageObject.Manager.Dashboard.EventDtails EventDtails = new PageObject.Manager.Dashboard.EventDtails();
-        private PageObject.Builder.Agenda BuilderAgenda = new PageObject.Builder.Agenda();
-
         [Test]
         [Category(Priority.Three)]
         public void AgendaNameTesting()
@@ -60,7 +52,7 @@
             AgendaPage.AgendaItems.Add(AgendaItem3);
             evt.AgendaPage = AgendaPage;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant();
             reg.Event = evt;
@@ -71,14 +63,14 @@
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
 
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem1).AgendaLabel.Text == AgendaItem1.NameOnFrom);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem2).AgendaLabel.Text == AgendaItem2.NameOnFrom);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem3).AgendaLabel.Text == AgendaItem3.NameOnFrom);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem1).AgendaLabel.Text == AgendaItem1.NameOnFrom);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem2).AgendaLabel.Text == AgendaItem2.NameOnFrom);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem3).AgendaLabel.Text == AgendaItem3.NameOnFrom);
 
             KeywordProvider.RegistrationCreation.Agenda(reg);
             KeywordProvider.RegistrationCreation.Checkout(reg);
 
-            List<Label> selectedAgendaItems = Confirmation.GetSelectedAgendaItems();
+            List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
 
             foreach (Label agenda in selectedAgendaItems)
             {
@@ -88,8 +80,8 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            PageObjectHelper.DashboardTab_Click(FormData.DashboardTab.Reports);
-            Reports.AgendaReportLink_Click();
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Reports);
+            PageObject.PageObjectProvider.Manager.Dashboard.Reports.AgendaReportLink_Click();
             List<string> results = KeywordProvider.VerifyStandardReports.VerifyStandardReport(FormData.StandardReports.AgendaReport);
             Assert.True(results.Find(r => r.Contains(AgendaItem1.NameOnReports)) != null);
             Assert.True(results.Find(r => r.Contains(expectOnReports)) != null);
@@ -141,7 +133,7 @@
             AgendaPage.AgendaItems.Add(AgendaItem5);
             evt.AgendaPage = AgendaPage;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant();
             reg.Event = evt;
@@ -149,16 +141,16 @@
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
 
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem1).StartDate == now);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem1).EndDate == now.AddDays(3));
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem2).StartDate == now);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem2).EndDate == now.AddDays(3));
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem3).StartDate == nowDate);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem3).EndDate == nowDate.AddDays(3));
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem4).StartDate == now);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem4).EndDate == now);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem5).StartDate == null);
-            Assert.True(RegisterAgenda.GetAgendaItem(AgendaItem5).EndDate == null);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem1).StartDate == now);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem1).EndDate == now.AddDays(3));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem2).StartDate == now);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem2).EndDate == now.AddDays(3));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem3).StartDate == nowDate);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem3).EndDate == nowDate.AddDays(3));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem4).StartDate == now);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem4).EndDate == now);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem5).StartDate == null);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem5).EndDate == null);
         }
 
         [Test]
@@ -190,18 +182,18 @@
             evt.AgendaPage.AgendaItems.Add(AG3);
             evt.AgendaPage.AgendaItems.Add(AG4);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, true, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            EventDtails.EditForm_Click();
-            BuilderHelper.GotoPage(FormData.Page.Agenda);
-            BuilderAgenda.AddAgendaItem_Click();
-            BuilderAgenda.NameOnForm.Type("NoMultipleChoice");
-            BuilderAgenda.FieldType_Click();
-            BuilderAgenda.AgendaType_Select(FormData.CustomFieldType.RadioButton);
-            BuilderAgenda.SaveItem_Click();
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Type("NoMultipleChoice");
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(FormData.CustomFieldType.RadioButton);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
             KeywordProvider.ManagerDefault.HassErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice);
-            BuilderAgenda.Cancel_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
 
             Registrant reg = new Registrant();
             reg.Event = evt;

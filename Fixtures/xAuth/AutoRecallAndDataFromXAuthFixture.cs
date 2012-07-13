@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
-    public class AutoRecallAndDataFromXAuthFixture : FixtureBase
+    public class AutoRecallAndDataFromXAuthFixture : ExternalAuthenticationFixtureBase
     {
         private const string FirstEventNameWithXAuth = "AutoRecallAndDataFromXAuth1";
         private const string SecondEventNameWithoutXAuth = "AutoRecallAndDataFromXAuthWithoutXAuth2";

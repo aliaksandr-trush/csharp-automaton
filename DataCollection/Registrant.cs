@@ -3,6 +3,17 @@
     using System;
     using System.Collections.Generic;
     using RegOnline.RegressionTest.Utilities;
+    using RegOnline.RegressionTest.Configuration;
+
+    public enum RegisterMethod
+    {
+        EventId,
+        Shortcut,
+        RegTypeDirectUrl,
+        EventWebsite,
+        EventCalendar,
+        Admin
+    }
 
     public abstract class DefaultPaymentInfo
     {
@@ -75,7 +86,7 @@
                 WorkPhone = "303.555.1212",
                 Extension = "113",
                 Fax = "303.987.3524",
-                Password = "regression0"
+                Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password
             };
         }
     }

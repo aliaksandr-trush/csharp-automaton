@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using RegOnline.RegressionTest.Attributes;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
 
@@ -116,9 +116,9 @@
             UIUtilityProvider.UIHelper.Type(locator, discountCode, LocateBy.XPath);
         }
 
-        public void VerifyAgendaPageTotalAmount(double totalAmount)
+        public void VerifyAgendaPageTotalAmount(double totalAmount, Utilities.MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
-            string expectedAmount = MoneyTool.FormatMoney(totalAmount);
+            string expectedAmount = MoneyTool.FormatMoney(totalAmount, currency);
             string actualAmount = UIUtilityProvider.UIHelper.GetText("totalAmt", LocateBy.Id);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, "Agenda total fee : {0}");
         }

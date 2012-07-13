@@ -5,7 +5,7 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Fixtures.Base;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.Managers.Manager;
@@ -1060,7 +1060,7 @@
 
         public void UpdateRenewDateAndRunReccuringFeeProcessor(int registrantId)
         {
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             int rowsAffected;
 
             // Set time back to one hour ago so that Recurring Fee Processor can process it

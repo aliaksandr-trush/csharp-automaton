@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Linq
+﻿namespace RegOnline.RegressionTest.DataAccess
 {
     using System;
     using System.Collections.Generic;

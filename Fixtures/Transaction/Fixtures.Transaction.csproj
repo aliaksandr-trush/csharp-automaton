@@ -67,9 +67,9 @@
       <Project>{00D2681A-E779-4805-8F26-735B3ED4C151}</Project>
       <Name>Fixtures.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Linq\Linq.csproj">
+    <ProjectReference Include="..\..\Linq\DataAccess.csproj">
       <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
-      <Name>Linq</Name>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Managers\Managers.csproj">
       <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>

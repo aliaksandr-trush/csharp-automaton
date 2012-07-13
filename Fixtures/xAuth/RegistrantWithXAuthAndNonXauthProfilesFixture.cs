@@ -10,7 +10,7 @@
     using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
-    public class RegistrantWithXAuthAndNonXauthProfilesFixture : FixtureBase
+    public class RegistrantWithXAuthAndNonXauthProfilesFixture : ExternalAuthenticationFixtureBase
     {
         private const string FirstEventNameWithXAuth = "RegistrantWithXAuthAndNonXauthProfilesWithXAuthRegType";
         private const string SecondEventNameWithoutXAuth = "RegistrantWithXAuthAndNonXauthProfilesWithoutXAuthRegType";

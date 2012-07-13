@@ -48,6 +48,7 @@
     <Compile Include="CustomField.cs" />
     <Compile Include="DiscountCode.cs" />
     <Compile Include="EarlyLatePrice.cs" />
+    <Compile Include="ExternalAuthenticationData.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="EventDetails.cs" />
     <Compile Include="EventFolders.cs" />
@@ -60,6 +61,10 @@
     <Compile Include="TaxRate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
       <Name>Utilities</Name>

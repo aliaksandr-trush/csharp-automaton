@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.Managers.Manager;
 
     [TestFixture]
-    public class xAuthFixture_SetupBasic : FixtureBase
+    public class xAuthFixture_SetupBasic : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "xAuthFixture_SetupBasic";
         private const string ExistingEventName = "xAuthFixture_SetupBasic_ExistingEvent";

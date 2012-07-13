@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.UIUtility;
 
     ////[TestFixture]
-    public class xAuthAndRegistrationTransferFixture : FixtureBase
+    public class xAuthAndRegistrationTransferFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventTransferFrom = "xAuthAndRegistrationTransferFrom";
         private const string EventTransferTo = "xAuthAndRegistrationTransferTo";

@@ -5,7 +5,7 @@
     using RegOnline.RegressionTest.Managers.Manager;
 
     [TestFixture]
-    public class NoXAuthFixture : FixtureBase
+    public class NoXAuthFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "NoXAuthTest";
         private const string EventNameExistEmail = "NoXAuthTest-ExistingEmail";

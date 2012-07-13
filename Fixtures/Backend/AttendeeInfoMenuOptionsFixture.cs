@@ -152,6 +152,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
+            ManagerSiteMgr.SelectFolder();
             int eventIdToTransferFrom = ManagerSiteMgr.GetFirstEventId(EventToTransferAttendee.NameForEventToTransferFrom);
             int eventIdToTransferTo = ManagerSiteMgr.GetFirstEventId(EventToTransferAttendee.NameForEventToTransferTo);
 

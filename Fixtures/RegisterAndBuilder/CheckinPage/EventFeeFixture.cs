@@ -179,8 +179,8 @@
                         null);
 
                     ////BuilderMgr.RegTypeMgr.FeeMgr.DC.SaveAndNewDiscountCode();
-                    BuilderMgr.EventFeeMgr.DC.SaveAndCloseDiscountCode();
-                    BuilderMgr.EventFeeMgr.DC.ClickAddCode();
+                    BuilderMgr.RegTypeMgr.FeeMgr.DC.SaveAndCloseDiscountCode();
+                    BuilderMgr.RegTypeMgr.FeeMgr.DC.ClickAddCode();
                     BuilderMgr.RegTypeMgr.FeeMgr.DC.SetAccessCodeValues(AccessCode, null);
                     BuilderMgr.RegTypeMgr.FeeMgr.DC.SaveAndCloseDiscountCode();
                     BuilderMgr.RegTypeMgr.FeeMgr.SaveAndClose();

@@ -156,10 +156,12 @@
         [Step]
         public void SaveAndNewDiscountCode()
         {
-            SelectCodeFrame();
+            this.SelectCodeFrame();
             UIUtilityProvider.UIHelper.ClickSaveAndNew();
             Utility.ThreadSleep(1);
             UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            this.SelectCodeFrame();
         }
 
         [Step]
@@ -172,6 +174,7 @@
                     UIUtilityProvider.UIHelper.ClickSaveAndClose();
                     Utility.ThreadSleep(1.5);
                     UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                    UIUtilityProvider.UIHelper.SwitchToMainContent();
 
                     if (this.FeeLocationOfStartPage == FormDetailManager.FeeLocation.Event)
                     {

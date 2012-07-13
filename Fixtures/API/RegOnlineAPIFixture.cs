@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI;
-    using RegOnline.RegressionTest.Linq;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.Managers.Manager.Dashboard;
 
@@ -121,7 +121,7 @@
 
             // Get most recent registrant's email address
             string email = string.Empty;
-            var db = new Linq.ClientDataContext();
+            var db = new DataAccess.ClientDataContext();
             
             var registrations = (from r in db.Registrations
                                  where r.Event_Id == this.eventId
@@ -548,14 +548,14 @@
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data);
 
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
                 var response = from cfResponse in db.Custom_Field_Responses
                                 where cfResponse.rRegisterId == this.registrationId
                                 && cfResponse.EventId == this.eventId
                                 && cfResponse.CFId == this.cfId
                                 select cfResponse;
-                    
-                List<Linq.Custom_Field_Response> responseList = response.ToList();
+
+                List<DataAccess.Custom_Field_Response> responseList = response.ToList();
                 Assert.AreEqual(1, responseList.Count);
                 Assert.AreEqual("False", responseList[0].Response);
         }
@@ -663,14 +663,14 @@
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data);
 
-            var db = new Linq.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
             var response = from agendaResponse in db.Custom_Field_Responses
                             where agendaResponse.rRegisterId == this.registrationId
                             && agendaResponse.EventId == this.eventId
                             && agendaResponse.CFId == this.agendaItemId
                             select agendaResponse;
 
-            List<Linq.Custom_Field_Response> responseList = response.ToList();
+            List<DataAccess.Custom_Field_Response> responseList = response.ToList();
             Assert.AreEqual(1, responseList.Count);
             Assert.AreEqual("False", responseList[0].Response);
         }

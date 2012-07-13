@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ROWarehouse" Class="ROWarehouseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=ROWarehouse;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.Linq.Properties.Settings" SettingsPropertyName="ROWarehouseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=ROWarehouse;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.DataAccess.Properties.Settings" SettingsPropertyName="ROWarehouseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.InvoiceItems_AdHoc" Member="InvoiceItems_AdHocs">
     <Type Name="InvoiceItems_AdHoc">
       <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

@@ -8,7 +8,7 @@
     using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
-    public class SetupWithPasswordAndValidForgetPasswordURLFixture : FixtureBase
+    public class SetupWithPasswordAndValidForgetPasswordURLFixture : ExternalAuthenticationFixtureBase
     {
         private const string EventName = "SetupWithPasswordAndValidForgetPasswordURL";
         private const string ForgotPasswordURL = "http://www.baidu.com/";
