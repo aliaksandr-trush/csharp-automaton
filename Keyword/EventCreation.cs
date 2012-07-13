@@ -10,12 +10,33 @@
     {
         public void CreateEvent(Event details)
         {
+            this.ClickAddEventAndGetEventId(details);
+
+            this.StartPage(details);
+            this.PersonalInfo(details);
+            this.Agenda(details);
+            this.LodgingTravel(details);
+            this.Merchandise(details);
+            this.Checkout(details);
+            this.EventWebsite(details);
+
+            PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
+
+            this.ActivateEvent(details);
+        }
+
+        public void ClickAddEventAndGetEventId(Event details)
+        {
             PageObject.PageObjectProvider.Manager.Events.AddEvent_Click();
             PageObject.PageObjectProvider.Manager.Events.EventType_Select(CustomStringAttribute.GetCustomString(FormData.EventType.ProEvent));
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.WaitForPresent();
             details.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.GetAttribute("value"));
+        }
 
-            #region Start Page
+        public void StartPage(Event details)
+        {
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Start);
+
             if (details.StartPage.StartDate.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartDate_Type(details.StartPage.StartDate.Value);
@@ -108,7 +129,7 @@
             //Set event name and shortcut after regType created to avoid bug 24560
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(details.Title);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(details.Shortcut);
-            
+
             if (details.StartPage.AllowGroupReg.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllGroupReg_Set(details.StartPage.AllowGroupReg.Value);
@@ -182,9 +203,10 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartPageFooterEditor.SaveAndClose_Click();
                 }
             }
-            #endregion
+        }
 
-            #region PI Page
+        public void PersonalInfo(Event details)
+        {
             if ((details.PersonalInfoPage.PageHeader != null) || (details.PersonalInfoPage.PageFooter != null))
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.PI);
@@ -223,15 +245,16 @@
                     }
                 }
             }
-            #endregion
+        }
 
-            #region Agenda Page
+        public void Agenda(Event details)
+        {
             if (details.AgendaPage != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
 
-                foreach(AgendaItem agendaItem in details.AgendaPage.AgendaItems)
+                foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
                 {
                     KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem);
                     agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
@@ -254,15 +277,16 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaPageFooterEditor.SaveAndClose_Click();
                 }
             }
-            #endregion
+        }
 
-            #region L&T Page
+        public void LodgingTravel(Event details)
+        {
             if (details.LodgingTravelPage != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.LodgingTravel);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
 
-                foreach(LodgingStandardFields field in details.LodgingTravelPage.Lodging.StandardFields)
+                foreach (LodgingStandardFields field in details.LodgingTravelPage.Lodging.StandardFields)
                 {
                     if (field.Visible.HasValue)
                     {
@@ -292,9 +316,10 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.LTPageFooterEditor.SaveAndClose_Click();
                 }
             }
-            #endregion
+        }
 
-            #region Merchandise Page
+        public void Merchandise(Event details)
+        {
             if (details.MerchandisePage != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Merchandise);
@@ -322,9 +347,10 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandisePageFooterEditor.SaveAndClose_Click();
                 }
             }
-            #endregion
+        }
 
-            #region Checkout Page
+        public void Checkout(Event details)
+        {
             if ((details.CheckoutPage.PageHeader != null) || (details.CheckoutPage.PageFooter != null))
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
@@ -356,9 +382,10 @@
                     KeywordProvider.AddPaymentMethod.AddPaymentMethods(method);
                 }
             }
-            #endregion
+        }
 
-            #region Event Website
+        public void EventWebsite(Event details)
+        {
             if (details.EventWebsite != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.EventWebsite_Click();
@@ -373,13 +400,13 @@
 
                 PageObject.PageObjectProvider.Builder.EventDetails.RegistrationFormPages_Click();
             }
-            #endregion
+        }
 
-            PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
-
+        public void ActivateEvent(Event details)
+        {
             if (details.IsActive)
             {
-                KeywordProvider.ManagerDefault.OpenFormDashboard(details.Id);
+                KeywordProvider.ManagerDefault.OpenFormDashboard(details.Title);
                 PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.Activate_Click();
