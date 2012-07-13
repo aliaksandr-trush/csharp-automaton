@@ -35,8 +35,6 @@
 
         public void StartPage(Event details)
         {
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Start);
-
             if (details.StartPage.StartDate.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartDate_Type(details.StartPage.StartDate.Value);

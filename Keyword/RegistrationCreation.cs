@@ -84,7 +84,7 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type(reg.Email);
             }
 
-            if (reg.RegType != null)
+            if ((reg.RegType != null) && (reg.RegisterMethod != RegisterMethod.RegTypeDirectUrl))
             {
                 KeywordProvider.RegisterDefault.SelectRegType(reg.RegType);
 
