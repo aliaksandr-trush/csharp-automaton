@@ -21,6 +21,9 @@
         public static ManagerDefault ManagerDefault = new ManagerDefault();
         public static RegisterDefault RegisterDefault = new RegisterDefault();
         public static BuilderDefault BuilderDefault = new BuilderDefault();
+        public static AddAttendeeDirectory AddAttendeeDirectory = new AddAttendeeDirectory();
+        public static ChangeEventStatus ChangeEventStatus = new ChangeEventStatus();
+        public static LaunchKiosk LaunchKiosk = new LaunchKiosk();
         public static VerifyStandardReports VerifyStandardReports = new VerifyStandardReports();
     }
 }
