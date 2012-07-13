@@ -69,7 +69,7 @@
 
         public void Checkin(Registrant reg)
         {
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(reg.Event.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
             {

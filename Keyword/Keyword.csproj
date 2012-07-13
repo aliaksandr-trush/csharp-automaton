@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddAgendaItem.cs" />
+    <Compile Include="AddAttendeeDirectory.cs" />
     <Compile Include="AddDiscountCode.cs" />
     <Compile Include="AddEarlyLatePrice.cs" />
     <Compile Include="AddMerchandise.cs" />
@@ -56,8 +57,10 @@
     <Compile Include="AddRegType.cs" />
     <Compile Include="AddTaxRate.cs" />
     <Compile Include="BuilderDefault.cs" />
+    <Compile Include="ChangeEventStatus.cs" />
     <Compile Include="EventCreation.cs" />
     <Compile Include="KeywordProvider.cs" />
+    <Compile Include="LaunchKiosk.cs" />
     <Compile Include="ManagerDefault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterDefault.cs" />

@@ -65,7 +65,7 @@
             Registrant reg = new Registrant();
             reg.Event = Event;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(Event.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             VerifyFooterResults footerResults = KeywordProvider.Display.VerifyCompanyFooter();
             VerifyEventDetailsResult eventDetailsResults = KeywordProvider.Display.VerifyEventDetails();
             VerifyPageResults pageResults = KeywordProvider.Display.VerifyPage();

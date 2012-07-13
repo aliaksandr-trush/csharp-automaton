@@ -7,28 +7,6 @@
 
     public class RegisterDefault
     {
-        public void OpenRegisterPageUrl(int eventId)
-        {
-            UIUtilityProvider.UIHelper.OpenUrl(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + eventId);
-            PageObject.PageObjectHelper.AllowCookie_Click();
-        }
-
-        public void OpenRegTypeDirectUrl(int eventId, int regTypeId)
-        {
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
-            PageObject.PageObjectHelper.AllowCookie_Click();
-        }
-
-        public void OpenRegisterPageUrl(string shortcut)
-        {
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(
-                "{0}{1}", 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
-                shortcut));
-
-            PageObject.PageObjectHelper.AllowCookie_Click();
-        }
-
         public string GenerateCurrentRegistrantLastName()
         {
             string lastName = string.Empty;

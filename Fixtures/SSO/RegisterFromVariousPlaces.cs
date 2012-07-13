@@ -20,9 +20,11 @@
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
             reg.Event = evt;
             reg.RegType = regType;
+            reg.RegisterMethod = DataCollection.RegisterMethod.RegTypeDirectUrl;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
-            Keyword.KeywordProvider.RegisterDefault.OpenRegTypeDirectUrl(evt.Id, reg.RegType.RegTypeId);
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsDisplay);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -63,9 +65,10 @@
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
             reg.Event = evt;
             reg.RegType = regType;
+            reg.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
-            Keyword.KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Shortcut);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -88,9 +91,10 @@
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
             reg.Event = evt;
             reg.RegType = regType;
+            reg.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
-            Keyword.KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Shortcut);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.EventWebsite.RegisterNow_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.RegType);
@@ -126,7 +130,11 @@
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt_Parent);
             Keyword.KeywordProvider.EventCreator.CreateEvent(evt_Child);
 
-            Keyword.KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt_Parent.Shortcut);
+            DataCollection.Registrant reg2 = new DataCollection.Registrant();
+            reg2.Event = evt_Parent;
+            reg2.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(DataCollection.FormData.EventCalendarView.Day);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ClickToRegister(evt_Child);
             PageObject.PageObjectHelper.SelectTopWindow();

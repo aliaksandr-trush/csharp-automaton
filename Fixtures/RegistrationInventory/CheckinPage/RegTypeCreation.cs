@@ -186,7 +186,7 @@
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
             Assert.True(reg2.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetConfirmationTotal()));
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
             KeywordProvider.RegisterDefault.SelectRegType(regType2);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.IsPresent);
@@ -221,7 +221,7 @@
             reg.Event = evt;
             reg.RegType = regType;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.RegType);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetails.Text.Trim().Equals(regType.AdditionalDetails));
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetailsClose_Click();
@@ -294,7 +294,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1);
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt1.Id);
+            Registrant reg = new Registrant();
+            reg.Event = evt1;
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType1).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType2).IsPresent);
@@ -318,7 +321,8 @@
             evt2.StartPage.RegTypeDisplayOption = FormData.RegTypeDisplayOption.DropDownList;
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt2);
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt2.Id);
+            reg.Event = evt2;
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.IsPresent);
         }
     }
