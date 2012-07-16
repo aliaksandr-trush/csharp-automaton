@@ -133,7 +133,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(evt.Id);
+            Registrant reg = new Registrant();
+            reg.Event = evt;
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type("a@b.com");
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type("a@c.com");

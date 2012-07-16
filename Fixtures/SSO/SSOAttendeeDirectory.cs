@@ -37,15 +37,12 @@
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Directories);
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.AddDirectory_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.SelectByName();
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.DirectoryName.Type("SSODirectory");
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.LinksAndSecurity_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.ShareDirectory.Set(true);
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.RequireLogin.Set(true);
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.Apply_Click();
-            string directoryURL = PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.DirectoryLink.Value;
-            PageObject.PageObjectProvider.Manager.Dashboard.AttendeeDirectory.DirectoryDefine.Cancel_Click();
+
+            AttendeeDirectory attendeeDirectory = new AttendeeDirectory("SSODirectory");
+            attendeeDirectory.ShareDirectory = true;
+            attendeeDirectory.RequireLogin = true;
+
+            string directoryURL = KeywordProvider.AddAttendeeDirectory.CreateAttendeeDirectory(attendeeDirectory);
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 

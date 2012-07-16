@@ -24,11 +24,11 @@
         public ButtonOrLink AddToWaitlist = new ButtonOrLink("//div[@class='buttonGroup']/button[text()='Add Yourself to Waitlist']", LocateBy.XPath);
         public Label AddedToWaitlistOfEvent = new Label("//*[text()='You have been added to the waitlist for this event.']", LocateBy.XPath);
 
-        public void OpenUrl(DataCollection.RegisterMethod method, DataCollection.Registrant reg)
+        public void OpenUrl(DataCollection.Registrant reg)
         {
             string url = string.Empty;
 
-            switch (method)
+            switch (reg.RegisterMethod)
             {
                 case RegisterMethod.EventId:
 

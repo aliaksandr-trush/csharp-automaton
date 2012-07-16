@@ -31,10 +31,7 @@
                 KeywordProvider.ManagerDefault.DeleteEvent(evt.Title);
             }
 
-            PageObject.PageObjectProvider.Manager.Events.AddEvent_Click();
-            PageObject.PageObjectProvider.Manager.Events.EventType_Select(CustomStringAttribute.GetCustomString(FormData.EventType.ProEvent));
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(evt.Title);
-            evt.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.GetAttribute("value"));
+            KeywordProvider.EventCreator.ClickAddEventAndGetEventId(evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EmptyAddRegType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType1.RegTypeName);

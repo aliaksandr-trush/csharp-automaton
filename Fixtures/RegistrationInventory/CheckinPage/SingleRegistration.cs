@@ -108,7 +108,7 @@
             Registrant registrantWhenFull = new Registrant();
             registrantWhenFull.Event = EventWithLimit;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(EventWithLimit.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrantWhenFull);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventLimitReachedMessage.IsPresent);
@@ -272,9 +272,9 @@
             registrant.RegType = EventWithFeeDCDollar.StartPage.RegTypes[1];
 
             Registrant reg = new Registrant(string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
+            reg.Event = EventWithFeeDCDollar;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(EventWithFeeDCDollar.Id);
-
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(EventWithFeeDCDollar.StartPage.RegTypes[1]);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type("abc");
@@ -342,7 +342,7 @@
             registrant.RegType = EventFeeDCRequired.StartPage.RegTypes[1];
             registrant.PaymentMethod = PaymentMethod;
 
-            KeywordProvider.RegisterDefault.OpenRegisterPageUrl(registrant.Event.Id);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrant);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.RegType);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
@@ -594,8 +594,10 @@
 
             Registrant reg = new Registrant();
             reg.Event = evt;
+            reg.RegType = regType1;
+            reg.RegisterMethod = RegisterMethod.RegTypeDirectUrl;
 
-            KeywordProvider.RegisterDefault.OpenRegTypeDirectUrl(evt.Id, regType1.RegTypeId);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);

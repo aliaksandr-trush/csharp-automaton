@@ -36,18 +36,14 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatus_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatusFrame.SelectByName();
-            PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatusFrame.ChangeStatusNow_Set(true);
-            PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatusFrame.Status.SelectWithText(CustomStringAttribute.GetCustomString(FormData.EventStatus.OnSite));
-            PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatusFrame.OK_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.SelfKiosk_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.LaunchSelfKiosk.SelectByName();
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.LaunchSelfKiosk.RequireAuthentication.Set(true);
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.LaunchSelfKiosk.AllowOnsiteReg.Set(true);
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.LaunchSelfKiosk.LaunchKiosk_Click();
+            KeywordProvider.ChangeEventStatus.EventStatusChange(evt, FormData.EventStatus.OnSite);
 
-            PageObject.PageObjectHelper.SelectTopWindow();
+            DataCollection.OnsiteKiosk kiosk = new DataCollection.OnsiteKiosk();
+            kiosk.RequireAuthentication = true;
+            kiosk.AllowOnsiteReg = true;
+
+            KeywordProvider.LaunchKiosk.LaunchOnsiteKiosk(kiosk);
+
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg1.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Enter_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
