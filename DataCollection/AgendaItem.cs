@@ -145,7 +145,7 @@
         public AgendaItemDate(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Time;
+            Type = FormData.CustomFieldType.Date;
         }
 
         public string GroupName;
@@ -177,7 +177,7 @@
         public AgendaItemOneLineText(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Number;
+            Type = FormData.CustomFieldType.OneLineText;
         }
     }
 
@@ -188,5 +188,17 @@
         {
             Type = FormData.CustomFieldType.Paragraph;
         }
+    }
+
+    public class AgendaItemContribution : AgendaItem
+    {
+        public AgendaItemContribution(string name)
+            : base(name)
+        {
+            Type = FormData.CustomFieldType.Contribution;
+        }
+
+        public double MinAmount;
+        public double MaxAmount;
     }
 }

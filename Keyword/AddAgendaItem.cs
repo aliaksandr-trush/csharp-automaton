@@ -19,6 +19,9 @@
 
             #region Common Settings
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Type(agenda.NameOnFrom);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReceipt.Type(agenda.NameOnFrom);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.Type(agenda.NameOnFrom);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(agenda.Type);
 
@@ -112,7 +115,10 @@
 
             if ((agenda.NameOnReceipt != null) || (agenda.NameOnReports != null))
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
+                if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.IsDisplay)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
+                }
 
                 if (agenda.NameOnReceipt != null)
                 {
@@ -125,6 +131,20 @@
                 }
             }
             #endregion
+
+            //#region CharacterLimit AgendaItem
+            //if ((agenda is AgendaItemNumber) || (agenda is AgendaItemOneLineText))
+            //{
+            //    CharInputAgendaItem ag = agenda as CharInputAgendaItem;
+            //    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CharacterLimit.Type(ag.CharLimit);
+            //}
+
+            //if (agenda is AgendaItemParagraph)
+            //{
+            //    CharInputAgendaItem ag = agenda as CharInputAgendaItem;
+            //    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ParagraphLimit.Type(ag.CharLimit);
+            //}
+            //#endregion
 
             #region Common AgendaItem
             if ((agenda is AgendaItemCheckBox) || (agenda is AgendaItemRadioButton) || (agenda is AgendaItemDropDown) ||
@@ -508,6 +528,13 @@
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ForceGroupToMatch.Set(ag.ForceGroupToMatch.Value);
                 }
+            }
+
+            if (agenda is AgendaItemContribution)
+            {
+                AgendaItemContribution ag = agenda as AgendaItemContribution;
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.MinAmount.Type(ag.MinAmount);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.MaxAmount.Type(ag.MaxAmount);
             }
             #endregion
 

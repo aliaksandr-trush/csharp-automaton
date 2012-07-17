@@ -5,11 +5,17 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.WebElements;
 
-    public class Agenda
+    public class Agenda : Window
     {
         public AgendaRow GetAgendaItem(AgendaItem agenda)
         {
             return new AgendaRow(agenda);
+        }
+
+        public bool IsChoiceItemPresent(ChoiceItem choice)
+        {
+            WebElement a = new WebElement(choice.Id.ToString(), LocateBy.Id);
+            return a.IsPresent;
         }
     }
 
@@ -36,7 +42,7 @@
                     this.GetAgendaPrice(agenda);
                     break;
                 case FormData.CustomFieldType.RadioButton:
-                    AgendaLabel = new WebElement(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
@@ -47,6 +53,40 @@
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
+                    break;
+                case FormData.CustomFieldType.Number:
+                case FormData.CustomFieldType.OneLineText:
+                case FormData.CustomFieldType.Contribution:
+                case FormData.CustomFieldType.Paragraph:
+                    AgendaType = new TextBox(agenda.Id.ToString(), LocateBy.Id);
+                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    break;
+                case FormData.CustomFieldType.Date:
+                    AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Datepicker')]", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    break;
+                case FormData.CustomFieldType.Time:
+                    AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Timepicker')]", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    break;
+                case FormData.CustomFieldType.FileUpload:
+                    AgendaType = new ButtonOrLink(string.Format(locator + "//a[@class='add_button']", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
+                    this.GetAgendaLocation(agenda);
+                    this.GetAgendaPrice(agenda);
+                    break;
+                case FormData.CustomFieldType.AlwaysSelected:
+                    AgendaType = new CheckBox(string.Format("//input[@id='{0}'][@disabled='disabled'][@checked='checked']", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    this.GetAgendaDate(agenda);
+                    this.GetAgendaLocation(agenda);
+                    this.GetAgendaPrice(agenda);
+                    break;
+                case FormData.CustomFieldType.SectionHeader:
+                    AgendaType = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
+                    break;
+                case FormData.CustomFieldType.ContinueButton:
+                    AgendaType = new ButtonOrLink(string.Format(locator + "//button"), LocateBy.XPath);
                     break;
                 default:
                     break;
