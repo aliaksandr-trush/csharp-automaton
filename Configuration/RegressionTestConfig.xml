@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <RegOnline.RegressionTestConfig>
   <Environments>
-    <Preferred Environment="Beta" PrivateLabel="SSO" />
+    <Preferred Environment="CBeta" PrivateLabel="Default" />
 
     <Environment Name="Alpha"
            ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -242,5 +242,5 @@
 
   <TimeZoneDifference>14</TimeZoneDifference>
 
-  <NUnitAddin ReportBack="true" />
+  <NUnitAddin ReportBack="false" />
 </RegOnline.RegressionTestConfig>
