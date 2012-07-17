@@ -7,7 +7,7 @@
     {
         public int Id;
         public string Title;
-        public string Shortcut = Guid.NewGuid().ToString();
+        public string Shortcut;
         public bool IsActive;
         
         public StartPage StartPage = new StartPage();
@@ -22,6 +22,12 @@
         public Event(string title)
         {
             this.Title = title;
+            this.ReSetShortcut();
+        }
+
+        public void ReSetShortcut()
+        {
+            this.Shortcut = Guid.NewGuid().ToString();
         }
     }
 

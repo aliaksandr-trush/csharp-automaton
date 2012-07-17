@@ -204,7 +204,6 @@
         public int? SingleLimit;
         public int? GroupLimit;
         public bool? Visible;
-        public bool Select;
 
         public ChoiceItem(string name)
         {

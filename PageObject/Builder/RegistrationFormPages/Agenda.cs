@@ -92,6 +92,8 @@
         public TextBox CharacterLimit = new TextBox("ctl00_cph_ucCF_rntLn_text", LocateBy.Id);
         public TextBox ParagraphLimit = new TextBox("ctl00_cph_ucCF_rntMultipleLineLn_text", LocateBy.Id);
         public Label AgendaChoiceItemCount = new Label("//*[@id='ctl00_cph_ucCF_grdLI_tblGrid']/tbody/tr[@class='dragTR']", LocateBy.XPath);
+        public TextBox MinAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMinVarAmount_text", LocateBy.Id);
+        public TextBox MaxAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount_text", LocateBy.Id);
         #endregion
 
         #region Generate Some Elements
@@ -474,6 +476,23 @@
         {
             popupFrameHelper.Cancel_Click();
             UIUtilityProvider.UIHelper.SwitchToMainContent();
+        }
+    }
+
+    public class AgendaRow
+    {
+        public ButtonOrLink Agenda;
+
+        public AgendaRow(DataCollection.AgendaItem agendaItem)
+        {
+            this.Agenda = new ButtonOrLink(string.Format("//*[@class='r1 colwidth1'][@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
+        }
+
+        public void Agenda_Click()
+        {
+            this.Agenda.WaitForDisplay();
+            this.Agenda.Click();
+            Utility.ThreadSleep(2);
         }
     }
 }
