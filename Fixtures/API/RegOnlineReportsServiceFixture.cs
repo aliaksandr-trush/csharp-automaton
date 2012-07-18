@@ -9,7 +9,8 @@
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Fixtures.API.RegOnlineReportsService;
     using RegOnline.RegressionTest.Attributes;
-    using RegOnline.RegressionTest.DataAccess;
+    using RegOnline.RegressionTest.Managers.Manager.Dashboard;
+    using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -24,6 +25,7 @@
         private string eventSessionId;
         private int eventId;
         private int reportId;
+        private List<DateTime> regDates = new List<DateTime>();
 
         protected override Uri RemoteAddressUri { get; set; }
 
@@ -54,7 +56,7 @@
         [Description("802")]
         public void GetReport_No_Exception_For_Valid_Params()
         {
-            this.PrepareEventAndReportAndRegistrations();
+            this.PrepareEventAndReportAndRegistrations(false);
 
             string startDate = DateTime.Now.AddYears(-1).ToShortDateString();
             string endDate = DateTime.Now.ToShortDateString();
@@ -77,7 +79,7 @@
         [Description("801")]
         public void GetNonCompressedReport_Returns_Noncompressed_Data()
         {
-            this.PrepareEventAndReportAndRegistrations();
+            this.PrepareEventAndReportAndRegistrations(false);
 
             // Search for any regs in this report modified in the last 2 days
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
@@ -97,85 +99,103 @@
 
             Assert.That(Regex.IsMatch(response, "<last_Name>.+</last_Name>"));
             string returnedDateString = Regex.Match(response, "<RegDate>[^<]+</RegDate>").Value.Split(new char[]{' '})[0].Split(new char[]{'>'})[1];
+            VerifyTool.VerifyValue(this.regDates[0].ToString("M/d/yyyy"), returnedDateString, "RegDate: {0}");
         }
 
         [Test]
+        [Category(Priority.Three)]
+        [Description("1343")]
         public void GetNonCompressedReport_CheckDateFormat_BritishEnglishCulture()
         {
-            
+            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+
+            this.PrepareEventAndReportAndRegistrations(true);
+
+            string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
+            string endDate = DateTime.Now.AddDays(1).ToShortDateString();
+
+            string response = this.service.getNonCompressedReport(
+                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
+                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id),
+                this.reportId,
+                this.eventId,
+                startDate,
+                endDate,
+                false);
+
+            string returnedDateString = Regex.Match(response, "<RegDate>[^<]+</RegDate>").Value.Split(new char[] { ' ' })[0].Split(new char[] { '>' })[1];
+            VerifyTool.VerifyValue(this.regDates[0].ToString("dd/MM/yyyy"), returnedDateString, "RegDate: {0}");
         }
 
-        private void PrepareEventAndReportAndRegistrations()
+        private void PrepareEventAndReportAndRegistrations(bool isActiveEurope)
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.SelectFolder();
 
-            ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
+            ManagerSiteMgr.DeleteEventByName(EventName);
 
-            if (!ManagerSiteMgr.EventExists(EventName))
+            this.CreateEvent(isActiveEurope);
+            this.PrepareCustomReport();
+            this.regDates.Clear();
+
+            for (int cnt = 0; cnt < TotalRegCount; cnt++)
             {
-                this.CreateEvent();
-                this.PrepareCustomReport();
-
-                for (int cnt = 0; cnt < TotalRegCount; cnt++)
-                {
-                    this.CreateRegistration();
-                }
-            }
-            else
-            {
-                this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
-                this.PrepareCustomReport();
-            }
-        }
-
-        private void PrepareEventAndReportAndRegistrations_BritishEnglishCulture()
-        {
-            ManagerSiteMgr.OpenLogin();
-            ManagerSiteMgr.Login();
-            this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
-
-            ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
-
-            if (!ManagerSiteMgr.EventExists(EventName))
-            {
-                this.CreateEvent();
-                this.PrepareCustomReport();
-
-                for (int cnt = 0; cnt < TotalRegCount; cnt++)
-                {
-                    this.CreateRegistration();
-                }
-            }
-            else
-            {
-                this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
-                this.PrepareCustomReport();
+                this.CreateRegistration(isActiveEurope);
             }
         }
 
         [Step]
-        private void CreateEvent()
+        private void CreateEvent(bool isActiveEurope)
         {
-            ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
+            if (!isActiveEurope)
+            {
+                ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
+            }
+            else
+            {
+                ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ActiveEuropeEvent);
+            }
+
             BuilderMgr.SetEventNameAndShortcut(EventName);
+
+            if (isActiveEurope)
+            {
+                BuilderMgr.SelectEventType(Managers.Builder.FormDetailManager.ActiveEuropeEventType.Running);
+            }
+
             this.eventId = BuilderMgr.GetEventId();
             BuilderMgr.SaveAndClose();
         }
 
         [Step]
-        private void CreateRegistration()
+        private void CreateRegistration(bool isActiveEurope)
         {
             RegisterMgr.OpenRegisterPage(this.eventId);
             RegisterMgr.Checkin();
             RegisterMgr.Continue();
-            RegisterMgr.EnterProfileInfo();
+
+            if (!isActiveEurope)
+            {
+                RegisterMgr.EnterProfileInfo();
+            }
+            else
+            {
+                RegisterMgr.EnterProfileInfoEnduranceNew();
+            }
+
             RegisterMgr.Continue();
+
+            if (isActiveEurope)
+            {
+                RegisterMgr.ClickCheckoutActiveWaiver();
+            }
+
             RegisterMgr.FinishRegistration();
             RegisterMgr.ConfirmRegistration();
+            this.regDates.Add(DateTimeTool.ConvertToRegOnlineTime(DateTime.Now));
         }
 
         [Step]

@@ -16,6 +16,7 @@
     {
         [Test]
         [Category(Priority.Three)]
+        [Description("1273")]
         public void AgendaNameTesting()
         {
             string baseString = "13579";
@@ -105,6 +106,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1344")]
         public void AgendaDateTime()
         {
             Event evt = new Event("AgendaDateTime");
@@ -170,6 +172,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1345")]
         public void AgendaMultipleChoice()
         {
             Event evt = new Event("AgendaMultipleChoice");
@@ -205,7 +208,7 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(FormData.CustomFieldType.RadioButton);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
-            KeywordProvider.ManagerDefault.HassErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice);
+            Assert.True(KeywordProvider.ManagerDefault.HasErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice));
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
 
             Registrant reg1 = new Registrant();
@@ -242,6 +245,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1346")]
         public void AgendaTypes()
         {
             Event evt = new Event("AgendaTypes");

@@ -58,7 +58,7 @@
             this.OpenFormDashboard(this.GetLatestEventId(eventName));
         }
 
-        public bool HassErrorMessage(string errorMessage)
+        public bool HasErrorMessage(string errorMessage)
         {
             bool found = false;
 
