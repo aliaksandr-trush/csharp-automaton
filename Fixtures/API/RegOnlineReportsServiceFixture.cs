@@ -9,6 +9,7 @@
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Fixtures.API.RegOnlineReportsService;
     using RegOnline.RegressionTest.Attributes;
+    using RegOnline.RegressionTest.DataAccess;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -94,11 +95,43 @@
                 endDate,
                 false);
 
-            //Assert.Fail(response);
             Assert.That(Regex.IsMatch(response, "<last_Name>.+</last_Name>"));
+            string returnedDateString = Regex.Match(response, "<RegDate>[^<]+</RegDate>").Value.Split(new char[]{' '})[0].Split(new char[]{'>'})[1];
+        }
+
+        [Test]
+        public void GetNonCompressedReport_CheckDateFormat_BritishEnglishCulture()
+        {
+            
         }
 
         private void PrepareEventAndReportAndRegistrations()
+        {
+            ManagerSiteMgr.OpenLogin();
+            ManagerSiteMgr.Login();
+            this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
+            ManagerSiteMgr.SelectFolder();
+
+            ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
+
+            if (!ManagerSiteMgr.EventExists(EventName))
+            {
+                this.CreateEvent();
+                this.PrepareCustomReport();
+
+                for (int cnt = 0; cnt < TotalRegCount; cnt++)
+                {
+                    this.CreateRegistration();
+                }
+            }
+            else
+            {
+                this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
+                this.PrepareCustomReport();
+            }
+        }
+
+        private void PrepareEventAndReportAndRegistrations_BritishEnglishCulture()
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
