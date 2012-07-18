@@ -55,7 +55,6 @@
         public string Extension;
         public string Fax;
         public string Password;
-        public List<AgendaItem> AgendaItems = new List<AgendaItem>();
         public PaymentMethod PaymentMethod;
         public RegisterMethod RegisterMethod = RegisterMethod.EventId;
         public List<CustomFieldResponse> CustomFieldResponses = new List<CustomFieldResponse>();

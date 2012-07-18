@@ -10,6 +10,7 @@
             public const string InvalidPassword = "Your login or password is incorrect. Please try again.";
             public const string EmailAddressesDoNotMatch = "The email addresses that you entered do not match. Re-enter your email address.";
             public const string EmailAlreadyUsed = "Our records show that this email address has already been used to register for this event. Each registrant must use a unique email address.";
+            public const string ContributionNotInMinAndMax = "Enter an amount between {0} and {1} for \"AGConribution\".";
         }
 
         public static class BuilderError

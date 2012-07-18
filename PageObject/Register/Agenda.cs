@@ -83,17 +83,17 @@
                     this.GetAgendaPrice(agenda);
                     break;
                 case FormData.CustomFieldType.SectionHeader:
-                    AgendaType = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
                     break;
                 case FormData.CustomFieldType.ContinueButton:
-                    AgendaType = new ButtonOrLink(string.Format(locator + "//button"), LocateBy.XPath);
+                    AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
                     break;
                 default:
                     break;
             }
         }
 
-        private void GetAgendaDate(AgendaItem agenda)
+        public DateTime? GetAgendaDate(AgendaItem agenda)
         {
             Label dateTime = new Label(string.Format(locator + "//div[@class='place'][span[text()='Date:']]", agenda.Id.ToString()), LocateBy.XPath);
             Label time = new Label(string.Format(locator + "//div[@class='place'][span[text()='Time:']]", agenda.Id.ToString()), LocateBy.XPath);
@@ -130,9 +130,11 @@
                     StartDate = EndDate = Convert.ToDateTime(tmp);
                 }
             }
+
+            return StartDate;
         }
 
-        private void GetAgendaPrice(AgendaItem agenda)
+        public double? GetAgendaPrice(AgendaItem agenda)
         {
             Label price = new Label(string.Format(locator + "//div[@class='place'][span[text()='Price:']]", agenda.Id.ToString()), LocateBy.XPath);
 
@@ -152,9 +154,11 @@
 
                 Price = Convert.ToDouble(PriceString);
             }
+
+            return Price;
         }
 
-        private void GetAgendaLocation(AgendaItem agenda)
+        public string GetAgendaLocation(AgendaItem agenda)
         {
             Label location = new Label(string.Format(locator + "//div[@class='place'][span[text()='Location:']]", agenda.Id.ToString()), LocateBy.XPath);
 
@@ -163,6 +167,8 @@
                 string locationString = location.Text;
                 Location = locationString.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
             }
+
+            return Location;
         }
     }
 }

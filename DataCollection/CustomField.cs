@@ -210,4 +210,25 @@
             this.Name = name;
         }
     }
+
+    public class MultipleChoice_CommonlyUsed
+    {
+        public static CommonlyUsed_Agreement Agreement = new CommonlyUsed_Agreement();
+        public static CommonlyUsed_YesOrNo YesOrNo = new CommonlyUsed_YesOrNo();
+    }
+
+    public class CommonlyUsed_Agreement
+    {
+        public readonly string Agree = "Agree";
+        public readonly string StronglyAgree = "Strongly Agree";
+        public readonly string Neutral = "Neutral";
+        public readonly string Disagree = "Disagree";
+        public readonly string NA = "N/A";
+    }
+
+    public class CommonlyUsed_YesOrNo
+    {
+        public readonly string Yes = "Yes";
+        public readonly string No = "No";
+    }
 }
