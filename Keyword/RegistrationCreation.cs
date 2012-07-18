@@ -214,7 +214,7 @@
 
         public void Agenda(Registrant reg)
         {
-            if (reg.AgendaItems.Count != 0)
+            if (reg.CustomFieldResponses.Count != 0)
             {
                 foreach (AgendaResponse response in reg.CustomFieldResponses)
                 {

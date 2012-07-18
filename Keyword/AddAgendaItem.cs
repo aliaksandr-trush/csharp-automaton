@@ -132,20 +132,6 @@
             }
             #endregion
 
-            //#region CharacterLimit AgendaItem
-            //if ((agenda is AgendaItemNumber) || (agenda is AgendaItemOneLineText))
-            //{
-            //    CharInputAgendaItem ag = agenda as CharInputAgendaItem;
-            //    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CharacterLimit.Type(ag.CharLimit);
-            //}
-
-            //if (agenda is AgendaItemParagraph)
-            //{
-            //    CharInputAgendaItem ag = agenda as CharInputAgendaItem;
-            //    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ParagraphLimit.Type(ag.CharLimit);
-            //}
-            //#endregion
-
             #region Common AgendaItem
             if ((agenda is AgendaItemCheckBox) || (agenda is AgendaItemRadioButton) || (agenda is AgendaItemDropDown) ||
                 (agenda is AgendaItemTime) || (agenda is AgendaItemDate) || (agenda is AgendaItemUpload) || (agenda is AgendaItemAlways))
@@ -374,6 +360,8 @@
 
                 if (ag.CommonlyUsedItems.Count != 0)
                 {
+                    int count = ag.ChoiceItems.Count;
+
                     foreach (FormData.CommonlyUsedMultipleChoice item in ag.CommonlyUsedItems)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddCommonlyUsedItem_Click();
@@ -384,7 +372,7 @@
 
                     List<ChoiceItem> choiceItems = KeywordProvider.BuilderDefault.GetAgendaChoiceItem();
 
-                    for (int i = 0; i < choiceItems.Count; i++)
+                    for (int i = count; i < choiceItems.Count; i++)
                     {
                         ag.ChoiceItems.Add(choiceItems[i]);
                     }

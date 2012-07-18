@@ -7,6 +7,7 @@
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.Keyword;
+    using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
 
     [TestFixture]
@@ -56,9 +57,18 @@
 
             Registrant reg = new Registrant();
             reg.Event = evt;
-            reg.AgendaItems.Add(AgendaItem1);
-            reg.AgendaItems.Add(AgendaItem2);
-            reg.AgendaItems.Add(AgendaItem3);
+            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            resp1.AgendaItem = AgendaItem1;
+            resp1.Checked = true;
+            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            resp2.AgendaItem = AgendaItem2;
+            resp2.Checked = true;
+            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            resp3.AgendaItem = AgendaItem3;
+            resp3.Checked = true;
+            reg.CustomFieldResponses.Add(resp1);
+            reg.CustomFieldResponses.Add(resp2);
+            reg.CustomFieldResponses.Add(resp3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -74,7 +84,12 @@
 
             foreach (Label agenda in selectedAgendaItems)
             {
-                AgendaItem agendaItem = reg.AgendaItems.Find(a => agenda.Text.Trim() == a.NameOnReceipt);
+                List<AgendaResponse> resps = new List<AgendaResponse>();
+                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
+                {
+                    resps.Add(resp as AgendaResponse);
+                }
+                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
                 Assert.True(agendaItem != null);
             }
 
@@ -195,10 +210,6 @@
 
             Registrant reg1 = new Registrant();
             reg1.Event = evt;
-            reg1.AgendaItems.Add(AG1);
-            reg1.AgendaItems.Add(AG2);
-            reg1.AgendaItems.Add(AG3);
-            reg1.AgendaItems.Add(AG4);
             AgendaRadioButtonResponse resp1 = new AgendaRadioButtonResponse();
             resp1.AgendaItem = AG1;
             resp1.ChoiceItem = AG1Choice1;
@@ -213,10 +224,6 @@
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             Registrant reg2 = new Registrant();
-            reg2.AgendaItems.Add(AG1);
-            reg2.AgendaItems.Add(AG2);
-            reg2.AgendaItems.Add(AG3);
-            reg2.AgendaItems.Add(AG4);
             reg2.CustomFieldResponses.Add(resp1);
             reg2.CustomFieldResponses.Add(resp2);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
@@ -240,8 +247,6 @@
             Event evt = new Event("AgendaTypes");
             evt.StartPage.StartDate = DateTime.Today.AddDays(-10);
             evt.StartPage.EndDate = DateTime.Today.AddDays(10);
-            PaymentMethod method = new PaymentMethod(FormData.PaymentMethod.Check);
-            evt.CheckoutPage.PaymentMethods.Add(method);
             evt.AgendaPage = new AgendaPage();
             AgendaItemNumber AGNumber = new AgendaItemNumber("AGNumber");
             AGNumber.CharLimit = 10;
@@ -283,6 +288,9 @@
             evt.AgendaPage.AgendaItems.Add(AGDropDown);
             evt.AgendaPage.AgendaItems.Add(AGAlways);
             evt.AgendaPage.AgendaItems.Add(ChangeToHeader);
+
+            DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 00);
+            DateTime nowDate = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
 
@@ -336,13 +344,76 @@
             //So will uncomment this step after the bug is resolved.
             //this.VerifyAgendaSettings(false, false, false, false, false, false, false);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
+            ChangeToHeader.Type = FormData.CustomFieldType.SectionHeader;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
             Registrant reg = new Registrant();
             reg.Event = evt;
+            AgendaCharInputResponse resp1 = new AgendaCharInputResponse();
+            resp1.AgendaItem = AGNumber;
+            resp1.CharToInput = "1234567890123";
+            AgendaCharInputResponse resp2 = new AgendaCharInputResponse();
+            resp2.AgendaItem = AGText;
+            resp2.CharToInput = "abcdefghijkl";
+            AgendaCharInputResponse resp3 = new AgendaCharInputResponse();
+            resp3.AgendaItem = AGPara;
+            resp3.CharToInput = "abcdefghijkl";
+            AgendaDateResponse resp4 = new AgendaDateResponse();
+            resp4.AgendaItem = AGDate;
+            resp4.Date = DateTime.Today;
+            AgendaTimeResponse resp5 = new AgendaTimeResponse();
+            resp5.AgendaItem = AGTime;
+            resp5.Time = DateTime.Now;
+            AgendaContributionResponse resp6 = new AgendaContributionResponse();
+            resp6.AgendaItem = AGConribution;
+            resp6.Contribution = 10.5;
+            AgendaCheckboxResponse resp7 = new AgendaCheckboxResponse();
+            resp7.AgendaItem = AGCheckBox;
+            resp7.Checked = true;
+            AgendaRadioButtonResponse resp8 = new AgendaRadioButtonResponse();
+            resp8.AgendaItem = AGRadio;
+            resp8.ChoiceItem = AGRadio.ChoiceItems.Find(c => c.Name == MultipleChoice_CommonlyUsed.YesOrNo.Yes);
+            AgendaDropDownResponse resp9 = new AgendaDropDownResponse();
+            resp9.AgendaItem = AGDropDown;
+            resp9.ChoiceItem = AGDropDown.ChoiceItems.Find(c => c.Name == MultipleChoice_CommonlyUsed.Agreement.Agree);
+            reg.CustomFieldResponses.Add(resp1);
+            reg.CustomFieldResponses.Add(resp2);
+            reg.CustomFieldResponses.Add(resp3);
+            reg.CustomFieldResponses.Add(resp4);
+            reg.CustomFieldResponses.Add(resp5);
+            reg.CustomFieldResponses.Add(resp6);
+            reg.CustomFieldResponses.Add(resp7);
+            reg.CustomFieldResponses.Add(resp8);
+            reg.CustomFieldResponses.Add(resp9);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGNumber).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGNumber).AgendaType.GetAttribute("data-ml") == 10.ToString());
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGText).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGText).AgendaType.GetAttribute("data-ml") == 10.ToString());
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGPara).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGPara).AgendaType.GetAttribute("data-ml") == 1000.ToString());
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGDate).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGTime).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGHeader).AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGContinue).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGConribution).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGUpload).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGCheckBox).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGRadio).AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGDropDown).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGAlways).AgendaType.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).AgendaLabel.IsPresent);
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).GetAgendaDate(ChangeToHeader) == nowDate.AddDays(-5));
+            //Comment this assertion to avoid a bug here
+            //Will uncomment after the bug is resolved
+            //Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).GetAgendaLocation(ChangeToHeader) == Registrant.Default.AddressLineOne);
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).GetAgendaPrice(ChangeToHeader) == 10);
+            ((TextBox)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGConribution).AgendaType)).Type(1);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.ContributionNotInMinAndMax, MoneyTool.FormatMoney(10), MoneyTool.FormatMoney(100)));
+            KeywordProvider.RegistrationCreation.Agenda(reg);
         }
 
         private void SelectAgendaType(FormData.CustomFieldType type)
