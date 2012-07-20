@@ -29,6 +29,7 @@
         public DateTime? EndDate;
         public string Location;
         public double? Price;
+        public TextBox DiscountCodeInput;
 
         public AgendaRow(AgendaItem agenda)
         {
@@ -37,6 +38,7 @@
                 case FormData.CustomFieldType.CheckBox:
                     AgendaType = new CheckBox(string.Format(locator + "//input", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);

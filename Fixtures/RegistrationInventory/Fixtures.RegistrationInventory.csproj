@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaPage\AgendaBasics.cs" />
+    <Compile Include="AgendaPage\AgendaDisplay.cs" />
+    <Compile Include="AgendaPage\AgendaWithPrice.cs" />
     <Compile Include="CheckinPage\GroupRegistration.cs" />
     <Compile Include="CheckinPage\RegTypeCreation.cs" />
     <Compile Include="CheckinPage\SingleRegistration.cs" />
@@ -60,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DataCollection\DataCollection.csproj">
       <Project>{1177E70D-E106-4B37-97F6-7295F8FF41AC}</Project>
       <Name>DataCollection</Name>

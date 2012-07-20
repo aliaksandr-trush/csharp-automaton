@@ -40,8 +40,8 @@
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.EarlyPriceTime_Type(earlyPrice.EarlyPriceTime.Value);
                             break;
                         case FormData.EarlyPriceType.Registrants:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.EarlyPriceRegLimit.Click();
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.EarlyPriceRegistrations.Type(earlyPrice.FirstNRegistrants.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.EarlyPriceRegLimit.Click();
                             break;
                         default:
                             break;

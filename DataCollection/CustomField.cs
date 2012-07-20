@@ -7,11 +7,11 @@
     {
         public CustomField(string name)
         {
-            this.NameOnFrom = name;
+            this.NameOnForm = name;
         }
 
         public int Id;
-        public string NameOnFrom;
+        public string NameOnForm;
         public string NameOnReceipt;
         public string NameOnReports;
         public FormData.CustomFieldType Type;

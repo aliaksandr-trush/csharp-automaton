@@ -1,5 +1,6 @@
 ﻿namespace RegOnline.RegressionTest.PageObject.Builder.RegistrationFormPages
 {
+    using System;
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
@@ -11,6 +12,8 @@
         public HtmlEditor PersonalInfoPageHeaderEditor = new HtmlEditor("dialog");
         public ButtonOrLink PersonalInfoPageFooter = new ButtonOrLink("//*[text()='Add Personal Information Page Footer']", LocateBy.XPath);
         public HtmlEditor PersonalInfoPageFooterEditor = new HtmlEditor("dialog");
+        public ButtonOrLink EmptyAddCustomField = new ButtonOrLink("ctl00_cph_grdCustomFieldPersonal_lnkEmptyAdd", LocateBy.Id);
+        public ButtonOrLink AddCustomField = new ButtonOrLink("ctl00_cph_grdCustomFieldPersonal_hlAddNew", LocateBy.Id);
 
         public void SetPersonalInfoFieldVisible(FormData.PersonalInfoField field, bool checkVisibleOption)
         {
@@ -54,6 +57,24 @@
             }
         }
 
+        public void EmptyAddCustomField_Click()
+        {
+            this.EmptyAddCustomField.WaitForDisplay();
+            this.EmptyAddCustomField.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
+        public void AddCustomField_Click()
+        {
+            this.AddCustomField.WaitForDisplay();
+            this.AddCustomField.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
         public void PersonalInfoPageHeader_Click()
         {
             this.PersonalInfoPageHeader.WaitForDisplay();
@@ -70,6 +91,38 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
+        }
+    }
+
+    public class PICustomFieldRow
+    {
+        public int CustomFieldId;
+        public string CustomFIeldName;
+        public ButtonOrLink CustomFieldTitle;
+
+        public PICustomFieldRow(string name)
+        {
+            this.CustomFIeldName = name;
+
+            this.CustomFieldTitle = new ButtonOrLink(
+                string.Format("//table[@id='ctl00_cph_grdCustomFieldPersonal_tblGrid']//a[text()='{0}']", this.CustomFIeldName),
+                LocateBy.XPath);
+
+            string customFieldHrefAttributeText = this.CustomFieldTitle.GetAttribute("href");
+
+            string tmp = customFieldHrefAttributeText.Split(new string[] { "&" }, StringSplitOptions.RemoveEmptyEntries)[2];
+            tmp = tmp.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+            this.CustomFieldId = Convert.ToInt32(tmp);
+        }
+
+        public void Title_Click()
+        {
+            this.CustomFieldTitle.WaitForDisplay();
+            this.CustomFieldTitle.Click();
+            Utility.ThreadSleep(2);
+            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
     }
 }

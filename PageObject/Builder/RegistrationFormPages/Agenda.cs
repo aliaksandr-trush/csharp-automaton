@@ -482,10 +482,12 @@
     public class AgendaRow
     {
         public ButtonOrLink Agenda;
+        public ButtonOrLink Delete;
 
         public AgendaRow(DataCollection.AgendaItem agendaItem)
         {
             this.Agenda = new ButtonOrLink(string.Format("//*[@class='r1 colwidth1'][@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
+            this.Delete = new ButtonOrLink(string.Format("//*[@class='r1 colwidth4'][@id='listGridTD{0}5']//img[@title='Delete']", agendaItem.Id), LocateBy.XPath);
         }
 
         public void Agenda_Click()
@@ -493,6 +495,33 @@
             this.Agenda.WaitForDisplay();
             this.Agenda.Click();
             Utility.ThreadSleep(2);
+        }
+
+        public void Delete_Click()
+        {
+            this.Delete.WaitForDisplay();
+            this.Delete.Click();
+            Utility.ThreadSleep(2);
+            UIUtilityProvider.UIHelper.GetConfirmation();
+            Utility.ThreadSleep(3);
+            UIUtilityProvider.UIHelper.SelectTopWindow();
+        }
+    }
+
+    public class CodeRow
+    {
+        public ButtonOrLink Code;
+        public int CodeId;
+
+        public CodeRow(DiscountCode code)
+        {
+            this.Code = new ButtonOrLink(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.Code), LocateBy.XPath);
+
+            string OnClickAttributeOfCode = this.Code.GetAttribute("onclick");
+
+            string tmp = OnClickAttributeOfCode.Split(new string[] { "'" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+            this.CodeId = Convert.ToInt32(tmp);
         }
     }
 }

@@ -25,5 +25,6 @@
         public static ChangeEventStatus ChangeEventStatus = new ChangeEventStatus();
         public static LaunchKiosk LaunchKiosk = new LaunchKiosk();
         public static VerifyStandardReports VerifyStandardReports = new VerifyStandardReports();
+        public static CustomFieldCreation CustomFieldCreation = new CustomFieldCreation();
     }
 }

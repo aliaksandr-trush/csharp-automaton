@@ -202,6 +202,40 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(Registrant.Default.Password);
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(Registrant.Default.Password);
             }
+            if (reg.CustomFieldResponses.Count != 0)
+            {
+                foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
+                {
+                    if (responses is CFResponse)
+                    {
+                        CFResponse response = responses as CFResponse;
+
+                        switch (response.CustomField.Type)
+                        {
+                            case FormData.CustomFieldType.CheckBox:
+                                {
+                                    CFCheckboxResponse resp = response as CFCheckboxResponse;
+                                    PageObject.Register.CustomFieldRow row = new CustomFieldRow(resp.CustomField);
+                                    ((CheckBox)row.CustomFieldType).Set(resp.Checked.Value);
+                                }
+                                break;
+                            case FormData.CustomFieldType.RadioButton:
+                            case FormData.CustomFieldType.Dropdown:
+                            case FormData.CustomFieldType.Number:
+                            case FormData.CustomFieldType.OneLineText:
+                            case FormData.CustomFieldType.Paragraph:
+                            case FormData.CustomFieldType.Contribution:
+                            case FormData.CustomFieldType.Date:
+                            case FormData.CustomFieldType.Time:
+                            case FormData.CustomFieldType.FileUpload:
+                                //To implement
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
             if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish.IsPresent)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
@@ -216,64 +250,81 @@
         {
             if (reg.CustomFieldResponses.Count != 0)
             {
-                foreach (AgendaResponse response in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
                 {
-                    switch (response.AgendaItem.Type)
+                    if (responses is AgendaResponse)
                     {
-                        case FormData.CustomFieldType.CheckBox:
-                            {
-                                AgendaCheckboxResponse resp = response as AgendaCheckboxResponse;
-                                ((CheckBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Set(resp.Checked.Value);
-                            }
-                            break;
-                        case FormData.CustomFieldType.RadioButton:
-                            {
-                                AgendaRadioButtonResponse resp = response as AgendaRadioButtonResponse;
-                                RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
-                                radio.Click();
-                            }
-                            break;
-                        case FormData.CustomFieldType.Dropdown:
-                            {
-                                AgendaDropDownResponse resp = response as AgendaDropDownResponse;
-                                ((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                    response.AgendaItem).AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
-                            }
-                            break;
-                        case FormData.CustomFieldType.Number:
-                        case FormData.CustomFieldType.OneLineText:
-                        case FormData.CustomFieldType.Paragraph:
-                            {
-                                AgendaCharInputResponse resp = response as AgendaCharInputResponse;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                    response.AgendaItem).AgendaType).Type(resp.CharToInput);
-                            }
-                            break;
-                        case FormData.CustomFieldType.Contribution:
-                            {
-                                AgendaContributionResponse resp = response as AgendaContributionResponse;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                    response.AgendaItem).AgendaType).Type(resp.Contribution.Value);
-                            }
-                            break;
-                        case FormData.CustomFieldType.Date:
-                            {
-                                AgendaDateResponse resp = response as AgendaDateResponse;
-                                string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                    response.AgendaItem).AgendaType).Type(date);
-                            }
-                            break;
-                        case FormData.CustomFieldType.Time:
-                            {
-                                AgendaTimeResponse resp = response as AgendaTimeResponse;
-                                string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                    response.AgendaItem).AgendaType).Type(time);
-                            }
-                            break;
-                        default:
-                            break;
+                        AgendaResponse response = responses as AgendaResponse;
+
+                        switch (response.AgendaItem.Type)
+                        {
+                            case FormData.CustomFieldType.CheckBox:
+                                {
+                                    AgendaCheckboxResponse resp = response as AgendaCheckboxResponse;
+                                    ((CheckBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Set(resp.Checked.Value);
+                                    if (resp.Code != null)
+                                    {
+                                        PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).DiscountCodeInput.Type(resp.Code.Code);
+                                    }
+                                }
+                                break;
+                            case FormData.CustomFieldType.RadioButton:
+                                {
+                                    AgendaRadioButtonResponse resp = response as AgendaRadioButtonResponse;
+                                    RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
+                                    radio.Click();
+                                }
+                                break;
+                            case FormData.CustomFieldType.Dropdown:
+                                {
+                                    AgendaDropDownResponse resp = response as AgendaDropDownResponse;
+                                    ((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
+                                }
+                                break;
+                            case FormData.CustomFieldType.Number:
+                            case FormData.CustomFieldType.OneLineText:
+                            case FormData.CustomFieldType.Paragraph:
+                                {
+                                    AgendaCharInputResponse resp = response as AgendaCharInputResponse;
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).Type(resp.CharToInput);
+                                }
+                                break;
+                            case FormData.CustomFieldType.Contribution:
+                                {
+                                    AgendaContributionResponse resp = response as AgendaContributionResponse;
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).Type(resp.Contribution.Value);
+                                }
+                                break;
+                            case FormData.CustomFieldType.Date:
+                                {
+                                    AgendaDateResponse resp = response as AgendaDateResponse;
+                                    string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).Type(date);
+                                }
+                                break;
+                            case FormData.CustomFieldType.Time:
+                                {
+                                    AgendaTimeResponse resp = response as AgendaTimeResponse;
+                                    string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).Type(time);
+                                }
+                                break;
+                            case FormData.CustomFieldType.FileUpload:
+                                {
+                                    AgendaFileUploadResponse resp = response as AgendaFileUploadResponse;
+                                    ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                        response.AgendaItem).AgendaType).Click();
+                                    AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
 

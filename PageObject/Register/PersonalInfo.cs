@@ -70,4 +70,21 @@
             UIUtilityProvider.UIHelper.SwitchToMainContent();
         }
     }
+
+    public class CustomFieldRow
+    {
+        private string locator = "//li[@data-id='{0}']";
+
+        public WebElement CustomFieldType = new WebElement();
+        public WebElement CustomFieldLabel = new WebElement();
+
+        public CustomFieldRow(CustomField field)
+        {
+            if (field is CFCheckBox)
+            {
+                CustomFieldType = new CheckBox(string.Format(locator + "//input", field.Id.ToString()), LocateBy.XPath);
+                CustomFieldLabel = new Label(string.Format(locator + "//label", field.Id.ToString()), LocateBy.XPath);
+            }
+        }
+    }
 }

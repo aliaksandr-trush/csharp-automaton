@@ -111,6 +111,7 @@
     public class PersonalInfoPage
     {
         public List<PersonalInfoPageStandardField> StandardFields = new List<PersonalInfoPageStandardField>();
+        public List<CustomField> CustomFields = new List<CustomField>();
         public string PageHeader;
         public string PageFooter;
     }
