@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="RegressionTestConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="RegOnline.RegressionTest.All.config">
       <SubType>Designer</SubType>

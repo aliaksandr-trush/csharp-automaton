@@ -518,22 +518,6 @@
             return Convert.ToInt32(UIUtilityProvider.UIHelper.GetText(string.Format(locatorFormat, eventId), LocateBy.XPath));
         }
 
-        /// <summary>
-        /// This is just for china test to handle the time difference
-        /// </summary>
-        /// <param name="now">china time now</param>
-        /// <returns>RegOnline time</returns>
-        public DateTime ConvertToRegOnlineTime(DateTime dateTime)
-        {
-            if (TimeZone.CurrentTimeZone.StandardName == "China Standard Time")
-            {
-                int diff = Convert.ToInt32(ConfigurationProvider.XmlConfig.AllConfiguration.TimeZoneDifference) * -1;
-                dateTime = dateTime.AddHours(diff);
-            }
-
-            return dateTime;
-        }
-
         [Step]
         public void DeleteExpiredDuplicateEvents(string eventName)
         {
@@ -573,7 +557,7 @@
                 {
                     createdTime = GetEventCreatedTime(Convert.ToInt32(maxid));
 
-                    if (((int)(ConvertToRegOnlineTime(DateTime.Now) - createdTime).TotalMinutes) > expireMinutes)
+                    if (((int)(DateTimeTool.ConvertToRegOnlineTime(DateTime.Now) - createdTime).TotalMinutes) > expireMinutes)
                     {
                         DeleteEventById(maxid);
                     }
