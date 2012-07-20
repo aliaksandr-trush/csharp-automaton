@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AddAgendaItem.cs" />
     <Compile Include="AddAttendeeDirectory.cs" />
+    <Compile Include="CustomFieldCreation.cs" />
     <Compile Include="AddDiscountCode.cs" />
     <Compile Include="AddEarlyLatePrice.cs" />
     <Compile Include="AddMerchandise.cs" />
@@ -70,6 +71,10 @@
     <Compile Include="VerifyStandardReports.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoIt\AutoIt.csproj">
+      <Project>{0346655B-EEF2-4ADC-B5E3-58FF493216AE}</Project>
+      <Name>AutoIt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration\Configuration.csproj">
       <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
       <Name>Configuration</Name>

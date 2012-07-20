@@ -243,6 +243,31 @@
                     }
                 }
             }
+            if (details.PersonalInfoPage.CustomFields.Count != 0)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.PI);
+
+                if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.PersonalInfoPage.EmptyAddCustomField.IsPresent)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.PersonalInfoPage.EmptyAddCustomField_Click();
+                }
+                else
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.PersonalInfoPage.AddCustomField_Click();
+                }
+
+                for (int i = 0; i < details.PersonalInfoPage.CustomFields.Count; i++)
+                {
+                    KeywordProvider.CustomFieldCreation.AddCustomField(details.PersonalInfoPage.CustomFields[i]);
+                    PageObject.Builder.RegistrationFormPages.PICustomFieldRow row = new PageObject.Builder.RegistrationFormPages.PICustomFieldRow(details.PersonalInfoPage.CustomFields[i].NameOnForm);
+                    details.PersonalInfoPage.CustomFields[i].Id = row.CustomFieldId;
+
+                    if (i < details.PersonalInfoPage.CustomFields.Count - 1)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.PersonalInfoPage.AddCustomField_Click();
+                    }
+                }
+            }
         }
 
         public void Agenda(Event details)

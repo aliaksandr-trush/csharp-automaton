@@ -18,10 +18,10 @@
             }
 
             #region Common Settings
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Type(agenda.NameOnFrom);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Type(agenda.NameOnForm);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReceipt.Type(agenda.NameOnFrom);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.Type(agenda.NameOnFrom);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReceipt.Type(agenda.NameOnForm);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.Type(agenda.NameOnForm);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(agenda.Type);
 
@@ -194,6 +194,8 @@
                         foreach (DiscountCode dc in ag.DiscountCode)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
+                            PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);
+                            dc.Id = row.CodeId;
                         }
                     }
 
@@ -205,17 +207,22 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.BulkLoadCodesDefine.SaveAndClose_Click();
                     }
 
+                    if (ag.RequireDC.HasValue)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.RequireCode.Set(ag.RequireDC.Value);
+                    }
+
                     if ((ag.TaxRateOne != null) || (ag.TaxRateTwo != null))
                     {
                         KeywordProvider.AddTaxRate.AddTaxRates(ag.TaxRateOne, ag.TaxRateTwo, FormData.Location.Agenda);
                     }
 
-                    if (ag.TaxRateOne.Apply.HasValue)
+                    if ((ag.TaxRateOne != null) && (ag.TaxRateOne.Apply.HasValue))
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxOne.Set(ag.TaxRateOne.Apply.Value);
                     }
 
-                    if (ag.TaxRateTwo.Apply.HasValue)
+                    if ((ag.TaxRateTwo != null) && (ag.TaxRateTwo.Apply.HasValue))
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxTwo.Set(ag.TaxRateTwo.Apply.Value);
                     }

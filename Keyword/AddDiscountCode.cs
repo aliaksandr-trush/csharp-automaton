@@ -18,7 +18,7 @@
                     {
                         case FormData.DiscountCodeType.DiscountCode:
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Discount_Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.ToString());
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
 
                             if (code.CodeKind == FormData.ChangeType.Percent)
                             {
@@ -55,7 +55,7 @@
                     {
                         case FormData.DiscountCodeType.DiscountCode:
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.Discount_Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.ToString());
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
 
                             if (code.CodeKind == FormData.ChangeType.Percent)
                             {

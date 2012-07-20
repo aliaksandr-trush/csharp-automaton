@@ -13,12 +13,13 @@
     {
         static void Main(string[] args)
         {
-            XmlConfiguration.Browser browser;
-            Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
-            DataHelper helper = new DataHelper();
-            helper.RemoveXAuthLiveRegistration(245012);
-            Console.WriteLine(browser.ToString());
-            Console.Read();
+            //XmlConfiguration.Browser browser;
+            //Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            //DataHelper helper = new DataHelper();
+            //helper.RemoveXAuthLiveRegistration(245012);
+            //Console.WriteLine(browser.ToString());
+            //Console.Read();
+            AutoIt.UploadFile.UploadAFile("File Upload", Configuration.ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + "grassbladesdy6pc8.jpg");
         }
     }
 }

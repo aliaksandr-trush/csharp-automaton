@@ -11,6 +11,8 @@
             public const string EmailAddressesDoNotMatch = "The email addresses that you entered do not match. Re-enter your email address.";
             public const string EmailAlreadyUsed = "Our records show that this email address has already been used to register for this event. Each registrant must use a unique email address.";
             public const string ContributionNotInMinAndMax = "Enter an amount between {0} and {1} for \"AGConribution\".";
+            public const string DiscountCodeNotFilled = "You must enter a discount code.";
+            public const string AgendaCodeLimitReached = "The limit for the discount code you entered has been reached and is no longer being accepted.";
         }
 
         public static class BuilderError

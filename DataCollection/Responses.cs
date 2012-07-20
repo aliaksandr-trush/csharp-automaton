@@ -3,36 +3,39 @@
     using System;
 
     public class CustomFieldResponse
+    { }
+
+    public class CFResponse : CustomFieldResponse
     {
         public CustomField CustomField;
     }
 
-    public class CFCheckboxResponse : CustomFieldResponse
+    public class CFCheckboxResponse : CFResponse
     {
         public bool? Checked;
     }
 
-    public class CFRadioButtonResponse : CustomFieldResponse
+    public class CFRadioButtonResponse : CFResponse
     {
         public ChoiceItem ChoiceItem;
     }
 
-    public class CFDropDownResponse : CustomFieldResponse
+    public class CFDropDownResponse : CFResponse
     {
         public ChoiceItem ChoiceItem;
     }
 
-    public class CFCharInputResponse : CustomFieldResponse
+    public class CFCharInputResponse : CFResponse
     {
         public string CharToInput;
     }
 
-    public class CFDateTimeResponse : CustomFieldResponse
+    public class CFDateTimeResponse : CFResponse
     {
         public DateTime? DateTime;
     }
 
-    public class CFFileUploadResponse : CustomFieldResponse
+    public class CFFileUploadResponse : CFResponse
     {
         public string FileSource;
     }
@@ -45,6 +48,7 @@
     public class AgendaCheckboxResponse : AgendaResponse
     {
         public bool? Checked;
+        public DiscountCode Code;
     }
 
     public class AgendaRadioButtonResponse : AgendaResponse

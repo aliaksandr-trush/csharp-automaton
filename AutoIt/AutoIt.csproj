@@ -2,29 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{628AF57E-FF93-40E9-9B2B-C7F307609880}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0346655B-EEF2-4ADC-B5E3-58FF493216AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RegOnline.RegressionTest.ConsoleTool</RootNamespace>
-    <AssemblyName>RegOnline.RegressionTest.ConsoleTool</AssemblyName>
+    <RootNamespace>RegOnline.RegressionTest.AutoIt</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.AutoIt</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,30 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadFile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoIt\AutoIt.csproj">
-      <Project>{0346655B-EEF2-4ADC-B5E3-58FF493216AE}</Project>
-      <Name>AutoIt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Configuration\Configuration.csproj">
-      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
-      <Name>Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Linq\DataAccess.csproj">
-      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Managers\Managers.csproj">
-      <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
-      <Name>Managers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.csproj">
-      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
-      <Name>Utilities</Name>
-    </ProjectReference>
+    <None Include="UploadAFile.au3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UploadAFile.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

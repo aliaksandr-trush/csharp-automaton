@@ -74,9 +74,9 @@
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
 
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem1).AgendaLabel.Text == AgendaItem1.NameOnFrom);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem2).AgendaLabel.Text == AgendaItem2.NameOnFrom);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem3).AgendaLabel.Text == AgendaItem3.NameOnFrom);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem1).AgendaLabel.Text == AgendaItem1.NameOnForm);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem2).AgendaLabel.Text == AgendaItem2.NameOnForm);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AgendaItem3).AgendaLabel.Text == AgendaItem3.NameOnForm);
 
             KeywordProvider.RegistrationCreation.Agenda(reg);
             KeywordProvider.RegistrationCreation.Checkout(reg);
@@ -418,6 +418,27 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.ContributionNotInMinAndMax, MoneyTool.FormatMoney(10), MoneyTool.FormatMoney(100)));
             KeywordProvider.RegistrationCreation.Agenda(reg);
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        public void AgendaLocation()
+        {
+            Event evt = new Event("FileUploadAndLocation");
+            evt.AgendaPage = new AgendaPage();
+            AgendaItemCheckBox AGCheckbox = new AgendaItemCheckBox("AGCheckbox");
+            AGCheckbox.Location = Registrant.Default.AddressLineOne;
+            evt.AgendaPage.AgendaItems.Add(AGCheckbox);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg = new Registrant();
+            reg.Event = evt;
+
+            KeywordProvider.RegistrationCreation.Checkin(reg);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            Assert.AreEqual(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                AGCheckbox).GetAgendaLocation(AGCheckbox), Registrant.Default.AddressLineOne);
         }
 
         private void SelectAgendaType(FormData.CustomFieldType type)
