@@ -10,20 +10,23 @@
     [Category(FixtureCategory.Regression)]
     public class GroupRegistration : FixtureBase
     {
-        string emailAddress;
-        Event GroupUniqueEmailEvent;
+        private string emailAddress;
+        private Event groupUniqueEmailEvent;
 
         public void GroupUniqueEmail()
         {
-            this.GroupUniqueEmailEvent = new Event("RI-GroupRegistration");
+            this.groupUniqueEmailEvent = new Event("RI-GroupRegistration");
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupUniqueEmailEvent, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(
+                EventFolders.Folders.RegistrationInventory, 
+                this.groupUniqueEmailEvent, 
+                false);
 
             Registrant reg1 = new Registrant();
             Registrant reg2 = new Registrant();
             this.emailAddress = reg1.Email;
-            reg1.Event = GroupUniqueEmailEvent;
-            reg2.Event = GroupUniqueEmailEvent;
+            reg1.Event = this.groupUniqueEmailEvent;
+            reg2.Event = this.groupUniqueEmailEvent;
             List<Registrant> regs = new List<Registrant>();
             regs.Add(reg1);
             regs.Add(reg2);
@@ -38,12 +41,8 @@
         {
             this.GroupUniqueEmail();
 
-            Event GroupUsedEmail = new Event("RI-GroupRegistration");
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupUsedEmail);
-
             Registrant registrant = new Registrant(this.emailAddress);
-            registrant.Event = GroupUsedEmail;
+            registrant.Event = this.groupUniqueEmailEvent;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -81,10 +80,13 @@
             KeywordProvider.RegistrationCreation.Login(registrant);
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
+
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
+
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
         }
@@ -161,14 +163,10 @@
         {
             this.GroupUniqueEmail();
 
-            Event UpdateGroup = new Event("RI-GroupRegistration");
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, UpdateGroup);
-
-            Registrant reg1 = new Registrant(emailAddress);
-            reg1.Event = UpdateGroup;
+            Registrant reg1 = new Registrant(this.emailAddress);
+            reg1.Event = this.groupUniqueEmailEvent;
             Registrant reg2 = new Registrant();
-            reg2.Event = UpdateGroup;
+            reg2.Event = this.groupUniqueEmailEvent;
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
 
@@ -271,7 +269,7 @@
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
 
             Registrant reg = new Registrant(emailAddress);
-            reg.Event = this.GroupUniqueEmailEvent;
+            reg.Event = this.groupUniqueEmailEvent;
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
 

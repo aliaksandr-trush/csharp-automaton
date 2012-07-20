@@ -69,7 +69,8 @@
 
         public enum ActiveEuropeEventType
         {
-            Running
+            Running,
+            Soccer
         }
 
         public enum EventCategory

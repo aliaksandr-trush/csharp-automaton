@@ -82,6 +82,7 @@
                 (regType.TaxRateTwo != null))
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeAdvanced_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AdjustRADWindowPositionAndResize();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SelectByName();
 
                 if (regType.FeeName != null)
@@ -107,7 +108,6 @@
                 if (regType.LatePrice != null)
                 {
                     KeywordProvider.AddEarlyLatePrice.AddLatePrice(regType.LatePrice, FormData.Location.RegType);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
                 }
                 #endregion
 

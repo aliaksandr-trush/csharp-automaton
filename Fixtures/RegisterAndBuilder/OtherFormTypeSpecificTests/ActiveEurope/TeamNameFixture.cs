@@ -12,84 +12,155 @@
     [Category(FixtureCategory.Regression)]
     public class TeamNameFixture : FixtureBase
     {
+        private const string EventName = "TeamNameFixture";
+
+        private string[] regTypeNames = new string[] { "U11 Girls", "U12 Girls", "U13 Girls", "U11 Boys", "U12 Boys", "U13 Boys" };
+        private string[] piCFMultipleChoices = new string[] { "Striker", "Forward", "Mid Field", "Defender", "Sweeper", "Keeper" };
+
+        private int eventId;
+
         [Test]
         [Category(Priority.Five)]
         [Description("262")]
         public void TestWithRegTypes()
         {
-            // Use endurance event with reg types that collect Team Name- Use Event 614068 on ActiveEuropeBeta Account 377431
+            // Use endurance event with reg types that collect Team Name
             ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
-            RegisterMgr.OpenRegisterPage(632819);
+
+            ManagerSiteMgr.OpenLogin();
+            ManagerSiteMgr.Login();
+            this.CreateEvent();
+            this.Register();
+        }
+
+        private void CreateEvent()
+        {
+            if (ManagerSiteMgr.EventExists(EventName))
+            {
+                this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
+            }
+            else
+            {
+                ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ActiveEuropeEvent);
+                this.eventId = BuilderMgr.GetEventId();
+                BuilderMgr.SetEventNameAndShortcut(EventName);
+                BuilderMgr.SelectEventType(Managers.Builder.FormDetailManager.ActiveEuropeEventType.Soccer);
+
+                foreach (string regTypeName in this.regTypeNames)
+                {
+                    this.AddRegType(regTypeName);
+                }
+
+                BuilderMgr.GotoPage(Managers.Builder.FormDetailManager.Page.PI);
+                this.AddCustomField();
+
+                BuilderMgr.GotoPage(Managers.Builder.FormDetailManager.Page.Agenda);
+                this.AddActivity();
+
+                BuilderMgr.GotoPage(Managers.Builder.FormDetailManager.Page.Checkout);
+                BuilderMgr.PaymentMethodMgr.AddPaymentMethod(Managers.ManagerBase.PaymentMethod.Check);
+
+                BuilderMgr.SaveAndClose();
+            }
+        }
+
+        private void AddRegType(string name)
+        {
+            BuilderMgr.ClickAddRegType();
+            BuilderMgr.RegTypeMgr.SetName(name);
+            BuilderMgr.RegTypeMgr.SetCollectTeamName(true);
+            BuilderMgr.RegTypeMgr.SaveAndClose();
+        }
+
+        private void AddCustomField()
+        {
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("What position do you play?");
+            BuilderMgr.CFMgr.SetType(Managers.Builder.CustomFieldManager.CustomFieldType.RadioButton);
+
+            foreach (string piCFChoiceItem in this.piCFMultipleChoices)
+            {
+                BuilderMgr.CFMgr.AddMultiChoiceItem(piCFChoiceItem);
+            }
+
+            BuilderMgr.CFMgr.SaveAndClose();
+        }
+
+        private void AddActivity()
+        {
+            BuilderMgr.ClickYesOnSplashPage();
+            BuilderMgr.ClickAddActivities();
+            BuilderMgr.AGMgr.SetName("Fee per player");
+            BuilderMgr.AGMgr.SetType(Managers.Builder.AgendaItemManager.AgendaItemType.AlwaysSelected);
+            BuilderMgr.AGMgr.FeeMgr.SetStandardPrice(5);
+        }
+
+        private void Register()
+        {
+            RegisterMgr.OpenRegisterPage(this.eventId);
 
             // Generate unique team name
             string uniqueTeam = "teamname{0}";
             string teamName = string.Format(uniqueTeam, System.DateTime.Now.Ticks);
-            // Generate array of Reg Types
-            string[] regName = new string[] { "U11 Girls", "U12 Girls", "U13 Girls", "U11 Boys", "U12 Boys", "U13 Boys" };
-            // Generate array of custom field radio button selections
-            string[] cfPositionPlayed = new string[] { "Striker", "Forward", "Mid Field", "Defender", "Sweeper", "Keeper" };
 
             // Register First person on the Team using random email
             RegisterMgr.Checkin();
             string primaryEmail = RegisterMgr.CurrentEmail;
 
             // Select Reg Type that collects Team Name according to the day of the week the script is run
-            GetRegTypeRandom(0, 6, regName);
+            this.SelectRegTypeRandom();
             RegisterMgr.Continue();
 
             // On Personal Info page, enter a unique Team Name in the Group Name field
             RegisterMgr.EnterPersonalInfoEnduranceNewsletterPartners(null, null);
             RegisterMgr.EnterPersonalInfoEnduranceTeamNameNew(teamName);
-            RegisterMgr.EnterPersonalInfoEndurancePrefix("Player");
             RegisterMgr.EnterPersonalInfoEnduranceForename("First");
-            // To get middle name and Suffix, use the original Method and null the other fields)
-            RegisterMgr.EnterPersonalInfoNamePrefixSuffix(null, null, "Middle", null, "Esquire");
+            RegisterMgr.EnterPersonalInfoNamePrefixSuffix(null, null, "Middle", null, null);
             RegisterMgr.EnterPersonalInfoEnduranceSurname("Teammate");
+
             // NOTE: Selecting United States as the country means you need to fill in the US State Field
-            RegisterMgr.EnterPersonalInfoEnduranceTitleBadgeCompanyCountry("Player", "Player", "CSYSA", "United States");
-            RegisterMgr.EnterPersonalInfoEnduranceAddress("123 Penny Lane", "2nd Floor", "Boulder", "Colorado", null, "80301");
-            RegisterMgr.EnterPersonalInfoEndurancePhoneNumbers("3033033333", "3035775100", "666", "1234567890", "9876543210");
-            // Additional fields
-            ////RegisterMgr.EnterPersonalInfoDateOfBirthGender("01/08/1969", "Male");
-            RegisterMgr.TypePersonalInfoDateOfBirth_Endurance(new DateTime(1969, 1, 8));
-            RegisterMgr.SelectPersonalInfoGender(Managers.Register.RegisterManager.Gender.Male);
-            RegisterMgr.EnterPersonalInfoEnduranceNationality("Italy");
-            RegisterMgr.EnterPersonalInfoTaxNumberMembershipNumberCustomerNumber("tax12345", "666666", "999999");
+            RegisterMgr.EnterPersonalInfoEnduranceTitleBadgeCompanyCountry("Player", null, "CSYSA", null);
+            RegisterMgr.EnterPersonalInfoEnduranceAddress("123 Penny Lane", "2nd Floor", "Boulder", null, "Colorado", "99701");
+            RegisterMgr.EnterPersonalInfoEndurancePhoneNumbers(null, "3035775100", "666", "1234567890", null);
 
-            RegisterMgr.EnterPersonalInfoPassword("zzzzzz");
-
+            RegisterMgr.EnterPersonalInfoPassword();
 
             // Select Position radio button based on the day of the week the script is run
-            //GetPositionPlayed();
-            GetPositionPlayedRandom(0, 6, cfPositionPlayed);
+            this.SelectPositionPlayedRandom();
 
             // Activities page has Always selected item.
             RegisterMgr.Continue();
 
             // Register second person
             RegisterMgr.ClickAddAnotherPerson();
-            AddSecondary("Player", "second", "teammate");
-            GetPositionPlayedRandom(cfPositionPlayed);
+            this.AddAnother("Player", "second", "teammate");
+            this.SelectPositionPlayedRandom();
+
             // Verify the unique Team Name displays and cannot be edited
-            ValidateTeamName(teamName);
+            this.ValidateTeamName(teamName);
+
             // Activities page has Always selected item.
             RegisterMgr.Continue();
 
             // Register third person 
             RegisterMgr.ClickAddAnotherPerson();
-            AddSecondary("Player", "third", "teammate");
-            GetPositionPlayedRandom(cfPositionPlayed);
+            this.AddAnother("Player", "third", "teammate");
+            this.SelectPositionPlayedRandom();
+
             // Verify the unique Team Name displays and cannot be edited
-            ValidateTeamName(teamName);
+            this.ValidateTeamName(teamName);
+
             // Activities page has Always selected item.
             RegisterMgr.Continue();
 
             // Register fourth person
             RegisterMgr.ClickAddAnotherPerson();
-            AddSecondary("Player", "fourth", "teammate");
-            GetPositionPlayedRandom(cfPositionPlayed);
+            this.AddAnother("Player", "fourth", "teammate");
+            this.SelectPositionPlayedRandom();
+
             // Verify the unique Team Name displays and cannot be edited
-            ValidateTeamName(teamName);
+            this.ValidateTeamName(teamName);
+
             // Activities page has Always selected item.
             RegisterMgr.Continue();
 
@@ -97,72 +168,52 @@
             RegisterMgr.Continue();
 
             // Finalize
-            //Click("ctl00_cph_chkAITerms");
             RegisterMgr.ClickCheckoutActiveWaiver();
-            ////RegisterMgr.PaymentMgr.EnterCreditCardNumberInfo("4444444444444448", "123", "10 - Oct", "2013");
-            ////RegisterMgr.PaymentMgr.EnterCreditCardNameCountryType(null, "United States", null);
-            ////RegisterMgr.PaymentMgr.EnterCreditCardAddressInfo(null, null, null, "CO", null);
+            RegisterMgr.SelectPaymentMethod(Managers.ManagerBase.PaymentMethod.Cheque);
             RegisterMgr.FinishRegistration();
             RegisterMgr.CurrentEmail = primaryEmail;
             RegisterMgr.ConfirmRegistration();
         }
 
-        //AddSecondary(string firstName, string lastName, bool addAnother);
         [Step]
-        private void AddSecondary(string ePrefix, string fName, string lName)
+        private void AddAnother(string ePrefix, string fName, string lName)
         {
             RegisterMgr.Checkin();
             RegisterMgr.Continue();
+
             // Enter info for next team mate
-            RegisterMgr.EnterPersonalInfoEndurancePrefix(ePrefix);
             RegisterMgr.EnterPersonalInfoEnduranceForename(fName);
             RegisterMgr.EnterPersonalInfoEnduranceSurname(lName);
-
         }
 
-        //ValidateTeamName(string teamName)
         [Verify]
         private void ValidateTeamName(string tName)
         {
             // Verify the unique Team Name displays and cannot be edited
             Assert.IsFalse(UIUtilityProvider.UIHelper.IsElementPresent("Team Name", LocateBy.Name));
             Assert.IsTrue(UIUtilityProvider.UIHelper.IsTextPresent(tName));
-            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
             bool isEditable = UIUtilityProvider.UIHelper.IsElementPresent("//td[text()='Team Name:']/../td/input", LocateBy.XPath);
-            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(M3.TimeOutSpan));
 
             Assert.IsFalse(isEditable);
         }
 
-        //Get a Reg Type based on random number
+        // Get a Reg Type based on random number
         [Step]
-        private void GetRegTypeRandom(int min, int max, string[] regName)
+        private void SelectRegTypeRandom()
         {
             Random random = new Random();
-            int numr = random.Next(min, max);
-            RegisterMgr.SelectRegType(regName[numr]);
+            int numr = random.Next(0, this.regTypeNames.Length);
+            RegisterMgr.SelectRegType(this.regTypeNames[numr]);
         }
 
-        #region GetPositionPlayedRandom
-
-        //Get a custom field multiple choice radio button based on random number
-        //  Note: SelectAgendaItemByName also works on the Personal Info page
+        // Get a custom field multiple choice radio button based on random number
+        // Note: SelectAgendaItemByName also works on the Personal Info page
         [Step]
-        private void GetPositionPlayedRandom(int min, int max, string[] cfPositionPlayed)
+        private void SelectPositionPlayedRandom()
         {
             Random random = new Random();
-            int num = random.Next(min, max);
-            RegisterMgr.SelectAgendaItem(cfPositionPlayed[num]);
+            int num = random.Next(0, this.piCFMultipleChoices.Length);
+            RegisterMgr.SelectAgendaItem(this.piCFMultipleChoices[num]);
         }
-
-        [Step]
-        private void GetPositionPlayedRandom(string[] cfPositionPlayed)
-        {
-            int min = 0;
-            int max = cfPositionPlayed.Length - 1;
-            GetPositionPlayedRandom(min, max, cfPositionPlayed);
-        }
-
-        #endregion
     }
 }

@@ -84,8 +84,8 @@
             // Search for any regs in this report modified in the last 2 days
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
 
-            // Set endDate to be one day forward, so that registrants added today can be retrieved.
-            string endDate = DateTime.Now.AddDays(1).ToShortDateString();
+            // Set endDate to be two days forward, so that registrants added today can be retrieved.
+            string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
                 ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
@@ -112,7 +112,7 @@
             this.PrepareEventAndReportAndRegistrations(true);
 
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
-            string endDate = DateTime.Now.AddDays(1).ToShortDateString();
+            string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
                 ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
@@ -195,7 +195,7 @@
 
             RegisterMgr.FinishRegistration();
             RegisterMgr.ConfirmRegistration();
-            this.regDates.Add(DateTimeTool.ConvertToRegOnlineTime(DateTime.Now));
+            this.regDates.Add(DateTime.Now);
         }
 
         [Step]

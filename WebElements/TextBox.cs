@@ -11,5 +11,10 @@
         {
             UIUtilityProvider.UIHelper.Type(Locator, value, TypeOfLocator);
         }
+
+        public void Click()
+        {
+            UIUtilityProvider.UIHelper.Click(Locator, TypeOfLocator);
+        }
     }
 }

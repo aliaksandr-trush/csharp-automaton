@@ -11,8 +11,6 @@
             : base(name)
         { }
 
-        public readonly string Locator_Id_RADWindowDiv = "RadWindowWrapper_ctl00_dialog";
-
         #region WebElements
         public TextBox NameOnForm = new TextBox("ctl00_cphDialog_txtDescription", LocateBy.Id);
         public TextBox NameOnReports = new TextBox("ctl00_cphDialog_txtReportDescription", LocateBy.Id);
@@ -134,7 +132,7 @@
 
         public void AdjustRADWindowPositionAndResize()
         {
-            PageObject.PageObjectHelper.AdjustRADWindowPosition(this.Locator_Id_RADWindowDiv, 20, 20);
+            PageObject.PageObjectHelper.AdjustRADWindowPosition("RadWindowWrapper_ctl00_dialog", 20, 20);
             PageObject.PageObjectHelper.ResizeRADWindow(this.Name, 800, 1000);
         }
     }

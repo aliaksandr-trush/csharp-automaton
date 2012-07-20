@@ -106,6 +106,7 @@
         {
             CreditCard,
             Check,
+            Cheque,
             PurchaseOrder,
             Cash,
             PayAtTheEvent,

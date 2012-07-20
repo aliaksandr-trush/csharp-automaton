@@ -2,6 +2,7 @@
 {
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.PageObject.Builder;
+    using RegOnline.RegressionTest.Utilities;
 
     public class AddEarlyLatePrice
     {
@@ -27,7 +28,10 @@
                         default:
                             break;
                     }
+
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.StandardPrice.Click();
                     break;
+
                 case FormData.Location.Agenda:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddEarlyPrice_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.EarlyPrice.Type(earlyPrice.earlyPrice);
@@ -46,10 +50,17 @@
                         default:
                             break;
                     }
+
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.StandardPrice.Click();
                     break;
+
                 default:
                     break;
             }
+
+            
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.WaitForAJAX();
+            Utility.ThreadSleep(2);
         }
 
         public void AddLatePrice(LatePrice latePrice, FormData.Location location)
@@ -71,6 +82,9 @@
                 default:
                     break;
             }
+
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.WaitForAJAX();
+            Utility.ThreadSleep(2);
         }
     }
 }
