@@ -11,7 +11,6 @@
         [Test]
         [Category(Priority.One)]
         [Description("400")]
-        //[Ignore("Marketing changes so frequently that it is meaningless to run automated test against it.")]
         public void CreateNewAccount()
         {
             string username = System.Guid.NewGuid().ToString();
@@ -25,6 +24,7 @@
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            ManagerSiteMgr.SkipEmailValidation();
             ManagerSiteMgr.GetFirstEventId(EventTitle);
         }
     }

@@ -14,7 +14,9 @@
 
     internal class Browser_Firefox : IGetWebDriver
     {
-        private FirefoxBinary binary;
+        // The 1st method to start Firefox is not safe,
+        // because the port number used by NUnit and Firefox may be occupied by some other programs.
+        /*private FirefoxBinary binary;
         private FirefoxProfile profile;
 
         private void ResetBinary()
@@ -46,28 +48,31 @@
             this.ResetProfile();
             this.ResetBinary();
             return new FirefoxDriver(this.binary, this.profile);
+        }*/
+
+        // The second method to start firefox is safe,
+        // but you have to run Reference/SeleniumServer/StartServer.bat first.
+        // It's best to start that file along with system startup to ensure the port number would not be occupied.
+        public IWebDriver GetWebDriver()
+        {
+            DesiredCapabilities capa = DesiredCapabilities.Firefox();
+
+            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            {
+                capa.SetCapability(
+                    "firefox_binary",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
+            }
+
+            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            {
+                capa.SetCapability(
+                    "firefox_profile",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value);
+            }
+
+            return new RemoteWebDriver(capa);
         }
-
-        ////public IWebDriver GetWebDriver()
-        ////{
-        ////    DesiredCapabilities capa = DesiredCapabilities.Firefox();
-
-        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
-        ////    {
-        ////        capa.SetCapability(
-        ////            "firefox_binary",
-        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
-        ////    }
-
-        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
-        ////    {
-        ////        capa.SetCapability(
-        ////            "firefox_profile",
-        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value);
-        ////    }
-
-        ////    return new RemoteWebDriver(capa);
-        ////}
     }
 
     internal class Browser_Chrome : IGetWebDriver
