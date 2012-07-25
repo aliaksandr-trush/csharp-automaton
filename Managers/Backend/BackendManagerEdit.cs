@@ -276,7 +276,8 @@
             }
 
             Utility.ThreadSleep(1.5);
-            //UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void CancelUncancelRegistration(bool isCancel)

@@ -26,8 +26,6 @@
         private const string FolderLocatorFormat = "//div[@id='tree']//span[text()='{0}']";
         private const string AddEventDropDown = "//div[@id='createNewEvent']//img[@class='rmLeftImage'][1]";
         private const string AddEventDropDownType = "//div[@id='createNewEvent']//span[text()='{0}']";
-        private const string AttendeeSearchButton = "//a[@id='ctl00_ctl00_cphDialog_uclSearch_btnSearchGo']/span";
-        private const string AttendeeSearchNextPageClick = "//a[text()='Next']";
         private const string EventExistsLocator = "//*[text()='{0}']/..";
         private const string HeaderAccountLocator = "ctl00_ctl00_hplAccount";
         private const string TemplateNameLocator = "//option[contains(text(),'{0}')]";
@@ -74,14 +72,6 @@
         {
             Asc,
             Desc
-        }
-
-        public enum SearchModes
-        {
-            Attendee,
-            Event,
-            Transaction,
-            Help
         }
 
         public enum EventType
@@ -154,6 +144,12 @@
             set { _createNewMgr = value; }
         }
 
+        public SearchManager SearchMgr
+        {
+            get;
+            private set;
+        }
+
         public ManagerSiteManager()
         {
             this._accountMgr = new AccountManager();
@@ -161,6 +157,7 @@
             this.BibNumberTool = new BibNumberingToolManager();
             this._getStartedMgr = new GetStartedManager();
             this._createNewMgr = new CreateNewManager();
+            this.SearchMgr = new SearchManager();
         }
 
         [Step]
@@ -734,103 +731,6 @@
                 eventID);
 
             UIUtilityProvider.UIHelper.OpenUrl(dashboardUrl);
-        }
-
-        /// <summary>
-        /// This enters attendee's first name and last name to do a search.
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        public void EnterSearchAttendeeCriteria(string firstName, string lastName)
-        {
-            UIUtilityProvider.UIHelper.Type("ctl00_ctl00_cphDialog_uclSearch_txtSearchQ", firstName + " " + lastName, LocateBy.Id);
-        }
-
-        public void EnterSearchAttendeeCriteria(int attendeeID)
-        {
-            UIUtilityProvider.UIHelper.Type("ctl00_ctl00_cphDialog_uclSearch_txtSearchQ", attendeeID.ToString(), LocateBy.Id);
-        }
-
-        /// <summary>
-        /// This clicks the search button at the top right of M3 to perform a search.
-        /// </summary>
-        public void PerformAttendeeSearch()
-        {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AttendeeSearchButton, LocateBy.XPath);
-        }
-
-        /// <summary>
-        /// This method will click the link to the attendee info page from the search results page.
-        /// If the link is not available, it will see if the "Next" button is there and click to advance to the next search results page
-        /// It will do this recursively until it finds the record.  If it doesn't find it, then Assert.Fail is called.
-        /// </summary>
-        /// <param name="attendeeId"></param>
-        public void SelectAttendeeOnSearchResults(int attendeeId)
-        {
-            string attendeeInfoLinkSelector_LinkText = attendeeId.ToString();// "css=a[href=\"javascript:AttendeeInfo('20091006141429050q5jtjn55lnf3j355uv',11267264)\"]";
-            string lastPageSelector = "//input[@title='Last Page']";
-
-            //to save time let's look for the Next Pages link so we can skip ahead 10 pages instead of individual pages.
-            if (UIUtilityProvider.UIHelper.IsElementPresent(lastPageSelector, LocateBy.XPath))
-            {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(lastPageSelector, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            }
-
-            try
-            {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(attendeeInfoLinkSelector_LinkText, LocateBy.LinkText);
-            }
-            catch
-            {
-                Assert.Fail("Could not find link on Attendee search results page for attendeeId: " + attendeeId);
-            }
-        }
-
-        /// <summary>
-        /// Selects the search mode in the quick search at the top of M3
-        /// </summary>
-        /// <param name="searchMode"></param>
-        [Step]
-        public void SelectQuickSearchMode(SearchModes searchMode)
-        {
-            switch (searchMode)
-            {
-                case SearchModes.Attendee:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_uclSearch_lbSearchAttendees", LocateBy.Id);
-                    break;
-                case SearchModes.Event:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_uclSearch_lbSearchEvents", LocateBy.Id);
-                    break;
-                case SearchModes.Transaction:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_uclSearch_lbSearchTransactions", LocateBy.Id);
-                    break;
-                case SearchModes.Help:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_uclSearch_lbSearchHelp", LocateBy.Id);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Enters search text into the quick search at the top of M3
-        /// </summary>
-        /// <param name="text"></param>
-        [Step]
-        public void EnterSearchText(string text)
-        {
-            UIUtilityProvider.UIHelper.Type("ctl00_ctl00_cphDialog_uclSearch_txtSearchQ", text, LocateBy.Id);
-        }
-
-        /// <summary>
-        /// Clicks the search button in the quick search in M3
-        /// </summary>
-        [Step]
-        public void ClickQuickSearchGoButton()
-        {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AttendeeSearchButton, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
         }
 
         public void OpenAttendeeReportFromManagerEventList(int eventID)

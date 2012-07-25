@@ -11,6 +11,12 @@
 
     public partial class BackendManager : ManagerBase
     {
+        public void VerifyRegistrationId(int expectedRegistrationId)
+        {
+            string actualRegistrationId = UIUtilityProvider.UIHelper.GetText("tdFive", LocateBy.Id);
+            VerifyTool.VerifyValue(expectedRegistrationId.ToString(), actualRegistrationId, "RegistrationId: {0}");
+        }
+
         public void VerifyHeaderIsCorrect(string header)
         {
             string attendeeInfoHeader = UIUtilityProvider.UIHelper.GetText("span.panelHeadTallAttendeeName", LocateBy.CssSelector);

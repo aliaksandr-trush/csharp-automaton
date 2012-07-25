@@ -5,7 +5,12 @@
 	  <assembly path="RegOnline.RegressionTest.Fixtures.API.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Emails.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Manager.dll" />
-    <assembly path="RegOnline.RegressionTest.Fixtures.RegisterAndBuilder.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.FormTypes.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.Agenda.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.LodgingAndTravel.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.Merchandise.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.FeeOptions.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.SpecialOptions.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.Reports.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Backend.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.Transaction.dll" />

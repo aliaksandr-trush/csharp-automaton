@@ -102,6 +102,7 @@
     <Compile Include="Builder\TaxManager.cs" />
     <Compile Include="Builder\TravelSettingsAndPaymentOptionsManager.cs" />
     <Compile Include="Builder\TravelStandardAdditionalFieldsManager.cs" />
+    <Compile Include="Manager\SearchManager.cs" />
     <Compile Include="Manager\XAuthManager.cs" />
     <Compile Include="DataHelper.cs" />
     <Compile Include="Emails\ContactListManager.cs" />
