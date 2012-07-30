@@ -36,6 +36,8 @@
 
         private const string ReportLinkOnFormDashboard = "ctl00_ctl00_cphDialog_cpMgrMain_lnkTotalRegs";
         private const string AddAttendeeDirectoryLocator = "ctl00_ctl00_cphDialog_cpMgrMain_aNewDirectory";
+        private const string UrlPath = "manager/forms/details.aspx";
+        private const string UrlPathFormat_SpecificEvent = "manager/forms/details.aspx?EventSessionId={0}&eventId={1}";
 
         #region Enums
 
@@ -873,18 +875,6 @@
         public void SelectAttendeeDirectoryWindow()
         {
             Utility.ThreadSleep(2);
-            ////string reportPopupWindowName = string.Empty;
-            ////ReadOnlyCollection<string> popupWindowNames = WebDriverManager.driver.WindowHandles;
-
-            ////foreach (string windowName in popupWindowNames)
-            ////{
-            ////    if (WebDriverManager.driver.SwitchTo().Window(windowName).Title.Contains("DirectoryReport"))
-            ////    {
-            ////        UIUtilityProvider.UIHelper.SelectWindow(windowName, RegOnline.RegressionTest.UIBase.UIManager.SelectWindowBy.Name);
-            ////        break;
-            ////    }
-            ////}
-
             UIUtilityProvider.UIHelper.SelectWindowByTitle("DirectoryReport");
         }
 
@@ -904,6 +894,17 @@
         public void ClickPreviewForm()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_lnkPreview", LocateBy.Id);
+        }
+
+        public void VerifyOnDashboard()
+        {
+            Assert.True(UIUtilityProvider.UIHelper.UrlContainsAbsolutePath(UrlPath));
+        }
+
+        public void VerifyOnDashboard(int eventId)
+        {
+            Assert.True(UIUtilityProvider.UIHelper.UrlContainsPath(
+                string.Format(UrlPathFormat_SpecificEvent, GetEventSessionId(), eventId)));
         }
     }
 }

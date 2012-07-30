@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{30D48282-7673-4387-A306-C472F7638A3E}</ProjectGuid>
+    <ProjectGuid>{3E21E791-9506-4D44-A43E-EB1952DC6A88}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RegOnline.RegressionTest.Fixtures.Gateway</RootNamespace>
-    <AssemblyName>RegOnline.RegressionTest.Fixtures.Gateway</AssemblyName>
+    <RootNamespace>RegOnline.RegressionTest.Fixtures.FeeOptions</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.Fixtures.FeeOptions</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,16 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardinalRegistrationFixture.cs" />
-    <Compile Include="CardinalRegistrationVisaMCFixture.cs" />
-    <Compile Include="GatewayRegistrationBetaFixture.cs" />
-    <Compile Include="GatewaySetupFixture.cs" />
+    <Compile Include="DiscountCodeFixture.cs" />
+    <Compile Include="EventFeeFixture.cs" />
+    <Compile Include="GroupDiscountFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxesFixture.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Attributes\Attributes.csproj">
       <Project>{5F381378-8D75-4A9B-8CED-CC714285B5D9}</Project>
       <Name>Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Linq\DataAccess.csproj">
+      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Managers\Managers.csproj">
       <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
