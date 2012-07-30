@@ -206,4 +206,5 @@
             KeywordProvider.RegistrationCreation.Agenda(reg3);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
         }
+    }
 }

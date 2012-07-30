@@ -318,10 +318,10 @@
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             DataCollection.GroupDiscount groupDiscount = new DataCollection.GroupDiscount();
             groupDiscount.GroupSize = 2;
-            groupDiscount.GroupSizeOption = DataCollection.FormData.GroupSizeOption.SizeOrMore;
+            groupDiscount.GroupSizeOption = DataCollection.GroupDiscount_GroupSizeOption.SizeOrMore;
             groupDiscount.DiscountAmount = 5;
-            groupDiscount.GroupDiscountType = DataCollection.FormData.DiscountType.USDollar;
-            groupDiscount.AddtionalRegOption = DataCollection.FormData.AdditionalRegOption.All;
+            groupDiscount.GroupDiscountType = DataCollection.GroupDiscount_DiscountType.USDollar;
+            groupDiscount.AddtionalRegOption = DataCollection.GroupDiscount_AdditionalRegOption.All;
             evt.StartPage.GroupDiscount = groupDiscount;
             DataCollection.AgendaItemCheckBox fee1 = new DataCollection.AgendaItemCheckBox("Fee1");
             fee1.Price = 50;
