@@ -123,5 +123,87 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG1).AgendaType.IsPresent);
         }
-    }
+
+        [Test]
+        [Category(Priority.Three)]
+        public void AgendaVisibility()
+        {
+            Event evt = new Event("AgendaVisibility");
+            evt.AgendaPage = new AgendaPage();
+            RegType regType1 = new RegType("RegType1");
+            RegType regType2 = new RegType("RegType2");
+            evt.StartPage.RegTypes.Add(regType1);
+            evt.StartPage.RegTypes.Add(regType2);
+            AgendaItemCheckBox visToAll = new AgendaItemCheckBox("VisToAll");
+            AgendaItemCheckBox visToType1 = new AgendaItemCheckBox("VisToType1");
+            CustomFieldVisibleOption visibleOption1 = new CustomFieldVisibleOption(regType1);
+            visibleOption1.Visible = true;
+            visToType1.CustomFieldVisibleOption.Add(visibleOption1);
+            AgendaItemCheckBox reqByType2 = new AgendaItemCheckBox("ReqByType2");
+            CustomFieldVisibleOption visibleOption2 = new CustomFieldVisibleOption(regType2);
+            visibleOption2.Required = true;
+            reqByType2.CustomFieldVisibleOption.Add(visibleOption2);
+            AgendaItemCheckBox adminOnly = new AgendaItemCheckBox("AdminOnly");
+            CustomFieldVisibleOption visibleOption3 = new CustomFieldVisibleOption();
+            visibleOption3.AdminOnly = true;
+            adminOnly.CustomFieldVisibleOption.Add(visibleOption3);
+            AgendaItemCheckBox adminAndReq = new AgendaItemCheckBox("AdminAndReq");
+            CustomFieldVisibleOption visibleOption4 = new CustomFieldVisibleOption();
+            visibleOption4.AdminOnly = true;
+            visibleOption4.Required = true;
+            adminAndReq.CustomFieldVisibleOption.Add(visibleOption4);
+            evt.AgendaPage.AgendaItems.Add(visToAll);
+            evt.AgendaPage.AgendaItems.Add(visToType1);
+            evt.AgendaPage.AgendaItems.Add(reqByType2);
+            evt.AgendaPage.AgendaItems.Add(adminOnly);
+            evt.AgendaPage.AgendaItems.Add(adminAndReq);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg1 = new Registrant();
+            reg1.Event = evt;
+            reg1.RegType = regType1;
+
+            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(visToAll);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(visToType1);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(reqByType2);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(adminOnly);
+            PageObject.Register.AgendaRow row5 = new PageObject.Register.AgendaRow(adminAndReq);
+            Assert.True(row1.AgendaType.IsPresent);
+            Assert.True(row2.AgendaType.IsPresent);
+            Assert.False(row3.AgendaType.IsPresent);
+            Assert.False(row4.AgendaType.IsPresent);
+            Assert.False(row5.AgendaType.IsPresent);
+
+            Registrant reg2 = new Registrant();
+            reg2.Event = evt;
+            reg2.RegType = regType2;
+
+            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            Assert.True(row1.AgendaType.IsPresent);
+            Assert.False(row2.AgendaType.IsPresent);
+            Assert.True(row3.AgendaType.IsPresent);
+            Assert.False(row4.AgendaType.IsPresent);
+            Assert.False(row5.AgendaType.IsPresent);
+            KeywordProvider.RegistrationCreation.Agenda(reg2);
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
+
+            Registrant reg3 = new Registrant();
+            reg3.Event = evt;
+            reg3.RegType = regType1;
+            reg3.RegisterMethod = RegisterMethod.Admin;
+
+            KeywordProvider.RegistrationCreation.Checkin(reg3);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
+            Assert.True(row1.AgendaType.IsPresent);
+            Assert.True(row2.AgendaType.IsPresent);
+            Assert.False(row3.AgendaType.IsPresent);
+            Assert.True(row4.AgendaType.IsPresent);
+            Assert.True(row5.AgendaType.IsPresent);
+            KeywordProvider.RegistrationCreation.Agenda(reg3);
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
+        }
 }

@@ -478,6 +478,18 @@
             [CustomString("Active")]
             Active
         }
+
+        public enum Countries
+        {
+            [CustomString("United States")]
+            UnitedStates,
+
+            [CustomString("China")]
+            China,
+
+            [CustomString("Canada")]
+            Canada
+        }
         #endregion
 
         public static DateTime DefaultStartDate = new DateTime(2020, 10, 10);

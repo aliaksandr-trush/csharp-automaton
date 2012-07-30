@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaPage\AgendaAdvanced.cs" />
     <Compile Include="AgendaPage\AgendaBasics.cs" />
     <Compile Include="AgendaPage\AgendaDisplay.cs" />
     <Compile Include="AgendaPage\AgendaWithPrice.cs" />

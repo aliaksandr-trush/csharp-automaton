@@ -168,6 +168,11 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
             }
+            if (reg.Country.HasValue)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Country.SelectWithText(
+                    Utilities.CustomStringAttribute.GetCustomString(reg.Country.Value));
+            }
             if (reg.State != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(reg.State);
@@ -192,12 +197,12 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
             }
-            if (reg.Password != null)
+            if ((reg.Password != null) && (reg.RegisterMethod != RegisterMethod.Admin))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
             }
-            else
+            else if (reg.RegisterMethod != RegisterMethod.Admin)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(Registrant.Default.Password);
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(Registrant.Default.Password);
@@ -327,9 +332,8 @@
                         }
                     }
                 }
-
-                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
         public void Checkout(Registrant reg)

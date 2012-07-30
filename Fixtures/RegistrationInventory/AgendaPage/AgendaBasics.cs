@@ -441,6 +441,78 @@
                 AGCheckbox).GetAgendaLocation(AGCheckbox), Registrant.Default.AddressLineOne);
         }
 
+        [Test]
+        [Category(Priority.Three)]
+        public void AgendaSpaces()
+        {
+            Event evt = new Event("AgendaSpaces");
+            evt.AgendaPage = new AgendaPage();
+            AgendaItemCheckBox AgendaShowCapacity = new AgendaItemCheckBox("AgendaShowCapacity");
+            AgendaShowCapacity.SpacesAvailable = 1;
+            AgendaShowCapacity.ShowCapacity = true;
+            AgendaItemCheckBox AgendaHideReached = new AgendaItemCheckBox("AgendaHideReached");
+            AgendaHideReached.SpacesAvailable = 1;
+            AgendaHideReached.LimitReachedOption = FormData.AgendaLimitReachedOption.HideItem;
+            AgendaItemCheckBox AgendaShowMessage = new AgendaItemCheckBox("AgendaShowMessage");
+            AgendaShowMessage.SpacesAvailable = 1;
+            AgendaShowMessage.LimitReachedOption = FormData.AgendaLimitReachedOption.ShowMessage;
+            AgendaShowMessage.LimitReachedMessage = "Full";
+            AgendaItemCheckBox AgendaWaitlist = new AgendaItemCheckBox("AgendaWaitlist");
+            AgendaWaitlist.SpacesAvailable = 1;
+            AgendaWaitlist.LimitReachedOption = FormData.AgendaLimitReachedOption.Waitlist;
+            AgendaWaitlist.WaitlistConfirmationText = "WaitlistConfirmationText";
+            evt.AgendaPage.AgendaItems.Add(AgendaShowCapacity);
+            evt.AgendaPage.AgendaItems.Add(AgendaHideReached);
+            evt.AgendaPage.AgendaItems.Add(AgendaShowMessage);
+            evt.AgendaPage.AgendaItems.Add(AgendaWaitlist);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg1 = new Registrant();
+            reg1.Event = evt;
+            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            resp1.AgendaItem = AgendaShowCapacity;
+            resp1.Checked = true;
+            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            resp2.AgendaItem = AgendaHideReached;
+            resp2.Checked = true;
+            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            resp3.AgendaItem = AgendaShowMessage;
+            resp3.Checked = true;
+            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            resp4.AgendaItem = AgendaWaitlist;
+            resp4.Checked = true;
+            reg1.CustomFieldResponses.Add(resp1);
+            reg1.CustomFieldResponses.Add(resp2);
+            reg1.CustomFieldResponses.Add(resp3);
+            reg1.CustomFieldResponses.Add(resp4);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(AgendaShowCapacity);
+            Assert.True(row1.AgendaLabel.Text.Contains("1 remaining"));
+            KeywordProvider.RegistrationCreation.Agenda(reg1);
+            KeywordProvider.RegistrationCreation.Checkout(reg1);
+
+            Registrant reg2 = new Registrant();
+            reg2.Event = evt;
+            reg2.CustomFieldResponses.Add(resp4);
+            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(AgendaHideReached);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(AgendaShowMessage);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(AgendaWaitlist);
+            Assert.False(row1.AgendaType.IsPresent);
+            Assert.False(row2.AgendaType.IsPresent);
+            Assert.True(row3.LimitFullMessage.IsPresent);
+            Assert.True(row4.WaitlistMessage.IsPresent);
+            KeywordProvider.RegistrationCreation.Agenda(reg2);
+            KeywordProvider.RegistrationCreation.Checkout(reg2);
+
+            //To implement.
+            //Check the WaitlistConfirmationText is added to confirmation email.
+        }
+
         private void SelectAgendaType(FormData.CustomFieldType type)
         {
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();

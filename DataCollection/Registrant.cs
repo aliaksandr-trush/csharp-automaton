@@ -49,6 +49,7 @@
         public string AddressLineOne;
         public string AddressLineTwo;
         public string City;
+        public FormData.Countries? Country;
         public string State;
         public string ZipCode;
         public string WorkPhone;

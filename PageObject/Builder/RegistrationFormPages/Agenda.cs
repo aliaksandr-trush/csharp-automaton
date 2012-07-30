@@ -60,7 +60,7 @@
         public HtmlEditor LimitReachedMessageEditor = new HtmlEditor("dialog");
         public RadioButton WaitlistWhenLimitReached = new RadioButton("ctl00_cph_ucCF_mipCap_ip7_rbActivateWaitlist", LocateBy.Id);
         public ButtonOrLink AddTextToConfirmation = new ButtonOrLink("ctl00_cph_ucCF_mipCap_ip7_elWaitlistConfirmation_linkCheckmarkCustomField0", LocateBy.Id);
-        public HtmlEditor TextToConfirmationEditor = new HtmlEditor("dialog");
+        public EmailEditor TextToConfirmationEditor = new EmailEditor("dialog");
         public ButtonOrLink ShowAllRegTypes = new ButtonOrLink("//*[@id='tblRegTypesLink']//td[@class='fieldCaption']/a", LocateBy.XPath);
         public CheckBox VisibleToAll = new CheckBox("ctl00_cph_ucCF_chkActive", LocateBy.Id);
         public CheckBox RequiredByAll = new CheckBox("ctl00_cph_ucCF_chkRequired", LocateBy.Id);

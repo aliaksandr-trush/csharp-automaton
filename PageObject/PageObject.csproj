@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\CustomFieldDefine.cs" />
+    <Compile Include="Builder\EmailEditor.cs" />
     <Compile Include="Builder\RegistrationFormPages\Agenda.cs" />
     <Compile Include="Builder\RegistrationFormPages\BulkLoadCodesDefine.cs" />
     <Compile Include="Builder\RegistrationFormPages\Checkout.cs" />

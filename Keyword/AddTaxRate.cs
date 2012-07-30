@@ -43,6 +43,21 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.TaxTwoRate.Type(taxRateTwo.Rate);
                     }
 
+                    if (taxRateOne.Country.HasValue || taxRateTwo.Country.HasValue)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.ApplyToSelectedCountry_Set(true);
+
+                        if ((taxRateOne != null) && taxRateOne.Country.HasValue)
+                        {
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.ApplyToCountry(taxRateOne.Country.Value).Set(true);
+                        }
+
+                        if ((taxRateTwo != null) && taxRateTwo.Country.HasValue)
+                        {
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.ApplyToCountry(taxRateTwo.Country.Value).Set(true);
+                        }
+                    }
+
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.SaveAndClose_Click();
                     break;
                 default:
