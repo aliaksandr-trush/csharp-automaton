@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using RegOnline.RegressionTest.Utilities;
 
     public class Event
     {
@@ -42,14 +43,51 @@
         }
     }
 
+    public enum GroupDiscount_GroupSizeOption
+    {
+        [CustomString("")]
+        JustSize,
+
+        [CustomString("or more")]
+        SizeOrMore
+    }
+
+    public enum GroupDiscount_DiscountType
+    {
+        [CustomString("US Dollar")]
+        USDollar,
+
+        [CustomString("Percent")]
+        Percent
+    }
+
+    public enum GroupDiscount_AdditionalRegOption
+    {
+        [CustomString("Additional")]
+        Additional,
+
+        [CustomString("All")]
+        All,
+
+        [CustomString("Any Additional")]
+        AnyAdditional
+    }
+
+    public enum GroupDiscount_ApplyOption
+    {
+        ToAllEventFees,
+        ToOnlySelectedFees
+    }
+
     public class GroupDiscount
     {
         public int GroupSize;
-        public FormData.GroupSizeOption GroupSizeOption;
+        public GroupDiscount_GroupSizeOption GroupSizeOption;
         public double DiscountAmount;
-        public FormData.DiscountType GroupDiscountType;
-        public FormData.AdditionalRegOption AddtionalRegOption;
-        public int? AdditionalNumber;
+        public GroupDiscount_DiscountType GroupDiscountType;
+        public GroupDiscount_AdditionalRegOption AddtionalRegOption;
+        public int? NumberOfAdditionalReg;
+        public GroupDiscount_ApplyOption? ApplyOption;
     }
 
     public class PaymentMethod

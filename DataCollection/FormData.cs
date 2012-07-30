@@ -56,36 +56,6 @@
             RadioButton
         }
 
-        public enum GroupSizeOption
-        {
-            [CustomString("")]
-            JustSize,
-
-            [CustomString("or more")]
-            SizeOrMore
-        }
-
-        public enum DiscountType
-        {
-            [CustomString("US Dollar")]
-            USDollar,
-
-            [CustomString("Percent")]
-            Percent
-        }
-
-        public enum AdditionalRegOption
-        {
-            [CustomString("Additional")]
-            Additional,
-
-            [CustomString("All")]
-            All,
-
-            [CustomString("Any Additional")]
-            AnyAdditional
-        }
-
         public enum Page
         {
             Start,

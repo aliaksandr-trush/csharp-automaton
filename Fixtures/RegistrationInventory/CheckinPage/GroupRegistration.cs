@@ -99,10 +99,10 @@
             Event GroupEventFeeGroupDiscount = new Event("RI-GroupEventFeeGroupDiscount");
             GroupDiscount GroupDiscount = new GroupDiscount();
             GroupDiscount.GroupSize = 2;
-            GroupDiscount.GroupSizeOption = FormData.GroupSizeOption.SizeOrMore;
+            GroupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
             GroupDiscount.DiscountAmount = 1;
-            GroupDiscount.GroupDiscountType = FormData.DiscountType.USDollar;
-            GroupDiscount.AddtionalRegOption = FormData.AdditionalRegOption.AnyAdditional;
+            GroupDiscount.GroupDiscountType = GroupDiscount_DiscountType.USDollar;
+            GroupDiscount.AddtionalRegOption = GroupDiscount_AdditionalRegOption.AnyAdditional;
             GroupEventFeeGroupDiscount.StartPage.GroupDiscount = GroupDiscount;
             RegType RegType = new RegType("First");
             RegType.Price = 50;
