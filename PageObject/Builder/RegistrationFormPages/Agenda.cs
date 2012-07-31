@@ -83,7 +83,7 @@
         public CheckBox ForceGroupToMatch = new CheckBox("ctl00_cph_ucCF_chkEnablePrePopulate", LocateBy.Id);
         public MultiChoiceDropdown InitialStatus = new MultiChoiceDropdown("ctl00_cph_ucCF_ddlDefaultStatusID", LocateBy.Id);
         public ButtonOrLink AddConfirmationAddendum = new ButtonOrLink("ctl00_cph_ucCF_elNonWaitlistConfirmation_linkCheckmarktext_elNonWaitlistConfirmation", LocateBy.Id);
-        public HtmlEditor ConfirmationAddendumEditor = new HtmlEditor("dialog");
+        public EmailEditor ConfirmationAddendumEditor = new EmailEditor("dialog");
         public Label AgendaItemId = new Label("ctl00_cph_ucCF_currentCustomFieldId", LocateBy.Id);
         public ButtonOrLink AddMultipleChoiceItem = new ButtonOrLink("Add Multiple Choice Item", LocateBy.LinkText);
         public MultipleChoiceDefine MultipleChoiceDefine = new MultipleChoiceDefine("dialog");
@@ -439,13 +439,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 
@@ -469,13 +469,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 

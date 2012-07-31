@@ -51,6 +51,12 @@
             Utility.ThreadSleep(1);
         }
 
+        public static bool IsTextPresent(string text)
+        {
+            Label label = new Label(string.Format("//*[contains(text(),'{0}')]", text), LocateBy.XPath);
+            return label.IsPresent;
+        }
+
         public static void SelectTopWindow()
         {
             UIUtilityProvider.UIHelper.SelectTopWindow();

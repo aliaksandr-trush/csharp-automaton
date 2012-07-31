@@ -4,5 +4,6 @@
     {
         public EventDetails EventDetails = new EventDetails();
         public EventWebsite EventWebsite = new EventWebsite();
+        public EmailViewer EmailViewer = new EmailViewer();
     }
 }

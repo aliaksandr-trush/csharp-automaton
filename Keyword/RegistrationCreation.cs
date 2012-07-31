@@ -197,6 +197,15 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
             }
+            if (reg.BirthDate.HasValue)
+            {
+                string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
+            }
+            if (reg.Gender.HasValue)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Gender.SelectWithText(reg.Gender.Value.ToString());
+            }
             if ((reg.Password != null) && (reg.RegisterMethod != RegisterMethod.Admin))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);

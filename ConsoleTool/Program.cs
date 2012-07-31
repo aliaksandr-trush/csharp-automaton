@@ -19,7 +19,8 @@
             //helper.RemoveXAuthLiveRegistration(245012);
             //Console.WriteLine(browser.ToString());
             //Console.Read();
-            AutoIt.UploadFile.UploadAFile("File Upload", Configuration.ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + "grassbladesdy6pc8.jpg");
+            Console.WriteLine(AccessData.GetEncryptString("375859"));
+            Console.WriteLine(ManagerProvider.EmailMgr.FetchConfirmationEmailId(Managers.Emails.EmailManager.EmailCategory.Complete, 637115));
         }
     }
 }

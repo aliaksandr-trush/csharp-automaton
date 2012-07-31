@@ -185,5 +185,6 @@
     public class EventWebsite
     {
         public bool? UseEventWebsiteAsTheStartingPageForEvent;
+        public bool ShowNavigation;
     }
 }

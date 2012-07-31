@@ -28,7 +28,7 @@
         public void Content_Type(string content)
         {
             this.Content.Type(content);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectByName();
         }
 
@@ -40,14 +40,14 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectParentFrame();
         }
         #endregion
