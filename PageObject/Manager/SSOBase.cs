@@ -33,7 +33,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectParentFrame();
         }
 
@@ -44,7 +44,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectParentFrame();
         }
     }

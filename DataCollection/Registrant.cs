@@ -59,10 +59,12 @@
         public PaymentMethod PaymentMethod;
         public RegisterMethod RegisterMethod = RegisterMethod.EventId;
         public List<CustomFieldResponse> CustomFieldResponses = new List<CustomFieldResponse>();
+        public FormData.Gender? Gender;
+        public DateTime? BirthDate;
 
         public Registrant()
         {
-            this.Email = string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString());
+            this.Email = string.Format("selenium{0}@regonline.com", DateTime.Now.Ticks.ToString());
         }
 
         public Registrant(string email)

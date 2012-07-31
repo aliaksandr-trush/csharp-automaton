@@ -46,7 +46,7 @@ namespace RegOnline.RegressionTest.DataAccess
     partial void UpdateShortcut(Shortcut instance);
     partial void DeleteShortcut(Shortcut instance);
     #endregion
-
+		
 		public ROMasterDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
@@ -109,6 +109,18 @@ namespace RegOnline.RegressionTest.DataAccess
 			{
 				return this.GetTable<Shortcut>();
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Decrypt", IsComposable=true)]
+		public string fn_Decrypt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EncryptedText", DbType="VarChar(500)")] string encryptedText)
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), encryptedText).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Encrypt", IsComposable=true)]
+		public string fn_Encrypt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DecryptedText", DbType="VarChar(500)")] string decryptedText)
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), decryptedText).ReturnValue));
 		}
 	}
 	

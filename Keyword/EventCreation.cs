@@ -420,7 +420,13 @@
                     PageObject.PageObjectProvider.Builder.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Set(
                         details.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Value);
                 }
-
+                if (details.EventWebsite.ShowNavigation)
+                {
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SelectById();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.ShowNavigation_Click();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SwitchToMain();
+                }
+                
                 PageObject.PageObjectProvider.Builder.EventDetails.RegistrationFormPages_Click();
             }
         }

@@ -509,8 +509,8 @@
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             KeywordProvider.RegistrationCreation.Checkout(reg2);
 
-            //To implement.
-            //Check the WaitlistConfirmationText is added to confirmation email.
+            PageObject.PageObjectProvider.Builder.EmailViewer.OpenURL(evt.Id, reg2.Id);
+            Assert.True(PageObject.PageObjectHelper.IsTextPresent(AgendaWaitlist.WaitlistConfirmationText));
         }
 
         private void SelectAgendaType(FormData.CustomFieldType type)

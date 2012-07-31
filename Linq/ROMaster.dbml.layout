@@ -20,7 +20,7 @@
         <elementListCompartment Id="59831dba-2a45-4e64-b6b7-769876324e4b" absoluteBounds="3.0149999999999997, 1.085, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.75 : 1.075); (1.75 : 1.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 1.075); (1.75 : 1.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ROMasterDataContext/CustomerInvoice/CustomerInvoice_CustomerInvoiceItem" />
       <nodes>
         <classShapeMoniker Id="c19ca7da-6884-429f-8191-8be4611c029b" />
