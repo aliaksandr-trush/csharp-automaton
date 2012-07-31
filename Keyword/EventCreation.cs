@@ -118,13 +118,14 @@
                     regType.RegTypeId = row.RegTypeId;
                 }
             }
+
             if (details.StartPage.RegTypeDisplayOption.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayOption_Set(true);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayFormat.SelectWithValue(CustomStringAttribute.GetCustomString(details.StartPage.RegTypeDisplayOption.Value));
             }
 
-            //Set event name and shortcut after regType created to avoid bug 24560
+            // Set event name and shortcut after regType created to avoid bug 24560
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(details.Title);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(details.Shortcut);
 
@@ -133,14 +134,17 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllGroupReg_Set(details.StartPage.AllowGroupReg.Value);
                 PageObject.PageObjectProvider.Builder.EventDetails.SaveAndStay_Click();
             }
+
             if (details.StartPage.ForceSelectSameRegType.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.ForceSameGroupType.Set(details.StartPage.ForceSelectSameRegType.Value);
             }
+
             if (details.StartPage.AllowChangeRegType.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllowChangeRegType.Set(details.StartPage.AllowChangeRegType.Value);
             }
+
             if (details.StartPage.GroupDiscount != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
@@ -151,10 +155,25 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountAmount.Type(details.StartPage.GroupDiscount.DiscountAmount);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountType.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupDiscountType));
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AddtionalRegOption.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.AddtionalRegOption));
-
-                if (details.StartPage.GroupDiscount.AdditionalNumber.HasValue)
+                
+                if (details.StartPage.GroupDiscount.NumberOfAdditionalReg.HasValue)
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(details.StartPage.GroupDiscount.AdditionalNumber.Value);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(details.StartPage.GroupDiscount.NumberOfAdditionalReg.Value);
+                }
+
+                switch (details.StartPage.GroupDiscount.ApplyOption)
+                {
+                    case GroupDiscount_ApplyOption.ToAllEventFees:
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToAllEventFees.Click();
+                        break;
+
+                    case GroupDiscount_ApplyOption.ToOnlySelectedFees:
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToSelectedFees.Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.All.Set(true);
+                        break;
+
+                    default:
+                        break;
                 }
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
