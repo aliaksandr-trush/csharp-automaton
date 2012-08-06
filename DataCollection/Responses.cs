@@ -85,4 +85,9 @@
     {
         public double? Contribution;
     }
+
+    public class AgendaResponse_Duration : AgendaResponse
+    {
+        public TimeSpan Duration;
+    }
 }

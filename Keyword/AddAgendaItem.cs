@@ -12,9 +12,17 @@
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateAgendaItem_Click();
             }
-            else
+            else if(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem.IsPresent)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
+            }
+            else if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateActivities.IsPresent)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateActivities_Click();
+            }
+            else
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddActivities_Click();
             }
 
             #region Common Settings

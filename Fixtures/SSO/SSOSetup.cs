@@ -87,12 +87,10 @@
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
-            Registrant reg1 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.Event = evt;
             reg1.RegType = regType1;
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);

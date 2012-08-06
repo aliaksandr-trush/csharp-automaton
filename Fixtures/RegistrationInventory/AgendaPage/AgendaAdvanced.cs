@@ -23,8 +23,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
             resp.AgendaItem = agendaWithEmailAddendum;
             resp.Checked = true;
@@ -60,8 +59,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             reg.RegisterMethod = RegisterMethod.EventWebsite;
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = agendaAddToCalenda;
@@ -107,8 +105,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = agendaGroup1;
             resp1.Checked = true;
@@ -194,8 +191,7 @@
             resp7.AgendaItem = ag7;
             resp7.Checked = true;
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.Gender = FormData.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
             reg1.CustomFieldResponses.Add(resp1);
@@ -218,8 +214,7 @@
             PageObject.Register.AgendaRow row6 = new PageObject.Register.AgendaRow(ag6);
             PageObject.Register.AgendaRow row7 = new PageObject.Register.AgendaRow(ag7);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.Gender = FormData.Gender.Male;
             reg2.BirthDate = DateTime.Today.AddYears(-18);
 
@@ -243,8 +238,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-            Registrant reg3 = new Registrant();
-            reg3.Event = evt;
+            Registrant reg3 = new Registrant(evt);
             reg3.Gender = FormData.Gender.Female;
             reg3.BirthDate = DateTime.Today.AddYears(-22);
 
@@ -255,8 +249,7 @@
             Assert.True(((WebElements.CheckBox)(row3.AgendaType)).IsChecked);
             Assert.True(((WebElements.CheckBox)(row3.AgendaType)).HasAttribute("disabled"));
 
-            Registrant reg4 = new Registrant();
-            reg4.Event = evt;
+            Registrant reg4 = new Registrant(evt);
             reg4.Gender = FormData.Gender.Male;
             reg4.BirthDate = DateTime.Today.AddYears(-22);
             reg4.CustomFieldResponses.Add(resp4);
@@ -266,8 +259,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg4);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-            Registrant reg5 = new Registrant();
-            reg5.Event = evt;
+            Registrant reg5 = new Registrant(evt);
             reg5.Gender = FormData.Gender.Male;
             reg5.BirthDate = DateTime.Today.AddYears(-22);
 
@@ -331,8 +323,7 @@
             resp7.AgendaItem = ag7;
             resp7.Checked = true;
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             reg.CustomFieldResponses.Add(resp1);
             reg.CustomFieldResponses.Add(resp2);
             reg.CustomFieldResponses.Add(resp3);

@@ -28,13 +28,18 @@
         public void ClickAddEventAndGetEventId(Event details)
         {
             PageObject.PageObjectProvider.Manager.Events.AddEvent_Click();
-            PageObject.PageObjectProvider.Manager.Events.EventType_Select(CustomStringAttribute.GetCustomString(FormData.EventType.ProEvent));
+            PageObject.PageObjectProvider.Manager.Events.EventType_Select(details.FormType);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.WaitForPresent();
             details.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.GetAttribute("value"));
         }
 
         public void StartPage(Event details)
         {
+            if (details.StartPage.EventType.HasValue)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventType.SelectWithText(details.StartPage.EventType.ToString());
+            }
+
             if (details.StartPage.StartDate.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartDate_Type(details.StartPage.StartDate.Value);

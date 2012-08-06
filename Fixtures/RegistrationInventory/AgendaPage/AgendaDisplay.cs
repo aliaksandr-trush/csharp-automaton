@@ -103,8 +103,7 @@
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG4);
             AG4.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             CFCheckboxResponse resp = new CFCheckboxResponse();
             resp.CustomField = PICustomField;
             resp.Checked = true;
@@ -116,8 +115,7 @@
             ((CheckBox)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG3).AgendaType)).Set(true);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG4).AgendaType.IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -160,8 +158,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.RegType = regType1;
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
@@ -177,8 +174,7 @@
             Assert.False(row4.AgendaType.IsPresent);
             Assert.False(row5.AgendaType.IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
@@ -191,8 +187,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
-            Registrant reg3 = new Registrant();
-            reg3.Event = evt;
+            Registrant reg3 = new Registrant(evt);
             reg3.RegType = regType1;
             reg3.RegisterMethod = RegisterMethod.Admin;
 
@@ -232,8 +227,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -272,8 +266,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.Gender = FormData.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
 
@@ -289,8 +282,7 @@
             Assert.True(row3.AgendaLabel.IsPresent);
             Assert.False(row4.AgendaLabel.IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.Gender = FormData.Gender.Female;
             reg2.BirthDate = DateTime.Today.AddYears(-18);
 

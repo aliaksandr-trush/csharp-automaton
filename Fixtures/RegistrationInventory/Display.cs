@@ -62,8 +62,7 @@
             Event.CheckoutPage.PageFooter = "This is checkout Page Footer.";
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, Event, false, false);
-            Registrant reg = new Registrant();
-            reg.Event = Event;
+            Registrant reg = new Registrant(Event);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             VerifyFooterResults footerResults = KeywordProvider.Display.VerifyCompanyFooter();

@@ -7,20 +7,6 @@
 
     public class RegisterDefault
     {
-        public string GenerateCurrentRegistrantLastName()
-        {
-            string lastName = string.Empty;
-
-            int check = Convert.ToInt32(System.DateTime.Now.Ticks.ToString().Substring(0, 5)) % 9;
-
-            lastName =
-                "Rgrssn-"
-                + check.ToString()
-                + System.DateTime.Now.Ticks.ToString().Substring(6);
-
-            return lastName;
-        }
-
         public double GetConfirmationTotal()
         {
             string amount = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.Text;

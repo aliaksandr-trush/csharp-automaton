@@ -17,6 +17,7 @@
         public TextBox City = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id);
         public MultiChoiceDropdown Country = new MultiChoiceDropdown("ctl00_cph_personalInfoStandardFields_rptFields_ctl13_sf_ddlResponse", LocateBy.Id);
         public MultiChoiceDropdown State = new MultiChoiceDropdown("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id);
+        public TextBox NonUSState = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl18_sf_txtResponse", LocateBy.Id);
         public TextBox Zip = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id);
         public TextBox WorkPhone = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id);
         public TextBox DateOfBirth = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl25_sf_dpResponse", LocateBy.Id);

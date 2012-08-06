@@ -109,6 +109,17 @@
                 case FormData.CustomFieldType.ContinueButton:
                     AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
+                case FormData.CustomFieldType.Duration:
+
+                    AgendaType = new TextBox(
+                        string.Format(locator + "//input[@id='{0}'][@class='durationEntry hasTimepicker dtPickerShadow']", agenda.Id), 
+                        LocateBy.XPath);
+
+                    AgendaLabel = new Label(string.Format(locator + "//label[@for='{0}']", agenda.Id), LocateBy.XPath);
+
+                    break;
+
                 default:
                     break;
             }

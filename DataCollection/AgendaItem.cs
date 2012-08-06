@@ -201,4 +201,13 @@
         public double MinAmount;
         public double MaxAmount;
     }
+
+    public class AgendaItem_Duration : AgendaItem
+    {
+        public AgendaItem_Duration(string name)
+            : base(name)
+        {
+            Type = FormData.CustomFieldType.Duration;
+        }
+    }
 }

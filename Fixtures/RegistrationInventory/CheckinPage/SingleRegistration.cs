@@ -15,8 +15,7 @@
         {
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, this.evt, false);
 
-            Registrant registrant = new Registrant(string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
-            registrant.Event = this.evt;
+            Registrant registrant = new Registrant(this.evt, string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -72,10 +71,10 @@
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
+                FormData.PersonalInfoField.FirstName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.FirstName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
+                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.MiddleName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
@@ -93,15 +92,13 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithLimit);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventWithLimit;
+            Registrant registrant = new Registrant(EventWithLimit);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
-            Registrant registrantWhenFull = new Registrant();
-            registrantWhenFull.Event = EventWithLimit;
+            Registrant registrantWhenFull = new Registrant(EventWithLimit);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrantWhenFull);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
@@ -137,8 +134,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithRegType);
 
-            Registrant registrant = new Registrant(string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
-            registrant.Event = EventWithRegType;
+            Registrant registrant = new Registrant(EventWithRegType, string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
             registrant.RegType = EventWithRegType.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -179,10 +175,10 @@
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                            FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
+                            FormData.PersonalInfoField.FirstName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.FirstName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
+                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.MiddleName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
@@ -228,8 +224,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeGroupDiscount);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventWithFeeGroupDiscount;
+            Registrant registrant = new Registrant(EventWithFeeGroupDiscount);
             registrant.RegType = EventWithFeeGroupDiscount.StartPage.RegTypes[0];
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -257,12 +252,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventWithFeeDCDollar;
+            Registrant registrant = new Registrant(EventWithFeeDCDollar);
             registrant.RegType = EventWithFeeDCDollar.StartPage.RegTypes[1];
 
-            Registrant reg = new Registrant(string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
-            reg.Event = EventWithFeeDCDollar;
+            Registrant reg = new Registrant(EventWithFeeDCDollar, string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
@@ -297,8 +290,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventWithFeeDCDollar;
+            Registrant registrant = new Registrant(EventWithFeeDCDollar);
             registrant.RegType = EventWithFeeDCDollar.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -327,8 +319,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventFeeDCRequired);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = eventFeeDCRequired;
+            Registrant registrant = new Registrant(eventFeeDCRequired);
             registrant.RegType = eventFeeDCRequired.StartPage.RegTypes[1];
             registrant.PaymentMethod = PaymentMethod;
 
@@ -350,8 +341,7 @@
             Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.DiscountCode);
 
             DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
-            Registrant registrantWhenFull = new Registrant();
-            registrantWhenFull.Event = reg.Event;
+            Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.RegType = reg.Event.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
@@ -367,8 +357,7 @@
             Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.AccessCode);
 
             DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
-            Registrant registrantWhenFull = new Registrant();
-            registrantWhenFull.Event = reg.Event;
+            Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.RegType = reg.Event.StartPage.RegTypes[1];
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
@@ -395,8 +384,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeEaylyPrice_Registrants);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventFeeEaylyPrice_Registrants;
+            Registrant registrant = new Registrant(EventFeeEaylyPrice_Registrants);
             registrant.RegType = EventFeeEaylyPrice_Registrants.StartPage.RegTypes[0];
             registrant.PaymentMethod = PaymentMethod;
 
@@ -407,8 +395,7 @@
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
-            Registrant registrant1 = new Registrant();
-            registrant1.Event = EventFeeEaylyPrice_Registrants;
+            Registrant registrant1 = new Registrant(EventFeeEaylyPrice_Registrants);
             registrant1.RegType = EventFeeEaylyPrice_Registrants.StartPage.RegTypes[0];
             registrant1.PaymentMethod = PaymentMethod;
 
@@ -440,8 +427,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventEarlyPrice);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventEarlyPrice;
+            Registrant registrant = new Registrant(EventEarlyPrice);
             registrant.RegType = EventEarlyPrice.StartPage.RegTypes[0];
             registrant.PaymentMethod = PaymentMethod;
 
@@ -472,8 +458,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventLatePrice);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventLatePrice;
+            Registrant registrant = new Registrant(EventLatePrice);
             registrant.RegType = EventLatePrice.StartPage.RegTypes[0];
             registrant.PaymentMethod = PaymentMethod;
 
@@ -510,8 +495,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventMiddlePrice);
 
-            Registrant registrant = new Registrant();
-            registrant.Event = EventMiddlePrice;
+            Registrant registrant = new Registrant(EventMiddlePrice);
             registrant.RegType = EventMiddlePrice.StartPage.RegTypes[0];
             registrant.PaymentMethod = PaymentMethod;
 
@@ -559,8 +543,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             reg.RegType = regType;
             reg.PaymentMethod = paymentMethod;
 
@@ -581,8 +564,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             reg.RegType = regType1;
             reg.RegisterMethod = RegisterMethod.RegTypeDirectUrl;
 
