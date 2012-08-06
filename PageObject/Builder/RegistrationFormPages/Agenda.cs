@@ -100,6 +100,7 @@
         public ButtonOrLink OK = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='OK']", LocateBy.XPath);
         public ButtonOrLink CancelCopy = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='Cancel']", LocateBy.XPath);
         public CheckBox DoNotAllowOverlapping = new CheckBox("ctl00_cph_chkEnableScheduleConflictChecking", LocateBy.Id);
+        public CheckBox IsShoppingCart = new CheckBox("ctl00_cph_chkEventsIsCart", LocateBy.Id);
         #endregion
 
         #region Generate Some Elements

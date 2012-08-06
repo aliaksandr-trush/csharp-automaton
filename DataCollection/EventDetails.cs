@@ -167,6 +167,7 @@
     {
         public List<AgendaItem> AgendaItems = new List<AgendaItem>();
         public bool? DoNotAllowOverlapping;
+        public bool? IsShoppingCart;
         public string PageHeader;
         public string PageFooter;
     }

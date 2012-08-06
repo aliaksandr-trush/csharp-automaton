@@ -443,6 +443,22 @@
         }
 
         [Test]
+        public void ShoppingCart()
+        {
+            Event evt = new Event("RI_Agenda_ShoppingCart");
+            evt.AgendaPage = new AgendaPage();
+            evt.AgendaPage.IsShoppingCart = true;
+
+            DataCollection.AgendaItemCheckBox sessionOne = new AgendaItemCheckBox("SessionOne");
+            sessionOne.Location = "FirstRoom";
+            DateTime oneYearAfter = DateTime.Now.AddYears(1);
+            sessionOne.StartDate = sessionOne.StartTime = oneYearAfter;
+            sessionOne.EndDate = sessionOne.EndTime = oneYearAfter.AddHours(1);
+            DataCollection.AgendaItemCheckBox sessionTwo = new AgendaItemCheckBox("SessionTwo");
+            DataCollection.AgendaItemCheckBox sessionThree = new AgendaItemCheckBox("SessionThree");
+        }
+
+        [Test]
         [Category(Priority.Three)]
         public void AgendaLocation()
         {
