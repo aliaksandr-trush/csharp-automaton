@@ -170,16 +170,14 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.RegType = regType1;
             reg1.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
             Assert.True(reg1.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType1;
             reg2.PaymentMethod = paymentMethod;
 
@@ -217,8 +215,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             reg.RegType = regType;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
@@ -294,8 +291,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt1;
+            Registrant reg = new Registrant(evt1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);

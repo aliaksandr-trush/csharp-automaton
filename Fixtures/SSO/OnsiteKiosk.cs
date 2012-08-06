@@ -23,12 +23,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt);
 
-            Registrant reg1 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.Event = evt;
             reg1.RegType = regType1;
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
@@ -51,7 +49,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.NewSearch_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Enter_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Password.Type(Registrant.Default.Password);
+            PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Password.Type(DataCollection.DefaultPersonalInfo.Password);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SubmitPassword_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.NewSearch_Click();
 
@@ -63,7 +61,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.GoBackToPreviousPage();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.GoBackToPreviousPage();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.OnsiteRegister_Click();
-            Registrant reg3 = new Registrant();
+            Registrant reg3 = new Registrant(evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType2);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();

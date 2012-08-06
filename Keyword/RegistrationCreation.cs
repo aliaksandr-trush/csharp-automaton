@@ -107,7 +107,7 @@
             }
             else
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(Registrant.Default.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(DataCollection.DefaultPersonalInfo.Password);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -115,107 +115,127 @@
 
         public void PersonalInfo(Registrant reg)
         {
-            string lastName = reg.LastName = KeywordProvider.RegisterDefault.GenerateCurrentRegistrantLastName();
+            reg.SetCurrentRegistrantLastName();
             
             if (reg.FirstName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(Registrant.Default.FirstName);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(Registrant.Default.FirstName);
+            ////}
+
             if (reg.MiddleName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(reg.MiddleName);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(Registrant.Default.MiddleName);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(Registrant.Default.MiddleName);
+            ////}
 
-            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(lastName);
+            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(reg.LastName);
             
             if (reg.JobTitle != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(Registrant.Default.JobTitle);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(Registrant.Default.JobTitle);
+            ////}
+
             if (reg.Company != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(reg.Company);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(Registrant.Default.Company);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(Registrant.Default.Company);
+            ////}
+
             if (reg.AddressLineOne != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(reg.AddressLineOne);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(Registrant.Default.AddressLineOne);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(Registrant.Default.AddressLineOne);
+            ////}
+
             if (reg.City != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(reg.City);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
+            ////}
+
             if (reg.Country.HasValue)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Country.SelectWithText(
                     Utilities.CustomStringAttribute.GetCustomString(reg.Country.Value));
             }
+
             if (reg.State != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(reg.State);
             }
-            else
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(Registrant.Default.State);
+            ////}
+
+            if (reg.NonUSState != null)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(Registrant.Default.State);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.NonUSState.Type(reg.NonUSState);
             }
+
             if (reg.ZipCode != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(reg.ZipCode);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(Registrant.Default.ZipCode);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(Registrant.Default.ZipCode);
+            ////}
+
             if (reg.WorkPhone != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(reg.WorkPhone);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
-            }
+            ////else
+            ////{
+            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
+            ////}
+
             if (reg.BirthDate.HasValue)
             {
                 string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
             }
+
             if (reg.Gender.HasValue)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Gender.SelectWithText(reg.Gender.Value.ToString());
             }
-            if ((reg.Password != null) && (reg.RegisterMethod != RegisterMethod.Admin))
+
+            if (reg.RegisterMethod != RegisterMethod.Admin)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
+                if (reg.Password != null)
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
+                }
+                else
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(DataCollection.DefaultPersonalInfo.Password);
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(DataCollection.DefaultPersonalInfo.Password);
+                }
             }
-            else if (reg.RegisterMethod != RegisterMethod.Admin)
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(Registrant.Default.Password);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(Registrant.Default.Password);
-            }
+
             if (reg.CustomFieldResponses.Count != 0)
             {
                 foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
@@ -336,6 +356,14 @@
                                     AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
                                 }
                                 break;
+
+                            case FormData.CustomFieldType.Duration:
+                                {
+                                    AgendaResponse_Duration resp = response as AgendaResponse_Duration;
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
+                                }
+                                break;
+
                             default:
                                 break;
                         }
@@ -365,6 +393,11 @@
                     default:
                         break;
                 }
+            }
+
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AggreementToWaiver.IsDisplay)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AggreementToWaiver.Set(true);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();

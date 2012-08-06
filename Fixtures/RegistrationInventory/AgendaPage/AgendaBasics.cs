@@ -56,8 +56,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = AgendaItem1;
             resp1.Checked = true;
@@ -152,8 +151,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -211,8 +209,7 @@
             Assert.True(KeywordProvider.ManagerDefault.HasErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice));
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             AgendaRadioButtonResponse resp1 = new AgendaRadioButtonResponse();
             resp1.AgendaItem = AG1;
             resp1.ChoiceItem = AG1Choice1;
@@ -226,7 +223,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Registrant reg2 = new Registrant();
+            Registrant reg2 = new Registrant(evt);
             reg2.CustomFieldResponses.Add(resp1);
             reg2.CustomFieldResponses.Add(resp2);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
@@ -234,7 +231,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Registrant reg3 = new Registrant();
+            Registrant reg3 = new Registrant(evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
@@ -275,7 +272,7 @@
             AgendaItemCheckBox ChangeToHeader = new AgendaItemCheckBox("ChangeToHeader");
             ChangeToHeader.StartDate = DateTime.Today.AddDays(-5);
             ChangeToHeader.EndDate = DateTime.Today.AddDays(5);
-            ChangeToHeader.Location = Registrant.Default.AddressLineOne;
+            ChangeToHeader.Location = DataCollection.DefaultPersonalInfo.AddressLineOne;
             ChangeToHeader.Price = 10;
             ChangeToHeader.SpacesAvailable = 5;
             evt.AgendaPage.AgendaItems.Add(AGNumber);
@@ -351,7 +348,7 @@
             ChangeToHeader.Type = FormData.CustomFieldType.SectionHeader;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
-            Registrant reg = new Registrant();
+            Registrant reg = new Registrant(evt);
             reg.Event = evt;
             AgendaCharInputResponse resp1 = new AgendaCharInputResponse();
             resp1.AgendaItem = AGNumber;
@@ -421,24 +418,49 @@
         }
 
         [Test]
+        public void Agenda_Duration()
+        {
+            Configuration.ConfigurationProvider.XmlConfig.ReloadAccount(Configuration.XmlConfiguration.AccountType.ActiveEurope);
+            Event evt = new Event("RI_Agenda_Duration");
+            evt.FormType = FormData.FormType.ActiveEuropeEvent;
+            evt.StartPage.EventType = EventType.Running;
+            evt.AgendaPage = new AgendaPage();
+            DataCollection.AgendaItem_Duration duration = new AgendaItem_Duration("AG_Duration");
+            evt.AgendaPage.AgendaItems.Add(duration);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg = new Registrant(evt);
+            AgendaResponse_Duration duration_Response = new AgendaResponse_Duration();
+            duration_Response.AgendaItem = duration;
+            duration_Response.Duration = new TimeSpan(1, 30, 30);
+            reg.CustomFieldResponses.Add(duration_Response);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.RegistrationCreation.Agenda(reg);
+            KeywordProvider.RegistrationCreation.Checkout(reg);
+        }
+
+        [Test]
         [Category(Priority.Three)]
         public void AgendaLocation()
         {
             Event evt = new Event("FileUploadAndLocation");
+            evt.FormType = FormData.FormType.ActiveEuropeEvent;
             evt.AgendaPage = new AgendaPage();
             AgendaItemCheckBox AGCheckbox = new AgendaItemCheckBox("AGCheckbox");
-            AGCheckbox.Location = Registrant.Default.AddressLineOne;
+            AGCheckbox.Location = DataCollection.DefaultPersonalInfo.AddressLineOne;
             evt.AgendaPage.AgendaItems.Add(AGCheckbox);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
             Assert.AreEqual(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                AGCheckbox).GetAgendaLocation(AGCheckbox), Registrant.Default.AddressLineOne);
+                AGCheckbox).GetAgendaLocation(AGCheckbox), DataCollection.DefaultPersonalInfo.AddressLineOne);
         }
 
         [Test]
@@ -468,8 +490,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = AgendaShowCapacity;
             resp1.Checked = true;
@@ -494,8 +515,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             KeywordProvider.RegistrationCreation.Checkout(reg1);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.CustomFieldResponses.Add(resp4);
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);

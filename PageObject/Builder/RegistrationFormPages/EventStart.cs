@@ -10,6 +10,7 @@
         #region WebElements
         public TextBox Title = new TextBox("ctl00_cph_txtEventsEventTitle", LocateBy.Id);
         public TextBox Shortcut = new TextBox("ctl00_cph_txtEventsShortcutDescription", LocateBy.Id);
+        public MultiChoiceDropdown EventType = new MultiChoiceDropdown("ctl00_cph_ddlChannels", LocateBy.Id);
         public TextBox EventFee = new TextBox("ctl00_cph_txtEventCost_text", LocateBy.Id);
         public ButtonOrLink EventFeeAdvanced = new ButtonOrLink("ctl00_cph_mdDefineCost", LocateBy.Id);
         public EventFeeDefine EventFeeDefine = new EventFeeDefine("dialog");

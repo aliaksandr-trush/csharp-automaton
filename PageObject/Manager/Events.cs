@@ -19,9 +19,9 @@
             WaitForAJAX();
         }
 
-        public void EventType_Select(string eventType)
+        public void EventType_Select(DataCollection.FormData.FormType formType)
         {
-            ButtonOrLink EventType = new ButtonOrLink(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", eventType), LocateBy.XPath);
+            ButtonOrLink EventType = new ButtonOrLink(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", CustomStringAttribute.GetCustomString(formType)), LocateBy.XPath);
 
             EventType.WaitForDisplay();
             EventType.Click();

@@ -19,9 +19,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, false, true);
 
-            Registrant reg = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg.Password = ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
             reg.RegType = regType;
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
@@ -65,13 +64,11 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, false, true);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.RegType = regType2;
 
-            Registrant reg2 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg2 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg2.Password = ExternalAuthenticationData.SSOPassword;
-            reg2.Event = evt;
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);

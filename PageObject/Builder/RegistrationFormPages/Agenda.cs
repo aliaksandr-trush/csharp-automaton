@@ -11,6 +11,8 @@
         #region WebElements
         public ButtonOrLink CreateAgendaItem = new ButtonOrLink("Create Agenda Item", LocateBy.LinkText);
         public ButtonOrLink AddAgendaItem = new ButtonOrLink("Add Agenda Item", LocateBy.LinkText);
+        public ButtonOrLink CreateActivities = new ButtonOrLink("Create Activities", LocateBy.LinkText);
+        public ButtonOrLink AddActivities = new ButtonOrLink("Add Activities", LocateBy.LinkText);
         public TextBox NameOnForm = new TextBox("ctl00_cph_ucCF_mipNam_elDesc_TextArea", LocateBy.Id);
         public ButtonOrLink NameOptions = new ButtonOrLink("ctl00_cph_ucCF_mipNam_bccMoreInfoNaming_optionsLink", LocateBy.Id);
         public TextBox NameOnReceipt = new TextBox("ctl00_cph_ucCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
@@ -135,6 +137,22 @@
         {
             this.AddAgendaItem.WaitForDisplay();
             this.AddAgendaItem.Click();
+            Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
+
+        public void CreateActivities_Click()
+        {
+            this.CreateActivities.WaitForDisplay();
+            this.CreateActivities.Click();
+            Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
+
+        public void AddActivities_Click()
+        {
+            this.AddActivities.WaitForDisplay();
+            this.AddActivities.Click();
             Utility.ThreadSleep(3);
             WaitForAJAX();
         }

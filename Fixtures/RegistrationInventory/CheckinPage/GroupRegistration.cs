@@ -22,11 +22,9 @@
                 this.groupUniqueEmailEvent, 
                 false);
 
-            Registrant reg1 = new Registrant();
-            Registrant reg2 = new Registrant();
+            Registrant reg1 = new Registrant(this.groupUniqueEmailEvent);
+            Registrant reg2 = new Registrant(this.groupUniqueEmailEvent);
             this.emailAddress = reg1.Email;
-            reg1.Event = this.groupUniqueEmailEvent;
-            reg2.Event = this.groupUniqueEmailEvent;
             List<Registrant> regs = new List<Registrant>();
             regs.Add(reg1);
             regs.Add(reg2);
@@ -41,8 +39,7 @@
         {
             this.GroupUniqueEmail();
 
-            Registrant registrant = new Registrant(this.emailAddress);
-            registrant.Event = this.groupUniqueEmailEvent;
+            Registrant registrant = new Registrant(this.groupUniqueEmailEvent, this.emailAddress);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -69,8 +66,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupUsedEmailDiffEvent);
 
-            Registrant registrant = new Registrant(this.emailAddress);
-            registrant.Event = GroupUsedEmailDiffEvent;
+            Registrant registrant = new Registrant(GroupUsedEmailDiffEvent, this.emailAddress);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -82,10 +78,10 @@
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.FirstName).Text.Trim().Equals(Registrant.Default.FirstName));
+                FormData.PersonalInfoField.FirstName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.FirstName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(Registrant.Default.MiddleName));
+                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.MiddleName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
                 FormData.PersonalInfoField.Password).Text != null);
@@ -112,12 +108,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupEventFeeGroupDiscount);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = GroupEventFeeGroupDiscount;
+            Registrant reg1 = new Registrant(GroupEventFeeGroupDiscount);
             reg1.RegType = GroupEventFeeGroupDiscount.StartPage.RegTypes[0];
             reg1.PaymentMethod = paymentMethod;
-            Registrant reg2 = new Registrant();
-            reg1.Event = GroupEventFeeGroupDiscount;
+            Registrant reg2 = new Registrant(GroupEventFeeGroupDiscount);
             reg1.RegType = GroupEventFeeGroupDiscount.StartPage.RegTypes[0];
             List<Registrant> regs = new List<Registrant>();
             regs.Add(reg1);
@@ -138,10 +132,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupEventLimitReached);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = GroupEventLimitReached;
-            Registrant reg2 = new Registrant();
-            reg2.Event = GroupEventLimitReached;
+            Registrant reg1 = new Registrant(GroupEventLimitReached);
+            Registrant reg2 = new Registrant(GroupEventLimitReached);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -163,10 +155,8 @@
         {
             this.GroupUniqueEmail();
 
-            Registrant reg1 = new Registrant(this.emailAddress);
-            reg1.Event = this.groupUniqueEmailEvent;
-            Registrant reg2 = new Registrant();
-            reg2.Event = this.groupUniqueEmailEvent;
+            Registrant reg1 = new Registrant(this.groupUniqueEmailEvent, this.emailAddress);
+            Registrant reg2 = new Registrant(this.groupUniqueEmailEvent);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
 
@@ -197,10 +187,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            Registrant reg2 = new Registrant();
-            reg1.Event = evt;
-            reg2.Event = evt;
+            Registrant reg1 = new Registrant(evt);
+            Registrant reg2 = new Registrant(evt);
             reg1.RegType = regType;
             reg2.RegType = regType;
             List<Registrant> regs = new List<Registrant>();
@@ -213,8 +201,7 @@
             KeywordProvider.RegistrationCreation.Login(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-            Registrant reg3 = new Registrant();
-            reg3.Event = evt;
+            Registrant reg3 = new Registrant(evt);
             reg3.RegType = regType;
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
@@ -234,10 +221,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            Registrant reg2 = new Registrant();
-            reg1.Event = evt;
-            reg2.Event = evt;
+            Registrant reg1 = new Registrant(evt);
+            Registrant reg2 = new Registrant(evt);
             reg1.RegType = regType;
             List<Registrant> regs = new List<Registrant>();
             regs.Add(reg1);
@@ -249,8 +234,7 @@
             KeywordProvider.RegistrationCreation.Login(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-            Registrant reg3 = new Registrant();
-            reg3.Event = evt;
+            Registrant reg3 = new Registrant(evt);
 
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.IsPresent);
@@ -268,8 +252,7 @@
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
 
-            Registrant reg = new Registrant(emailAddress);
-            reg.Event = this.groupUniqueEmailEvent;
+            Registrant reg = new Registrant(this.groupUniqueEmailEvent, emailAddress);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
 
@@ -291,8 +274,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GoBackLink);
 
-            Registrant reg = new Registrant();
-            reg.Event = GoBackLink;
+            Registrant reg = new Registrant(GoBackLink);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);

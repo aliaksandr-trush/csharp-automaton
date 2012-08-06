@@ -23,12 +23,10 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt);
 
-            Registrant reg1 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.Event = evt;
             reg1.RegType = regType1;
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
@@ -55,7 +53,7 @@
 
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.Continue_Click();
-            PageObject.PageObjectProvider.Reports.AttendeeDirectory.Password.Type(Registrant.Default.Password);
+            PageObject.PageObjectProvider.Reports.AttendeeDirectory.Password.Type(DataCollection.DefaultPersonalInfo.Password);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.Continue_Click();
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.SignOut_Click();
         }
