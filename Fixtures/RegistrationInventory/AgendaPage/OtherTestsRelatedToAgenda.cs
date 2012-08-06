@@ -62,8 +62,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
             AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
             resp.AgendaItem = agenda1;
             resp.Checked = true;
@@ -105,8 +104,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = agenda1;
             resp1.Checked = true;
@@ -128,8 +126,7 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.CustomFieldResponses.Add(resp1);
             reg2.CustomFieldResponses.Add(resp2);
 
@@ -157,8 +154,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
