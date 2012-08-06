@@ -69,7 +69,7 @@
             reg1.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(),aGStandardPrice.Price
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
                 + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.EarlyPrice.earlyPrice + aGLatePrice.LatePrice.latePrice);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant();
@@ -81,7 +81,7 @@
             reg2.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), aGStandardPrice.Price
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
                 + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.Price + aGLatePrice.LatePrice.latePrice);
         }
 
@@ -242,7 +242,7 @@
                 + agendaDCFixUnderZero.Price.Value + agendaDCPercentIncreace.Price.Value * 1.1 + (agendaDCFixIncreace.Price.Value + 10)
                 + agendaDCPercentIncreaceUnderZero.Price.Value + agendaDCFixIncreaceUnderZero.Price.Value + agendaDCWithLimit.Price.Value * 0.9
                 + agendaDCRequired.Price.Value * 0.9;
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), expectedTotal);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), expectedTotal);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant();
             reg1.Event = evt;
@@ -363,7 +363,7 @@
             regs1.Add(reg2);
 
             KeywordProvider.RegistrationCreation.GroupRegistration(regs1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), 300 - 5 * 4);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 5 * 4);
 
             KeywordProvider.SignIn.SignIn(DataCollection.EventFolders.Folders.RegistrationInventory);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
@@ -389,7 +389,7 @@
             regs2.Add(reg4);
 
             KeywordProvider.RegistrationCreation.GroupRegistration(regs2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), 300 - 10 * 4);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 10 * 4);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.Login(reg1);
@@ -406,7 +406,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg5);
             KeywordProvider.RegistrationCreation.Agenda(reg5);
             KeywordProvider.RegistrationCreation.Checkout(reg5);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), 450 - 5 * 6);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 450 - 5 * 6);
 
             DataCollection.Registrant reg6 = new DataCollection.Registrant();
             reg6.Event = evt;
@@ -429,7 +429,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg6);
             KeywordProvider.RegistrationCreation.Agenda(reg6);
             KeywordProvider.RegistrationCreation.Checkout(reg1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetConfirmationTotal(), 300 - 10 * 4);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 10 * 4);
         }
 
         [Test]
@@ -496,7 +496,7 @@
             reg1.CustomFieldResponses.Add(resp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.AreEqual(55, KeywordProvider.RegisterDefault.GetConfirmationTotal());
+            Assert.AreEqual(55, KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation));
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant();
 
@@ -514,7 +514,7 @@
             reg2.CustomFieldResponses.Add(resp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.AreEqual(50, KeywordProvider.RegisterDefault.GetConfirmationTotal());
+            Assert.AreEqual(50, KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation));
         }
     }
 }

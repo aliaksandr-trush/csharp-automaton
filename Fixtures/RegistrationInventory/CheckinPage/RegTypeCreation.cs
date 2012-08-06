@@ -176,7 +176,7 @@
             reg1.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(reg1.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetConfirmationTotal()));
+            Assert.True(reg1.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             Registrant reg2 = new Registrant();
             reg2.Event = evt;
@@ -184,7 +184,7 @@
             reg2.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(reg2.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetConfirmationTotal()));
+            Assert.True(reg2.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();

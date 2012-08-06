@@ -302,6 +302,11 @@
                     agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
                 }
 
+                if (details.AgendaPage.DoNotAllowOverlapping.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(details.AgendaPage.DoNotAllowOverlapping.Value);
+                }
+
                 if (details.AgendaPage.PageHeader != null)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaPageHeader_Click();

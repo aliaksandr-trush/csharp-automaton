@@ -403,7 +403,7 @@
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == EarlyPrice.earlyPrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == EarlyPrice.earlyPrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
@@ -415,7 +415,7 @@
             KeywordProvider.RegistrationCreation.Checkin(registrant1);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant1);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == RegType.Price.Value);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == RegType.Price.Value);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant1);
         }
@@ -448,7 +448,7 @@
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == EarlyPrice.earlyPrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == EarlyPrice.earlyPrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -480,7 +480,7 @@
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == LatePrice.latePrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == LatePrice.latePrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -518,7 +518,7 @@
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == RegType.Price.Value);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == RegType.Price.Value);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -565,7 +565,7 @@
             reg.PaymentMethod = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
-            Assert.True(KeywordProvider.RegisterDefault.GetConfirmationTotal() == 75);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 75);
         }
 
         [Test]

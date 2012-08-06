@@ -94,6 +94,10 @@
         public Label AgendaChoiceItemCount = new Label("//*[@id='ctl00_cph_ucCF_grdLI_tblGrid']/tbody/tr[@class='dragTR']", LocateBy.XPath);
         public TextBox MinAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMinVarAmount_text", LocateBy.Id);
         public TextBox MaxAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount_text", LocateBy.Id);
+        public TextBox CopyAgendaAmount = new TextBox("//input[@class='rwDialogInput'][@value='1']", LocateBy.XPath);
+        public ButtonOrLink OK = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='OK']", LocateBy.XPath);
+        public ButtonOrLink CancelCopy = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='Cancel']", LocateBy.XPath);
+        public CheckBox DoNotAllowOverlapping = new CheckBox("ctl00_cph_chkEnableScheduleConflictChecking", LocateBy.Id);
         #endregion
 
         #region Generate Some Elements
@@ -415,6 +419,15 @@
             WaitForAJAX();
             WaitForLoad();
         }
+
+        public void OK_Click()
+        {
+            this.OK.WaitForDisplay();
+            this.OK.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
         #endregion
     }
 
@@ -483,11 +496,13 @@
     {
         public ButtonOrLink Agenda;
         public ButtonOrLink Delete;
+        public ButtonOrLink Copy;
 
         public AgendaRow(DataCollection.AgendaItem agendaItem)
         {
-            this.Agenda = new ButtonOrLink(string.Format("//*[@class='r1 colwidth1'][@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
-            this.Delete = new ButtonOrLink(string.Format("//*[@class='r1 colwidth4'][@id='listGridTD{0}5']//img[@title='Delete']", agendaItem.Id), LocateBy.XPath);
+            this.Agenda = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
+            this.Delete = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItem.Id), LocateBy.XPath);
+            this.Copy = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItem.Id), LocateBy.XPath);
         }
 
         public void Agenda_Click()
@@ -505,6 +520,13 @@
             UIUtilityProvider.UIHelper.GetConfirmation();
             Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
+        }
+
+        public void Copy_Click()
+        {
+            this.Copy.WaitForDisplay();
+            this.Copy.Click();
+            Utility.ThreadSleep(1);
         }
     }
 

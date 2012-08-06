@@ -47,6 +47,12 @@
             Merchandise
         }
 
+        public enum ConfirmationOptions
+        {
+            OK,
+            Cancel
+        }
+
         public enum RegTypeDisplayOption
         {
             [CustomString("1")]

@@ -12,6 +12,8 @@
             LocateBy.XPath);
         public ButtonOrLink CloseDetailsPopup = new ButtonOrLink("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
         public Window AgendaDetailsWindow = new Window();
+        public ButtonOrLink RecalculateTotal = new ButtonOrLink("//div[@class='sectionTotal']/button[text()='Recalculate Total']", LocateBy.XPath);
+        public Label Total = new Label("totalAmt", LocateBy.Id);
 
         public AgendaRow GetAgendaItem(AgendaItem agenda)
         {
@@ -29,6 +31,15 @@
             this.CloseDetailsPopup.WaitForDisplay();
             this.CloseDetailsPopup.Click();
             Utilities.Utility.ThreadSleep(1);
+        }
+
+        public void RecalculateTotal_Click()
+        {
+            this.RecalculateTotal.WaitForDisplay();
+            this.RecalculateTotal.Click();
+            Utilities.Utility.ThreadSleep(1);
+            WaitForAJAX();
+            WaitForLoad();
         }
     }
 

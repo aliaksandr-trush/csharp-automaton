@@ -55,6 +55,7 @@
     <Compile Include="AgendaPage\AgendaBasics.cs" />
     <Compile Include="AgendaPage\AgendaDisplay.cs" />
     <Compile Include="AgendaPage\AgendaWithPrice.cs" />
+    <Compile Include="AgendaPage\OtherTestsRelatedToAgenda.cs" />
     <Compile Include="CheckinPage\GroupRegistration.cs" />
     <Compile Include="CheckinPage\RegTypeCreation.cs" />
     <Compile Include="CheckinPage\SingleRegistration.cs" />

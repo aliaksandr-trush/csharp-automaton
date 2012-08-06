@@ -157,6 +157,7 @@
     public class AgendaPage
     {
         public List<AgendaItem> AgendaItems = new List<AgendaItem>();
+        public bool? DoNotAllowOverlapping;
         public string PageHeader;
         public string PageFooter;
     }

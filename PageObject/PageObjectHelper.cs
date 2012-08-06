@@ -61,5 +61,24 @@
         {
             UIUtilityProvider.UIHelper.SelectTopWindow();
         }
+
+        public static void ClickConfirmation(DataCollection.FormData.ConfirmationOptions option)
+        {
+            if (option == DataCollection.FormData.ConfirmationOptions.OK)
+            {
+                UIUtilityProvider.UIHelper.GetConfirmation();
+                Utility.ThreadSleep(3);
+                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            }
+
+            if (option == DataCollection.FormData.ConfirmationOptions.Cancel)
+            {
+                UIUtilityProvider.UIHelper.ChooseCancelOnNextConfirmation();
+                Utility.ThreadSleep(3);
+                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            }
+        }
     }
 }
