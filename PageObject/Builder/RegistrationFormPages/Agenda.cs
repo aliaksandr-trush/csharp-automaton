@@ -17,7 +17,7 @@
         public ButtonOrLink NameOptions = new ButtonOrLink("ctl00_cph_ucCF_mipNam_bccMoreInfoNaming_optionsLink", LocateBy.Id);
         public TextBox NameOnReceipt = new TextBox("ctl00_cph_ucCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
         public TextBox NameOnReports = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtFieldName", LocateBy.Id);
-        public TextBox NameOnBadge = new TextBox("//*[@id='divBadgeCaption']//input", LocateBy.XPath);
+        public TextBox NameOnBadge = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtBadgeCaption", LocateBy.Id);
         public ButtonOrLink FieldType = new ButtonOrLink("ctl00_cph_ucCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
         public ButtonOrLink SaveItem = new ButtonOrLink("Save Item", LocateBy.LinkText);
         public ButtonOrLink SaveAndNew = new ButtonOrLink("Save & New", LocateBy.LinkText);

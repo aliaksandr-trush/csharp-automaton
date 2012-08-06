@@ -19,7 +19,6 @@
     {
         public AgendaItemCommon(string name) : base(name) { }
 
-        public string NameOnBadge;
         public DateTime? StartDate;
         public DateTime? StartTime;
         public DateTime? EndDate;
@@ -50,7 +49,6 @@
     {
         public CharInputAgendaItem(string name) : base(name) { }
 
-        public string NameOnBadge;
         public int? CharLimit;
         public string DetailsPopup;
         public string DetailsURL;

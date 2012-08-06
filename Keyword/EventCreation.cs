@@ -312,10 +312,10 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(details.AgendaPage.DoNotAllowOverlapping.Value);
                 }
 
-                if (details.AgendaPage.IsShoppingCart.HasValue)
+                if (details.AgendaPage.IsShoppingCart)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.IsShoppingCart.Set(details.AgendaPage.IsShoppingCart.Value);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.IsShoppingCart.Set(true);
                 }
 
                 if (details.AgendaPage.PageHeader != null)

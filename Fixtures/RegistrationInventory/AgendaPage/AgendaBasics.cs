@@ -80,18 +80,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg);
             KeywordProvider.RegistrationCreation.Checkout(reg);
 
-            List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
-
-            foreach (Label agenda in selectedAgendaItems)
-            {
-                List<AgendaResponse> resps = new List<AgendaResponse>();
-                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
-                {
-                    resps.Add(resp as AgendaResponse);
-                }
-                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
-                Assert.True(agendaItem != null);
-            }
+            this.VerifySelectedAgendaItems(reg);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
@@ -101,6 +90,24 @@
             Assert.True(results.Find(r => r.Contains(AgendaItem1.NameOnReports)) != null);
             Assert.True(results.Find(r => r.Contains(expectOnReports)) != null);
             Assert.True(results.Find(r => r.Contains(AgendaItem3.NameOnReports)) != null);
+        }
+
+        public void VerifySelectedAgendaItems(DataCollection.Registrant reg)
+        {
+            List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
+
+            foreach (Label agenda in selectedAgendaItems)
+            {
+                List<AgendaResponse> resps = new List<AgendaResponse>();
+
+                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
+                {
+                    resps.Add(resp as AgendaResponse);
+                }
+
+                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
+                Assert.True(agendaItem != null);
+            }
         }
 
         [Test]
@@ -436,15 +443,14 @@
             duration_Response.Duration = new TimeSpan(1, 30, 30);
             reg.CustomFieldResponses.Add(duration_Response);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            KeywordProvider.RegistrationCreation.Agenda(reg);
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
         }
 
         [Test]
         public void ShoppingCart()
         {
+            double agendaStandardPrice = 100;
+
             Event evt = new Event("RI_Agenda_ShoppingCart");
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.IsShoppingCart = true;
@@ -453,9 +459,45 @@
             sessionOne.Location = "FirstRoom";
             DateTime oneYearAfter = DateTime.Now.AddYears(1);
             sessionOne.StartDate = sessionOne.StartTime = oneYearAfter;
-            sessionOne.EndDate = sessionOne.EndTime = oneYearAfter.AddHours(1);
+            sessionOne.EndDate = sessionOne.EndTime = sessionOne.StartTime.Value.AddHours(1);
+            sessionOne.Price = agendaStandardPrice;
+
             DataCollection.AgendaItemCheckBox sessionTwo = new AgendaItemCheckBox("SessionTwo");
+            sessionTwo.Location = "SecondRoom";
+            sessionTwo.StartDate = sessionTwo.StartTime = sessionOne.EndTime.Value.AddHours(1);
+            sessionTwo.EndDate = sessionTwo.EndTime = sessionTwo.StartTime.Value.AddHours(1);
+            sessionTwo.Price = agendaStandardPrice;
+
             DataCollection.AgendaItemCheckBox sessionThree = new AgendaItemCheckBox("SessionThree");
+            sessionThree.Location = "ThirdRoom";
+            sessionThree.StartDate = sessionThree.StartTime = sessionTwo.EndTime.Value.AddHours(1);
+            sessionThree.EndDate = sessionThree.EndTime = sessionThree.StartTime.Value.AddHours(1);
+            sessionThree.Price = agendaStandardPrice;
+
+            evt.AgendaPage.AgendaItems.Add(sessionOne);
+            evt.AgendaPage.AgendaItems.Add(sessionTwo);
+            evt.AgendaPage.AgendaItems.Add(sessionThree);
+
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethod.Check));
+
+            Registrant reg = new Registrant(evt);
+
+            DataCollection.AgendaResponse responseOne = new AgendaResponse();
+            responseOne.AgendaItem = sessionOne;
+            DataCollection.AgendaResponse responseTwo = new AgendaResponse();
+            responseTwo.AgendaItem = sessionTwo;
+            DataCollection.AgendaResponse responseThree = new AgendaResponse();
+            responseThree.AgendaItem = sessionThree;
+
+            reg.CustomFieldResponses.Add(responseOne);
+            reg.CustomFieldResponses.Add(responseTwo);
+            reg.CustomFieldResponses.Add(responseThree);
+
+            reg.PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            this.VerifySelectedAgendaItems(reg);
         }
 
         [Test]

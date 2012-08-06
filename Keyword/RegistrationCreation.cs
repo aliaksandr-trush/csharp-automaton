@@ -23,7 +23,11 @@
                 PersonalInfo(reg);
             }
 
-            Agenda(reg);
+            if (reg.Event.AgendaPage != null && !reg.Event.AgendaPage.IsShoppingCart)
+            {
+                Agenda(reg);
+            }
+
             Checkout(reg);
         }
 
@@ -35,9 +39,12 @@
             {
                 PersonalInfo(regs[i]);
                 Agenda(regs[i]);
-                //Click add another person on checkout page
+
+                // Click add another person on checkout page
                 PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
+
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(regs[i + 1].Email);
+
                 if (regs[i + 1].RegType != null)
                 {
                     if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.HasValue)
@@ -61,6 +68,7 @@
                         PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(regs[i + 1].RegType.DiscountCode[0].Code);
                     }
                 }
+
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
 
@@ -72,6 +80,11 @@
         public void Checkin(Registrant reg)
         {
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
+
+            if (reg.Event.AgendaPage != null && reg.Event.AgendaPage.IsShoppingCart)
+            {
+                this.ShoppingCart(reg);
+            }
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
             {
@@ -97,6 +110,13 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+        }
+
+        private void ShoppingCart(DataCollection.Registrant reg)
+        {
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(FormData.EventCalendarView.Location);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.AddToCart(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ShoppingCart_RegisterButtonOne_Click();
         }
 
         public void Login(Registrant reg)
