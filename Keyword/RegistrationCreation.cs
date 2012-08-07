@@ -141,19 +141,11 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(Registrant.Default.FirstName);
-            ////}
 
             if (reg.MiddleName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(reg.MiddleName);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(Registrant.Default.MiddleName);
-            ////}
 
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(reg.LastName);
             
@@ -161,37 +153,21 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(Registrant.Default.JobTitle);
-            ////}
 
             if (reg.Company != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(reg.Company);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(Registrant.Default.Company);
-            ////}
 
             if (reg.AddressLineOne != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(reg.AddressLineOne);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(Registrant.Default.AddressLineOne);
-            ////}
 
             if (reg.City != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(reg.City);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
-            ////}
 
             if (reg.Country.HasValue)
             {
@@ -203,10 +179,6 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(reg.State);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(Registrant.Default.State);
-            ////}
 
             if (reg.NonUSState != null)
             {
@@ -217,19 +189,11 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(reg.ZipCode);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(Registrant.Default.ZipCode);
-            ////}
 
             if (reg.WorkPhone != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(reg.WorkPhone);
             }
-            ////else
-            ////{
-            ////    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
-            ////}
 
             if (reg.BirthDate.HasValue)
             {
@@ -306,7 +270,7 @@
             {
                 foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
                 {
-                    if (responses is AgendaResponse)
+                    if ((responses is AgendaResponse) && responses.IsUpdate)
                     {
                         AgendaResponse response = responses as AgendaResponse;
 
@@ -388,6 +352,8 @@
                                 break;
                         }
                     }
+
+                    responses.IsUpdate = false;
                 }
             }
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();

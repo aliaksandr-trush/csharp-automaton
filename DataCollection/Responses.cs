@@ -3,7 +3,9 @@
     using System;
 
     public class CustomFieldResponse
-    { }
+    {
+        public bool IsUpdate = true;
+    }
 
     public class CFResponse : CustomFieldResponse
     {

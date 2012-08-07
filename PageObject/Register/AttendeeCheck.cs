@@ -16,6 +16,14 @@
                                       LocateBy.Id);
         }
 
+        public ButtonOrLink Agenda(int index)
+        {
+            return new ButtonOrLink(string.Format(
+                                      "ctl00_cph_grdMembers_ctl{0}_lnkAgenda",
+                                      ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString()),
+                                      LocateBy.Id);
+        }
+
         public ButtonOrLink Cancel(int index)
         {
             return new ButtonOrLink(string.Format(
@@ -38,6 +46,17 @@
 
             PersonalInfo.WaitForDisplay();
             PersonalInfo.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
+        public void Agenda_Click(int index)
+        {
+            ButtonOrLink Agenda = this.Agenda(index);
+
+            Agenda.WaitForDisplay();
+            Agenda.Click();
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
