@@ -25,11 +25,11 @@
             Registrant reg1 = new Registrant(this.groupUniqueEmailEvent);
             Registrant reg2 = new Registrant(this.groupUniqueEmailEvent);
             this.emailAddress = reg1.Email;
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
         }
 
         [Test]
@@ -113,11 +113,11 @@
             reg1.PaymentMethod = paymentMethod;
             Registrant reg2 = new Registrant(GroupEventFeeGroupDiscount);
             reg1.RegType = GroupEventFeeGroupDiscount.StartPage.RegTypes[0];
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
         }
 
         [Test]
@@ -191,11 +191,11 @@
             Registrant reg2 = new Registrant(evt);
             reg1.RegType = regType;
             reg2.RegType = regType;
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             KeywordProvider.RegistrationCreation.Login(reg1);
@@ -224,11 +224,11 @@
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
             reg1.RegType = regType;
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             KeywordProvider.RegistrationCreation.Login(reg1);

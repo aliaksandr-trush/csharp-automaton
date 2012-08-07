@@ -79,11 +79,11 @@
 
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 

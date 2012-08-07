@@ -31,50 +31,49 @@
             Checkout(reg);
         }
 
-        public void GroupRegistration(List<Registrant> regs)
+        public void GroupRegistration(Group group)
         {
-            Checkin(regs[0]);
+            Checkin(group.Primary);
+            PersonalInfo(group.Primary);
 
-            for (int i = 0; i <= regs.Count - 2; i++)
+            for (int i = 0; i <= group.Secondaries.Count - 1; i++)
             {
-                PersonalInfo(regs[i]);
-                Agenda(regs[i]);
+                Agenda(group.Primary);
 
-                // Click add another person on checkout page
                 PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(regs[i + 1].Email);
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group.Secondaries[i].Email);
 
-                if (regs[i + 1].RegType != null)
+                if (group.Secondaries[i].RegType != null)
                 {
-                    if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.HasValue)
+                    if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.HasValue)
                     {
-                        if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
+                        if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(regs[i + 1].RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].RegType.RegTypeName);
                         }
                         else
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
                         }
                     }
                     else
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
                     }
 
-                    if (regs[i + 1].RegType.DiscountCode.Count != 0)
+                    if (group.Secondaries[i].RegType.DiscountCode.Count != 0)
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(regs[i + 1].RegType.DiscountCode[0].Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].RegType.DiscountCode[0].Code);
                     }
                 }
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+                PersonalInfo(group.Secondaries[i]);
+                Agenda(group.Secondaries[i]);
             }
 
-            PersonalInfo(regs[regs.Count - 1]);
-            Agenda(regs[regs.Count - 1]);
-            Checkout(regs[0]);
+            Checkout(group.Primary);
         }
 
         public void Checkin(Registrant reg)
@@ -356,7 +355,11 @@
                     responses.IsUpdate = false;
                 }
             }
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            }
         }
 
         public void Checkout(Registrant reg)

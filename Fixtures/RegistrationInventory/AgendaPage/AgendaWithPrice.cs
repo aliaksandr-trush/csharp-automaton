@@ -72,6 +72,10 @@
                 + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.EarlyPrice.earlyPrice + aGLatePrice.LatePrice.latePrice);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
+            resp1.IsUpdate = true;
+            resp2.IsUpdate = true;
+            resp3.IsUpdate = true;
+            resp4.IsUpdate = true;
             reg2.CustomFieldResponses.Add(resp1);
             reg2.CustomFieldResponses.Add(resp2);
             reg2.CustomFieldResponses.Add(resp3);
@@ -292,6 +296,8 @@
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
+            resp1.IsUpdate = true;
+            resp2.IsUpdate = true;
             reg2.CustomFieldResponses.Add(resp1);
             reg2.CustomFieldResponses.Add(resp2);
 
@@ -342,19 +348,25 @@
             DataCollection.AgendaCheckboxResponse resp2 = new DataCollection.AgendaCheckboxResponse();
             resp2.AgendaItem = fee2;
             resp2.Checked = true;
+            DataCollection.AgendaCheckboxResponse resp3 = new DataCollection.AgendaCheckboxResponse();
+            resp3.AgendaItem = fee1;
+            resp3.Checked = true;
+            DataCollection.AgendaCheckboxResponse resp4 = new DataCollection.AgendaCheckboxResponse();
+            resp4.AgendaItem = fee2;
+            resp4.Checked = true;
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             reg1.PaymentMethod = paymentMethod;
             reg1.CustomFieldResponses.Add(resp1);
             reg1.CustomFieldResponses.Add(resp2);
             System.Threading.Thread.Sleep(10);
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
-            List<DataCollection.Registrant> regs1 = new List<DataCollection.Registrant>();
-            regs1.Add(reg1);
-            regs1.Add(reg2);
+            reg2.CustomFieldResponses.Add(resp3);
+            reg2.CustomFieldResponses.Add(resp4);
+            DataCollection.Group group1 = new DataCollection.Group();
+            group1.Primary = reg1;
+            group1.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs1);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group1);
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 5 * 4);
 
             KeywordProvider.SignIn.SignIn(DataCollection.EventFolders.Folders.RegistrationInventory);
@@ -367,18 +379,22 @@
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
             DataCollection.Registrant reg3 = new DataCollection.Registrant(evt);
+            resp1.IsUpdate = true;
+            resp2.IsUpdate = true;
+            resp3.IsUpdate = true;
+            resp4.IsUpdate = true;
             reg3.PaymentMethod = paymentMethod;
             reg3.CustomFieldResponses.Add(resp1);
             reg3.CustomFieldResponses.Add(resp2);
             System.Threading.Thread.Sleep(10);
             DataCollection.Registrant reg4 = new DataCollection.Registrant(evt);
-            reg4.CustomFieldResponses.Add(resp1);
-            reg4.CustomFieldResponses.Add(resp2);
-            List<DataCollection.Registrant> regs2 = new List<DataCollection.Registrant>();
-            regs2.Add(reg3);
-            regs2.Add(reg4);
+            reg4.CustomFieldResponses.Add(resp3);
+            reg4.CustomFieldResponses.Add(resp4);
+            DataCollection.Group group2 = new DataCollection.Group();
+            group2.Primary = reg3;
+            group2.Secondaries.Add(reg4);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs2);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group2);
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 10 * 4);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
@@ -386,6 +402,8 @@
 
             DataCollection.Registrant reg5 = new DataCollection.Registrant(evt);
             reg5.PaymentMethod = paymentMethod;
+            resp1.IsUpdate = true;
+            resp2.IsUpdate = true;
             reg5.CustomFieldResponses.Add(resp1);
             reg5.CustomFieldResponses.Add(resp2);
 
@@ -398,6 +416,8 @@
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 450 - 5 * 6);
 
             DataCollection.Registrant reg6 = new DataCollection.Registrant(evt);
+            resp1.IsUpdate = true;
+            resp2.IsUpdate = true;
             reg6.CustomFieldResponses.Add(resp1);
             reg6.CustomFieldResponses.Add(resp2);
 
@@ -497,6 +517,7 @@
             }
 
             reg2.PaymentMethod = paymentMethod;
+            resp.IsUpdate = true;
             reg2.CustomFieldResponses.Add(resp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
