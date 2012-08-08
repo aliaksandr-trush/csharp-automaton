@@ -13,6 +13,7 @@
     {
         [Test]
         [Category(Priority.Three)]
+        [Description("1356")]
         public void AgendaConditionalLogic()
         {
             Event evt = new Event("AgendaConditionalLogic");
@@ -124,6 +125,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1357")]
         public void AgendaVisibility()
         {
             Event evt = new Event("AgendaVisibility");
@@ -204,6 +206,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1358")]
         public void AgendaShowHideDate()
         {
             Event evt = new Event("AgendaShowHideDate");
@@ -245,6 +248,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1359")]
         public void AgendaShowIf()
         {
             Event evt = new Event("AgendaShowIf");

@@ -3,8 +3,7 @@
     using System;
     using System.Collections.Generic;
     using NUnit.Framework;
-    using RegOnline.RegressionTest;
-    using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.Managers.Backend;
     using RegOnline.RegressionTest.Managers.Builder;
@@ -14,7 +13,6 @@
     using RegOnline.RegressionTest.Managers.Report;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
-    using RegOnline.RegressionTest.Attributes;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -116,24 +114,24 @@
             this.cfIDs = new Dictionary<CustomField,int>();
         }
 
-        [Test]
-        [Category(Priority.Two)]
-        [Description("419")]
-        public void AgendaItemConditionalLogic()
-        {
-            this.CreateEvent();
-            this.Register();
-        }
+        ////[Test]
+        ////[Category(Priority.Two)]
+        ////[Description("419")]
+        ////public void AgendaItemConditionalLogic()
+        ////{
+        ////    this.CreateEvent();
+        ////    this.Register();
+        ////}
 
-        [Test]
-        [Category(Priority.Two)]
-        [Description("420")]
-        public void AgendaItemWaitlisting()
-        {
-            this.CreateWaitlistEvent();
-            this.RegisterWaitlistEvent(2);
-            this.ChangeWaitlistedRegistrations();
-        }
+        ////[Test]
+        ////[Category(Priority.Two)]
+        ////[Description("420")]
+        ////public void AgendaItemWaitlisting()
+        ////{
+        ////    this.CreateWaitlistEvent();
+        ////    this.RegisterWaitlistEvent(2);
+        ////    this.ChangeWaitlistedRegistrations();
+        ////}
 
         [Test]
         [Category(Priority.Two)]

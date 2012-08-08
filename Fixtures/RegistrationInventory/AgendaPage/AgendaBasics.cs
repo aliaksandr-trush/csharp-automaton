@@ -427,6 +427,8 @@
         }
 
         [Test]
+        [Category(Priority.Two)]
+        [Description("1347")]
         public void Agenda_Duration()
         {
             Configuration.ConfigurationProvider.XmlConfig.ReloadAccount(Configuration.XmlConfiguration.AccountType.ActiveEurope);
@@ -449,6 +451,8 @@
         }
 
         [Test]
+        [Category(Priority.Two)]
+        [Description("1348")]
         public void ShoppingCart()
         {
             double agendaStandardPrice = 100;
@@ -504,6 +508,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1349")]
         public void AgendaLocation()
         {
             Event evt = new Event("AgendaLocation");
@@ -524,6 +529,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1350")]
         public void AgendaSpaces()
         {
             Event evt = new Event("AgendaSpaces");

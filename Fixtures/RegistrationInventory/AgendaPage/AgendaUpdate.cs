@@ -12,6 +12,7 @@
     {
         [Test]
         [Category(Priority.Three)]
+        [Description("1360")]
         public void UpdateReg()
         {
             Event evt = new Event("AgendaUpdateReg");
@@ -58,6 +59,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1361")]
         public void BackendUpdate()
         {
             Event evt = new Event("AgendaBackendUpdate");

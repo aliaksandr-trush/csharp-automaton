@@ -13,6 +13,7 @@
     {
         [Test]
         [Category(Priority.Four)]
+        [Description("1351")]
         public void AgendaEmailAddendum()
         {
             Event evt = new Event("AgendaEmailAddendum");
@@ -37,6 +38,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1352")]
         public void AgendaCalendaAndEventWeb()
         {
             Event evt = new Event("AgendaCalendaAndEventWeb");
@@ -86,6 +88,7 @@
 
         [Test]
         [Category(Priority.Four)]
+        [Description("1353")]
         public void AgendaDetailsAndGroupName()
         {
             Event evt = new Event("AgendaDetailsAndGroupName");
@@ -137,6 +140,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1354")]
         public void AgendaForceGroup()
         {
             Event evt = new Event("AgendaForceGroup");
@@ -275,6 +279,7 @@
 
         [Test]
         [Category(Priority.Four)]
+        [Description("1355")]
         public void AgendaStatus()
         {
             Event evt = new Event("AgendaStatus");
