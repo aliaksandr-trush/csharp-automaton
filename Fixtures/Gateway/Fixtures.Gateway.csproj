@@ -62,6 +62,10 @@
       <Project>{5F381378-8D75-4A9B-8CED-CC714285B5D9}</Project>
       <Name>Attributes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
+      <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Managers\Managers.csproj">
       <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
       <Name>Managers</Name>
