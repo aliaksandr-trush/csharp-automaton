@@ -7,6 +7,14 @@
 
     public class Agenda : Window
     {
+        public Label AgendaDetailsPopup = new Label(
+            "//div[@class='tooltipWrapper tooltipLightbox ui-dialog-content ui-widget-content']/div[@class='tooltipWrapperContent']",
+            LocateBy.XPath);
+        public ButtonOrLink CloseDetailsPopup = new ButtonOrLink("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
+        public Window AgendaDetailsWindow = new Window();
+        public ButtonOrLink RecalculateTotal = new ButtonOrLink("//div[@class='sectionTotal']/button[text()='Recalculate Total']", LocateBy.XPath);
+        public Label Total = new Label("totalAmt", LocateBy.Id);
+
         public AgendaRow GetAgendaItem(AgendaItem agenda)
         {
             return new AgendaRow(agenda);
@@ -16,6 +24,22 @@
         {
             WebElement a = new WebElement(choice.Id.ToString(), LocateBy.Id);
             return a.IsPresent;
+        }
+
+        public void CloseDetailsPopup_Click()
+        {
+            this.CloseDetailsPopup.WaitForDisplay();
+            this.CloseDetailsPopup.Click();
+            Utilities.Utility.ThreadSleep(1);
+        }
+
+        public void RecalculateTotal_Click()
+        {
+            this.RecalculateTotal.WaitForDisplay();
+            this.RecalculateTotal.Click();
+            Utilities.Utility.ThreadSleep(1);
+            WaitForAJAX();
+            WaitForLoad();
         }
     }
 
@@ -32,6 +56,7 @@
         public TextBox DiscountCodeInput;
         public Label LimitFullMessage;
         public Label WaitlistMessage;
+        public ButtonOrLink Details;
 
         public AgendaRow(AgendaItem agenda)
         {
@@ -43,6 +68,7 @@
                     DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
                     LimitFullMessage = new Label(string.Format(locator + "//div[@class='capacityMsg']", agenda.Id.ToString()), LocateBy.XPath);
                     WaitlistMessage = new Label(string.Format(locator + "//span[@class='wlist']", agenda.Id.ToString()), LocateBy.XPath);
+                    Details = new ButtonOrLink(string.Format(locator + "//span/a[@href]", agenda.Id.ToString()), LocateBy.XPath);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
@@ -94,6 +120,17 @@
                 case FormData.CustomFieldType.ContinueButton:
                     AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
+                case FormData.CustomFieldType.Duration:
+
+                    AgendaType = new TextBox(
+                        string.Format(locator + "//input[@id='{0}'][@class='durationEntry hasTimepicker dtPickerShadow']", agenda.Id), 
+                        LocateBy.XPath);
+
+                    AgendaLabel = new Label(string.Format(locator + "//label[@for='{0}']", agenda.Id), LocateBy.XPath);
+
+                    break;
+
                 default:
                     break;
             }

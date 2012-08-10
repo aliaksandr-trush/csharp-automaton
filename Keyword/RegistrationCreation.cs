@@ -23,55 +23,67 @@
                 PersonalInfo(reg);
             }
 
-            Agenda(reg);
+            if (reg.Event.AgendaPage != null && !reg.Event.AgendaPage.IsShoppingCart)
+            {
+                Agenda(reg);
+            }
+
             Checkout(reg);
         }
 
-        public void GroupRegistration(List<Registrant> regs)
+        public void GroupRegistration(Group group)
         {
-            Checkin(regs[0]);
+            Checkin(group.Primary);
+            PersonalInfo(group.Primary);
 
-            for (int i = 0; i <= regs.Count - 2; i++)
+            for (int i = 0; i <= group.Secondaries.Count - 1; i++)
             {
-                PersonalInfo(regs[i]);
-                Agenda(regs[i]);
-                //Click add another person on checkout page
+                Agenda(group.Primary);
+
                 PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(regs[i + 1].Email);
-                if (regs[i + 1].RegType != null)
+
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group.Secondaries[i].Email);
+
+                if (group.Secondaries[i].RegType != null)
                 {
-                    if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.HasValue)
+                    if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.HasValue)
                     {
-                        if (regs[i + 1].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
+                        if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(regs[i + 1].RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].RegType.RegTypeName);
                         }
                         else
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
                         }
                     }
                     else
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regs[i + 1].RegType);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
                     }
 
-                    if (regs[i + 1].RegType.DiscountCode.Count != 0)
+                    if (group.Secondaries[i].RegType.DiscountCode.Count != 0)
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(regs[i + 1].RegType.DiscountCode[0].Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].RegType.DiscountCode[0].Code);
                     }
                 }
+
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+                PersonalInfo(group.Secondaries[i]);
+                Agenda(group.Secondaries[i]);
             }
 
-            PersonalInfo(regs[regs.Count - 1]);
-            Agenda(regs[regs.Count - 1]);
-            Checkout(regs[0]);
+            Checkout(group.Primary);
         }
 
         public void Checkin(Registrant reg)
         {
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
+
+            if (reg.Event.AgendaPage != null && reg.Event.AgendaPage.IsShoppingCart)
+            {
+                this.ShoppingCart(reg);
+            }
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
             {
@@ -99,6 +111,13 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
+        private void ShoppingCart(DataCollection.Registrant reg)
+        {
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(FormData.EventCalendarView.Location);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.AddToCart(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ShoppingCart_RegisterButtonOne_Click();
+        }
+
         public void Login(Registrant reg)
         {
             if (reg.Password != null)
@@ -107,7 +126,7 @@
             }
             else
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(Registrant.Default.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.Type(DataCollection.DefaultPersonalInfo.Password);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -115,98 +134,91 @@
 
         public void PersonalInfo(Registrant reg)
         {
-            string lastName = reg.LastName = KeywordProvider.RegisterDefault.GenerateCurrentRegistrantLastName();
+            reg.SetCurrentRegistrantLastName();
             
             if (reg.FirstName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(Registrant.Default.FirstName);
-            }
+
             if (reg.MiddleName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(reg.MiddleName);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.MiddleName.Type(Registrant.Default.MiddleName);
-            }
 
-            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(lastName);
+            PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(reg.LastName);
             
             if (reg.JobTitle != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(Registrant.Default.JobTitle);
-            }
+
             if (reg.Company != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(reg.Company);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Company.Type(Registrant.Default.Company);
-            }
+
             if (reg.AddressLineOne != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(reg.AddressLineOne);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.AddressOne.Type(Registrant.Default.AddressLineOne);
-            }
+
             if (reg.City != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(reg.City);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.City.Type(Registrant.Default.City);
-            }
+
             if (reg.Country.HasValue)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Country.SelectWithText(
                     Utilities.CustomStringAttribute.GetCustomString(reg.Country.Value));
             }
+
             if (reg.State != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(reg.State);
             }
-            else
+
+            if (reg.NonUSState != null)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.State.SelectWithText(Registrant.Default.State);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.NonUSState.Type(reg.NonUSState);
             }
+
             if (reg.ZipCode != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(reg.ZipCode);
             }
-            else
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Zip.Type(Registrant.Default.ZipCode);
-            }
+
             if (reg.WorkPhone != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(reg.WorkPhone);
             }
-            else
+
+            if (reg.BirthDate.HasValue)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.WorkPhone.Type(Registrant.Default.WorkPhone);
+                string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
             }
-            if ((reg.Password != null) && (reg.RegisterMethod != RegisterMethod.Admin))
+
+            if (reg.Gender.HasValue)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Gender.SelectWithText(reg.Gender.Value.ToString());
             }
-            else if (reg.RegisterMethod != RegisterMethod.Admin)
+
+            if (reg.RegisterMethod != RegisterMethod.Admin)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(Registrant.Default.Password);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(Registrant.Default.Password);
+                if (reg.Password != null)
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(reg.Password);
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(reg.Password);
+                }
+                else
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Type(DataCollection.DefaultPersonalInfo.Password);
+                    PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PasswordReEnter.Type(DataCollection.DefaultPersonalInfo.Password);
+                }
             }
+
             if (reg.CustomFieldResponses.Count != 0)
             {
                 foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
@@ -257,7 +269,7 @@
             {
                 foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
                 {
-                    if (responses is AgendaResponse)
+                    if ((responses is AgendaResponse) && responses.IsUpdate)
                     {
                         AgendaResponse response = responses as AgendaResponse;
 
@@ -327,13 +339,27 @@
                                     AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
                                 }
                                 break;
+
+                            case FormData.CustomFieldType.Duration:
+                                {
+                                    AgendaResponse_Duration resp = response as AgendaResponse_Duration;
+                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
+                                }
+                                break;
+
                             default:
                                 break;
                         }
                     }
+
+                    responses.IsUpdate = false;
                 }
             }
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            }
         }
 
         public void Checkout(Registrant reg)
@@ -356,6 +382,11 @@
                     default:
                         break;
                 }
+            }
+
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AggreementToWaiver.IsDisplay)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AggreementToWaiver.Set(true);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();

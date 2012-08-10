@@ -28,13 +28,18 @@
         public void ClickAddEventAndGetEventId(Event details)
         {
             PageObject.PageObjectProvider.Manager.Events.AddEvent_Click();
-            PageObject.PageObjectProvider.Manager.Events.EventType_Select(CustomStringAttribute.GetCustomString(FormData.EventType.ProEvent));
+            PageObject.PageObjectProvider.Manager.Events.EventType_Select(details.FormType);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.WaitForPresent();
             details.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.GetAttribute("value"));
         }
 
         public void StartPage(Event details)
         {
+            if (details.StartPage.EventType.HasValue)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventType.SelectWithText(details.StartPage.EventType.ToString());
+            }
+
             if (details.StartPage.StartDate.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartDate_Type(details.StartPage.StartDate.Value);
@@ -302,6 +307,17 @@
                     agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
                 }
 
+                if (details.AgendaPage.DoNotAllowOverlapping.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(details.AgendaPage.DoNotAllowOverlapping.Value);
+                }
+
+                if (details.AgendaPage.IsShoppingCart)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.IsShoppingCart.Set(true);
+                }
+
                 if (details.AgendaPage.PageHeader != null)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaPageHeader_Click();
@@ -439,7 +455,13 @@
                     PageObject.PageObjectProvider.Builder.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Set(
                         details.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Value);
                 }
-
+                if (details.EventWebsite.ShowNavigation)
+                {
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SelectById();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.ShowNavigation_Click();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SwitchToMain();
+                }
+                
                 PageObject.PageObjectProvider.Builder.EventDetails.RegistrationFormPages_Click();
             }
         }

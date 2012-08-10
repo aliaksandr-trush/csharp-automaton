@@ -16,9 +16,8 @@
             regType.IsSSO = true;
             evt.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
             reg.RegType = regType;
             reg.RegisterMethod = DataCollection.RegisterMethod.RegTypeDirectUrl;
 
@@ -41,9 +40,8 @@
             regType.IsSSO = true;
             evt.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
             reg.RegType = regType;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
@@ -61,9 +59,8 @@
             regType.IsSSO = true;
             evt.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
             reg.RegType = regType;
             reg.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
 
@@ -87,9 +84,8 @@
             evt.EventWebsite = new DataCollection.EventWebsite();
             evt.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent = true;
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
             reg.RegType = regType;
             reg.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
 
@@ -122,16 +118,14 @@
             regType.IsSSO = true;
             evt_Child.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt_Child, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt_Child;
             reg.RegType = regType;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt_Parent);
             Keyword.KeywordProvider.EventCreator.CreateEvent(evt_Child);
 
-            DataCollection.Registrant reg2 = new DataCollection.Registrant();
-            reg2.Event = evt_Parent;
+            DataCollection.Registrant reg2 = new DataCollection.Registrant(evt_Parent);
             reg2.RegisterMethod = DataCollection.RegisterMethod.Shortcut;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);

@@ -7,13 +7,14 @@
     {
         public CustomField(string name)
         {
-            this.NameOnForm = name;
+            this.NameOnForm = this.NameOnReceipt = this.NameOnReports = this.NameOnBadge = name;
         }
 
         public int Id;
         public string NameOnForm;
         public string NameOnReceipt;
         public string NameOnReports;
+        public string NameOnBadge;
         public FormData.CustomFieldType Type;
         public List<CustomFieldVisibleOption> CustomFieldVisibleOption = new List<CustomFieldVisibleOption>();
         public List<string> ConditionalLogic = new List<string>();
@@ -25,7 +26,6 @@
     {
         public CommonCustomField(string name) : base(name) { }
 
-        public string NameOnBadge;
         public int? SpacesAvailable;
         public bool? ShowCapacity;
         public FormData.AgendaLimitReachedOption? LimitReachedOption;
@@ -38,7 +38,6 @@
     {
         public CharInputCustomField(string name) : base(name) { }
 
-        public string NameOnBadge;
         public int CharLimit;
         public string DetailsPopup;
         public string DetailsURL;

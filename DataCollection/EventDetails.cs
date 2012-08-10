@@ -10,6 +10,7 @@
         public string Title;
         public string Shortcut;
         public bool IsActive;
+        public FormData.FormType FormType;
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();
@@ -24,6 +25,7 @@
         {
             this.Title = title;
             this.ReSetShortcut();
+            FormType = FormData.FormType.ProEvent;
         }
 
         public void ReSetShortcut()
@@ -117,8 +119,15 @@
         public Event ParentEvent;
     }
 
+    public enum EventType
+    {
+        Running,
+        Soccer
+    }
+
     public class StartPage
     {
+        public EventType? EventType;
         public EventLevelLimit EventLimit;
         public GroupDiscount GroupDiscount;
         public bool? ForceSelectSameRegType;
@@ -157,6 +166,8 @@
     public class AgendaPage
     {
         public List<AgendaItem> AgendaItems = new List<AgendaItem>();
+        public bool? DoNotAllowOverlapping;
+        public bool IsShoppingCart = false;
         public string PageHeader;
         public string PageFooter;
     }
@@ -185,5 +196,6 @@
     public class EventWebsite
     {
         public bool? UseEventWebsiteAsTheStartingPageForEvent;
+        public bool ShowNavigation;
     }
 }

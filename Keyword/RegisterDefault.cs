@@ -21,9 +21,22 @@
             return lastName;
         }
 
-        public double GetConfirmationTotal()
+        public double GetTotal(FormData.RegisterPage page)
         {
-            string amount = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.Text;
+            string amount = string.Empty;
+
+            switch (page)
+            {
+                case FormData.RegisterPage.Agenda:
+                    amount = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.Total.Text;
+                    break;
+                case FormData.RegisterPage.Confirmation:
+                    amount = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.Text;
+                    break;
+                default:
+                    break;
+            }
+
             string a = "";
 
             for (int i = 0; i < amount.Length; i++)

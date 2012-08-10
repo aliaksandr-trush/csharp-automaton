@@ -11,6 +11,11 @@
         public ButtonOrLink ChangeMyRegistration = new ButtonOrLink("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
         public Label RegistrationId = new Label("//th[@scope='row'][text()='Registration ID:']/../td", LocateBy.XPath);
 
+        public ButtonOrLink AddToCalendar(DataCollection.AgendaItem agendaItem)
+        {
+            return new ButtonOrLink(string.Format("//li[@class='addToCalendar']/a[contains(@href,'{0}')]", agendaItem.Id), LocateBy.XPath);
+        }
+
         public void ChangeMyRegistration_Click()
         {
             this.ChangeMyRegistration.WaitForDisplay();

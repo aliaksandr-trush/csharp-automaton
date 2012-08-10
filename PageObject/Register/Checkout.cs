@@ -9,6 +9,7 @@
         public MultiChoiceDropdown PaymentMethodList = new MultiChoiceDropdown("ctl00_cph_ddlPaymentMethods", LocateBy.Id);
         public ButtonOrLink Finish = new ButtonOrLink("//div[@class='buttonGroup']//button[@type='submit']", LocateBy.XPath);
         public ButtonOrLink AANoThanks = new ButtonOrLink("//div[@class='offerSubmit']//span[text()='No thanks']/..", LocateBy.XPath);
+        public CheckBox AggreementToWaiver = new CheckBox("ctl00_cph_chkAITerms", LocateBy.Id);
 
         public void Finish_Click()
         {

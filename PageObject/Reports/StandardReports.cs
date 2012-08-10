@@ -53,7 +53,7 @@
 
         private string agendaName = "//table[@id='rptParentTable']/tbody/tr[td/div[@class='section']][{0}]";
         private string agendaFollowingTr = "//table[@id='rptParentTable']/tbody/tr[td/div[@class='section']][{0}]/following-sibling::*";
-        private string attendeeTr = "//table[@id='rptParentTable']/tbody/tr[td/div[@class='section']][1]/following-sibling::*[{0}]";
+        private string attendeeTr = "//table[@id='rptParentTable']/tbody/tr[td/div[@class='section']][{0}]/following-sibling::*[{1}]";
         private string attendeeFollowingTrIsAgenda = "//table[@id='rptParentTable']/tbody/tr[td/div[@class='section']][1]/following-sibling::*[{0}]/following-sibling::*[1]//div";
 
         public AgendaReportRow(int agendaIndex)
@@ -65,16 +65,16 @@
             {
                 Label AttendeeFollowingTrIsAgenda = new Label(string.Format(attendeeFollowingTrIsAgenda, i), LocateBy.XPath);
                 AttendeeRow attendeeRow = new AttendeeRow();
-                attendeeRow.CheckAttendee = new CheckBox(string.Format(attendeeTr, i) + "/td[1]/input", LocateBy.XPath);
-                attendeeRow.AttendeeId = new ButtonOrLink(string.Format(attendeeTr, i) + "/td[2]/a", LocateBy.XPath);
-                attendeeRow.AgendaStatus = new Label(string.Format(attendeeTr, i) + "/td[3]", LocateBy.XPath);
-                attendeeRow.AttendeeName = new Label(string.Format(attendeeTr, i) + "/td[4]", LocateBy.XPath);
-                attendeeRow.AttendeeCompany = new Label(string.Format(attendeeTr, i) + "/td[5]", LocateBy.XPath);
-                attendeeRow.AttendeeEmail = new Label(string.Format(attendeeTr, i) + "/td[6]", LocateBy.XPath);
-                attendeeRow.AttendeeWorkPhone = new Label(string.Format(attendeeTr, i) + "/td[7]", LocateBy.XPath);
-                attendeeRow.AttendeeHomePhone = new Label(string.Format(attendeeTr, i) + "/td[8]", LocateBy.XPath);
-                attendeeRow.AttendeeRegisterDate = new Label(string.Format(attendeeTr, i) + "/td[9]", LocateBy.XPath);
-                attendeeRow.AttendeeModifyDate = new Label(string.Format(attendeeTr, i) + "/td[10]", LocateBy.XPath);
+                attendeeRow.CheckAttendee = new CheckBox(string.Format(attendeeTr, agendaIndex, i) + "/td[1]/input", LocateBy.XPath);
+                attendeeRow.AttendeeId = new ButtonOrLink(string.Format(attendeeTr, agendaIndex, i) + "/td[2]/a", LocateBy.XPath);
+                attendeeRow.AgendaStatus = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[3]", LocateBy.XPath);
+                attendeeRow.AttendeeName = new Label(string.Format(attendeeTr,agendaIndex, i) + "/td[4]", LocateBy.XPath);
+                attendeeRow.AttendeeCompany = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[5]", LocateBy.XPath);
+                attendeeRow.AttendeeEmail = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[6]", LocateBy.XPath);
+                attendeeRow.AttendeeWorkPhone = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[7]", LocateBy.XPath);
+                attendeeRow.AttendeeHomePhone = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[8]", LocateBy.XPath);
+                attendeeRow.AttendeeRegisterDate = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[9]", LocateBy.XPath);
+                attendeeRow.AttendeeModifyDate = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[10]", LocateBy.XPath);
 
                 Attendees.Add(attendeeRow);
 

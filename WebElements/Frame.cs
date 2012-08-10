@@ -7,6 +7,7 @@
         public string Name;
         public string ParentFrame;
         public int Index;
+        public string Id;
 
         public Frame(string name)
         {
@@ -18,6 +19,9 @@
             this.Index = index;
         }
 
+        public Frame()
+        { }
+
         public Frame(string name, string parentFrame)
         {
             this.Name = name;
@@ -27,6 +31,11 @@
         public void SelectByName()
         {
             UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Name);
+        }
+
+        public void SelectById()
+        {
+            UIUtilityProvider.UIHelper.SelectPopUpFrameById(Id);
         }
 
         public void SelectParentFrame()
@@ -40,6 +49,11 @@
         public void SelectByIndex()
         {
             UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(Index);
+        }
+
+        public void SwitchToMain()
+        {
+            UIUtilityProvider.UIHelper.SwitchToMainContent();
         }
 
         public void WaitForAJAX()

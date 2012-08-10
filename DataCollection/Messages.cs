@@ -14,6 +14,7 @@
             public const string DiscountCodeNotFilled = "You must enter a discount code.";
             public const string AgendaCodeLimitReached = "The limit for the discount code you entered has been reached and is no longer being accepted.";
             public const string RequiredCheckBoxNotChecked = "You must select all required check boxes.";
+            public const string AgendaOverlapped = "Some of the items you selected have overlapping times.";
         }
 
         public static class BuilderError

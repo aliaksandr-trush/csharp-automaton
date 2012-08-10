@@ -3,7 +3,9 @@
     using System;
 
     public class CustomFieldResponse
-    { }
+    {
+        public bool IsUpdate = true;
+    }
 
     public class CFResponse : CustomFieldResponse
     {
@@ -84,5 +86,10 @@
     public class AgendaContributionResponse : AgendaResponse
     {
         public double? Contribution;
+    }
+
+    public class AgendaResponse_Duration : AgendaResponse
+    {
+        public TimeSpan Duration;
     }
 }

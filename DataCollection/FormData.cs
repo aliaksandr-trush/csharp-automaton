@@ -47,6 +47,12 @@
             Merchandise
         }
 
+        public enum ConfirmationOptions
+        {
+            OK,
+            Cancel
+        }
+
         public enum RegTypeDisplayOption
         {
             [CustomString("1")]
@@ -214,7 +220,10 @@
             Number = 13,
 
             [CustomString("File Upload")]
-            FileUpload = 14
+            FileUpload = 14,
+
+            [CustomString("Duration")]
+            Duration = 15
         }
 
         public enum AgendaLimitReachedOption
@@ -305,7 +314,7 @@
             PayPal
         }
 
-        public enum EventType
+        public enum FormType
         {
             [CustomString("Event")]
             ActiveEuropeEvent,

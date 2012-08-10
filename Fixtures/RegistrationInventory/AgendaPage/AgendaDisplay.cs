@@ -13,6 +13,7 @@
     {
         [Test]
         [Category(Priority.Three)]
+        [Description("1356")]
         public void AgendaConditionalLogic()
         {
             Event evt = new Event("AgendaConditionalLogic");
@@ -103,8 +104,7 @@
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG4);
             AG4.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             CFCheckboxResponse resp = new CFCheckboxResponse();
             resp.CustomField = PICustomField;
             resp.Checked = true;
@@ -116,8 +116,7 @@
             ((CheckBox)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG3).AgendaType)).Set(true);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG4).AgendaType.IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -126,6 +125,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1357")]
         public void AgendaVisibility()
         {
             Event evt = new Event("AgendaVisibility");
@@ -160,8 +160,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt);
             reg1.RegType = regType1;
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
@@ -177,8 +176,7 @@
             Assert.False(row4.AgendaType.IsPresent);
             Assert.False(row5.AgendaType.IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
+            Registrant reg2 = new Registrant(evt);
             reg2.RegType = regType2;
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
@@ -191,8 +189,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
-            Registrant reg3 = new Registrant();
-            reg3.Event = evt;
+            Registrant reg3 = new Registrant(evt);
             reg3.RegType = regType1;
             reg3.RegisterMethod = RegisterMethod.Admin;
 
@@ -205,6 +202,100 @@
             Assert.True(row5.AgendaType.IsPresent);
             KeywordProvider.RegistrationCreation.Agenda(reg3);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1358")]
+        public void AgendaShowHideDate()
+        {
+            Event evt = new Event("AgendaShowHideDate");
+            evt.AgendaPage = new AgendaPage();
+            AgendaItemCheckBox showInPast = new AgendaItemCheckBox("ShowInPast");
+            showInPast.ShowStarting = DateTime.Today.AddDays(-3);
+            AgendaItemCheckBox showInFuture = new AgendaItemCheckBox("ShowInFuture");
+            showInFuture.ShowStarting = DateTime.Today.AddDays(3);
+            AgendaItemCheckBox hideInPast = new AgendaItemCheckBox("HideInPast");
+            hideInPast.HideStarting = DateTime.Today.AddDays(-3);
+            AgendaItemCheckBox hideInFuture = new AgendaItemCheckBox("HideInFuture");
+            hideInFuture.HideStarting = DateTime.Today.AddDays(3);
+            AgendaItemCheckBox sIPHIF = new AgendaItemCheckBox("SIPHIF");
+            sIPHIF.ShowStarting = DateTime.Today.AddDays(-3);
+            sIPHIF.HideStarting = DateTime.Today.AddDays(3);
+            evt.AgendaPage.AgendaItems.Add(showInPast);
+            evt.AgendaPage.AgendaItems.Add(showInFuture);
+            evt.AgendaPage.AgendaItems.Add(hideInPast);
+            evt.AgendaPage.AgendaItems.Add(hideInFuture);
+            evt.AgendaPage.AgendaItems.Add(sIPHIF);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg = new Registrant(evt);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(showInPast);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(showInFuture);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(hideInPast);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(hideInFuture);
+            PageObject.Register.AgendaRow row5 = new PageObject.Register.AgendaRow(sIPHIF);
+            Assert.True(row1.AgendaLabel.IsPresent);
+            Assert.False(row2.AgendaLabel.IsPresent);
+            Assert.False(row3.AgendaLabel.IsPresent);
+            Assert.True(row4.AgendaLabel.IsPresent);
+            Assert.True(row5.AgendaLabel.IsPresent);
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1359")]
+        public void AgendaShowIf()
+        {
+            Event evt = new Event("AgendaShowIf");
+            evt.AgendaPage = new AgendaPage();
+            AgendaItemCheckBox showToMale = new AgendaItemCheckBox("ShowToMale");
+            showToMale.Gender = FormData.Gender.Male;
+            AgendaItemCheckBox showToFemale = new AgendaItemCheckBox("ShowToFemale");
+            showToFemale.Gender = FormData.Gender.Female;
+            AgendaItemCheckBox showOver20 = new AgendaItemCheckBox("ShowOver20");
+            showOver20.AgeGreaterThan = 20;
+            showOver20.AgeGreaterThanDate = DateTime.Today;
+            AgendaItemCheckBox showLT20 = new AgendaItemCheckBox("ShowLT20");
+            showLT20.AgeLessThan = 20;
+            showLT20.AgeLessThanDate = DateTime.Today;
+            evt.AgendaPage.AgendaItems.Add(showToMale);
+            evt.AgendaPage.AgendaItems.Add(showToFemale);
+            evt.AgendaPage.AgendaItems.Add(showOver20);
+            evt.AgendaPage.AgendaItems.Add(showLT20);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg1 = new Registrant(evt);
+            reg1.Gender = FormData.Gender.Male;
+            reg1.BirthDate = DateTime.Today.AddYears(-22);
+
+            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(showToMale);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(showToFemale);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(showOver20);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(showLT20);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            Assert.True(row1.AgendaLabel.IsPresent);
+            Assert.False(row2.AgendaLabel.IsPresent);
+            Assert.True(row3.AgendaLabel.IsPresent);
+            Assert.False(row4.AgendaLabel.IsPresent);
+
+            Registrant reg2 = new Registrant(evt);
+            reg2.Gender = FormData.Gender.Female;
+            reg2.BirthDate = DateTime.Today.AddYears(-18);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            Assert.False(row1.AgendaLabel.IsPresent);
+            Assert.True(row2.AgendaLabel.IsPresent);
+            Assert.False(row3.AgendaLabel.IsPresent);
+            Assert.True(row4.AgendaLabel.IsPresent);
         }
     }
 }
