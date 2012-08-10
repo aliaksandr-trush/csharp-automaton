@@ -231,7 +231,7 @@
   <Browsers Current="Firefox">
     <ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
     <Browser Name="Firefox">
-      <BinaryPath Enable="true">D:\Program Files\Mozilla Firefox\firefox.exe</BinaryPath>
+      <BinaryPath Enable="false">D:\Program Files\Mozilla Firefox\firefox.exe</BinaryPath>
       <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
     </Browser>
     <Browser Name="Chrome">
