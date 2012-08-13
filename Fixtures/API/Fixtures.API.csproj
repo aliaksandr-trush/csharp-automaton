@@ -226,6 +226,9 @@
     <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomField.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomFieldListItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfCustomFieldResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -235,6 +238,9 @@
     <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfEvent.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfEventWebsite.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfListOfRegistration.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -242,6 +248,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfLoginResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RegOnlineAPI\RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI.ResultsOfOrganizerMobileAppSettings.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\RegOnlineCFResponseService\CustomFieldResponseWS.wsdl" />

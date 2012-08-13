@@ -151,6 +151,7 @@
             }
 
             AGMgr.ClickSaveItem();
+            UIUtility.UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType type, string name)

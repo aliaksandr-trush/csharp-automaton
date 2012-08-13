@@ -43,12 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgendaEarlyLatePriceFixture.cs" />
     <Compile Include="AgendaItemFixture.cs" />
-    <Compile Include="AgendaItemPriceFixture.cs" />
-    <Compile Include="AgendaVisibilityFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShoppingCartFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Attributes\Attributes.csproj">

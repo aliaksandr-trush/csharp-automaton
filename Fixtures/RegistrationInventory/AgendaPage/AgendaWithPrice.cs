@@ -11,6 +11,7 @@
     {
         [Test]
         [Category(Priority.Three)]
+        [Description("1362")]
         public void AgendaPrice()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaPrice");
@@ -89,6 +90,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1363")]
         public void AgendaDiscountCode()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaDiscountCode");
@@ -260,6 +262,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1364")]
         public void AgendaAccessCode()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaAccessCode");
@@ -311,6 +314,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1365")]
         public void AgendaGroupDiscountCode()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaGroupDiscountCode");
@@ -442,6 +446,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1366")]
         public void AgendaTaxRate()
         {
             this.AgedanTaxRateSpecificCountry(DataCollection.FormData.Countries.UnitedStates);

@@ -12,6 +12,7 @@
     {
         [Test]
         [Category(Priority.Four)]
+        [Description("1367")]
         public void ButtonTest()
         {
             Event evt = new Event("AgendaButtonTest");
@@ -51,6 +52,7 @@
 
         [Test]
         [Category(Priority.Four)]
+        [Description("1368")]
         public void AgendaCopyDelete()
         {
             Event evt = new Event("AgendaCopyDelete");
@@ -88,6 +90,7 @@
 
         [Test]
         [Category(Priority.Four)]
+        [Description("1369")]
         public void OverlappingAgenda()
         {
             Event evt = new Event("AgendaOverlapping");
@@ -135,6 +138,7 @@
 
         [Test]
         [Category(Priority.Four)]
+        [Description("1370")]
         public void RecalculateTotal()
         {
             Event evt = new Event("AgendaRecalculate");

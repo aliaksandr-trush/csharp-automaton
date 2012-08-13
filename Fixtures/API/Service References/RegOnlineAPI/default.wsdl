@@ -198,6 +198,7 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="EventOID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ParentID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
@@ -301,6 +302,99 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetEventWebsite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventWebsiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventWebsiteResult" type="tns:ResultsOfListOfEventWebsite" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultsOfListOfEventWebsite">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfAPIEventWebsite" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAPIEventWebsite">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="APIEventWebsite" nillable="true" type="tns:APIEventWebsite" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="APIEventWebsite">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AreTabsVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRegisterNowButtonVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsContactDetailsSectionVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSpacesRemainingVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsEarlyBirdAvailableVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAddToCalendarLinkVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTellAFriendLinkVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsFeaturesSectionVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsGlobalHeaderVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsGlobalFooterVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsWebsiteHeaderVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsWebsiteFooterVisible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="WebsiteHeader" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WebsiteFooter" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryTab" type="tns:APIEventWebsiteSummaryTab" />
+          <s:element minOccurs="0" maxOccurs="1" name="LodgingTab" type="tns:APIEventWebsiteLodgingTab" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgendaTab" type="tns:APIEventWebsiteAgendaTab" />
+          <s:element minOccurs="0" maxOccurs="1" name="DirectoriesTab" type="tns:APIEventWebsiteDirectoriesTab" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="APIEventWebsiteSummaryTab">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIEventWebsiteTab">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsEventDetailSectionVisible" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="APIEventWebsiteTab" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsCustomContentVisible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomContent" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="APIEventWebsiteDirectoriesTab">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIEventWebsiteTab">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsDirectoriesSectionVisible" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="APIEventWebsiteAgendaTab">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIEventWebsiteTab">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsAgendaItemsSectionVisible" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="APIEventWebsiteLodgingTab">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIEventWebsiteTab">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsLodgingInformationVisible" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:element name="GetRegistrationsForCustomField">
         <s:complexType>
           <s:sequence>
@@ -561,6 +655,49 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetCustomFieldListItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="eventID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cfID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomFieldListItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomFieldListItemsResult" type="tns:ResultsOfListOfCustomFieldListItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultsOfListOfCustomFieldListItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfAPICustomFieldListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAPICustomFieldListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="APICustomFieldListItem" nillable="true" type="tns:APICustomFieldListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="APICustomFieldListItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameOnForm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameOnReport" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Capacity" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PerGroupLimit" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsVisible" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetCustomFieldsForRegistration">
         <s:complexType>
           <s:sequence>
@@ -898,6 +1035,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="googlewebpropertyid" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="googlevariableindex" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="goolgevariablename" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="showeucookieribbon" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfLocation">
@@ -960,15 +1098,52 @@
           <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="_GetOrganizerMobileAppSettings">
+        <s:complexType />
+      </s:element>
+      <s:element name="_GetOrganizerMobileAppSettingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_GetOrganizerMobileAppSettingsResult" type="tns:ResultsOfOrganizerMobileAppSettings" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultsOfOrganizerMobileAppSettings">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:OrganizerMobileAppSettings" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrganizerMobileAppSettings">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="resources" type="tns:ArrayOfSetting" />
+          <s:element minOccurs="1" maxOccurs="1" name="showeucookieribbon" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSetting">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="setting" type="tns:setting" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="setting">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ResultsOfListOfRegistration" nillable="true" type="tns:ResultsOfListOfRegistration" />
       <s:element name="ResultsOfLoginResults" nillable="true" type="tns:ResultsOfLoginResults" />
       <s:element name="ResultsOfListOfEvent" nillable="true" type="tns:ResultsOfListOfEvent" />
+      <s:element name="ResultsOfListOfEventWebsite" nillable="true" type="tns:ResultsOfListOfEventWebsite" />
       <s:element name="ResultsOfListOfTransaction" nillable="true" type="tns:ResultsOfListOfTransaction" />
       <s:element name="ResultsOfListOfCustomField" nillable="true" type="tns:ResultsOfListOfCustomField" />
+      <s:element name="ResultsOfListOfCustomFieldListItem" nillable="true" type="tns:ResultsOfListOfCustomFieldListItem" />
       <s:element name="ResultsOfListOfCustomFieldResponse" nillable="true" type="tns:ResultsOfListOfCustomFieldResponse" />
       <s:element name="ResultsOfBoolean" nillable="true" type="tns:ResultsOfBoolean" />
       <s:element name="ResultsOfListOfCustomReport" nillable="true" type="tns:ResultsOfListOfCustomReport" />
       <s:element name="ResultsOfAttendeeMobileAppSettings" nillable="true" type="tns:ResultsOfAttendeeMobileAppSettings" />
+      <s:element name="ResultsOfOrganizerMobileAppSettings" nillable="true" type="tns:ResultsOfOrganizerMobileAppSettings" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetRegistrationsByEventIDSoapIn">
@@ -1035,6 +1210,15 @@
     <wsdl:part name="parameters" element="tns:GetEventStatisticsResponse" />
   </wsdl:message>
   <wsdl:message name="GetEventStatisticsTokenHeader">
+    <wsdl:part name="TokenHeader" element="tns:TokenHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventWebsite" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventWebsiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteTokenHeader">
     <wsdl:part name="TokenHeader" element="tns:TokenHeader" />
   </wsdl:message>
   <wsdl:message name="GetRegistrationsForCustomFieldSoapIn">
@@ -1143,6 +1327,15 @@
     <wsdl:part name="parameters" element="tns:GetAgendaItemsResponse" />
   </wsdl:message>
   <wsdl:message name="GetAgendaItemsTokenHeader">
+    <wsdl:part name="TokenHeader" element="tns:TokenHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomFieldListItems" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomFieldListItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsTokenHeader">
     <wsdl:part name="TokenHeader" element="tns:TokenHeader" />
   </wsdl:message>
   <wsdl:message name="GetCustomFieldsForRegistrationSoapIn">
@@ -1277,6 +1470,12 @@
   <wsdl:message name="_GetAttendeeMobileAppSettingsSoapOut">
     <wsdl:part name="parameters" element="tns:_GetAttendeeMobileAppSettingsResponse" />
   </wsdl:message>
+  <wsdl:message name="_GetOrganizerMobileAppSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:_GetOrganizerMobileAppSettings" />
+  </wsdl:message>
+  <wsdl:message name="_GetOrganizerMobileAppSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:_GetOrganizerMobileAppSettingsResponse" />
+  </wsdl:message>
   <wsdl:message name="GetRegistrationsByEventIDHttpGetIn">
     <wsdl:part name="eventID" type="s:string" />
     <wsdl:part name="filter" type="s:string" />
@@ -1324,6 +1523,12 @@
   </wsdl:message>
   <wsdl:message name="GetEventStatisticsHttpGetOut">
     <wsdl:part name="Body" element="tns:ResultsOfListOfEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteHttpGetIn">
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultsOfListOfEventWebsite" />
   </wsdl:message>
   <wsdl:message name="GetRegistrationsForCustomFieldHttpGetIn">
     <wsdl:part name="eventID" type="s:string" />
@@ -1398,6 +1603,15 @@
   <wsdl:message name="GetAgendaItemsHttpGetOut">
     <wsdl:part name="Body" element="tns:ResultsOfListOfCustomField" />
   </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsHttpGetIn">
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="cfID" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="orderBy" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultsOfListOfCustomFieldListItem" />
+  </wsdl:message>
   <wsdl:message name="GetCustomFieldResponsesHttpGetIn">
     <wsdl:part name="eventID" type="s:string" />
     <wsdl:part name="cfID" type="s:string" />
@@ -1441,6 +1655,10 @@
   </wsdl:message>
   <wsdl:message name="_GetAttendeeMobileAppSettingsHttpGetOut">
     <wsdl:part name="Body" element="tns:ResultsOfAttendeeMobileAppSettings" />
+  </wsdl:message>
+  <wsdl:message name="_GetOrganizerMobileAppSettingsHttpGetIn" />
+  <wsdl:message name="_GetOrganizerMobileAppSettingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultsOfOrganizerMobileAppSettings" />
   </wsdl:message>
   <wsdl:message name="GetRegistrationsByEventIDHttpPostIn">
     <wsdl:part name="eventID" type="s:string" />
@@ -1489,6 +1707,12 @@
   </wsdl:message>
   <wsdl:message name="GetEventStatisticsHttpPostOut">
     <wsdl:part name="Body" element="tns:ResultsOfListOfEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteHttpPostIn">
+    <wsdl:part name="eventID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEventWebsiteHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultsOfListOfEventWebsite" />
   </wsdl:message>
   <wsdl:message name="GetRegistrationsForCustomFieldHttpPostIn">
     <wsdl:part name="eventID" type="s:string" />
@@ -1563,6 +1787,15 @@
   <wsdl:message name="GetAgendaItemsHttpPostOut">
     <wsdl:part name="Body" element="tns:ResultsOfListOfCustomField" />
   </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsHttpPostIn">
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="cfID" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="orderBy" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldListItemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultsOfListOfCustomFieldListItem" />
+  </wsdl:message>
   <wsdl:message name="GetCustomFieldResponsesHttpPostIn">
     <wsdl:part name="eventID" type="s:string" />
     <wsdl:part name="cfID" type="s:string" />
@@ -1607,6 +1840,10 @@
   <wsdl:message name="_GetAttendeeMobileAppSettingsHttpPostOut">
     <wsdl:part name="Body" element="tns:ResultsOfAttendeeMobileAppSettings" />
   </wsdl:message>
+  <wsdl:message name="_GetOrganizerMobileAppSettingsHttpPostIn" />
+  <wsdl:message name="_GetOrganizerMobileAppSettingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultsOfOrganizerMobileAppSettings" />
+  </wsdl:message>
   <wsdl:portType name="RegOnline_x0020_APISoap">
     <wsdl:operation name="GetRegistrationsByEventID">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Registrations By EventID</wsdl:documentation>
@@ -1647,6 +1884,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event details for dashboard</wsdl:documentation>
       <wsdl:input message="tns:GetEventStatisticsSoapIn" />
       <wsdl:output message="tns:GetEventStatisticsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event Website for a single event</wsdl:documentation>
+      <wsdl:input message="tns:GetEventWebsiteSoapIn" />
+      <wsdl:output message="tns:GetEventWebsiteSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRegistrationsForCustomField">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Registrations</wsdl:documentation>
@@ -1707,6 +1949,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event Schedule</wsdl:documentation>
       <wsdl:input message="tns:GetAgendaItemsSoapIn" />
       <wsdl:output message="tns:GetAgendaItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list items for a multiple choice Custom Field</wsdl:documentation>
+      <wsdl:input message="tns:GetCustomFieldListItemsSoapIn" />
+      <wsdl:output message="tns:GetCustomFieldListItemsSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCustomFieldsForRegistration">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of all custom fields available to the given registration and location</wsdl:documentation>
@@ -1782,6 +2029,10 @@
       <wsdl:input message="tns:_GetAttendeeMobileAppSettingsSoapIn" />
       <wsdl:output message="tns:_GetAttendeeMobileAppSettingsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <wsdl:input message="tns:_GetOrganizerMobileAppSettingsSoapIn" />
+      <wsdl:output message="tns:_GetOrganizerMobileAppSettingsSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="RegOnline_x0020_APIHttpGet">
     <wsdl:operation name="GetRegistrationsByEventID">
@@ -1818,6 +2069,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event details for dashboard</wsdl:documentation>
       <wsdl:input message="tns:GetEventStatisticsHttpGetIn" />
       <wsdl:output message="tns:GetEventStatisticsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event Website for a single event</wsdl:documentation>
+      <wsdl:input message="tns:GetEventWebsiteHttpGetIn" />
+      <wsdl:output message="tns:GetEventWebsiteHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRegistrationsForCustomField">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Registrations</wsdl:documentation>
@@ -1869,6 +2125,11 @@
       <wsdl:input message="tns:GetAgendaItemsHttpGetIn" />
       <wsdl:output message="tns:GetAgendaItemsHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list items for a multiple choice Custom Field</wsdl:documentation>
+      <wsdl:input message="tns:GetCustomFieldListItemsHttpGetIn" />
+      <wsdl:output message="tns:GetCustomFieldListItemsHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomFieldResponses">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets all responses for an agenda item</wsdl:documentation>
       <wsdl:input message="tns:GetCustomFieldResponsesHttpGetIn" />
@@ -1897,6 +2158,10 @@
     <wsdl:operation name="_GetAttendeeMobileAppSettings">
       <wsdl:input message="tns:_GetAttendeeMobileAppSettingsHttpGetIn" />
       <wsdl:output message="tns:_GetAttendeeMobileAppSettingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <wsdl:input message="tns:_GetOrganizerMobileAppSettingsHttpGetIn" />
+      <wsdl:output message="tns:_GetOrganizerMobileAppSettingsHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="RegOnline_x0020_APIHttpPost">
@@ -1934,6 +2199,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event details for dashboard</wsdl:documentation>
       <wsdl:input message="tns:GetEventStatisticsHttpPostIn" />
       <wsdl:output message="tns:GetEventStatisticsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Event Website for a single event</wsdl:documentation>
+      <wsdl:input message="tns:GetEventWebsiteHttpPostIn" />
+      <wsdl:output message="tns:GetEventWebsiteHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRegistrationsForCustomField">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets Registrations</wsdl:documentation>
@@ -1985,6 +2255,11 @@
       <wsdl:input message="tns:GetAgendaItemsHttpPostIn" />
       <wsdl:output message="tns:GetAgendaItemsHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list items for a multiple choice Custom Field</wsdl:documentation>
+      <wsdl:input message="tns:GetCustomFieldListItemsHttpPostIn" />
+      <wsdl:output message="tns:GetCustomFieldListItemsHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomFieldResponses">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets all responses for an agenda item</wsdl:documentation>
       <wsdl:input message="tns:GetCustomFieldResponsesHttpPostIn" />
@@ -2013,6 +2288,10 @@
     <wsdl:operation name="_GetAttendeeMobileAppSettings">
       <wsdl:input message="tns:_GetAttendeeMobileAppSettingsHttpPostIn" />
       <wsdl:output message="tns:_GetAttendeeMobileAppSettingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <wsdl:input message="tns:_GetOrganizerMobileAppSettingsHttpPostIn" />
+      <wsdl:output message="tns:_GetOrganizerMobileAppSettingsHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="RegOnline_x0020_APISoap" type="tns:RegOnline_x0020_APISoap">
@@ -2090,6 +2369,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:GetEventStatisticsTokenHeader" part="TokenHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <soap:operation soapAction="http://www.regonline.com/api/GetEventWebsite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEventWebsiteTokenHeader" part="TokenHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -2210,6 +2499,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:GetAgendaItemsTokenHeader" part="TokenHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <soap:operation soapAction="http://www.regonline.com/api/GetCustomFieldListItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCustomFieldListItemsTokenHeader" part="TokenHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -2364,6 +2663,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <soap:operation soapAction="http://www.regonline.com/api/_GetOrganizerMobileAppSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="RegOnline_x0020_APISoap12" type="tns:RegOnline_x0020_APISoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -2440,6 +2748,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:GetEventStatisticsTokenHeader" part="TokenHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <soap12:operation soapAction="http://www.regonline.com/api/GetEventWebsite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetEventWebsiteTokenHeader" part="TokenHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
@@ -2560,6 +2878,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:GetAgendaItemsTokenHeader" part="TokenHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <soap12:operation soapAction="http://www.regonline.com/api/GetCustomFieldListItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCustomFieldListItemsTokenHeader" part="TokenHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
@@ -2714,6 +3042,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <soap12:operation soapAction="http://www.regonline.com/api/_GetOrganizerMobileAppSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="RegOnline_x0020_APIHttpGet" type="tns:RegOnline_x0020_APIHttpGet">
     <http:binding verb="GET" />
@@ -2773,6 +3110,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetEventStatistics">
       <http:operation location="/GetEventStatistics" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <http:operation location="/GetEventWebsite" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -2870,6 +3216,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <http:operation location="/GetCustomFieldListItems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomFieldResponses">
       <http:operation location="/GetCustomFieldResponses" />
       <wsdl:input>
@@ -2917,6 +3272,15 @@
     </wsdl:operation>
     <wsdl:operation name="_GetAttendeeMobileAppSettings">
       <http:operation location="/_GetAttendeeMobileAppSettings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <http:operation location="/_GetOrganizerMobileAppSettings" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -2990,6 +3354,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetEventWebsite">
+      <http:operation location="/GetEventWebsite" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRegistrationsForCustomField">
       <http:operation location="/GetRegistrationsForCustomField" />
       <wsdl:input>
@@ -3080,6 +3453,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldListItems">
+      <http:operation location="/GetCustomFieldListItems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomFieldResponses">
       <http:operation location="/GetCustomFieldResponses" />
       <wsdl:input>
@@ -3127,6 +3509,15 @@
     </wsdl:operation>
     <wsdl:operation name="_GetAttendeeMobileAppSettings">
       <http:operation location="/_GetAttendeeMobileAppSettings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_GetOrganizerMobileAppSettings">
+      <http:operation location="/_GetOrganizerMobileAppSettings" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
