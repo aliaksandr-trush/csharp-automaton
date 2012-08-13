@@ -188,6 +188,7 @@
             }
 
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick(NextButton, LocateBy.XPath);
+            UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -217,13 +218,17 @@
                 UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
                 UIUtilityProvider.UIHelper.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
             }
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/register/checkout.aspx"))
+            else if (UIUtilityProvider.UIHelper.UrlContainsPath("/register/checkout.aspx"))
             {
                 string ccNumberRadioButtonLocator = "ctl00_cph_rbNewCC";
                 string ccNumberTextboxLocator = "ctl00_cph_txtCC";
                 UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
                 UIUtilityProvider.UIHelper.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
-            }            
+            }
+            else
+            {
+                UIUtilityProvider.UIHelper.FailTest("Not on NewCC page or checkout page!");
+            }
         }
 
         [Step]
@@ -535,7 +540,9 @@
 
             //this.EnterTransactionDefaultCCInfo();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("actionYes", LocateBy.Id);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            Utility.ThreadSleep(2);
         }
         
         // Specify the 'rowIndex' to null to verify the last row

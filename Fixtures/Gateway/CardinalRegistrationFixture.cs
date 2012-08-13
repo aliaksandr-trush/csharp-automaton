@@ -127,20 +127,6 @@
             BuilderMgr.SaveAndClose(); 
         }
 
-        private void SetAgendaPage(string[] agendaname, double[] price)
-        {
-            int i = 0;
-            BuilderMgr.GotoPage(FormDetailManager.Page.Agenda);
-            BuilderMgr.ClickYesOnSplashPage();
-            BuilderMgr.VerifyEventAgendaPage();
-
-            foreach (var name in agendaname)
-            {
-                BuilderMgr.AddAgendaItemWithPriceAndNoDate(AgendaItemManager.AgendaItemType.CheckBox, name, price[i]);
-                i++;
-            }
-        }
-
         private void ActivateEvent(int eventid)
         {
             ManagerSiteMgr.OpenEventDashboard(eventId);
