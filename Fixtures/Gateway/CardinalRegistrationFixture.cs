@@ -24,15 +24,15 @@
         {
             this.LoginAndGetSessionID();
 
-            ManagerSiteMgr.DeleteEventByName(EventName);
-
             if (!ManagerSiteMgr.EventExists(EventName))
             {
                 this.CreateEvent(EventName, AgendaName, Price, EventFee);
                 this.ActivateEvent(eventId);
             }
             else
+            {
                 this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
+            }
 
             this.Register(eventId, "01 - Jan", "2013");
 
@@ -40,6 +40,8 @@
             RegisterMgr.SubmitCardinalPassword("1234");
 
             this.ConfirmationPage();
+
+            DataHelperTool.ChangeAllRegsToTestAndDelete(this.eventId);
         }
 
         [Test]
@@ -49,7 +51,31 @@
         {
             this.LoginAndGetSessionID();
 
-            ManagerSiteMgr.DeleteEventByName(EventName);
+            if (!ManagerSiteMgr.EventExists(EventName))
+            {
+                this.CreateEvent(EventName, AgendaName, Price, EventFee);
+                this.ActivateEvent(eventId);
+            }
+            else
+            {
+                this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
+            }
+
+            this.Register(eventId, "06 - Jun", "2015");
+
+            Assert.False(RegisterMgr.OnCardinalVerificationPage());
+
+            this.ConfirmationPage();
+
+            DataHelperTool.ChangeAllRegsToTestAndDelete(this.eventId);
+        }
+
+        [Test]
+        [Category(Priority.One)]
+        [Description("152")]
+        public void CardinalRegistration_MC()
+        {
+            this.LoginAndGetSessionID();
 
             if (!ManagerSiteMgr.EventExists(EventName))
             {
@@ -57,13 +83,26 @@
                 this.ActivateEvent(eventId);
             }
             else
+            {
                 this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
+            }
 
-            this.Register(eventId, "06 - Jun", "2015");
+            this.Register(eventId);
 
-            Assert.False(RegisterMgr.OnCardinalVerificationPage());
+            DataHelperTool.ChangeAllRegsToTestAndDelete(this.eventId);
+        }
 
-            this.ConfirmationPage();
+        private void SetAgendaPage(string[] agendaname, double[] price)
+        {
+            int i = 0;
+            BuilderMgr.GotoPage(FormDetailManager.Page.Agenda);
+            BuilderMgr.ClickYesOnSplashPage();
+
+            foreach (var name in agendaname)
+            {
+                BuilderMgr.AddAgendaItemWithPriceAndNoDate(AgendaItemManager.AgendaItemType.CheckBox, name, price[i]);
+                i++;
+            }
         }
 
         private void LoginAndGetSessionID()
@@ -108,13 +147,36 @@
             ManagerSiteMgr.DashboardMgr.ActiveEvent(); 
         }
 
+        private void Register(int eventId)
+        {
+            RegisterMgr.OpenRegisterPage(eventId);
+            RegisterMgr.Checkin();
+            RegisterMgr.Continue();
+            RegisterMgr.EnterProfileInfo();
+            RegisterMgr.Continue();
+            RegisterMgr.SelectAgendaItems();
+            RegisterMgr.Continue();
+            RegisterMgr.PaymentMgr.EnterCreditCardNumberInfo("5500005555555559", "123", "01 - Jan", "2013");
+            RegisterMgr.PaymentMgr.EnterCreditCardNameCountryType("test test", "United States", null);
+            RegisterMgr.PaymentMgr.EnterCreditCardAddressInfo(null, null, null, "CO", null);
+            RegisterMgr.FinishRegistration();
+            Assert.True(RegisterMgr.OnCardinalVerificationPage());
+            RegisterMgr.SubmitCardinalPassword("1234");
+
+            if (RegisterMgr.OnConfirmationRedirectPage())
+            {
+                RegisterMgr.ClickAdvantageNo();
+            }
+            
+            RegisterMgr.ConfirmRegistration();
+        }
+
         private void Register(int EventId, string Date, string Year)
         {
             RegisterMgr.OpenRegisterPage(EventId);
             RegisterMgr.Checkin();
             RegisterMgr.Continue();
-            RegisterMgr.SetDefaultStandardPersonalInfoFields();
-            RegisterMgr.EnterPersonalInfoPassword(Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
             RegisterMgr.SelectAgendaItems();
             RegisterMgr.Continue();
@@ -127,7 +189,10 @@
         private void ConfirmationPage()
         {
             if (RegisterMgr.OnConfirmationRedirectPage())
+            {
                 RegisterMgr.ClickAdvantageNo();
+            }
+
             RegisterMgr.ConfirmRegistration();      
         }
     }

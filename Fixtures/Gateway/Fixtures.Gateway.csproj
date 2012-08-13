@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardinalRegistrationFixture.cs" />
-    <Compile Include="CardinalRegistrationVisaMCFixture.cs" />
     <Compile Include="GatewayRegistrationBetaFixture.cs" />
     <Compile Include="GatewaySetupFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
