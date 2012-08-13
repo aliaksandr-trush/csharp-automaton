@@ -65,8 +65,8 @@
             this.PaymentMethodMgr.CreditCardOptionsMgr.SelectPaymentGateway(
                 CreditCardOptionsManager.PaymentGateway.RegOnlineGateway);
 
-            this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
-                CreditCardOptionsManager.DefaultCreditCardStatementDescription);
+            ////this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
+            ////    CreditCardOptionsManager.DefaultCreditCardStatementDescription);
 
             this.PaymentMethodMgr.CreditCardOptionsMgr.SetAcceptedCreditCard(
                 CreditCardOptionsManager.AcceptedCreditCard.Discover, 
@@ -112,8 +112,8 @@
             this.PaymentMethodMgr.CreditCardOptionsMgr.SelectPaymentGateway(
                 CreditCardOptionsManager.PaymentGateway.RegOnlineGateway);
 
-            this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
-                CreditCardOptionsManager.DefaultCreditCardStatementDescription);
+            ////this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
+            ////    CreditCardOptionsManager.DefaultCreditCardStatementDescription);
 
             this.PaymentMethodMgr.CreditCardOptionsMgr.SetAcceptedCreditCard(
                 CreditCardOptionsManager.AcceptedCreditCard.Discover, 
@@ -147,15 +147,14 @@
             // verify payment options
             Assert.That(Event.Capture_Payment);
             Assert.IsFalse(Event.CapturePaymentOnZero ?? false);
-            Assert.That(Event.CurrencyCode == "USD");
-            Assert.That(Event.InvoiceCompany == "Active Events AKA RegOnline");
+            VerifyTool.VerifyValue("USD", Event.CurrencyCode, "Event currency code: {0}");
+            VerifyTool.VerifyValue("Active Events AKA RegOnline", Event.InvoiceCompany, "Event invoice company: {0}");
             Assert.That(Event.GenerateInvoice ?? false);
 
             // verify cc options
             Assert.That(Event.Charge_Online);
-            //Assert.That(Event.CustomerMerchantId == 744);
-            VerifyTool.VerifyValue(Event.customerMerchantId, 1218, "CustomerMerchantId: {0}");
-            Assert.That(Event.DynamicDescriptor == "ActiveEvents");
+            VerifyTool.VerifyValue(1218, Event.customerMerchantId, "CustomerMerchantId: {0}");
+            VerifyTool.VerifyValue("Active Events AKA RegOnli", Event.DynamicDescriptor, "Event dynamic descriptor: {0}");
             Assert.IsFalse(Event.DontChargeCC ?? false);
             Assert.That(Event.storeCCNumbers);
             Assert.That(Event.EventCollectionField.cCVVCode ?? false);

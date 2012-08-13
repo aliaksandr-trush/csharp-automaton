@@ -153,7 +153,11 @@
         [Description("832")]
         public void GetEvents()
         {
-            RunTestToGetAPIToken();
+            ConfigurationProvider.XmlConfig.ReloadAccount(
+                XmlConfiguration.AccountType.Alternative);
+
+            this.Login();
+            header.APIToken = userAPIToken;
 
             ResultsOfListOfEvent result = this.service.GetEvents(header, "IsActive", "AddDate DESC");
             Assert.IsTrue(result.Success);
@@ -164,6 +168,8 @@
             // Assert that the AddDate of the first event is greater or equal than the second one's,
             // so that the result list is in descending order
             Assert.GreaterOrEqual(result.Data[0].AddDate, result.Data[1].AddDate);
+
+            userAPIToken = null;
         }
 
         /*

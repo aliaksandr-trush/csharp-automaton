@@ -93,6 +93,7 @@
         public void ResendConfirmation()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Resend Confirmation", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("Email");
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Name);
             this.SelectAttendeeInfoWindow();
@@ -103,6 +104,7 @@
         public void GenerateInvoiceAndVerify(int registrationId)
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Invoice", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("Invoice");
 
             // Verify we are on the correct page
@@ -127,6 +129,7 @@
         public void CancelRegistrationAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Cancel Registration", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
             DateTime expectedCancelledDateTime = DateTime.Now;
@@ -144,6 +147,7 @@
         public void UndoCancelRegistrationAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Undo Cancellation", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
             DateTime expectedCancelledDateTime = DateTime.Now;
@@ -160,6 +164,7 @@
         public void GenerateRegDetailsAndVerify(int registrationId)
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Reg Details", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("PrintMyReg");
 
             VerifyTool.VerifyValue(
