@@ -95,6 +95,7 @@
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Resend Confirmation", LocateBy.LinkText);
             UIUtilityProvider.UIHelper.SelectWindowByName("Email");
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Name);
+            Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
@@ -120,6 +121,7 @@
                 "Registration Id on invoice: {0}");
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -130,6 +132,7 @@
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
             DateTime expectedCancelledDateTime = DateTime.Now;
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
             UIUtilityProvider.UIHelper.WaitForElementPresent(CancelledOnLocator, LocateBy.XPath);
             
@@ -168,6 +171,7 @@
                 "Registration Id on reg details: {0}");
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -188,6 +192,7 @@
             }
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -223,6 +228,7 @@
             UIUtilityProvider.UIHelper.SelectWindowByName("Profile");
             VerifyTool.VerifyValue(name + " (" + emailAddress + ")", UIUtilityProvider.UIHelper.GetText("lblProfleTitle", LocateBy.Id), "Profile title: {0}");
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
