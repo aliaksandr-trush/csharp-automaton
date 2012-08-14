@@ -883,12 +883,14 @@
         public void ClickChangeStatusButton()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.SelectWindowByName("GroupEmail");
         }
 
         public void ClickChangeStatusButtonOnCustomReport()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.SelectWindowByName("ChangeStatus");
         }
 
@@ -898,6 +900,7 @@
             UIUtilityProvider.UIHelper.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
             UIUtilityProvider.UIHelper.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnChange", LocateBy.Id);
+            Utility.ThreadSleep(2);
         }
 
         public void ChangeStatusOnCustomReport(AttendeeStatus fromStatus, AttendeeStatus toStatus)
@@ -905,6 +908,7 @@
             UIUtilityProvider.UIHelper.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
             UIUtilityProvider.UIHelper.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Submit1", LocateBy.Id);
+            Utility.ThreadSleep(2);
         }
 
         [Step]
@@ -916,13 +920,14 @@
         public void ClickRunReport()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_reportTools_btnRun", LocateBy.Id);
+            Utility.ThreadSleep(2);
         }
 
         [Step]
         public void ClickSendEmailButton()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Send Email", LocateBy.LinkText);
-            Utility.ThreadSleep(1);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.SelectWindowByName("GroupEmail");
         }
 

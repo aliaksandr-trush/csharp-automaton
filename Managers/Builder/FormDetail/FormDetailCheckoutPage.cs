@@ -121,6 +121,15 @@
             this.PaymentMethodMgr.CreditCardOptionsMgr.SelectPaymentGateway(
                 CreditCardOptionsManager.PaymentGateway.RegOnlineGateway);
 
+            // Bruce - 2012-8-13
+            // Sleep for 2 seconds is necessary:
+            // In case you'll meet the error 'Element is no longer attached to the DOM'.
+            // The default gateway has changed from RegOnline gateway to AMS,
+            // so every time we change it from AMS to RegOnline gateway, some related elements will be refreshed.
+            // See http://stackoverflow.com/questions/5709204/random-element-is-no-longer-attached-to-the-dom-staleelementreferenceexception as a reference,
+            // those elements are 'removed and re-added'.
+            Utility.ThreadSleep(2);
+
             ////this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
             ////    CreditCardOptionsManager.DefaultCreditCardStatementDescription);
 
