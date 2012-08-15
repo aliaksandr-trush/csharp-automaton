@@ -242,5 +242,5 @@
 
   <TimeZoneDifference>14</TimeZoneDifference>
 
-  <NUnitAddin ReportBack="false" />
+  <NUnitAddin ReportBack="true" />
 </RegOnline.RegressionTestConfig>
