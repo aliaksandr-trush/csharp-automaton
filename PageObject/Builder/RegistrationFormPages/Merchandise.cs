@@ -1,5 +1,6 @@
 ﻿namespace RegOnline.RegressionTest.PageObject.Builder.RegistrationFormPages
 {
+    using System;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
@@ -48,6 +49,24 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
+        }
+    }
+
+    public class MerchandiseRow
+    {
+        public int MerchandiseId;
+        public ButtonOrLink Merchandise;
+
+        public MerchandiseRow(DataCollection.Merchandise merch)
+        {
+            this.Merchandise = new ButtonOrLink(string.Format("//table[@id='ctl00_cph_grdFees_tblGrid']//a[text()='{0}']", merch.MerchandiseName), LocateBy.XPath);
+
+            string merchHrefAttriString = this.Merchandise.GetAttribute("href");
+
+            string tmp = merchHrefAttriString.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries)[3];
+            tmp = tmp.Split(new string[] { "&" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+            this.MerchandiseId = Convert.ToInt32(tmp);
         }
     }
 }

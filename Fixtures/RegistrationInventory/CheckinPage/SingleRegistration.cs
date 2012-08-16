@@ -527,32 +527,6 @@
 
         [Test]
         [Category(Priority.Three)]
-        [Description("1320")]
-        public void EventFeeTax()
-        {
-            Event evt = new Event("RI-EventFeeTax");
-            RegType regType = new RegType("First");
-            TaxRate tax = new TaxRate("tax1");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            tax.Rate = 50;
-            tax.Apply = true;
-            regType.Price = 50;
-            regType.TaxRateOne = tax;
-            evt.StartPage.RegTypes.Add(regType);
-            evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
-
-            Registrant reg = new Registrant(evt);
-            reg.RegType = regType;
-            reg.PaymentMethod = paymentMethod;
-
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 75);
-        }
-
-        [Test]
-        [Category(Priority.Three)]
         [Description("1321")]
         public void RegTypeDirectUrl()
         {

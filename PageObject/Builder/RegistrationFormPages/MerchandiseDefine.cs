@@ -16,6 +16,10 @@
         public TextBox NameOnForm = new TextBox("ctl00_cphDialog_elDescription_TextArea", LocateBy.Id);
         public TextBox NameOnReceipt = new TextBox("ctl00_cphDialog_elReportDescription_TextArea", LocateBy.Id);
         public TextBox NameOnReports = new TextBox("ctl00_cphDialog_feeFieldName", LocateBy.Id);
+        public ButtonOrLink AddTaxRate = new ButtonOrLink("ctl00_cphDialog_lbnTaxes", LocateBy.Id);
+        public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_chkListTaxRates_0", LocateBy.Id);
+        public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_chkListTaxRates_1", LocateBy.Id);
+        public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog2", "dialog");
         #endregion
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
@@ -25,6 +29,15 @@
             this.MerchandiseType.SelectWithValue(type);
             Utility.ThreadSleep(1);
             WaitForAJAX();
+        }
+
+        public void AddTaxRate_Click()
+        {
+            this.AddTaxRate.WaitForDisplay();
+            this.AddTaxRate.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
         }
 
         public void SaveAndStay_Click()

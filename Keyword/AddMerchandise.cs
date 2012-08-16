@@ -5,7 +5,7 @@
 
     public class AddMerchandise
     {
-        public void AddMerchandises(DataCollection.Merchandise merch)
+        public void AddMerchandises(DataCollection.Merchandise merch, Event evt)
         {
             if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.EmptyAddMerchandise.IsPresent)
             {
@@ -23,11 +23,11 @@
             switch (merch.MerchandiseType)
             {
                 case FormData.MerchandiseType.Fixed:
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.FeeAmount.Type(merch.MerchandiseFee);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.FeeAmount.Type(merch.MerchandiseFee.Value);
                     break;
                 case FormData.MerchandiseType.Variable:
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMinAmount.Type(merch.MinMerchandiseFee);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMaxAmount.Type(merch.MaxMerchandiseFee);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMinAmount.Type(merch.MinMerchandiseFee.Value);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMaxAmount.Type(merch.MaxMerchandiseFee.Value);
                     break;
                 case FormData.MerchandiseType.Header:
                     break;
@@ -38,6 +38,23 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnForm.Type(merch.MerchandiseName);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnReceipt.Type(merch.MerchandiseName);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.NameOnReports.Type(merch.MerchandiseName);
+
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.Advanced_Click();
+
+            if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
+            {
+                KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Merchandise);
+            }
+
+            if ((evt.TaxRateOne != null) && (merch.ApplyTaxOne.HasValue))
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.ApplyTaxOne.Set(merch.ApplyTaxOne.Value);
+            }
+
+            if ((evt.TaxRateTwo != null) && (merch.ApplyTaxTwo.HasValue))
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.ApplyTaxTwo.Set(merch.ApplyTaxTwo.Value);
+            }
 
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.SaveAndClose_Click();
         }

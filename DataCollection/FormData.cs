@@ -467,7 +467,13 @@
             China,
 
             [CustomString("Canada")]
-            Canada
+            Canada,
+
+            [CustomString("European Union (EU)")]
+            EU,
+
+            [CustomString("Austria")]
+            Austria
         }
         #endregion
 

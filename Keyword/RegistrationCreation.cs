@@ -28,6 +28,11 @@
                 Agenda(reg);
             }
 
+            if (reg.Event.MerchandisePage != null)
+            {
+                Merchandise(reg);
+            }
+
             Checkout(reg);
         }
 
@@ -360,6 +365,31 @@
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
+        }
+
+        public void Merchandise(Registrant reg)
+        {
+            if (reg.MerchandiseResponses.Count != 0)
+            {
+                foreach (MerchandiseResponse response in reg.MerchandiseResponses)
+                {
+                    if ((response is MerchFixedResponse) && response.IsUpdate)
+                    {
+                        MerchFixedResponse resp = response as MerchFixedResponse;
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Quantity);
+                        resp.IsUpdate = false;
+                    }
+
+                    if ((response is MerchVariableResponse) && response.IsUpdate)
+                    {
+                        MerchVariableResponse resp = response as MerchVariableResponse;
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Amount);
+                        resp.IsUpdate = false;
+                    }
+                }
+            }
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
         public void Checkout(Registrant reg)

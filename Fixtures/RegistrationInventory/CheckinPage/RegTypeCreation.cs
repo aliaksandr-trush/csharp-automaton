@@ -128,7 +128,6 @@
             regType6.LatePrice = latePrice6;
             regType6.DiscountCode.Add(discountCode6);
 
-            RegType regType7 = new RegType("EarlyLateFeeDCRequiredTax");
             EarlyPrice earlyPrice7 = new EarlyPrice();
             earlyPrice7.earlyPrice = 40;
             earlyPrice7.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
@@ -143,19 +142,6 @@
             discountCode7.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode7.CodeKind = FormData.ChangeType.FixedAmount;
             discountCode7.CodeType = FormData.DiscountCodeType.DiscountCode;
-            TaxRate tax1 = new TaxRate("tax1");
-            tax1.Rate = 10;
-            tax1.Apply = true;
-            TaxRate tax2 = new TaxRate("tax2");
-            tax2.Rate = 20;
-            tax2.Apply = true;
-            regType7.Price = 50;
-            regType7.EarlyPrice = earlyPrice7;
-            regType7.LatePrice = latePrice7;
-            regType7.DiscountCode.Add(discountCode7);
-            regType7.RequireDC = true;
-            regType7.TaxRateOne = tax1;
-            regType7.TaxRateTwo = tax2;
 
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
 
@@ -165,7 +151,6 @@
             evt.StartPage.RegTypes.Add(regType4);
             evt.StartPage.RegTypes.Add(regType5);
             evt.StartPage.RegTypes.Add(regType6);
-            evt.StartPage.RegTypes.Add(regType7);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
@@ -197,9 +182,6 @@
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
             KeywordProvider.RegisterDefault.SelectRegType(regType6);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.IsPresent);
-            KeywordProvider.RegisterDefault.SelectRegType(regType7);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
         }
 
         [Test]

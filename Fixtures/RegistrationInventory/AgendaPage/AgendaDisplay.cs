@@ -85,9 +85,9 @@
             AgendaItemCheckBox AG3 = new AgendaItemCheckBox("AG3");
             AG3.ConditionalLogic.Add(AG2.NameOnForm);
 
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG2);
+            KeywordProvider.AddAgendaItem.AddAgendaItems(AG2, evt);
             AG2.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG3);
+            KeywordProvider.AddAgendaItem.AddAgendaItems(AG3, evt);
             AG3.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(AG2);
             row1.Delete_Click();
@@ -101,7 +101,7 @@
 
             AgendaItemCheckBox AG4 = new AgendaItemCheckBox("AG4");
             AG4.ConditionalLogic.Add(AG3.NameOnForm);
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG4);
+            KeywordProvider.AddAgendaItem.AddAgendaItems(AG4, evt);
             AG4.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
 
             Registrant reg1 = new Registrant(evt);

@@ -56,7 +56,6 @@
     <Compile Include="EventFeeFixture.cs" />
     <Compile Include="GroupDiscountFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxesFixture.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -5,7 +5,7 @@
 
     public class AddRegType
     {
-        public void AddRegTypes(RegType regType)
+        public void Add_RegType(RegType regType, Event evt)
         {
             if (regType.AdditionalDetails != null)
             {
@@ -78,8 +78,8 @@
             #endregion
 
             if ((regType.DiscountCode.Count != 0) || (regType.EarlyPrice != null) ||
-                (regType.LatePrice != null) || (regType.TaxRateOne != null) ||
-                (regType.TaxRateTwo != null))
+                (regType.LatePrice != null) || (evt.TaxRateOne != null) ||
+                (evt.TaxRateTwo != null))
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeAdvanced_Click();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AdjustRADWindowPositionAndResize();
@@ -132,25 +132,25 @@
                 #endregion
 
                 #region AddTaxRate
-                if ((regType.TaxRateOne != null) || (regType.TaxRateTwo != null))
+                if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                 {
                     if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddTaxRate.IsPresent)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
                     }
 
-                    KeywordProvider.AddTaxRate.AddTaxRates(regType.TaxRateOne, regType.TaxRateTwo, FormData.Location.RegType);
+                    KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.RegType);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
 
-                    if (regType.TaxRateOne != null && regType.TaxRateOne.Apply.HasValue)
+                    if (evt.TaxRateOne != null && regType.ApplyTaxOne.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxOne.Set(regType.TaxRateOne.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxOne.Set(regType.ApplyTaxOne.Value);
                     }
 
-                    if (regType.TaxRateTwo != null && regType.TaxRateTwo.Apply.HasValue)
+                    if (evt.TaxRateTwo != null && regType.ApplyTaxTwo.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxTwo.Set(regType.TaxRateTwo.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxTwo.Set(regType.ApplyTaxTwo.Value);
                     }
                 }
                 #endregion

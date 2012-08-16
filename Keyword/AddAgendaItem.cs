@@ -6,7 +6,7 @@
 
     public class AddAgendaItem
     {
-        public void AddAgendaItems(AgendaItem agenda)
+        public void AddAgendaItems(AgendaItem agenda, Event evt)
         {
             if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateAgendaItem.IsPresent)
             {
@@ -183,7 +183,7 @@
 
                 if ((ag.EarlyPrice != null) || (ag.LatePrice != null) ||
                     (ag.DiscountCode.Count != 0) || (ag.BulkCodes != null) ||
-                    (ag.TaxRateOne != null) || (ag.TaxRateTwo != null))
+                    (evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.PriceOptionsLink_Click();
 
@@ -220,19 +220,19 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.RequireCode.Set(ag.RequireDC.Value);
                     }
 
-                    if ((ag.TaxRateOne != null) || (ag.TaxRateTwo != null))
+                    if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                     {
-                        KeywordProvider.AddTaxRate.AddTaxRates(ag.TaxRateOne, ag.TaxRateTwo, FormData.Location.Agenda);
+                        KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Agenda);
                     }
 
-                    if ((ag.TaxRateOne != null) && (ag.TaxRateOne.Apply.HasValue))
+                    if ((evt.TaxRateOne != null) && (ag.ApplyTaxOne.HasValue))
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxOne.Set(ag.TaxRateOne.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxOne.Set(ag.ApplyTaxOne.Value);
                     }
 
-                    if ((ag.TaxRateTwo != null) && (ag.TaxRateTwo.Apply.HasValue))
+                    if ((evt.TaxRateTwo != null) && (ag.ApplyTaxTwo.HasValue))
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxTwo.Set(ag.TaxRateTwo.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxTwo.Set(ag.ApplyTaxTwo.Value);
                     }
                 }
 

@@ -30,12 +30,12 @@
             KeywordProvider.EventCreator.StartPage(evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
-            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda1);
+            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda1, evt);
             agenda1.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(agenda1);
             Assert.True(row1.Agenda.IsPresent);
             Assert.AreEqual(row1.Agenda.GetAttribute("class"), "hs colwidth1");
-            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda2);
+            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda2, evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveAndNew_Click();
             Assert.AreNotEqual(agenda1.Id, Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value));
             Assert.AreEqual(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Text, "");

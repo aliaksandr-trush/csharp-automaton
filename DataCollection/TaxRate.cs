@@ -4,8 +4,8 @@
     {
         public string TaxRateCaption;
         public double Rate;
-        public bool? Apply;
         public FormData.Countries? Country;
+        public bool ToBeAdded = true;
 
         public TaxRate(string caption)
         {

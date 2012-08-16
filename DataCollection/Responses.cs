@@ -92,4 +92,20 @@
     {
         public TimeSpan Duration;
     }
+
+    public class MerchandiseResponse
+    {
+        public Merchandise Merchandise;
+        public bool IsUpdate = true;
+    }
+
+    public class MerchFixedResponse : MerchandiseResponse
+    {
+        public int Quantity;
+    }
+
+    public class MerchVariableResponse : MerchandiseResponse
+    {
+        public double Amount;
+    }
 }

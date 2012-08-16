@@ -118,7 +118,7 @@
             {
                 foreach (RegType regType in details.StartPage.RegTypes)
                 {
-                    KeywordProvider.AddRegType.AddRegTypes(regType);
+                    KeywordProvider.AddRegType.Add_RegType(regType, details);
                     PageObject.Builder.RegistrationFormPages.RegTypeRow row = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType.RegTypeName);
                     regType.RegTypeId = row.RegTypeId;
                 }
@@ -303,7 +303,7 @@
 
                 foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
                 {
-                    KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem);
+                    KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem, details);
                     agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
                 }
 
@@ -384,7 +384,9 @@
 
                 foreach (DataCollection.Merchandise merch in details.MerchandisePage.Merchandises)
                 {
-                    KeywordProvider.AddMerchandise.AddMerchandises(merch);
+                    KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
+                    PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
+                    merch.Id = row.MerchandiseId;
                 }
 
                 if (details.MerchandisePage.PageHeader != null)

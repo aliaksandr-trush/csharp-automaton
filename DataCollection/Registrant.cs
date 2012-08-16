@@ -78,6 +78,7 @@
         public PaymentMethod PaymentMethod;
         public RegisterMethod RegisterMethod = RegisterMethod.EventId;
         public List<CustomFieldResponse> CustomFieldResponses = new List<CustomFieldResponse>();
+        public List<MerchandiseResponse> MerchandiseResponses = new List<MerchandiseResponse>();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
 

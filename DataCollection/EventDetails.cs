@@ -11,6 +11,8 @@
         public string Shortcut;
         public bool IsActive;
         public FormData.FormType FormType;
+        public TaxRate TaxRateOne;
+        public TaxRate TaxRateTwo;
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();

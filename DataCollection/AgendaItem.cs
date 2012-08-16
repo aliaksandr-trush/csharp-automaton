@@ -30,8 +30,8 @@
         public List<DiscountCode> DiscountCode = new List<DiscountCode>();
         public string BulkCodes;
         public bool? RequireDC;
-        public TaxRate TaxRateOne;
-        public TaxRate TaxRateTwo;
+        public bool? ApplyTaxOne;
+        public bool? ApplyTaxTwo;
         public int? SpacesAvailable;
         public bool? ShowCapacity;
         public FormData.AgendaLimitReachedOption? LimitReachedOption;
