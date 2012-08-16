@@ -134,6 +134,7 @@
             Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
             Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
@@ -153,6 +154,7 @@
             Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
             this.SelectAttendeeInfoWindow();
             UIUtilityProvider.UIHelper.WaitForPageToLoad();
@@ -183,6 +185,7 @@
         public void PrintBadgeAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Print Badge", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("PersonalBadges");
 
             // The page will be redirected to activereports/default.aspx first, loading, then redirected to badge
