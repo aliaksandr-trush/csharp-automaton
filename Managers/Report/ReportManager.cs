@@ -171,6 +171,7 @@
         public void ClickReportsFilterButton()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_reportTools_linkCustomizeIcon", LocateBy.Id);
+            Utility.ThreadSleep(2);
 
             // select the window
             UIUtilityProvider.UIHelper.SelectWindowByTitle("FiltersConsole"); 
@@ -400,6 +401,7 @@
         public void ClickSmartLinkButton()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@id='ctl00_reportTools_divSmartlink']/a", LocateBy.XPath);
+            Utility.ThreadSleep(2);
 
             // select the window
             UIUtilityProvider.UIHelper.SelectWindowByTitle("SmartLink Options");
@@ -439,6 +441,7 @@
         public void ClickCheckInButton()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Check In", LocateBy.LinkText);
+            Utility.ThreadSleep(2);
         }
 
         [Step]

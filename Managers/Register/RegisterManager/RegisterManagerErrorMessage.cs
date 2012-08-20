@@ -31,7 +31,7 @@
                 "This event is full. You cannot add another person.\rTo complete this registration, click Continue.";
 
             public const string RegTypeLimitReachedAndContinueFormat =
-                "The event is full for the {0} registrant type. You cannot add another person with this registrant type.\rTo complete this registration, click Continue.";
+                "You have registered the maximum number of people for the {0} registration type.\rTo continue and complete this registration, click Continue.";
 
             public const string RegTypeLimitReachedFormat = "{0} limit reached!";
 

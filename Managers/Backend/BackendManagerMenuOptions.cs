@@ -288,6 +288,7 @@
             
             // Click 'Next'
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnStart", LocateBy.Id);
+            UIUtilityProvider.UIHelper.WaitForPageToLoad();
 
             // Get new registration id
             int newRegistrationId = Convert.ToInt32(UIUtilityProvider.UIHelper.GetText("lblNewRegisterId", LocateBy.Id));

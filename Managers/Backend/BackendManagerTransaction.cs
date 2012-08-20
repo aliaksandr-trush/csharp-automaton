@@ -370,6 +370,7 @@
                 (charge - decimal.Truncate(charge)).ToString("F2", CultureInfo.InvariantCulture).Remove(0, 1)*/ format);
 
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("inButCharge", LocateBy.Id);
+            Utility.ThreadSleep(2);
             string confirmationMessage = UIUtilityProvider.UIHelper.GetConfirmationText();
             UIUtilityProvider.UIHelper.GetConfirmation();
             VerifyTool.VerifyValue(confirmationPattern, confirmationMessage, "Confirmation: {0}");

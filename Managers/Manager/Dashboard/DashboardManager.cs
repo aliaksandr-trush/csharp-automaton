@@ -724,11 +724,13 @@
                 case CommonReportType.Lodging:
                 case CommonReportType.ConfirmedRegistrants:
                     UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    Utility.ThreadSleep(3);
                     SelectReportPopupWindow();
                     break;
 
                 case CommonReportType.RoomingList:
                     UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    Utility.ThreadSleep(3);
                     this.ByPassRoomingListReportFilter();
                     SelectReportPopupWindow();
                     break;
