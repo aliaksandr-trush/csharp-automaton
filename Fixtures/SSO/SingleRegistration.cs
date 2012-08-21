@@ -21,7 +21,7 @@
 
             Registrant reg = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg.Password = ExternalAuthenticationData.SSOPassword;
-            reg.RegType = regType;
+            reg.RegType_Response = new RegTypeResponse(regType);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
@@ -65,11 +65,11 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, false, true);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.RegType = regType2;
+            reg1.RegType_Response = new RegTypeResponse(regType2);
 
             Registrant reg2 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg2.Password = ExternalAuthenticationData.SSOPassword;
-            reg2.RegType = regType2;
+            reg2.RegType_Response = new RegTypeResponse(regType2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);

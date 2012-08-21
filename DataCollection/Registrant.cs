@@ -58,7 +58,7 @@
         public int Id;
         public Event Event;
         public string Email;
-        public RegType RegType;
+        public RegTypeResponse RegType_Response;
         public string FirstName;
         public string MiddleName;
         public string LastName;
@@ -75,10 +75,10 @@
         public string Extension;
         public string Fax;
         public string Password;
-        public PaymentMethod PaymentMethod;
-        public RegisterMethod RegisterMethod = RegisterMethod.EventId;
-        public List<CustomFieldResponse> CustomFieldResponses = new List<CustomFieldResponse>();
-        public List<MerchandiseResponse> MerchandiseResponses = new List<MerchandiseResponse>();
+        public PaymentMethod Payment_Method;
+        public RegisterMethod Register_Method = RegisterMethod.EventId;
+        public List<CustomFieldResponse> CustomField_Responses = new List<CustomFieldResponse>();
+        public List<MerchandiseResponse> Merchandise_Responses = new List<MerchandiseResponse>();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
 

@@ -36,8 +36,8 @@
             AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
             resp3.AgendaItem = agenda3;
             resp3.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
@@ -46,7 +46,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Agenda_Click(0);
             resp2.IsUpdate = true;
             resp2.Checked = false;
-            reg.CustomFieldResponses.Add(resp3);
+            reg.CustomField_Responses.Add(resp3);
             KeywordProvider.RegistrationCreation.Agenda(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.Checkout(reg);
@@ -96,10 +96,10 @@
             AgendaCheckboxResponse resp5 = new AgendaCheckboxResponse();
             resp5.AgendaItem = agenda5;
             resp5.Checked = true;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
-            reg1.CustomFieldResponses.Add(resp3);
-            reg1.CustomFieldResponses.Add(resp4);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp3);
+            reg1.CustomField_Responses.Add(resp4);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
 
@@ -107,8 +107,8 @@
             reg2.Gender = FormData.Gender.Female;
             resp1.IsUpdate = true;
             resp2.IsUpdate = true;
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
 
@@ -119,9 +119,9 @@
             resp4.IsUpdate = true;
             resp5.IsUpdate = true;
             resp2.Checked = false;
-            reg2.CustomFieldResponses.Add(resp3);
-            reg2.CustomFieldResponses.Add(resp4);
-            reg2.CustomFieldResponses.Add(resp5);
+            reg2.CustomField_Responses.Add(resp3);
+            reg2.CustomField_Responses.Add(resp4);
+            reg2.CustomField_Responses.Add(resp5);
             KeywordProvider.BackendUpdate.UpdateCustomField(reg2);
             Assert.True(attendeeInfo.AgendaLable(agenda1).IsPresent);
             Assert.False(attendeeInfo.AgendaLable(agenda2).IsPresent);

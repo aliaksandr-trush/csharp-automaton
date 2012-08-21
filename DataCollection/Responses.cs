@@ -108,4 +108,15 @@
     {
         public double Amount;
     }
+
+    public class RegTypeResponse
+    {
+        public RegType RegType;
+        public DiscountCode DiscountCode;
+
+        public RegTypeResponse(RegType regType)
+        {
+            this.RegType = regType;
+        }
+    }
 }

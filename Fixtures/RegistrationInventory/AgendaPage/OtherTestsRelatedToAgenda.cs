@@ -68,7 +68,7 @@
             AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
             resp.AgendaItem = agenda1;
             resp.Checked = true;
-            reg.CustomFieldResponses.Add(resp);
+            reg.CustomField_Responses.Add(resp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
@@ -114,8 +114,8 @@
             AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
             resp2.AgendaItem = agenda2;
             resp2.Checked = true;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -130,8 +130,8 @@
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
             Registrant reg2 = new Registrant(evt);
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
         }

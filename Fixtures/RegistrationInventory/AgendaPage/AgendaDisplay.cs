@@ -108,7 +108,7 @@
             CFCheckboxResponse resp = new CFCheckboxResponse();
             resp.CustomField = PICustomField;
             resp.Checked = true;
-            reg1.CustomFieldResponses.Add(resp);
+            reg1.CustomField_Responses.Add(resp);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -161,7 +161,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.RegType = regType1;
+            reg1.RegType_Response = new RegTypeResponse(regType1);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -177,7 +177,7 @@
             Assert.False(row5.AgendaType.IsPresent);
 
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType = regType2;
+            reg2.RegType_Response = new RegTypeResponse(regType2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -190,8 +190,8 @@
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType = regType1;
-            reg3.RegisterMethod = RegisterMethod.Admin;
+            reg3.RegType_Response = new RegTypeResponse(regType1);
+            reg3.Register_Method = RegisterMethod.Admin;
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);

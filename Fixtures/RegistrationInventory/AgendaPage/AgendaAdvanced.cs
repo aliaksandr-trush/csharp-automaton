@@ -28,7 +28,7 @@
             AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
             resp.AgendaItem = agendaWithEmailAddendum;
             resp.Checked = true;
-            reg.CustomFieldResponses.Add(resp);
+            reg.CustomField_Responses.Add(resp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
@@ -62,15 +62,15 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            reg.RegisterMethod = RegisterMethod.EventWebsite;
+            reg.Register_Method = RegisterMethod.EventWebsite;
             AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
             resp1.AgendaItem = agendaAddToCalenda;
             resp1.Checked = true;
             AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
             resp2.AgendaItem = includeOnEventWeb;
             resp2.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.EventWebsite.Agenda_Click();
@@ -115,8 +115,8 @@
             AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
             resp2.AgendaItem = agendaGroup2;
             resp2.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -198,13 +198,13 @@
             Registrant reg1 = new Registrant(evt);
             reg1.Gender = FormData.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
-            reg1.CustomFieldResponses.Add(resp3);
-            reg1.CustomFieldResponses.Add(resp4);
-            reg1.CustomFieldResponses.Add(resp5);
-            reg1.CustomFieldResponses.Add(resp6);
-            reg1.CustomFieldResponses.Add(resp7);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp3);
+            reg1.CustomField_Responses.Add(resp4);
+            reg1.CustomField_Responses.Add(resp5);
+            reg1.CustomField_Responses.Add(resp6);
+            reg1.CustomField_Responses.Add(resp7);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -257,7 +257,7 @@
             reg4.Gender = FormData.Gender.Male;
             reg4.BirthDate = DateTime.Today.AddYears(-22);
             resp4.IsUpdate = true;
-            reg4.CustomFieldResponses.Add(resp4);
+            reg4.CustomField_Responses.Add(resp4);
 
             KeywordProvider.RegistrationCreation.Checkin(reg4);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg4);
@@ -330,13 +330,13 @@
             resp7.Checked = true;
 
             Registrant reg = new Registrant(evt);
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
-            reg.CustomFieldResponses.Add(resp4);
-            reg.CustomFieldResponses.Add(resp5);
-            reg.CustomFieldResponses.Add(resp6);
-            reg.CustomFieldResponses.Add(resp7);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
+            reg.CustomField_Responses.Add(resp4);
+            reg.CustomField_Responses.Add(resp5);
+            reg.CustomField_Responses.Add(resp6);
+            reg.CustomField_Responses.Add(resp7);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 

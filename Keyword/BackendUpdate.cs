@@ -10,9 +10,9 @@
 
         public void UpdateCustomField(Registrant reg)
         {
-            if (reg.CustomFieldResponses.Capacity != 0)
+            if (reg.CustomField_Responses.Capacity != 0)
             {
-                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse resp in reg.CustomField_Responses)
                 {
                     if (resp.IsUpdate && (resp is AgendaResponse))
                     {

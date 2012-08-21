@@ -70,7 +70,7 @@
 
         public void AddToCart(DataCollection.Registrant reg)
         {
-            foreach(DataCollection.CustomFieldResponse resp in reg.CustomFieldResponses)
+            foreach(DataCollection.CustomFieldResponse resp in reg.CustomField_Responses)
             {
                 if (resp is DataCollection.AgendaResponse)
                 {

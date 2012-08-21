@@ -62,11 +62,11 @@
         {
             this.GroupUniqueEmail();
 
-            Event GroupUsedEmailDiffEvent = new Event("RI-GroupRegistrationDiffEvent");
+            Event groupUsedEmailDiffEvent = new Event("RI-GroupRegistrationDiffEvent");
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupUsedEmailDiffEvent);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupUsedEmailDiffEvent);
 
-            Registrant registrant = new Registrant(GroupUsedEmailDiffEvent, this.emailAddress);
+            Registrant registrant = new Registrant(groupUsedEmailDiffEvent, this.emailAddress);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -92,27 +92,27 @@
         [Description("1308")]
         public void GroupEventFeeGroupDiscount()
         {
-            Event GroupEventFeeGroupDiscount = new Event("RI-GroupEventFeeGroupDiscount");
-            GroupDiscount GroupDiscount = new GroupDiscount();
-            GroupDiscount.GroupSize = 2;
-            GroupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
-            GroupDiscount.DiscountAmount = 1;
-            GroupDiscount.GroupDiscountType = GroupDiscount_DiscountType.USDollar;
-            GroupDiscount.AddtionalRegOption = GroupDiscount_AdditionalRegOption.AnyAdditional;
-            GroupEventFeeGroupDiscount.StartPage.GroupDiscount = GroupDiscount;
-            RegType RegType = new RegType("First");
-            RegType.Price = 50;
-            GroupEventFeeGroupDiscount.StartPage.RegTypes.Add(RegType);
+            Event groupEventFeeGroupDiscount = new Event("RI-GroupEventFeeGroupDiscount");
+            GroupDiscount groupDiscount = new GroupDiscount();
+            groupDiscount.GroupSize = 2;
+            groupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
+            groupDiscount.DiscountAmount = 1;
+            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.USDollar;
+            groupDiscount.AddtionalRegOption = GroupDiscount_AdditionalRegOption.AnyAdditional;
+            groupEventFeeGroupDiscount.StartPage.GroupDiscount = groupDiscount;
+            RegType regType = new RegType("First");
+            regType.Price = 50;
+            groupEventFeeGroupDiscount.StartPage.RegTypes.Add(regType);
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            GroupEventFeeGroupDiscount.CheckoutPage.PaymentMethods.Add(paymentMethod);
+            groupEventFeeGroupDiscount.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupEventFeeGroupDiscount);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupEventFeeGroupDiscount);
 
-            Registrant reg1 = new Registrant(GroupEventFeeGroupDiscount);
-            reg1.RegType = GroupEventFeeGroupDiscount.StartPage.RegTypes[0];
-            reg1.PaymentMethod = paymentMethod;
-            Registrant reg2 = new Registrant(GroupEventFeeGroupDiscount);
-            reg1.RegType = GroupEventFeeGroupDiscount.StartPage.RegTypes[0];
+            Registrant reg1 = new Registrant(groupEventFeeGroupDiscount);
+            reg1.RegType_Response = new RegTypeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
+            reg1.Payment_Method = paymentMethod;
+            Registrant reg2 = new Registrant(groupEventFeeGroupDiscount);
+            reg1.RegType_Response = new RegTypeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
@@ -125,15 +125,15 @@
         [Description("1309")]
         public void GroupEventLimitReached()
         {
-            Event GroupEventLimitReached = new Event("RI-GroupEventLimitReached");
+            Event groupEventLimitReached = new Event("RI-GroupEventLimitReached");
             EventLevelLimit eventLimit = new EventLevelLimit(1);
             eventLimit.EnableWaitList = true;
-            GroupEventLimitReached.StartPage.EventLimit = eventLimit;
+            groupEventLimitReached.StartPage.EventLimit = eventLimit;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, GroupEventLimitReached);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupEventLimitReached);
 
-            Registrant reg1 = new Registrant(GroupEventLimitReached);
-            Registrant reg2 = new Registrant(GroupEventLimitReached);
+            Registrant reg1 = new Registrant(groupEventLimitReached);
+            Registrant reg2 = new Registrant(groupEventLimitReached);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -189,8 +189,8 @@
 
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
-            reg1.RegType = regType;
-            reg2.RegType = regType;
+            reg1.RegType_Response = new RegTypeResponse(regType);
+            reg2.RegType_Response = new RegTypeResponse(regType);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
@@ -202,7 +202,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType = regType;
+            reg3.RegType_Response = new RegTypeResponse(regType);
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
@@ -223,7 +223,7 @@
 
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
-            reg1.RegType = regType;
+            reg1.RegType_Response = new RegTypeResponse(regType);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);

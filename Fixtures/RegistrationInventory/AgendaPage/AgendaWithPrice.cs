@@ -62,11 +62,11 @@
             DataCollection.AgendaCheckboxResponse resp4 = new DataCollection.AgendaCheckboxResponse();
             resp4.AgendaItem = aGLatePrice;
             resp4.Checked = true;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
-            reg1.CustomFieldResponses.Add(resp3);
-            reg1.CustomFieldResponses.Add(resp4);
-            reg1.PaymentMethod = paymentMethod;
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp3);
+            reg1.CustomField_Responses.Add(resp4);
+            reg1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
@@ -77,11 +77,11 @@
             resp2.IsUpdate = true;
             resp3.IsUpdate = true;
             resp4.IsUpdate = true;
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
-            reg2.CustomFieldResponses.Add(resp3);
-            reg2.CustomFieldResponses.Add(resp4);
-            reg2.PaymentMethod = paymentMethod;
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
+            reg2.CustomField_Responses.Add(resp3);
+            reg2.CustomField_Responses.Add(resp4);
+            reg2.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
@@ -183,7 +183,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
 
             DataCollection.Registrant reg = new DataCollection.Registrant(evt);
-            reg.PaymentMethod = paymentMethod;
+            reg.Payment_Method = paymentMethod;
             DataCollection.AgendaCheckboxResponse resp1 = new DataCollection.AgendaCheckboxResponse();
             resp1.AgendaItem = agendaDCPercent;
             resp1.Checked = true;
@@ -223,16 +223,16 @@
             DataCollection.AgendaCheckboxResponse resp10 = new DataCollection.AgendaCheckboxResponse();
             resp10.AgendaItem = agendaDCRequired;
             resp10.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
-            reg.CustomFieldResponses.Add(resp4);
-            reg.CustomFieldResponses.Add(resp5);
-            reg.CustomFieldResponses.Add(resp6);
-            reg.CustomFieldResponses.Add(resp7);
-            reg.CustomFieldResponses.Add(resp8);
-            reg.CustomFieldResponses.Add(resp9);
-            reg.CustomFieldResponses.Add(resp10);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
+            reg.CustomField_Responses.Add(resp4);
+            reg.CustomField_Responses.Add(resp5);
+            reg.CustomField_Responses.Add(resp6);
+            reg.CustomField_Responses.Add(resp7);
+            reg.CustomField_Responses.Add(resp8);
+            reg.CustomField_Responses.Add(resp9);
+            reg.CustomField_Responses.Add(resp10);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -252,7 +252,7 @@
             resp11.AgendaItem = agendaDCWithLimit;
             resp11.Checked = true;
             resp11.Code = dCWithLimit;
-            reg1.CustomFieldResponses.Add(resp11);
+            reg1.CustomField_Responses.Add(resp11);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -293,16 +293,16 @@
             resp2.AgendaItem = accessWithLimit;
             resp2.Checked = true;
             resp2.Code = accessCodeWithLimit;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
             resp1.IsUpdate = true;
             resp2.IsUpdate = true;
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -359,13 +359,13 @@
             resp4.AgendaItem = fee2;
             resp4.Checked = true;
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
-            reg1.PaymentMethod = paymentMethod;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
+            reg1.Payment_Method = paymentMethod;
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
             System.Threading.Thread.Sleep(10);
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
-            reg2.CustomFieldResponses.Add(resp3);
-            reg2.CustomFieldResponses.Add(resp4);
+            reg2.CustomField_Responses.Add(resp3);
+            reg2.CustomField_Responses.Add(resp4);
             DataCollection.Group group1 = new DataCollection.Group();
             group1.Primary = reg1;
             group1.Secondaries.Add(reg2);
@@ -387,13 +387,13 @@
             resp2.IsUpdate = true;
             resp3.IsUpdate = true;
             resp4.IsUpdate = true;
-            reg3.PaymentMethod = paymentMethod;
-            reg3.CustomFieldResponses.Add(resp1);
-            reg3.CustomFieldResponses.Add(resp2);
+            reg3.Payment_Method = paymentMethod;
+            reg3.CustomField_Responses.Add(resp1);
+            reg3.CustomField_Responses.Add(resp2);
             System.Threading.Thread.Sleep(10);
             DataCollection.Registrant reg4 = new DataCollection.Registrant(evt);
-            reg4.CustomFieldResponses.Add(resp3);
-            reg4.CustomFieldResponses.Add(resp4);
+            reg4.CustomField_Responses.Add(resp3);
+            reg4.CustomField_Responses.Add(resp4);
             DataCollection.Group group2 = new DataCollection.Group();
             group2.Primary = reg3;
             group2.Secondaries.Add(reg4);
@@ -405,11 +405,11 @@
             KeywordProvider.RegistrationCreation.Login(reg1);
 
             DataCollection.Registrant reg5 = new DataCollection.Registrant(evt);
-            reg5.PaymentMethod = paymentMethod;
+            reg5.Payment_Method = paymentMethod;
             resp1.IsUpdate = true;
             resp2.IsUpdate = true;
-            reg5.CustomFieldResponses.Add(resp1);
-            reg5.CustomFieldResponses.Add(resp2);
+            reg5.CustomField_Responses.Add(resp1);
+            reg5.CustomField_Responses.Add(resp2);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg5.Email);
@@ -422,8 +422,8 @@
             DataCollection.Registrant reg6 = new DataCollection.Registrant(evt);
             resp1.IsUpdate = true;
             resp2.IsUpdate = true;
-            reg6.CustomFieldResponses.Add(resp1);
-            reg6.CustomFieldResponses.Add(resp2);
+            reg6.CustomField_Responses.Add(resp1);
+            reg6.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.Login(reg1);

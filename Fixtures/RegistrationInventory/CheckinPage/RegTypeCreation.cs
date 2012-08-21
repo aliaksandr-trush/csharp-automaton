@@ -156,18 +156,18 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.RegType = regType1;
-            reg1.PaymentMethod = paymentMethod;
+            reg1.RegType_Response = new RegTypeResponse(regType1);
+            reg1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(reg1.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
+            Assert.True(reg1.RegType_Response.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType = regType1;
-            reg2.PaymentMethod = paymentMethod;
+            reg2.RegType_Response = new RegTypeResponse(regType1);
+            reg2.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(reg2.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
+            Assert.True(reg2.RegType_Response.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
@@ -198,10 +198,10 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            reg.RegType = regType;
+            reg.RegType_Response = new RegTypeResponse(regType);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.RegType_Response.RegType);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetails.Text.Trim().Equals(regType.AdditionalDetails));
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetailsClose_Click();
             KeywordProvider.RegistrationCreation.Checkin(reg);

@@ -13,7 +13,7 @@
         {
             Checkin(reg);
 
-            if (reg.RegType != null && reg.RegType.IsSSO)
+            if (reg.RegType_Response != null && reg.RegType_Response.RegType.IsSSO)
             {
                 SSOLogin(reg);
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -49,27 +49,27 @@
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group.Secondaries[i].Email);
 
-                if (group.Secondaries[i].RegType != null)
+                if (group.Secondaries[i].RegType_Response != null)
                 {
                     if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.HasValue)
                     {
                         if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].RegType_Response.RegType.RegTypeName);
                         }
                         else
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType_Response.RegType);
                         }
                     }
                     else
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType_Response.RegType);
                     }
 
-                    if (group.Secondaries[i].RegType.DiscountCode.Count != 0)
+                    if (group.Secondaries[i].RegType_Response.DiscountCode != null)
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].RegType.DiscountCode[0].Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].RegType_Response.DiscountCode.Code);
                     }
                 }
 
@@ -103,13 +103,13 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type(reg.Email);
             }
 
-            if ((reg.RegType != null) && (reg.RegisterMethod != RegisterMethod.RegTypeDirectUrl))
+            if ((reg.RegType_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
             {
-                KeywordProvider.RegisterDefault.SelectRegType(reg.RegType);
+                KeywordProvider.RegisterDefault.SelectRegType(reg.RegType_Response.RegType);
 
-                if (reg.RegType.DiscountCode.Count != 0)
+                if (reg.RegType_Response.DiscountCode != null)
                 {
-                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.RegType.DiscountCode[0].Code);
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.RegType_Response.DiscountCode.Code);
                 }
             }
 
@@ -210,7 +210,7 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Gender.SelectWithText(reg.Gender.Value.ToString());
             }
 
-            if (reg.RegisterMethod != RegisterMethod.Admin)
+            if (reg.Register_Method != RegisterMethod.Admin)
             {
                 if (reg.Password != null)
                 {
@@ -224,9 +224,9 @@
                 }
             }
 
-            if (reg.CustomFieldResponses.Count != 0)
+            if (reg.CustomField_Responses.Count != 0)
             {
-                foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse responses in reg.CustomField_Responses)
                 {
                     if (responses is CFResponse)
                     {
@@ -270,9 +270,9 @@
 
         public void Agenda(Registrant reg)
         {
-            if (reg.CustomFieldResponses.Count != 0)
+            if (reg.CustomField_Responses.Count != 0)
             {
-                foreach (CustomFieldResponse responses in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse responses in reg.CustomField_Responses)
                 {
                     if ((responses is AgendaResponse) && responses.IsUpdate)
                     {
@@ -369,9 +369,9 @@
 
         public void Merchandise(Registrant reg)
         {
-            if (reg.MerchandiseResponses.Count != 0)
+            if (reg.Merchandise_Responses.Count != 0)
             {
-                foreach (MerchandiseResponse response in reg.MerchandiseResponses)
+                foreach (MerchandiseResponse response in reg.Merchandise_Responses)
                 {
                     if ((response is MerchFixedResponse) && response.IsUpdate)
                     {
@@ -394,15 +394,15 @@
 
         public void Checkout(Registrant reg)
         {
-            if (reg.PaymentMethod != null)
+            if (reg.Payment_Method != null)
             {
                 if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.IsPresent)
                 {
                     PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.SelectWithText(
-                        FormData.PaymentMethodCheckouLabelAttribute.GetPaymentMethodCheckouLabel(reg.PaymentMethod.PMethod));
+                        FormData.PaymentMethodCheckouLabelAttribute.GetPaymentMethodCheckouLabel(reg.Payment_Method.PMethod));
                 }
 
-                switch (reg.PaymentMethod.PMethod)
+                switch (reg.Payment_Method.PMethod)
                 { 
                     /*****
                      To implement

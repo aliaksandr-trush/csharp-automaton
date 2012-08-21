@@ -66,9 +66,9 @@
             AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
             resp3.AgendaItem = AgendaItem3;
             resp3.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -100,7 +100,7 @@
             {
                 List<AgendaResponse> resps = new List<AgendaResponse>();
 
-                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse resp in reg.CustomField_Responses)
                 {
                     resps.Add(resp as AgendaResponse);
                 }
@@ -223,8 +223,8 @@
             AgendaDropDownResponse resp2 = new AgendaDropDownResponse();
             resp2.AgendaItem = AG4;
             resp2.ChoiceItem = AG4Choice1;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -233,8 +233,8 @@
             Registrant reg2 = new Registrant(evt);
             resp1.IsUpdate = true;
             resp2.IsUpdate = true;
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -386,15 +386,15 @@
             AgendaDropDownResponse resp9 = new AgendaDropDownResponse();
             resp9.AgendaItem = AGDropDown;
             resp9.ChoiceItem = AGDropDown.ChoiceItems.Find(c => c.Name == MultipleChoice_CommonlyUsed.Agreement.Agree);
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
-            reg.CustomFieldResponses.Add(resp4);
-            reg.CustomFieldResponses.Add(resp5);
-            reg.CustomFieldResponses.Add(resp6);
-            reg.CustomFieldResponses.Add(resp7);
-            reg.CustomFieldResponses.Add(resp8);
-            reg.CustomFieldResponses.Add(resp9);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
+            reg.CustomField_Responses.Add(resp4);
+            reg.CustomField_Responses.Add(resp5);
+            reg.CustomField_Responses.Add(resp6);
+            reg.CustomField_Responses.Add(resp7);
+            reg.CustomField_Responses.Add(resp8);
+            reg.CustomField_Responses.Add(resp9);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -445,7 +445,7 @@
             AgendaResponse_Duration duration_Response = new AgendaResponse_Duration();
             duration_Response.AgendaItem = duration;
             duration_Response.Duration = new TimeSpan(1, 30, 30);
-            reg.CustomFieldResponses.Add(duration_Response);
+            reg.CustomField_Responses.Add(duration_Response);
 
             Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
         }
@@ -495,11 +495,11 @@
             DataCollection.AgendaResponse responseThree = new AgendaResponse();
             responseThree.AgendaItem = sessionThree;
 
-            reg.CustomFieldResponses.Add(responseOne);
-            reg.CustomFieldResponses.Add(responseTwo);
-            reg.CustomFieldResponses.Add(responseThree);
+            reg.CustomField_Responses.Add(responseOne);
+            reg.CustomField_Responses.Add(responseTwo);
+            reg.CustomField_Responses.Add(responseThree);
 
-            reg.PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
             Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
@@ -568,10 +568,10 @@
             AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
             resp4.AgendaItem = AgendaWaitlist;
             resp4.Checked = true;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
-            reg1.CustomFieldResponses.Add(resp3);
-            reg1.CustomFieldResponses.Add(resp4);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp3);
+            reg1.CustomField_Responses.Add(resp4);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -582,7 +582,7 @@
 
             Registrant reg2 = new Registrant(evt);
             resp4.IsUpdate = true;
-            reg2.CustomFieldResponses.Add(resp4);
+            reg2.CustomField_Responses.Add(resp4);
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(AgendaHideReached);

@@ -85,20 +85,20 @@
         [Description("1290")]
         public void RegisterWithEventLimitFull()
         {
-            Event EventWithLimit = new Event("RI-SingleRegistrationEventWithLimit");
+            Event eventWithLimit = new Event("RI-SingleRegistrationEventWithLimit");
             EventLevelLimit eventLimit = new EventLevelLimit(1);
             eventLimit.EnableWaitList = true;
-            EventWithLimit.StartPage.EventLimit = eventLimit;
+            eventWithLimit.StartPage.EventLimit = eventLimit;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithLimit);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithLimit);
 
-            Registrant registrant = new Registrant(EventWithLimit);
+            Registrant registrant = new Registrant(eventWithLimit);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
-            Registrant registrantWhenFull = new Registrant(EventWithLimit);
+            Registrant registrantWhenFull = new Registrant(eventWithLimit);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrantWhenFull);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
@@ -126,16 +126,16 @@
 
         public Registrant CreateEventAndRegisterWithRegType()
         {
-            Event EventWithRegType = new Event("RI-SingleRegistrationWithRegType");
-            RegType RegType1 = new RegType("First");
-            RegType RegType2 = new RegType("Second");
-            EventWithRegType.StartPage.RegTypes.Add(RegType1);
-            EventWithRegType.StartPage.RegTypes.Add(RegType2);
+            Event eventWithRegType = new Event("RI-SingleRegistrationWithRegType");
+            RegType regType1 = new RegType("First");
+            RegType regType2 = new RegType("Second");
+            eventWithRegType.StartPage.RegTypes.Add(regType1);
+            eventWithRegType.StartPage.RegTypes.Add(regType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithRegType);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithRegType);
 
-            Registrant registrant = new Registrant(EventWithRegType, string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
-            registrant.RegType = EventWithRegType.StartPage.RegTypes[1];
+            Registrant registrant = new Registrant(eventWithRegType, string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
+            registrant.RegType_Response = new RegTypeResponse(eventWithRegType.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -163,7 +163,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffEventWithRegType);
 
             registrant.Event = diffEventWithRegType;
-            registrant.RegType = diffEventWithRegType.StartPage.RegTypes[1];
+            registrant.RegType_Response = new RegTypeResponse(diffEventWithRegType.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -210,22 +210,22 @@
         [Description("1297")]
         public void RegistrationWithEventFeeGroupDiscount()
         {
-            Event EventWithFeeGroupDiscount = new Event("RI-SingleRegistrationWithEventFeeGroupDiscount");
-            RegType RegType = new RegType("First");
-            RegType.Price = 50;
-            EventWithFeeGroupDiscount.StartPage.RegTypes.Add(RegType);
+            Event eventWithFeeGroupDiscount = new Event("RI-SingleRegistrationWithEventFeeGroupDiscount");
+            RegType regType = new RegType("First");
+            regType.Price = 50;
+            eventWithFeeGroupDiscount.StartPage.RegTypes.Add(regType);
             GroupDiscount GroupDiscount = new GroupDiscount();
             GroupDiscount.GroupSize = 2;
             GroupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
             GroupDiscount.DiscountAmount = 1;
             GroupDiscount.GroupDiscountType = GroupDiscount_DiscountType.USDollar;
             GroupDiscount.AddtionalRegOption = GroupDiscount_AdditionalRegOption.AnyAdditional;
-            EventWithFeeGroupDiscount.StartPage.GroupDiscount = GroupDiscount;
+            eventWithFeeGroupDiscount.StartPage.GroupDiscount = GroupDiscount;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeGroupDiscount);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeGroupDiscount);
 
-            Registrant registrant = new Registrant(EventWithFeeGroupDiscount);
-            registrant.RegType = EventWithFeeGroupDiscount.StartPage.RegTypes[0];
+            Registrant registrant = new Registrant(eventWithFeeGroupDiscount);
+            registrant.RegType_Response = new RegTypeResponse(eventWithFeeGroupDiscount.StartPage.RegTypes[0]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -237,29 +237,29 @@
         [Description("1299")]
         public void RegistrationEventFeeDCDollar()
         {
-            Event EventWithFeeDCDollar = new Event("RI-SingleRegistrationEventFeeDCDollar");
-            RegType RegType1 = new RegType("First");
-            RegType RegType2 = new RegType("Second");
-            RegType2.Price = 50;
-            DiscountCode DC = new DiscountCode("CodeName");
-            DC.CodeType = FormData.DiscountCodeType.DiscountCode;
-            DC.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            DC.Amount = 10;
-            DC.CodeKind = FormData.ChangeType.Percent;
-            RegType2.DiscountCode.Add(DC);
-            EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType1);
-            EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType2);
+            Event eventWithFeeDCDollar = new Event("RI-SingleRegistrationEventFeeDCDollar");
+            RegType regType1 = new RegType("First");
+            RegType regType2 = new RegType("Second");
+            regType2.Price = 50;
+            DiscountCode dc = new DiscountCode("CodeName");
+            dc.CodeType = FormData.DiscountCodeType.DiscountCode;
+            dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dc.Amount = 10;
+            dc.CodeKind = FormData.ChangeType.Percent;
+            regType2.DiscountCode.Add(dc);
+            eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
+            eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeDCDollar);
 
-            Registrant registrant = new Registrant(EventWithFeeDCDollar);
-            registrant.RegType = EventWithFeeDCDollar.StartPage.RegTypes[1];
+            Registrant registrant = new Registrant(eventWithFeeDCDollar);
+            registrant.RegType_Response = new RegTypeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
 
-            Registrant reg = new Registrant(EventWithFeeDCDollar, string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
+            Registrant reg = new Registrant(eventWithFeeDCDollar, string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(EventWithFeeDCDollar.StartPage.RegTypes[1]);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(eventWithFeeDCDollar.StartPage.RegTypes[1]);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type("abc");
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
@@ -275,23 +275,23 @@
         [Description("1298")]
         public void RegistrationEventFeeDCPercent()
         {
-            Event EventWithFeeDCDollar = new Event("RI-SingleRegistrationEventFeeDCPercent");
-            RegType RegType1 = new RegType("First");
-            RegType RegType2 = new RegType("Second");
-            RegType2.Price = 50;
-            DiscountCode DC = new DiscountCode("CodeName");
-            DC.CodeType = FormData.DiscountCodeType.DiscountCode;
-            DC.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            DC.Amount = 10;
-            DC.CodeKind = FormData.ChangeType.FixedAmount;
-            RegType2.DiscountCode.Add(DC);
-            EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType1);
-            EventWithFeeDCDollar.StartPage.RegTypes.Add(RegType2);
+            Event eventWithFeeDCDollar = new Event("RI-SingleRegistrationEventFeeDCPercent");
+            RegType regType1 = new RegType("First");
+            RegType regType2 = new RegType("Second");
+            regType2.Price = 50;
+            DiscountCode dc = new DiscountCode("CodeName");
+            dc.CodeType = FormData.DiscountCodeType.DiscountCode;
+            dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dc.Amount = 10;
+            dc.CodeKind = FormData.ChangeType.FixedAmount;
+            regType2.DiscountCode.Add(dc);
+            eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
+            eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventWithFeeDCDollar);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeDCDollar);
 
-            Registrant registrant = new Registrant(EventWithFeeDCDollar);
-            registrant.RegType = EventWithFeeDCDollar.StartPage.RegTypes[1];
+            Registrant registrant = new Registrant(eventWithFeeDCDollar);
+            registrant.RegType_Response = new RegTypeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -301,30 +301,30 @@
         public Registrant RegistrationEventFeeCodeRequired(FormData.DiscountCodeType type)
         {
             Event eventFeeDCRequired = new Event(string.Format("RI-SingleRegistrationEventFee{0}Required", type.ToString()));
-            RegType RegType1 = new RegType("First");
-            RegType RegType2 = new RegType("Second");
-            RegType2.Price = 50;
-            DiscountCode DC = new DiscountCode("CodeName");
-            DC.CodeType = type;
-            DC.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            DC.Amount = 10;
-            DC.Limit = 1;
-            DC.CodeKind = FormData.ChangeType.FixedAmount;
-            RegType2.DiscountCode.Add(DC);
-            RegType2.RequireDC = true;
-            PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            eventFeeDCRequired.StartPage.RegTypes.Add(RegType1);
-            eventFeeDCRequired.StartPage.RegTypes.Add(RegType2);
-            eventFeeDCRequired.CheckoutPage.PaymentMethods.Add(PaymentMethod);
+            RegType regType1 = new RegType("First");
+            RegType regType2 = new RegType("Second");
+            regType2.Price = 50;
+            DiscountCode dc = new DiscountCode("CodeName");
+            dc.CodeType = type;
+            dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dc.Amount = 10;
+            dc.Limit = 1;
+            dc.CodeKind = FormData.ChangeType.FixedAmount;
+            regType2.DiscountCode.Add(dc);
+            regType2.RequireDC = true;
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            eventFeeDCRequired.StartPage.RegTypes.Add(regType1);
+            eventFeeDCRequired.StartPage.RegTypes.Add(regType2);
+            eventFeeDCRequired.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventFeeDCRequired);
 
             Registrant registrant = new Registrant(eventFeeDCRequired);
-            registrant.RegType = eventFeeDCRequired.StartPage.RegTypes[1];
-            registrant.PaymentMethod = PaymentMethod;
+            registrant.RegType_Response = new RegTypeResponse(eventFeeDCRequired.StartPage.RegTypes[1]);
+            registrant.Payment_Method = paymentMethod;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrant);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.RegType_Response.RegType);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
 
@@ -340,13 +340,13 @@
         {
             Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.DiscountCode);
 
-            DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
+            DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
-            registrantWhenFull.RegType = reg.Event.StartPage.RegTypes[1];
+            registrantWhenFull.RegType_Response = new RegTypeResponse(reg.Event.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.CodeLimitHasReached, DiscountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.CodeLimitHasReached, discountCode.Code)));
         }
 
         [Test]
@@ -356,13 +356,13 @@
         {
             Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.AccessCode);
 
-            DiscountCode DiscountCode = new DataCollection.DiscountCode("CodeName");
+            DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
-            registrantWhenFull.RegType = reg.Event.StartPage.RegTypes[1];
+            registrantWhenFull.RegType_Response = new RegTypeResponse(reg.Event.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.CodeLimitHasReached, DiscountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.CodeLimitHasReached, discountCode.Code)));
         }
 
         [Test]
@@ -370,39 +370,39 @@
         [Description("1302")]
         public void EventFeeEaylyPrice_Registrants()
         {
-            Event EventFeeEaylyPrice_Registrants = new Event("RI-EventFeeEaylyPrice-Registrants");
-            RegType RegType = new RegType("First");
-            EarlyPrice EarlyPrice = new EarlyPrice();
-            EarlyPrice.earlyPrice = 40;
-            EarlyPrice.EarlyPriceType = FormData.EarlyPriceType.Registrants;
-            EarlyPrice.FirstNRegistrants = 1;
-            RegType.EarlyPrice = EarlyPrice;
-            RegType.Price = 50;
-            EventFeeEaylyPrice_Registrants.StartPage.RegTypes.Add(RegType);
-            PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            EventFeeEaylyPrice_Registrants.CheckoutPage.PaymentMethods.Add(PaymentMethod);
+            Event eventFeeEaylyPrice_Registrants = new Event("RI-EventFeeEaylyPrice-Registrants");
+            RegType regType = new RegType("First");
+            EarlyPrice earlyPrice = new EarlyPrice();
+            earlyPrice.earlyPrice = 40;
+            earlyPrice.EarlyPriceType = FormData.EarlyPriceType.Registrants;
+            earlyPrice.FirstNRegistrants = 1;
+            regType.EarlyPrice = earlyPrice;
+            regType.Price = 50;
+            eventFeeEaylyPrice_Registrants.StartPage.RegTypes.Add(regType);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            eventFeeEaylyPrice_Registrants.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventFeeEaylyPrice_Registrants);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventFeeEaylyPrice_Registrants);
 
-            Registrant registrant = new Registrant(EventFeeEaylyPrice_Registrants);
-            registrant.RegType = EventFeeEaylyPrice_Registrants.StartPage.RegTypes[0];
-            registrant.PaymentMethod = PaymentMethod;
+            Registrant registrant = new Registrant(eventFeeEaylyPrice_Registrants);
+            registrant.RegType_Response = new RegTypeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
+            registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == EarlyPrice.earlyPrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == earlyPrice.earlyPrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
-            Registrant registrant1 = new Registrant(EventFeeEaylyPrice_Registrants);
-            registrant1.RegType = EventFeeEaylyPrice_Registrants.StartPage.RegTypes[0];
-            registrant1.PaymentMethod = PaymentMethod;
+            Registrant registrant1 = new Registrant(eventFeeEaylyPrice_Registrants);
+            registrant1.RegType_Response = new RegTypeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
+            registrant1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant1);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant1);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == RegType.Price.Value);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == regType.Price.Value);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant1);
         }
@@ -412,29 +412,29 @@
         [Description("1303")]
         public void RegistrationEarlyPriceDate()
         {
-            Event EventEarlyPrice = new Event("RI-EventEarlyPrice");
-            RegType RegType = new RegType("First");
-            EarlyPrice EarlyPrice = new EarlyPrice();
-            EarlyPrice.earlyPrice = 40;
-            EarlyPrice.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
-            EarlyPrice.EarlyPriceDate = System.DateTime.Today.AddDays(2);
-            EarlyPrice.EarlyPriceTime = System.DateTime.Now;
-            RegType.EarlyPrice = EarlyPrice;
-            RegType.Price = 50;
-            EventEarlyPrice.StartPage.RegTypes.Add(RegType);
-            PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            EventEarlyPrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
+            Event eventEarlyPrice = new Event("RI-EventEarlyPrice");
+            RegType regType = new RegType("First");
+            EarlyPrice earlyPrice = new EarlyPrice();
+            earlyPrice.earlyPrice = 40;
+            earlyPrice.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
+            earlyPrice.EarlyPriceDate = System.DateTime.Today.AddDays(2);
+            earlyPrice.EarlyPriceTime = System.DateTime.Now;
+            regType.EarlyPrice = earlyPrice;
+            regType.Price = 50;
+            eventEarlyPrice.StartPage.RegTypes.Add(regType);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            eventEarlyPrice.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventEarlyPrice);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventEarlyPrice);
 
-            Registrant registrant = new Registrant(EventEarlyPrice);
-            registrant.RegType = EventEarlyPrice.StartPage.RegTypes[0];
-            registrant.PaymentMethod = PaymentMethod;
+            Registrant registrant = new Registrant(eventEarlyPrice);
+            registrant.RegType_Response = new RegTypeResponse(eventEarlyPrice.StartPage.RegTypes[0]);
+            registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == EarlyPrice.earlyPrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == earlyPrice.earlyPrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -444,28 +444,28 @@
         [Description("1304")]
         public void RegistrationLatePriceDate()
         {
-            Event EventLatePrice = new Event("RI-EventLatePrice");
-            RegType RegType = new RegType("First");
-            LatePrice LatePrice = new LatePrice();
-            LatePrice.latePrice = 60;
-            LatePrice.LatePriceDate = System.DateTime.Today.AddDays(-2);
-            LatePrice.LatePriceTime = System.DateTime.Now;
-            RegType.LatePrice = LatePrice;
-            RegType.Price = 50;
-            EventLatePrice.StartPage.RegTypes.Add(RegType);
-            PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            EventLatePrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
+            Event eventLatePrice = new Event("RI-EventLatePrice");
+            RegType regType = new RegType("First");
+            LatePrice latePrice = new LatePrice();
+            latePrice.latePrice = 60;
+            latePrice.LatePriceDate = System.DateTime.Today.AddDays(-2);
+            latePrice.LatePriceTime = System.DateTime.Now;
+            regType.LatePrice = latePrice;
+            regType.Price = 50;
+            eventLatePrice.StartPage.RegTypes.Add(regType);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            eventLatePrice.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventLatePrice);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventLatePrice);
 
-            Registrant registrant = new Registrant(EventLatePrice);
-            registrant.RegType = EventLatePrice.StartPage.RegTypes[0];
-            registrant.PaymentMethod = PaymentMethod;
+            Registrant registrant = new Registrant(eventLatePrice);
+            registrant.RegType_Response = new RegTypeResponse(eventLatePrice.StartPage.RegTypes[0]);
+            registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == LatePrice.latePrice);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == latePrice.latePrice);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -475,34 +475,34 @@
         [Description("1305")]
         public void RegistrationMiddlePriceDate()
         {
-            Event EventMiddlePrice = new Event("RI-EventMiddlePrice");
-            RegType RegType = new RegType("First");
-            EarlyPrice EarlyPrice = new EarlyPrice();
-            EarlyPrice.earlyPrice = 40;
-            EarlyPrice.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
-            EarlyPrice.EarlyPriceDate = System.DateTime.Today.AddDays(-2);
-            EarlyPrice.EarlyPriceTime = System.DateTime.Now;
-            LatePrice LatePrice = new LatePrice();
-            LatePrice.latePrice = 60;
-            LatePrice.LatePriceDate = System.DateTime.Today.AddDays(2);
-            LatePrice.LatePriceTime = System.DateTime.Now;
-            RegType.EarlyPrice = EarlyPrice;
-            RegType.LatePrice = LatePrice;
-            RegType.Price = 50;
-            EventMiddlePrice.StartPage.RegTypes.Add(RegType);
-            PaymentMethod PaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
-            EventMiddlePrice.CheckoutPage.PaymentMethods.Add(PaymentMethod);
+            Event eventMiddlePrice = new Event("RI-EventMiddlePrice");
+            RegType regType = new RegType("First");
+            EarlyPrice earlyPrice = new EarlyPrice();
+            earlyPrice.earlyPrice = 40;
+            earlyPrice.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
+            earlyPrice.EarlyPriceDate = System.DateTime.Today.AddDays(-2);
+            earlyPrice.EarlyPriceTime = System.DateTime.Now;
+            LatePrice latePrice = new LatePrice();
+            latePrice.latePrice = 60;
+            latePrice.LatePriceDate = System.DateTime.Today.AddDays(2);
+            latePrice.LatePriceTime = System.DateTime.Now;
+            regType.EarlyPrice = earlyPrice;
+            regType.LatePrice = latePrice;
+            regType.Price = 50;
+            eventMiddlePrice.StartPage.RegTypes.Add(regType);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            eventMiddlePrice.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, EventMiddlePrice);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventMiddlePrice);
 
-            Registrant registrant = new Registrant(EventMiddlePrice);
-            registrant.RegType = EventMiddlePrice.StartPage.RegTypes[0];
-            registrant.PaymentMethod = PaymentMethod;
+            Registrant registrant = new Registrant(eventMiddlePrice);
+            registrant.RegType_Response = new RegTypeResponse(eventMiddlePrice.StartPage.RegTypes[0]);
+            registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
             KeywordProvider.RegistrationCreation.PersonalInfo(registrant);
 
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == RegType.Price.Value);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == regType.Price.Value);
 
             KeywordProvider.RegistrationCreation.Checkout(registrant);
         }
@@ -539,8 +539,8 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            reg.RegType = regType1;
-            reg.RegisterMethod = RegisterMethod.RegTypeDirectUrl;
+            reg.RegType_Response = new RegTypeResponse(regType1);
+            reg.Register_Method = RegisterMethod.RegTypeDirectUrl;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);

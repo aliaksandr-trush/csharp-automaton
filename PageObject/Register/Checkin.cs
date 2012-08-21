@@ -28,7 +28,7 @@
         {
             string url = string.Empty;
 
-            switch (reg.RegisterMethod)
+            switch (reg.Register_Method)
             {
                 case RegisterMethod.EventId:
 
@@ -56,7 +56,7 @@
                         "{0}?eventID={1}&rTypeID={2}", 
                         ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
                         reg.Event.Id, 
-                        reg.RegType.RegTypeId));
+                        reg.RegType_Response.RegType.RegTypeId));
 
                     break;
 

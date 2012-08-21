@@ -118,8 +118,8 @@
         private void GenerateRegForTaxRate(FormData.Countries? country)
         {
             Registrant reg = new Registrant(evt);
-            reg.RegType = regType;
-            reg.PaymentMethod = paymentMethod;
+            reg.RegType_Response = new RegTypeResponse(regType);
+            reg.Payment_Method = paymentMethod;
             if (country.HasValue)
             {
                 reg.Country = country.Value;
@@ -130,8 +130,8 @@
             MerchFixedResponse merchResp = new MerchFixedResponse();
             merchResp.Merchandise = merch;
             merchResp.Quantity = 2;
-            reg.CustomFieldResponses.Add(agResp);
-            reg.MerchandiseResponses.Add(merchResp);
+            reg.CustomField_Responses.Add(agResp);
+            reg.Merchandise_Responses.Add(merchResp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
         }
