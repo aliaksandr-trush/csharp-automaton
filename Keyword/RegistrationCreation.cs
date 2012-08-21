@@ -44,6 +44,7 @@
             for (int i = 0; i <= group.Secondaries.Count - 1; i++)
             {
                 Agenda(group.Primary);
+                Merchandise(group.Primary);
 
                 PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
@@ -76,6 +77,7 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
                 PersonalInfo(group.Secondaries[i]);
                 Agenda(group.Secondaries[i]);
+                Merchandise(group.Secondaries[i]);
             }
 
             Checkout(group.Primary);
@@ -373,23 +375,32 @@
             {
                 foreach (MerchandiseResponse response in reg.Merchandise_Responses)
                 {
-                    if ((response is MerchFixedResponse) && response.IsUpdate)
+                    if (response is MerchFixedResponse)
                     {
                         MerchFixedResponse resp = response as MerchFixedResponse;
                         PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Quantity);
-                        resp.IsUpdate = false;
+                        if (resp.Discount_Code != null)
+                        {
+                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise).Type(resp.Discount_Code.Code);
+                        }
                     }
 
-                    if ((response is MerchVariableResponse) && response.IsUpdate)
+                    if (response is MerchVariableResponse)
                     {
                         MerchVariableResponse resp = response as MerchVariableResponse;
                         PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Amount);
-                        resp.IsUpdate = false;
+                        if (resp.Discount_Code != null)
+                        {
+                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise).Type(resp.Discount_Code.Code);
+                        }
                     }
                 }
             }
 
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            }
         }
 
         public void Checkout(Registrant reg)

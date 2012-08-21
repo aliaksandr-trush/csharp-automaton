@@ -53,6 +53,16 @@
         public readonly static string Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
     }
 
+    public class UpdateRegistrant : Registrant
+    {
+        public Registrant OldRegistration;
+
+        public UpdateRegistrant(Registrant reg) : base(reg.Event)
+        {
+            this.OldRegistration = reg;
+        }
+    }
+
     public class Registrant
     {
         public int Id;

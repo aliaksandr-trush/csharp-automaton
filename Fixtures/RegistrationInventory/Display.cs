@@ -49,9 +49,8 @@
             lodgingTravelPage.PageFooter = "This is lodging travel Page Footer.";
             Event.LodgingTravelPage = lodgingTravelPage;
 
-            Merchandise merchandise = new Merchandise();
+            Merchandise merchandise = new Merchandise(DateTime.Now.AddSeconds(1).Ticks.ToString());
             merchandise.MerchandiseType = FormData.MerchandiseType.Header;
-            merchandise.MerchandiseName = DateTime.Now.AddSeconds(1).Ticks.ToString();
             MerchandisePage merchandisePage = new MerchandisePage();
             merchandisePage.Merchandises.Add(merchandise);
             merchandisePage.PageHeader = "This is merchandise Page Header.";

@@ -191,20 +191,7 @@
         }
         #endregion
 
-        #region Test Methods
-        [Test]
-        [Category(Priority.Two)]
-        [Description("692")]
-        public void RegTypeDiscount()
-        {
-            this.eventType = EventType.DiscountCodeFixtureWithRegType;
-
-            this.InitializeEvent(true);
-            
-            // Group reg choose different discount code and alternate between the two reg types
-            this.GroupRegWithRegType();
-        }
-        
+        #region Test Methods      
         [Test]
         [Category(Priority.Two)]
         [Description("691")]

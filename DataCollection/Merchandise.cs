@@ -1,5 +1,7 @@
 ﻿namespace RegOnline.RegressionTest.DataCollection
 {
+    using System.Collections.Generic;
+
     public class Merchandise
     {
         public int Id;
@@ -10,5 +12,11 @@
         public string MerchandiseName;
         public bool? ApplyTaxOne;
         public bool? ApplyTaxTwo;
+        public List<DiscountCode> DiscountCodes = new List<DiscountCode>();
+
+        public Merchandise(string merchandiseName)
+        {
+            this.MerchandiseName = merchandiseName;
+        }
     }
 }

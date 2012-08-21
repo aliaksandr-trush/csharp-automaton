@@ -96,7 +96,7 @@
     public class MerchandiseResponse
     {
         public Merchandise Merchandise;
-        public bool IsUpdate = true;
+        public DiscountCode Discount_Code;
     }
 
     public class MerchFixedResponse : MerchandiseResponse

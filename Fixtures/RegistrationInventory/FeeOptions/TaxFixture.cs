@@ -103,8 +103,7 @@
             agenda.ApplyTaxTwo = applyTaxTwo;
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
-            this.merch = new Merchandise();
-            merch.MerchandiseName = "merch";
+            this.merch = new Merchandise("merch");
             merch.MerchandiseType = FormData.MerchandiseType.Fixed;
             merch.MerchandiseFee = 70;
             merch.ApplyTaxOne = applyTaxOne;

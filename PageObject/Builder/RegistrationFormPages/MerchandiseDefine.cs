@@ -20,6 +20,7 @@
         public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_chkListTaxRates_0", LocateBy.Id);
         public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_chkListTaxRates_1", LocateBy.Id);
         public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog2", "dialog");
+        public TextBox DiscountCodes = new TextBox("ctl00_cphDialog_feepassword", LocateBy.Id);
         #endregion
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
