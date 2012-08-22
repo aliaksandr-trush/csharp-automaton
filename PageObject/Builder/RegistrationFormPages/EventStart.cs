@@ -53,6 +53,12 @@
         #endregion
 
         #region Basic Actions
+        public void EventFee_Type(double price)
+        {
+            this.EventFee.WaitForDisplay();
+            this.EventFee.Type(price);
+        }
+
         public void EventFeeAdvanced_Click()
         {
             this.EventFeeAdvanced.WaitForDisplay();

@@ -92,12 +92,12 @@
                 }
                 else
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
                 }
 
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.StandardPrice.Type(regType.Price);
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.StandardPrice.Type(regType.Price);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
 
                 #region AddEarlyLatePrice
                 if (regType.EarlyPrice != null)

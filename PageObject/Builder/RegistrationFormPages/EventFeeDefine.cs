@@ -34,11 +34,32 @@
         public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog3", "dialog2");
         public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_cfCF_mipPrc_ip6_chkListTaxRates_0", LocateBy.Id);
         public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_cfCF_mipPrc_ip6_chkListTaxRates_1", LocateBy.Id);
+        private WebElement Options_Div = new WebElement("ctl00_cphDialog_cfCF_mipPrc_ctl02", LocateBy.Id);
         #endregion
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
         #region Basic Actions
+        public void Options_Expand()
+        {
+            this.Options_Div.WaitForPresent();
+
+            if (this.Options_Div.GetAttribute("style").Contains("display: none;"))
+            {
+                this.Options_Click();
+            }
+        }
+
+        public void Options_Collapse()
+        {
+            this.Options_Div.WaitForPresent();
+
+            if (!this.Options_Div.GetAttribute("style").Contains("display: none;"))
+            {
+                this.Options_Click();
+            }
+        }
+
         public void Options_Click()
         {
             this.Options.WaitForDisplay();

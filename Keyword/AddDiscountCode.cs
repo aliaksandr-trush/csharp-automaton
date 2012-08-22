@@ -9,6 +9,46 @@
         {
             switch(location)
             {
+                case FormData.Location.EventFee:
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AddDiscountCode_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.SelectByName();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Code.Type(code.Code);
+
+                    switch (code.CodeType)
+                    {
+                        case FormData.DiscountCodeType.DiscountCode:
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Discount_Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
+
+                            if (code.CodeKind == FormData.ChangeType.Percent)
+                            {
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Percentage_Click();
+                            }
+
+                            if (code.CodeKind == FormData.ChangeType.FixedAmount)
+                            {
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.FixAmount_Click();
+                            }
+
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Amount.Type(code.Amount);
+                            break;
+
+                        case FormData.DiscountCodeType.AccessCode:
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Access_Click();
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (code.Limit.HasValue)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.UseLimit.Type(code.Limit.Value);
+                    }
+
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.SaveAndClose_Click();
+                    break;
+
                 case FormData.Location.RegType:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddDiscountCode_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.SelectByName();
@@ -32,9 +72,11 @@
 
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Amount.Type(code.Amount);
                             break;
+
                         case FormData.DiscountCodeType.AccessCode:
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Access_Click();
                             break;
+
                         default:
                             break;
                     }
@@ -46,6 +88,7 @@
 
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.SaveAndClose_Click();
                     break;
+
                 case FormData.Location.Agenda:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddDiscountCode_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.SelectByName();
@@ -83,6 +126,7 @@
 
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.SaveAndClose_Click();
                     break;
+
                 default:
                     break;
             }

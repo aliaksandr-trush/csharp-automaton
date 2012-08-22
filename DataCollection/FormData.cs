@@ -41,7 +41,7 @@
 
         public enum Location
         {
-            EventDetails,
+            EventFee,
             RegType,
             Agenda,
             Merchandise

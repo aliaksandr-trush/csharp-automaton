@@ -365,5 +365,37 @@
             KeywordProvider.RegistrationCreation.CreateRegistration(reg5);
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 55);
         }
+
+        [Test]
+        [Category(Priority.Two)]
+        [Description("691")]
+        public void SameDiscountCode()
+        {
+            Event evt = new Event("DiscountCodeFixture");
+            evt.StartPage.Event_Fee = new EventFee();
+            evt.StartPage.Event_Fee.StandardPrice = 100;
+
+            DiscountCode half = new DiscountCode("Half");
+            half.Amount = 50;
+            half.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            half.CodeKind = FormData.ChangeType.Percent;
+            half.CodeType = FormData.DiscountCodeType.DiscountCode;
+            DiscountCode fixedAmount = new DiscountCode("FixedAmount");
+            fixedAmount.Amount = 25;
+            fixedAmount.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            fixedAmount.CodeKind = FormData.ChangeType.Percent;
+            fixedAmount.CodeType = FormData.DiscountCodeType.DiscountCode;
+            DiscountCode enter = new DiscountCode("Enter");
+            enter.CodeType = FormData.DiscountCodeType.AccessCode;
+            DiscountCode free = new DiscountCode("Free");
+            free.Amount = 100;
+            free.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            free.CodeKind = FormData.ChangeType.Percent;
+            free.CodeType = FormData.DiscountCodeType.DiscountCode;
+            evt.StartPage.Event_Fee.DiscountCodes.Add(half);
+            evt.StartPage.Event_Fee.DiscountCodes.Add(fixedAmount);
+            evt.StartPage.Event_Fee.DiscountCodes.Add(enter);
+            evt.StartPage.Event_Fee.DiscountCodes.Add(free);
+        }
     }
 }

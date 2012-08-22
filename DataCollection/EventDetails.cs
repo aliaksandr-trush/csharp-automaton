@@ -36,6 +36,21 @@
         }
     }
 
+    public class EventFee
+    {
+        public double StandardPrice { get; set; }
+        public string Name { get; set; }
+        public EarlyPrice Early_Price { get; set; }
+        public LatePrice Late_Price { get; set; }
+        public List<DiscountCode> DiscountCodes { get; set; }
+        public bool RequireDC { get; set; }
+
+        public EventFee()
+        {
+            this.DiscountCodes = new List<DiscountCode>();
+        }
+    }
+
     public class EventLevelLimit
     {
         public int Spaces;
@@ -129,6 +144,7 @@
 
     public class StartPage
     {
+        public EventFee Event_Fee { get; set; }
         public EventType? EventType;
         public EventLevelLimit EventLimit;
         public GroupDiscount GroupDiscount;

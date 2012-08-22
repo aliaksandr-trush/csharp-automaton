@@ -21,7 +21,13 @@
             //Console.Read();
             ////Console.WriteLine(AccessData.GetEncryptString("375859"));
             ////Console.WriteLine(ManagerProvider.EmailMgr.FetchConfirmationEmailId(Managers.Emails.EmailManager.EmailCategory.Complete, 637115));
-            DateTimeConvertTest();
+            ////DateTimeConvertTest();
+            PropertyTest test = new PropertyTest();
+            Console.WriteLine(test.IsTrue.ToString());
+            Console.WriteLine(test.StringProperty);
+            Console.WriteLine(test.IntegerProperty);
+            Console.WriteLine(test.DoubleProperty);
+            Console.WriteLine(test.InnerClassInstance);
             Console.Read();
         }
 
@@ -66,6 +72,15 @@
                 Console.WriteLine("Converted {0} {1} to {2}.", timeToConvert,
                                   timeToConvert.Kind, targetTime);
             }
+        }
+
+        public class PropertyTest
+        {
+            public bool IsTrue { get; set; }
+            public string StringProperty { get; set; }
+            public int IntegerProperty { get; set; }
+            public double DoubleProperty { get; set; }
+            public PropertyTest InnerClassInstance { get; set; }
         }
     }
 }
