@@ -57,9 +57,9 @@
         public int MerchandiseId;
         public ButtonOrLink Merchandise;
 
-        public MerchandiseRow(DataCollection.Merchandise merch)
+        public MerchandiseRow(DataCollection.MerchandiseItem merch)
         {
-            this.Merchandise = new ButtonOrLink(string.Format("//table[@id='ctl00_cph_grdFees_tblGrid']//a[text()='{0}']", merch.MerchandiseName), LocateBy.XPath);
+            this.Merchandise = new ButtonOrLink(string.Format("//table[@id='ctl00_cph_grdFees_tblGrid']//a[text()='{0}']", merch.Name), LocateBy.XPath);
 
             string merchHrefAttriString = this.Merchandise.GetAttribute("href");
 

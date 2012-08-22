@@ -13,7 +13,7 @@
         {
             Checkin(reg);
 
-            if (reg.RegType_Response != null && reg.RegType_Response.RegType.IsSSO)
+            if (reg.EventFee_Response != null && reg.EventFee_Response.RegType.IsSSO)
             {
                 SSOLogin(reg);
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -49,27 +49,27 @@
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group.Secondaries[i].Email);
 
-                if (group.Secondaries[i].RegType_Response != null)
+                if (group.Secondaries[i].EventFee_Response != null)
                 {
                     if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.HasValue)
                     {
                         if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].RegType_Response.RegType.RegTypeName);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].EventFee_Response.RegType.RegTypeName);
                         }
                         else
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType_Response.RegType);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].EventFee_Response.RegType);
                         }
                     }
                     else
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].RegType_Response.RegType);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].EventFee_Response.RegType);
                     }
 
-                    if (group.Secondaries[i].RegType_Response.DiscountCode != null)
+                    if (group.Secondaries[i].EventFee_Response.Code != null)
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].RegType_Response.DiscountCode.Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].EventFee_Response.Code.Code);
                     }
                 }
 
@@ -104,13 +104,13 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.Type(reg.Email);
             }
 
-            if ((reg.RegType_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
+            if ((reg.EventFee_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
             {
-                KeywordProvider.RegisterDefault.SelectRegType(reg.RegType_Response.RegType);
+                KeywordProvider.RegisterDefault.SelectRegType(reg.EventFee_Response.RegType);
 
-                if (reg.RegType_Response.DiscountCode != null)
+                if (reg.EventFee_Response.Code != null)
                 {
-                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.RegType_Response.DiscountCode.Code);
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.EventFee_Response.Code.Code);
                 }
             }
 
@@ -237,7 +237,7 @@
                         {
                             case FormData.CustomFieldType.CheckBox:
                                 {
-                                    CFCheckboxResponse resp = response as CFCheckboxResponse;
+                                    CFResponse_Checkbox resp = response as CFResponse_Checkbox;
                                     PageObject.Register.CustomFieldRow row = new CustomFieldRow(resp.CustomField);
                                     ((CheckBox)row.CustomFieldType).Set(resp.Checked.Value);
                                 }
@@ -283,7 +283,7 @@
                         {
                             case FormData.CustomFieldType.CheckBox:
                                 {
-                                    AgendaCheckboxResponse resp = response as AgendaCheckboxResponse;
+                                    AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                     ((CheckBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Set(resp.Checked.Value);
                                     if (resp.Code != null)
                                     {
@@ -293,14 +293,14 @@
                                 break;
                             case FormData.CustomFieldType.RadioButton:
                                 {
-                                    AgendaRadioButtonResponse resp = response as AgendaRadioButtonResponse;
+                                    AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                     RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
                                     radio.Click();
                                 }
                                 break;
                             case FormData.CustomFieldType.Dropdown:
                                 {
-                                    AgendaDropDownResponse resp = response as AgendaDropDownResponse;
+                                    AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                     ((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                         response.AgendaItem).AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
                                 }
@@ -309,21 +309,21 @@
                             case FormData.CustomFieldType.OneLineText:
                             case FormData.CustomFieldType.Paragraph:
                                 {
-                                    AgendaCharInputResponse resp = response as AgendaCharInputResponse;
+                                    AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
                                     ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                         response.AgendaItem).AgendaType).Type(resp.CharToInput);
                                 }
                                 break;
                             case FormData.CustomFieldType.Contribution:
                                 {
-                                    AgendaContributionResponse resp = response as AgendaContributionResponse;
+                                    AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
                                     ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(resp.Contribution.Value);
+                                        response.AgendaItem).AgendaType).Type(resp.ContributionAmount.Value);
                                 }
                                 break;
                             case FormData.CustomFieldType.Date:
                                 {
-                                    AgendaDateResponse resp = response as AgendaDateResponse;
+                                    AgendaResponse_Date resp = response as AgendaResponse_Date;
                                     string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
                                     ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                         response.AgendaItem).AgendaType).Type(date);
@@ -331,7 +331,7 @@
                                 break;
                             case FormData.CustomFieldType.Time:
                                 {
-                                    AgendaTimeResponse resp = response as AgendaTimeResponse;
+                                    AgendaResponse_Time resp = response as AgendaResponse_Time;
                                     string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
                                     ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                         response.AgendaItem).AgendaType).Type(time);
@@ -339,7 +339,7 @@
                                 break;
                             case FormData.CustomFieldType.FileUpload:
                                 {
-                                    AgendaFileUploadResponse resp = response as AgendaFileUploadResponse;
+                                    AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                     ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                         response.AgendaItem).AgendaType).Click();
                                     AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
@@ -372,24 +372,20 @@
             {
                 foreach (MerchandiseResponse response in reg.Merchandise_Responses)
                 {
-                    if (response is MerchFixedResponse)
+                    if (response is MerchResponse_FixedPrice)
                     {
-                        MerchFixedResponse resp = response as MerchFixedResponse;
-                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Quantity);
+                        MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Quantity);
                         if (resp.Discount_Code != null)
                         {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise).Type(resp.Discount_Code.Code);
+                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
                         }
                     }
 
-                    if (response is MerchVariableResponse)
+                    if (response is MerchResponse_VariableAmount)
                     {
-                        MerchVariableResponse resp = response as MerchVariableResponse;
-                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise).Type(resp.Amount);
-                        if (resp.Discount_Code != null)
-                        {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise).Type(resp.Discount_Code.Code);
-                        }
+                        MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Amount);
                     }
                 }
             }

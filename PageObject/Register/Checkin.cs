@@ -56,7 +56,7 @@
                         "{0}?eventID={1}&rTypeID={2}", 
                         ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
                         reg.Event.Id, 
-                        reg.RegType_Response.RegType.RegTypeId));
+                        reg.EventFee_Response.RegType.RegTypeId));
 
                     break;
 

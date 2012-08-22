@@ -9,8 +9,8 @@
     {
         private Event evt;
         private RegType regType;
-        private AgendaItemCheckBox agenda;
-        private Merchandise merch;
+        private AgendaItem_CheckBox agenda;
+        private MerchandiseItem merch;
         private PaymentMethod paymentMethod;
 
         [Test]
@@ -97,15 +97,15 @@
             evt.TaxRateTwo = tax2;
             evt.StartPage.RegTypes.Add(regType);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
-            this.agenda = new AgendaItemCheckBox("agenda");
+            this.agenda = new AgendaItem_CheckBox("agenda");
             agenda.Price = 60;
             agenda.ApplyTaxOne = applyTaxOne;
             agenda.ApplyTaxTwo = applyTaxTwo;
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
-            this.merch = new Merchandise("merch");
-            merch.MerchandiseType = FormData.MerchandiseType.Fixed;
-            merch.MerchandiseFee = 70;
+            this.merch = new MerchandiseItem("merch");
+            merch.Type = FormData.MerchandiseType.Fixed;
+            merch.Price = 70;
             merch.ApplyTaxOne = applyTaxOne;
             merch.ApplyTaxTwo = applyTaxTwo;
             evt.MerchandisePage = new MerchandisePage();
@@ -117,17 +117,17 @@
         private void GenerateRegForTaxRate(FormData.Countries? country)
         {
             Registrant reg = new Registrant(evt);
-            reg.RegType_Response = new RegTypeResponse(regType);
+            reg.EventFee_Response = new EventFeeResponse(regType);
             reg.Payment_Method = paymentMethod;
             if (country.HasValue)
             {
                 reg.Country = country.Value;
             }
-            AgendaCheckboxResponse agResp = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox agResp = new AgendaResponse_Checkbox();
             agResp.AgendaItem = agenda;
             agResp.Checked = true;
-            MerchFixedResponse merchResp = new MerchFixedResponse();
-            merchResp.Merchandise = merch;
+            MerchResponse_FixedPrice merchResp = new MerchResponse_FixedPrice();
+            merchResp.Merchandise_Item = merch;
             merchResp.Quantity = 2;
             reg.CustomField_Responses.Add(agResp);
             reg.Merchandise_Responses.Add(merchResp);

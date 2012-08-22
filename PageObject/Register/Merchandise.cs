@@ -5,12 +5,12 @@
 
     public class Merchandise : Window
     {
-        public TextBox MerchInputField(DataCollection.Merchandise merch)
+        public TextBox MerchInputField(DataCollection.MerchandiseItem merch)
         {
             return new TextBox(merch.Id.ToString(), LocateBy.Id);
         }
 
-        public TextBox MerchDiscountCode(DataCollection.Merchandise merch)
+        public TextBox MerchDiscountCode(DataCollection.MerchandiseItem merch)
         {
             return new TextBox("dc" + merch.Id.ToString(), LocateBy.Id);
         }

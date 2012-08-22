@@ -20,27 +20,27 @@
             CFCheckBox PICustomField = new CFCheckBox("PICustomField");
             evt.PersonalInfoPage.CustomFields.Add(PICustomField);
             evt.AgendaPage = new DataCollection.AgendaPage();
-            AgendaItemNumber AGNumber = new AgendaItemNumber("AGNumber");
+            AgendaItem_Number AGNumber = new AgendaItem_Number("AGNumber");
             AGNumber.CharLimit = 10;
-            AgendaItemOneLineText AGText = new AgendaItemOneLineText("AGText");
+            AgendaItem_OneLineText AGText = new AgendaItem_OneLineText("AGText");
             AGText.CharLimit = 10;
-            AgendaItemParagraph AGPara = new AgendaItemParagraph("AGPara");
+            AgendaItem_Paragraph AGPara = new AgendaItem_Paragraph("AGPara");
             AGPara.CharLimit = 1000;
-            AgendaItemDate AGDate = new AgendaItemDate("AGDate");
-            AgendaItemTime AGTime = new AgendaItemTime("AGTime");
-            AgendaItemHeader AGHeader = new AgendaItemHeader("AGHeader");
-            AgendaItemContinue AGContinue = new AgendaItemContinue("AGContinue");
-            AgendaItemContribution AGConribution = new AgendaItemContribution("AGConribution");
+            AgendaItem_Date AGDate = new AgendaItem_Date("AGDate");
+            AgendaItem_Time AGTime = new AgendaItem_Time("AGTime");
+            AgendaItem_Header AGHeader = new AgendaItem_Header("AGHeader");
+            AgendaItem_ContinueButton AGContinue = new AgendaItem_ContinueButton("AGContinue");
+            AgendaItem_Contribution AGConribution = new AgendaItem_Contribution("AGConribution");
             AGConribution.MinAmount = 10;
             AGConribution.MaxAmount = 100;
-            AgendaItemUpload AGUpload = new AgendaItemUpload("AGUpload");
-            AgendaItemCheckBox AGCheckBox = new AgendaItemCheckBox("AGCheckBox");
-            AgendaItemRadioButton AGRadio = new AgendaItemRadioButton("AGRadio");
+            AgendaItem_FileUpload AGUpload = new AgendaItem_FileUpload("AGUpload");
+            AgendaItem_CheckBox AGCheckBox = new AgendaItem_CheckBox("AGCheckBox");
+            AgendaItem_MultipleChoice_RadioButton AGRadio = new AgendaItem_MultipleChoice_RadioButton("AGRadio");
             AGRadio.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.YesOrNo);
-            AgendaItemDropDown AGDropDown = new AgendaItemDropDown("AGDropDown");
+            AgendaItem_MultipleChoice_DropDown AGDropDown = new AgendaItem_MultipleChoice_DropDown("AGDropDown");
             AGDropDown.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.Agreement);
-            AgendaItemAlways AGAlways = new AgendaItemAlways("AGAlways");
-            AgendaItemCheckBox AG1 = new AgendaItemCheckBox("AG1");
+            AgendaItem_AlwaysSelected AGAlways = new AgendaItem_AlwaysSelected("AGAlways");
+            AgendaItem_CheckBox AG1 = new AgendaItem_CheckBox("AG1");
             AG1.ConditionalLogic.Add(PICustomField.NameOnForm);
             evt.AgendaPage.AgendaItems.Add(AGNumber);
             evt.AgendaPage.AgendaItems.Add(AGText);
@@ -81,8 +81,8 @@
             Assert.False(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ConditionalLogicParent(AGAlways.NameOnForm).IsPresent);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
 
-            AgendaItemCheckBox AG2 = new AgendaItemCheckBox("AG2");
-            AgendaItemCheckBox AG3 = new AgendaItemCheckBox("AG3");
+            AgendaItem_CheckBox AG2 = new AgendaItem_CheckBox("AG2");
+            AgendaItem_CheckBox AG3 = new AgendaItem_CheckBox("AG3");
             AG3.ConditionalLogic.Add(AG2.NameOnForm);
 
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG2, evt);
@@ -99,13 +99,13 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ExpandConditionalLogic_Click();
             Assert.False(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ConditionalLogicParent(AG2.NameOnForm).IsPresent);
 
-            AgendaItemCheckBox AG4 = new AgendaItemCheckBox("AG4");
+            AgendaItem_CheckBox AG4 = new AgendaItem_CheckBox("AG4");
             AG4.ConditionalLogic.Add(AG3.NameOnForm);
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG4, evt);
             AG4.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
 
             Registrant reg1 = new Registrant(evt);
-            CFCheckboxResponse resp = new CFCheckboxResponse();
+            CFResponse_Checkbox resp = new CFResponse_Checkbox();
             resp.CustomField = PICustomField;
             resp.Checked = true;
             reg1.CustomField_Responses.Add(resp);
@@ -134,20 +134,20 @@
             RegType regType2 = new RegType("RegType2");
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
-            AgendaItemCheckBox visToAll = new AgendaItemCheckBox("VisToAll");
-            AgendaItemCheckBox visToType1 = new AgendaItemCheckBox("VisToType1");
+            AgendaItem_CheckBox visToAll = new AgendaItem_CheckBox("VisToAll");
+            AgendaItem_CheckBox visToType1 = new AgendaItem_CheckBox("VisToType1");
             CustomFieldVisibleOption visibleOption1 = new CustomFieldVisibleOption(regType1);
             visibleOption1.Visible = true;
             visToType1.CustomFieldVisibleOption.Add(visibleOption1);
-            AgendaItemCheckBox reqByType2 = new AgendaItemCheckBox("ReqByType2");
+            AgendaItem_CheckBox reqByType2 = new AgendaItem_CheckBox("ReqByType2");
             CustomFieldVisibleOption visibleOption2 = new CustomFieldVisibleOption(regType2);
             visibleOption2.Required = true;
             reqByType2.CustomFieldVisibleOption.Add(visibleOption2);
-            AgendaItemCheckBox adminOnly = new AgendaItemCheckBox("AdminOnly");
+            AgendaItem_CheckBox adminOnly = new AgendaItem_CheckBox("AdminOnly");
             CustomFieldVisibleOption visibleOption3 = new CustomFieldVisibleOption();
             visibleOption3.AdminOnly = true;
             adminOnly.CustomFieldVisibleOption.Add(visibleOption3);
-            AgendaItemCheckBox adminAndReq = new AgendaItemCheckBox("AdminAndReq");
+            AgendaItem_CheckBox adminAndReq = new AgendaItem_CheckBox("AdminAndReq");
             CustomFieldVisibleOption visibleOption4 = new CustomFieldVisibleOption();
             visibleOption4.AdminOnly = true;
             visibleOption4.Required = true;
@@ -161,7 +161,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.RegType_Response = new RegTypeResponse(regType1);
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
@@ -177,7 +177,7 @@
             Assert.False(row5.AgendaType.IsPresent);
 
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType_Response = new RegTypeResponse(regType2);
+            reg2.EventFee_Response = new EventFeeResponse(regType2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -190,7 +190,7 @@
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType_Response = new RegTypeResponse(regType1);
+            reg3.EventFee_Response = new EventFeeResponse(regType1);
             reg3.Register_Method = RegisterMethod.Admin;
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
@@ -211,15 +211,15 @@
         {
             Event evt = new Event("AgendaShowHideDate");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox showInPast = new AgendaItemCheckBox("ShowInPast");
+            AgendaItem_CheckBox showInPast = new AgendaItem_CheckBox("ShowInPast");
             showInPast.ShowStarting = DateTime.Today.AddDays(-3);
-            AgendaItemCheckBox showInFuture = new AgendaItemCheckBox("ShowInFuture");
+            AgendaItem_CheckBox showInFuture = new AgendaItem_CheckBox("ShowInFuture");
             showInFuture.ShowStarting = DateTime.Today.AddDays(3);
-            AgendaItemCheckBox hideInPast = new AgendaItemCheckBox("HideInPast");
+            AgendaItem_CheckBox hideInPast = new AgendaItem_CheckBox("HideInPast");
             hideInPast.HideStarting = DateTime.Today.AddDays(-3);
-            AgendaItemCheckBox hideInFuture = new AgendaItemCheckBox("HideInFuture");
+            AgendaItem_CheckBox hideInFuture = new AgendaItem_CheckBox("HideInFuture");
             hideInFuture.HideStarting = DateTime.Today.AddDays(3);
-            AgendaItemCheckBox sIPHIF = new AgendaItemCheckBox("SIPHIF");
+            AgendaItem_CheckBox sIPHIF = new AgendaItem_CheckBox("SIPHIF");
             sIPHIF.ShowStarting = DateTime.Today.AddDays(-3);
             sIPHIF.HideStarting = DateTime.Today.AddDays(3);
             evt.AgendaPage.AgendaItems.Add(showInPast);
@@ -253,14 +253,14 @@
         {
             Event evt = new Event("AgendaShowIf");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox showToMale = new AgendaItemCheckBox("ShowToMale");
+            AgendaItem_CheckBox showToMale = new AgendaItem_CheckBox("ShowToMale");
             showToMale.Gender = FormData.Gender.Male;
-            AgendaItemCheckBox showToFemale = new AgendaItemCheckBox("ShowToFemale");
+            AgendaItem_CheckBox showToFemale = new AgendaItem_CheckBox("ShowToFemale");
             showToFemale.Gender = FormData.Gender.Female;
-            AgendaItemCheckBox showOver20 = new AgendaItemCheckBox("ShowOver20");
+            AgendaItem_CheckBox showOver20 = new AgendaItem_CheckBox("ShowOver20");
             showOver20.AgeGreaterThan = 20;
             showOver20.AgeGreaterThanDate = DateTime.Today;
-            AgendaItemCheckBox showLT20 = new AgendaItemCheckBox("ShowLT20");
+            AgendaItem_CheckBox showLT20 = new AgendaItem_CheckBox("ShowLT20");
             showLT20.AgeLessThan = 20;
             showLT20.AgeLessThanDate = DateTime.Today;
             evt.AgendaPage.AgendaItems.Add(showToMale);

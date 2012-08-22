@@ -16,8 +16,8 @@
         public void ButtonTest()
         {
             Event evt = new Event("AgendaButtonTest");
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("agenda1");
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("agenda2");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
 
@@ -57,15 +57,15 @@
         {
             Event evt = new Event("AgendaCopyDelete");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("agenda1");
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("agenda2");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp = new AgendaResponse_Checkbox();
             resp.AgendaItem = agenda1;
             resp.Checked = true;
             reg.CustomField_Responses.Add(resp);
@@ -95,10 +95,10 @@
         {
             Event evt = new Event("AgendaOverlapping");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("agenda1");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
             agenda1.StartDate = DateTime.Today.AddDays(3);
             agenda1.EndDate = DateTime.Today.AddDays(9);
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("agenda2");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
             agenda2.StartDate = DateTime.Today.AddDays(6);
             agenda2.EndDate = DateTime.Today.AddDays(12);
             evt.AgendaPage.AgendaItems.Add(agenda1);
@@ -108,10 +108,10 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg1 = new Registrant(evt);
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agenda1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = agenda2;
             resp2.Checked = true;
             reg1.CustomField_Responses.Add(resp1);
@@ -143,16 +143,16 @@
         {
             Event evt = new Event("AgendaRecalculate");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("agenda1");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
             agenda1.Price = 50;
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("agenda2");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
             agenda2.Price = 60;
             DiscountCode discount = new DiscountCode("discount");
             discount.Amount = 10;
             discount.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discount.CodeKind = FormData.ChangeType.Percent;
             discount.CodeType = FormData.DiscountCodeType.DiscountCode;
-            agenda2.DiscountCode.Add(discount);
+            agenda2.DiscountCodes.Add(discount);
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
 

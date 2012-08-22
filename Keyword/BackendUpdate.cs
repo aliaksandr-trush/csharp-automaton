@@ -10,7 +10,7 @@
 
         public void UpdateCustomField(Registrant reg)
         {
-            if (reg.CustomField_Responses.Capacity != 0)
+            if (reg.CustomField_Responses.Count != 0)
             {
                 foreach (CustomFieldResponse resp in reg.CustomField_Responses)
                 {
@@ -24,7 +24,7 @@
                         {
                             case FormData.CustomFieldType.CheckBox:
                                 {
-                                    AgendaCheckboxResponse ckresp = respAgenda as AgendaCheckboxResponse;
+                                    AgendaResponse_Checkbox ckresp = respAgenda as AgendaResponse_Checkbox;
                                     ((agendaEdit.AgendaType(ckresp.AgendaItem)) as CheckBox).Set(ckresp.Checked.Value);
                                 }
                                 break;

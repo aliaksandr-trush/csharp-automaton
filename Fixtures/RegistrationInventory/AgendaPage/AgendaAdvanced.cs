@@ -18,14 +18,14 @@
         {
             Event evt = new Event("AgendaEmailAddendum");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agendaWithEmailAddendum = new AgendaItemCheckBox("EmailAddendum");
+            AgendaItem_CheckBox agendaWithEmailAddendum = new AgendaItem_CheckBox("EmailAddendum");
             agendaWithEmailAddendum.ConfirmationAddendum = "ConfirmationAddendum";
             evt.AgendaPage.AgendaItems.Add(agendaWithEmailAddendum);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            AgendaCheckboxResponse resp = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp = new AgendaResponse_Checkbox();
             resp.AgendaItem = agendaWithEmailAddendum;
             resp.Checked = true;
             reg.CustomField_Responses.Add(resp);
@@ -46,12 +46,12 @@
             evt.EventWebsite = new EventWebsite();
             evt.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent = true;
             evt.EventWebsite.ShowNavigation = true;
-            AgendaItemCheckBox agendaAddToCalenda = new AgendaItemCheckBox("AddToCalenda");
+            AgendaItem_CheckBox agendaAddToCalenda = new AgendaItem_CheckBox("AddToCalenda");
             agendaAddToCalenda.StartDate = DateTime.Today.AddDays(-3);
             agendaAddToCalenda.EndDate = DateTime.Today.AddDays(3);
             agendaAddToCalenda.AddToCalendar = true;
             agendaAddToCalenda.IncludeOnEventWeb = false;
-            AgendaItemCheckBox includeOnEventWeb = new AgendaItemCheckBox("OnEventWeb");
+            AgendaItem_CheckBox includeOnEventWeb = new AgendaItem_CheckBox("OnEventWeb");
             includeOnEventWeb.StartDate = DateTime.Today.AddDays(4);
             includeOnEventWeb.EndDate = DateTime.Today.AddDays(7);
             includeOnEventWeb.AddToCalendar = false;
@@ -63,10 +63,10 @@
 
             Registrant reg = new Registrant(evt);
             reg.Register_Method = RegisterMethod.EventWebsite;
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agendaAddToCalenda;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = includeOnEventWeb;
             resp2.Checked = true;
             reg.CustomField_Responses.Add(resp1);
@@ -93,13 +93,13 @@
         {
             Event evt = new Event("AgendaDetailsAndGroupName");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agendaDetails = new AgendaItemCheckBox("AgendaDetails");
+            AgendaItem_CheckBox agendaDetails = new AgendaItem_CheckBox("AgendaDetails");
             agendaDetails.DetailsPopup = "DetailsPopup";
-            AgendaItemCheckBox agendaDetailsURL = new AgendaItemCheckBox("AgendaDetailsURL");
+            AgendaItem_CheckBox agendaDetailsURL = new AgendaItem_CheckBox("AgendaDetailsURL");
             agendaDetailsURL.DetailsURL = "www.baidu.com";
-            AgendaItemCheckBox agendaGroup1 = new AgendaItemCheckBox("AgendaGroup1");
+            AgendaItem_CheckBox agendaGroup1 = new AgendaItem_CheckBox("AgendaGroup1");
             agendaGroup1.GroupName = "nameOfGroup";
-            AgendaItemCheckBox agendaGroup2 = new AgendaItemCheckBox("AgendaGroup2");
+            AgendaItem_CheckBox agendaGroup2 = new AgendaItem_CheckBox("AgendaGroup2");
             agendaGroup2.GroupName = "nameOfGroup";
             evt.AgendaPage.AgendaItems.Add(agendaDetails);
             evt.AgendaPage.AgendaItems.Add(agendaDetailsURL);
@@ -109,10 +109,10 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agendaGroup1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = agendaGroup2;
             resp2.Checked = true;
             reg.CustomField_Responses.Add(resp1);
@@ -145,23 +145,23 @@
         {
             Event evt = new Event("AgendaForceGroup");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox ag1 = new AgendaItemCheckBox("ag1");
+            AgendaItem_CheckBox ag1 = new AgendaItem_CheckBox("ag1");
             ag1.ForceGroupToMatch = true;
-            AgendaItemCheckBox ag2 = new AgendaItemCheckBox("ag2");
+            AgendaItem_CheckBox ag2 = new AgendaItem_CheckBox("ag2");
             ag2.ForceGroupToMatch = true;
             ag2.Gender = FormData.Gender.Male;
-            AgendaItemCheckBox ag3 = new AgendaItemCheckBox("ag3");
+            AgendaItem_CheckBox ag3 = new AgendaItem_CheckBox("ag3");
             ag3.ForceGroupToMatch = true;
             ag3.AgeGreaterThan = 20;
             ag3.AgeGreaterThanDate = DateTime.Today;
-            AgendaItemCheckBox ag4 = new AgendaItemCheckBox("ag4");
+            AgendaItem_CheckBox ag4 = new AgendaItem_CheckBox("ag4");
             ag4.ForceGroupToMatch = true;
-            AgendaItemCheckBox ag5 = new AgendaItemCheckBox("ag5");
+            AgendaItem_CheckBox ag5 = new AgendaItem_CheckBox("ag5");
             ag5.ForceGroupToMatch = true;
             ag5.ConditionalLogic.Add(ag4.NameOnForm);
-            AgendaItemCheckBox ag6 = new AgendaItemCheckBox("ag6");
+            AgendaItem_CheckBox ag6 = new AgendaItem_CheckBox("ag6");
             ag6.ForceGroupToMatch = true;
-            AgendaItemCheckBox ag7 = new AgendaItemCheckBox("ag7");
+            AgendaItem_CheckBox ag7 = new AgendaItem_CheckBox("ag7");
             ag7.ConditionalLogic.Add(ag6.NameOnForm);
             evt.AgendaPage.AgendaItems.Add(ag1);
             evt.AgendaPage.AgendaItems.Add(ag2);
@@ -173,25 +173,25 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = ag1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = ag2;
             resp2.Checked = true;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = ag3;
             resp3.Checked = true;
-            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
             resp4.AgendaItem = ag4;
             resp4.Checked = true;
-            AgendaCheckboxResponse resp5 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp5 = new AgendaResponse_Checkbox();
             resp5.AgendaItem = ag5;
             resp5.Checked = true;
-            AgendaCheckboxResponse resp6 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp6 = new AgendaResponse_Checkbox();
             resp6.AgendaItem = ag6;
             resp6.Checked = true;
-            AgendaCheckboxResponse resp7 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp7 = new AgendaResponse_Checkbox();
             resp7.AgendaItem = ag7;
             resp7.Checked = true;
 
@@ -283,18 +283,18 @@
         {
             Event evt = new Event("AgendaStatus");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox ag1 = new AgendaItemCheckBox("ag1");
-            AgendaItemCheckBox ag2 = new AgendaItemCheckBox("ag2");
+            AgendaItem_CheckBox ag1 = new AgendaItem_CheckBox("ag1");
+            AgendaItem_CheckBox ag2 = new AgendaItem_CheckBox("ag2");
             ag2.InitialStatus = FormData.AgendaInitialStatus.Pending;
-            AgendaItemCheckBox ag3 = new AgendaItemCheckBox("ag3");
+            AgendaItem_CheckBox ag3 = new AgendaItem_CheckBox("ag3");
             ag3.InitialStatus = FormData.AgendaInitialStatus.Confirmed;
-            AgendaItemCheckBox ag4 = new AgendaItemCheckBox("ag4");
+            AgendaItem_CheckBox ag4 = new AgendaItem_CheckBox("ag4");
             ag4.InitialStatus = FormData.AgendaInitialStatus.Approved;
-            AgendaItemCheckBox ag5 = new AgendaItemCheckBox("ag5");
+            AgendaItem_CheckBox ag5 = new AgendaItem_CheckBox("ag5");
             ag5.InitialStatus = FormData.AgendaInitialStatus.Declined;
-            AgendaItemCheckBox ag6 = new AgendaItemCheckBox("ag6");
+            AgendaItem_CheckBox ag6 = new AgendaItem_CheckBox("ag6");
             ag6.InitialStatus = FormData.AgendaInitialStatus.NoShow;
-            AgendaItemCheckBox ag7 = new AgendaItemCheckBox("ag7");
+            AgendaItem_CheckBox ag7 = new AgendaItem_CheckBox("ag7");
             ag7.InitialStatus = FormData.AgendaInitialStatus.FollowUp;
             evt.AgendaPage.AgendaItems.Add(ag1);
             evt.AgendaPage.AgendaItems.Add(ag2);
@@ -306,25 +306,25 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = ag1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = ag2;
             resp2.Checked = true;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = ag3;
             resp3.Checked = true;
-            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
             resp4.AgendaItem = ag4;
             resp4.Checked = true;
-            AgendaCheckboxResponse resp5 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp5 = new AgendaResponse_Checkbox();
             resp5.AgendaItem = ag5;
             resp5.Checked = true;
-            AgendaCheckboxResponse resp6 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp6 = new AgendaResponse_Checkbox();
             resp6.AgendaItem = ag6;
             resp6.Checked = true;
-            AgendaCheckboxResponse resp7 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp7 = new AgendaResponse_Checkbox();
             resp7.AgendaItem = ag7;
             resp7.Checked = true;
 

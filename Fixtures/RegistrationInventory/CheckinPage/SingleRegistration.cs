@@ -135,7 +135,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithRegType);
 
             Registrant registrant = new Registrant(eventWithRegType, string.Format("selenium{0}@regonline.com", System.DateTime.Now.Ticks.ToString()));
-            registrant.RegType_Response = new RegTypeResponse(eventWithRegType.StartPage.RegTypes[1]);
+            registrant.EventFee_Response = new EventFeeResponse(eventWithRegType.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -163,7 +163,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffEventWithRegType);
 
             registrant.Event = diffEventWithRegType;
-            registrant.RegType_Response = new RegTypeResponse(diffEventWithRegType.StartPage.RegTypes[1]);
+            registrant.EventFee_Response = new EventFeeResponse(diffEventWithRegType.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -225,7 +225,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeGroupDiscount);
 
             Registrant registrant = new Registrant(eventWithFeeGroupDiscount);
-            registrant.RegType_Response = new RegTypeResponse(eventWithFeeGroupDiscount.StartPage.RegTypes[0]);
+            registrant.EventFee_Response = new EventFeeResponse(eventWithFeeGroupDiscount.StartPage.RegTypes[0]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -253,7 +253,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeDCDollar);
 
             Registrant registrant = new Registrant(eventWithFeeDCDollar);
-            registrant.RegType_Response = new RegTypeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
+            registrant.EventFee_Response = new EventFeeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
 
             Registrant reg = new Registrant(eventWithFeeDCDollar, string.Format("test{0}@test.com", System.DateTime.Now.Ticks.ToString()));
 
@@ -291,7 +291,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventWithFeeDCDollar);
 
             Registrant registrant = new Registrant(eventWithFeeDCDollar);
-            registrant.RegType_Response = new RegTypeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
+            registrant.EventFee_Response = new EventFeeResponse(eventWithFeeDCDollar.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
 
@@ -320,11 +320,11 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventFeeDCRequired);
 
             Registrant registrant = new Registrant(eventFeeDCRequired);
-            registrant.RegType_Response = new RegTypeResponse(eventFeeDCRequired.StartPage.RegTypes[1]);
+            registrant.EventFee_Response = new EventFeeResponse(eventFeeDCRequired.StartPage.RegTypes[1]);
             registrant.Payment_Method = paymentMethod;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrant);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.RegType_Response.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(registrant.EventFee_Response.RegType);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
 
@@ -342,7 +342,7 @@
 
             DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
-            registrantWhenFull.RegType_Response = new RegTypeResponse(reg.Event.StartPage.RegTypes[1]);
+            registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
@@ -358,7 +358,7 @@
 
             DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
-            registrantWhenFull.RegType_Response = new RegTypeResponse(reg.Event.StartPage.RegTypes[1]);
+            registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
@@ -385,7 +385,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventFeeEaylyPrice_Registrants);
 
             Registrant registrant = new Registrant(eventFeeEaylyPrice_Registrants);
-            registrant.RegType_Response = new RegTypeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
+            registrant.EventFee_Response = new EventFeeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
             registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -396,7 +396,7 @@
             KeywordProvider.RegistrationCreation.Checkout(registrant);
 
             Registrant registrant1 = new Registrant(eventFeeEaylyPrice_Registrants);
-            registrant1.RegType_Response = new RegTypeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
+            registrant1.EventFee_Response = new EventFeeResponse(eventFeeEaylyPrice_Registrants.StartPage.RegTypes[0]);
             registrant1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant1);
@@ -428,7 +428,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventEarlyPrice);
 
             Registrant registrant = new Registrant(eventEarlyPrice);
-            registrant.RegType_Response = new RegTypeResponse(eventEarlyPrice.StartPage.RegTypes[0]);
+            registrant.EventFee_Response = new EventFeeResponse(eventEarlyPrice.StartPage.RegTypes[0]);
             registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -459,7 +459,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventLatePrice);
 
             Registrant registrant = new Registrant(eventLatePrice);
-            registrant.RegType_Response = new RegTypeResponse(eventLatePrice.StartPage.RegTypes[0]);
+            registrant.EventFee_Response = new EventFeeResponse(eventLatePrice.StartPage.RegTypes[0]);
             registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -496,7 +496,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, eventMiddlePrice);
 
             Registrant registrant = new Registrant(eventMiddlePrice);
-            registrant.RegType_Response = new RegTypeResponse(eventMiddlePrice.StartPage.RegTypes[0]);
+            registrant.EventFee_Response = new EventFeeResponse(eventMiddlePrice.StartPage.RegTypes[0]);
             registrant.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.Checkin(registrant);
@@ -539,7 +539,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            reg.RegType_Response = new RegTypeResponse(regType1);
+            reg.EventFee_Response = new EventFeeResponse(regType1);
             reg.Register_Method = RegisterMethod.RegTypeDirectUrl;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);

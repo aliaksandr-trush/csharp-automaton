@@ -109,10 +109,10 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupEventFeeGroupDiscount);
 
             Registrant reg1 = new Registrant(groupEventFeeGroupDiscount);
-            reg1.RegType_Response = new RegTypeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
+            reg1.EventFee_Response = new EventFeeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
             reg1.Payment_Method = paymentMethod;
             Registrant reg2 = new Registrant(groupEventFeeGroupDiscount);
-            reg1.RegType_Response = new RegTypeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
+            reg1.EventFee_Response = new EventFeeResponse(groupEventFeeGroupDiscount.StartPage.RegTypes[0]);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
@@ -189,8 +189,8 @@
 
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
-            reg1.RegType_Response = new RegTypeResponse(regType);
-            reg2.RegType_Response = new RegTypeResponse(regType);
+            reg1.EventFee_Response = new EventFeeResponse(regType);
+            reg2.EventFee_Response = new EventFeeResponse(regType);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
@@ -202,7 +202,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType_Response = new RegTypeResponse(regType);
+            reg3.EventFee_Response = new EventFeeResponse(regType);
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
@@ -223,7 +223,7 @@
 
             Registrant reg1 = new Registrant(evt);
             Registrant reg2 = new Registrant(evt);
-            reg1.RegType_Response = new RegTypeResponse(regType);
+            reg1.EventFee_Response = new EventFeeResponse(regType);
             Group group = new Group();
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
@@ -267,7 +267,7 @@
         public void GoBackLink()
         {
             Event GoBackLink = new Event("RI-GoBackLink");
-            AgendaItemCheckBox agenda = new AgendaItemCheckBox("GroupAgenda");
+            AgendaItem_CheckBox agenda = new AgendaItem_CheckBox("GroupAgenda");
             AgendaPage agendaPage = new AgendaPage();
             agendaPage.AgendaItems.Add(agenda);
             GoBackLink.AgendaPage = agendaPage;

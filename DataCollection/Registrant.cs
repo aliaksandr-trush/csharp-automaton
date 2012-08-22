@@ -53,6 +53,11 @@
         public readonly static string Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
     }
 
+    public class FeeSummary
+    {
+        public double Total;
+    }
+
     public class UpdateRegistrant : Registrant
     {
         public Registrant OldRegistration;
@@ -68,7 +73,7 @@
         public int Id;
         public Event Event;
         public string Email;
-        public RegTypeResponse RegType_Response;
+        public EventFeeResponse EventFee_Response;
         public string FirstName;
         public string MiddleName;
         public string LastName;
@@ -91,6 +96,7 @@
         public List<MerchandiseResponse> Merchandise_Responses = new List<MerchandiseResponse>();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
+        public FeeSummary Fee_Summary { get; set; }
 
         public Registrant(Event evt)
         {
@@ -164,6 +170,103 @@
                 "Rgrssn-"
                 + check.ToString()
                 + System.DateTime.Now.Ticks.ToString().Substring(6);
+        }
+
+        public void ReCalculateFee()
+        {
+            this.Fee_Summary = new FeeSummary();
+            this.Fee_Summary.Total = 0;
+
+            if (this.EventFee_Response != null)
+            {
+                double fee = this.EventFee_Response.Fee.HasValue ? 0 : this.EventFee_Response.Fee.Value;
+                this.Fee_Summary.Total += (this.EventFee_Response.Code == null) ? fee : this.EventFee_Response.Code.CalculateDiscountedPrice(fee);
+            }
+
+            foreach (CustomFieldResponse responses in this.CustomField_Responses)
+            {
+                if (responses is AgendaResponse)
+                {
+                    AgendaResponse response = responses as AgendaResponse;
+
+                    switch (response.AgendaItem.Type)
+                    {
+                        case FormData.CustomFieldType.AlwaysSelected:
+                            {
+                                AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
+                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
+                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                            }
+                            break;
+
+                        case FormData.CustomFieldType.CheckBox:
+                            {
+                                AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
+                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
+                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                            }
+                            break;
+
+                        case FormData.CustomFieldType.RadioButton:
+                            {
+                                AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
+                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
+                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                            }
+                            break;
+
+                        case FormData.CustomFieldType.Dropdown:
+                            {
+                                AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
+                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
+                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                            }
+                            break;
+                        
+                        case FormData.CustomFieldType.Contribution:
+                            {
+                                AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
+                                this.Fee_Summary.Total += (resp.ContributionAmount.HasValue ? 0 : resp.ContributionAmount.Value);
+                            }
+                            break;
+
+                        case FormData.CustomFieldType.FileUpload:
+                            {
+                                AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
+                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
+                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                            }
+                            break;
+
+                        default:
+                            throw new ArgumentException(string.Format("Agenda item of specified type has no price: {0}", response.AgendaItem.Type));
+                    }
+                }
+            }
+
+            foreach (MerchandiseResponse response in this.Merchandise_Responses)
+            {
+                switch (response.Merchandise_Item.Type)
+                {
+                    case FormData.MerchandiseType.Fixed:
+                        {
+                            MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
+                            double price = (resp.Merchandise_Item.Price.HasValue ? 0 : resp.Merchandise_Item.Price.Value);
+                            this.Fee_Summary.Total += (resp.Discount_Code == null) ? price : resp.Discount_Code.CalculateDiscountedPrice(price);
+                        }
+                        break;
+
+                    case FormData.MerchandiseType.Variable:
+                        {
+                            MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
+                            this.Fee_Summary.Total += resp.Amount;
+                        }
+                        break;
+
+                    default:
+                        throw new ArgumentException(string.Format("Merchandise item of specified type has no price: {0}", response.Merchandise_Item.Type));
+                }
+            }
         }
     }
 }

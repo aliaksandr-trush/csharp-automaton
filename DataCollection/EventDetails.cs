@@ -199,7 +199,7 @@
 
     public class MerchandisePage
     {
-        public List<Merchandise> Merchandises = new List<Merchandise>();
+        public List<MerchandiseItem> Merchandises = new List<MerchandiseItem>();
         public string PageHeader;
         public string PageFooter;
     }

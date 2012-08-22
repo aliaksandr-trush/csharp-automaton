@@ -7,6 +7,15 @@
 
     public class DiscountCodeFixture : FixtureBase
     {
+        private enum DiscountCodeType
+        {
+            NoCode,
+            Free,
+            FixedAmount,
+            Half,
+            Enter
+        }
+
         [Test]
         [Category(Priority.Two)]
         [Description("692")]
@@ -50,12 +59,12 @@
 
             Registrant reg1 = new Registrant(evt);
             reg1.Payment_Method = paymentMethod;
-            reg1.RegType_Response = new RegTypeResponse(regType1);
-            reg1.RegType_Response.DiscountCode = dc1;
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
+            reg1.EventFee_Response.Code = dc1;
             System.Threading.Thread.Sleep(10);
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType_Response = new RegTypeResponse(regType2);
-            reg2.RegType_Response.DiscountCode = dc3;
+            reg2.EventFee_Response = new EventFeeResponse(regType2);
+            reg2.EventFee_Response.Code = dc3;
             Group group1 = new Group();
             group1.Primary = reg1;
             group1.Secondaries.Add(reg2);
@@ -65,12 +74,12 @@
 
             Registrant reg3 = new Registrant(evt);
             reg3.Payment_Method = paymentMethod;
-            reg3.RegType_Response = new RegTypeResponse(regType1);
-            reg3.RegType_Response.DiscountCode = dc2;
+            reg3.EventFee_Response = new EventFeeResponse(regType1);
+            reg3.EventFee_Response.Code = dc2;
             System.Threading.Thread.Sleep(10);
             Registrant reg4 = new Registrant(evt);
-            reg4.RegType_Response = new RegTypeResponse(regType2);
-            reg4.RegType_Response.DiscountCode = dc4;
+            reg4.EventFee_Response = new EventFeeResponse(regType2);
+            reg4.EventFee_Response.Code = dc4;
             Group group2 = new Group();
             group2.Primary = reg3;
             group2.Secondaries.Add(reg4);
@@ -105,9 +114,9 @@
             regType2.DiscountCode.Add(dc2);
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("Agenda1");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("Agenda1");
             agenda1.Price = 80;
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("Agenda2");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("Agenda2");
             agenda2.Price = 100;
             DiscountCode dc3 = new DiscountCode("dc3");
             dc3.Amount = 50;
@@ -119,17 +128,17 @@
             dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc4.CodeKind = FormData.ChangeType.Percent;
             dc4.CodeType = FormData.DiscountCodeType.DiscountCode;
-            agenda1.DiscountCode.Add(dc3);
-            agenda2.DiscountCode.Add(dc4);
+            agenda1.DiscountCodes.Add(dc3);
+            agenda2.DiscountCodes.Add(dc4);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
-            Merchandise merch1 = new Merchandise("Merch1");
-            merch1.MerchandiseType = FormData.MerchandiseType.Fixed;
-            merch1.MerchandiseFee = 110;
-            Merchandise merch2 = new Merchandise("Merch2");
-            merch2.MerchandiseType = FormData.MerchandiseType.Fixed;
-            merch2.MerchandiseFee = 150;
+            MerchandiseItem merch1 = new MerchandiseItem("Merch1");
+            merch1.Type = FormData.MerchandiseType.Fixed;
+            merch1.Price = 110;
+            MerchandiseItem merch2 = new MerchandiseItem("Merch2");
+            merch2.Type = FormData.MerchandiseType.Fixed;
+            merch2.Price = 150;
             DiscountCode dc5 = new DiscountCode("dc5");
             dc5.Amount = 50;
             dc5.CodeDirection = FormData.ChangePriceDirection.Decrease;
@@ -148,42 +157,42 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            RegTypeResponse resp1 = new RegTypeResponse(regType1);
-            resp1.DiscountCode = dc1;
-            RegTypeResponse resp2 = new RegTypeResponse(regType2);
-            resp2.DiscountCode = dc2;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            EventFeeResponse resp1 = new EventFeeResponse(regType1);
+            resp1.Code = dc1;
+            EventFeeResponse resp2 = new EventFeeResponse(regType2);
+            resp2.Code = dc2;
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = agenda1;
             resp3.Checked = true;
             resp3.Code = dc3;
-            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
             resp4.AgendaItem = agenda2;
             resp4.Checked = true;
             resp4.Code = dc4;
-            MerchFixedResponse resp5 = new MerchFixedResponse();
-            resp5.Merchandise = merch1;
+            MerchResponse_FixedPrice resp5 = new MerchResponse_FixedPrice();
+            resp5.Merchandise_Item = merch1;
             resp5.Quantity = 1;
             resp5.Discount_Code = dc5;
-            MerchFixedResponse resp6 = new MerchFixedResponse();
-            resp6.Merchandise = merch2;
+            MerchResponse_FixedPrice resp6 = new MerchResponse_FixedPrice();
+            resp6.Merchandise_Item = merch2;
             resp6.Quantity = 1;
             resp6.Discount_Code = dc6;
 
             Registrant reg1 = new Registrant(evt);
             reg1.Payment_Method = paymentMethod;
-            reg1.RegType_Response = resp1;
+            reg1.EventFee_Response = resp1;
             reg1.CustomField_Responses.Add(resp3);
             reg1.CustomField_Responses.Add(resp4);
             reg1.Merchandise_Responses.Add(resp5);
             reg1.Merchandise_Responses.Add(resp6);
             System.Threading.Thread.Sleep(10);
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType_Response = resp2;
+            reg2.EventFee_Response = resp2;
             reg2.CustomField_Responses.Add(resp3);
             reg2.CustomField_Responses.Add(resp4);
             System.Threading.Thread.Sleep(10);
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType_Response = resp1;
+            reg3.EventFee_Response = resp1;
             reg3.CustomField_Responses.Add(resp3);
             Group group = new Group();
             group.Primary = reg1;
@@ -372,8 +381,6 @@
         public void SameDiscountCode()
         {
             Event evt = new Event("DiscountCodeFixture");
-            evt.StartPage.Event_Fee = new EventFee();
-            evt.StartPage.Event_Fee.StandardPrice = 100;
 
             DiscountCode half = new DiscountCode("Half");
             half.Amount = 50;
@@ -392,10 +399,102 @@
             free.CodeDirection = FormData.ChangePriceDirection.Decrease;
             free.CodeKind = FormData.ChangeType.Percent;
             free.CodeType = FormData.DiscountCodeType.DiscountCode;
+
+            evt.StartPage.Event_Fee = new EventFee();
+            evt.StartPage.Event_Fee.StandardPrice = 100;
             evt.StartPage.Event_Fee.DiscountCodes.Add(half);
             evt.StartPage.Event_Fee.DiscountCodes.Add(fixedAmount);
             evt.StartPage.Event_Fee.DiscountCodes.Add(enter);
             evt.StartPage.Event_Fee.DiscountCodes.Add(free);
+
+            DataCollection.AgendaItem_CheckBox checkbox = new AgendaItem_CheckBox("Checkbox");
+            checkbox.Price = 50;
+            checkbox.DiscountCodes.Add(half);
+            checkbox.DiscountCodes.Add(fixedAmount);
+            checkbox.DiscountCodes.Add(enter);
+            checkbox.DiscountCodes.Add(free);
+
+            DataCollection.AgendaItem_AlwaysSelected alwaysSelected = new AgendaItem_AlwaysSelected("AlwaysSelected");
+            alwaysSelected.Price = 50;
+            alwaysSelected.DiscountCodes.Add(half);
+            alwaysSelected.DiscountCodes.Add(fixedAmount);
+            alwaysSelected.DiscountCodes.Add(enter);
+            alwaysSelected.DiscountCodes.Add(free);
+
+            DataCollection.AgendaItem_CheckBox checkboxAndRequireDC = new AgendaItem_CheckBox("CheckboxAndRequireDC");
+            checkboxAndRequireDC.Price = 50;
+            checkboxAndRequireDC.DiscountCodes.Add(half);
+            checkboxAndRequireDC.DiscountCodes.Add(fixedAmount);
+            checkboxAndRequireDC.DiscountCodes.Add(enter);
+            checkboxAndRequireDC.DiscountCodes.Add(free);
+            checkboxAndRequireDC.RequireDC = true;
+
+            DataCollection.AgendaItem_MultipleChoice_RadioButton multipleChoiceRadioButton = new AgendaItem_MultipleChoice_RadioButton("MultipleChoiceRadioButton");
+            multipleChoiceRadioButton.Price = 50;
+            multipleChoiceRadioButton.DiscountCodes.Add(half);
+            multipleChoiceRadioButton.DiscountCodes.Add(fixedAmount);
+            multipleChoiceRadioButton.DiscountCodes.Add(enter);
+            multipleChoiceRadioButton.DiscountCodes.Add(free);
+            DataCollection.ChoiceItem item1 = new ChoiceItem("Item1");
+            item1.Price = 5;
+            DataCollection.ChoiceItem item2 = new ChoiceItem("Item2");
+            item2.Price = 5;
+            multipleChoiceRadioButton.ChoiceItems.Add(item1);
+            multipleChoiceRadioButton.ChoiceItems.Add(item2);
+
+            evt.AgendaPage = new AgendaPage();
+            evt.AgendaPage.AgendaItems.Add(checkbox);
+            evt.AgendaPage.AgendaItems.Add(alwaysSelected);
+            evt.AgendaPage.AgendaItems.Add(checkboxAndRequireDC);
+            evt.AgendaPage.AgendaItems.Add(multipleChoiceRadioButton);
+
+            DataCollection.MerchandiseItem merch = new MerchandiseItem("MerchWithFixedPrice");
+            merch.Type = FormData.MerchandiseType.Fixed;
+            merch.Price = 25;
+            merch.DiscountCodes.Add(half);
+            merch.DiscountCodes.Add(fixedAmount);
+            merch.DiscountCodes.Add(enter);
+            merch.DiscountCodes.Add(free);
+
+            evt.MerchandisePage = new MerchandisePage();
+            evt.MerchandisePage.Merchandises.Add(merch);
+
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethod.Check));
+
+            Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            // First registration: no codes
+            DataCollection.AgendaResponse_Checkbox agendaResponse_Checkbox = new AgendaResponse_Checkbox();
+            agendaResponse_Checkbox.AgendaItem = checkbox;
+            agendaResponse_Checkbox.Checked = true;
+
+            DataCollection.AgendaResponse_AlwaysSelected agendaResponse_AlwaysSelected = new AgendaResponse_AlwaysSelected();
+            agendaResponse_AlwaysSelected.AgendaItem = alwaysSelected;
+
+            DataCollection.AgendaResponse_Checkbox agendaResponse_CheckboxAndRequireDC = new AgendaResponse_Checkbox();
+            agendaResponse_CheckboxAndRequireDC.AgendaItem = checkboxAndRequireDC;
+            agendaResponse_CheckboxAndRequireDC.Checked = true;
+            agendaResponse_CheckboxAndRequireDC.Code = enter;
+
+            DataCollection.AgendaResponse_MultipleChoice_RadioButton agendaResponse_MultiChoiceRadioButton = new AgendaResponse_MultipleChoice_RadioButton();
+            agendaResponse_MultiChoiceRadioButton.AgendaItem = multipleChoiceRadioButton;
+            agendaResponse_MultiChoiceRadioButton.ChoiceItem = item1;
+
+            DataCollection.MerchResponse_FixedPrice merchandiseResponse_FixedPrice = new MerchResponse_FixedPrice();
+            merchandiseResponse_FixedPrice.Merchandise_Item = merch;
+            merchandiseResponse_FixedPrice.Quantity = 2;
+
+            DataCollection.Registrant reg_NoCodes = new Registrant(evt);
+            reg_NoCodes.CustomField_Responses.Add(agendaResponse_Checkbox);
+            reg_NoCodes.CustomField_Responses.Add(agendaResponse_AlwaysSelected);
+            reg_NoCodes.CustomField_Responses.Add(agendaResponse_CheckboxAndRequireDC);
+            reg_NoCodes.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
+            reg_NoCodes.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
+
+            reg_NoCodes.ReCalculateFee();
+
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg_NoCodes);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 0);
         }
     }
 }

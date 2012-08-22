@@ -418,7 +418,7 @@
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Merchandise);
 
-                foreach (DataCollection.Merchandise merch in details.MerchandisePage.Merchandises)
+                foreach (DataCollection.MerchandiseItem merch in details.MerchandisePage.Merchandises)
                 {
                     KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
                     PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);

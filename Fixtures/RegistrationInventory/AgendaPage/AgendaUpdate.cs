@@ -17,9 +17,9 @@
         {
             Event evt = new Event("AgendaUpdateReg");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("Agenda1");
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("Agenda2");
-            AgendaItemCheckBox agenda3 = new AgendaItemCheckBox("Agenda3");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("Agenda1");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("Agenda2");
+            AgendaItem_CheckBox agenda3 = new AgendaItem_CheckBox("Agenda3");
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
             evt.AgendaPage.AgendaItems.Add(agenda3);
@@ -27,13 +27,13 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
             Registrant reg = new Registrant(evt);
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agenda1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = agenda2;
             resp2.Checked = true;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = agenda3;
             resp3.Checked = true;
             reg.CustomField_Responses.Add(resp1);
@@ -64,12 +64,12 @@
         {
             Event evt = new Event("AgendaBackendUpdate");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox agenda1 = new AgendaItemCheckBox("Agenda1");
-            AgendaItemCheckBox agenda2 = new AgendaItemCheckBox("Agenda2");
-            AgendaItemCheckBox agenda3 = new AgendaItemCheckBox("Agenda3");
-            AgendaItemCheckBox agenda4 = new AgendaItemCheckBox("Agenda4");
+            AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("Agenda1");
+            AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("Agenda2");
+            AgendaItem_CheckBox agenda3 = new AgendaItem_CheckBox("Agenda3");
+            AgendaItem_CheckBox agenda4 = new AgendaItem_CheckBox("Agenda4");
             agenda4.SpacesAvailable = 1;
-            AgendaItemCheckBox agenda5 = new AgendaItemCheckBox("Agenda5");
+            AgendaItem_CheckBox agenda5 = new AgendaItem_CheckBox("Agenda5");
             agenda5.Gender = FormData.Gender.Male;
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
@@ -81,19 +81,19 @@
 
             Registrant reg1 = new Registrant(evt);
             reg1.Gender = FormData.Gender.Male;
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agenda1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = agenda2;
             resp2.Checked = true;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = agenda3;
             resp3.Checked = true;
-            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
             resp4.AgendaItem = agenda4;
             resp4.Checked = true;
-            AgendaCheckboxResponse resp5 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp5 = new AgendaResponse_Checkbox();
             resp5.AgendaItem = agenda5;
             resp5.Checked = true;
             reg1.CustomField_Responses.Add(resp1);

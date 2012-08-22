@@ -31,7 +31,7 @@
             Event.PersonalInfoPage.PageHeader = "This is personal info Page Header.";
             Event.PersonalInfoPage.PageFooter = "This is personal info Page Footer.";
 
-            AgendaItemCheckBox agendaItem = new AgendaItemCheckBox(DateTime.Now.Ticks.ToString());
+            AgendaItem_CheckBox agendaItem = new AgendaItem_CheckBox(DateTime.Now.Ticks.ToString());
             DataCollection.AgendaPage agendaPage = new DataCollection.AgendaPage();
             agendaPage.AgendaItems.Add(agendaItem);
             agendaPage.PageHeader = "This is agenda Page Header.";
@@ -49,8 +49,8 @@
             lodgingTravelPage.PageFooter = "This is lodging travel Page Footer.";
             Event.LodgingTravelPage = lodgingTravelPage;
 
-            Merchandise merchandise = new Merchandise(DateTime.Now.AddSeconds(1).Ticks.ToString());
-            merchandise.MerchandiseType = FormData.MerchandiseType.Header;
+            MerchandiseItem merchandise = new MerchandiseItem(DateTime.Now.AddSeconds(1).Ticks.ToString());
+            merchandise.Type = FormData.MerchandiseType.Header;
             MerchandisePage merchandisePage = new MerchandisePage();
             merchandisePage.Merchandises.Add(merchandise);
             merchandisePage.PageHeader = "This is merchandise Page Header.";

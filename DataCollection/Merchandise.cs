@@ -2,21 +2,21 @@
 {
     using System.Collections.Generic;
 
-    public class Merchandise
+    public class MerchandiseItem
     {
         public int Id;
-        public FormData.MerchandiseType MerchandiseType;
-        public double? MerchandiseFee;
-        public double? MinMerchandiseFee;
-        public double? MaxMerchandiseFee;
-        public string MerchandiseName;
+        public FormData.MerchandiseType Type;
+        public double? Price;
+        public double? MinPrice;
+        public double? MaxPrice;
+        public string Name;
         public bool? ApplyTaxOne;
         public bool? ApplyTaxTwo;
         public List<DiscountCode> DiscountCodes = new List<DiscountCode>();
 
-        public Merchandise(string merchandiseName)
+        public MerchandiseItem(string merchandiseName)
         {
-            this.MerchandiseName = merchandiseName;
+            this.Name = merchandiseName;
         }
     }
 }
