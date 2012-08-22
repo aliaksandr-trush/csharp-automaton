@@ -4,7 +4,8 @@
     {
         public static class RegisterError
         {
-            public const string CodeLimitHasReached = "No more \"{0}\" codes are being accepted for this registrant type. Enter another code or contact your event administrator.";
+            public const string RegTypeCodeLimitHasReachedAndRequired = "No more \"{0}\" codes are being accepted for this registrant type. Enter another code or contact your event administrator.";
+            public const string RegTypeCodeLimitHasReached = "No more \"{0}\" codes are being accepted for this registrant type. Enter another code or leave the field blank.";
             public const string InvalidCode = "You have entered an invalid code. ";
             public const string YouMustEnterValidEmailAddress = "You must enter a valid email address.";
             public const string InvalidPassword = "Your login or password is incorrect. Please try again.";

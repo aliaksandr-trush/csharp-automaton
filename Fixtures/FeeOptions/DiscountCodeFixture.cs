@@ -216,61 +216,6 @@
             // Access Code
             this.RegWithSameDiscountCode(DiscountCodeType.Enter);
         }
-
-        // Group registration (3 attendees). Use discount code “Half” for all items
-        [Test]
-        [Category(Priority.Two)]
-        [Description("539")]
-        public void GroupRegWithHalfDiscount()
-        {
-            this.eventType = EventType.DiscountCodeFixture;
-
-            this.InitializeEvent(false);
-            
-            int groupSize = 3;
-            this.GroupRegWithDiscountCode(groupSize);
-        }
-
-        // Use different discount codes for all items
-        [Test]
-        [Category(Priority.Two)]
-        [Description("540")]
-        public void DifferentDiscountCode()
-        {
-            this.eventType = EventType.DiscountCodeFixture;
-
-            this.InitializeEvent(false);
-            
-            this.RegWithDifferentDiscountCode();
-        }
-
-        [Test]
-        [Category(Priority.Two)]
-        [Description("541")]
-        public void DiscountCodeLimitTest()
-        {
-            this.eventType = EventType.DiscountCodeLimitTest;
-
-            this.InitializeEvent(false);
-            
-            // Add the 1st registration with free discount code
-            this.RegWithSameDiscountCode(DiscountCodeType.Free);
-
-            // Add the 2nd registration with free discount code
-            this.RegWithSameDiscountCode(DiscountCodeType.Free);
-
-            // Add the 3rd registration with free discount code
-            this.RegWithSameDiscountCode(DiscountCodeType.Free);
-
-            // Add the 4th registration with free discount code
-            this.RegWithSameDiscountCode(DiscountCodeType.Free);
-
-            // Add the 5th registration with free discount code
-            this.RegWithSameDiscountCode(DiscountCodeType.Free);
-
-            // Add the 6th registration with free discount code and use access code when code limit has been reached
-            this.RegisterWhenDiscountCodeLimitHasBeenReached(DiscountCodeType.Free);
-        }
         #endregion
 
         #region Private Methods

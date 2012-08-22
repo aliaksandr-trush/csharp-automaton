@@ -14,7 +14,7 @@
             {
                 foreach (CustomFieldResponse resp in reg.CustomField_Responses)
                 {
-                    if (resp.IsUpdate && (resp is AgendaResponse))
+                    if (resp is AgendaResponse)
                     {
                         AgendaResponse respAgenda = resp as AgendaResponse;
                         attendeeInfo.AgendaEdit_Click();
@@ -35,8 +35,6 @@
                         agendaEdit.SaveAndClose_Click();
                         PageObject.PageObjectHelper.SelectTopWindow();
                     }
-                    
-                    resp.IsUpdate = false;
                 }
             }
         }

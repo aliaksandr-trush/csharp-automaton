@@ -73,10 +73,6 @@
                 + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.EarlyPrice.earlyPrice + aGLatePrice.LatePrice.latePrice);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
-            resp3.IsUpdate = true;
-            resp4.IsUpdate = true;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
             reg2.CustomField_Responses.Add(resp3);
@@ -299,8 +295,6 @@
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 
@@ -383,10 +377,6 @@
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
             DataCollection.Registrant reg3 = new DataCollection.Registrant(evt);
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
-            resp3.IsUpdate = true;
-            resp4.IsUpdate = true;
             reg3.Payment_Method = paymentMethod;
             reg3.CustomField_Responses.Add(resp1);
             reg3.CustomField_Responses.Add(resp2);
@@ -406,8 +396,6 @@
 
             DataCollection.Registrant reg5 = new DataCollection.Registrant(evt);
             reg5.Payment_Method = paymentMethod;
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
             reg5.CustomField_Responses.Add(resp1);
             reg5.CustomField_Responses.Add(resp2);
 
@@ -420,8 +408,6 @@
             Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 450 - 5 * 6);
 
             DataCollection.Registrant reg6 = new DataCollection.Registrant(evt);
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
             reg6.CustomField_Responses.Add(resp1);
             reg6.CustomField_Responses.Add(resp2);
 

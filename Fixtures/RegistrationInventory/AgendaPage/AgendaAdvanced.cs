@@ -256,7 +256,6 @@
             Registrant reg4 = new Registrant(evt);
             reg4.Gender = FormData.Gender.Male;
             reg4.BirthDate = DateTime.Today.AddYears(-22);
-            resp4.IsUpdate = true;
             reg4.CustomField_Responses.Add(resp4);
 
             KeywordProvider.RegistrationCreation.Checkin(reg4);

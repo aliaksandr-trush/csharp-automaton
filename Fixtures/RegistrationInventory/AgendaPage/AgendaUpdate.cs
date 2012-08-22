@@ -44,8 +44,8 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             KeywordProvider.RegistrationCreation.Login(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Agenda_Click(0);
-            resp2.IsUpdate = true;
             resp2.Checked = false;
+            reg.CustomField_Responses.Add(resp2);
             reg.CustomField_Responses.Add(resp3);
             KeywordProvider.RegistrationCreation.Agenda(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -105,8 +105,6 @@
 
             Registrant reg2 = new Registrant(evt);
             reg2.Gender = FormData.Gender.Female;
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 
@@ -114,10 +112,6 @@
 
             PageObject.Backend.AttendeeInfo attendeeInfo = new PageObject.Backend.AttendeeInfo();
             attendeeInfo.OpenUrl(reg2.Id);
-            resp2.IsUpdate = true;
-            resp3.IsUpdate = true;
-            resp4.IsUpdate = true;
-            resp5.IsUpdate = true;
             resp2.Checked = false;
             reg2.CustomField_Responses.Add(resp3);
             reg2.CustomField_Responses.Add(resp4);

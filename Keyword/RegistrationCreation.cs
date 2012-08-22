@@ -40,12 +40,11 @@
         {
             Checkin(group.Primary);
             PersonalInfo(group.Primary);
+            Agenda(group.Primary);
+            Merchandise(group.Primary);
 
             for (int i = 0; i <= group.Secondaries.Count - 1; i++)
             {
-                Agenda(group.Primary);
-                Merchandise(group.Primary);
-
                 PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group.Secondaries[i].Email);
@@ -276,7 +275,7 @@
             {
                 foreach (CustomFieldResponse responses in reg.CustomField_Responses)
                 {
-                    if ((responses is AgendaResponse) && responses.IsUpdate)
+                    if (responses is AgendaResponse)
                     {
                         AgendaResponse response = responses as AgendaResponse;
 
@@ -358,8 +357,6 @@
                                 break;
                         }
                     }
-
-                    responses.IsUpdate = false;
                 }
             }
 

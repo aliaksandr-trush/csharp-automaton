@@ -231,8 +231,6 @@
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             Registrant reg2 = new Registrant(evt);
-            resp1.IsUpdate = true;
-            resp2.IsUpdate = true;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
@@ -581,7 +579,6 @@
             KeywordProvider.RegistrationCreation.Checkout(reg1);
 
             Registrant reg2 = new Registrant(evt);
-            resp4.IsUpdate = true;
             reg2.CustomField_Responses.Add(resp4);
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
