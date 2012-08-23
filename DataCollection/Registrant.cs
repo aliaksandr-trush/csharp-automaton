@@ -55,7 +55,7 @@
 
     public class FeeSummary
     {
-        public double Total;
+        public double Total { get; set; }
     }
 
     public class UpdateRegistrant : Registrant
@@ -96,6 +96,8 @@
         public List<MerchandiseResponse> Merchandise_Responses = new List<MerchandiseResponse>();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
+
+        public bool WhetherToVerifyFeeOnCheckoutPage { get; set; }
         public FeeSummary Fee_Summary { get; set; }
 
         public Registrant(Event evt)
@@ -179,8 +181,7 @@
 
             if (this.EventFee_Response != null)
             {
-                double fee = this.EventFee_Response.Fee.HasValue ? 0 : this.EventFee_Response.Fee.Value;
-                this.Fee_Summary.Total += (this.EventFee_Response.Code == null) ? fee : this.EventFee_Response.Code.CalculateDiscountedPrice(fee);
+                this.Fee_Summary.Total += (this.EventFee_Response.Code == null) ? this.EventFee_Response.Fee : this.EventFee_Response.Code.CalculateDiscountedPrice(this.EventFee_Response.Fee);
             }
 
             foreach (CustomFieldResponse responses in this.CustomField_Responses)
@@ -194,47 +195,42 @@
                         case FormData.CustomFieldType.AlwaysSelected:
                             {
                                 AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
-                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
-                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                                this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
                         case FormData.CustomFieldType.CheckBox:
                             {
                                 AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
-                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
-                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                                this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
                         case FormData.CustomFieldType.RadioButton:
                             {
                                 AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
-                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
-                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                                this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
                         case FormData.CustomFieldType.Dropdown:
                             {
                                 AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
-                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
-                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                                this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
                         
                         case FormData.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
-                                this.Fee_Summary.Total += (resp.ContributionAmount.HasValue ? 0 : resp.ContributionAmount.Value);
+                                this.Fee_Summary.Total += resp.ContributionAmount;
                             }
                             break;
 
                         case FormData.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
-                                double price = (resp.Fee.HasValue ? 0 : resp.Fee.Value);
-                                this.Fee_Summary.Total += (resp.Code == null) ? price : resp.Code.CalculateDiscountedPrice(price);
+                                this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
@@ -251,8 +247,8 @@
                     case FormData.MerchandiseType.Fixed:
                         {
                             MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
-                            double price = (resp.Merchandise_Item.Price.HasValue ? 0 : resp.Merchandise_Item.Price.Value);
-                            this.Fee_Summary.Total += (resp.Discount_Code == null) ? price : resp.Discount_Code.CalculateDiscountedPrice(price);
+                            double price = (resp.Merchandise_Item.Price.HasValue ? resp.Merchandise_Item.Price.Value : 0);
+                            this.Fee_Summary.Total += ((resp.Discount_Code == null) ? price : resp.Discount_Code.CalculateDiscountedPrice(price)) * resp.Quantity;
                         }
                         break;
 

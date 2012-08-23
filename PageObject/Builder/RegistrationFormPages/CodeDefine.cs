@@ -6,7 +6,6 @@
 
     public class CodeDefine : Frame
     {
-        public CodeDefine(string name, string parentFrame) : base(name, parentFrame) { }
         public CodeDefine(string name) : base(name) { }
 
         #region WebElements
@@ -62,14 +61,12 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
         #endregion
     }

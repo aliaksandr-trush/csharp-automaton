@@ -8,7 +8,6 @@
     public class EventFeeDefine : Frame
     {
         public EventFeeDefine(string name) : base(name) { }
-        public EventFeeDefine(string name, string parentFrame) : base(name, parentFrame) { }
 
         #region WebElements
         public TextBox NameOnReceipt = new TextBox("ctl00_cphDialog_cfCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
@@ -28,10 +27,10 @@
         public TextBox LatePriceTime = new TextBox("ctl00_cphDialog_cfCF_mipPrc_ip3_tpLtSD_dateInput_text", LocateBy.Id);
         public ButtonOrLink AddDiscountCode = new ButtonOrLink("ctl00_cphDialog_cfCF_mipPrc_ip4_hrefOpenCodeWindow", LocateBy.Id);
         public ButtonOrLink AddBulkCodes = new ButtonOrLink("ctl00_cphDialog_cfCF_mipPrc_ip4_hrefOpenBulkCodesWindow", LocateBy.Id);
-        public CodeDefine CodeDefine = new CodeDefine("dialog3", "dialog2");
+        public CodeDefine Code_Define = new CodeDefine("dialog3");
         public CheckBox RequireCode = new CheckBox("ctl00_cphDialog_cfCF_mipPrc_ip4_chkPasswordRequired", LocateBy.Id);
         public ButtonOrLink AddTaxRate = new ButtonOrLink("//div[@id='ctl00_cphDialog_cfCF_mipPrc_ip6_dvTxWarn']/a", LocateBy.XPath);
-        public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog3", "dialog2");
+        public TaxRateDefine TaxRate_Define = new TaxRateDefine("dialog3");
         public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_cfCF_mipPrc_ip6_chkListTaxRates_0", LocateBy.Id);
         public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_cfCF_mipPrc_ip6_chkListTaxRates_1", LocateBy.Id);
         private WebElement Options_Div = new WebElement("ctl00_cphDialog_cfCF_mipPrc_ctl02", LocateBy.Id);
@@ -151,20 +150,18 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
         #endregion
 
         public void AdjustRADWindowPositionAndResize()
         {
-            PageObject.PageObjectHelper.AdjustRADWindowPosition("RadWindowWrapper_ctl00_dialog2", 20, 20);
+            PageObject.PageObjectHelper.AdjustRADWindowPosition("RadWindowWrapper_ctl00_dialog", 20, 20);
             PageObject.PageObjectHelper.ResizeRADWindow(this.Name, 800, 1000);
         }
     }

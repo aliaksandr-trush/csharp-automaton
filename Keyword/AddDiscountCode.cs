@@ -11,30 +11,30 @@
             {
                 case FormData.Location.EventFee:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AddDiscountCode_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Code.Type(code.Code);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.SelectByName();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Code.Type(code.Code);
 
                     switch (code.CodeType)
                     {
                         case FormData.DiscountCodeType.DiscountCode:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Discount_Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Discount_Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
 
                             if (code.CodeKind == FormData.ChangeType.Percent)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Percentage_Click();
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Percentage_Click();
                             }
 
                             if (code.CodeKind == FormData.ChangeType.FixedAmount)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.FixAmount_Click();
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.FixAmount_Click();
                             }
 
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Amount.Type(code.Amount);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Amount.Type(code.Amount);
                             break;
 
                         case FormData.DiscountCodeType.AccessCode:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.Access_Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Access_Click();
                             break;
 
                         default:
@@ -43,38 +43,39 @@
 
                     if (code.Limit.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.UseLimit.Type(code.Limit.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.UseLimit.Type(code.Limit.Value);
                     }
 
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.CodeDefine.SaveAndClose_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.SaveAndClose_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SelectByName();
                     break;
 
                 case FormData.Location.RegType:
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddDiscountCode_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Code.Type(code.Code);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddDiscountCode_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.SelectByName();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Code.Type(code.Code);
 
                     switch (code.CodeType)
                     {
                         case FormData.DiscountCodeType.DiscountCode:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Discount_Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Discount_Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.CodeDirection.SelectWithText(code.CodeDirection.Value.ToString());
 
                             if (code.CodeKind == FormData.ChangeType.Percent)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Percentage_Click();
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Percentage_Click();
                             }
 
                             if (code.CodeKind == FormData.ChangeType.FixedAmount)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.FixAmount_Click();
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.FixAmount_Click();
                             }
 
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Amount.Type(code.Amount);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Amount.Type(code.Amount);
                             break;
 
                         case FormData.DiscountCodeType.AccessCode:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.Access_Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Access_Click();
                             break;
 
                         default:
@@ -83,10 +84,11 @@
 
                     if (code.Limit.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.UseLimit.Type(code.Limit.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.UseLimit.Type(code.Limit.Value);
                     }
 
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.CodeDefine.SaveAndClose_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.SaveAndClose_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SelectByName();
                     break;
 
                 case FormData.Location.Agenda:

@@ -48,28 +48,28 @@
 
     public class AgendaResponse_AlwaysSelected : AgendaResponse
     {
-        public double? Fee;
+        public double Fee { get; set; }
         public DiscountCode Code { get; set; }
     }
 
     public class AgendaResponse_Checkbox : AgendaResponse
     {
         public bool? Checked;
-        public double? Fee;
+        public double Fee { get; set; }
         public DiscountCode Code;
     }
 
     public class AgendaResponse_MultipleChoice_RadioButton : AgendaResponse
     {
         public ChoiceItem ChoiceItem;
-        public double? Fee;
+        public double Fee { get; set; }
         public DiscountCode Code;
     }
 
     public class AgendaResponse_MultipleChoice_DropDown : AgendaResponse
     {
         public ChoiceItem ChoiceItem;
-        public double? Fee;
+        public double Fee { get; set; }
         public DiscountCode Code;
     }
 
@@ -91,13 +91,13 @@
     public class AgendaResponse_FileUpload : AgendaResponse
     {
         public string FileSource;
-        public double? Fee;
+        public double Fee { get; set; }
         public DiscountCode Code;
     }
 
     public class AgendaResponse_Contribution : AgendaResponse
     {
-        public double? ContributionAmount;
+        public double ContributionAmount { get; set; }
     }
 
     public class AgendaResponse_Duration : AgendaResponse
@@ -125,7 +125,7 @@
     {
         public RegType RegType;
         public DiscountCode Code;
-        public double? Fee;
+        public double Fee { get; set; }
 
         public EventFeeResponse() { }
 

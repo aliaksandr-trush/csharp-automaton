@@ -19,7 +19,7 @@
         public ButtonOrLink AddTaxRate = new ButtonOrLink("ctl00_cphDialog_lbnTaxes", LocateBy.Id);
         public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_chkListTaxRates_0", LocateBy.Id);
         public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_chkListTaxRates_1", LocateBy.Id);
-        public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog2", "dialog");
+        public TaxRateDefine TaxRate_Define = new TaxRateDefine("dialog2");
         public TextBox DiscountCodes = new TextBox("ctl00_cphDialog_feepassword", LocateBy.Id);
         #endregion
 

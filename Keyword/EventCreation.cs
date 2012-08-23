@@ -35,42 +35,6 @@
 
         public void StartPage(Event details)
         {
-            if (details.StartPage.Event_Fee != null)
-            {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFee_Type(details.StartPage.Event_Fee.StandardPrice);
-
-                if (details.StartPage.Event_Fee.Early_Price != null || 
-                    details.StartPage.Event_Fee.Late_Price != null || 
-                    (details.StartPage.Event_Fee.DiscountCodes != null && details.StartPage.Event_Fee.DiscountCodes.Count > 0))
-                {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeAdvanced_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AdjustRADWindowPositionAndResize();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Expand();
-
-                    if (details.StartPage.Event_Fee.Name != null)
-                    {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name);
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name);
-                    }
-                    else
-                    {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
-                    }
-
-                    if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
-                    {
-                        foreach (DataCollection.DiscountCode code in details.StartPage.Event_Fee.DiscountCodes)
-                        {
-                            KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
-                        }
-
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.RequireCode.Set(details.StartPage.Event_Fee.RequireDC);
-                    }
-                }
-            }
-
             if (details.StartPage.EventType.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventType.SelectWithText(details.StartPage.EventType.ToString());
@@ -169,6 +133,45 @@
             // Set event name and shortcut after regType created to avoid bug 24560
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(details.Title);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(details.Shortcut);
+
+            // Set event fee
+            if (details.StartPage.Event_Fee != null)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFee_Type(details.StartPage.Event_Fee.StandardPrice);
+
+                if (details.StartPage.Event_Fee.Early_Price != null ||
+                    details.StartPage.Event_Fee.Late_Price != null ||
+                    (details.StartPage.Event_Fee.DiscountCodes != null && details.StartPage.Event_Fee.DiscountCodes.Count > 0))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeAdvanced_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AdjustRADWindowPositionAndResize();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SelectByName();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Expand();
+
+                    if (details.StartPage.Event_Fee.Name != null)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name);
+                    }
+                    else
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
+                    }
+
+                    if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
+                    {
+                        foreach (DataCollection.DiscountCode code in details.StartPage.Event_Fee.DiscountCodes)
+                        {
+                            KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
+                        }
+
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.RequireCode.Set(details.StartPage.Event_Fee.RequireDC);
+                    }
+
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SaveAndClose_Click();
+                }
+            }
 
             if (details.StartPage.AllowGroupReg.HasValue)
             {
