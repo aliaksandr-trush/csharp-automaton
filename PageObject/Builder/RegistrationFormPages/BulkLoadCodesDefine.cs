@@ -6,7 +6,6 @@
     public class BulkLoadCodesDefine : Frame
     {
         public BulkLoadCodesDefine(string name) : base(name) {}
-        public BulkLoadCodesDefine(string name, string parentFrame) : base(name, parentFrame) {}
 
         public TextBox CodesDefine = new TextBox("ctl00_cphDialog_txtBulkCodes", LocateBy.Id);
 
@@ -22,14 +21,12 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
     }
 }

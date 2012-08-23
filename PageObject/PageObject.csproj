@@ -60,6 +60,7 @@
     <Compile Include="Builder\RegistrationFormPages\Agenda.cs" />
     <Compile Include="Builder\RegistrationFormPages\BulkLoadCodesDefine.cs" />
     <Compile Include="Builder\RegistrationFormPages\Checkout.cs" />
+    <Compile Include="Builder\RegistrationFormPages\RegTypeFeeDefine.cs" />
     <Compile Include="Builder\RegistrationFormPages\EventAdvancedSettings.cs" />
     <Compile Include="Builder\EventDetails.cs">
       <SubType>Code</SubType>

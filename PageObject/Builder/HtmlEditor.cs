@@ -8,7 +8,6 @@
     {
         public HtmlEditor(string name) : base(name) { }
         public HtmlEditor(int index) : base(index) { }
-        public HtmlEditor(string name, string parentFrame) : base(name, parentFrame) { }
 
         #region WebElements
         public ButtonOrLink HtmlMode = new ButtonOrLink("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
@@ -43,14 +42,12 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
         #endregion
     }

@@ -12,39 +12,40 @@
                 switch (location)
                 {
                     case FormData.Location.RegType:
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddTaxRate_Click();
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.SelectByName();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddTaxRate_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.SelectByName();
 
                         if (taxRateOne != null)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.TaxOneCaption.Type(taxRateOne.TaxRateCaption);
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.TaxOneRate.Type(taxRateOne.Rate);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.TaxOneCaption.Type(taxRateOne.TaxRateCaption);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.TaxOneRate.Type(taxRateOne.Rate);
                             taxRateOne.ToBeAdded = false;
                         }
 
                         if (taxRateTwo != null)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.TaxTwoCaption.Type(taxRateTwo.TaxRateCaption);
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.TaxTwoRate.Type(taxRateTwo.Rate);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.TaxTwoCaption.Type(taxRateTwo.TaxRateCaption);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.TaxTwoRate.Type(taxRateTwo.Rate);
                             taxRateTwo.ToBeAdded = false;
                         }
 
                         if (((taxRateOne != null) && taxRateOne.Country.HasValue) || ((taxRateTwo != null) && taxRateTwo.Country.HasValue))
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.ApplyToSelectedCountry_Set(true);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.ApplyToSelectedCountry_Set(true);
 
                             if ((taxRateOne != null) && taxRateOne.Country.HasValue)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.ApplyToCountry(taxRateOne.Country.Value).Set(true);
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.ApplyToCountry(taxRateOne.Country.Value).Set(true);
                             }
 
                             if ((taxRateTwo != null) && taxRateTwo.Country.HasValue)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.ApplyToCountry(taxRateTwo.Country.Value).Set(true);
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.ApplyToCountry(taxRateTwo.Country.Value).Set(true);
                             }
                         }
 
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.TaxRateDefine.SaveAndClose_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.SaveAndClose_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SelectByName();
                         break;
                     case FormData.Location.Agenda:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddTaxRate_Click();
@@ -83,38 +84,39 @@
                         break;
                     case FormData.Location.Merchandise:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.AddTaxRate_Click();
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.SelectByName();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.SelectByName();
 
                         if (taxRateOne != null)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.TaxOneCaption.Type(taxRateOne.TaxRateCaption);
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.TaxOneRate.Type(taxRateOne.Rate);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.TaxOneCaption.Type(taxRateOne.TaxRateCaption);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.TaxOneRate.Type(taxRateOne.Rate);
                             taxRateOne.ToBeAdded = false;
                         }
 
                         if (taxRateTwo != null)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.TaxTwoCaption.Type(taxRateTwo.TaxRateCaption);
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.TaxTwoRate.Type(taxRateTwo.Rate);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.TaxTwoCaption.Type(taxRateTwo.TaxRateCaption);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.TaxTwoRate.Type(taxRateTwo.Rate);
                             taxRateTwo.ToBeAdded = false;
                         }
 
                         if (((taxRateOne != null) && taxRateOne.Country.HasValue) || ((taxRateTwo != null) && taxRateTwo.Country.HasValue))
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.ApplyToSelectedCountry_Set(true);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.ApplyToSelectedCountry_Set(true);
 
                             if ((taxRateOne != null) && taxRateOne.Country.HasValue)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.ApplyToCountry(taxRateOne.Country.Value).Set(true);
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.ApplyToCountry(taxRateOne.Country.Value).Set(true);
                             }
 
                             if ((taxRateTwo != null) && taxRateTwo.Country.HasValue)
                             {
-                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.ApplyToCountry(taxRateTwo.Country.Value).Set(true);
+                                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.ApplyToCountry(taxRateTwo.Country.Value).Set(true);
                             }
                         }
 
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRateDefine.SaveAndClose_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.SaveAndClose_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.SelectByName();
                         break;
                     default:
                         break;

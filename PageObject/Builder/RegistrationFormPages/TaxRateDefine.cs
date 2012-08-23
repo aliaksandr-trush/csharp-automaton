@@ -7,7 +7,6 @@
     public class TaxRateDefine : Frame
     {
         public TaxRateDefine(string name) : base(name) { }
-        public TaxRateDefine(string name, string parentFrame) : base(name, parentFrame) { }
 
         #region WebElements
         public TextBox TaxOneCaption = new TextBox("ctl00_cphDialog_ucTaxRates_txtEventsTaxCaption1", LocateBy.Id);
@@ -43,14 +42,12 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
         #endregion
     }

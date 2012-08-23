@@ -13,7 +13,7 @@
         {
             Checkin(reg);
 
-            if (reg.EventFee_Response != null && reg.EventFee_Response.RegType.IsSSO)
+            if (reg.EventFee_Response != null && reg.EventFee_Response.RegType != null && reg.EventFee_Response.RegType.IsSSO)
             {
                 SSOLogin(reg);
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -106,7 +106,10 @@
 
             if ((reg.EventFee_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
             {
-                KeywordProvider.RegisterDefault.SelectRegType(reg.EventFee_Response.RegType);
+                if (reg.EventFee_Response.RegType != null)
+                {
+                    KeywordProvider.RegisterDefault.SelectRegType(reg.EventFee_Response.RegType);
+                }
 
                 if (reg.EventFee_Response.Code != null)
                 {
@@ -318,7 +321,7 @@
                                 {
                                     AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
                                     ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(resp.ContributionAmount.Value);
+                                        response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
                                 }
                                 break;
                             case FormData.CustomFieldType.Date:
@@ -376,6 +379,7 @@
                     {
                         MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                         PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Quantity);
+                        
                         if (resp.Discount_Code != null)
                         {
                             PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
@@ -390,6 +394,8 @@
                 }
             }
 
+            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.ClickPageContentDivToRefresh();
+
             if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -398,6 +404,11 @@
 
         public void Checkout(Registrant reg)
         {
+            if (reg.WhetherToVerifyFeeOnCheckoutPage)
+            {
+                VerifyFeeSummary(reg);
+            }
+
             if (reg.Payment_Method != null)
             {
                 if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.IsPresent)
@@ -445,6 +456,13 @@
             PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Email.SelectWithText(email);
             PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Password.SelectWithText(password);
             PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Login_Click();
+        }
+
+        public void VerifyFeeSummary(Registrant reg)
+        {
+            string actual_Total = PageObject.PageObjectProvider.Register.RegistationSite.Checkout.FeeSummary_Total.Text;
+            reg.ReCalculateFee();
+            Utilities.VerifyTool.VerifyValue(Utilities.MoneyTool.FormatMoney(reg.Fee_Summary.Total), actual_Total, "Checkout total: {0}");
         }
     }
 }

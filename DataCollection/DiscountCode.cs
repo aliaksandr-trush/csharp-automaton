@@ -21,7 +21,7 @@
         {
             if (this.CodeType == FormData.DiscountCodeType.AccessCode)
             {
-                throw new InvalidOperationException(string.Format("Cannot calculate discounted price for access code: {0}", this.Code));
+                return originalPrice;
             }
             else
             {
