@@ -62,6 +62,15 @@
         {
             switch (agenda.Type)
             {
+                case FormData.CustomFieldType.AlwaysSelected:
+                    AgendaType = new CheckBox(string.Format("//input[@id='{0}'][@disabled='disabled'][@checked='checked']", agenda.Id.ToString()), LocateBy.XPath);
+                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                    this.GetAgendaDate(agenda);
+                    this.GetAgendaLocation(agenda);
+                    this.GetAgendaPrice(agenda);
+                    break;
+
                 case FormData.CustomFieldType.CheckBox:
                     AgendaType = new CheckBox(string.Format(locator + "//input", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
@@ -73,19 +82,24 @@
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
+
                 case FormData.CustomFieldType.RadioButton:
                     AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
+                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
+
                 case FormData.CustomFieldType.Dropdown:
                     AgendaType = new MultiChoiceDropdown(string.Format(locator + "//select", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
+
                 case FormData.CustomFieldType.Number:
                 case FormData.CustomFieldType.OneLineText:
                 case FormData.CustomFieldType.Contribution:
@@ -93,30 +107,28 @@
                     AgendaType = new TextBox(agenda.Id.ToString(), LocateBy.Id);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
                 case FormData.CustomFieldType.Date:
                     AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Datepicker')]", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
                 case FormData.CustomFieldType.Time:
                     AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Timepicker')]", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
                 case FormData.CustomFieldType.FileUpload:
                     AgendaType = new ButtonOrLink(string.Format(locator + "//a[@class='add_button']", agenda.Id.ToString()), LocateBy.XPath);
                     AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
-                case FormData.CustomFieldType.AlwaysSelected:
-                    AgendaType = new CheckBox(string.Format("//input[@id='{0}'][@disabled='disabled'][@checked='checked']", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    this.GetAgendaDate(agenda);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+
                 case FormData.CustomFieldType.SectionHeader:
                     AgendaLabel = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
                     break;
+
                 case FormData.CustomFieldType.ContinueButton:
                     AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
                     break;

@@ -7,15 +7,6 @@
 
     public class DiscountCodeFixture : FixtureBase
     {
-        private enum DiscountCodeType
-        {
-            NoCode,
-            Free,
-            FixedAmount,
-            Half,
-            Enter
-        }
-
         [Test]
         [Category(Priority.Two)]
         [Description("692")]
@@ -380,7 +371,7 @@
         [Description("691")]
         public void SameDiscountCode()
         {
-            Event evt = new Event("DiscountCodeFixture");
+            Event evt = new Event("DiscountCodeFixture_SameDiscountCode");
 
             DiscountCode half = new DiscountCode("Half");
             half.Amount = 50;
@@ -463,7 +454,7 @@
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            // First registration: no codes
+            // First registration: no code
             DataCollection.EventFeeResponse evtFeeResponse = new EventFeeResponse();
             evtFeeResponse.Fee = evt.StartPage.Event_Fee.StandardPrice;
 
@@ -502,6 +493,86 @@
             reg_NoCodes.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg_NoCodes);
+
+            // Second registration: discount code - half
+            evtFeeResponse.Code = half;
+            agendaResponse_Checkbox.Code = half;
+            agendaResponse_AlwaysSelected.Code = half;
+            agendaResponse_CheckboxAndRequireDC.Code = half;
+            agendaResponse_MultiChoiceRadioButton.Code = half;
+            merchandiseResponse_FixedPrice.Discount_Code = half;
+
+            DataCollection.Registrant reg_Code_Half = new Registrant(evt);
+            reg_Code_Half.EventFee_Response = evtFeeResponse;
+            reg_Code_Half.CustomField_Responses.Add(agendaResponse_Checkbox);
+            reg_Code_Half.CustomField_Responses.Add(agendaResponse_AlwaysSelected);
+            reg_Code_Half.CustomField_Responses.Add(agendaResponse_CheckboxAndRequireDC);
+            reg_Code_Half.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
+            reg_Code_Half.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
+            reg_Code_Half.WhetherToVerifyFeeOnCheckoutPage = true;
+            reg_Code_Half.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_Half);
+
+            // Third registration: discount code - free
+            evtFeeResponse.Code = free;
+            agendaResponse_Checkbox.Code = free;
+            agendaResponse_AlwaysSelected.Code = free;
+            agendaResponse_CheckboxAndRequireDC.Code = free;
+            agendaResponse_MultiChoiceRadioButton.Code = free;
+            merchandiseResponse_FixedPrice.Discount_Code = free;
+
+            DataCollection.Registrant reg_Code_Free = new Registrant(evt);
+            reg_Code_Free.EventFee_Response = evtFeeResponse;
+            reg_Code_Free.CustomField_Responses.Add(agendaResponse_Checkbox);
+            reg_Code_Free.CustomField_Responses.Add(agendaResponse_AlwaysSelected);
+            reg_Code_Free.CustomField_Responses.Add(agendaResponse_CheckboxAndRequireDC);
+            reg_Code_Free.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
+            reg_Code_Free.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
+            reg_Code_Free.WhetherToVerifyFeeOnCheckoutPage = true;
+            reg_Code_Free.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_Free);
+
+            // Fourth registration: discount code - fixed amount
+            evtFeeResponse.Code = fixedAmount;
+            agendaResponse_Checkbox.Code = fixedAmount;
+            agendaResponse_AlwaysSelected.Code = fixedAmount;
+            agendaResponse_CheckboxAndRequireDC.Code = fixedAmount;
+            agendaResponse_MultiChoiceRadioButton.Code = fixedAmount;
+            merchandiseResponse_FixedPrice.Discount_Code = fixedAmount;
+
+            DataCollection.Registrant reg_Code_FixedAmount = new Registrant(evt);
+            reg_Code_FixedAmount.EventFee_Response = evtFeeResponse;
+            reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_Checkbox);
+            reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_AlwaysSelected);
+            reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_CheckboxAndRequireDC);
+            reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
+            reg_Code_FixedAmount.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
+            reg_Code_FixedAmount.WhetherToVerifyFeeOnCheckoutPage = true;
+            reg_Code_FixedAmount.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_FixedAmount);
+
+            // Fifth registration: access code - enter
+            evtFeeResponse.Code = enter;
+            agendaResponse_Checkbox.Code = enter;
+            agendaResponse_AlwaysSelected.Code = enter;
+            agendaResponse_CheckboxAndRequireDC.Code = enter;
+            agendaResponse_MultiChoiceRadioButton.Code = enter;
+            merchandiseResponse_FixedPrice.Discount_Code = enter;
+
+            DataCollection.Registrant reg_Code_AccessCode = new Registrant(evt);
+            reg_Code_AccessCode.EventFee_Response = evtFeeResponse;
+            reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_Checkbox);
+            reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_AlwaysSelected);
+            reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_CheckboxAndRequireDC);
+            reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
+            reg_Code_AccessCode.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
+            reg_Code_AccessCode.WhetherToVerifyFeeOnCheckoutPage = true;
+            reg_Code_AccessCode.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_AccessCode);
         }
     }
 }
