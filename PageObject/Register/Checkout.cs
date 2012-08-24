@@ -11,6 +11,8 @@
         public ButtonOrLink AANoThanks = new ButtonOrLink("//div[@class='offerSubmit']//span[text()='No thanks']/..", LocateBy.XPath);
         public CheckBox AggreementToWaiver = new CheckBox("ctl00_cph_chkAITerms", LocateBy.Id);
 
+        public Label FeeSummary_Total = new Label("//table[@class='columnHeader dataTable multiColumn']//td[text()='Total:']/following-sibling::td[@class='currency']", LocateBy.XPath);
+
         public void Finish_Click()
         {
             this.Finish.WaitForDisplay();

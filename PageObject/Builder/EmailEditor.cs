@@ -8,7 +8,6 @@
     {
         public EmailEditor(string name) : base(name) { }
         public EmailEditor(int index) : base(index) { }
-        public EmailEditor(string name, string parentFrame) : base(name, parentFrame) { }
 
         public ButtonOrLink HtmlMode = new ButtonOrLink("ctl00_cphDialog_ucEmailEditor_ucContent_radHtml", LocateBy.Id);
         public TextBox Content = new TextBox("//textarea", LocateBy.XPath);
@@ -41,14 +40,12 @@
         {
             popupFrameHelper.SaveAndClose_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
             SwitchToMain();
-            SelectParentFrame();
         }
         #endregion
     }
