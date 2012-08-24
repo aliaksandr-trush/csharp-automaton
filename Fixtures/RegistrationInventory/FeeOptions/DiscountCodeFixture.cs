@@ -220,19 +220,19 @@
             dc1.CodeType = FormData.DiscountCodeType.DiscountCode;
             regType.DiscountCode.Add(dc1);
             evt.StartPage.RegTypes.Add(regType);
-            AgendaItemCheckBox agenda = new AgendaItemCheckBox("Agenda");
+            AgendaItem_CheckBox agenda = new AgendaItem_CheckBox("Agenda");
             agenda.Price = 80;
             DiscountCode dc2 = new DiscountCode("dc2");
             dc2.Amount = 20;
             dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc2.CodeKind = FormData.ChangeType.Percent;
             dc2.CodeType = FormData.DiscountCodeType.DiscountCode;
-            agenda.DiscountCode.Add(dc2);
+            agenda.DiscountCodes.Add(dc2);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
-            Merchandise merchandise = new Merchandise("Merch");
-            merchandise.MerchandiseFee = 90;
-            merchandise.MerchandiseType = FormData.MerchandiseType.Fixed;
+            MerchandiseItem merchandise = new MerchandiseItem("Merch");
+            merchandise.Price = 90;
+            merchandise.Type = FormData.MerchandiseType.Fixed;
             DiscountCode dc3 = new DiscountCode("dc3");
             dc3.Amount = 30;
             dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
@@ -246,14 +246,14 @@
 
             Registrant reg = new Registrant(evt);
             reg.Payment_Method = paymentMethod;
-            reg.RegType_Response = new RegTypeResponse(regType);
-            reg.RegType_Response.DiscountCode = dc1;
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            reg.EventFee_Response = new EventFeeResponse(regType);
+            reg.EventFee_Response.Code = dc1;
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agenda;
             resp1.Checked = true;
             resp1.Code = dc2;
-            MerchFixedResponse resp2 = new MerchFixedResponse();
-            resp2.Merchandise = merchandise;
+            MerchResponse_FixedPrice resp2 = new MerchResponse_FixedPrice();
+            resp2.Merchandise_Item = merchandise;
             resp2.Quantity = 2;
             resp2.Discount_Code = dc3;
             reg.CustomField_Responses.Add(resp1);
@@ -287,7 +287,7 @@
             regType.DiscountCode.Add(dc1);
             regType.DiscountCode.Add(dc2);
             evt.StartPage.RegTypes.Add(regType);
-            AgendaItemCheckBox agenda = new AgendaItemCheckBox("Agenda");
+            AgendaItem_CheckBox agenda = new AgendaItem_CheckBox("Agenda");
             agenda.Price = 60;
             DiscountCode dc3 = new DiscountCode("dc3");
             dc3.Amount = 100;
@@ -300,13 +300,13 @@
             dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc4.CodeKind = FormData.ChangeType.Percent;
             dc4.CodeType = FormData.DiscountCodeType.DiscountCode;
-            agenda.DiscountCode.Add(dc3);
-            agenda.DiscountCode.Add(dc4);
+            agenda.DiscountCodes.Add(dc3);
+            agenda.DiscountCodes.Add(dc4);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
-            Merchandise merchandise = new Merchandise("Merchandise");
-            merchandise.MerchandiseFee = 80;
-            merchandise.MerchandiseType = FormData.MerchandiseType.Fixed;
+            MerchandiseItem merchandise = new MerchandiseItem("Merchandise");
+            merchandise.Price = 80;
+            merchandise.Type = FormData.MerchandiseType.Fixed;
             DiscountCode dc5 = new DiscountCode("dc5");
             dc5.Amount = 100;
             dc5.CodeDirection = FormData.ChangePriceDirection.Decrease;
@@ -318,30 +318,30 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            RegTypeResponse resp1 = new RegTypeResponse(regType);
-            resp1.DiscountCode = dc1;
-            RegTypeResponse resp2 = new RegTypeResponse(regType);
-            resp2.DiscountCode = dc2;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            EventFeeResponse resp1 = new EventFeeResponse(regType);
+            resp1.Code = dc1;
+            EventFeeResponse resp2 = new EventFeeResponse(regType);
+            resp2.Code = dc2;
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = agenda;
             resp3.Checked = true;
             resp3.Code = dc3;
-            AgendaCheckboxResponse resp4 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
             resp4.AgendaItem = agenda;
             resp4.Checked = true;
             resp4.Code = dc4;
-            MerchFixedResponse resp5 = new MerchFixedResponse();
-            resp5.Merchandise = merchandise;
+            MerchResponse_FixedPrice resp5 = new MerchResponse_FixedPrice();
+            resp5.Merchandise_Item = merchandise;
             resp5.Quantity = 1;
             resp5.Discount_Code = dc5;
 
             Registrant reg1 = new Registrant(evt);
-            reg1.RegType_Response = resp1;
+            reg1.EventFee_Response = resp1;
             reg1.CustomField_Responses.Add(resp3);
             reg1.Merchandise_Responses.Add(resp5);
             System.Threading.Thread.Sleep(10);
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType_Response = resp1;
+            reg2.EventFee_Response = resp1;
             reg2.CustomField_Responses.Add(resp3);
             reg2.Merchandise_Responses.Add(resp5);
 
@@ -351,13 +351,13 @@
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 0);
 
             Registrant reg3 = new Registrant(evt);
-            reg3.RegType_Response = resp1;
+            reg3.EventFee_Response = resp1;
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, dc1.Code)));
 
             Registrant reg4 = new Registrant(evt);
-            reg4.RegType_Response = resp2;
+            reg4.EventFee_Response = resp2;
             reg4.CustomField_Responses.Add(resp3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg4);
@@ -367,7 +367,7 @@
 
             Registrant reg5 = new Registrant(evt);
             reg5.Payment_Method = paymenMethod;
-            reg5.RegType_Response = resp2;
+            reg5.EventFee_Response = resp2;
             reg5.CustomField_Responses.Add(resp4);
             reg5.Merchandise_Responses.Add(resp5);
 
