@@ -284,30 +284,61 @@
 
                         switch (response.AgendaItem.Type)
                         {
-                            case FormData.CustomFieldType.CheckBox:
+                            case FormData.CustomFieldType.AlwaysSelected:
                                 {
-                                    AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
-                                    ((CheckBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Set(resp.Checked.Value);
+                                    AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
+                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+
                                     if (resp.Code != null)
                                     {
-                                        PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).DiscountCodeInput.Type(resp.Code.Code);
+                                        row.DiscountCodeInput.Type(resp.Code.Code);
                                     }
                                 }
                                 break;
+
+                            case FormData.CustomFieldType.CheckBox:
+                                {
+                                    AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
+                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+                                    ((CheckBox)row.AgendaType).Set(resp.Checked.Value);
+                                    
+                                    if (resp.Code != null)
+                                    {
+                                        row.DiscountCodeInput.Type(resp.Code.Code);
+                                    }
+                                }
+                                break;
+
                             case FormData.CustomFieldType.RadioButton:
                                 {
                                     AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                     RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
                                     radio.Click();
+
+                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+
+                                    if (resp.Code != null)
+                                    {
+                                        row.DiscountCodeInput.Type(resp.Code.Code);
+                                    }
                                 }
                                 break;
+
                             case FormData.CustomFieldType.Dropdown:
                                 {
                                     AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
-                                    ((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
+
+                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+
+                                    ((MultiChoiceDropdown)row.AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
+
+                                    if (resp.Code != null)
+                                    {
+                                        row.DiscountCodeInput.Type(resp.Code.Code);
+                                    }
                                 }
                                 break;
+
                             case FormData.CustomFieldType.Number:
                             case FormData.CustomFieldType.OneLineText:
                             case FormData.CustomFieldType.Paragraph:
@@ -317,6 +348,7 @@
                                         response.AgendaItem).AgendaType).Type(resp.CharToInput);
                                 }
                                 break;
+
                             case FormData.CustomFieldType.Contribution:
                                 {
                                     AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
@@ -324,6 +356,7 @@
                                         response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
                                 }
                                 break;
+
                             case FormData.CustomFieldType.Date:
                                 {
                                     AgendaResponse_Date resp = response as AgendaResponse_Date;
@@ -332,6 +365,7 @@
                                         response.AgendaItem).AgendaType).Type(date);
                                 }
                                 break;
+
                             case FormData.CustomFieldType.Time:
                                 {
                                     AgendaResponse_Time resp = response as AgendaResponse_Time;
@@ -340,6 +374,7 @@
                                         response.AgendaItem).AgendaType).Type(time);
                                 }
                                 break;
+
                             case FormData.CustomFieldType.FileUpload:
                                 {
                                     AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
@@ -357,7 +392,7 @@
                                 break;
 
                             default:
-                                break;
+                                throw new InvalidOperationException(string.Format("No action defined for specified type of agenda item: {0}", response.AgendaItem.Type.ToString()));
                         }
                     }
                 }

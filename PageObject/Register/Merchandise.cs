@@ -21,6 +21,7 @@
         {
             this.PageContent_Div.WaitForPresent();
             this.PageContent_Div.Click();
+            Utilities.Utility.ThreadSleep(3);
             WaitForAJAX();
         }
     }
