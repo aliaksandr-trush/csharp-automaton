@@ -80,5 +80,10 @@
                 UIUtilityProvider.UIHelper.WaitForPageToLoad();
             }
         }
+
+        public static string GetSessionId()
+        {
+            return UIUtilityProvider.UIHelper.GetQueryStringValue("SessionId");
+        }
     }
 }
