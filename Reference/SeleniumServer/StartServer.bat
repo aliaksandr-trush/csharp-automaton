@@ -1,1 +1,1 @@
-D:\Programs\Java\jdk\bin\java.exe -jar selenium-server-standalone.jar
+java -jar selenium-server-standalone.jar

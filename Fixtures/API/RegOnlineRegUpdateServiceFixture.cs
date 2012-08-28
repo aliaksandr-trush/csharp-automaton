@@ -27,10 +27,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RegUpdateService].Url);
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegUpdateService].Url);
 
             this.service = new RegistrationUpdateServiceSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RegUpdateService].EndpointConfigName,
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegUpdateService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

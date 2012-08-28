@@ -8,7 +8,7 @@
     {
         private readonly string XmlConfigFilePath = "RegressionTestConfig.xml";
 
-        public enum Environment
+        public enum EnvironmentEnum
         {
             Alpha,
             Beta,
@@ -23,7 +23,7 @@
             SSO
         }
 
-        public enum WebService
+        public enum WebServiceEnum
         {
             LoginService,
             RegistrationService,
@@ -44,37 +44,37 @@
             XmlUpdaterService
         }
 
-        public enum Browser
+        public enum BrowserEnum
         {
             Firefox,
             Chrome
         }
 
-        public RegOnlineRegressionTestConfig AllConfiguration
+        public TestConfig AllConfiguration
         {
             get;
             private set;
         }
 
-        public RegOnlineRegressionTestConfigEnvironmentsEnvironment EnvironmentConfiguration
+        public Environment EnvironmentConfiguration
         {
             get;
             private set;
         }
 
-        public RegOnlineRegressionTestConfigEnvironmentsEnvironmentAccount AccountConfiguration
+        public Account AccountConfiguration
         {
             get;
             private set;
         }
 
-        public Dictionary<WebService, RegOnlineRegressionTestConfigWebService> WebServiceConfiguration
+        public Dictionary<WebServiceEnum, WebService> WebServiceConfiguration
         {
             get;
             private set;
         }
 
-        public RegOnlineRegressionTestConfigBrowsersBrowser CurrentBrowser
+        public Browser CurrentBrowser
         {
             get;
             private set;
@@ -140,9 +140,9 @@
 
         private void DeserializeFromXml()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(RegOnlineRegressionTestConfig));
+            XmlSerializer serializer = new XmlSerializer(typeof(TestConfig));
             XmlTextReader reader = new XmlTextReader(XmlConfigFilePath);
-            this.AllConfiguration = (RegOnlineRegressionTestConfig)serializer.Deserialize(reader);
+            this.AllConfiguration = (TestConfig)serializer.Deserialize(reader);
         }
 
         private void LoadEnvironmentAndAccountConfiguration(string environment, string accountType)
@@ -153,7 +153,7 @@
 
         private void LoadEnvironmentConfiguration(string environment)
         {
-            foreach (RegOnlineRegressionTestConfigEnvironmentsEnvironment en in this.AllConfiguration.Environments.Environment)
+            foreach (Environment en in this.AllConfiguration.Environments.Environment)
             {
                 if (en.Name.Equals(environment))
                 {
@@ -164,7 +164,7 @@
 
         private void LoadAccountConfiguration(string accountType)
         {
-            foreach (RegOnlineRegressionTestConfigEnvironmentsEnvironmentAccount account in this.EnvironmentConfiguration.Account)
+            foreach (Account account in this.EnvironmentConfiguration.Account)
             {
                 if (account.Name.Equals(accountType))
                 {
@@ -177,35 +177,35 @@
         {
             if (this.WebServiceConfiguration == null)
             {
-                this.WebServiceConfiguration = new Dictionary<WebService, RegOnlineRegressionTestConfigWebService>();
+                this.WebServiceConfiguration = new Dictionary<WebServiceEnum, WebService>();
             }
             else
             {
                 this.WebServiceConfiguration.Clear();
             }
 
-            this.AddWebServiceToDictionary(WebService.LoginService);
-            this.AddWebServiceToDictionary(WebService.RegistrationService);
-            this.AddWebServiceToDictionary(WebService.EventService);
-            this.AddWebServiceToDictionary(WebService.Default);
-            this.AddWebServiceToDictionary(WebService.CFResponseService);
-            this.AddWebServiceToDictionary(WebService.CheckInRegService);
-            this.AddWebServiceToDictionary(WebService.CheckinService);
-            this.AddWebServiceToDictionary(WebService.GetEventFieldsService);
-            this.AddWebServiceToDictionary(WebService.GetEventRegistrationsService);
-            this.AddWebServiceToDictionary(WebService.GetEventsService);
-            this.AddWebServiceToDictionary(WebService.MemberAuthService);
-            this.AddWebServiceToDictionary(WebService.RegTrackerService);
-            this.AddWebServiceToDictionary(WebService.RegUpdateService);
-            this.AddWebServiceToDictionary(WebService.ReportsService);
-            this.AddWebServiceToDictionary(WebService.RetrieveAllRegsService);
-            this.AddWebServiceToDictionary(WebService.RetrieveSingleRegService);
-            this.AddWebServiceToDictionary(WebService.XmlUpdaterService);
+            this.AddWebServiceToDictionary(WebServiceEnum.LoginService);
+            this.AddWebServiceToDictionary(WebServiceEnum.RegistrationService);
+            this.AddWebServiceToDictionary(WebServiceEnum.EventService);
+            this.AddWebServiceToDictionary(WebServiceEnum.Default);
+            this.AddWebServiceToDictionary(WebServiceEnum.CFResponseService);
+            this.AddWebServiceToDictionary(WebServiceEnum.CheckInRegService);
+            this.AddWebServiceToDictionary(WebServiceEnum.CheckinService);
+            this.AddWebServiceToDictionary(WebServiceEnum.GetEventFieldsService);
+            this.AddWebServiceToDictionary(WebServiceEnum.GetEventRegistrationsService);
+            this.AddWebServiceToDictionary(WebServiceEnum.GetEventsService);
+            this.AddWebServiceToDictionary(WebServiceEnum.MemberAuthService);
+            this.AddWebServiceToDictionary(WebServiceEnum.RegTrackerService);
+            this.AddWebServiceToDictionary(WebServiceEnum.RegUpdateService);
+            this.AddWebServiceToDictionary(WebServiceEnum.ReportsService);
+            this.AddWebServiceToDictionary(WebServiceEnum.RetrieveAllRegsService);
+            this.AddWebServiceToDictionary(WebServiceEnum.RetrieveSingleRegService);
+            this.AddWebServiceToDictionary(WebServiceEnum.XmlUpdaterService);
         }
 
-        private void AddWebServiceToDictionary(WebService webService)
+        private void AddWebServiceToDictionary(WebServiceEnum webService)
         {
-            foreach (RegOnlineRegressionTestConfigWebService service in this.AllConfiguration.WebServices)
+            foreach (WebService service in this.AllConfiguration.WebServices.WebService)
             {
                 if (service.Name.Equals(webService.ToString()))
                 {
@@ -221,7 +221,7 @@
 
         private void LoadBrowser(string browserString)
         {
-            foreach (RegOnlineRegressionTestConfigBrowsersBrowser br in this.AllConfiguration.Browsers.Browser)
+            foreach (Browser br in this.AllConfiguration.Browsers.Browser)
             {
                 if (br.Name.Equals(browserString))
                 {

@@ -61,14 +61,14 @@
             {
                 capa.SetCapability(
                     "firefox_binary",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
             }
 
             if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
             {
                 capa.SetCapability(
                     "firefox_profile",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value);
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
             }
 
             return new RemoteWebDriver(capa);
@@ -84,7 +84,7 @@
             if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
             {
                 this.options.BinaryLocation =
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value;
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path;
             }
         }
 
@@ -94,7 +94,7 @@
             {
                 this.options.AddArgument(string.Format(
                     "user-data-dir={0}",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value));
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path));
             }
         }
 

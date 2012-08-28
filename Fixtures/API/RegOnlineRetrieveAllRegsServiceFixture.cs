@@ -26,10 +26,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RetrieveAllRegsService].Url);
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveAllRegsService].Url);
 
             this.service = new RetrieveAllRegistrationsManagerSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RetrieveAllRegsService].EndpointConfigName,
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveAllRegsService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

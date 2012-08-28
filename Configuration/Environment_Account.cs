@@ -1,18 +1,21 @@
-﻿public partial class RegOnlineRegressionTestConfigEnvironmentsEnvironmentAccount
+﻿namespace RegOnline.RegressionTest.Configuration
 {
-    public string BaseUrl
+    public partial class Account
     {
-        get
+        public string BaseUrl
         {
-            return string.Format("http://{0}/", this.DomainName);
+            get
+            {
+                return string.Format("http://{0}/", this.DomainName);
+            }
         }
-    }
 
-    public string BaseUrlWithHttps
-    {
-        get
+        public string BaseUrlWithHttps
         {
-            return string.Format("https://{0}/", this.DomainName);
+            get
+            {
+                return string.Format("https://{0}/", this.DomainName);
+            }
         }
     }
 }

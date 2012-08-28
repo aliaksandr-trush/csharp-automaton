@@ -77,10 +77,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUriWithHttps,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.Default].Url);
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.Default].Url);
 
             this.service = new RegOnlineAPISoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.Default].EndpointConfigName,
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.Default].EndpointConfigName,
                 RemoteAddressUri.ToString());
 
             header = new TokenHeader();

@@ -27,10 +27,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.GetEventRegistrationsService].Url);
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventRegistrationsService].Url);
 
             this.service = new getEventRegistrationsSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.GetEventRegistrationsService].EndpointConfigName,
+                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventRegistrationsService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

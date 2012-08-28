@@ -157,6 +157,7 @@
                 #endregion
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             }
 
             #region RegTypeAdvanced
