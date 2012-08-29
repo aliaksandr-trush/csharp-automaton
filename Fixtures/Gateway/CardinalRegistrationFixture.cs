@@ -1,10 +1,13 @@
 ﻿namespace RegOnline.RegressionTest.Fixtures.Gateway
 {
     using NUnit.Framework;
+    using System;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.Managers.Manager;
     using RegOnline.RegressionTest.Managers.Builder;
+    using System.Collections.Generic;
+    
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -92,6 +95,8 @@
             DataHelperTool.ChangeAllRegsToTestAndDelete(this.eventId);
         }
 
+        
+        
         private void SetAgendaPage(string[] agendaname, double[] price)
         {
             int i = 0;

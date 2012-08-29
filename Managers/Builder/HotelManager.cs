@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using System.Collections.Generic;
 
     public class HotelManager : ManagerBase
     {
@@ -84,11 +85,51 @@
 
         public void AddRoomBlock(string date)
         {
-            string calendarLocator = "//span/input[contains(@id,'RoomBlockDate')][contains(@onfocus,'DisplayCalendar')]";
             string newRoomBlockLocator = "ctl00_cphDialog_mdNewRoomBlocks";
 
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick(newRoomBlockLocator, LocateBy.Id);
+            string calendarLocator = "//span/input[contains(@id,'RoomBlockDate')][contains(@onfocus,'DisplayCalendar')]";
             UIUtilityProvider.UIHelper.Type(calendarLocator, date, LocateBy.XPath);
+        }
+
+        public void AddRoomBlockNoDate()
+        {
+            string newRoomBlockLocator = "ctl00_cphDialog_mdNewRoomBlocks";
+
+            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(newRoomBlockLocator, LocateBy.Id);
+        }
+
+        public void SetCapacityAndRate(string roomType, int capacity, double? rate)
+        {
+            string capacityLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'BlockSize')]", roomType);
+            UIUtilityProvider.UIHelper.Type(capacityLocator, capacity, LocateBy.XPath);
+
+            if (rate != null)
+            {
+                string rateLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'RoomRate')]", roomType);
+                UIUtilityProvider.UIHelper.Type(rateLocator, rate, LocateBy.XPath);
+            }
+        }
+
+
+        public void SetCapacityAndRates(string roomType, int capacity, double? rate, int number)
+        {
+            string capacityLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'BlockSize')]", roomType);
+
+            int id = System.Convert.ToInt32((UIUtilityProvider.UIHelper.GetId(capacityLocator, LocateBy.XPath)).Substring(29, 4));
+            string order = UIUtilityProvider.UIHelper.GetId(capacityLocator, LocateBy.XPath).Substring(34);
+
+
+            for (int i = 0; i <= number; i++)
+            {
+                UIUtilityProvider.UIHelper.Type(string.Format("ctl00_cphDialog_rntBlockSize_{0}_{1}", id + i, order), capacity, LocateBy.Id);
+
+                if (rate != null)
+                {
+                    UIUtilityProvider.UIHelper.Type(string.Format("ctl00_cphDialog_rntRoomRate_{0}_{1}", id + i, order), rate, LocateBy.Id);
+
+                }
+            }
         }
     }
 }

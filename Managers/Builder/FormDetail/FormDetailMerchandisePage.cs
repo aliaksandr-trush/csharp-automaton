@@ -34,10 +34,27 @@
         [Step]
         public void AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType type, string name, double? fee, double? minFee, double? maxFee)
         {
+            
+            ClickAddMerchandiseItem ();
+            this.MerchMgr.SetName(name);
+            this.MerchMgr.SetType(type);
+            this.MerchMgr.SetMerchItemPrice(type, fee, minFee, maxFee);
+            this.MerchMgr.SaveAndClose();
+        }
+
+        [Step]
+        public void AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType type, string name, double? fee, double? minFee, double? maxFee, string[] itemname, int? limit)
+        {
             ClickAddMerchandiseItem();
             this.MerchMgr.SetName(name);
             this.MerchMgr.SetType(type);
             this.MerchMgr.SetMerchItemPrice(type, fee, minFee, maxFee);
+
+            this.MerchMgr.ExpandAdvanced();
+            for (int i = 0; i < itemname.Length; i++)
+            {
+                this.MerchMgr.AddMerchandiseMultipleChoiceItem(itemname[i], limit);
+            }
             this.MerchMgr.SaveAndClose();
         }
 

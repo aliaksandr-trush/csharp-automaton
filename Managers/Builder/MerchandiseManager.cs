@@ -217,7 +217,10 @@
         {
             this.ClickAddMerchMultiChoiceItemLink();
             this.MultiChoiceItemMgr.SetName(name);
-            this.MultiChoiceItemMgr.SetLimit(limit);
+            if (limit != null)
+            {
+                this.MultiChoiceItemMgr.SetLimit(limit);
+            }
             this.MultiChoiceItemMgr.SaveAndClose();
         }
 

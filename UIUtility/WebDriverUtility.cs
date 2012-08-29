@@ -567,6 +567,11 @@
             return this.GetAttribute(locator, "value", locateBy);
         }
 
+        public string GetId(string locator, LocateBy locateBy)
+        {
+            return this.GetAttribute(locator, "id", locateBy);
+        }
+
         public string GetText(string locator, LocateBy locateBy)
         {
             By by = this.GetLocatorFinder(locator, locateBy);

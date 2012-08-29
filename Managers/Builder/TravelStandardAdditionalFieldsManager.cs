@@ -40,6 +40,12 @@
             Departure
         }
 
+        public enum TravelInfo
+        {
+            PurposeArrive,
+            PurposeBooking
+        }
+
         public void SetAirline(bool arrivalVisible, bool arrivalRequired, bool departureVisible, bool departureRequired)
         {
             UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAirlineDepartV", arrivalVisible, LocateBy.Id);
@@ -98,6 +104,38 @@
         {
             UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdditionalInfoTravelV", visible, LocateBy.Id);
             UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdditionalInfoTravelR", required, LocateBy.Id);
+        }
+
+        public void SetFrequentFlyerNumber(bool visible, bool required)
+        {
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkFrequentFlyerNumberV", visible, LocateBy.Id);
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkFrequentFlyerNumberR", required, LocateBy.Id); 
+        }
+
+        public void SetSeatingPreference(bool visible, bool required)
+        {
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSeatingPreferenceV", visible, LocateBy.Id);
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSeatingPreferenceR", required, LocateBy.Id);
+        }
+
+        public void SetPassportNumber(bool visible, bool required)
+        {
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkPassportNumberV", visible, LocateBy.Id);
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkPassportNumberR", required, LocateBy.Id);
+        }
+
+        public void ChoicePurposeForCollectingTravelInfo(TravelInfo travelinfo)
+        {
+            switch (travelinfo)
+            {
+                case TravelInfo.PurposeArrive:
+                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_radPurposeArrive", LocateBy.Id);
+                    break;
+
+                case TravelInfo.PurposeBooking:
+                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_radPurposeBooking", LocateBy.Id);
+                    break;
+            }
         }
     }
 }

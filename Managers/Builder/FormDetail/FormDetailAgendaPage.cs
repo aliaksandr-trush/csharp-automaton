@@ -35,6 +35,7 @@
 
         public void ClickAddAgendaItem()
         {
+            Utility.ThreadSleep(1);
             UIUtilityProvider.UIHelper.SwitchToMainContent();
 
             // Click "create/add agenda item"

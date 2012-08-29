@@ -6,6 +6,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using System.Collections.Generic;
 
     public class LodgingStandardFieldsManager
     {

@@ -16,6 +16,11 @@
             UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkEventsEnableScheduleDownload", true, LocateBy.Id);
         }
 
+        public void SetEnableHotelSearchFeature(bool check)
+        {
+            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkEventsHotelSearch", check, LocateBy.Id);
+        }
+
         [Verify]
         public void VerifyEventConfirmationPage()
         {
@@ -48,5 +53,6 @@
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
             UIUtilityProvider.UIHelper.SwitchToMainContent();
         }
+
     }
 }

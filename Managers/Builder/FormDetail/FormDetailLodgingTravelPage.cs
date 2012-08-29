@@ -7,6 +7,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using System.Collections.Generic;
 
     public partial class FormDetailManager : ManagerBase
     {
@@ -157,6 +158,8 @@
             this._travelStandardAdditionalFieldsMgr.SetAdditionalInfo(true, false);
         }
 
+        
+
         [Verify]
         public void VerifyEventLodgingTravelPage()
         {
@@ -293,6 +296,23 @@
         }
         #endregion
 
+        public List<string> GetRoomTypes()
+        {
+            List<string> RoomTypes = new List<string>();
+
+            string locator = "//tr[@class='borderBottom']";
+
+            int i = UIUtilityProvider.UIHelper.GetElementsCount(locator, LocateBy.XPath);
+
+            string roomTypeLocator = locator + "[{0}]/td[@class='borderBottom']";
+
+            for (int a = 1; a <= i; a++)
+            {
+                RoomTypes.Add(UIUtilityProvider.UIHelper.GetText(string.Format(roomTypeLocator, a), LocateBy.XPath));
+            }
+
+            return RoomTypes;
+        }
 
         #region Travel
         public void ClickAddTravelCustomField()

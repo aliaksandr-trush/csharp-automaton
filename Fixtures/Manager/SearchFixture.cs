@@ -7,6 +7,8 @@
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.Managers.Manager;
     using RegOnline.RegressionTest.Managers.Register;
+    using RegOnline.RegressionTest.UIUtility;
+    using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
