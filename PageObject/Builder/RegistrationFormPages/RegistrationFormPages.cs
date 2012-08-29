@@ -68,6 +68,7 @@
             }
 
             ButtonOrLink Page = new ButtonOrLink(string.Format("//a[@accesskey='{0}']", accesskey), LocateBy.XPath);
+            Page.WaitForDisplay();
             Page.Click();
             WaitForLoad();
             UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);

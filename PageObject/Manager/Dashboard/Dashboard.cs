@@ -70,7 +70,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
@@ -80,7 +80,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 
@@ -108,7 +108,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
@@ -118,7 +118,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 }

@@ -52,10 +52,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\AgendaEdit.cs" />
+    <Compile Include="Backend\AttendeeInfo.cs" />
     <Compile Include="Builder\CustomFieldDefine.cs" />
+    <Compile Include="Builder\EmailEditor.cs" />
+    <Compile Include="Builder\EmailViewer.cs" />
     <Compile Include="Builder\RegistrationFormPages\Agenda.cs" />
     <Compile Include="Builder\RegistrationFormPages\BulkLoadCodesDefine.cs" />
     <Compile Include="Builder\RegistrationFormPages\Checkout.cs" />
+    <Compile Include="Builder\RegistrationFormPages\RegTypeFeeDefine.cs" />
     <Compile Include="Builder\RegistrationFormPages\EventAdvancedSettings.cs" />
     <Compile Include="Builder\EventDetails.cs">
       <SubType>Code</SubType>
@@ -97,6 +102,7 @@
     <Compile Include="Register\EventCalendar.cs" />
     <Compile Include="Register\EventWebsite.cs" />
     <Compile Include="Register\Login.cs" />
+    <Compile Include="Register\Merchandise.cs" />
     <Compile Include="Register\OnsiteKiosk.cs" />
     <Compile Include="Register\PageObjectProvider.cs" />
     <Compile Include="Register\PersonalInfo.cs" />
@@ -114,6 +120,10 @@
     <ProjectReference Include="..\DataCollection\DataCollection.csproj">
       <Project>{1177E70D-E106-4B37-97F6-7295F8FF41AC}</Project>
       <Name>DataCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\DataAccess.csproj">
+      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\UIUtility\UIUtility.csproj">
       <Project>{80BBF187-B2B4-4CAC-9C5E-19165E2C2F41}</Project>

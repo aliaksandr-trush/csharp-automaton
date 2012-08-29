@@ -64,17 +64,17 @@
 
         private void StartWebDriver()
         {
-            XmlConfiguration.Browser browser;
-            Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            XmlConfiguration.BrowserEnum browser;
+            Enum.TryParse<XmlConfiguration.BrowserEnum>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
             IGetWebDriver br;
 
             switch (browser)
             {
-                case XmlConfiguration.Browser.Firefox:
+                case XmlConfiguration.BrowserEnum.Firefox:
                     br = new Browser_Firefox();
                     break;
 
-                case XmlConfiguration.Browser.Chrome:
+                case XmlConfiguration.BrowserEnum.Chrome:
                     br = new Browser_Chrome();
                     break;
 

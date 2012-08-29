@@ -6,15 +6,23 @@
 
     public class AddAgendaItem
     {
-        public void AddAgendaItems(AgendaItem agenda)
+        public void AddAgendaItems(AgendaItem agenda, Event evt)
         {
             if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateAgendaItem.IsPresent)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateAgendaItem_Click();
             }
-            else
+            else if(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem.IsPresent)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
+            }
+            else if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateActivities.IsPresent)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateActivities_Click();
+            }
+            else
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddActivities_Click();
             }
 
             #region Common Settings
@@ -22,6 +30,7 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReceipt.Type(agenda.NameOnForm);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.Type(agenda.NameOnForm);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.Type(agenda.NameOnForm);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(agenda.Type);
 
@@ -113,6 +122,7 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgeLessThanDate_Type(agenda.AgeLessThanDate.Value);
             }
 
+            // In case NameOnReceipt or NameOnReports is different from NameOnForm
             if ((agenda.NameOnReceipt != null) || (agenda.NameOnReports != null))
             {
                 if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.IsDisplay)
@@ -133,10 +143,10 @@
             #endregion
 
             #region Common AgendaItem
-            if ((agenda is AgendaItemCheckBox) || (agenda is AgendaItemRadioButton) || (agenda is AgendaItemDropDown) ||
-                (agenda is AgendaItemTime) || (agenda is AgendaItemDate) || (agenda is AgendaItemUpload) || (agenda is AgendaItemAlways))
+            if ((agenda is AgendaItem_CheckBox) || (agenda is AgendaItem_MultipleChoice_RadioButton) || (agenda is AgendaItem_MultipleChoice_DropDown) ||
+                (agenda is AgendaItem_Time) || (agenda is AgendaItem_Date) || (agenda is AgendaItem_FileUpload) || (agenda is AgendaItem_AlwaysSelected))
             {
-                AgendaItemCommon ag = agenda as AgendaItemCommon;
+                AgendaItem_Common ag = agenda as AgendaItem_Common;
 
                 if (ag.NameOnBadge != null)
                 {
@@ -174,8 +184,8 @@
                 }
 
                 if ((ag.EarlyPrice != null) || (ag.LatePrice != null) ||
-                    (ag.DiscountCode.Count != 0) || (ag.BulkCodes != null) ||
-                    (ag.TaxRateOne != null) || (ag.TaxRateTwo != null))
+                    (ag.DiscountCodes.Count != 0) || (ag.BulkCodes != null) ||
+                    (evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.PriceOptionsLink_Click();
 
@@ -189,9 +199,9 @@
                         KeywordProvider.AddEarlyLatePrice.AddLatePrice(ag.LatePrice, FormData.Location.Agenda);
                     }
 
-                    if (ag.DiscountCode.Count != 0)
+                    if (ag.DiscountCodes.Count != 0)
                     {
-                        foreach (DiscountCode dc in ag.DiscountCode)
+                        foreach (DiscountCode dc in ag.DiscountCodes)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
                             PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);
@@ -212,19 +222,19 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.RequireCode.Set(ag.RequireDC.Value);
                     }
 
-                    if ((ag.TaxRateOne != null) || (ag.TaxRateTwo != null))
+                    if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                     {
-                        KeywordProvider.AddTaxRate.AddTaxRates(ag.TaxRateOne, ag.TaxRateTwo, FormData.Location.Agenda);
+                        KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Agenda);
                     }
 
-                    if ((ag.TaxRateOne != null) && (ag.TaxRateOne.Apply.HasValue))
+                    if ((evt.TaxRateOne != null) && (ag.ApplyTaxOne.HasValue))
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxOne.Set(ag.TaxRateOne.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxOne.Set(ag.ApplyTaxOne.Value);
                     }
 
-                    if ((ag.TaxRateTwo != null) && (ag.TaxRateTwo.Apply.HasValue))
+                    if ((evt.TaxRateTwo != null) && (ag.ApplyTaxTwo.HasValue))
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxTwo.Set(ag.TaxRateTwo.Apply.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ApplyTaxTwo.Set(ag.ApplyTaxTwo.Value);
                     }
                 }
 
@@ -316,9 +326,9 @@
             #endregion
 
             #region MultipleChoice AgendaItem
-            if ((agenda is AgendaItemRadioButton) || (agenda is AgendaItemDropDown))
+            if ((agenda is AgendaItem_MultipleChoice_RadioButton) || (agenda is AgendaItem_MultipleChoice_DropDown))
             {
-                AgendaItemMultipleChoice ag = agenda as AgendaItemMultipleChoice;
+                AgendaItem_MultipleChoice ag = agenda as AgendaItem_MultipleChoice;
 
                 if (ag.ChoiceItems.Count != 0)
                 {
@@ -398,9 +408,9 @@
             #endregion
 
             #region CharInput AgendaItem
-            if ((agenda is AgendaItemNumber) || (agenda is AgendaItemOneLineText) || (agenda is AgendaItemParagraph))
+            if ((agenda is AgendaItem_Number) || (agenda is AgendaItem_OneLineText) || (agenda is AgendaItem_Paragraph))
             {
-                CharInputAgendaItem ag = agenda as CharInputAgendaItem;
+                AgendaItem_TextInput ag = agenda as AgendaItem_TextInput;
 
                 if (ag.NameOnBadge != null)
                 {
@@ -414,7 +424,7 @@
 
                 if (ag.CharLimit.HasValue)
                 {
-                    if (agenda is AgendaItemParagraph)
+                    if (agenda is AgendaItem_Paragraph)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ParagraphLimit.Type(ag.CharLimit.Value);
                     }
@@ -451,9 +461,9 @@
             #endregion
 
             #region Other Related Settings
-            if (agenda is AgendaItemHeader)
+            if (agenda is AgendaItem_Header)
             {
-                AgendaItemHeader ag = agenda as AgendaItemHeader;
+                AgendaItem_Header ag = agenda as AgendaItem_Header;
 
                 if (ag.DetailsPopup != null)
                 {
@@ -470,9 +480,9 @@
                 }
             }
 
-            if (agenda is AgendaItemUpload)
+            if (agenda is AgendaItem_FileUpload)
             {
-                AgendaItemUpload ag = agenda as AgendaItemUpload;
+                AgendaItem_FileUpload ag = agenda as AgendaItem_FileUpload;
 
                 if (ag.GroupName != null)
                 {
@@ -480,24 +490,9 @@
                 }
             }
 
-            if (agenda is AgendaItemDate)
+            if (agenda is AgendaItem_Date)
             {
-                AgendaItemDate ag = agenda as AgendaItemDate;
-
-                if (ag.GroupName != null)
-                {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.GroupName.Type(ag.GroupName);
-                }
-
-                if (ag.ForceGroupToMatch.HasValue)
-                {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ForceGroupToMatch.Set(ag.ForceGroupToMatch.Value);
-                }
-            }
-
-            if (agenda is AgendaItemTime)
-            {
-                AgendaItemTime ag = agenda as AgendaItemTime;
+                AgendaItem_Date ag = agenda as AgendaItem_Date;
 
                 if (ag.GroupName != null)
                 {
@@ -510,9 +505,9 @@
                 }
             }
 
-            if (agenda is AgendaItemCheckBox)
+            if (agenda is AgendaItem_Time)
             {
-                AgendaItemCheckBox ag = agenda as AgendaItemCheckBox;
+                AgendaItem_Time ag = agenda as AgendaItem_Time;
 
                 if (ag.GroupName != null)
                 {
@@ -525,9 +520,24 @@
                 }
             }
 
-            if (agenda is AgendaItemContribution)
+            if (agenda is AgendaItem_CheckBox)
             {
-                AgendaItemContribution ag = agenda as AgendaItemContribution;
+                AgendaItem_CheckBox ag = agenda as AgendaItem_CheckBox;
+
+                if (ag.GroupName != null)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.GroupName.Type(ag.GroupName);
+                }
+
+                if (ag.ForceGroupToMatch.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ForceGroupToMatch.Set(ag.ForceGroupToMatch.Value);
+                }
+            }
+
+            if (agenda is AgendaItem_Contribution)
+            {
+                AgendaItem_Contribution ag = agenda as AgendaItem_Contribution;
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.MinAmount.Type(ag.MinAmount);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.MaxAmount.Type(ag.MaxAmount);
             }

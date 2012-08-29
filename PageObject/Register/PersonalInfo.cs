@@ -15,9 +15,13 @@
         public TextBox Company = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl12_sf_txtResponse", LocateBy.Id);
         public TextBox AddressOne = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl14_sf_txtResponse", LocateBy.Id);
         public TextBox City = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id);
+        public MultiChoiceDropdown Country = new MultiChoiceDropdown("ctl00_cph_personalInfoStandardFields_rptFields_ctl13_sf_ddlResponse", LocateBy.Id);
         public MultiChoiceDropdown State = new MultiChoiceDropdown("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id);
+        public TextBox NonUSState = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl18_sf_txtResponse", LocateBy.Id);
         public TextBox Zip = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id);
         public TextBox WorkPhone = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id);
+        public TextBox DateOfBirth = new TextBox("ctl00_cph_personalInfoStandardFields_rptFields_ctl25_sf_dpResponse", LocateBy.Id);
+        public MultiChoiceDropdown Gender = new MultiChoiceDropdown("ctl00_cph_personalInfoStandardFields_rptFields_ctl26_sf_ddlResponse", LocateBy.Id);
         public TextBox Password = new TextBox("ctl00_cph_ctlPassword_txtPassword", LocateBy.Id);
         public TextBox PasswordReEnter = new TextBox("ctl00_cph_ctlPassword_txtVerifyPassword", LocateBy.Id);
         public ButtonOrLink ChangeRegType = new ButtonOrLink("ctl00_cph_lnkChangeRegType", LocateBy.Id);
@@ -58,7 +62,7 @@
             Utility.ThreadSleep(1);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
@@ -67,7 +71,7 @@
             this.Cancel.Click();
             Utility.ThreadSleep(1);
             WaitForAJAX();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 

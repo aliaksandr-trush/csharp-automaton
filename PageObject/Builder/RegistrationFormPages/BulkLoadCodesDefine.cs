@@ -6,7 +6,6 @@
     public class BulkLoadCodesDefine : Frame
     {
         public BulkLoadCodesDefine(string name) : base(name) {}
-        public BulkLoadCodesDefine(string name, string parentFrame) : base(name, parentFrame) {}
 
         public TextBox CodesDefine = new TextBox("ctl00_cphDialog_txtBulkCodes", LocateBy.Id);
 
@@ -15,21 +14,19 @@
         public void SaveAndStay_Click()
         {
             popupFrameHelper.SaveAndStay_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
     }
 }

@@ -14,6 +14,7 @@
         public RadioButton ViewByMonth = new RadioButton("viewList_2", UIUtility.LocateBy.Id);
         public RadioButton ViewByDay = new RadioButton("viewList_3", UIUtility.LocateBy.Id);
         public RadioButton ViewByCategory = new RadioButton("viewList_4", UIUtility.LocateBy.Id);
+        public ButtonOrLink ShoppingCart_RegisterButtonOne = new ButtonOrLink("btnRegister", UIUtility.LocateBy.Id);
 
         private ButtonOrLink Register;
 
@@ -64,6 +65,33 @@
 
             this.Register.WaitForDisplay();
             this.Register.Click();
+            WaitForLoad();
+        }
+
+        public void AddToCart(DataCollection.Registrant reg)
+        {
+            foreach(DataCollection.CustomFieldResponse resp in reg.CustomField_Responses)
+            {
+                if (resp is DataCollection.AgendaResponse)
+                {
+                    DataCollection.AgendaResponse re = resp as DataCollection.AgendaResponse;
+
+                    ButtonOrLink addToCart = new ButtonOrLink(
+                        string.Format("//a[@onclick='DisplayInfo({0},{1});return false;']/parent::td/following-sibling::td/a", reg.Event.Id, re.AgendaItem.Id), 
+                        UIUtility.LocateBy.XPath);
+
+                    addToCart.WaitForDisplay();
+                    addToCart.Click();
+                    WaitForAJAX();
+                    Utilities.Utility.ThreadSleep(1);
+                }
+            }
+        }
+
+        public void ShoppingCart_RegisterButtonOne_Click()
+        {
+            this.ShoppingCart_RegisterButtonOne.WaitForDisplay();
+            this.ShoppingCart_RegisterButtonOne.Click();
             WaitForLoad();
         }
     }

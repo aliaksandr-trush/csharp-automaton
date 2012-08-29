@@ -217,7 +217,7 @@
             ReportMgr.ClickCheckInButton();
 
             // click OK on the check in confirmation
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            ReportMgr.ClickOKOnCheckInConfirmationPopup();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
 
             ReportMgr.OpenReportUrl(40, this.eventID);

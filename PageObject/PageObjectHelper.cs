@@ -51,9 +51,39 @@
             Utility.ThreadSleep(1);
         }
 
+        public static bool IsTextPresent(string text)
+        {
+            Label label = new Label(string.Format("//*[contains(text(),'{0}')]", text), LocateBy.XPath);
+            return label.IsPresent;
+        }
+
         public static void SelectTopWindow()
         {
             UIUtilityProvider.UIHelper.SelectTopWindow();
+        }
+
+        public static void ClickConfirmation(DataCollection.FormData.ConfirmationOptions option)
+        {
+            if (option == DataCollection.FormData.ConfirmationOptions.OK)
+            {
+                UIUtilityProvider.UIHelper.GetConfirmation();
+                Utility.ThreadSleep(3);
+                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            }
+
+            if (option == DataCollection.FormData.ConfirmationOptions.Cancel)
+            {
+                UIUtilityProvider.UIHelper.ChooseCancelOnNextConfirmation();
+                Utility.ThreadSleep(3);
+                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            }
+        }
+
+        public static string GetSessionId()
+        {
+            return UIUtilityProvider.UIHelper.GetQueryStringValue("SessionId");
         }
     }
 }

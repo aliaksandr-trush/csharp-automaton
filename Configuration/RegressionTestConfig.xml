@@ -1,246 +1,246 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<RegOnline.RegressionTestConfig>
+<ArrayOfRegOnlineRegressionTestConfig>
   <Environments>
-    <Preferred Environment="CBeta" PrivateLabel="Default" />
+	<Preferred Environment="Beta" PrivateLabel="Default" />
 
-    <Environment Name="Alpha"
-           ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
-           ROMasterConnection="server=WS0034DEVSQL01\QA2ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-           ROWarehouseConnection="server=WS0034DEVSQL01\QA2;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
-           DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+	<Environment Name="Alpha"
+		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
+		   ROMasterConnection="server=WS0034DEVSQL01\QA2ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=WS0034DEVSQL01\QA2;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
+		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
-      <Account Name="Default">
-        <DomainName>alpha.regonline.com</DomainName>
-        <Id>377595</Id>
-        <Login>rol4ever</Login>
-        <Password>rol4ever</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Default">
+		<DomainName>alpha.regonline.com</DomainName>
+		<Id>377595</Id>
+		<Login>rol4ever</Login>
+		<Password>rol4ever</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="Alternative">
-        <DomainName>alpha.regonline.com</DomainName>
-        <Id>377566</Id>
-        <Login>alphaKK0</Login>
-        <Password>alphaKK0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Alternative">
+		<DomainName>alpha.regonline.com</DomainName>
+		<Id>377566</Id>
+		<Login>alphaKK0</Login>
+		<Password>alphaKK0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="ActiveEurope">
-        <DomainName>activeeuropealpha.regonline.com</DomainName>
-        <Id>377567</Id>
-        <Login>AlphaCC1</Login>
-        <Password>AlphaCC1</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="ActiveEurope">
+		<DomainName>activeeuropealpha.regonline.com</DomainName>
+		<Id>377567</Id>
+		<Login>AlphaCC1</Login>
+		<Password>AlphaCC1</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-    </Environment>
+	</Environment>
 
-    <Environment Name="Beta"
-           ClientDbConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=Beta"
-           ROMasterConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-           ROWarehouseConnection="server=ws0034devsql01\QA1ROM;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
-           DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+	<Environment Name="Beta"
+		   ClientDbConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=Beta"
+		   ROMasterConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=ws0034devsql01\QA1ROM;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
+		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
-      <Account Name="Default">
-        <DomainName>beta.regonline.com</DomainName>
-        <Id>377977</Id>
-        <Login>regression</Login>
-        <Password>regression0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Default">
+		<DomainName>beta.regonline.com</DomainName>
+		<Id>377977</Id>
+		<Login>regression</Login>
+		<Password>regression0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="Alternative">
-        <DomainName>beta.regonline.com</DomainName>
-        <Id>377969</Id>
-        <Login>brucesun0</Login>
-        <Password>brucesun0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Alternative">
+		<DomainName>beta.regonline.com</DomainName>
+		<Id>377969</Id>
+		<Login>brucesun0</Login>
+		<Password>brucesun0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="ActiveEurope">
-        <DomainName>activeeuropebeta.regonline.com</DomainName>
-        <Id>378150</Id>
-        <Login>regressioneur</Login>
-        <Password>regression0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="ActiveEurope">
+		<DomainName>activeeuropebeta.regonline.com</DomainName>
+		<Id>378150</Id>
+		<Login>regressioneur</Login>
+		<Password>regression0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="SSO">
-        <DomainName>beta.regonline.com</DomainName>
-        <Id>245012</Id>
-        <Login>sn00ch37</Login>
-        <Password>sn00ch37</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>New</XAuthVersion>
-      </Account>
-    </Environment>
+	  <Account Name="SSO">
+		<DomainName>beta.regonline.com</DomainName>
+		<Id>245012</Id>
+		<Login>sn00ch37</Login>
+		<Password>sn00ch37</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>New</XAuthVersion>
+	  </Account>
+	</Environment>
 
-    <Environment Name="CBeta"
-           ClientDbConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;database=Beta"
-           ROMasterConnection="server=WD00060064\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-           ROWarehouseConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;Database=ROWarehouse"
-           DataPath="\\10.109.0.80\QA\RegressionTestData\">
+	<Environment Name="CBeta"
+		   ClientDbConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;database=Beta"
+		   ROMasterConnection="server=WD00060064\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;Database=ROWarehouse"
+		   DataPath="\\10.109.0.80\QA\RegressionTestData\">
 
-      <Account Name="Default">
-        <DomainName>cbeta.regonline.com</DomainName>
-        <Id>377977</Id>
-        <Login>regression</Login>
-        <Password>regression0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Default">
+		<DomainName>cbeta.regonline.com</DomainName>
+		<Id>377977</Id>
+		<Login>regression</Login>
+		<Password>regression0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="Alternative">
-        <DomainName>cbeta.regonline.com</DomainName>
-        <Id>377969</Id>
-        <Login>brucesun0</Login>
-        <Password>brucesun0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="Alternative">
+		<DomainName>cbeta.regonline.com</DomainName>
+		<Id>377969</Id>
+		<Login>brucesun0</Login>
+		<Password>brucesun0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="ActiveEurope">
-        <DomainName>cbeta.regonline.com</DomainName>
-        <Id>378150</Id>
-        <Login>regressioneur</Login>
-        <Password>regression0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
+	  <Account Name="ActiveEurope">
+		<DomainName>cbeta.regonline.com</DomainName>
+		<Id>378150</Id>
+		<Login>regressioneur</Login>
+		<Password>regression0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
 
-      <Account Name="SSO">
-        <DomainName>cbeta.regonline.com</DomainName>
-        <Id>245012</Id>
-        <Login>sn00ch37</Login>
-        <Password>sn00ch37</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>New</XAuthVersion>
-      </Account>
-    </Environment>
+	  <Account Name="SSO">
+		<DomainName>cbeta.regonline.com</DomainName>
+		<Id>245012</Id>
+		<Login>sn00ch37</Login>
+		<Password>sn00ch37</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>New</XAuthVersion>
+	  </Account>
+	</Environment>
 
-    <Environment Name="Production"
-             ClientDbConnection=""
-             ROMasterConnection=""
-             ROWarehouseConnection=""
-             DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+	<Environment Name="Production"
+			 ClientDbConnection=""
+			 ROMasterConnection=""
+			 ROWarehouseConnection=""
+			 DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
-      <Account Name="Default">
-        <DomainName>www.regonline.com</DomainName>
-        <Id>299725</Id>
-        <Login>ROLChina</Login>
-        <Password>ROLChina0</Password>
-        <Folder>Regression</Folder>
-        <XAuthVersion>Old</XAuthVersion>
-      </Account>
-    </Environment>
+	  <Account Name="Default">
+		<DomainName>www.regonline.com</DomainName>
+		<Id>299725</Id>
+		<Login>ROLChina</Login>
+		<Password>ROLChina0</Password>
+		<Folder>Regression</Folder>
+		<XAuthVersion>Old</XAuthVersion>
+	  </Account>
+	</Environment>
   </Environments>
 
   <WebServices>
-    <WebService Name="LoginService">
-      <Url>webservices/users/login.asmx</Url>
-      <EndpointConfigName>LoginSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="LoginService">
+	  <Url>webservices/users/login.asmx</Url>
+	  <EndpointConfigName>LoginSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="RegistrationService">
-      <Url>webservices/Registrations/RegistrationService.asmx</Url>
-      <EndpointConfigName>RegistrationServiceSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="RegistrationService">
+	  <Url>webservices/Registrations/RegistrationService.asmx</Url>
+	  <EndpointConfigName>RegistrationServiceSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="EventService">
-      <Url>webservices/Events/EventService.asmx</Url>
-      <EndpointConfigName>EventServiceSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="EventService">
+	  <Url>webservices/Events/EventService.asmx</Url>
+	  <EndpointConfigName>EventServiceSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="Default">
-      <Url>api/default.asmx</Url>
-      <EndpointConfigName>RegOnline APISoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="Default">
+	  <Url>api/default.asmx</Url>
+	  <EndpointConfigName>RegOnline APISoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="CFResponseService">
-      <Url>webservices/CustomFieldResponseWS.asmx</Url>
-      <EndpointConfigName>CustomFieldResponseWSSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="CFResponseService">
+	  <Url>webservices/CustomFieldResponseWS.asmx</Url>
+	  <EndpointConfigName>CustomFieldResponseWSSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="CheckInRegService">
-      <Url>webservices/CheckInReg.asmx</Url>
-      <EndpointConfigName>CheckInRegSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="CheckInRegService">
+	  <Url>webservices/CheckInReg.asmx</Url>
+	  <EndpointConfigName>CheckInRegSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="CheckinService">
-      <Url>webservices/Checkin.asmx</Url>
-      <EndpointConfigName>CheckInSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="CheckinService">
+	  <Url>webservices/Checkin.asmx</Url>
+	  <EndpointConfigName>CheckInSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="GetEventFieldsService">
-      <Url>webservices/geteventfields.asmx</Url>
-      <EndpointConfigName>getEventFieldsSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="GetEventFieldsService">
+	  <Url>webservices/geteventfields.asmx</Url>
+	  <EndpointConfigName>getEventFieldsSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="GetEventRegistrationsService">
-      <Url>webservices/geteventregistrations.asmx</Url>
-      <EndpointConfigName>getEventRegistrationsSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="GetEventRegistrationsService">
+	  <Url>webservices/geteventregistrations.asmx</Url>
+	  <EndpointConfigName>getEventRegistrationsSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="GetEventsService">
-      <Url>webservices/getEvents.asmx</Url>
-      <EndpointConfigName>getEventsSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="GetEventsService">
+	  <Url>webservices/getEvents.asmx</Url>
+	  <EndpointConfigName>getEventsSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="MemberAuthService">
-      <Url>webservices/memberAuthorization.asmx</Url>
-      <EndpointConfigName>memberAuthorizationSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="MemberAuthService">
+	  <Url>webservices/memberAuthorization.asmx</Url>
+	  <EndpointConfigName>memberAuthorizationSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="RegTrackerService">
-      <Url>webservices/WSRegBug.asmx</Url>
-      <EndpointConfigName>WSRegBugSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="RegTrackerService">
+	  <Url>webservices/WSRegBug.asmx</Url>
+	  <EndpointConfigName>WSRegBugSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="RegUpdateService">
-      <Url>webservices/RegistrationUpdateService.asmx</Url>
-      <EndpointConfigName>RegistrationUpdateServiceSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="RegUpdateService">
+	  <Url>webservices/RegistrationUpdateService.asmx</Url>
+	  <EndpointConfigName>RegistrationUpdateServiceSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="ReportsService">
-      <Url>activeReports/regOnline.asmx</Url>
-      <EndpointConfigName>Regonline Web ServicesSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="ReportsService">
+	  <Url>activeReports/regOnline.asmx</Url>
+	  <EndpointConfigName>Regonline Web ServicesSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="RetrieveAllRegsService">
-      <Url>webservices/retrieveallregistrations.asmx</Url>
-      <EndpointConfigName>RetrieveAllRegistrationsManagerSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="RetrieveAllRegsService">
+	  <Url>webservices/retrieveallregistrations.asmx</Url>
+	  <EndpointConfigName>RetrieveAllRegistrationsManagerSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="RetrieveSingleRegService">
-      <Url>webservices/RetrieveSingleRegistration.asmx</Url>
-      <EndpointConfigName>RetrieveSingleRegistrationManagerSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="RetrieveSingleRegService">
+	  <Url>webservices/RetrieveSingleRegistration.asmx</Url>
+	  <EndpointConfigName>RetrieveSingleRegistrationManagerSoap</EndpointConfigName>
+	</WebService>
 
-    <WebService Name="XmlUpdaterService">
-      <Url>webservices/XmlUpdater.asmx</Url>
-      <EndpointConfigName>XmlUpdaterSoap</EndpointConfigName>
-    </WebService>
+	<WebService Name="XmlUpdaterService">
+	  <Url>webservices/XmlUpdater.asmx</Url>
+	  <EndpointConfigName>XmlUpdaterSoap</EndpointConfigName>
+	</WebService>
   </WebServices>
-
+	
   <Browsers Current="Firefox">
-    <ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
-    <Browser Name="Firefox">
-      <BinaryPath Enable="true">D:\Program Files\Mozilla Firefox\firefox.exe</BinaryPath>
-      <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
-    </Browser>
-    <Browser Name="Chrome">
-      <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
-      <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
-    </Browser>
+	<ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
+	<Browser Name="Firefox">
+	  <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
+	</Browser>
+	<Browser Name="Chrome">
+	  <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
+	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
+	</Browser>
   </Browsers>
 
   <TimeZoneDifference>14</TimeZoneDifference>
 
   <NUnitAddin ReportBack="false" />
-</RegOnline.RegressionTestConfig>
+</ArrayOfRegOnlineRegressionTestConfig>

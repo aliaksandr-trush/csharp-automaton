@@ -8,7 +8,6 @@
     public class SSOBase : Frame
     {
         public SSOBase(string name) : base(name) { }
-        public SSOBase(string name, string parentFrame) : base(name, parentFrame) { }
 
         public RadioButton SSORadio = new RadioButton("ctl00_cphDialog_xAuth_rdoSSO", LocateBy.Id);
         public TextBox EndpointURL = new TextBox("ctl00_cphDialog_xAuth_txtSSOEndpointUrl", LocateBy.Id);
@@ -33,8 +32,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
@@ -44,8 +42,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
     }
 }

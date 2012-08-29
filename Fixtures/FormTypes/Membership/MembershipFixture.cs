@@ -411,14 +411,17 @@
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
             ManagerSiteMgr.SelectFolder();
+
             if (ManagerSiteMgr.EventExists(UpdateRegName))
             {
                 ManagerSiteMgr.DeleteEventByName(UpdateRegName);
             }
+
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.Membership);
             this.eventId = BuilderMgr.GetEventId();
 
             BuilderMgr.SetStartPage(ManagerSiteManager.EventType.Membership, UpdateRegName);
+
             BuilderMgr.ClickAddRegType();
             BuilderMgr.RegTypeMgr.SetName(StringEnum.GetStringValue(RegTypes.FirstRegType));
             BuilderMgr.RegTypeMgr.SaveAndClose();
@@ -548,14 +551,17 @@
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
             ManagerSiteMgr.SelectFolder();
+
             if (ManagerSiteMgr.EventExists(AdminRegName))
             {
                 ManagerSiteMgr.DeleteEventByName(AdminRegName);
             }
+
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.Membership);
             this.eventId = BuilderMgr.GetEventId();
 
             BuilderMgr.SetStartPage(ManagerSiteManager.EventType.Membership, AdminRegName);
+
             BuilderMgr.ClickAddRegType();
             BuilderMgr.RegTypeMgr.SetName(memberTypeAdmin.RegTypeAdminOnly);
             BuilderMgr.RegTypeMgr.SetVisibilities(false, true, null);

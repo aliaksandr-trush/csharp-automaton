@@ -21,21 +21,21 @@
         public TextBox GroupLimit = new TextBox("ctl00_cphDialog_nonEnduranceLimiting_txtLimitGroups_text", LocateBy.Id);
         public TextBox SoldOutMessage = new TextBox("ctl00_cphDialog_nonEnduranceLimiting_LimitMessage", LocateBy.Id);
         public ButtonOrLink AdditionalDetails = new ButtonOrLink("ctl00_cphDialog_elRegTypeInfo_linkCheckmarktext_elRegTypeInfo", LocateBy.Id);
-        public HtmlEditor AdditionalDetailsEditor = new HtmlEditor("dialog2", "dialog");
+        public HtmlEditor AdditionalDetailsEditor = new HtmlEditor("dialog2");
         public CheckBox Public = new CheckBox("ctl00_cphDialog_chkPublic", LocateBy.Id);
         public CheckBox Admin = new CheckBox("ctl00_cphDialog_chkAdmin", LocateBy.Id);
         public CheckBox OnSite = new CheckBox("ctl00_cphDialog_chkOnsite", LocateBy.Id);
         public TextBox EventFee = new TextBox("ctl00_cphDialog_txtCost_text", LocateBy.Id);
         public ButtonOrLink EventFeeAdvanced = new ButtonOrLink("ctl00_cphDialog_mdCostLink", LocateBy.Id);
-        public EventFeeDefine EventFeeDefine = new EventFeeDefine("dialog2", "dialog");
+        public RegTypeFeeDefine RegTypeFee_Define = new RegTypeFeeDefine("dialog2");
         public TextBox ShowDate = new TextBox("ctl00_cphDialog_dtpShowDate_tbDate", LocateBy.Id);
         public TextBox HideDate = new TextBox("ctl00_cphDialog_dtpHideDate_tbDate", LocateBy.Id);
         public TextBox MinGroupSize = new TextBox("ctl00_cphDialog_MinRegs_text", LocateBy.Id);
         public TextBox MaxGroupSize = new TextBox("ctl00_cphDialog_MaxRegs_text", LocateBy.Id);
         public ButtonOrLink AddMinRegMessage = new ButtonOrLink("ctl00_cphDialog_elMinRegsMessage_linkCheckmarktext_elMinRegsMessage", LocateBy.Id);
-        public HtmlEditor MinRegMessageEditor = new HtmlEditor("dialog2", "dialog");
+        public HtmlEditor MinRegMessageEditor = new HtmlEditor("dialog2");
         public ButtonOrLink ExternalAuthentication = new ButtonOrLink("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id);
-        public Manager.SSOBase ExternalAuthenticationSetup = new Manager.SSOBase("dialog2", "dialog");
+        public Manager.SSOBase ExternalAuthenticationSetup = new Manager.SSOBase("dialog2");
         public CheckBox EnableExternalAuthentication = new CheckBox("ctl00_cphDialog_chkXAuthEnable", LocateBy.Id);
         #endregion
 
@@ -120,13 +120,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
         #endregion
 

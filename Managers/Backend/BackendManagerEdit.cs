@@ -290,16 +290,14 @@
 
             if (isCancel)
             {
-
                 linkText = "Cancel Registration";
             }
 
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick(linkText, LocateBy.LinkText);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.SelectTopWindow();
-
-
-
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(2);
             SelectAttendeeInfoWindow();
         }
 

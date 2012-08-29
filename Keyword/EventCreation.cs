@@ -28,13 +28,18 @@
         public void ClickAddEventAndGetEventId(Event details)
         {
             PageObject.PageObjectProvider.Manager.Events.AddEvent_Click();
-            PageObject.PageObjectProvider.Manager.Events.EventType_Select(CustomStringAttribute.GetCustomString(FormData.EventType.ProEvent));
+            PageObject.PageObjectProvider.Manager.Events.EventType_Select(details.FormType);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.WaitForPresent();
             details.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventId.GetAttribute("value"));
         }
 
         public void StartPage(Event details)
         {
+            if (details.StartPage.EventType.HasValue)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventType.SelectWithText(details.StartPage.EventType.ToString());
+            }
+
             if (details.StartPage.StartDate.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.StartDate_Type(details.StartPage.StartDate.Value);
@@ -113,34 +118,77 @@
             {
                 foreach (RegType regType in details.StartPage.RegTypes)
                 {
-                    KeywordProvider.AddRegType.AddRegTypes(regType);
+                    KeywordProvider.AddRegType.Add_RegType(regType, details);
                     PageObject.Builder.RegistrationFormPages.RegTypeRow row = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType.RegTypeName);
                     regType.RegTypeId = row.RegTypeId;
                 }
             }
+
             if (details.StartPage.RegTypeDisplayOption.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayOption_Set(true);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayFormat.SelectWithValue(CustomStringAttribute.GetCustomString(details.StartPage.RegTypeDisplayOption.Value));
             }
 
-            //Set event name and shortcut after regType created to avoid bug 24560
+            // Set event name and shortcut after regType created to avoid bug 24560
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(details.Title);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(details.Shortcut);
+
+            // Set event fee
+            if (details.StartPage.Event_Fee != null)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFee_Type(details.StartPage.Event_Fee.StandardPrice);
+
+                if (details.StartPage.Event_Fee.Early_Price != null ||
+                    details.StartPage.Event_Fee.Late_Price != null ||
+                    (details.StartPage.Event_Fee.DiscountCodes != null && details.StartPage.Event_Fee.DiscountCodes.Count > 0))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeAdvanced_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AdjustRADWindowPositionAndResize();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SelectByName();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Expand();
+
+                    if (details.StartPage.Event_Fee.Name != null)
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name);
+                    }
+                    else
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
+                    }
+
+                    if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
+                    {
+                        foreach (DataCollection.DiscountCode code in details.StartPage.Event_Fee.DiscountCodes)
+                        {
+                            KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
+                        }
+
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.RequireCode.Set(details.StartPage.Event_Fee.RequireDC);
+                    }
+
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.SaveAndClose_Click();
+                }
+            }
 
             if (details.StartPage.AllowGroupReg.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllGroupReg_Set(details.StartPage.AllowGroupReg.Value);
                 PageObject.PageObjectProvider.Builder.EventDetails.SaveAndStay_Click();
             }
+
             if (details.StartPage.ForceSelectSameRegType.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.ForceSameGroupType.Set(details.StartPage.ForceSelectSameRegType.Value);
             }
+
             if (details.StartPage.AllowChangeRegType.HasValue)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllowChangeRegType.Set(details.StartPage.AllowChangeRegType.Value);
             }
+
             if (details.StartPage.GroupDiscount != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
@@ -151,10 +199,25 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountAmount.Type(details.StartPage.GroupDiscount.DiscountAmount);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountType.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupDiscountType));
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AddtionalRegOption.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.AddtionalRegOption));
-
-                if (details.StartPage.GroupDiscount.AdditionalNumber.HasValue)
+                
+                if (details.StartPage.GroupDiscount.NumberOfAdditionalReg.HasValue)
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(details.StartPage.GroupDiscount.AdditionalNumber.Value);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(details.StartPage.GroupDiscount.NumberOfAdditionalReg.Value);
+                }
+
+                switch (details.StartPage.GroupDiscount.ApplyOption)
+                {
+                    case GroupDiscount_ApplyOption.ToAllEventFees:
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToAllEventFees.Click();
+                        break;
+
+                    case GroupDiscount_ApplyOption.ToOnlySelectedFees:
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToSelectedFees.Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.All.Set(true);
+                        break;
+
+                    default:
+                        break;
                 }
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
@@ -279,8 +342,19 @@
 
                 foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
                 {
-                    KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem);
+                    KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem, details);
                     agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
+                }
+
+                if (details.AgendaPage.DoNotAllowOverlapping.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(details.AgendaPage.DoNotAllowOverlapping.Value);
+                }
+
+                if (details.AgendaPage.IsShoppingCart)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.IsShoppingCart.Set(true);
                 }
 
                 if (details.AgendaPage.PageHeader != null)
@@ -347,9 +421,11 @@
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Merchandise);
 
-                foreach (DataCollection.Merchandise merch in details.MerchandisePage.Merchandises)
+                foreach (DataCollection.MerchandiseItem merch in details.MerchandisePage.Merchandises)
                 {
-                    KeywordProvider.AddMerchandise.AddMerchandises(merch);
+                    KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
+                    PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
+                    merch.Id = row.MerchandiseId;
                 }
 
                 if (details.MerchandisePage.PageHeader != null)
@@ -420,7 +496,13 @@
                     PageObject.PageObjectProvider.Builder.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Set(
                         details.EventWebsite.UseEventWebsiteAsTheStartingPageForEvent.Value);
                 }
-
+                if (details.EventWebsite.ShowNavigation)
+                {
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SelectById();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.ShowNavigation_Click();
+                    PageObject.PageObjectProvider.Builder.EventWebsite.EventWebsiteFrame.SwitchToMain();
+                }
+                
                 PageObject.PageObjectProvider.Builder.EventDetails.RegistrationFormPages_Click();
             }
         }

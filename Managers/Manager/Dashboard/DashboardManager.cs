@@ -707,7 +707,7 @@
         }
 
         [Step]
-        public void OpenCommonReport(CommonReportType type)////, int eventId, string eventSessionId)
+        public void OpenCommonReport(CommonReportType type)
         {
             switch (type)
             {
@@ -716,7 +716,7 @@
                 case CommonReportType.Transaction:
                 case CommonReportType.CreditCardTransaction:
                 case CommonReportType.TransactionFees:
-                case CommonReportType.RoomingList:
+                
                 case CommonReportType.EventSnapshot:
                 case CommonReportType.RegistrationWaitlist:
                 case CommonReportType.Resource:
@@ -724,6 +724,14 @@
                 case CommonReportType.Lodging:
                 case CommonReportType.ConfirmedRegistrants:
                     UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    Utility.ThreadSleep(3);
+                    SelectReportPopupWindow();
+                    break;
+
+                case CommonReportType.RoomingList:
+                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    Utility.ThreadSleep(3);
+                    this.ByPassRoomingListReportFilter();
                     SelectReportPopupWindow();
                     break;
 
@@ -735,6 +743,17 @@
             }
 
             UIUtilityProvider.UIHelper.WaitForPageToLoad();
+        }
+
+        private void ByPassRoomingListReportFilter()
+        {
+            // Select the FiltersConsole window
+            UIUtilityProvider.UIHelper.SelectTopWindow();
+
+            // Click OK
+            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnApply", LocateBy.Id);
+
+            Utility.ThreadSleep(2);
         }
 
         [Step]

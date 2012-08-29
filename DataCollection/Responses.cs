@@ -3,39 +3,40 @@
     using System;
 
     public class CustomFieldResponse
-    { }
+    {
+    }
 
     public class CFResponse : CustomFieldResponse
     {
         public CustomField CustomField;
     }
 
-    public class CFCheckboxResponse : CFResponse
+    public class CFResponse_Checkbox : CFResponse
     {
         public bool? Checked;
     }
 
-    public class CFRadioButtonResponse : CFResponse
+    public class CFResponse_MultipleChoice_RadioButton : CFResponse
     {
         public ChoiceItem ChoiceItem;
     }
 
-    public class CFDropDownResponse : CFResponse
+    public class CFResponse_MultipleChoice_DropDown : CFResponse
     {
         public ChoiceItem ChoiceItem;
     }
 
-    public class CFCharInputResponse : CFResponse
+    public class CFResponse_TextInput : CFResponse
     {
         public string CharToInput;
     }
 
-    public class CFDateTimeResponse : CFResponse
+    public class CFResponse_DateTime : CFResponse
     {
         public DateTime? DateTime;
     }
 
-    public class CFFileUploadResponse : CFResponse
+    public class CFResponse_FileUpload : CFResponse
     {
         public string FileSource;
     }
@@ -45,44 +46,92 @@
         public AgendaItem AgendaItem;
     }
 
-    public class AgendaCheckboxResponse : AgendaResponse
+    public class AgendaResponse_AlwaysSelected : AgendaResponse
+    {
+        public double Fee { get; set; }
+        public DiscountCode Code { get; set; }
+    }
+
+    public class AgendaResponse_Checkbox : AgendaResponse
     {
         public bool? Checked;
+        public double Fee { get; set; }
         public DiscountCode Code;
     }
 
-    public class AgendaRadioButtonResponse : AgendaResponse
+    public class AgendaResponse_MultipleChoice_RadioButton : AgendaResponse
     {
         public ChoiceItem ChoiceItem;
+        public double Fee { get; set; }
+        public DiscountCode Code;
     }
 
-    public class AgendaDropDownResponse : AgendaResponse
+    public class AgendaResponse_MultipleChoice_DropDown : AgendaResponse
     {
         public ChoiceItem ChoiceItem;
+        public double Fee { get; set; }
+        public DiscountCode Code;
     }
 
-    public class AgendaCharInputResponse : AgendaResponse
+    public class AgendaResponse_TextInput : AgendaResponse
     {
         public string CharToInput;
     }
 
-    public class AgendaDateResponse : AgendaResponse
+    public class AgendaResponse_Date : AgendaResponse
     {
         public DateTime? Date;
     }
 
-    public class AgendaTimeResponse : AgendaResponse
+    public class AgendaResponse_Time : AgendaResponse
     {
         public DateTime? Time;
     }
 
-    public class AgendaFileUploadResponse : AgendaResponse
+    public class AgendaResponse_FileUpload : AgendaResponse
     {
         public string FileSource;
+        public double Fee { get; set; }
+        public DiscountCode Code;
     }
 
-    public class AgendaContributionResponse : AgendaResponse
+    public class AgendaResponse_Contribution : AgendaResponse
     {
-        public double? Contribution;
+        public double ContributionAmount { get; set; }
+    }
+
+    public class AgendaResponse_Duration : AgendaResponse
+    {
+        public TimeSpan Duration;
+    }
+
+    public class MerchandiseResponse
+    {
+        public MerchandiseItem Merchandise_Item;
+    }
+
+    public class MerchResponse_FixedPrice : MerchandiseResponse
+    {
+        public int Quantity;
+        public DiscountCode Discount_Code;
+    }
+
+    public class MerchResponse_VariableAmount : MerchandiseResponse
+    {
+        public double Amount;
+    }
+
+    public class EventFeeResponse
+    {
+        public RegType RegType;
+        public DiscountCode Code;
+        public double Fee { get; set; }
+
+        public EventFeeResponse() { }
+
+        public EventFeeResponse(RegType regType)
+        {
+            this.RegType = regType;
+        }
     }
 }

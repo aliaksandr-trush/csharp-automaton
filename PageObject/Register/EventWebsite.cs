@@ -9,11 +9,25 @@
     public class EventWebsite : Window
     {
         public ButtonOrLink RegisterNow = new ButtonOrLink("aRegBtn", UIUtility.LocateBy.Id);
+        public ButtonOrLink Agenda = new ButtonOrLink("ctl00_hpTab2", UIUtility.LocateBy.Id);
+
+        public Label Text(string text)
+        {
+            return new Label(string.Format("//div[@class='agenda_repeater']/div[contains(text(),'{0}')]", text), UIUtility.LocateBy.XPath);
+        }
 
         public void RegisterNow_Click()
         {
             this.RegisterNow.WaitForDisplay();
             this.RegisterNow.Click();
+            WaitForLoad();
+        }
+
+        public void Agenda_Click()
+        {
+            this.Agenda.WaitForDisplay();
+            this.Agenda.Click();
+            Utilities.Utility.ThreadSleep(1);
             WaitForLoad();
         }
     }

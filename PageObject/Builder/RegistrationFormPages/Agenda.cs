@@ -11,11 +11,13 @@
         #region WebElements
         public ButtonOrLink CreateAgendaItem = new ButtonOrLink("Create Agenda Item", LocateBy.LinkText);
         public ButtonOrLink AddAgendaItem = new ButtonOrLink("Add Agenda Item", LocateBy.LinkText);
+        public ButtonOrLink CreateActivities = new ButtonOrLink("Create Activities", LocateBy.LinkText);
+        public ButtonOrLink AddActivities = new ButtonOrLink("Add Activities", LocateBy.LinkText);
         public TextBox NameOnForm = new TextBox("ctl00_cph_ucCF_mipNam_elDesc_TextArea", LocateBy.Id);
         public ButtonOrLink NameOptions = new ButtonOrLink("ctl00_cph_ucCF_mipNam_bccMoreInfoNaming_optionsLink", LocateBy.Id);
         public TextBox NameOnReceipt = new TextBox("ctl00_cph_ucCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
         public TextBox NameOnReports = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtFieldName", LocateBy.Id);
-        public TextBox NameOnBadge = new TextBox("//*[@id='divBadgeCaption']//input", LocateBy.XPath);
+        public TextBox NameOnBadge = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtBadgeCaption", LocateBy.Id);
         public ButtonOrLink FieldType = new ButtonOrLink("ctl00_cph_ucCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
         public ButtonOrLink SaveItem = new ButtonOrLink("Save Item", LocateBy.LinkText);
         public ButtonOrLink SaveAndNew = new ButtonOrLink("Save & New", LocateBy.LinkText);
@@ -60,7 +62,7 @@
         public HtmlEditor LimitReachedMessageEditor = new HtmlEditor("dialog");
         public RadioButton WaitlistWhenLimitReached = new RadioButton("ctl00_cph_ucCF_mipCap_ip7_rbActivateWaitlist", LocateBy.Id);
         public ButtonOrLink AddTextToConfirmation = new ButtonOrLink("ctl00_cph_ucCF_mipCap_ip7_elWaitlistConfirmation_linkCheckmarkCustomField0", LocateBy.Id);
-        public HtmlEditor TextToConfirmationEditor = new HtmlEditor("dialog");
+        public EmailEditor TextToConfirmationEditor = new EmailEditor("dialog");
         public ButtonOrLink ShowAllRegTypes = new ButtonOrLink("//*[@id='tblRegTypesLink']//td[@class='fieldCaption']/a", LocateBy.XPath);
         public CheckBox VisibleToAll = new CheckBox("ctl00_cph_ucCF_chkActive", LocateBy.Id);
         public CheckBox RequiredByAll = new CheckBox("ctl00_cph_ucCF_chkRequired", LocateBy.Id);
@@ -83,7 +85,7 @@
         public CheckBox ForceGroupToMatch = new CheckBox("ctl00_cph_ucCF_chkEnablePrePopulate", LocateBy.Id);
         public MultiChoiceDropdown InitialStatus = new MultiChoiceDropdown("ctl00_cph_ucCF_ddlDefaultStatusID", LocateBy.Id);
         public ButtonOrLink AddConfirmationAddendum = new ButtonOrLink("ctl00_cph_ucCF_elNonWaitlistConfirmation_linkCheckmarktext_elNonWaitlistConfirmation", LocateBy.Id);
-        public HtmlEditor ConfirmationAddendumEditor = new HtmlEditor("dialog");
+        public EmailEditor ConfirmationAddendumEditor = new EmailEditor("dialog");
         public Label AgendaItemId = new Label("ctl00_cph_ucCF_currentCustomFieldId", LocateBy.Id);
         public ButtonOrLink AddMultipleChoiceItem = new ButtonOrLink("Add Multiple Choice Item", LocateBy.LinkText);
         public MultipleChoiceDefine MultipleChoiceDefine = new MultipleChoiceDefine("dialog");
@@ -94,6 +96,11 @@
         public Label AgendaChoiceItemCount = new Label("//*[@id='ctl00_cph_ucCF_grdLI_tblGrid']/tbody/tr[@class='dragTR']", LocateBy.XPath);
         public TextBox MinAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMinVarAmount_text", LocateBy.Id);
         public TextBox MaxAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount_text", LocateBy.Id);
+        public TextBox CopyAgendaAmount = new TextBox("//input[@class='rwDialogInput'][@value='1']", LocateBy.XPath);
+        public ButtonOrLink OK = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='OK']", LocateBy.XPath);
+        public ButtonOrLink CancelCopy = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='Cancel']", LocateBy.XPath);
+        public CheckBox DoNotAllowOverlapping = new CheckBox("ctl00_cph_chkEnableScheduleConflictChecking", LocateBy.Id);
+        public CheckBox IsShoppingCart = new CheckBox("ctl00_cph_chkEventsIsCart", LocateBy.Id);
         #endregion
 
         #region Generate Some Elements
@@ -131,6 +138,22 @@
         {
             this.AddAgendaItem.WaitForDisplay();
             this.AddAgendaItem.Click();
+            Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
+
+        public void CreateActivities_Click()
+        {
+            this.CreateActivities.WaitForDisplay();
+            this.CreateActivities.Click();
+            Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
+
+        public void AddActivities_Click()
+        {
+            this.AddActivities.WaitForDisplay();
+            this.AddActivities.Click();
             Utility.ThreadSleep(3);
             WaitForAJAX();
         }
@@ -415,6 +438,15 @@
             WaitForAJAX();
             WaitForLoad();
         }
+
+        public void OK_Click()
+        {
+            this.OK.WaitForDisplay();
+            this.OK.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
         #endregion
     }
 
@@ -439,13 +471,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 
@@ -469,13 +501,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 
@@ -483,11 +515,13 @@
     {
         public ButtonOrLink Agenda;
         public ButtonOrLink Delete;
+        public ButtonOrLink Copy;
 
         public AgendaRow(DataCollection.AgendaItem agendaItem)
         {
-            this.Agenda = new ButtonOrLink(string.Format("//*[@class='r1 colwidth1'][@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
-            this.Delete = new ButtonOrLink(string.Format("//*[@class='r1 colwidth4'][@id='listGridTD{0}5']//img[@title='Delete']", agendaItem.Id), LocateBy.XPath);
+            this.Agenda = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
+            this.Delete = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItem.Id), LocateBy.XPath);
+            this.Copy = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItem.Id), LocateBy.XPath);
         }
 
         public void Agenda_Click()
@@ -505,6 +539,13 @@
             UIUtilityProvider.UIHelper.GetConfirmation();
             Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
+        }
+
+        public void Copy_Click()
+        {
+            this.Copy.WaitForDisplay();
+            this.Copy.Click();
+            Utility.ThreadSleep(1);
         }
     }
 

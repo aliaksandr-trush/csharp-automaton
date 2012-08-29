@@ -107,7 +107,7 @@
             {
                 BuilderMgr.AddAgendaItemWithPriceAndNoDate(AgendaItemManager.AgendaItemType.CheckBox, name, price[i]);
                 i++;
-            }            
+            }
         }
 
         private void LoginAndGetSessionID()
@@ -153,8 +153,12 @@
             RegisterMgr.FinishRegistration();
             Assert.True(RegisterMgr.OnCardinalVerificationPage());
             RegisterMgr.SubmitCardinalPassword("1234");
+
             if (RegisterMgr.OnConfirmationRedirectPage())
+            {
                 RegisterMgr.ClickAdvantageNo();
+            }
+            
             RegisterMgr.ConfirmRegistration();
         }
 

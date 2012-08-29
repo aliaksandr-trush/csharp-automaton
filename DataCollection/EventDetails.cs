@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using RegOnline.RegressionTest.Utilities;
 
     public class Event
     {
@@ -9,6 +10,9 @@
         public string Title;
         public string Shortcut;
         public bool IsActive;
+        public FormData.FormType FormType;
+        public TaxRate TaxRateOne;
+        public TaxRate TaxRateTwo;
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();
@@ -23,11 +27,27 @@
         {
             this.Title = title;
             this.ReSetShortcut();
+            FormType = FormData.FormType.ProEvent;
         }
 
         public void ReSetShortcut()
         {
             this.Shortcut = Guid.NewGuid().ToString();
+        }
+    }
+
+    public class EventFee
+    {
+        public double StandardPrice { get; set; }
+        public string Name { get; set; }
+        public EarlyPrice Early_Price { get; set; }
+        public LatePrice Late_Price { get; set; }
+        public List<DiscountCode> DiscountCodes { get; set; }
+        public bool RequireDC { get; set; }
+
+        public EventFee()
+        {
+            this.DiscountCodes = new List<DiscountCode>();
         }
     }
 
@@ -42,14 +62,51 @@
         }
     }
 
+    public enum GroupDiscount_GroupSizeOption
+    {
+        [CustomString("")]
+        JustSize,
+
+        [CustomString("or more")]
+        SizeOrMore
+    }
+
+    public enum GroupDiscount_DiscountType
+    {
+        [CustomString("US Dollar")]
+        USDollar,
+
+        [CustomString("Percent")]
+        Percent
+    }
+
+    public enum GroupDiscount_AdditionalRegOption
+    {
+        [CustomString("Additional")]
+        Additional,
+
+        [CustomString("All")]
+        All,
+
+        [CustomString("Any Additional")]
+        AnyAdditional
+    }
+
+    public enum GroupDiscount_ApplyOption
+    {
+        ToAllEventFees,
+        ToOnlySelectedFees
+    }
+
     public class GroupDiscount
     {
         public int GroupSize;
-        public FormData.GroupSizeOption GroupSizeOption;
+        public GroupDiscount_GroupSizeOption GroupSizeOption;
         public double DiscountAmount;
-        public FormData.DiscountType GroupDiscountType;
-        public FormData.AdditionalRegOption AddtionalRegOption;
-        public int? AdditionalNumber;
+        public GroupDiscount_DiscountType GroupDiscountType;
+        public GroupDiscount_AdditionalRegOption AddtionalRegOption;
+        public int? NumberOfAdditionalReg;
+        public GroupDiscount_ApplyOption? ApplyOption;
     }
 
     public class PaymentMethod
@@ -79,8 +136,16 @@
         public Event ParentEvent;
     }
 
+    public enum EventType
+    {
+        Running,
+        Soccer
+    }
+
     public class StartPage
     {
+        public EventFee Event_Fee { get; set; }
+        public EventType? EventType;
         public EventLevelLimit EventLimit;
         public GroupDiscount GroupDiscount;
         public bool? ForceSelectSameRegType;
@@ -119,6 +184,8 @@
     public class AgendaPage
     {
         public List<AgendaItem> AgendaItems = new List<AgendaItem>();
+        public bool? DoNotAllowOverlapping;
+        public bool IsShoppingCart = false;
         public string PageHeader;
         public string PageFooter;
     }
@@ -132,7 +199,7 @@
 
     public class MerchandisePage
     {
-        public List<Merchandise> Merchandises = new List<Merchandise>();
+        public List<MerchandiseItem> Merchandises = new List<MerchandiseItem>();
         public string PageHeader;
         public string PageFooter;
     }
@@ -147,5 +214,6 @@
     public class EventWebsite
     {
         public bool? UseEventWebsiteAsTheStartingPageForEvent;
+        public bool ShowNavigation;
     }
 }

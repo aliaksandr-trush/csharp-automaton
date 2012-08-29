@@ -27,14 +27,12 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, true, false);
 
-            Registrant reg1 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
-            reg1.Event = evt;
+            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.RegType = regType1;
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
-            reg2.RegType = regType3;
+            Registrant reg2 = new Registrant(evt);
+            reg2.EventFee_Response = new EventFeeResponse(regType3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.SSOLogin(reg1);
@@ -45,7 +43,7 @@
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType3).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType4).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Value == "");
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
@@ -93,9 +91,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, true, false);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
-            reg1.RegType = regType3;
+            Registrant reg1 = new Registrant(evt);
+            reg1.EventFee_Response = new EventFeeResponse(regType3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
@@ -107,12 +104,11 @@
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType3).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType4).IsPresent);
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
-            reg2.RegType = regType4;
+            Registrant reg2 = new Registrant(evt);
+            reg2.EventFee_Response = new EventFeeResponse(regType4);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
             KeywordProvider.RegistrationCreation.Checkout(reg2);
@@ -136,10 +132,9 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt1, true, false);
 
-            Registrant reg1 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg1 = new Registrant(evt1, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.Event = evt1;
-            reg1.RegType = regType1;
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.SSOLogin(reg1);
@@ -158,10 +153,9 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt2, true, false);
 
-            Registrant reg2 = new Registrant(ExternalAuthenticationData.SSOTestEmail);
+            Registrant reg2 = new Registrant(evt2, ExternalAuthenticationData.SSOTestEmail);
             reg2.Password = ExternalAuthenticationData.SSOPassword;
-            reg2.Event = evt2;
-            reg2.RegType = regType3;
+            reg2.EventFee_Response = new EventFeeResponse(regType3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.SSOLogin(reg2);

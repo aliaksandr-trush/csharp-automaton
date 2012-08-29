@@ -93,8 +93,10 @@
         public void ResendConfirmation()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Resend Confirmation", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("Email");
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Name);
+            Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
@@ -103,6 +105,7 @@
         public void GenerateInvoiceAndVerify(int registrationId)
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Invoice", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("Invoice");
 
             // Verify we are on the correct page
@@ -120,6 +123,7 @@
                 "Registration Id on invoice: {0}");
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -127,9 +131,12 @@
         public void CancelRegistrationAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Cancel Registration", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
             UIUtilityProvider.UIHelper.WaitForElementPresent(CancelledOnLocator, LocateBy.XPath);
             
@@ -144,8 +151,10 @@
         public void UndoCancelRegistrationAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Undo Cancellation", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectTopWindow();
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
             this.SelectAttendeeInfoWindow();
             UIUtilityProvider.UIHelper.WaitForPageToLoad();
@@ -160,6 +169,7 @@
         public void GenerateRegDetailsAndVerify(int registrationId)
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Reg Details", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("PrintMyReg");
 
             VerifyTool.VerifyValue(
@@ -168,12 +178,14 @@
                 "Registration Id on reg details: {0}");
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
         public void PrintBadgeAndVerify()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Print Badge", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
             UIUtilityProvider.UIHelper.SelectWindowByName("PersonalBadges");
 
             // The page will be redirected to activereports/default.aspx first, loading, then redirected to badge
@@ -188,6 +200,7 @@
             }
 
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -223,6 +236,7 @@
             UIUtilityProvider.UIHelper.SelectWindowByName("Profile");
             VerifyTool.VerifyValue(name + " (" + emailAddress + ")", UIUtilityProvider.UIHelper.GetText("lblProfleTitle", LocateBy.Id), "Profile title: {0}");
             UIUtilityProvider.UIHelper.CloseWindow();
+            Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
@@ -274,6 +288,7 @@
             
             // Click 'Next'
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnStart", LocateBy.Id);
+            UIUtilityProvider.UIHelper.WaitForPageToLoad();
 
             // Get new registration id
             int newRegistrationId = Convert.ToInt32(UIUtilityProvider.UIHelper.GetText("lblNewRegisterId", LocateBy.Id));

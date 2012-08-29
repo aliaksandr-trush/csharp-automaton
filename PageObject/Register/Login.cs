@@ -45,7 +45,7 @@
             Utility.ThreadSleep(1);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 }

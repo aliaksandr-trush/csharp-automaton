@@ -19,8 +19,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg = new Registrant("abc");
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt, "abc");
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
 
@@ -37,8 +36,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg = new Registrant(emailAddress);
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt, emailAddress);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
@@ -59,10 +57,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
-            Registrant reg1 = new Registrant("abc");
-            reg1.Event = evt;
+            Registrant reg = new Registrant(evt);
+            Registrant reg1 = new Registrant(evt, "abc");
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -81,15 +77,13 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg1 = new Registrant();
-            Registrant reg2 = new Registrant();
-            reg1.Event = evt;
-            reg2.Event = evt;
-            List<Registrant> regs = new List<Registrant>();
-            regs.Add(reg1);
-            regs.Add(reg2);
+            Registrant reg1 = new Registrant(evt);
+            Registrant reg2 = new Registrant(evt);
+            Group group = new Group();
+            group.Primary = reg1;
+            group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(regs);
+            KeywordProvider.RegistrationCreation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 
@@ -108,8 +102,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
@@ -133,8 +126,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, false);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyEmailAddress.IsPresent);

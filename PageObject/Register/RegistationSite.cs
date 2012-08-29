@@ -18,6 +18,7 @@
         public PageObject.Register.OnsiteKiosk OnsiteKiosk = new PageObject.Register.OnsiteKiosk();
         public PageObject.Register.PersonalInfo PersonalInfo = new PageObject.Register.PersonalInfo();
         public PageObject.Register.SSOLogin SSOLogin = new PageObject.Register.SSOLogin();
+        public PageObject.Register.Merchandise Merchandise = new PageObject.Register.Merchandise();
         #endregion
 
         #region WebElements

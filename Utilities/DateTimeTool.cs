@@ -5,6 +5,33 @@
 
     public class DateTimeTool
     {
+        public enum TimeZoneIdentifier
+        {
+            Local,
+
+            [CustomString("GMT Standard Time")]
+            GMTStandardTime,
+
+            [CustomString("US Mountain Standard Time")]
+            USMountainStandardTime
+        }
+
+        public static DateTime ConvertTo(
+            DateTime dateTimeToConvert, 
+            TimeZoneIdentifier targetTimeZone,
+            TimeZoneIdentifier sourceTimeZone = TimeZoneIdentifier.Local)
+        {
+            TimeZoneInfo sourceTimeZoneInfo = TimeZoneInfo.Local;
+
+            if (sourceTimeZone != TimeZoneIdentifier.Local)
+            {
+                sourceTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(CustomStringAttribute.GetCustomString(sourceTimeZone));
+            }
+
+            TimeZoneInfo targetTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(CustomStringAttribute.GetCustomString(targetTimeZone));
+            return TimeZoneInfo.ConvertTime(dateTimeToConvert, targetTimeZoneInfo);
+        }
+
         /// <summary>
         /// This is just for china test to handle the time difference
         /// </summary>

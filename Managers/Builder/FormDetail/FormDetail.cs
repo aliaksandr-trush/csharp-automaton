@@ -212,6 +212,7 @@
         public void Next()
         {
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnNext", LocateBy.Id);
+            Utility.ThreadSleep(2);
             UIUtilityProvider.UIHelper.WaitForPageToLoad();
             UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
         }

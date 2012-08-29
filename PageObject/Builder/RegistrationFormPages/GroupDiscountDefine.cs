@@ -16,6 +16,9 @@
         public MultiChoiceDropdown DiscountType = new MultiChoiceDropdown("ctl00_cphDialog_ddlGroupRuleType", LocateBy.Id);
         public MultiChoiceDropdown AddtionalRegOption = new MultiChoiceDropdown("ctl00_cphDialog_AdditionalAllDropDownList", LocateBy.Id);
         public TextBox AdditionalNumber = new TextBox("ctl00_cphDialog_EffectedSizeTextBox_text", LocateBy.Id);
+        public RadioButton ApplyToAllEventFees = new RadioButton("ctl00_cphDialog_rbApplyAll", LocateBy.Id);
+        public RadioButton ApplyToSelectedFees = new RadioButton("ctl00_cphDialog_rbApplySelected", LocateBy.Id);
+        public CheckBox All = new CheckBox("//li[@class='rtLI rtFirst rtLast']/div/input", LocateBy.XPath);
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
@@ -27,13 +30,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void AdjustRADWindowPositionAndResize()

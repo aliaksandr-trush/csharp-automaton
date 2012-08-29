@@ -11,25 +11,25 @@
             switch (location)
             {
                 case FormData.Location.RegType:
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddEarlyPrice_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPrice.Type(earlyPrice.earlyPrice);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddEarlyPrice_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPrice.Type(earlyPrice.earlyPrice);
 
                     switch (earlyPrice.EarlyPriceType)
                     {
                         case FormData.EarlyPriceType.DateAndTime:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPriceDateTime.Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPriceDate_Type(earlyPrice.EarlyPriceDate.Value);
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPriceTime_Type(earlyPrice.EarlyPriceTime.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPriceDateTime.Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPriceDate_Type(earlyPrice.EarlyPriceDate.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPriceTime_Type(earlyPrice.EarlyPriceTime.Value);
                             break;
                         case FormData.EarlyPriceType.Registrants:
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPriceRegLimit.Click();
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.EarlyPriceRegistrations.Type(earlyPrice.FirstNRegistrants.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPriceRegLimit.Click();
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.EarlyPriceRegistrations.Type(earlyPrice.FirstNRegistrants.Value);
                             break;
                         default:
                             break;
                     }
 
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.StandardPrice.Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.StandardPrice.Click();
                     break;
 
                 case FormData.Location.Agenda:
@@ -68,16 +68,18 @@
             switch (location)
             {
                 case FormData.Location.RegType:
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddLatePrice_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.LatePriceTime_Type(latePrice.LatePriceTime);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.LatePriceDate_Type(latePrice.LatePriceDate);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.LatePrice.Type(latePrice.latePrice);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddLatePrice_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.LatePriceTime_Type(latePrice.LatePriceTime);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.LatePriceDate_Type(latePrice.LatePriceDate);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.LatePrice.Type(latePrice.latePrice);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.StandardPrice.Click();
                     break;
                 case FormData.Location.Agenda:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddLatePrice_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LatePriceTime_Type(latePrice.LatePriceTime);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LatePriceDate_Type(latePrice.LatePriceDate);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LatePrice.Type(latePrice.latePrice);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.StandardPrice.Click();
                     break;
                 default:
                     break;

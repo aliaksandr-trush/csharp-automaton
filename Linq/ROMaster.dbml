@@ -145,4 +145,12 @@
       <Column Name="nonCustomize" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
+  <Function Name="dbo.fn_Decrypt" Method="fn_Decrypt" IsComposable="true">
+    <Parameter Name="EncryptedText" Parameter="encryptedText" Type="System.String" DbType="VarChar(500)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_Encrypt" Method="fn_Encrypt" IsComposable="true">
+    <Parameter Name="DecryptedText" Parameter="decryptedText" Type="System.String" DbType="VarChar(500)" />
+    <Return Type="System.String" />
+  </Function>
 </Database>

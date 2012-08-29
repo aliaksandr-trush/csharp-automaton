@@ -44,11 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -56,25 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoIt\AutoIt.csproj">
-      <Project>{0346655B-EEF2-4ADC-B5E3-58FF493216AE}</Project>
-      <Name>AutoIt</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Configuration\Configuration.csproj">
       <Project>{82D2E8C9-A6D9-4222-A744-5D7CB15BEC00}</Project>
       <Name>Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Linq\DataAccess.csproj">
-      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Managers\Managers.csproj">
-      <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
-      <Name>Managers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.csproj">
-      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
-      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

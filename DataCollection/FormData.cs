@@ -41,10 +41,16 @@
 
         public enum Location
         {
-            EventDetails,
+            EventFee,
             RegType,
             Agenda,
             Merchandise
+        }
+
+        public enum ConfirmationOptions
+        {
+            OK,
+            Cancel
         }
 
         public enum RegTypeDisplayOption
@@ -54,36 +60,6 @@
 
             [CustomString("2")]
             RadioButton
-        }
-
-        public enum GroupSizeOption
-        {
-            [CustomString("")]
-            JustSize,
-
-            [CustomString("or more")]
-            SizeOrMore
-        }
-
-        public enum DiscountType
-        {
-            [CustomString("US Dollar")]
-            USDollar,
-
-            [CustomString("Percent")]
-            Percent
-        }
-
-        public enum AdditionalRegOption
-        {
-            [CustomString("Additional")]
-            Additional,
-
-            [CustomString("All")]
-            All,
-
-            [CustomString("Any Additional")]
-            AnyAdditional
         }
 
         public enum Page
@@ -244,7 +220,10 @@
             Number = 13,
 
             [CustomString("File Upload")]
-            FileUpload = 14
+            FileUpload = 14,
+
+            [CustomString("Duration")]
+            Duration = 15
         }
 
         public enum AgendaLimitReachedOption
@@ -335,7 +314,7 @@
             PayPal
         }
 
-        public enum EventType
+        public enum FormType
         {
             [CustomString("Event")]
             ActiveEuropeEvent,
@@ -477,6 +456,24 @@
 
             [CustomString("Active")]
             Active
+        }
+
+        public enum Countries
+        {
+            [CustomString("United States")]
+            UnitedStates,
+
+            [CustomString("China")]
+            China,
+
+            [CustomString("Canada")]
+            Canada,
+
+            [CustomString("European Union (EU)")]
+            EU,
+
+            [CustomString("Austria")]
+            Austria
         }
         #endregion
 

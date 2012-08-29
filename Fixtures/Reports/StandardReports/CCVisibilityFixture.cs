@@ -108,6 +108,7 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.Reports);
             ManagerSiteMgr.DashboardMgr.OpenCommonReport(Managers.Report.ReportManager.CommonReportType.RoomingList);
+            ManagerSiteMgr.DashboardMgr.SelectReportPopupWindow();
 
             if (withAccess)
             {

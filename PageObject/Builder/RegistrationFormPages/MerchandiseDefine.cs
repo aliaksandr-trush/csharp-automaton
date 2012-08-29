@@ -16,6 +16,11 @@
         public TextBox NameOnForm = new TextBox("ctl00_cphDialog_elDescription_TextArea", LocateBy.Id);
         public TextBox NameOnReceipt = new TextBox("ctl00_cphDialog_elReportDescription_TextArea", LocateBy.Id);
         public TextBox NameOnReports = new TextBox("ctl00_cphDialog_feeFieldName", LocateBy.Id);
+        public ButtonOrLink AddTaxRate = new ButtonOrLink("ctl00_cphDialog_lbnTaxes", LocateBy.Id);
+        public CheckBox ApplyTaxOne = new CheckBox("ctl00_cphDialog_chkListTaxRates_0", LocateBy.Id);
+        public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cphDialog_chkListTaxRates_1", LocateBy.Id);
+        public TaxRateDefine TaxRate_Define = new TaxRateDefine("dialog2");
+        public TextBox DiscountCodes = new TextBox("ctl00_cphDialog_feepassword", LocateBy.Id);
         #endregion
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
@@ -27,6 +32,15 @@
             WaitForAJAX();
         }
 
+        public void AddTaxRate_Click()
+        {
+            this.AddTaxRate.WaitForDisplay();
+            this.AddTaxRate.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
         public void SaveAndStay_Click()
         {
             popupFrameHelper.SaveAndStay_Click();
@@ -35,13 +49,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
         }
     }
 }

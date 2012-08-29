@@ -8,7 +8,6 @@
     {
         public HtmlEditor(string name) : base(name) { }
         public HtmlEditor(int index) : base(index) { }
-        public HtmlEditor(string name, string parentFrame) : base(name, parentFrame) { }
 
         #region WebElements
         public ButtonOrLink HtmlMode = new ButtonOrLink("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
@@ -30,7 +29,7 @@
         public void Content_Type(string content)
         {
             this.Content.Type(content);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            SwitchToMain();
             SelectByName();
         }
 
@@ -42,15 +41,13 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
 
         public void Cancel_Click()
         {
             popupFrameHelper.Cancel_Click();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            SelectParentFrame();
+            SwitchToMain();
         }
         #endregion
     }

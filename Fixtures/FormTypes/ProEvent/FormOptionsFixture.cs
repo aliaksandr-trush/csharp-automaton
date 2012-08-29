@@ -198,6 +198,9 @@
             BuilderMgr.Next();
             VerifyMerchPage();
             BuilderMgr.Next();
+            BuilderMgr.PaymentMethodMgr.ClickCreditCardLink();
+            BuilderMgr.PaymentMethodMgr.CreditCardOptionsMgr.SelectPaymentGateway(CreditCardOptionsManager.PaymentGateway.RegOnlineGateway);
+            BuilderMgr.PaymentMethodMgr.CreditCardOptionsMgr.SaveAndClose();
             VerifyCheckoutPage();
             BuilderMgr.Next();
             VerifyConfirmationPage();

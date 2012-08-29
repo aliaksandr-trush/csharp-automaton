@@ -126,18 +126,23 @@
 
             this.RegisterNoAgendaItemsMerch(RegisterManager.PaymentMethod.Check);
 
-            this.PerformBackendCharge();
+            LoginAndGoToRegressionFolder();
+            BackendMgr.OpenAttendeeInfoURL(eventSessionId, regId);
+            BackendMgr.OpenPaymentMethod();
+            Assert.True(UIUtilityProvider.UIHelper.IsElementPresent("//select[@id='creditCardType'][@disabled]", LocateBy.XPath));
 
-            this.LoginAndOpenEventDashboardAndSwitchToReportTab();
+            ////this.PerformBackendCharge();
 
-            this.VerifyReportData(EventType.ProEvent, ProEvent.FeeCalculation_SimpleReg.Default);
+            ////this.LoginAndOpenEventDashboardAndSwitchToReportTab();
+
+            ////this.VerifyReportData(EventType.ProEvent, ProEvent.FeeCalculation_SimpleReg.Default);
 
             ////VerifyTransactionDataInDB(TxnIntegrityConstants.BackEndTransactionAmount,
             ////    TxnIntegrityConstants.BackEndBillableAmount,
             ////    TxnIntegrityConstants.AddAndModByRegression,
             ////    TxnIntegrityConstants.SharedFeePercent, EventType.ProEvent);
 
-            this.ChooseEventsTabOnEventDashboardAndCleanupTestRegAndReturnToManagerEventList();
+            ////this.ChooseEventsTabOnEventDashboardAndCleanupTestRegAndReturnToManagerEventList();
         }
 
         /// <summary>

@@ -128,7 +128,6 @@
             regType6.LatePrice = latePrice6;
             regType6.DiscountCode.Add(discountCode6);
 
-            RegType regType7 = new RegType("EarlyLateFeeDCRequiredTax");
             EarlyPrice earlyPrice7 = new EarlyPrice();
             earlyPrice7.earlyPrice = 40;
             earlyPrice7.EarlyPriceType = FormData.EarlyPriceType.DateAndTime;
@@ -143,19 +142,6 @@
             discountCode7.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode7.CodeKind = FormData.ChangeType.FixedAmount;
             discountCode7.CodeType = FormData.DiscountCodeType.DiscountCode;
-            TaxRate tax1 = new TaxRate("tax1");
-            tax1.Rate = 10;
-            tax1.Apply = true;
-            TaxRate tax2 = new TaxRate("tax2");
-            tax2.Rate = 20;
-            tax2.Apply = true;
-            regType7.Price = 50;
-            regType7.EarlyPrice = earlyPrice7;
-            regType7.LatePrice = latePrice7;
-            regType7.DiscountCode.Add(discountCode7);
-            regType7.RequireDC = true;
-            regType7.TaxRateOne = tax1;
-            regType7.TaxRateTwo = tax2;
 
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
 
@@ -165,26 +151,23 @@
             evt.StartPage.RegTypes.Add(regType4);
             evt.StartPage.RegTypes.Add(regType5);
             evt.StartPage.RegTypes.Add(regType6);
-            evt.StartPage.RegTypes.Add(regType7);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
-            reg1.RegType = regType1;
-            reg1.PaymentMethod = paymentMethod;
+            Registrant reg1 = new Registrant(evt);
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
+            reg1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(reg1.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetConfirmationTotal()));
+            Assert.True(reg1.EventFee_Response.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
-            Registrant reg2 = new Registrant();
-            reg2.Event = evt;
-            reg2.RegType = regType1;
-            reg2.PaymentMethod = paymentMethod;
+            Registrant reg2 = new Registrant(evt);
+            reg2.EventFee_Response = new EventFeeResponse(regType1);
+            reg2.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(reg2.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetConfirmationTotal()));
+            Assert.True(reg2.EventFee_Response.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
@@ -199,9 +182,6 @@
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
             KeywordProvider.RegisterDefault.SelectRegType(regType6);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.IsPresent);
-            KeywordProvider.RegisterDefault.SelectRegType(regType7);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.DiscountCodeRequired.IsPresent);
         }
 
         [Test]
@@ -217,12 +197,11 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
-            reg.RegType = regType;
+            Registrant reg = new Registrant(evt);
+            reg.EventFee_Response = new EventFeeResponse(regType);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.EventFee_Response.RegType);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetails.Text.Trim().Equals(regType.AdditionalDetails));
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetailsClose_Click();
             KeywordProvider.RegistrationCreation.Checkin(reg);
@@ -294,8 +273,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt1;
+            Registrant reg = new Registrant(evt1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);

@@ -19,16 +19,15 @@
             regType.IsSSO = true;
             evt.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(DataCollection.ExternalAuthenticationData.SSOTestEmail);
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
             reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
-            reg.Event = evt;
-            reg.RegType = regType;
-            reg.RegisterMethod = DataCollection.RegisterMethod.Admin;
+            reg.EventFee_Response = new DataCollection.EventFeeResponse(regType);
+            reg.Register_Method = DataCollection.RegisterMethod.Admin;
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();

@@ -37,9 +37,9 @@
 
             Event evt = new Event("AgendaNameTesting");
             AgendaPage AgendaPage = new AgendaPage();
-            AgendaItemCheckBox AgendaItem1 = new AgendaItemCheckBox("NameOnDifferentOptions");
-            AgendaItemCheckBox AgendaItem2 = new AgendaItemCheckBox("NameMaxLength");
-            AgendaItemCheckBox AgendaItem3 = new AgendaItemCheckBox(specialCharacters);
+            AgendaItem_CheckBox AgendaItem1 = new AgendaItem_CheckBox("NameOnDifferentOptions");
+            AgendaItem_CheckBox AgendaItem2 = new AgendaItem_CheckBox("NameMaxLength");
+            AgendaItem_CheckBox AgendaItem3 = new AgendaItem_CheckBox(specialCharacters);
             AgendaItem1.NameOnReceipt = "NameOnReceipt";
             AgendaItem1.NameOnReports = "NameOnReports";
             AgendaItem1.NameOnBadge = "NameOnBadge";
@@ -56,20 +56,19 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
-            AgendaCheckboxResponse resp1 = new AgendaCheckboxResponse();
+            Registrant reg = new Registrant(evt);
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = AgendaItem1;
             resp1.Checked = true;
-            AgendaCheckboxResponse resp2 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
             resp2.AgendaItem = AgendaItem2;
             resp2.Checked = true;
-            AgendaCheckboxResponse resp3 = new AgendaCheckboxResponse();
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
             resp3.AgendaItem = AgendaItem3;
             resp3.Checked = true;
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -81,18 +80,7 @@
             KeywordProvider.RegistrationCreation.Agenda(reg);
             KeywordProvider.RegistrationCreation.Checkout(reg);
 
-            List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
-
-            foreach (Label agenda in selectedAgendaItems)
-            {
-                List<AgendaResponse> resps = new List<AgendaResponse>();
-                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
-                {
-                    resps.Add(resp as AgendaResponse);
-                }
-                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
-                Assert.True(agendaItem != null);
-            }
+            this.VerifySelectedAgendaItems(reg);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
@@ -104,6 +92,24 @@
             Assert.True(results.Find(r => r.Contains(AgendaItem3.NameOnReports)) != null);
         }
 
+        public void VerifySelectedAgendaItems(DataCollection.Registrant reg)
+        {
+            List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
+
+            foreach (Label agenda in selectedAgendaItems)
+            {
+                List<AgendaResponse> resps = new List<AgendaResponse>();
+
+                foreach (CustomFieldResponse resp in reg.CustomField_Responses)
+                {
+                    resps.Add(resp as AgendaResponse);
+                }
+
+                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
+                Assert.True(agendaItem != null);
+            }
+        }
+
         [Test]
         [Category(Priority.Three)]
         [Description("1344")]
@@ -111,11 +117,11 @@
         {
             Event evt = new Event("AgendaDateTime");
             AgendaPage AgendaPage = new AgendaPage();
-            AgendaItemCheckBox AgendaItem1 = new AgendaItemCheckBox("DefaultDateTime");
-            AgendaItemCheckBox AgendaItem2 = new AgendaItemCheckBox("DateAndTime");
-            AgendaItemCheckBox AgendaItem3 = new AgendaItemCheckBox("DateOnly");
-            AgendaItemCheckBox AgendaItem4 = new AgendaItemCheckBox("TimeOnly");
-            AgendaItemCheckBox AgendaItem5 = new AgendaItemCheckBox("NotDisplayDateTime");
+            AgendaItem_CheckBox AgendaItem1 = new AgendaItem_CheckBox("DefaultDateTime");
+            AgendaItem_CheckBox AgendaItem2 = new AgendaItem_CheckBox("DateAndTime");
+            AgendaItem_CheckBox AgendaItem3 = new AgendaItem_CheckBox("DateOnly");
+            AgendaItem_CheckBox AgendaItem4 = new AgendaItem_CheckBox("TimeOnly");
+            AgendaItem_CheckBox AgendaItem5 = new AgendaItem_CheckBox("NotDisplayDateTime");
             DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 00);
             DateTime nowDate = new DateTime(now.Year, now.Month, now.Day, 0, 0 ,0);
             AgendaItem1.StartDate = now;
@@ -152,8 +158,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -177,10 +182,10 @@
         {
             Event evt = new Event("AgendaMultipleChoice");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemRadioButton AG1 = new AgendaItemRadioButton("RadioNew");
-            AgendaItemRadioButton AG2 = new AgendaItemRadioButton("RadioCommon");
-            AgendaItemDropDown AG3 = new AgendaItemDropDown("DropdownCommon");
-            AgendaItemDropDown AG4 = new AgendaItemDropDown("DropdownNew");
+            AgendaItem_MultipleChoice_RadioButton AG1 = new AgendaItem_MultipleChoice_RadioButton("RadioNew");
+            AgendaItem_MultipleChoice_RadioButton AG2 = new AgendaItem_MultipleChoice_RadioButton("RadioCommon");
+            AgendaItem_MultipleChoice_DropDown AG3 = new AgendaItem_MultipleChoice_DropDown("DropdownCommon");
+            AgendaItem_MultipleChoice_DropDown AG4 = new AgendaItem_MultipleChoice_DropDown("DropdownNew");
             ChoiceItem AG1Choice1 = new ChoiceItem("AG1Choice1");
             ChoiceItem AG1Choice2 = new ChoiceItem("AG1Choice2");
             AG1Choice1.SingleLimit = 2;
@@ -211,30 +216,29 @@
             Assert.True(KeywordProvider.ManagerDefault.HasErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice));
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
 
-            Registrant reg1 = new Registrant();
-            reg1.Event = evt;
-            AgendaRadioButtonResponse resp1 = new AgendaRadioButtonResponse();
+            Registrant reg1 = new Registrant(evt);
+            AgendaResponse_MultipleChoice_RadioButton resp1 = new AgendaResponse_MultipleChoice_RadioButton();
             resp1.AgendaItem = AG1;
             resp1.ChoiceItem = AG1Choice1;
-            AgendaDropDownResponse resp2 = new AgendaDropDownResponse();
+            AgendaResponse_MultipleChoice_DropDown resp2 = new AgendaResponse_MultipleChoice_DropDown();
             resp2.AgendaItem = AG4;
             resp2.ChoiceItem = AG4Choice1;
-            reg1.CustomFieldResponses.Add(resp1);
-            reg1.CustomFieldResponses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Registrant reg2 = new Registrant();
-            reg2.CustomFieldResponses.Add(resp1);
-            reg2.CustomFieldResponses.Add(resp2);
+            Registrant reg2 = new Registrant(evt);
+            reg2.CustomField_Responses.Add(resp1);
+            reg2.CustomField_Responses.Add(resp2);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Registrant reg3 = new Registrant();
+            Registrant reg3 = new Registrant(evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
@@ -252,30 +256,30 @@
             evt.StartPage.StartDate = DateTime.Today.AddDays(-10);
             evt.StartPage.EndDate = DateTime.Today.AddDays(10);
             evt.AgendaPage = new AgendaPage();
-            AgendaItemNumber AGNumber = new AgendaItemNumber("AGNumber");
+            AgendaItem_Number AGNumber = new AgendaItem_Number("AGNumber");
             AGNumber.CharLimit = 10;
-            AgendaItemOneLineText AGText = new AgendaItemOneLineText("AGText");
+            AgendaItem_OneLineText AGText = new AgendaItem_OneLineText("AGText");
             AGText.CharLimit = 10;
-            AgendaItemParagraph AGPara = new AgendaItemParagraph("AGPara");
+            AgendaItem_Paragraph AGPara = new AgendaItem_Paragraph("AGPara");
             AGPara.CharLimit = 1000;
-            AgendaItemDate AGDate = new AgendaItemDate("AGDate");
-            AgendaItemTime AGTime = new AgendaItemTime("AGTime");
-            AgendaItemHeader AGHeader = new AgendaItemHeader("AGHeader");
-            AgendaItemContinue AGContinue = new AgendaItemContinue("AGContinue");
-            AgendaItemContribution AGConribution = new AgendaItemContribution("AGConribution");
+            AgendaItem_Date AGDate = new AgendaItem_Date("AGDate");
+            AgendaItem_Time AGTime = new AgendaItem_Time("AGTime");
+            AgendaItem_Header AGHeader = new AgendaItem_Header("AGHeader");
+            AgendaItem_ContinueButton AGContinue = new AgendaItem_ContinueButton("AGContinue");
+            AgendaItem_Contribution AGConribution = new AgendaItem_Contribution("AGConribution");
             AGConribution.MinAmount = 10;
             AGConribution.MaxAmount = 100;
-            AgendaItemUpload AGUpload = new AgendaItemUpload("AGUpload");
-            AgendaItemCheckBox AGCheckBox = new AgendaItemCheckBox("AGCheckBox");
-            AgendaItemRadioButton AGRadio = new AgendaItemRadioButton("AGRadio");
+            AgendaItem_FileUpload AGUpload = new AgendaItem_FileUpload("AGUpload");
+            AgendaItem_CheckBox AGCheckBox = new AgendaItem_CheckBox("AGCheckBox");
+            AgendaItem_MultipleChoice_RadioButton AGRadio = new AgendaItem_MultipleChoice_RadioButton("AGRadio");
             AGRadio.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.YesOrNo);
-            AgendaItemDropDown AGDropDown = new AgendaItemDropDown("AGDropDown");
+            AgendaItem_MultipleChoice_DropDown AGDropDown = new AgendaItem_MultipleChoice_DropDown("AGDropDown");
             AGDropDown.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.Agreement);
-            AgendaItemAlways AGAlways = new AgendaItemAlways("AGAlways");
-            AgendaItemCheckBox ChangeToHeader = new AgendaItemCheckBox("ChangeToHeader");
+            AgendaItem_AlwaysSelected AGAlways = new AgendaItem_AlwaysSelected("AGAlways");
+            AgendaItem_CheckBox ChangeToHeader = new AgendaItem_CheckBox("ChangeToHeader");
             ChangeToHeader.StartDate = DateTime.Today.AddDays(-5);
             ChangeToHeader.EndDate = DateTime.Today.AddDays(5);
-            ChangeToHeader.Location = Registrant.Default.AddressLineOne;
+            ChangeToHeader.Location = DataCollection.DefaultPersonalInfo.AddressLineOne;
             ChangeToHeader.Price = 10;
             ChangeToHeader.SpacesAvailable = 5;
             evt.AgendaPage.AgendaItems.Add(AGNumber);
@@ -351,44 +355,44 @@
             ChangeToHeader.Type = FormData.CustomFieldType.SectionHeader;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
-            Registrant reg = new Registrant();
+            Registrant reg = new Registrant(evt);
             reg.Event = evt;
-            AgendaCharInputResponse resp1 = new AgendaCharInputResponse();
+            AgendaResponse_TextInput resp1 = new AgendaResponse_TextInput();
             resp1.AgendaItem = AGNumber;
             resp1.CharToInput = "1234567890123";
-            AgendaCharInputResponse resp2 = new AgendaCharInputResponse();
+            AgendaResponse_TextInput resp2 = new AgendaResponse_TextInput();
             resp2.AgendaItem = AGText;
             resp2.CharToInput = "abcdefghijkl";
-            AgendaCharInputResponse resp3 = new AgendaCharInputResponse();
+            AgendaResponse_TextInput resp3 = new AgendaResponse_TextInput();
             resp3.AgendaItem = AGPara;
             resp3.CharToInput = "abcdefghijkl";
-            AgendaDateResponse resp4 = new AgendaDateResponse();
+            AgendaResponse_Date resp4 = new AgendaResponse_Date();
             resp4.AgendaItem = AGDate;
             resp4.Date = DateTime.Today;
-            AgendaTimeResponse resp5 = new AgendaTimeResponse();
+            AgendaResponse_Time resp5 = new AgendaResponse_Time();
             resp5.AgendaItem = AGTime;
             resp5.Time = DateTime.Now;
-            AgendaContributionResponse resp6 = new AgendaContributionResponse();
+            AgendaResponse_Contribution resp6 = new AgendaResponse_Contribution();
             resp6.AgendaItem = AGConribution;
-            resp6.Contribution = 10.5;
-            AgendaCheckboxResponse resp7 = new AgendaCheckboxResponse();
+            resp6.ContributionAmount = 10.5;
+            AgendaResponse_Checkbox resp7 = new AgendaResponse_Checkbox();
             resp7.AgendaItem = AGCheckBox;
             resp7.Checked = true;
-            AgendaRadioButtonResponse resp8 = new AgendaRadioButtonResponse();
+            AgendaResponse_MultipleChoice_RadioButton resp8 = new AgendaResponse_MultipleChoice_RadioButton();
             resp8.AgendaItem = AGRadio;
             resp8.ChoiceItem = AGRadio.ChoiceItems.Find(c => c.Name == MultipleChoice_CommonlyUsed.YesOrNo.Yes);
-            AgendaDropDownResponse resp9 = new AgendaDropDownResponse();
+            AgendaResponse_MultipleChoice_DropDown resp9 = new AgendaResponse_MultipleChoice_DropDown();
             resp9.AgendaItem = AGDropDown;
             resp9.ChoiceItem = AGDropDown.ChoiceItems.Find(c => c.Name == MultipleChoice_CommonlyUsed.Agreement.Agree);
-            reg.CustomFieldResponses.Add(resp1);
-            reg.CustomFieldResponses.Add(resp2);
-            reg.CustomFieldResponses.Add(resp3);
-            reg.CustomFieldResponses.Add(resp4);
-            reg.CustomFieldResponses.Add(resp5);
-            reg.CustomFieldResponses.Add(resp6);
-            reg.CustomFieldResponses.Add(resp7);
-            reg.CustomFieldResponses.Add(resp8);
-            reg.CustomFieldResponses.Add(resp9);
+            reg.CustomField_Responses.Add(resp1);
+            reg.CustomField_Responses.Add(resp2);
+            reg.CustomField_Responses.Add(resp3);
+            reg.CustomField_Responses.Add(resp4);
+            reg.CustomField_Responses.Add(resp5);
+            reg.CustomField_Responses.Add(resp6);
+            reg.CustomField_Responses.Add(resp7);
+            reg.CustomField_Responses.Add(resp8);
+            reg.CustomField_Responses.Add(resp9);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
@@ -421,24 +425,175 @@
         }
 
         [Test]
+        [Category(Priority.Two)]
+        [Description("1347")]
+        public void Agenda_Duration()
+        {
+            Configuration.ConfigurationProvider.XmlConfig.ReloadAccount(Configuration.XmlConfiguration.AccountType.ActiveEurope);
+            Event evt = new Event("RI_Agenda_Duration");
+            evt.FormType = FormData.FormType.ActiveEuropeEvent;
+            evt.StartPage.EventType = EventType.Running;
+            evt.AgendaPage = new AgendaPage();
+            DataCollection.AgendaItem_Duration duration = new AgendaItem_Duration("AG_Duration");
+            evt.AgendaPage.AgendaItems.Add(duration);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg = new Registrant(evt);
+            AgendaResponse_Duration duration_Response = new AgendaResponse_Duration();
+            duration_Response.AgendaItem = duration;
+            duration_Response.Duration = new TimeSpan(1, 30, 30);
+            reg.CustomField_Responses.Add(duration_Response);
+
+            Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+        }
+
+        [Test]
+        [Category(Priority.Two)]
+        [Description("1348")]
+        public void ShoppingCart()
+        {
+            double agendaStandardPrice = 100;
+
+            Event evt = new Event("RI_Agenda_ShoppingCart");
+            evt.AgendaPage = new AgendaPage();
+            evt.AgendaPage.IsShoppingCart = true;
+
+            DataCollection.AgendaItem_CheckBox sessionOne = new AgendaItem_CheckBox("SessionOne");
+            sessionOne.Location = "FirstRoom";
+            DateTime oneYearAfter = DateTime.Now.AddYears(1);
+            sessionOne.StartDate = sessionOne.StartTime = oneYearAfter;
+            sessionOne.EndDate = sessionOne.EndTime = sessionOne.StartTime.Value.AddHours(1);
+            sessionOne.Price = agendaStandardPrice;
+
+            DataCollection.AgendaItem_CheckBox sessionTwo = new AgendaItem_CheckBox("SessionTwo");
+            sessionTwo.Location = "SecondRoom";
+            sessionTwo.StartDate = sessionTwo.StartTime = sessionOne.EndTime.Value.AddHours(1);
+            sessionTwo.EndDate = sessionTwo.EndTime = sessionTwo.StartTime.Value.AddHours(1);
+            sessionTwo.Price = agendaStandardPrice;
+
+            DataCollection.AgendaItem_CheckBox sessionThree = new AgendaItem_CheckBox("SessionThree");
+            sessionThree.Location = "ThirdRoom";
+            sessionThree.StartDate = sessionThree.StartTime = sessionTwo.EndTime.Value.AddHours(1);
+            sessionThree.EndDate = sessionThree.EndTime = sessionThree.StartTime.Value.AddHours(1);
+            sessionThree.Price = agendaStandardPrice;
+
+            evt.AgendaPage.AgendaItems.Add(sessionOne);
+            evt.AgendaPage.AgendaItems.Add(sessionTwo);
+            evt.AgendaPage.AgendaItems.Add(sessionThree);
+
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethod.Check));
+
+            Registrant reg = new Registrant(evt);
+
+            DataCollection.AgendaResponse responseOne = new AgendaResponse();
+            responseOne.AgendaItem = sessionOne;
+            DataCollection.AgendaResponse responseTwo = new AgendaResponse();
+            responseTwo.AgendaItem = sessionTwo;
+            DataCollection.AgendaResponse responseThree = new AgendaResponse();
+            responseThree.AgendaItem = sessionThree;
+
+            reg.CustomField_Responses.Add(responseOne);
+            reg.CustomField_Responses.Add(responseTwo);
+            reg.CustomField_Responses.Add(responseThree);
+
+            reg.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+
+            Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            Keyword.KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            this.VerifySelectedAgendaItems(reg);
+        }
+
+        [Test]
         [Category(Priority.Three)]
+        [Description("1349")]
         public void AgendaLocation()
         {
-            Event evt = new Event("FileUploadAndLocation");
+            Event evt = new Event("AgendaLocation");
             evt.AgendaPage = new AgendaPage();
-            AgendaItemCheckBox AGCheckbox = new AgendaItemCheckBox("AGCheckbox");
-            AGCheckbox.Location = Registrant.Default.AddressLineOne;
+            AgendaItem_CheckBox AGCheckbox = new AgendaItem_CheckBox("AGCheckbox");
+            AGCheckbox.Location = DataCollection.DefaultPersonalInfo.AddressLineOne;
             evt.AgendaPage.AgendaItems.Add(AGCheckbox);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            Registrant reg = new Registrant();
-            reg.Event = evt;
+            Registrant reg = new Registrant(evt);
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
             Assert.AreEqual(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                AGCheckbox).GetAgendaLocation(AGCheckbox), Registrant.Default.AddressLineOne);
+                AGCheckbox).GetAgendaLocation(AGCheckbox), DataCollection.DefaultPersonalInfo.AddressLineOne);
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1350")]
+        public void AgendaSpaces()
+        {
+            Event evt = new Event("AgendaSpaces");
+            evt.AgendaPage = new AgendaPage();
+            AgendaItem_CheckBox AgendaShowCapacity = new AgendaItem_CheckBox("AgendaShowCapacity");
+            AgendaShowCapacity.SpacesAvailable = 1;
+            AgendaShowCapacity.ShowCapacity = true;
+            AgendaItem_CheckBox AgendaHideReached = new AgendaItem_CheckBox("AgendaHideReached");
+            AgendaHideReached.SpacesAvailable = 1;
+            AgendaHideReached.LimitReachedOption = FormData.AgendaLimitReachedOption.HideItem;
+            AgendaItem_CheckBox AgendaShowMessage = new AgendaItem_CheckBox("AgendaShowMessage");
+            AgendaShowMessage.SpacesAvailable = 1;
+            AgendaShowMessage.LimitReachedOption = FormData.AgendaLimitReachedOption.ShowMessage;
+            AgendaShowMessage.LimitReachedMessage = "Full";
+            AgendaItem_CheckBox AgendaWaitlist = new AgendaItem_CheckBox("AgendaWaitlist");
+            AgendaWaitlist.SpacesAvailable = 1;
+            AgendaWaitlist.LimitReachedOption = FormData.AgendaLimitReachedOption.Waitlist;
+            AgendaWaitlist.WaitlistConfirmationText = "WaitlistConfirmationText";
+            evt.AgendaPage.AgendaItems.Add(AgendaShowCapacity);
+            evt.AgendaPage.AgendaItems.Add(AgendaHideReached);
+            evt.AgendaPage.AgendaItems.Add(AgendaShowMessage);
+            evt.AgendaPage.AgendaItems.Add(AgendaWaitlist);
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+
+            Registrant reg1 = new Registrant(evt);
+            AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
+            resp1.AgendaItem = AgendaShowCapacity;
+            resp1.Checked = true;
+            AgendaResponse_Checkbox resp2 = new AgendaResponse_Checkbox();
+            resp2.AgendaItem = AgendaHideReached;
+            resp2.Checked = true;
+            AgendaResponse_Checkbox resp3 = new AgendaResponse_Checkbox();
+            resp3.AgendaItem = AgendaShowMessage;
+            resp3.Checked = true;
+            AgendaResponse_Checkbox resp4 = new AgendaResponse_Checkbox();
+            resp4.AgendaItem = AgendaWaitlist;
+            resp4.Checked = true;
+            reg1.CustomField_Responses.Add(resp1);
+            reg1.CustomField_Responses.Add(resp2);
+            reg1.CustomField_Responses.Add(resp3);
+            reg1.CustomField_Responses.Add(resp4);
+
+            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(AgendaShowCapacity);
+            Assert.True(row1.AgendaLabel.Text.Contains("1 remaining"));
+            KeywordProvider.RegistrationCreation.Agenda(reg1);
+            KeywordProvider.RegistrationCreation.Checkout(reg1);
+
+            Registrant reg2 = new Registrant(evt);
+            reg2.CustomField_Responses.Add(resp4);
+            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(AgendaHideReached);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(AgendaShowMessage);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(AgendaWaitlist);
+            Assert.False(row1.AgendaType.IsPresent);
+            Assert.False(row2.AgendaType.IsPresent);
+            Assert.True(row3.LimitFullMessage.IsPresent);
+            Assert.True(row4.WaitlistMessage.IsPresent);
+            KeywordProvider.RegistrationCreation.Agenda(reg2);
+            KeywordProvider.RegistrationCreation.Checkout(reg2);
+
+            PageObject.PageObjectProvider.Builder.EmailViewer.OpenURL(evt.Id, reg2.Id);
+            Assert.True(PageObject.PageObjectHelper.IsTextPresent(AgendaWaitlist.WaitlistConfirmationText));
         }
 
         private void SelectAgendaType(FormData.CustomFieldType type)

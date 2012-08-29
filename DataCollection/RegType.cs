@@ -13,8 +13,8 @@
         public bool? RequireDC;
         public EarlyPrice EarlyPrice;
         public LatePrice LatePrice;
-        public TaxRate TaxRateOne;
-        public TaxRate TaxRateTwo;
+        public bool? ApplyTaxOne;
+        public bool? ApplyTaxTwo;
         public int? MinGroupSize;
         public int? MaxGroupSize;
         public string MinRegistrantMessage;

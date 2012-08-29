@@ -54,6 +54,7 @@
     <Compile Include="DiscountCode.cs" />
     <Compile Include="EarlyLatePrice.cs" />
     <Compile Include="ExternalAuthenticationData.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="EventDetails.cs" />
     <Compile Include="EventFolders.cs" />
