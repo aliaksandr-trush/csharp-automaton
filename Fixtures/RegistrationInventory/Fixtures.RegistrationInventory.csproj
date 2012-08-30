@@ -63,6 +63,7 @@
     <Compile Include="CheckinPage\SingleRegistration.cs" />
     <Compile Include="CheckinPage\VerifyCheckinAndLogin.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="FeeOptions\AccessCodeFixture.cs" />
     <Compile Include="FeeOptions\DiscountCodeFixture.cs" />
     <Compile Include="FeeOptions\TaxFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

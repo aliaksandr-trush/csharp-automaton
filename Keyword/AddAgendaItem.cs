@@ -199,7 +199,7 @@
                         KeywordProvider.AddEarlyLatePrice.AddLatePrice(ag.LatePrice, FormData.Location.Agenda);
                     }
 
-                    if (ag.DiscountCodes.Count != 0)
+                    if ((ag.DiscountCodes.Count != 0) && (ag.BulkCodes == null))
                     {
                         foreach (DiscountCode dc in ag.DiscountCodes)
                         {

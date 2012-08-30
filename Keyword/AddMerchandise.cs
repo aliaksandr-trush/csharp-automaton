@@ -58,34 +58,7 @@
 
             if (merch.DiscountCodes.Count != 0)
             {
-                string discountCodeString = string.Empty;
-
-                for (int i = 0; i < merch.DiscountCodes.Count; i++)
-                {
-                    discountCodeString += merch.DiscountCodes[i].Code;
-
-                    if (merch.DiscountCodes[i].CodeType != FormData.DiscountCodeType.AccessCode)
-                    {
-                        discountCodeString += "=";
-
-                        if (merch.DiscountCodes[i].CodeDirection == FormData.ChangePriceDirection.Decrease)
-                        {
-                            discountCodeString += "-";
-                        }
-
-                        discountCodeString += merch.DiscountCodes[i].Amount.ToString();
-
-                        if (merch.DiscountCodes[i].CodeKind == FormData.ChangeType.Percent)
-                        {
-                            discountCodeString += "%";
-                        }
-                    }
-
-                    if (i != merch.DiscountCodes.Count - 1)
-                    {
-                        discountCodeString += ",";
-                    }
-                }
+                string discountCodeString = DiscountCode.GenerateBulkCodes(merch.DiscountCodes);
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.DiscountCodes.Type(discountCodeString);
             }
