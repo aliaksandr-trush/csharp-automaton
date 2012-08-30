@@ -55,6 +55,7 @@
     <Compile Include="AssertHelper.cs" />
     <Compile Include="ExternalAuthenticationFixtureBase.cs" />
     <Compile Include="FixtureBase.cs" />
+    <Compile Include="HtmlUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

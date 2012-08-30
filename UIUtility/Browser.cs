@@ -129,4 +129,28 @@
         ////    return new RemoteWebDriver(new Uri("http://127.0.0.1:9515"), capa);
         ////}
     }
+
+    internal class Browser_HtmlUnit : IGetWebDriver
+    {
+        public IWebDriver GetWebDriver()
+        {
+            DesiredCapabilities capa = DesiredCapabilities.HtmlUnitWithJavaScript();
+
+            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            {
+                capa.SetCapability(
+                    "firefox_binary",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+            }
+
+            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            {
+                capa.SetCapability(
+                    "firefox_profile",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+            }
+
+            return new RemoteWebDriver(capa);
+        }
+    }
 }
