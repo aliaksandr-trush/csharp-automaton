@@ -5,6 +5,8 @@
     using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.Keyword;
 
+    [TestFixture]
+    [Category(FixtureCategory.Regression)]
     public class TaxFixture : FixtureBase
     {
         private Event evt;

@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MerchandiseDiscountCodesFixture.cs" />
     <Compile Include="MerchandiseFeeOptionsFixture.cs" />
     <Compile Include="MerchandiseMultiChoiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
