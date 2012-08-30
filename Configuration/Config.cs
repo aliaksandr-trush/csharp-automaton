@@ -147,7 +147,7 @@
 
     public class NUnitAddin
     {
-        [XmlElement(ElementName = "ReportBack")]
+        [XmlAttributeAttribute(ElementName = "ReportBack")]
         public bool ReportBack { get; set; }
     }
 }
