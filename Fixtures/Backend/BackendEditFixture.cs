@@ -1034,24 +1034,15 @@
         private void CreateEventForAttendeeInfo()
         {
             this.LoginAndGetSessionID();
-
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
             this.eventId = BuilderMgr.GetEventId();
-
             this.SetStartPageForAttendeeInfoEvent(BackendFixtureHelper.AttendeeInfoEvent.EventName, new DateTime(2013, 4, 25), new DateTime(2013, 5, 2));
-
             this.SetPersonalInfoPageForAttendeeInfoEvent();
-
             this.SetAgendaPageForAttendeeInfoEvent();
-
             this.SetLTPageForAttendeeInfoEvent(5);
-
             this.SetMerchandisePageForAttendeeInfoEvent();
-
             this.SetCheckoutPageForAttendeeInfoEvent();
-
             this.SetConfrimationPageForAttendeeInfoEvent();
-
             BuilderMgr.SaveAndClose();
         }
 
@@ -1100,10 +1091,12 @@
             BuilderMgr.ClickAddPICustomField();
             BuilderMgr.CFMgr.SetName("Personal info drop down");
             BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Dropdown);
+
             foreach (string name in ItemName2)
             {
                 BuilderMgr.CFMgr.AddMultiChoiceItem(name);
             }
+
             BuilderMgr.CFMgr.SaveAndClose();
 
             BuilderMgr.ClickAddPICustomField();
@@ -1161,10 +1154,12 @@
             BuilderMgr.ClickAddAgendaItem();
             BuilderMgr.AGMgr.SetName("Agenda Radio Buttons no fee");
             BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.RadioButton);
+
             foreach (string name in ItemName1)
             {
                 BuilderMgr.AGMgr.AddMultiChoiceItem(name, null);
             }
+
             BuilderMgr.AGMgr.ClickSaveItem();
 
             BuilderMgr.ClickAddAgendaItem();
@@ -1177,10 +1172,12 @@
             BuilderMgr.ClickAddAgendaItem();
             BuilderMgr.AGMgr.SetName("Agenda dropdown no fee");
             BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Dropdown);
+
             foreach (string name in ItemName1)
             {
                 BuilderMgr.AGMgr.AddMultiChoiceItem(name, null);
             }
+
             BuilderMgr.AGMgr.ClickSaveItem();
 
             BuilderMgr.ClickAddAgendaItem();
@@ -1221,7 +1218,6 @@
 
             BuilderMgr.SaveAndStay();
         }
-
 
         private void SetLTPageForAttendeeInfoEvent(int number)
         {
@@ -1264,7 +1260,7 @@
             BuilderMgr.LodgingSettingsAndPaymentOptionsMgr.ChoosePaymentOption(LodgingSettingsAndPaymentOptionsManager.PaymentOption.ChargeForLodging);
             BuilderMgr.LodgingSettingsAndPaymentOptionsMgr.SetHotelBookingFee(10.00);
 
-            BuilderMgr.TravelStandardAdditionalFieldsMgr.ChoicePurposeForCollectingTravelInfo(TravelStandardAdditionalFieldsManager.TravelInfo.PurposeBooking);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SelectPurposeForCollectingTravelInfo(TravelStandardAdditionalFieldsManager.TravelInfo.PurposeBooking);
             BuilderMgr.TravelStandardAdditionalFieldsMgr.SetAirline(true, false, true, false);
             BuilderMgr.TravelStandardAdditionalFieldsMgr.SetAirport(true, false, true, false);
             BuilderMgr.TravelStandardAdditionalFieldsMgr.SetCity(true, false, true, false);
@@ -1284,6 +1280,7 @@
         {
             string[] itemname_fixed = { "numero 1", "numero 2" };
             string[] itemname_var = { "Letter A", "Letter B" };
+
             BuilderMgr.GotoPage(FormDetailManager.Page.Merchandise);
             BuilderMgr.AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType.Fixed, "Fixed price", 1.00, null, null);
             BuilderMgr.AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType.Fixed, "Fixed price w/MC items", 1.00, null, null, itemname_fixed, null);
@@ -1291,7 +1288,6 @@
             BuilderMgr.AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType.Variable, "Variable amount", null, 1.00, 1000.00);
             BuilderMgr.AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType.Variable, "Variable amount w/MC items", null, 1.00, 1000.00, itemname_var, null);
         }
-
 
         private void SetCheckoutPageForAttendeeInfoEvent()
         {

@@ -61,22 +61,11 @@
         [Verify]
         public void VerifyMerchandiseItem(MerchandiseManager.MerchandiseType type, string name)
         {
-            ////ReloadEvent();
-
             Fee fee = null;
 
             ClientDataContext db = new ClientDataContext();
             fee = (from f in db.Fees where f.Description == name && f.AmountTypeId == (int)type orderby f.Id ascending select f).ToList().Last();
 
-            //E.Fees fee = Event.FeesCollection.Find(
-            //    delegate(E.Fees feeInner)
-            //    {
-            //        return feeInner.Description == name &&
-            //            feeInner.ReportDescription == feeInner.Description &&
-            //            feeInner.Fieldname == feeInner.Description &&
-            //            feeInner.AmountTypeId == (int)type;
-            //    }
-            //);
             Assert.That(fee != null);
 
             switch (type)
@@ -88,9 +77,6 @@
                     Assert.That(fee.MinVarAmount > 0);
                     Assert.That(fee.MaxVarAmount > 0);
                     break;
-                ////case MerchandiseManager.MerchandiseType.Percentage:
-                ////    Assert.That(fee.Pct > 0);
-                ////    break;
             }
         }
 

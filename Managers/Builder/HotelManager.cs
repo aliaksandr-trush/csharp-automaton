@@ -99,26 +99,12 @@
             UIUtilityProvider.UIHelper.WaitForDisplayAndClick(newRoomBlockLocator, LocateBy.Id);
         }
 
-        public void SetCapacityAndRate(string roomType, int capacity, double? rate)
-        {
-            string capacityLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'BlockSize')]", roomType);
-            UIUtilityProvider.UIHelper.Type(capacityLocator, capacity, LocateBy.XPath);
-
-            if (rate != null)
-            {
-                string rateLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'RoomRate')]", roomType);
-                UIUtilityProvider.UIHelper.Type(rateLocator, rate, LocateBy.XPath);
-            }
-        }
-
-
         public void SetCapacityAndRates(string roomType, int capacity, double? rate, int number)
         {
             string capacityLocator = string.Format("//*[text()='{0}']/following-sibling::*/input[contains(@id,'BlockSize')]", roomType);
 
             int id = System.Convert.ToInt32((UIUtilityProvider.UIHelper.GetId(capacityLocator, LocateBy.XPath)).Substring(29, 4));
             string order = UIUtilityProvider.UIHelper.GetId(capacityLocator, LocateBy.XPath).Substring(34);
-
 
             for (int i = 0; i <= number; i++)
             {
@@ -127,7 +113,6 @@
                 if (rate != null)
                 {
                     UIUtilityProvider.UIHelper.Type(string.Format("ctl00_cphDialog_rntRoomRate_{0}_{1}", id + i, order), rate, LocateBy.Id);
-
                 }
             }
         }

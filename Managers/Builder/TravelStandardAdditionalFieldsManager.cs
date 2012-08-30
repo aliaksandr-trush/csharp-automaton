@@ -124,7 +124,7 @@
             UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkPassportNumberR", required, LocateBy.Id);
         }
 
-        public void ChoicePurposeForCollectingTravelInfo(TravelInfo travelinfo)
+        public void SelectPurposeForCollectingTravelInfo(TravelInfo travelinfo)
         {
             switch (travelinfo)
             {
