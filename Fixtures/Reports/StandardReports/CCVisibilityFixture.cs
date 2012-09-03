@@ -58,6 +58,7 @@
             RegisterMgr.Continue();
             RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.FillOutLodgingCCInfo_Default();
             RegisterMgr.Continue();
             RegisterMgr.PayMoney(Managers.ManagerBase.PaymentMethod.CreditCard);

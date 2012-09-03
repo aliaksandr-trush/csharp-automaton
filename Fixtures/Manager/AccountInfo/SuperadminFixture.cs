@@ -93,6 +93,7 @@
             RegisterMgr.Continue();
             RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.FillOutLodgingCCInfo_Default();
             RegisterMgr.Continue();
             RegisterMgr.FinishRegistration();
