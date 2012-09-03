@@ -712,6 +712,7 @@
             RegisterMgr.VerifyTravelStandardAdditionalFieldsPresent(null, TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields.AdditionalInfo, true);
             RegisterMgr.VerifyTravelStandardAdditionalFieldsPresent(null, TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields.GroundTransportationPreference, true);
 
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.Continue();
 
             string[] errorList = RegisterMgr.GetErrorMessages();
