@@ -321,6 +321,7 @@
 
             Registrant registrant = new Registrant(eventFeeDCRequired);
             registrant.EventFee_Response = new EventFeeResponse(eventFeeDCRequired.StartPage.RegTypes[1]);
+            registrant.EventFee_Response.Code = dc;
             registrant.Payment_Method = paymentMethod;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(registrant);
@@ -343,6 +344,7 @@
             DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
+            registrantWhenFull.EventFee_Response.Code = discountCode;
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
@@ -359,6 +361,7 @@
             DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
+            registrantWhenFull.EventFee_Response.Code = discountCode;
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 

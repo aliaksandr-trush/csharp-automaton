@@ -63,7 +63,7 @@
         {
             this.EventFeeAdvanced.WaitForDisplay();
             this.EventFeeAdvanced.Click();
-            Utility.ThreadSleep(2);
+            Utility.ThreadSleep(4);
             WaitForAJAX();
             WaitForLoad();
         }

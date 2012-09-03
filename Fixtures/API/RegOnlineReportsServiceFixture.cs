@@ -97,7 +97,7 @@
                 endDate,
                 false);
 
-            Assert.That(Regex.IsMatch(response, "<last_Name>.+</last_Name>"));
+            Assert.That(Regex.IsMatch(response, "<last_Name>[^<]+</last_Name>"));
             string returnedDateString = Regex.Match(response, "<RegDate>[^<]+</RegDate>").Value.Split(new char[]{' '})[0].Split(new char[]{'>'})[1];
             VerifyTool.VerifyValue(this.regDates[0].ToString("M/d/yyyy"), returnedDateString, "RegDate: {0}");
         }
@@ -191,6 +191,7 @@
             RegisterMgr.Continue();
             RegisterMgr.FinishRegistration();
             RegisterMgr.ConfirmRegistration();
+            this.regDates.Add(DateTime.Now);
         }
 
         [Step]

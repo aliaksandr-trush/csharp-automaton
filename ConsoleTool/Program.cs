@@ -4,6 +4,8 @@
     using System.IO;
     using System.Xml.Serialization;
     using System.Xml;
+    using System.Collections.Generic;
+    using RegOnline.RegressionTest.DataAccess;
 
     public class Program
     {
@@ -25,11 +27,13 @@
             ////Console.WriteLine(test.DoubleProperty);
             ////Console.WriteLine(test.InnerClassInstance);
             ////Console.Read();
-            XmlSerializer ser = new XmlSerializer(typeof(RegOnline.RegressionTest.Configuration.TestConfig));
-            FileStream fs = new FileStream("RegressionTestConfig.xml", FileMode.Open);
-            RegOnline.RegressionTest.Configuration.TestConfig config = (RegOnline.RegressionTest.Configuration.TestConfig)ser.Deserialize(fs);
-            Console.WriteLine(config.Environments.Preferred.Environment);
-            Console.WriteLine(config.Environments.Preferred.PrivateLabel);
+            string input = Console.ReadLine();
+            string[] eventIds = input.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string eventId in eventIds)
+            {
+                AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
+            }
+            Console.Read();
         }
 
         //private static void DateTimeConvertTest()

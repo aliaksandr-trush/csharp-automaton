@@ -7,7 +7,7 @@
     {
         public CustomField(string name)
         {
-            this.NameOnForm = name;
+            this.NameOnForm = this.NameOnReceipt = this.NameOnReports = this.NameOnBadge = name;
         }
 
         public int Id;

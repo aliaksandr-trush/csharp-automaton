@@ -30,6 +30,7 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
+            Utilities.Utility.ThreadSleep(2);
             SwitchToMain();
         }
 

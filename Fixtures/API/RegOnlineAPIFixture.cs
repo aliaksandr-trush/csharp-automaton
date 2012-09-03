@@ -594,7 +594,9 @@
         public void GetCustomFieldsForRegistration()
         {
             // login as a registrant
-            RunTestToGetRegistrantAPIToken();
+            ////RunTestToGetRegistrantAPIToken();
+            this.LoginRegistrant();
+            header.APIToken = registrantAPIToken;
 
             var result = service.GetCustomFieldsForRegistration(header, null, null,
                 (int)PageSectionId.Preferences);
@@ -1168,6 +1170,7 @@
             RegisterMgr.Continue();
             RegisterMgr.SetCustomFieldCheckBox(AgendaItemName, true);
             RegisterMgr.Continue();
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.SelectRoomPreference(Managers.Register.RegisterManager.RoomPreference.Single);
             RegisterMgr.SelectBedPreference(Managers.Register.RegisterManager.BedPreference.Queen);
             RegisterMgr.EnterArrivalAirline();

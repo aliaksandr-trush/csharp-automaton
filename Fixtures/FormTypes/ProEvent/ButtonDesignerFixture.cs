@@ -29,7 +29,7 @@
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
             ManagerSiteMgr.SelectFolder();
-            htmlButtons = NewFile(string.Format(@"C:\QA\ButtonDesigner\ChecklistTest_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
+            htmlButtons = NewFile(string.Format(@"\\ws0034qaauto01\C$\QA\ButtonDesigner\ChecklistTest_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
             ManagerSiteMgr.OpenEventDashboard(formName);
 
             //Text right here- register
@@ -71,7 +71,7 @@
                 ManagerSiteMgr.DeleteEventByName(formName);
                 BuildBasicMembership(formName);
 
-                htmlButtons = NewFile(string.Format(@"C:\QA\ButtonDesigner\Membership_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
+                htmlButtons = NewFile(string.Format(@"\\ws0034qaauto01\C$\QA\ButtonDesigner\Membership_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
                 ManagerSiteMgr.OpenEventDashboard(formName);
 
                 // All possible for a text box, same window

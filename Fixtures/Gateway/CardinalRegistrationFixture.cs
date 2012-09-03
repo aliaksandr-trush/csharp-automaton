@@ -8,7 +8,6 @@
     using RegOnline.RegressionTest.Managers.Builder;
     using System.Collections.Generic;
     
-
     [TestFixture]
     [Category(FixtureCategory.Regression)]
     public class CardinalRegistrationFixture : FixtureBase
@@ -95,8 +94,6 @@
             DataHelperTool.ChangeAllRegsToTestAndDelete(this.eventId);
         }
 
-        
-        
         private void SetAgendaPage(string[] agendaname, double[] price)
         {
             int i = 0;

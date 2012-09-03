@@ -105,7 +105,7 @@
                     resps.Add(resp as AgendaResponse);
                 }
 
-                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
+                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnForm).AgendaItem;
                 Assert.True(agendaItem != null);
             }
         }

@@ -33,6 +33,7 @@
                 eventIds.Add(row.EventId);
             }
 
+            eventIds.Sort();
             eventIds.Reverse();
             return eventIds[0];
         }
