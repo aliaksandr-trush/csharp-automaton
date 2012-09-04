@@ -11,6 +11,7 @@
     using RegOnline.RegressionTest.Managers.Manager.Dashboard;
     using RegOnline.RegressionTest.Managers.Register;
     using RegOnline.RegressionTest.UIUtility;
+    using RegOnline.RegressionTest.Utilities;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -39,9 +40,9 @@
         private BibNumberingToolManager.TeamWithRegTypes noTeamName;
         private BibNumberingToolManager.TeamWithRegTypes noGroupReg;
 
-        [Test]
-        [Category(Priority.Three)]
-        [Description("567")]
+        ////[Test]
+        ////[Category(Priority.Three)]
+        ////[Description("567")]
         public void BibNumberingTool()
         {
             //step 1
@@ -179,15 +180,20 @@
         [Test]
         [Category(Priority.Three)]
         [Description("260")]
-        public void BibNumberReportsAndMergeCode()
+        public void BibNumberingTool_EventCreationAndRegister_AndCheckInReport_AndCheckMergeCodeInEmail()
         {
             this.BibNumberingTool();
-            this.CheckBibInReport(1, 3, 101, null);
-            this.CheckBibInReport(4, 6, 102, null);
-            this.CheckBibInReport(7, 9, 28, null);
-            this.CheckBibInReport(10, 11, 99, null);
-            this.CheckBibInReport(12, 13, 104, true);
+            ManagerSiteMgr.DashboardMgr.ClickAttendeeReportLinkOnFormDashboard();
+            ManagerSiteMgr.SelectReportPopupWindow();
+            this.CheckBibNumber(1, 3, 101, null);
+            this.CheckBibNumber(4, 6, 104, null);
+            this.CheckBibNumber(7, 9, 34, null);
+            this.CheckBibNumber(10, 11, 107, null);
+            this.CheckBibNumber(12, 13, 109, true);
+            VerifyTool.VerifyValue(this.teamName, ReportMgr.GetTeamName(this.regs), "Team name for group regs in the same team: {0}");
+            ReportMgr.CloseReportPopupWindow();
             ////this.VerifyBibInEmail(104);
+            ////this.CheckTeamNameInEmail();
         }
 
         [Test]
@@ -201,9 +207,9 @@
             this.RegisterAndCheckTeamName();
         }
 
-        [Test]
-        [Category(Priority.Three)]
-        [Description("263")]
+        ////[Test]
+        ////[Category(Priority.Three)]
+        ////[Description("263")]
         public void TeamNameReportsAndMergeCode()
         {
             this.BibNumberingTool();
@@ -352,20 +358,44 @@
             ManagerSiteMgr.DashboardMgr.ClickAttendeeReportLinkOnFormDashboard();
             ManagerSiteMgr.SelectReportPopupWindow();
 
+            int lastBib = this.CheckBibNumber(firstReg, lastReg, startNumber, same);
+
+            ReportMgr.CloseReportPopupWindow();
+
+            return lastBib;
+        }
+
+        private int CheckBibNumber(int firstReg, int lastReg, int startNumber, bool? same)
+        {
+            int lastBib = -1;
+
             if (same.HasValue && same.Value == true)
             {
-                for (int i = firstReg - 1; i < lastReg; i++)
-                    Assert.True(startNumber == ReportMgr.GetBibId(i + 1));
+                for (int i = firstReg; i <= lastReg; i++)
+                {
+                    ////Assert.True(startNumber == ReportMgr.GetBibId(i + 1));
+                    VerifyTool.VerifyValue(startNumber, ReportMgr.GetBibId(i), "Entry number: {0}");
+                }
             }
             else
             {
-                for (int i = firstReg - 1; i < lastReg; i++)
-                    Assert.True(startNumber + i == ReportMgr.GetBibId(i + 1));
+                int j = 0;
+
+                for (int i = firstReg; i <= lastReg; i++)
+                {
+                    int actualBibId = ReportMgr.GetBibId(i);
+
+                    if (i == lastReg)
+                    {
+                        lastBib = actualBibId;
+                    }
+
+                    ////Assert.True(startNumber + i == ReportMgr.GetBibId(i + 1));
+                    VerifyTool.VerifyValue(startNumber + j, actualBibId, "Entry number: {0}");
+                    
+                    j++;
+                }
             }
-
-            int lastBib = ReportMgr.GetBibId(lastReg);
-
-            ReportMgr.CloseReportPopupWindow();
 
             return lastBib;
         }
@@ -441,38 +471,38 @@
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.SelectFolder();
 
-            ManagerSiteMgr.DeleteExpiredDuplicateEvents(eventName);
+            ManagerSiteMgr.DeleteEventByName(eventName);
 
-            if (!ManagerSiteMgr.EventExists(eventName))
-            {
+            //if (!ManagerSiteMgr.EventExists(eventName))
+            //{
                 ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ActiveEuropeEvent);
                 this.eventId = BuilderMgr.GetEventId();
                 BuilderMgr.SetEventNameAndShortcut(eventName);
                 BuilderMgr.SelectEventType(FormDetailManager.ActiveEuropeEventType.Running);
                 BuilderMgr.AddRegTypes<BibNumberingToolManager.TeamWithRegTypes>(_teams);
                 BuilderMgr.SaveAndClose();
-            }
-            else
-            {
-                this.eventId = ManagerSiteMgr.GetFirstEventId(eventName);
+            //}
+            //else
+            //{
+            //    this.eventId = ManagerSiteMgr.GetFirstEventId(eventName);
 
-                //duped from RegistrationLimitsFixture.DeleteTestRegistrations.
-                //why purge test regs?
-                //I found that when you start with a set of registrants with "Assign the same number to every member of a team";
-                //then you renumber the event with the tool to "Assign a unique number to each member of a team.",
-                //and then add more and do "Assign the same number to every member of a team" again...
-                //it can break apart the bib numbers in the first set, if they're in a group without a team name.
-                //I see this as a bug; I don't think it should ever separate bibs within a group.
-                //That test case is beyond the scope of this project.
-                //what IS in scope is re-runnability.
-                ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, ManagerSiteMgr.GetEventSessionId());
-                ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
-                ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-                ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                ManagerSiteMgr.DashboardMgr.ReturnToList();
-            }
+            //    //duped from RegistrationLimitsFixture.DeleteTestRegistrations.
+            //    //why purge test regs?
+            //    //I found that when you start with a set of registrants with "Assign the same number to every member of a team";
+            //    //then you renumber the event with the tool to "Assign a unique number to each member of a team.",
+            //    //and then add more and do "Assign the same number to every member of a team" again...
+            //    //it can break apart the bib numbers in the first set, if they're in a group without a team name.
+            //    //I see this as a bug; I don't think it should ever separate bibs within a group.
+            //    //That test case is beyond the scope of this project.
+            //    //what IS in scope is re-runnability.
+            //    ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, ManagerSiteMgr.GetEventSessionId());
+            //    ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
+            //    ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
+            //    UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            //    ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
+            //    UIUtilityProvider.UIHelper.SwitchToMainContent();
+            //    ManagerSiteMgr.DashboardMgr.ReturnToList();
+            //}
         }
 
         //duped from BackendFixture

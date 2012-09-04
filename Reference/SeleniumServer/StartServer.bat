@@ -1,1 +1,1 @@
-%JAVA_HOME%\bin\java -jar selenium-server-standalone.jar
+"%JAVA_HOME%\bin\java" -jar selenium-server-standalone.jar
