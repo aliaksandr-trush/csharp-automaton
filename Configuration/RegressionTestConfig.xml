@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfRegOnlineRegressionTestConfig>
+<TestConfig>
   <Environments>
 	<Preferred Environment="Beta" PrivateLabel="Default" />
 
@@ -231,7 +231,7 @@
   <Browsers Current="Firefox">
 	<ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
 	<Browser Name="Firefox">
-	  <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	  <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
 	<Browser Name="Chrome">
@@ -243,4 +243,4 @@
   <TimeZoneDifference>14</TimeZoneDifference>
 
   <NUnitAddin ReportBack="true" />
-</ArrayOfRegOnlineRegressionTestConfig>
+</TestConfig>

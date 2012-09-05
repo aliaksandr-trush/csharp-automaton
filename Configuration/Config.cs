@@ -2,7 +2,7 @@
 {
     using System.Xml.Serialization;
 
-    [XmlRoot(ElementName = "ArrayOfRegOnlineRegressionTestConfig")]
+    [XmlRoot(ElementName = "TestConfig")]
     public class TestConfig
     {
         [XmlElement(ElementName = "Environments")]

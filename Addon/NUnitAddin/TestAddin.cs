@@ -5,10 +5,10 @@
     using NUnit.Core.Extensibility;
     using System.Net;
 
-    [NUnitAddin(Type = ExtensionType.Core, Name = "ResultReporter", Description = "Report test case's execution results")]
+    [NUnitAddin(Type = ExtensionType.Core, Name = "TestResultCommunicator", Description = "Report test case's execution results back to where you want")]
     public class TestAddin : IAddin
     {
-        internal const string SOURCE_NAME = "ResultReporter";
+        internal const string SOURCE_NAME = "TestResultCommunicator";
         private const string CLASS_NAME = "TestAddin::";
 
         #region IAddin Members
@@ -18,14 +18,26 @@
 
             try
             {
-                IExtensionPoint listeners = host.GetExtensionPoint("EventListeners");
+                ////IExtensionPoint listeners = host.GetExtensionPoint("EventListeners");
                 
-                if (listeners == null)
+                ////if (listeners == null)
+                ////{
+                ////    return false;
+                ////}
+
+                ////listeners.Install(new NUnitTestEventListener());
+
+                // Instantiate the test decorator extension point
+                IExtensionPoint decorators = host.GetExtensionPoint("TestDecorators");
+
+                if (decorators == null)
                 {
                     return false;
                 }
 
-                listeners.Install(new NUnitTestEventListener());
+                // Install the SpiraTest Test Case decorator
+                decorators.Install(new NUnitTestCaseDecorator());
+
                 return true;
             }
             catch (Exception exception)

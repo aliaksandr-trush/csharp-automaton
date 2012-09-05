@@ -26,7 +26,7 @@
             public const string RunnerName = "NUnit";
         }
 
-        public static void ReportResultToSpiraTeam(TestResult result)
+        public static void ReportResultToSpiraTeam(TestResult result, int testCaseId)
         {
             string url = SpiraTeam.WebServiceUrl;
             string login = SpiraTeam.Login;
@@ -38,7 +38,7 @@
 
             // Now we need to extract the result information
             ExecutionStatus executionStatus = ExecutionStatus.Unknown;
-            
+
             if (!result.Executed)
             {
                 // Set status to 'Not Run'
@@ -66,19 +66,6 @@
                     // Set status to 'Failed'
                     executionStatus = ExecutionStatus.Failed;
                 }
-            }
-
-            // Extract the other information
-            string testCaseId = string.Empty;
-
-            if (!string.IsNullOrEmpty(result.Description))
-            {
-                testCaseId = result.Description;
-            }
-            else
-            {
-                // If there's no corresponding test case id, do not report back to SpiraTeam
-                return;
             }
 
             string testCaseName = result.Name;
@@ -113,7 +100,7 @@
 
             // Now actually record the test run itself
             SpiraImportExport.RemoteTestRun remoteTestRun = new SpiraImportExport.RemoteTestRun();
-            remoteTestRun.TestCaseId = Convert.ToInt32(testCaseId);
+            remoteTestRun.TestCaseId = testCaseId;
             remoteTestRun.ReleaseId = releaseId;
             remoteTestRun.TestSetId = testSetId;
             remoteTestRun.StartDate = startDate;
@@ -128,13 +115,23 @@
 
             // Close the SpiraTest connection
             spiraTestExecuteProxy.Connection_Disconnect();
+        }
 
-            // Report result to CIP
-            ////CIPReporter.RegressionTestServiceSoapClient soap = new CIPReporter.RegressionTestServiceSoapClient(
-            ////    "RegressionTestServiceSoap", 
-            ////    "http://10.119.33.66:8080/Services/RegressionTestService.asmx");
+        public static void ReportResultToSpiraTeam(TestResult result)
+        {
+            // Extract the other information
+            string testCaseId = string.Empty;
 
-            ////soap.InsertTestResult(result.FullName, "Automation", result.IsSuccess, result.StackTrace, result.Time);
+            if (!string.IsNullOrEmpty(result.Description))
+            {
+                testCaseId = result.Description;
+                ReportResultToSpiraTeam(result, Convert.ToInt32(testCaseId));
+            }
+            else
+            {
+                // If there's no corresponding test case id, do not report back to SpiraTeam
+                return;
+            }
         }
     }
 }
