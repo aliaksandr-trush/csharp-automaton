@@ -3,7 +3,7 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Fixtures.Base;
 
-	[TestFixture]
+    [TestFixture]
 	[Category(FixtureCategory.Regression)]
     public class LoginFixture : FixtureBase
 	{
@@ -38,15 +38,15 @@
         [Category(Priority.Three)]
         [Description("701")]
         public void TestSuccessfullLogin()
-		{
+        {
             ManagerSiteMgr.OpenLogin();
 
-			// Login
-			ManagerSiteMgr.Login();
+            // Login
+            ManagerSiteMgr.Login();
 
-			// Verify we are in manager
-			ManagerSiteMgr.VerifyManager();
-		}
+            // Verify we are in manager
+            ManagerSiteMgr.VerifyManager();
+        }
 
 		[Test]
         [Category(Priority.Three)]

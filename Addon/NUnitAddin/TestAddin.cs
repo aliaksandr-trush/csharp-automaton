@@ -1,9 +1,7 @@
 ﻿namespace RegOnline.RegressionTest.NUnitAddin
 {
     using System;
-    using NUnit.Core;
     using NUnit.Core.Extensibility;
-    using System.Net;
 
     [NUnitAddin(Type = ExtensionType.Core, Name = "TestResultCommunicator", Description = "Report test case's execution results back to where you want")]
     public class TestAddin : IAddin
@@ -18,25 +16,26 @@
 
             try
             {
-                ////IExtensionPoint listeners = host.GetExtensionPoint("EventListeners");
-                
-                ////if (listeners == null)
-                ////{
-                ////    return false;
-                ////}
+                IExtensionPoint listeners = host.GetExtensionPoint("EventListeners");
 
-                ////listeners.Install(new NUnitTestEventListener());
-
-                // Instantiate the test decorator extension point
-                IExtensionPoint decorators = host.GetExtensionPoint("TestDecorators");
-
-                if (decorators == null)
+                if (listeners == null)
                 {
                     return false;
                 }
 
-                // Install the SpiraTest Test Case decorator
-                decorators.Install(new NUnitTestCaseDecorator());
+                listeners.Install(new NUnitTestEventListener());
+
+                // Decorator doesn't work!
+                //// Instantiate the test decorator extension point
+                //IExtensionPoint decorators = host.GetExtensionPoint("TestDecorators");
+
+                //if (decorators == null)
+                //{
+                //    return false;
+                //}
+
+                //// Install the SpiraTest Test Case decorator
+                //decorators.Install(new NUnitTestCaseDecorator());
 
                 return true;
             }

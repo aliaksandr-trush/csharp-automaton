@@ -21,7 +21,7 @@
         {
             if (ConfigurationProvider.XmlConfig.AllConfiguration.NUnitAddin.ReportBack)
             {
-                ResultReporter.ReportResultToSpiraTeam(result);
+                Communicator.ReportResultToSpiraTeam(result);
             }
         }
 

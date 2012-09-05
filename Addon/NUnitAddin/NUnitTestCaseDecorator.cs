@@ -23,13 +23,26 @@
             {
                 if (test is TestMethod)
                 {
-                    Attribute attribute = Reflect.GetAttribute(member, "SpiraTeamTestCaseId", false);
+                    ////Attribute attribute = Reflect.GetAttribute(member, "SpiraTeamTestCaseId", false);
+
+                    ////if (attribute != null)
+                    ////{
+                    ////    // Get the test case id from the test case attribute
+                    ////    int testCaseId = (int)Reflect.GetPropertyValue(attribute, "TestCaseId", BindingFlags.Public | BindingFlags.Instance);
+                    ////    test = new ExtendedNUnitTestCase((TestMethod)test, testCaseId);
+                    ////}
+
+                    Attribute attribute = Reflect.GetAttribute(member, SpiraTeamTestCaseIdAttribute.AttributeFullName, false);
 
                     if (attribute != null)
                     {
                         // Get the test case id from the test case attribute
-                        int testCaseId = (int)Reflect.GetPropertyValue(attribute, "TestCaseId", BindingFlags.Public | BindingFlags.Instance);
+                        int testCaseId = SpiraTeamTestCaseIdAttribute.GetTestCaseId(member);
                         test = new ExtendedNUnitTestCase((TestMethod)test, testCaseId);
+                    }
+                    else
+                    {
+                        throw new Exception(string.Format("'{0}' attribute not set!", SpiraTeamTestCaseIdAttribute.AttributeFullName));
                     }
                 }
 

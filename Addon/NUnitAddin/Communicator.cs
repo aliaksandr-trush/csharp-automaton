@@ -4,7 +4,7 @@
     using System.Net;
     using NUnit.Core;
 
-    public class ResultReporter
+    public class Communicator
     {
         private enum ExecutionStatus
         {
