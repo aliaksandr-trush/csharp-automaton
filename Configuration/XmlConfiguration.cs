@@ -6,7 +6,7 @@
 
     public class XmlConfiguration
     {
-        private readonly string XmlConfigFilePath = "RegressionTestConfig.xml";
+        private readonly string XmlConfigFilePath = "TestConfig.xml";
 
         public enum EnvironmentEnum
         {

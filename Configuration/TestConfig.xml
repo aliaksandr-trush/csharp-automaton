@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
   <Environments>
-	<Preferred Environment="Beta" PrivateLabel="Default" />
+	<Preferred Environment="CBeta" PrivateLabel="Default" />
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -228,13 +228,15 @@
 	</WebService>
   </WebServices>
 	
-  <Browsers Current="Firefox">
-	<ChromeDriverPath>..\Reference\ChromeDriver</ChromeDriverPath>
+  <!-- "DirectStartup": whether to startup browser directly (i.e. without selenium server) -->
+  <Browsers Current="Firefox" DirectStartup="false">
 	<Browser Name="Firefox">
+    <Server Host="127.0.0.1" Port="9999"/>
 	  <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
 	<Browser Name="Chrome">
+    <Server Host="127.0.0.1" Port="9999"/>
 	  <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
@@ -242,5 +244,5 @@
 
   <TimeZoneDifference>14</TimeZoneDifference>
 
-  <NUnitAddin ReportBack="true" />
+  <NUnitAddin ReportBack="false" />
 </TestConfig>

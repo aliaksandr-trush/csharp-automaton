@@ -60,7 +60,7 @@
         public Account[] Account { get; set; }
     }
 
-    public partial class Account
+    public class Account
     {
         [XmlElement(ElementName = "DomainName")]
         public string DomainName { get; set; }
@@ -82,6 +82,22 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+
+        public string BaseUrl
+        {
+            get
+            {
+                return string.Format("http://{0}/", this.DomainName);
+            }
+        }
+
+        public string BaseUrlWithHttps
+        {
+            get
+            {
+                return string.Format("https://{0}/", this.DomainName);
+            }
+        }
     }
 
     public class WebServices
@@ -104,18 +120,21 @@
 
     public class Browsers
     {
-        [XmlElement(ElementName = "ChromeDriverPath")]
-        public string ChromeDriverPath { get; set; }
-
         [XmlElement(ElementName = "Browser")]
         public Browser[] Browser { get; set; }
 
         [XmlAttribute("Current")]
         public string Current { get; set; }
+
+        [XmlAttribute("DirectStartup")]
+        public bool DirectStartup { get; set; }
     }
 
     public class Browser
     {
+        [XmlElementAttribute(ElementName = "Server")]
+        public Server Server { get; set; }
+
         [XmlElementAttribute(ElementName = "BinaryPath")]
         public BinaryPath BinaryPath { get; set; }
 
@@ -124,6 +143,15 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+    }
+
+    public class Server
+    {
+        [XmlAttributeAttribute("Host")]
+        public string Host { get; set; }
+
+        [XmlAttributeAttribute("Port")]
+        public int Port { get; set; }
     }
 
     [XmlTypeAttribute]

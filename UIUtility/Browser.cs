@@ -14,16 +14,26 @@
 
     internal class Browser_Firefox : IGetWebDriver
     {
-        // The 1st method to start Firefox is not safe,
-        // because the port number used by NUnit and Firefox may be occupied by some other programs.
-        /*private FirefoxBinary binary;
+        // To startup Firefox directly is not stable,
+        // because the port number used to start Firefox may be occupied by some other programs.
+        // The second method to start firefox is stable,
+        // but you have to run Reference/SeleniumServer/StartServer.bat first.
+        // It's best to start that file along with system startup to ensure the port number would not be occupied.
+
+        private FirefoxBinary binary;
         private FirefoxProfile profile;
+        private DesiredCapabilities capa = DesiredCapabilities.Firefox();
+        private Uri remoteServerUrl;
 
         private void ResetBinary()
         {
             if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
             {
-                this.binary = new FirefoxBinary(ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
+                this.binary = new FirefoxBinary(ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+
+                this.capa.SetCapability(
+                    "firefox_binary",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
             }
             else
             {
@@ -35,49 +45,53 @@
         {
             if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
             {
-                this.profile = new FirefoxProfile(ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value);
+                this.profile = new FirefoxProfile(ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+
+                this.capa.SetCapability(
+                    "firefox_profile",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+
+                this.capa.SetCapability(
+                    "acceptSslCerts",
+                    true);
             }
             else
             {
                 this.profile = new FirefoxProfile();
+                this.profile.AcceptUntrustedCertificates = true;
             }
+        }
+
+        private void ResetRemoteServerUrl()
+        {
+            this.remoteServerUrl = new Uri(string.Format(
+                "http://{0}:{1}/wd/hub", 
+                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Host,
+                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Port));
         }
 
         public IWebDriver GetWebDriver()
         {
             this.ResetProfile();
             this.ResetBinary();
-            return new FirefoxDriver(this.binary, this.profile);
-        }*/
+            this.ResetRemoteServerUrl();
 
-        // The second method to start firefox is safe,
-        // but you have to run Reference/SeleniumServer/StartServer.bat first.
-        // It's best to start that file along with system startup to ensure the port number would not be occupied.
-        public IWebDriver GetWebDriver()
-        {
-            DesiredCapabilities capa = DesiredCapabilities.Firefox();
-
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            if (ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.DirectStartup)
             {
-                capa.SetCapability(
-                    "firefox_binary",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+                return new FirefoxDriver(this.binary, this.profile);
             }
-
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            else
             {
-                capa.SetCapability(
-                    "firefox_profile",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+                return new RemoteWebDriver(this.remoteServerUrl, this.capa);
             }
-
-            return new RemoteWebDriver(capa);
         }
     }
 
     internal class Browser_Chrome : IGetWebDriver
     {
         private ChromeOptions options = new ChromeOptions();
+        private DesiredCapabilities capa = DesiredCapabilities.Chrome();
+        private Uri remoteServerUrl;
 
         private void ResetBinary()
         {
@@ -85,6 +99,10 @@
             {
                 this.options.BinaryLocation =
                     ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path;
+
+                this.capa.SetCapability(
+                    "chrome.binary",
+                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
             }
         }
 
@@ -95,39 +113,40 @@
                 this.options.AddArgument(string.Format(
                     "user-data-dir={0}",
                     ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path));
+
+                this.capa.SetCapability(
+                    "chrome.switches",
+                    string.Format("user-data-dir={0}", ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path));
+
+                this.capa.SetCapability(
+                    "acceptSslCerts",
+                    true);
             }
+        }
+
+        private void ResetRemoteServerUrl()
+        {
+            this.remoteServerUrl = new Uri(string.Format(
+                "http://{0}:{1}",
+                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Host,
+                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Port));
         }
 
         public IWebDriver GetWebDriver()
         {
             this.ResetProfile();
             this.ResetBinary();
+            this.ResetRemoteServerUrl();
 
-            return new ChromeDriver(
-                ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.ChromeDriverPath,
-                this.options);
+            if (ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.DirectStartup)
+            {
+                return new ChromeDriver(this.options);
+            }
+            else
+            {
+                return new RemoteWebDriver(this.remoteServerUrl, this.capa);
+            }
         }
-
-        ////public IWebDriver GetWebDriver()
-        ////{
-        ////    DesiredCapabilities capa = DesiredCapabilities.Chrome();
-
-        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
-        ////    {
-        ////        capa.SetCapability(
-        ////            "chrome.binary",
-        ////            ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Value);
-        ////    }
-
-        ////    if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
-        ////    {
-        ////        capa.SetCapability(
-        ////            "chrome.switches",
-        ////            string.Format("user-data-dir={0}", ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Value));
-        ////    }
-
-        ////    return new RemoteWebDriver(new Uri("http://127.0.0.1:9515"), capa);
-        ////}
     }
 
     internal class Browser_HtmlUnit : IGetWebDriver

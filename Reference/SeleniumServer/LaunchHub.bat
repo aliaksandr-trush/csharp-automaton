@@ -1,1 +1,1 @@
-java -jar selenium-server-standalone.jar -role hub
+"%JAVA_HOME%\bin\java" -jar selenium-server-standalone.jar -role hub
