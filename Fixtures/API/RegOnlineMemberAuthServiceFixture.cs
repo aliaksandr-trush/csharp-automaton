@@ -27,15 +27,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineMemberAuthServiceFixture()
+            : base(ConfigReader.WebServiceEnum.MemberAuthService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.MemberAuthService].Url);
-
             this.service = new memberAuthorizationSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.MemberAuthService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

@@ -22,15 +22,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineGetEventRegistrationsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.GetEventRegistrationsService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventRegistrationsService].Url);
-
             this.service = new getEventRegistrationsSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventRegistrationsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

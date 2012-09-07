@@ -17,15 +17,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public LoginServiceFixture()
+            : base(ConfigReader.WebServiceEnum.LoginService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.LoginService].Url);
-
             this.service = new LoginSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.LoginService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

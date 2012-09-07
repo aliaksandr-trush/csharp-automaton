@@ -20,15 +20,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineCheckInRegServiceFixture()
+            : base(ConfigReader.WebServiceEnum.CheckInRegService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.CheckInRegService].Url);
-
             this.service = new CheckInRegSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.CheckInRegService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

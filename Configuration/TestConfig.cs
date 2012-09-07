@@ -33,15 +33,6 @@
         public Environment[] Environment { get; set; }
     }
 
-    public class Preferred
-    {
-        [XmlAttribute("Environment")]
-        public string Environment { get; set; }
-
-        [XmlAttribute("PrivateLabel")]
-        public string PrivateLabel { get; set; }
-    }
-
     public class Environment
     {
         [XmlAttribute("Name")]
@@ -122,6 +113,9 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+
+        [XmlAttribute("HTTPS")]
+        public bool HTTPS { get; set; }
     }
 
     public class Browsers

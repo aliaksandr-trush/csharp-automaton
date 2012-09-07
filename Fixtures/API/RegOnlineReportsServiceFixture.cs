@@ -30,15 +30,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineReportsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.RegistrationService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.ReportsService].Url);
-
             this.service = new RegonlineWebServicesSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.ReportsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
