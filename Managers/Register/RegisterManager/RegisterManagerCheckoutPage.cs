@@ -47,9 +47,9 @@
             string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutTotal : {0}");
         }
@@ -59,9 +59,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutSubTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutSubTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutSubTotal : {0}");
         }
@@ -71,9 +71,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutShippingFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutShippingFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Checkout Shipping Fee : {0}");
         }
@@ -83,9 +83,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutLodgingFeeSubTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutLodgingFeeSubTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Subtotal : {0}");
         }
@@ -95,9 +95,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutLodgingBookingFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutLodgingBookingFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Booking Fee : {0}");
         }
@@ -107,9 +107,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutServiceFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutServiceFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Service Fee : {0}");
         }
@@ -120,9 +120,9 @@
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutSaving : {0}");
         }
@@ -134,9 +134,9 @@
             string expectedValue = string.Format("Your total includes a group discount savings of {0} and a discount code savings of {1}.", groupAmount, codeAmount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutSaving : {0}");
         }
@@ -144,7 +144,7 @@
         public void VerifyCheckoutTax(double taxAmountToVerify, string taxLabel, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
             string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
-            string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(TaxLocatorCheckout, taxLabel), LocateBy.XPath);
+            string actualAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(TaxLocatorCheckout, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
@@ -153,9 +153,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutRecurringSubtotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutRecurringSubtotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Recurring Subtotal: {0}");
         }
@@ -163,7 +163,7 @@
         public void VerifyCheckoutMembershipReccuringTax(double taxAmountToVerify, string taxLabel, MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
             string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
-            string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(CheckoutRecurringTax, taxLabel), LocateBy.XPath);
+            string actualAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(CheckoutRecurringTax, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
@@ -172,9 +172,9 @@
             string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutMembershipYearlyFees, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutMembershipYearlyFees, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "MembershipYearlyFees : {0}");
         }
@@ -185,9 +185,9 @@
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutMembershipDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutMembershipDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutSaving : {0}");
         }
@@ -197,9 +197,9 @@
             string expectedValue = string.Format("Renew your membership on {0}.", date);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CheckoutMembershipRenewalDate, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CheckoutMembershipRenewalDate, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Renewal Date: {0}");
         }
@@ -209,9 +209,9 @@
             string expectedValue = MoneyTool.FormatMoney(expectedAmount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnCheckoutPage(), "Checkout");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(CurentBalanceCheckoutLocator, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(CurentBalanceCheckoutLocator, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "CheckoutCurrentBalance : {0}");
         }
@@ -220,7 +220,7 @@
         {
             bool onCheckout = false;
 
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
                 onCheckout = true;
             }
@@ -233,9 +233,9 @@
             string valueFound = string.Empty;
             string locator = string.Format(CheckoutVerifyTemplate, regNum, (int)column);
 
-            if ((regNum >= 1) && (UIUtilityProvider.UIHelper.IsElementPresent(locator, LocateBy.XPath)))
+            if ((regNum >= 1) && (WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.XPath)))
             {
-                valueFound = UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath);
+                valueFound = WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath);
             }
             else
             {
@@ -247,19 +247,19 @@
 
         public void MakeChangesToMerchandise()
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent("//strong[text() = 'Make Changes to Merchandise']", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//strong[text() = 'Make Changes to Merchandise']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent("//strong[text() = 'Make Changes to Merchandise']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//strong[text() = 'Make Changes to Merchandise']", LocateBy.XPath);
         }
 
         [Step]
         public void ClickCheckoutActiveWaiver()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_chkAITerms", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_chkAITerms", LocateBy.Id);
         }
 
         public void ClickTermsAndConditions()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(CheckoutTermsAndConditionsLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CheckoutTermsAndConditionsLocator, LocateBy.Id);
         }
 
         public void VerifyCheckoutGroupDiscountSavings(double savingToVerify)
@@ -268,9 +268,9 @@
             string expectedValue = string.Format(CheckoutGroupDiscountSaving, saving);
             string foundValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(this.OnCheckoutPage(), "Checkout");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(this.OnCheckoutPage(), "Checkout");
 
-            foundValue = UIUtilityProvider.UIHelper.GetText(CheckoutDiscountMessage, LocateBy.XPath);
+            foundValue = WebDriverUtility.DefaultProvider.GetText(CheckoutDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, foundValue, "CheckoutGroupDiscountSavings : {0}");
         }
@@ -282,12 +282,12 @@
 
         public bool HasDiscountMessage()
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(CheckoutDiscountMessage, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(CheckoutDiscountMessage, LocateBy.XPath);
         }
 
         public void SetMembershipAutomaticRenewalCheckbox(bool automaticallyRenew)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(CheckoutMembershipAutoRenew, automaticallyRenew, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(CheckoutMembershipAutoRenew, automaticallyRenew, LocateBy.Id);
         }
 
         #endregion
@@ -322,9 +322,9 @@
 
         public void SelectPaymentMethod(string customMethod)
         {
-            if (UIUtilityProvider.UIHelper.IsElementDisplay(CheckoutPaymentMethod, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementDisplay(CheckoutPaymentMethod, LocateBy.Id))
             {
-                UIUtilityProvider.UIHelper.SelectWithText(CheckoutPaymentMethod, customMethod, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CheckoutPaymentMethod, customMethod, LocateBy.Id);
             }
         }
 
@@ -426,14 +426,14 @@
 
             VerifyTool.VerifyValue(
                 "Your registration contains a waitlisted item(s) with a fee. If the waitlisted item becomes available, you will be charged for the waitlisted item.",
-                UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath), 
+                WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath), 
                 "Waitlist Payment message: {0}");
         }
 
         public void VerifyAgendaItemWaitlistMessage(string agendaItemName)
         {
             string locator = string.Format(CheckoutAgendaItemWaitlistLocator, agendaItemName);
-            VerifyTool.VerifyValue(UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath), "Waitlisted", "Waitlist Message: {0}");
+            VerifyTool.VerifyValue(WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath), "Waitlisted", "Waitlist Message: {0}");
         }
         #endregion
 
@@ -442,14 +442,14 @@
         [Step]
         public void ClickSaveAndClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//button[@name='ctl00$cph$btnFinalize']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//button[@name='ctl00$cph$btnFinalize']", LocateBy.XPath);
         }
         /// <summary>
         /// in Refund mode, the value can start with invalid characters like the dollar or euro sign
         /// </summary>
         public void FixAmount()
         {
-            string actual = UIUtilityProvider.UIHelper.GetValue(CCAmountLocatorNew, LocateBy.Id);
+            string actual = WebDriverUtility.DefaultProvider.GetValue(CCAmountLocatorNew, LocateBy.Id);
             decimal ret;
             while (!string.IsNullOrEmpty(actual) && !decimal.TryParse(actual.Substring(0, 1), out ret))
                 actual = actual.Substring(1);
@@ -457,14 +457,14 @@
             if (string.IsNullOrEmpty(actual))
                 Assert.Fail("This is a bad amount.");
 
-            if (UIUtilityProvider.UIHelper.GetValue(CCAmountLocatorNew, LocateBy.Id) != actual)
-                UIUtilityProvider.UIHelper.Type(CCAmountLocatorNew, actual, LocateBy.Id);
+            if (WebDriverUtility.DefaultProvider.GetValue(CCAmountLocatorNew, LocateBy.Id) != actual)
+                WebDriverUtility.DefaultProvider.Type(CCAmountLocatorNew, actual, LocateBy.Id);
         }
         #endregion
 
         public void ChangeCheckoutCCCountry(string country)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(CheckoutCCCountryLocator, country, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(CheckoutCCCountryLocator, country, LocateBy.Id);
         }
 
         public enum CheckoutField
@@ -517,7 +517,7 @@
             bool checkRequiredOption)
         {
             string loc = string.Format(CheckoutRequiredOptionLocatorBase, checkoutFieldControl[field]);
-            string imgClass = UIUtilityProvider.UIHelper.GetAttribute(loc, "class", LocateBy.XPath);
+            string imgClass = WebDriverUtility.DefaultProvider.GetAttribute(loc, "class", LocateBy.XPath);
             //based on UIUtilityProvider.UIHelper.VerifyElementContains(imgClass, "required");
             Assert.AreEqual(checkRequiredOption, !imgClass.Contains("hidden"));
         }

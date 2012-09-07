@@ -31,64 +31,64 @@
         
         public void EnterEmailAddressOnLogin(string email)
         {
-            UIUtilityProvider.UIHelper.Type(EmailAddressTextboxID, email, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(EmailAddressTextboxID, email, LocateBy.Id);
         }
 
         public void EnterUserIDOnLogin(string userID)
         {
-            UIUtilityProvider.UIHelper.Type(UserIDTextboxID, userID, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(UserIDTextboxID, userID, LocateBy.Id);
         }
 
         public void EnterPasswordOnLogin(string password)
         {
-            UIUtilityProvider.UIHelper.Type(PasswordTextboxID, password, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(PasswordTextboxID, password, LocateBy.Id);
         }
 
         public void EnterFirstName(string firstName)
         {
-            UIUtilityProvider.UIHelper.Type(FirstNameTextBoxID, firstName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(FirstNameTextBoxID, firstName, LocateBy.Id);
         }
 
         public void EnterLastName(string lastName)
         {
-            UIUtilityProvider.UIHelper.Type(LastNameTextBoxID, lastName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(LastNameTextBoxID, lastName, LocateBy.Id);
         }
 
         public void EnterForgotPasswordEmail(string email)
         {
-            UIUtilityProvider.UIHelper.Type(PasswordEmailTextBoxID, email, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(PasswordEmailTextBoxID, email, LocateBy.Id);
         }
 
         public void Submit()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(SubmitBtnID, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SubmitBtnID, LocateBy.Id);
         }
 
         public void Continue()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ContinueBtnID, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContinueBtnID, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickNonXauthForgotPasswordLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(NonXAuthForgotPasswordLinkID, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(NonXAuthForgotPasswordLinkID, LocateBy.Id);
         }
 
         public void VerifyIsOnReportPage()
         {
-            Assert.IsTrue(UIUtilityProvider.UIHelper.UrlContainsPath("DirectoryReport.aspx"));
+            Assert.IsTrue(WebDriverUtility.DefaultProvider.UrlContainsPath("DirectoryReport.aspx"));
         }
 
         public void VerifyIsOnDirectoryLoginPage()
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            Assert.IsTrue(UIUtilityProvider.UIHelper.UrlContainsPath("DirectoryUserLogin.aspx"));   
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            Assert.IsTrue(WebDriverUtility.DefaultProvider.UrlContainsPath("DirectoryUserLogin.aspx"));   
         }
 
         public void VerifyErrorMessage(string errorMsg)
         {
-            Assert.IsTrue(UIUtilityProvider.UIHelper.IsElementPresent(string.Format("//table//td[text()[contains(.,'{0}')]]", errorMsg), LocateBy.XPath));            
+            Assert.IsTrue(WebDriverUtility.DefaultProvider.IsElementPresent(string.Format("//table//td[text()[contains(.,'{0}')]]", errorMsg), LocateBy.XPath));            
         }
         public void VerifyUserIDTextboxIsPresent(bool present = true)
         {
@@ -97,13 +97,13 @@
 
         public void VerifyPasswordTextboxIsPresent(bool present = true)
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             VerifyFieldPresent<DirectoryElements>(DirectoryElements.Password, present);
         }
 
         public void VerifyEmailTextboxIsPresent(bool present = true)
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             VerifyFieldPresent<DirectoryElements>(DirectoryElements.EmailAddress, present);
         }
 

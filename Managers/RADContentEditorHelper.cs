@@ -20,16 +20,16 @@
             switch (mode)
             {
                 case Mode.Edit:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radEdit", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radEdit", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case Mode.HTML:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case Mode.Preview:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radPreview", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radPreview", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -38,7 +38,7 @@
 
         public void TypeHTMLTextarea(string content)
         {
-            UIUtilityProvider.UIHelper.Type("//textarea", content, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type("//textarea", content, LocateBy.XPath);
         }
     }
 }

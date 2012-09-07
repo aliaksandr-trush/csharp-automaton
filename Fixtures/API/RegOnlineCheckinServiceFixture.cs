@@ -25,10 +25,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.CheckinService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.CheckinService].Url);
 
             this.service = new CheckInSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.CheckinService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.CheckinService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 

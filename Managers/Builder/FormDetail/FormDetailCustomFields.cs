@@ -17,12 +17,12 @@
 
         public void OpenCustomField(string cfName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(
                 string.Format("//table[@id='ctl00_cph_grdCustomFieldPersonal_tblGrid']//a[text()='{0}']", cfName), 
                 LocateBy.XPath);
 
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(CFFrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CFFrameID);
         }
 
         private void ClickAddCustomField(CustomFieldManager.CustomFieldLocation cfLocation)
@@ -51,10 +51,10 @@
                     throw new Exception(string.Format("Invalid custom field location: '{0}'", cfLocation.ToString()));
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(linkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(linkLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(CFFrameID);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CFFrameID);
 
             switch (cfLocation)
             {
@@ -123,7 +123,7 @@
 
         private void ResizeCustomFieldRADWindowAndAdjustPosition(int widthPx, int heightPx, int position_LeftPx, int position_TopPx)
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
 
             this.AdjustCustomFieldRADWindowPosition(position_LeftPx, position_TopPx);
 
@@ -133,9 +133,9 @@
                 widthPx,
                 heightPx);
 
-            UIUtilityProvider.UIHelper.ExecuteJavaScript(js);
+            WebDriverUtility.DefaultProvider.ExecuteJavaScript(js);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(CFFrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CFFrameID);
         }
 
         // Custom field rad window's element id on personal info page and LT page are the same
@@ -149,7 +149,7 @@
                 leftPx,
                 topPx);
 
-            UIUtilityProvider.UIHelper.ExecuteJavaScript(js);
+            WebDriverUtility.DefaultProvider.ExecuteJavaScript(js);
         }
     }
 }

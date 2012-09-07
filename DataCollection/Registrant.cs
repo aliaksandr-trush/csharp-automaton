@@ -50,7 +50,7 @@
         public const string WorkPhone = "303.555.1212";
         public const string Extension = "113";
         public const string Fax = "303.987.3524";
-        public readonly static string Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
+        public readonly static string Password = ConfigReader.DefaultProvider.AccountConfiguration.Password;
     }
 
     public class FeeSummary

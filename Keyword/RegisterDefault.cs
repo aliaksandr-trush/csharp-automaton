@@ -71,7 +71,7 @@
 
             for (int i = 1; i <= count; i++)
             {
-                errorList[i - 1] = UIUtilityProvider.UIHelper.GetText(string.Format(
+                errorList[i - 1] = WebDriverUtility.DefaultProvider.GetText(string.Format(
                     PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Locator + "[{0}]", i), LocateBy.XPath);
             }
 

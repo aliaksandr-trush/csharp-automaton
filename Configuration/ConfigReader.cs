@@ -4,9 +4,10 @@
     using System.Xml;
     using System.Xml.Serialization;
 
-    public class XmlConfiguration
+    public class ConfigReader
     {
-        private readonly string XmlConfigFilePath = "RegressionTestConfig.xml";
+        private readonly string XmlConfigFilePath = "TestConfig.xml";
+        private static ConfigReader Default = new ConfigReader();
 
         public enum EnvironmentEnum
         {
@@ -80,7 +81,15 @@
             private set;
         }
 
-        public XmlConfiguration()
+        public static ConfigReader DefaultProvider
+        {
+            get
+            {
+                return ConfigReader.Default;
+            }
+        }
+
+        public ConfigReader()
         {
             this.ReloadAllConfiguration();
         }

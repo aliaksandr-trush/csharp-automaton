@@ -75,42 +75,42 @@
         {
             RemoveLiveXAuthEventForCustomer();
     
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            db.ExecuteCommand("update Attendees set IsXAuth=0 where IsXAuth=1 and CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id);
-            db.ExecuteCommand("delete from XAuthConfiguration where CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id);
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            db.ExecuteCommand("update Attendees set IsXAuth=0 where IsXAuth=1 and CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id);
+            db.ExecuteCommand("delete from XAuthConfiguration where CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id);
         }
 
         [Step]
         public void ApprovedXAuthRoleForCustomer(bool isApproved)
         {
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            db.ExecuteCommand("update XAuthConfiguration set approved='" + isApproved + "' where CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id);
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            db.ExecuteCommand("update XAuthConfiguration set approved='" + isApproved + "' where CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id);
         }
 
         [Step]
         public void RemoveLiveXAuthEventForCustomer()
         {
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            db.ExecuteCommand("update EventRegTypes set xauthenabled=0 where xauthenabled=1 and eventid in (select id from events where customer_id=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + ")");
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            db.ExecuteCommand("update EventRegTypes set xauthenabled=0 where xauthenabled=1 and eventid in (select id from events where customer_id=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + ")");
         }
 
         [Step]
         public void RemoveXAuthTestRegisterAndAttendeeForCustomer()
         {
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            db.ExecuteCommand("UPDATE Registrations Set GroupId=Register_Id,ResourceGroupId=Register_Id WHERE GroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + ")) OR ResourceGroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + "))");
-            db.ExecuteCommand("DELETE FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + ")");
-            db.ExecuteCommand("DELETE FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id);
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            db.ExecuteCommand("UPDATE Registrations Set GroupId=Register_Id,ResourceGroupId=Register_Id WHERE GroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + ")) OR ResourceGroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + "))");
+            db.ExecuteCommand("DELETE FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + ")");
+            db.ExecuteCommand("DELETE FROM Attendees WHERE IsXAuth=1 AND CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id);
         }
 
         [Step]
         public void RemoveTestRegisterAndAttendeeByCustomerIdEmail(string email)
         {
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            db.ExecuteCommand("UPDATE Registrations Set GroupId=Register_Id,ResourceGroupId=Register_Id WHERE GroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + " AND Email_Address='" + email + "')) OR ResourceGroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + " AND Email_Address='" + email + "'))");
-            db.ExecuteCommand("UPDATE Registrations SET GroupId = 0 WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + " AND Email_Address='" + email + "')");
-            db.ExecuteCommand("DELETE FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId= " + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + " AND Email_Address='" + email + "')");
-            db.ExecuteCommand("DELETE FROM Attendees WHERE CustomerId=" + ConfigurationProvider.XmlConfig.AccountConfiguration.Id + " AND Email_Address='" + email + "'");
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            db.ExecuteCommand("UPDATE Registrations Set GroupId=Register_Id,ResourceGroupId=Register_Id WHERE GroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + " AND Email_Address='" + email + "')) OR ResourceGroupId in (SELECT Registrations.Register_Id FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + " AND Email_Address='" + email + "'))");
+            db.ExecuteCommand("UPDATE Registrations SET GroupId = 0 WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + " AND Email_Address='" + email + "')");
+            db.ExecuteCommand("DELETE FROM Registrations WHERE Attendee_Id IN (SELECT id FROM Attendees WHERE CustomerId= " + ConfigReader.DefaultProvider.AccountConfiguration.Id + " AND Email_Address='" + email + "')");
+            db.ExecuteCommand("DELETE FROM Attendees WHERE CustomerId=" + ConfigReader.DefaultProvider.AccountConfiguration.Id + " AND Email_Address='" + email + "'");
         }
 
         [Step]
@@ -125,13 +125,13 @@
         {
             xAuth.OK.WaitForDisplay();
             xAuth.OK.Click();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Builder.RegTypeManager.RegTypeDetailFrameID);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Builder.RegTypeManager.RegTypeDetailFrameID);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickCancelButton()
         {
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
         }
 
         [Step]
@@ -347,12 +347,12 @@
 
             if (HasErrors())
             {
-                int count = Convert.ToInt32(UIUtilityProvider.UIHelper.GetXPathCountByXPath(ErrorLocator + "/li"));
+                int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
                 string errorFormat = ErrorLocator + "/li[{0}]";
 
                 for (int i = 1; i <= count; i++)
                 {
-                    errorList.Add(UIUtilityProvider.UIHelper.GetText(string.Format(errorFormat, i), LocateBy.XPath));
+                    errorList.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(errorFormat, i), LocateBy.XPath));
                 }
             }
 
@@ -361,7 +361,7 @@
 
         private bool HasErrors()
         {
-            return UIUtilityProvider.UIHelper.GetAttribute(this.xAuth.ErrorDIVLocator.Locator, "@style", LocateBy.XPath) != "display:none;";
+            return WebDriverUtility.DefaultProvider.GetAttribute(this.xAuth.ErrorDIVLocator.Locator, "@style", LocateBy.XPath) != "display:none;";
         }
 
         private void VerifyErrors(List<string> errorMessages, int errorsCount)

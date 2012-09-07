@@ -162,7 +162,7 @@
         private int separatorLineFieldId;
         private string roomBlockDate = string.Format("{0}/{1}/{2}", DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Year);
         private int blockSize = 60;
-        private string DetailsURL = ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps;
+        private string DetailsURL = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps;
 
         [Test]
         [Category(Priority.Three)]

@@ -29,15 +29,15 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegistrationService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegistrationService].Url);
 
             this.service = new RegistrationServiceSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegistrationService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegistrationService].EndpointConfigName,
                 RemoteAddressUri.ToString());
 
             header = new AuthenticationHeader();
-            header.UserName = ConfigurationProvider.XmlConfig.AccountConfiguration.Login;
-            header.Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
+            header.UserName = ConfigReader.DefaultProvider.AccountConfiguration.Login;
+            header.Password = ConfigReader.DefaultProvider.AccountConfiguration.Password;
         }
 
         [Test]

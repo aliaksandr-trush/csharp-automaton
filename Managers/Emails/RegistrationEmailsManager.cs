@@ -185,22 +185,22 @@
 
         public bool OnWebEventJoinPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/WebEvent/join.aspx");
+            return WebDriverUtility.DefaultProvider.UrlContainsPath("register/WebEvent/join.aspx");
         }
 
         public string GetEmailHeaderTitle()
         {
-            return UIUtilityProvider.UIHelper.GetText(HeaderTitleLocator, LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.GetText(HeaderTitleLocator, LocateBy.Id);
         }
 
         public string GetHeaderImgPathAttribute()
         {
-            return UIUtilityProvider.UIHelper.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
+            return WebDriverUtility.DefaultProvider.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
         }
 
         public string GetBodyText()
         {
-            return UIUtilityProvider.UIHelper.GetText(BodyTextLocator, LocateBy.Id); 
+            return WebDriverUtility.DefaultProvider.GetText(BodyTextLocator, LocateBy.Id); 
         }
 
         public class ConfirmationEmailBody
@@ -267,14 +267,14 @@
 
         public void ClickReviewChangeUpdateLinkInConfirmationEmail()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickClickHereLinkInIncompleteConfirmationEmail()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("click here", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("click here", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ModifyEmailHtmlContent(EmailCategory category, string appendedContentText)

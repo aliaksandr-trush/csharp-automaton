@@ -28,10 +28,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveSingleRegService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RetrieveSingleRegService].Url);
 
             this.service = new RetrieveSingleRegistrationManagerSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveSingleRegService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RetrieveSingleRegService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -45,8 +45,8 @@
 
             //The registrant belongs to specific event
             string response = this.service.RetrieveSingleRegistration(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventIdRegistrantBelongsTo,
                 this.registerId);
 
@@ -74,8 +74,8 @@
 
             // The registrant doesn't belong to specific event
             string response = this.service.RetrieveSingleRegistration(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventIdRegistrantDoesNotBelongTo,
                 this.registerId);
 

@@ -128,7 +128,7 @@
             EmailMgr.ClickCreateNewContactList();
             listName = "ContactList" + DateTime.Now.Ticks;
             EmailMgr.CreateContactListSetup(listName, true, EmailManager.ContactMethod.Import);
-            EmailMgr.ChooseContactListToUpload(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + listToUpload);
+            EmailMgr.ChooseContactListToUpload(ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + listToUpload);
             EmailMgr.NextStep();
             EmailMgr.ConfirmContactListUpload(exepectedContacts, exepectedContacts);
             EmailMgr.CloseContactListImport();
@@ -142,7 +142,7 @@
             EmailMgr.ClickCreateNewContactList();
             listName = "ContactList" + DateTime.Now.Ticks;
             EmailMgr.CreateContactListSetup(listName, true, EmailManager.ContactMethod.Import);
-            EmailMgr.ChooseContactListToUpload(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + listToUpload);
+            EmailMgr.ChooseContactListToUpload(ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + listToUpload);
             EmailMgr.NextStep();
             EmailMgr.CorrectUploadErrors("laura.wisen@gmail.com", 0, expectedContacts, expectedContacts, 1);
             EmailMgr.CorrectUploadErrors("something@wulfogf.org", 0, expectedContacts + 1, expectedContacts + 1, 0); 
@@ -156,7 +156,7 @@
             EmailMgr.ClickCreateNewContactList();
             listName = "ContactList" + DateTime.Now.Ticks;
             EmailMgr.CreateContactListSetup(listName, true, EmailManager.ContactMethod.Import);
-            EmailMgr.ChooseContactListToUpload(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + listToUpload);
+            EmailMgr.ChooseContactListToUpload(ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + listToUpload);
             EmailMgr.MapFields(2, EmailManager.FieldMappingOptions.LastName);
             EmailMgr.MapFields(3, EmailManager.FieldMappingOptions.Company);
             EmailMgr.MapFields(6, EmailManager.FieldMappingOptions.AdditionalField1);
@@ -172,7 +172,7 @@
             EmailMgr.ClickCreateNewContactList();
             listName = "ContactList" + DateTime.Now.Ticks;
             EmailMgr.CreateContactListSetup(listName, true, EmailManager.ContactMethod.Import);
-            EmailMgr.ChooseContactListToUpload(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + listToUpload);
+            EmailMgr.ChooseContactListToUpload(ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + listToUpload);
             EmailMgr.MapFields(2, EmailManager.FieldMappingOptions.Email);
             EmailMgr.NextStep();
             EmailMgr.CorrectUploadErrors("asdfassdf@asdf.fds", 0, expectedContacts, expectedContacts, 1);

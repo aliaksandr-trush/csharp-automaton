@@ -159,7 +159,7 @@
             RegisterMgr.OpenRegisterPage(this.eventId);
             RegisterMgr.Checkin(email);
             RegisterMgr.ClickCheckinAlreadyRegistered();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
             RegisterMgr.ClickEditPersonalInformationLink(0);
             string newAddressLineOne = RegisterManager.DefaultPersonalInfo.AddressLineOne + updateCount.ToString();

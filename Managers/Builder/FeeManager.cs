@@ -69,18 +69,18 @@
         // However you can set it to 0.00
         public void SetStandardPrice(double? price)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(this.standardPriceTxtboxLocator, price);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.standardPriceTxtboxLocator, price);
         }
 
         public double GetStandardPrice()
         {
-            return Convert.ToDouble(UIUtilityProvider.UIHelper.GetValue(this.standardPriceTxtboxLocator, LocateBy.Id));
+            return Convert.ToDouble(WebDriverUtility.DefaultProvider.GetValue(this.standardPriceTxtboxLocator, LocateBy.Id));
         }
 
         protected void ClickOptionLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.optionLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.optionLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             System.Threading.Thread.Sleep(3000);
         }
 
@@ -88,7 +88,7 @@
         public void ExpandOption()
         {
             // Some Expand options - like with pricing - do an AJAX thing. So it might not even have rendered to HTML yet.
-            if (!UIUtilityProvider.UIHelper.IsElementPresent(this.pricingScheduleDIVLocator, LocateBy.Id) || UIUtilityProvider.UIHelper.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
+            if (!WebDriverUtility.DefaultProvider.IsElementPresent(this.pricingScheduleDIVLocator, LocateBy.Id) || WebDriverUtility.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
             {
                 this.ClickOptionLink();
             }
@@ -96,7 +96,7 @@
 
         public void CollapseOption()
         {
-            if (!UIUtilityProvider.UIHelper.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
+            if (!WebDriverUtility.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
             {
                 this.ClickOptionLink();
             }

@@ -32,15 +32,15 @@
             Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserNamePassword);
 
-            if (Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.XAuthVersion == "Old")
+            if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "Old")
             {
-                Assert.AreEqual(true, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_rdoMembership", LocateBy.Id));
-                Assert.AreEqual(false, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_rdoEmail", LocateBy.Id));
+                Assert.AreEqual(true, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_rdoMembership", LocateBy.Id));
+                Assert.AreEqual(false, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_rdoEmail", LocateBy.Id));
             }
             else
             {
-                Assert.AreEqual(true, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_xAuth_rdoMembership", LocateBy.Id));
-                Assert.AreEqual(false, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_xAuth_rdoEmail", LocateBy.Id));
+                Assert.AreEqual(true, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoMembership", LocateBy.Id));
+                Assert.AreEqual(false, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoEmail", LocateBy.Id));
             }        
 
             //4.2 

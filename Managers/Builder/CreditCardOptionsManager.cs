@@ -66,7 +66,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -77,29 +77,29 @@
         public void SaveAndClose()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectPaymentGateway(PaymentGateway paymentGateway)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_ddlEventsCustomerMerchantID", StringEnum.GetStringValue(paymentGateway), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlEventsCustomerMerchantID", StringEnum.GetStringValue(paymentGateway), LocateBy.Id);
         }
 
         public void SetCreditCardStatementDescription(string description)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_txtEventsDynamicDescriptor", description, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsDynamicDescriptor", description, LocateBy.Id);
         }
 
         public void SetAcceptedCreditCard(AcceptedCreditCard creditCard, bool? checkPublic, bool? checkAdmin, bool? checkOnSite)
@@ -110,32 +110,32 @@
             {
                 string creditCardPublicCheckboxLocator = string.Format(CreditCardPublicCheckboxLocatorFormat, creditCardTitleLocator);
 
-                UIUtilityProvider.UIHelper.SetCheckbox(creditCardPublicCheckboxLocator, checkPublic.Value, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SetCheckbox(creditCardPublicCheckboxLocator, checkPublic.Value, LocateBy.XPath);
             }
 
             if (checkAdmin.HasValue)
             {
                 string creditCardAdminCheckboxLocator = string.Format(CreditCardAdminCheckboxLocatorFormat, creditCardTitleLocator);
 
-                UIUtilityProvider.UIHelper.SetCheckbox(creditCardAdminCheckboxLocator, checkAdmin.Value, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SetCheckbox(creditCardAdminCheckboxLocator, checkAdmin.Value, LocateBy.XPath);
             }
 
             if (checkOnSite.HasValue)
             {
                 string creditCardOnSiteCheckboxLocator = string.Format(CreditCardOnSiteCheckboxLocatorFormat, creditCardTitleLocator);
 
-                UIUtilityProvider.UIHelper.SetCheckbox(creditCardOnSiteCheckboxLocator, checkOnSite.Value, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SetCheckbox(creditCardOnSiteCheckboxLocator, checkOnSite.Value, LocateBy.XPath);
             }
         }
 
         public void SetDeleteCCNumber(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkDeleteCreditCard", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkDeleteCreditCard", check, LocateBy.Id);
         }
 
         public void SetNotChargeCC(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkDoNotCharge", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkDoNotCharge", check, LocateBy.Id);
         }
     }
 }

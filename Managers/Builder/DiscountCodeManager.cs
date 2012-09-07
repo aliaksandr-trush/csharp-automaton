@@ -104,40 +104,40 @@
         #region Methods on the start and agenda page
         public bool HasDiscountCode(string codeName)
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(ComposeCodeLinkLocator(codeName), LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(ComposeCodeLinkLocator(codeName), LocateBy.XPath);
         }
 
         public bool HasDiscountCodeErrors()
         {
             try
             {
-                UIUtilityProvider.UIHelper.WaitForElementPresent("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForElementPresent("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
             }
             catch { /*ignore*/ }
 
-            return UIUtilityProvider.UIHelper.IsElementPresent("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
         }
 
         [Step]
         public void ClickAddCode()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(addCodeLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(addCodeLinkLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
 
             if(builderPage == FormDetailManager.Page.Start)
             {
                 SelectBuilderWindow();
             }
 
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(codeDialogID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(codeDialogID);
         }
 
         private void SelectCodeFrame()
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(codeDialogID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(codeDialogID);
             }
             catch
             {
@@ -147,20 +147,20 @@
 
         public void OpenCode(string codeName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ComposeCodeLinkLocator(codeName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ComposeCodeLinkLocator(codeName), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectUpperFrame();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(codeDialogID); ;
+            WebDriverUtility.DefaultProvider.SelectUpperFrame();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(codeDialogID); ;
         }
 
         [Step]
         public void SaveAndNewDiscountCode()
         {
             this.SelectCodeFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndNew();
+            WebDriverUtility.DefaultProvider.ClickSaveAndNew();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             this.SelectCodeFrame();
         }
 
@@ -171,28 +171,28 @@
             {
                 case FormDetailManager.Page.Start:
                     SelectCodeFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1.5);
-                    UIUtilityProvider.UIHelper.SelectOriginalWindow();
-                    UIUtilityProvider.UIHelper.SwitchToMainContent();
+                    WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+                    WebDriverUtility.DefaultProvider.SwitchToMainContent();
 
                     if (this.FeeLocationOfStartPage == FormDetailManager.FeeLocation.Event)
                     {
-                        UIUtilityProvider.UIHelper.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInEventFee);
+                        WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInEventFee);
                     }
                     else
                     {
-                        UIUtilityProvider.UIHelper.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInRegType);
+                        WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInRegType);
                     }
 
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     SelectCodeFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1.5);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -205,17 +205,17 @@
             {
                 case FormDetailManager.Page.Start:
                     SelectCodeFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1.5);
-                    UIUtilityProvider.UIHelper.SelectOriginalWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     SelectCodeFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1.5);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -226,7 +226,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(bulkLoadCodesDialogID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(bulkLoadCodesDialogID);
             }
             catch
             {
@@ -236,16 +236,16 @@
 
         public void ClickBulkLoadCodes()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(bulkLoadCodesLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(bulkLoadCodesLinkLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SaveAndStayBulkLoadCodes()
         {
             SelectBulkLoadCodesFrame();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
         }
 
         public void SaveAndCloseBulkLoadCodes()
@@ -254,17 +254,17 @@
             {
                 case FormDetailManager.Page.Start:
                     SelectBulkLoadCodesFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectOriginalWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     SelectBulkLoadCodesFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -277,17 +277,17 @@
             {
                 case FormDetailManager.Page.Start:
                     SelectBulkLoadCodesFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectOriginalWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     SelectBulkLoadCodesFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -298,21 +298,21 @@
         {
             if (doCancel)
             {
-                UIUtilityProvider.UIHelper.ChooseCancelOnNextConfirmation();
+                WebDriverUtility.DefaultProvider.ChooseCancelOnNextConfirmation();
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ComposeDeleteCodeLinkLocator(codeName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ComposeDeleteCodeLinkLocator(codeName), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.GetConfirmation();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void DeleteCode(string codeName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ComposeDeleteCodeLinkLocator(codeName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ComposeDeleteCodeLinkLocator(codeName), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.GetConfirmation();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public double CalculateDiscountPrice(double standardPrice, 
@@ -412,10 +412,10 @@
             switch (type)
             {
                 case DiscountCodeType.DiscountCode:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_rblCodeTypes_0", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_rblCodeTypes_0", LocateBy.Id);
                     break;
                 case DiscountCodeType.AccessCode:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_rblCodeTypes_1", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_rblCodeTypes_1", LocateBy.Id);
                     break;
                 default:
                     break;
@@ -424,65 +424,65 @@
 
         public void SetChangeDirection(ChangePriceDirection changePriceDirection)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_ddlChangePriceByDirection", changePriceDirection.ToString(), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlChangePriceByDirection", changePriceDirection.ToString(), LocateBy.Id);
         }
 
         public void SetChangeType(ChangeType changeType)
         {
             if (changeType == ChangeType.Percent)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_rblChangeTypePercent", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_rblChangeTypePercent", LocateBy.Id);
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_rblChangeTypeFixed", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_rblChangeTypeFixed", LocateBy.Id);
             }
         }
 
         public void SetDiscountChangePrice(double discountPrice)
         {
             string priceTxtboxLocator = "ctl00_cphDialog_radNChangePriceBy";
-            UIUtilityProvider.UIHelper.TypeRADNumericById(priceTxtboxLocator, Convert.ToString(discountPrice));
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(priceTxtboxLocator, Convert.ToString(discountPrice));
         }
 
         public void SetCodeName(string code)
         {
             string nameTxtboxLocator = "ctl00_cphDialog_txtDiscountCodeTitle";
-            UIUtilityProvider.UIHelper.Type(nameTxtboxLocator, code, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(nameTxtboxLocator, code, LocateBy.Id);
         }
 
         public void SetCodeLimitNumber(int? limitNumber)
         {
             string limitTxtboxLocator = "ctl00_cphDialog_radNCodeUseLimit";
-            UIUtilityProvider.UIHelper.TypeRADNumericById(limitTxtboxLocator, Convert.ToString(limitNumber));
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(limitTxtboxLocator, Convert.ToString(limitNumber));
         }
 
         public void SetCodeLabelOnForm(string label)
         {
-            UIUtilityProvider.UIHelper.Type(codeLabelOnFormTxtboxLocator, label, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(codeLabelOnFormTxtboxLocator, label, LocateBy.Id);
         }
 
         public void SetCodeRequired(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(codeRequiredCheckboxLocator, check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(codeRequiredCheckboxLocator, check, LocateBy.Id);
         }
 
         public void AppendCodeToBulkLoadCodes(string codeString)
         {
             // Get existing code string
             // Be aware! Do not use GetText() here, or we cannot get the current code string in the textarea!
-            string existingCodeString = UIUtilityProvider.UIHelper.GetValue(BulkCodesTxtareaLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(BulkCodesTxtareaLocator, existingCodeString + "," + codeString, LocateBy.Id);
+            string existingCodeString = WebDriverUtility.DefaultProvider.GetValue(BulkCodesTxtareaLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(BulkCodesTxtareaLocator, existingCodeString + "," + codeString, LocateBy.Id);
         }
 
         public void SetBulkLoadCodes(string codeString)
         {
-            UIUtilityProvider.UIHelper.Type(BulkCodesTxtareaLocator, codeString, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(BulkCodesTxtareaLocator, codeString, LocateBy.Id);
         }
 
         public void ClearBulkLoadCodes()
         {
-            UIUtilityProvider.UIHelper.Type(BulkCodesTxtareaLocator, string.Empty, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(BulkCodesTxtareaLocator, string.Empty, LocateBy.Id);
         }
 
         public string GetBulkLoadCodeStringForDiscountCode(string code, ChangePriceDirection changePriceDirection,
@@ -537,7 +537,7 @@
         {
             string codeLinkLocator = ComposeCodeLinkLocator(codeName);
 
-            if (hasCode != UIUtilityProvider.UIHelper.IsElementPresent(codeLinkLocator, LocateBy.XPath))
+            if (hasCode != WebDriverUtility.DefaultProvider.IsElementPresent(codeLinkLocator, LocateBy.XPath))
             {
                 Assert.Fail(string.Format("DiscountCode '{0}' was{1} found in the code list!", codeName, hasCode ? " NOT" : string.Empty));
             }
@@ -551,7 +551,7 @@
         {
             string codeLinkLocator = ComposeCodeLinkLocator(codeName);
 
-            if (hasCode != UIUtilityProvider.UIHelper.IsElementPresent(codeLinkLocator, LocateBy.XPath))
+            if (hasCode != WebDriverUtility.DefaultProvider.IsElementPresent(codeLinkLocator, LocateBy.XPath))
             {
                 Assert.Fail(string.Format("AccessCode '{0}' was{1} found in the code list!", codeName, hasCode ? " NOT" : string.Empty));
             }
@@ -564,8 +564,8 @@
             ChangePriceDirection changePriceDirection, ChangeType changeType, 
             double discountPrice, int? limitNumber)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(BulkCodesTxtareaLocator, LocateBy.Id);
-            bool actual = UIUtilityProvider.UIHelper.GetText(BulkCodesTxtareaLocator, LocateBy.Id).Contains(
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(BulkCodesTxtareaLocator, LocateBy.Id);
+            bool actual = WebDriverUtility.DefaultProvider.GetText(BulkCodesTxtareaLocator, LocateBy.Id).Contains(
                 GetBulkLoadCodeStringForDiscountCode(codeName, changePriceDirection, changeType, discountPrice, limitNumber));
 
             if (hasCode != actual)
@@ -576,8 +576,8 @@
 
         public void VerifyAccessCodeInBulkLoadCodes(bool hasCode, string codeName, int? limitNumber)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(BulkCodesTxtareaLocator, LocateBy.Id);
-            bool actual = UIUtilityProvider.UIHelper.GetText(BulkCodesTxtareaLocator, LocateBy.Id).Contains(GetBulkLoadCodeStringForAccessCode(codeName, limitNumber));
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(BulkCodesTxtareaLocator, LocateBy.Id);
+            bool actual = WebDriverUtility.DefaultProvider.GetText(BulkCodesTxtareaLocator, LocateBy.Id).Contains(GetBulkLoadCodeStringForAccessCode(codeName, limitNumber));
 
             if (hasCode != actual)
             {
@@ -594,7 +594,7 @@
             string codeTypeTitleLocator = string.Format(codeTypeTitleLocatorFormat, codeLinkLocator);
 
             //Get the code type title attribute and verify whether it matches the right type
-            string codeTypeTitle = UIUtilityProvider.UIHelper.GetAttribute(codeTypeTitleLocator, "title", LocateBy.XPath);
+            string codeTypeTitle = WebDriverUtility.DefaultProvider.GetAttribute(codeTypeTitleLocator, "title", LocateBy.XPath);
             if (codeType == DiscountCodeType.DiscountCode)
             {
                 VerifyTool.VerifyValue("Discount code", codeTypeTitle, "The code type is : {0}");
@@ -604,7 +604,7 @@
                 VerifyTool.VerifyValue("Access code", codeTypeTitle, "The code type is : {0}");
             }
 
-            VerifyTool.VerifyValue(codeName, UIUtilityProvider.UIHelper.GetText(codeLinkLocator, LocateBy.XPath), "The code name is : {0}");
+            VerifyTool.VerifyValue(codeName, WebDriverUtility.DefaultProvider.GetText(codeLinkLocator, LocateBy.XPath), "The code name is : {0}");
         }
 
         public void VerifyCodeChangeAmount(string codeName, ChangePriceDirection changePriceDirection, ChangeType changeType, double discountPrice)
@@ -626,14 +626,14 @@
             {
                 expectedAmount.Append("%");
             }
-            VerifyTool.VerifyValue(expectedAmount.ToString(), UIUtilityProvider.UIHelper.GetText(codeChangeAmountLocator, LocateBy.XPath), "The change amount is : {0}");
+            VerifyTool.VerifyValue(expectedAmount.ToString(), WebDriverUtility.DefaultProvider.GetText(codeChangeAmountLocator, LocateBy.XPath), "The change amount is : {0}");
         }
 
         public void VerifyCodeLimitNumber(string codeName, int? limitNumber)
         {
             string codeLinkLocator = ComposeCodeLinkLocator(codeName);
             string codeLimitNumberLocator = string.Format("{0}/../../td[4]", codeLinkLocator);
-            VerifyTool.VerifyValue(Convert.ToString(limitNumber), UIUtilityProvider.UIHelper.GetText(codeLimitNumberLocator, LocateBy.XPath), "The code limit is : {0}");
+            VerifyTool.VerifyValue(Convert.ToString(limitNumber), WebDriverUtility.DefaultProvider.GetText(codeLimitNumberLocator, LocateBy.XPath), "The code limit is : {0}");
         }
         #endregion
 
@@ -642,18 +642,18 @@
         #region Methods on merchandise page
         public void SetMerchandiseDiscountCode(string discountCodeRule)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_feepassword", discountCodeRule, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_feepassword", discountCodeRule, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickDiscountCodeRequired()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_feePasswordRequired", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_feePasswordRequired", LocateBy.Id);
         }
 
         public void VerifyMerchandiseDiscountCodeAvailable(bool available)
         {
-            string style = UIUtilityProvider.UIHelper.GetAttribute("ctl00_cphDialog_divDiscountOptions", "style", LocateBy.Id);
+            string style = WebDriverUtility.DefaultProvider.GetAttribute("ctl00_cphDialog_divDiscountOptions", "style", LocateBy.Id);
             bool actual = (style != "display: none;");
 
             if (actual != available)
@@ -666,7 +666,7 @@
         {
             if (HasDiscountCodeErrors())
             {
-                string actMessage = UIUtilityProvider.UIHelper.GetText("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
+                string actMessage = WebDriverUtility.DefaultProvider.GetText("//div[@id = 'ctl00_valSummary']/ul/li", LocateBy.XPath);
                 if (actMessage != errorMessage)
                 {
                     VerifyTool.VerifyValue(errorMessage, actMessage, "The discount code error message is: {0}");

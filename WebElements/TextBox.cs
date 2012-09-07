@@ -9,12 +9,12 @@
 
         public void Type(object value)
         {
-            UIUtilityProvider.UIHelper.Type(Locator, value, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.Type(Locator, value, TypeOfLocator);
         }
 
         public void Click()
         {
-            UIUtilityProvider.UIHelper.Click(Locator, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
     }
 }

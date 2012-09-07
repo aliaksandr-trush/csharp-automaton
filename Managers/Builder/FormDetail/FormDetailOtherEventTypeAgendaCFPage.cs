@@ -12,19 +12,19 @@
 
         public void ClickAddAgendaItemOld()
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(GetAddGridItemLocator(OtherEventTypeAgendaAndCFManager.Locator.AddOptionLinkLocatorPrefix), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator(OtherEventTypeAgendaAndCFManager.Locator.AddOptionLinkLocatorPrefix), LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(OtherEventTypeAgendaAndCFManager.FrameId);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(OtherEventTypeAgendaAndCFManager.FrameId);
         }
 
         // Donation custom field is very much similiar to donation option
         public void ClickAddCustomFieldOld()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(GetAddGridItemLocator(PIPageAddCFLinkLocatorPrefix), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator(PIPageAddCFLinkLocatorPrefix), LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(OtherEventTypeAgendaAndCFManager.FrameId);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(OtherEventTypeAgendaAndCFManager.FrameId);
             this.ResizeCustomFieldRADWindowAndAdjustPosition(1000, 800, 20, 20);
         }
 
@@ -34,8 +34,8 @@
             this.OldAGAndCFMgr.SetQuestionDescription(name);
             this.OldAGAndCFMgr.SetTypeWithDefaultsOld(type);
             this.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddAgendaItemOldStyle(OtherEventTypeAgendaAndCFManager.FieldType type, string name)
@@ -43,7 +43,7 @@
             this.ClickAddAgendaItemOld();
             this.OldAGAndCFMgr.SetQuestionDescription(name);
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(OtherEventTypeAgendaAndCFManager.Locator.FeeTypeTableLocator, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(OtherEventTypeAgendaAndCFManager.Locator.FeeTypeTableLocator, LocateBy.Id))
             {
                 this.OldAGAndCFMgr.SetMembershipFeeType(OtherEventTypeAgendaAndCFManager.FeeType.OneTimeFee);
             }
@@ -60,11 +60,11 @@
                 this.OldAGAndCFMgr.SetRegularPrice(Math.Round(new Random((int)DateTime.Now.Ticks).NextDouble() * 1000 + 1, 2));
             }
 
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
 
             this.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddAgendaItemOldStyleWithPrice(
@@ -75,7 +75,7 @@
             this.ClickAddAgendaItemOld();
             this.OldAGAndCFMgr.SetQuestionDescription(name);
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(OtherEventTypeAgendaAndCFManager.Locator.FeeTypeTableLocator, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(OtherEventTypeAgendaAndCFManager.Locator.FeeTypeTableLocator, LocateBy.Id))
             {
                 OldAGAndCFMgr.SetMembershipFeeType(OtherEventTypeAgendaAndCFManager.FeeType.OneTimeFee);
             }
@@ -91,11 +91,11 @@
                 OldAGAndCFMgr.SetRegularPrice(standardPrice);
             }
 
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
 
             OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

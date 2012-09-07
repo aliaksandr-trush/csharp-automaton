@@ -29,7 +29,7 @@
 			// Verify captcha is visible
 			ManagerSiteMgr.VerifyCaptchaVisible();
 
-            UIUtility.UIUtilityProvider.UIHelper.ClearCookiesAndRestart();
+            UIUtility.WebDriverUtility.DefaultProvider.ClearCookiesAndRestart();
 			// Would be nice to actually log in now with the captcha value but 
 			// that's sort of the point of captcha is to prevent this from happening.
 		}

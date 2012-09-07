@@ -31,10 +31,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventFieldsService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventFieldsService].Url);
 
             this.service = new getEventFieldsSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventFieldsService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventFieldsService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
         
@@ -44,7 +44,7 @@
         [ExpectedException()]
         public void RetrieveEventFields_Throws_Exception_For_Invalid_Data()
         {
-            string response = this.service.RetrieveEventFields(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, ManagerBase.InvalidId);
+            string response = this.service.RetrieveEventFields(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, ManagerBase.InvalidId);
             Assert.Fail();
         }
 
@@ -55,7 +55,7 @@
         {
             this.PrepareEvent();
 
-            string response = this.service.RetrieveEventFields(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, this.eventId);
+            string response = this.service.RetrieveEventFields(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, this.eventId);
             Assert.That(response.IndexOf(AgendaItemName.WithPrice.ToString()) <= 0);
             Assert.Greater(response.IndexOf(AgendaItemName.WithoutPrice.ToString()), 1);
         }
@@ -66,7 +66,7 @@
         [ExpectedException()]
         public void RetrieveEventFields2_Throws_Exception_For_Invalid_Data()
         {
-            string response = this.service.RetrieveEventFields2(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, ManagerBase.InvalidId, false);
+            string response = this.service.RetrieveEventFields2(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, ManagerBase.InvalidId, false);
             Assert.Fail();
         }
 
@@ -77,7 +77,7 @@
         {
             this.PrepareEvent();
 
-            string response = this.service.RetrieveEventFields2(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, eventId, false);
+            string response = this.service.RetrieveEventFields2(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, eventId, false);
             Assert.That(response.IndexOf(AgendaItemName.WithPrice.ToString()) > 0);
         }
 

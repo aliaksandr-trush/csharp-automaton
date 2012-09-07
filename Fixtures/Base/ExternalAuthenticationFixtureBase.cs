@@ -8,7 +8,7 @@
         [SetUp]
         public void RemoveXAuthAndSSOLiveReg()
         {
-            DataHelperTool.RemoveXAuthLiveRegistration(ConfigurationProvider.XmlConfig.AccountConfiguration.Id); 
+            DataHelperTool.RemoveXAuthLiveRegistration(ConfigReader.DefaultProvider.AccountConfiguration.Id); 
         }
     }
 }

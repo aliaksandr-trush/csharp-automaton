@@ -318,9 +318,9 @@
         [Step]
         public void ReturnToList()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_hplBack", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_hplBack", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -328,8 +328,8 @@
         {
             string tabLocatorFormat = StringEnum.GetStringValue(tabChoice);
             //string tabName = string.Empty;
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(tabLocatorFormat, LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(tabLocatorFormat, LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ChooseTabAndVerify(DashboardTab tabChoice)
@@ -346,35 +346,35 @@
             {
                 case DashboardTab.EventDetails:
                     //Verify presence of setup, registration, and additional sections, as well as event statistics
-                    if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulSetupLinks", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulRegistrationLinks", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulAdditionalLinks", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_wrpEventStats", LocateBy.Id))
+                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulSetupLinks", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulRegistrationLinks", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_ulAdditionalLinks", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_wrpEventStats", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case DashboardTab.Reports:
                     //Verify presence of sections for common, attendee, financial, miscellaneous, and custom reports
-                    if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlMainReports", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlAttendeeReports", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlFinancialReports", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlMiscReports", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomReports", LocateBy.Id))
+                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlMainReports", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlAttendeeReports", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlFinancialReports", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlMiscReports", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomReports", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case DashboardTab.XEventReports:
                     //Verify presence of standard and custom XEvent Report list
-                    if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlStandardXReports", LocateBy.Id) &&
-                        UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlCustomXEventReports", LocateBy.Id))
+                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlStandardXReports", LocateBy.Id) &&
+                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlCustomXEventReports", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case DashboardTab.LabelsBadges:
                     //Verify presence of labels and badges section
-                    if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlBadges", LocateBy.Id))
+                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlBadges", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case DashboardTab.Directories:
                     //Verify presence of user list
-                    if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlDirectories", LocateBy.Id))
+                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlDirectories", LocateBy.Id))
                         isCorrect = true;
                     break;
             }
@@ -397,8 +397,8 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickOption(EventAdditionalFunction optionChoice)
@@ -435,8 +435,8 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -450,27 +450,27 @@
             {
                 case EventRegistrationFunction.TestRegister:
                     locator = "ctl00_ctl00_cphDialog_cpMgrMain_lnkRegister";
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
                     break;
                 case EventRegistrationFunction.OnsiteCheckIn:
                     locator = "ctl00_ctl00_cphDialog_cpMgrMain_lnkOnsiteCheckin";
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
                     break;
                 case EventRegistrationFunction.SelfRegistrationKiosk:
                     locator = "//a[@class='frmDashLink kiosk']";
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
                     break;
                 case EventRegistrationFunction.AdminRegister:
                     locator = "ctl00_ctl00_cphDialog_cpMgrMain_lnkAdminReg";
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
                     break;
                 case EventRegistrationFunction.DeleteTestRegistrations:
                     locator = "ctl00_ctl00_cphDialog_cpMgrMain_lnkDeleteTestRegs";
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void DeleteTestRegs()
@@ -478,25 +478,25 @@
             this.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             this.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
             this.DeleteTestReg_ClickDelete();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
         public void DeleteTestReg_ClickDelete()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(DeleteTestRegButtonFormat, "Delete"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DeleteTestRegButtonFormat, "Delete"), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         public void DeleteTestReg_ClickCancel()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(DeleteTestRegButtonFormat, "Cancel"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DeleteTestRegButtonFormat, "Cancel"), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         private int GetTestRegCountWhenTryingToDeleteThem()
@@ -506,8 +506,8 @@
             string confirmMessageLocator =
                 "//div[@id='ctl00_cphDialog_rapDeleteTestRegistrations']/div[@id='ctl00_cphDialog_divMessage']";
 
-            UIUtilityProvider.UIHelper.WaitForElementPresent(confirmMessageLocator, LocateBy.XPath);
-            string confirmMssg = UIUtilityProvider.UIHelper.GetText(confirmMessageLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(confirmMessageLocator, LocateBy.XPath);
+            string confirmMssg = WebDriverUtility.DefaultProvider.GetText(confirmMessageLocator, LocateBy.XPath);
             string numfound = Regex.Match(confirmMssg, @"\b\d+\b").Value;
             regCount = int.Parse(numfound);
             return regCount;
@@ -526,22 +526,22 @@
         public string GetEventWebsiteURL(int eventID)
         {
             string eventWebsiteURLLinkLocator = this.ComposeEventWebsiteURLLinkLocator(eventID);
-            UIUtilityProvider.UIHelper.WaitForElementPresent(eventWebsiteURLLinkLocator, LocateBy.XPath);
-            return UIUtilityProvider.UIHelper.GetText(eventWebsiteURLLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(eventWebsiteURLLinkLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(eventWebsiteURLLinkLocator, LocateBy.XPath);
         }
 
         public void ClickEventWebsiteURLLink(int eventID)
         {
             string eventWebsiteURLLinkLocator = this.ComposeEventWebsiteURLLinkLocator(eventID);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(eventWebsiteURLLinkLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(eventWebsiteURLLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
         }
 
         [Step]
         public void ClickManagerActivateEventButton()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ManagerActivateButton, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ManagerActivateButton, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ActiveEvent()
@@ -564,55 +564,55 @@
                 return;
             }
             
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ChangeStatusLink, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ChangeStatusLink, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
 
             // Select 'Change Form Status' rad window
             string locator_Name_ChangeFormStatusFrame = "plain";
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(locator_Name_ChangeFormStatusFrame);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ChangeStatusNow, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectWithText(SetStatusNowLocator, StatusToChangeTo, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_ChangeFormStatusFrame);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ChangeStatusNow, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectWithText(SetStatusNowLocator, StatusToChangeTo, LocateBy.Id);
 
             if (!string.IsNullOrEmpty(statusMessage))
             {
                 this.AddOrEditStatusMessage(statusMessage);
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(locator_Name_ChangeFormStatusFrame);
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_ChangeFormStatusFrame);
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(OkButton, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(OkButton, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         private void AddOrEditStatusMessage(string message)
         {
             RADContentEditorHelper helper = new RADContentEditorHelper();
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddStatusMessage, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddStatusMessage, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             Utility.ThreadSleep(2);
 
             // Select 'Edit Status Message' rad window
             string locator_Name_EditStatusMessageFrame = "dialog2";
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(locator_Name_EditStatusMessageFrame);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_EditStatusMessageFrame);
 
             // Switch to HTML mode
             helper.SwitchMode(RADContentEditorHelper.Mode.HTML);
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", message, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(locator_Name_EditStatusMessageFrame);
-            UIUtilityProvider.UIHelper.SaveAndCloseContentEditorFrame();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", message, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_EditStatusMessageFrame);
+            WebDriverUtility.DefaultProvider.SaveAndCloseContentEditorFrame();
         }
 
         [Step]
         private string GetEventStatusFromDashboard()
         {
-            return UIUtilityProvider.UIHelper.GetText(CurrentEventStatus, LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.GetText(CurrentEventStatus, LocateBy.Id);
         }
 
         public void VerifyEventStatus(EventStatus expectedStatus)
@@ -626,7 +626,7 @@
         [Step]
         public bool IsCustomReportExist(string reportName)
         {
-            return UIUtilityProvider.UIHelper.IsElementDisplay(this.ComposeCustomReportLinkLocator(reportName), LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementDisplay(this.ComposeCustomReportLinkLocator(reportName), LocateBy.XPath);
         }
 
         private string ComposeCustomReportLinkLocator(string reportName)
@@ -639,16 +639,16 @@
 
         public void DeleteCustomReport(string reportName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//a[text()='{0}']/../..//*[contains(@id,'Delete')]", reportName), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//a[text()='{0}']/../..//*[contains(@id,'Delete')]", reportName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public int GetCustomReportId(string reportName)
         {
-            string href = UIUtilityProvider.UIHelper.GetAttribute(this.ComposeCustomReportLinkLocator(reportName), "href", LocateBy.XPath);
+            string href = WebDriverUtility.DefaultProvider.GetAttribute(this.ComposeCustomReportLinkLocator(reportName), "href", LocateBy.XPath);
 
             string id = href.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0];
             id = id.Split(new char[] { '(' }, StringSplitOptions.RemoveEmptyEntries)[1];
@@ -663,7 +663,7 @@
                 XEventReportTableLocator,
                 reportName);
 
-            string href = UIUtilityProvider.UIHelper.GetAttribute(customReportLinkLocator, "href", LocateBy.XPath);
+            string href = WebDriverUtility.DefaultProvider.GetAttribute(customReportLinkLocator, "href", LocateBy.XPath);
 
             string id = href.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0];
             id = id.Split(new char[] { '(' }, StringSplitOptions.RemoveEmptyEntries)[1];
@@ -674,8 +674,8 @@
         public void OpenOnSiteCheckin()
         {
             this.ClickOption(EventRegistrationFunction.OnsiteCheckIn);
-            UIUtilityProvider.UIHelper.SelectWindowByTitle("RegOnline");
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle("RegOnline");
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void LaunchKiosk(
@@ -723,13 +723,13 @@
                 case CommonReportType.Travel:
                 case CommonReportType.Lodging:
                 case CommonReportType.ConfirmedRegistrants:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
                     Utility.ThreadSleep(3);
                     SelectReportPopupWindow();
                     break;
 
                 case CommonReportType.RoomingList:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.commonReportLinkLocators[type], LocateBy.Id);
                     Utility.ThreadSleep(3);
                     this.ByPassRoomingListReportFilter();
                     SelectReportPopupWindow();
@@ -742,16 +742,16 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         private void ByPassRoomingListReportFilter()
         {
             // Select the FiltersConsole window
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
 
             // Click OK
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnApply", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnApply", LocateBy.Id);
 
             Utility.ThreadSleep(2);
         }
@@ -759,14 +759,14 @@
         [Step]
         public void OpenCustomReport(string reportName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//table[@id='{0}']//a[text()='{1}']", CustomReportTableLocator, reportName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//table[@id='{0}']//a[text()='{1}']", CustomReportTableLocator, reportName), LocateBy.XPath);
             Utility.ThreadSleep(2);
             SelectReportPopupWindow();
         }
 
         public void OpenXEventReport(string reportName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//table[@id='{0}']//a[text()='{1}']", XEventReportTableLocator, reportName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//table[@id='{0}']//a[text()='{1}']", XEventReportTableLocator, reportName), LocateBy.XPath);
             Utility.ThreadSleep(5);
             SelectReportPopupWindow();
         }
@@ -778,17 +778,17 @@
                 throw new NotImplementedException("CCTransactionsReport URL format not implemented!");
             }
 
-            UIUtilityProvider.UIHelper.OpenUrl(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + (string.Format(this.commonReportURLFormats[type], eventSessionId, eventId)));
+            WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + (string.Format(this.commonReportURLFormats[type], eventSessionId, eventId)));
         }
 
         public void OpenCustomReportURL(int eventId, string eventSessionId, int reportId)
         {
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(CustomReportURLFormat, eventSessionId, eventId, reportId));
+            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(CustomReportURLFormat, eventSessionId, eventId, reportId));
         }
 
         public void OpenXEventReportURL(string eventSessionId, int reportId)
         {
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(XEventReportURLFormat, eventSessionId, reportId));
+            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(XEventReportURLFormat, eventSessionId, reportId));
         }
 
         [Step]
@@ -804,14 +804,14 @@
 
         public void ClickAttendeeReportLinkOnFormDashboard()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ReportLinkOnFormDashboard, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ReportLinkOnFormDashboard, LocateBy.Id);
         }
 
         [Step]
         public int GetTotalRegCountFromDashboard()
         {
             string regCount = string.Empty;
-            regCount = UIUtilityProvider.UIHelper.GetText(ReportLinkOnFormDashboard, LocateBy.Id);
+            regCount = WebDriverUtility.DefaultProvider.GetText(ReportLinkOnFormDashboard, LocateBy.Id);
             return Convert.ToInt32(regCount);
         }
 
@@ -825,21 +825,21 @@
         public void CopyEventFromDashboard(string copiedEventName)
         {
             ClickOption(DashboardManager.EventAdditionalFunction.CopyEvent);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             Utility.ThreadSleep(6);
-            string test = UIUtilityProvider.UIHelper.GetText("builderSectionHeaderText", LocateBy.ClassName);
+            string test = WebDriverUtility.DefaultProvider.GetText("builderSectionHeaderText", LocateBy.ClassName);
             Assert.True(test.Contains(copiedEventName));
         }
 
         public void OpenBadge(string badgeName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdBadges']//a[text()='{0}']", badgeName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdBadges']//a[text()='{0}']", badgeName), LocateBy.XPath);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectWindowByTitle("BadgeFilters");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='OK']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle("BadgeFilters");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']", LocateBy.XPath);
             Utility.ThreadSleep(5);
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.SelectBadgeWindow();
         }
 
@@ -858,31 +858,31 @@
             ////}
 
             ////UIUtilityProvider.UIHelper.SelectWindow(badgeWindowId, RegOnline.RegressionTest.UIBase.UIManager.SelectWindowBy.Name);
-            UIUtilityProvider.UIHelper.SelectWindowByTitle("Badge");
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle("Badge");
         }
 
         public void CloseBadge()
         {
             this.SelectBadgeWindow();
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         public void OpenAttendeeDirectory(string directoryName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdDirectories']//a[text()='{0}']", directoryName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdDirectories']//a[text()='{0}']", directoryName), LocateBy.XPath);
             Utility.ThreadSleep(3);
             this.SelectAttendeeDirectoryWindow();
         }
 
         public void AddAttendeeDirectory(string directoryName)
         {
-            if (!UIUtilityProvider.UIHelper.IsElementPresent(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdDirectories']//a[text()='{0}']", directoryName), LocateBy.XPath))
+            if (!WebDriverUtility.DefaultProvider.IsElementPresent(string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_grdDirectories']//a[text()='{0}']", directoryName), LocateBy.XPath))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddAttendeeDirectoryLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddAttendeeDirectoryLocator, LocateBy.Id);
                 Utility.ThreadSleep(3);
                 this.SelectAttendeeDirectoryWindow();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
                 AttendeeDirectoryCreationMgr.SetName(directoryName);
             }
             else
@@ -894,35 +894,35 @@
         public void SelectAttendeeDirectoryWindow()
         {
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.SelectWindowByTitle("DirectoryReport");
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle("DirectoryReport");
         }
 
         public void CloseAttendeeDirectory()
         {
             this.SelectAttendeeDirectoryWindow();
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         [Step]
         public void SelectActivateEventFrame()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         public void ClickPreviewForm()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_lnkPreview", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_lnkPreview", LocateBy.Id);
         }
 
         public void VerifyOnDashboard()
         {
-            Assert.True(UIUtilityProvider.UIHelper.UrlContainsAbsolutePath(UrlPath));
+            Assert.True(WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(UrlPath));
         }
 
         public void VerifyOnDashboard(int eventId)
         {
-            Assert.True(UIUtilityProvider.UIHelper.UrlContainsPath(
+            Assert.True(WebDriverUtility.DefaultProvider.UrlContainsPath(
                 string.Format(UrlPathFormat_SpecificEvent, GetEventSessionId(), eventId)));
         }
     }

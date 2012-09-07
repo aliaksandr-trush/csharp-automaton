@@ -18,7 +18,7 @@
             string invitationCode = "Invitation";
             string invitationList = "Invitation List";
 
-            if (Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.XAuthVersion == "New")
+            if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "New")
             {
                 invitationList = "Invitations";
             }

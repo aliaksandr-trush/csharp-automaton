@@ -41,7 +41,7 @@
         {
             if (TimeZone.CurrentTimeZone.StandardName == "China Standard Time")
             {
-                int diff = Convert.ToInt32(ConfigurationProvider.XmlConfig.AllConfiguration.TimeZoneDifference) * -1;
+                int diff = Convert.ToInt32(ConfigReader.DefaultProvider.AllConfiguration.TimeZoneDifference) * -1;
                 dateTime = dateTime.AddHours(diff);
             }
 
