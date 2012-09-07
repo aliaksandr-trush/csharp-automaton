@@ -47,7 +47,7 @@
         {
             //step 1
             //bib numbers are ActiveEurope only.
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             //Avoid the known bug which causes overlap. (per QA: It's not in regression scope.)
             //when preparing these, ensure that StartingNumber is far enough away from each other and from the event starting number.
@@ -117,7 +117,7 @@
         [Description("637")]
         public void TeamWithoutRegType()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreatTeamWithoutRegType();
         }
@@ -127,7 +127,7 @@
         [Description("636")]
         public void TeamWithRegType()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateTeamWithRegType();
         }
@@ -137,7 +137,7 @@
         [Description("258")]
         public void BibNumberingToolWithoutRegType()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreatTeamWithoutRegType();
             this.BibSetting();
@@ -153,7 +153,7 @@
         [Description("259")]
         public void BibNumberingToolUpdates()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateTeamWithRegType();
             this.BibSetting();
@@ -201,7 +201,7 @@
         [Description("261")]
         public void TeamNameWithRegType()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateNewTeamWithRegType();
             this.RegisterAndCheckTeamName();

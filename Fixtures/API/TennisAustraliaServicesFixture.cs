@@ -27,7 +27,7 @@
         public TennisAustraliaServicesFixture()
         {
             // Because the provided user and password only exist on beta, we have to run this test against beta
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.Default);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.Default);
 
             // Re-initialize base uri after changing environment above
             BaseUriWithHttps = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps);

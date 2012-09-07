@@ -24,15 +24,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegistrationServiceFixture()
+            : base(ConfigReader.WebServiceEnum.RegistrationService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegistrationService].Url);
-
             this.service = new RegistrationServiceSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegistrationService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
 
             header = new AuthenticationHeader();

@@ -10,6 +10,8 @@
         protected Uri BaseUri;
         protected Uri BaseUriWithHttps;
 
+        protected WebService CurrentWebServiceConfig;
+
         protected abstract Uri RemoteAddressUri { get; set; }
 
         public APIFixtureBase()
@@ -17,6 +19,20 @@
             RequiresBrowser = false;
             BaseUri = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl);
             BaseUriWithHttps = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps);
+        }
+
+        public APIFixtureBase(ConfigReader.WebServiceEnum webService) : this()
+        {
+            CurrentWebServiceConfig = ConfigReader.DefaultProvider.WebServiceConfiguration[webService];
+
+            if (CurrentWebServiceConfig.HTTPS)
+            {
+                RemoteAddressUri = new Uri(BaseUriWithHttps, CurrentWebServiceConfig.Url);
+            }
+            else
+            {
+                RemoteAddressUri = new Uri(BaseUri, CurrentWebServiceConfig.Url);
+            }
         }
     }
 }

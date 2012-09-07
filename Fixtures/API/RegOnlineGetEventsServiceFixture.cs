@@ -23,15 +23,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineGetEventsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.GetEventsService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventsService].Url);
-
             this.service = new getEventsSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.GetEventsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -83,7 +80,7 @@
         public void ByAccountID_No_Exception_For_Valid_Params()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.Alternative);
+                ConfigReader.AccountEnum.Alternative);
 
             this.PrepareEvent();
 
@@ -119,7 +116,7 @@
         public void All_Methods_Return_EventFeeAmount()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.Alternative);
+                ConfigReader.AccountEnum.Alternative);
 
             this.PrepareEvent();
 

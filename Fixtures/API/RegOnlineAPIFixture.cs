@@ -7,8 +7,8 @@
     using NUnit.Framework;
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
-    using RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI;
     using RegOnline.RegressionTest.DataAccess;
+    using RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI;
     using RegOnline.RegressionTest.Managers.Builder;
     using RegOnline.RegressionTest.Managers.Manager.Dashboard;
 
@@ -71,16 +71,13 @@
 
         protected override Uri RemoteAddressUri { get; set; }
 
-        public RegOnlineAPIFixture()
+        public RegOnlineAPIFixture() 
+            : base(ConfigReader.WebServiceEnum.Default)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUriWithHttps,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.Default].Url);
-
             this.service = new RegOnlineAPISoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.Default].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
 
             header = new TokenHeader();
@@ -154,7 +151,7 @@
         public void GetEvents()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.Alternative);
+                ConfigReader.AccountEnum.Alternative);
 
             this.Login();
             header.APIToken = userAPIToken;

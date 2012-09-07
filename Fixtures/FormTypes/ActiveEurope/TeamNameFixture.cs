@@ -25,7 +25,7 @@
         public void TestWithRegTypes()
         {
             // Use endurance event with reg types that collect Team Name
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();

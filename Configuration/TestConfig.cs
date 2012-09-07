@@ -14,29 +14,23 @@
         [XmlElement(ElementName = "Browsers")]
         public Browsers Browsers { get; set; }
 
-        [XmlElement(ElementName = "TimeZoneDifference")]
-        public int TimeZoneDifference { get; set; }
-
         [XmlElement(ElementName = "NUnitAddin")]
         public NUnitAddin NUnitAddin { get; set; }
     }
 
     public class Environments
     {
-        [XmlElement(ElementName = "Preferred")]
-        public Preferred Preferred { get; set; }
+        [XmlAttribute("CurrentEnvironment")]
+        public string CurrentEnvironment { get; set; }
+
+        [XmlAttribute("CurrentAccount")]
+        public string CurrentAccount { get; set; }
+
+        [XmlAttribute("CurrentMachineTimeZoneOffset")]
+        public int CurrentMachineTimeZoneOffset { get; set; }
 
         [XmlElement(ElementName = "Environment")]
         public Environment[] Environment { get; set; }
-    }
-
-    public class Preferred
-    {
-        [XmlAttribute("Environment")]
-        public string Environment { get; set; }
-
-        [XmlAttribute("PrivateLabel")]
-        public string PrivateLabel { get; set; }
     }
 
     public class Environment
@@ -80,6 +74,9 @@
         [XmlElement(ElementName = "XAuthVersion")]
         public string XAuthVersion { get; set; }
 
+        [XmlElement(ElementName = "TimeZoneOffset")]
+        public int TimeZoneOffset { get; set; }
+
         [XmlAttribute("Name")]
         public string Name { get; set; }
 
@@ -116,6 +113,9 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+
+        [XmlAttribute("HTTPS")]
+        public bool HTTPS { get; set; }
     }
 
     public class Browsers

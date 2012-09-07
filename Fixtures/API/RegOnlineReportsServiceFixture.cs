@@ -30,15 +30,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineReportsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.RegistrationService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.ReportsService].Url);
-
             this.service = new RegonlineWebServicesSoapClient(
-                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.ReportsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -107,7 +104,7 @@
         [Description("1343")]
         public void GetNonCompressedReport_CheckDateFormat_BritishEnglishCulture()
         {
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -133,7 +130,7 @@
                 RegisterMgr.ClickCheckoutActiveWaiver();
                 RegisterMgr.FinishRegistration();
                 RegisterMgr.ConfirmRegistration();
-                this.regDates.Add(DateTimeTool.ConvertTo(DateTime.Now, DateTimeTool.TimeZoneIdentifier.GMTStandardTime));
+                this.regDates.Add(DateTimeTool.ConvertForCurrentAccount(DateTime.Now, ConfigReader.AccountEnum.ActiveEurope));
             }
 
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
