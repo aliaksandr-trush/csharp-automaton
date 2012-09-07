@@ -7,6 +7,7 @@
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using RegOnline.RegressionTest.DataAccess;
 
     public partial class EmailManager : ManagerBase
     {
@@ -95,27 +96,27 @@
         private const string ConfirmationEmailURLConstructor = "builder/site/emailviewer.aspx?eventid={0}&aid={1}&emailid={2}=&typeid=2&themeid=-1";
         private const string EmailInvitationURLConstructor = "builder/site/emailviewer.aspx?eventid={0}&aid={1}&emailid={2}=&typeid=9&themeid=-1";
 
-        ////public string ComposeConfirmationEmailURL(EmailCategory category, int eventId, int registrationId)
-        ////{
-        ////    string url = string.Empty;
-        ////    string emailId = FetchConfirmationEmailId(category, eventId);
-        ////    string attendeeId = FetchAttendeeId(registrationId);
+        public string ComposeConfirmationEmailURL(EmailCategory category, int eventId, int registrationId)
+        {
+            string url = string.Empty;
+            string emailId = FetchConfirmationEmailId(category, eventId);
+            string attendeeId = FetchAttendeeId(registrationId);
 
-        ////    url = ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.BaseUrl + 
-        ////        string.Format(ConfirmationEmailURLConstructor, eventId, U.EncryptionTools.Encrypt(attendeeId), U.EncryptionTools.Encrypt(emailId));
+            url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
+                string.Format(ConfirmationEmailURLConstructor, eventId, AccessData.GetEncryptString(attendeeId), AccessData.GetEncryptString(emailId));
 
-        ////    return url;
-        ////}
+            return url;
+        }
 
-        ////public string ComposeEmailInvitationURL(int eventId, string attendeeId, string emailId)
-        ////{
-        ////    string url = string.Empty;
+        public string ComposeEmailInvitationURL(int eventId, string attendeeId, string emailId)
+        {
+            string url = string.Empty;
 
-        ////    url = ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.BaseUrl + 
-        ////        string.Format(EmailInvitationURLConstructor, eventId, U.EncryptionTools.Encrypt(attendeeId), U.EncryptionTools.Encrypt(emailId));
-            
-        ////    return url;
-        ////}
+            url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
+                string.Format(EmailInvitationURLConstructor, eventId, AccessData.GetEncryptString(attendeeId), AccessData.GetEncryptString(emailId));
+
+            return url;
+        }
 
         public string FetchConfirmationEmailId(EmailCategory category, int eventId)
         {
