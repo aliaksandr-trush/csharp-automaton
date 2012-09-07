@@ -9,7 +9,7 @@
     public partial class ClientDataContext : System.Data.Linq.DataContext
     {
         public ClientDataContext() :
-            base(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection, mappingSource)
+            base(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, mappingSource)
         {
             OnCreated();
         }
@@ -18,7 +18,7 @@
     public partial class ROMasterDataContext : System.Data.Linq.DataContext
     {
         public ROMasterDataContext() :
-            base(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection, mappingSource)
+            base(ConfigReader.DefaultProvider.EnvironmentConfiguration.ROMasterConnection, mappingSource)
         {
             OnCreated();
         }

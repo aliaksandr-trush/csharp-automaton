@@ -13,12 +13,12 @@
         public void SetEventConfirmationPage()
         {
             // enable schedule download
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkEventsEnableScheduleDownload", true, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsEnableScheduleDownload", true, LocateBy.Id);
         }
 
         public void SetEnableHotelSearchFeature(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkEventsHotelSearch", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsHotelSearch", check, LocateBy.Id);
         }
 
         [Verify]
@@ -42,16 +42,16 @@
 
         public void AddConfirmationMessage(string message)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_elConfirmationText_linkCheckmarkfrmEventTextsConfirm_Info", LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", message + "<br>", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_elConfirmationText_linkCheckmarkfrmEventTextsConfirm_Info", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", message + "<br>", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
     }

@@ -245,7 +245,7 @@
             RegisterMgr.OpenRegisterPage();
             RegisterMgr.CheckinWithEmail(emailAddress);
             RegisterMgr.ClickCheckinAlreadyRegistered();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
 
             RegisterMgr.ClickEditPersonalInformationLink(0);

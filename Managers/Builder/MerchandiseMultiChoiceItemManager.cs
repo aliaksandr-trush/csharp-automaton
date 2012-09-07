@@ -13,7 +13,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -24,28 +24,28 @@
         public void SaveAndStay()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
         public void SaveAndClose()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetName(string name)
@@ -56,22 +56,22 @@
 
         public void SetFieldName(string name)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_feeListItemFieldName", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_feeListItemFieldName", name, LocateBy.Id);
         }
 
         public void SetDescription(string name)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_feeListItemDescription", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_feeListItemDescription", name, LocateBy.Id);
         }
 
         public void SetLimit(int? limit)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById("ctl00_cphDialog_feeListItemMaxQuantity", limit);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_feeListItemMaxQuantity", limit);
         }
 
         public void SetVisibility(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_feeListItemVisible", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_feeListItemVisible", check, LocateBy.Id);
         }
     }
 }

@@ -103,7 +103,7 @@
                 case PaymentMethod.CreditCard:
                     if (checkPublic.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(
+                        WebDriverUtility.DefaultProvider.SetCheckbox(
                             string.Format(CCPaymentMethodPublicCheckboxLocatorFormat, this.CCPaymentMethodLinkLocator),
                             checkPublic.Value, 
                             LocateBy.XPath);
@@ -111,7 +111,7 @@
 
                     if (checkAdmin.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(
+                        WebDriverUtility.DefaultProvider.SetCheckbox(
                             string.Format(CCPaymentMethodAdminCheckboxLocatorFormat, this.CCPaymentMethodLinkLocator),
                             checkAdmin.Value, 
                             LocateBy.XPath);
@@ -119,7 +119,7 @@
 
                     if (checkOnSite.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(
+                        WebDriverUtility.DefaultProvider.SetCheckbox(
                             string.Format(CCPaymentMethodOnSiteCheckboxLocatorFormat, this.CCPaymentMethodLinkLocator),
                             checkOnSite.Value, 
                             LocateBy.XPath);
@@ -138,7 +138,7 @@
                             PaymentMethodTitleLocatorFormat,
                             this.PaymentMethodIDs[paymentMethod]);
 
-                    if (!UIUtilityProvider.UIHelper.IsElementPresent(paymentMethodTitleLocator, LocateBy.XPath))
+                    if (!WebDriverUtility.DefaultProvider.IsElementPresent(paymentMethodTitleLocator, LocateBy.XPath))
                     {
                         this.AddPaymentMethod(paymentMethod);
                     }
@@ -149,7 +149,7 @@
                             PaymentMethodPublicCheckboxLocatorFormat,
                             paymentMethodTitleLocator);
 
-                        UIUtilityProvider.UIHelper.SetCheckbox(paymentMethodPublicCheckboxLocator, checkPublic.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(paymentMethodPublicCheckboxLocator, checkPublic.Value, LocateBy.XPath);
                     }
 
                     if (checkAdmin.HasValue)
@@ -158,7 +158,7 @@
                             PaymentMethodAdminCheckboxLocatorFormat,
                             paymentMethodTitleLocator);
 
-                        UIUtilityProvider.UIHelper.SetCheckbox(paymentMethodAdminCheckboxLocator, checkAdmin.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(paymentMethodAdminCheckboxLocator, checkAdmin.Value, LocateBy.XPath);
                     }
 
                     if (checkOnSite.HasValue)
@@ -167,7 +167,7 @@
                             PaymentMethodOnSiteCheckboxLocatorFormat,
                             paymentMethodTitleLocator);
 
-                        UIUtilityProvider.UIHelper.SetCheckbox(paymentMethodOnSiteCheckboxLocator, checkOnSite.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(paymentMethodOnSiteCheckboxLocator, checkOnSite.Value, LocateBy.XPath);
                     }
 
                     if (paymentMethod == PaymentMethod.PayPal)
@@ -176,7 +176,7 @@
                             PaypalEmailAddressLocator, 
                             paymentMethodTitleLocator);
 
-                        UIUtilityProvider.UIHelper.Type(paypalEmailExpressAddressLocator, PaypalEmailAddress, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Type(paypalEmailExpressAddressLocator, PaypalEmailAddress, LocateBy.XPath);
                     }
                     break;
 
@@ -187,17 +187,17 @@
 
         public void ClickCreditCardLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(CCPaymentMethodLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CCPaymentMethodLinkLocator, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(CreditCardOptionsManager.FrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CreditCardOptionsManager.FrameID);
         }
 
         public void ClickEditCreditCardPaymentMethod()
         {
             string actionLinkLocator = string.Format(EditCCPaymentMethodLinkLocatorFormat, this.CCPaymentMethodLinkLocator);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(actionLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(actionLinkLocator, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(CreditCardOptionsManager.FrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CreditCardOptionsManager.FrameID);
         }
 
         public void AddPaymentMethod(PaymentMethod paymentMethod)
@@ -209,16 +209,16 @@
 
         public void ClickAddPaymentMethod()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//a[text()='Add Payment Method']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//a[text()='Add Payment Method']", LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(AddPaymentMethodFrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(AddPaymentMethodFrameID);
         }
 
         private void SelectAddPaymentMethodFrame()
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(AddPaymentMethodFrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(AddPaymentMethodFrameID);
             }
             catch
             {
@@ -229,24 +229,24 @@
         public void SaveAndCloseAddPaymentMethod()
         {
             SelectAddPaymentMethodFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void CancelAddPaymentMethod()
         {
             SelectAddPaymentMethodFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectNewPaymentMethod(PaymentMethod paymentMethod)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_ddlPaymentMethod", this.paymentMethodLabels[paymentMethod], LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlPaymentMethod", this.paymentMethodLabels[paymentMethod], LocateBy.Id);
         }
 
         public void DeletePaymentMethod(PaymentMethod paymentMethod, bool delete)
@@ -283,35 +283,35 @@
 
             if (!delete)
             {
-                UIUtilityProvider.UIHelper.ChooseCancelOnNextConfirmation();
+                WebDriverUtility.DefaultProvider.ChooseCancelOnNextConfirmation();
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(deleteLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(deleteLinkLocator, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.GetConfirmation();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetCustomPaymentMethodDescription(string description)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_rptPaymentMethods_ctl06_txtDescription", description, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_rptPaymentMethods_ctl06_txtDescription", description, LocateBy.Id);
         }
 
         public void SetCustomPaymentMethodIncludeInputField(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_rptPaymentMethods_ctl06_chkIncludeInput", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_rptPaymentMethods_ctl06_chkIncludeInput", check, LocateBy.Id);
         }
 
         public void SetPayPalPaymentMethodDescription(string description)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_rptPaymentMethods_ctl07_txtDescription", description, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_rptPaymentMethods_ctl07_txtDescription", description, LocateBy.Id);
         }
 
         public void ClickTestPayPalLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_rptPaymentMethods_ctl07_hlTestLink", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_rptPaymentMethods_ctl07_hlTestLink", LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(TestPayPalFrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(TestPayPalFrameID);
         }
     }
 }

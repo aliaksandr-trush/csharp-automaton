@@ -181,14 +181,14 @@
 
         private void VerifyNorecordsfoundShowUp()
         {
-            Assert.AreEqual("0 record(s) found.", UIUtilityProvider.UIHelper.GetText("//div[@class='regHeader']", LocateBy.XPath));
+            Assert.AreEqual("0 record(s) found.", WebDriverUtility.DefaultProvider.GetText("//div[@class='regHeader']", LocateBy.XPath));
         }
 
         private void VerifyIncorrectMessageShowUp()
         {
             string errorMessage = "Authentication failure. Please try again.";
             string errorMessage_Alternative = "You must sign in with the correct values.";
-            string actualMessage = UIUtilityProvider.UIHelper.GetText("//div[@id='ctl00_cph_valSummary']/ul/li", LocateBy.XPath);
+            string actualMessage = WebDriverUtility.DefaultProvider.GetText("//div[@id='ctl00_cph_valSummary']/ul/li", LocateBy.XPath);
 
             try
             {
@@ -202,7 +202,7 @@
 
         private void VerifyCheckInSucess()
         {
-            Assert.AreEqual("You are already checked-in.", UIUtilityProvider.UIHelper.GetText("//div[@id='ctl00_cph_divMessage']/span[@class='prompt']", LocateBy.XPath));
+            Assert.AreEqual("You are already checked-in.", WebDriverUtility.DefaultProvider.GetText("//div[@id='ctl00_cph_divMessage']/span[@class='prompt']", LocateBy.XPath));
         }
     }
 }

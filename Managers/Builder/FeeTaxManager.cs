@@ -78,7 +78,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(_taxOptionDialogID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(_taxOptionDialogID);
             }
             catch
             {
@@ -89,17 +89,17 @@
         #region Public methods
         public void ClickAddTaxRatesLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(_taxOptionLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(_taxOptionLinkLocator, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             ////UIUtilityProvider.UIHelper.SelectUpperFrame();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(_taxOptionDialogID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(_taxOptionDialogID);
         }
 
         public void SaveAndStay()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
@@ -110,17 +110,17 @@
                 case FormDetailManager.Page.Start:
                 case FormDetailManager.Page.Merchandise:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -134,17 +134,17 @@
                 case FormDetailManager.Page.Start:
                 case FormDetailManager.Page.Merchandise:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.Page.Agenda:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -160,20 +160,20 @@
 
         public void ApplyTaxOneToFee(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(_applyTaxRateOneCheckboxLocator, check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(_applyTaxRateOneCheckboxLocator, check, LocateBy.Id);
         }
 
         public void ApplyTaxTwoToFee(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(_applyTaxRateTwoCheckboxLocator, check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(_applyTaxRateTwoCheckboxLocator, check, LocateBy.Id);
         }
         #endregion
 
         #region Verifying methods
         public void VerifyTaxAvailability(bool hasTaxOne, bool hasTaxTwo)
         {
-            bool actualHasTaxOne = UIUtilityProvider.UIHelper.IsElementPresent(_applyTaxRateOneCheckboxLocator, LocateBy.Id);
-            bool actualHasTaxTwo = UIUtilityProvider.UIHelper.IsElementPresent(_applyTaxRateTwoCheckboxLocator, LocateBy.Id);
+            bool actualHasTaxOne = WebDriverUtility.DefaultProvider.IsElementPresent(_applyTaxRateOneCheckboxLocator, LocateBy.Id);
+            bool actualHasTaxTwo = WebDriverUtility.DefaultProvider.IsElementPresent(_applyTaxRateTwoCheckboxLocator, LocateBy.Id);
 
             if (hasTaxOne != actualHasTaxOne)
             {
@@ -203,19 +203,19 @@
         public void VerifyTaxOneSettings(string captionOne, double percentageOne, bool check)
         {
             VerifyTool.VerifyValue(string.Format("Apply {0} ({1}%)", captionOne, Convert.ToString(percentageOne)),
-                UIUtilityProvider.UIHelper.GetText(string.Format("//label[@for='{0}']", _applyTaxRateOneCheckboxLocator), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format("//label[@for='{0}']", _applyTaxRateOneCheckboxLocator), LocateBy.XPath),
                 "The caption and percentage of tax rate ONE : {0}");
 
-            VerifyTool.VerifyValue(check, UIUtilityProvider.UIHelper.GetValue(_applyTaxRateOneCheckboxLocator, LocateBy.Id) == "on", "The checkbox for tax rate ONE is checked : {0}");
+            VerifyTool.VerifyValue(check, WebDriverUtility.DefaultProvider.GetValue(_applyTaxRateOneCheckboxLocator, LocateBy.Id) == "on", "The checkbox for tax rate ONE is checked : {0}");
         }
 
         public void VerifyTaxTwoSettings(string captionTwo, double percentageTwo, bool check)
         {
             VerifyTool.VerifyValue(string.Format("Apply {0} ({1}%)", captionTwo, Convert.ToString(percentageTwo)),
-                UIUtilityProvider.UIHelper.GetText(string.Format("//label[@for='{0}']", _applyTaxRateTwoCheckboxLocator), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format("//label[@for='{0}']", _applyTaxRateTwoCheckboxLocator), LocateBy.XPath),
                 "The caption and percentage of tax rate TWO : {0}");
 
-            VerifyTool.VerifyValue(check, UIUtilityProvider.UIHelper.GetValue(_applyTaxRateTwoCheckboxLocator, LocateBy.Id) == "on", "The checkbox for tax rate TWO is checked : {0}");
+            VerifyTool.VerifyValue(check, WebDriverUtility.DefaultProvider.GetValue(_applyTaxRateTwoCheckboxLocator, LocateBy.Id) == "on", "The checkbox for tax rate TWO is checked : {0}");
         }
         #endregion
 

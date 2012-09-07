@@ -429,7 +429,7 @@
         [Description("1347")]
         public void Agenda_Duration()
         {
-            Configuration.ConfigurationProvider.XmlConfig.ReloadAccount(Configuration.XmlConfiguration.AccountType.ActiveEurope);
+            Configuration.ConfigReader.DefaultProvider.ReloadAccount(Configuration.ConfigReader.AccountType.ActiveEurope);
             Event evt = new Event("RI_Agenda_Duration");
             evt.FormType = FormData.FormType.ActiveEuropeEvent;
             evt.StartPage.EventType = EventType.Running;

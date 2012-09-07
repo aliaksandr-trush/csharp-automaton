@@ -506,7 +506,7 @@
             RegisterMgr.OpenRegisterPage();
             RegisterMgr.CheckinWithEmail(emailAddress);
             RegisterMgr.ClickCheckinAlreadyRegistered();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
 
             RegisterMgr.ClickEditPersonalInformationLink(0);
@@ -897,10 +897,10 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddRecurringFeeItemWithDiscount(OtherEventTypeAgendaAndCFManager.FieldType type, string name, double price, string discount, bool required, bool oneTime)
@@ -909,13 +909,13 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.AddMembershipDiscountCodes("Discount Code", discount, required);
             BuilderMgr.OldAGAndCFMgr.ApplyMembershipDiscountCodeOnce(oneTime);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
 
@@ -1066,7 +1066,7 @@
 
         public void UpdateRenewDateAndRunReccuringFeeProcessor(int registrantId)
         {
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             int rowsAffected;
 
             // Set time back to one hour ago so that Recurring Fee Processor can process it
@@ -1083,10 +1083,10 @@
 
             rowsAffected = db.ExecuteCommand(command);
 
-            UIUtilityProvider.UIHelper.OpenUrl(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps + "recurringFeeProcessor.aspx?Token=E4627417-0596-427C-AC92-399F6EF5B826");
+            WebDriverUtility.DefaultProvider.OpenUrl(
+                ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "recurringFeeProcessor.aspx?Token=E4627417-0596-427C-AC92-399F6EF5B826");
 
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

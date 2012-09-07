@@ -27,10 +27,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegUpdateService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegUpdateService].Url);
 
             this.service = new RegistrationUpdateServiceSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegUpdateService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegUpdateService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -49,8 +49,8 @@
         private updateRegistrationsRequestHeader GetHeader()
         {
             updateRegistrationsRequestHeader header = new updateRegistrationsRequestHeader();
-            header.login = ConfigurationProvider.XmlConfig.AccountConfiguration.Login;
-            header.password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
+            header.login = ConfigReader.DefaultProvider.AccountConfiguration.Login;
+            header.password = ConfigReader.DefaultProvider.AccountConfiguration.Password;
 
             return header;
         }

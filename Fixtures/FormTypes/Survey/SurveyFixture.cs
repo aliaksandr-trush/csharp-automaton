@@ -383,7 +383,7 @@
             this.surveyMgr.SaveAndNewQuestion();
             this.surveyMgr.SetCustomQuestionName(StringEnum.GetStringValue(Questions.QuestionAdminOnly));
             this.surveyMgr.SetCustomQuestionVisibilities(false, false, true);
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
 
             BuilderMgr.Next();
 

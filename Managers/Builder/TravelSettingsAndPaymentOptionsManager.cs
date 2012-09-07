@@ -17,9 +17,9 @@
 
         public void SetDateRangeForArrivalAndDeparture(DateTime arrival, DateTime departure)
         {
-            UIUtilityProvider.UIHelper.SetDateTimeById("ctl00_cph_dtpTravelDepartureDate", arrival);
-            UIUtilityProvider.UIHelper.SetDateTimeById("ctl00_cph_dtpTravelReturnDate", departure);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("divTravelPurposeText", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cph_dtpTravelDepartureDate", arrival);
+            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cph_dtpTravelReturnDate", departure);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("divTravelPurposeText", LocateBy.Id);
         }
 
         public void SetDateRangeForArrivalAndDepartureDefault()
@@ -32,10 +32,10 @@
             switch (option)
             {
                 case PaymentOption.DoNotChargeOrCollect:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_radDoNotChargeTravel", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_radDoNotChargeTravel", LocateBy.Id);
                     break;
                 case PaymentOption.CollectCCInfo:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_radCollectTravel", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_radCollectTravel", LocateBy.Id);
                     break;
                 default:
                     throw new InvalidOperationException("No such payment option!");

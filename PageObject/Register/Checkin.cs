@@ -34,7 +34,7 @@
 
                     url = string.Format(
                         "{0}{1}", 
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, 
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl, 
                         reg.Event.Id);
 
                     break;
@@ -45,7 +45,7 @@
 
                     url = string.Format(
                         "{0}{1}",
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
                         reg.Event.Shortcut);
 
                     break;
@@ -54,7 +54,7 @@
 
                     url = string.Format(string.Format(
                         "{0}?eventID={1}&rTypeID={2}", 
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
                         reg.Event.Id, 
                         reg.EventFee_Response.RegType.RegTypeId));
 
@@ -64,7 +64,7 @@
 
                     url = string.Format(
                         "{0}register/checkin.aspx?MethodId=1&eventsessionId={1}&eventID={2}",
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps,
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps,
                         DataCollection.FormData.EventSessionId,
                         reg.Event.Id);
 
@@ -74,7 +74,7 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.OpenUrl(url);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
         }
 
         public RadioButton RegTypeRadio(RegType regType)

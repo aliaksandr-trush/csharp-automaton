@@ -167,7 +167,7 @@
             catch
             {
                 // doesn't seem to be working on integrator...
-                UIUtilityProvider.UIHelper.CaptureFailureScreenshot();
+                WebDriverUtility.DefaultProvider.CaptureFailureScreenshot();
                 throw;
             }
             finally
@@ -188,7 +188,7 @@
             string extraInfo = string.Empty;
 
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventAdditionalFunction.ButtonDesigner);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickField(buttonType);
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerNext();
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickField(buttonDest);
@@ -222,7 +222,7 @@
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerNext();
             string buttonCode = ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.GetButtonCode();
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerClose();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
 
             // Write to file
             htmlButtons.WriteLine(string.Format(BaseFileText, typeAndDest));

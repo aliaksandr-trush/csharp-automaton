@@ -14,8 +14,8 @@
         [Step]
         public void Continue()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ContinueButton, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContinueButton, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             ////if (this.HasErrors())
             ////{
@@ -31,9 +31,9 @@
         [Step]
         public void ContinueWithErrors()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ContinueButton, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContinueButton, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void VerifyHasContinueOrContinueNextStepButton(bool hasButton)
@@ -43,16 +43,16 @@
 
         public bool HasContinueOrContinueNextStepButton()
         {
-            return (UIUtilityProvider.UIHelper.IsElementPresent(ContinueButton, LocateBy.XPath) ||
-                UIUtilityProvider.UIHelper.IsElementPresent(ContinueButton_Old, LocateBy.XPath) ||
-                UIUtilityProvider.UIHelper.IsElementPresent(ContinueToNextStepButton, LocateBy.XPath));
+            return (WebDriverUtility.DefaultProvider.IsElementPresent(ContinueButton, LocateBy.XPath) ||
+                WebDriverUtility.DefaultProvider.IsElementPresent(ContinueButton_Old, LocateBy.XPath) ||
+                WebDriverUtility.DefaultProvider.IsElementPresent(ContinueToNextStepButton, LocateBy.XPath));
         }
 
         [Step]
         public void ClickAddAnotherPerson()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddAnotherPersonLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddAnotherPersonLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Verify]
@@ -63,29 +63,29 @@
 
         public bool HasAddAnotherPersonButton()
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(AddAnotherPersonLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(AddAnotherPersonLocator, LocateBy.XPath);
         }
 
         public bool HasAddPersonToWaitlistButton()
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(AddPersonToWaitlistLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(AddPersonToWaitlistLocator, LocateBy.XPath);
         }
 
         public void ClickAddPersonToWaitlist()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddPersonToWaitlistLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddPersonToWaitlistLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void FinishRegistration()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(FinishButton, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FinishButton, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             if (OnConfirmationRedirectPage())
             {
-                UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationRedirectPage(), "Active Advantage");
+                WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationRedirectPage(), "Active Advantage");
                 ClickAdvantageNo();
             }
         }
@@ -93,8 +93,8 @@
         [Step]
         public void GoBackToPreviousPage()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Go back", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Go back", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void VerifyRegTypeMinimumMessage(string expMessage)
@@ -105,7 +105,7 @@
 
         public string GetRegTypeMinimumMessage()
         {
-            return UIUtilityProvider.UIHelper.GetText(AddAnotherPersonLocator + "/preceding-sibling::p", LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(AddAnotherPersonLocator + "/preceding-sibling::p", LocateBy.XPath);
         }
 
         public void VerifyEventLimitReachedAndContinueMessage(string expMessage)
@@ -117,7 +117,7 @@
         public string GetEventLimitReachedAndContinueMessage()
         {
             string xPath = ContinueButton + "/preceding-sibling::p";
-            string messages = UIUtilityProvider.UIHelper.GetText(xPath, LocateBy.XPath);
+            string messages = WebDriverUtility.DefaultProvider.GetText(xPath, LocateBy.XPath);
 
             string[] separator = { "\n" };
             string message = messages.Split(separator, StringSplitOptions.RemoveEmptyEntries)[0];

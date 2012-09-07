@@ -18,60 +18,60 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.GetLocation();
+                return WebDriverUtility.DefaultProvider.GetLocation();
             }
         }
 
         public bool URLContains(string url)
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath(url);
+            return WebDriverUtility.DefaultProvider.UrlContainsPath(url);
         }
 
         public string GetQueryStringValue(string queryString)
         {
-            return UIUtilityProvider.UIHelper.GetQueryStringValue(queryString);
+            return WebDriverUtility.DefaultProvider.GetQueryStringValue(queryString);
         }
 
         public void SelectByName()
         {
-            UIUtilityProvider.UIHelper.SelectWindowByName(Name);
+            WebDriverUtility.DefaultProvider.SelectWindowByName(Name);
         }
 
         public void Close()
         {
-            UIUtilityProvider.UIHelper.CloseWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
         }
 
         public void GoBackToPreviousPage()
         {
-            UIUtilityProvider.UIHelper.GoBackToPreviousPage();
+            WebDriverUtility.DefaultProvider.GoBackToPreviousPage();
         }
 
         public void CloseAndBackToPrevious()
         {
             this.Close();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
         }
 
         public void WaitForLoad()
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void WaitForLoad(TimeSpan timeOut)
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad(timeOut);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad(timeOut);
         }
 
         public void WaitForAJAX()
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Refresh()
         {
-            UIUtilityProvider.UIHelper.RefreshPage();
+            WebDriverUtility.DefaultProvider.RefreshPage();
         }
     }
 }

@@ -60,7 +60,7 @@
         public void ClickToRegister(DataCollection.Event evt)
         {
             this.Register = new ButtonOrLink(
-                string.Format("//a[@href='{0}?{1}']", ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps, evt.Id), 
+                string.Format("//a[@href='{0}?{1}']", ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, evt.Id), 
                 UIUtility.LocateBy.XPath);
 
             this.Register.WaitForDisplay();

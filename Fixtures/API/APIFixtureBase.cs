@@ -15,8 +15,8 @@
         public APIFixtureBase()
         {
             RequiresBrowser = false;
-            BaseUri = new Uri(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl);
-            BaseUriWithHttps = new Uri(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps);
+            BaseUri = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl);
+            BaseUriWithHttps = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps);
         }
     }
 }

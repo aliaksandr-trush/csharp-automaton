@@ -54,11 +54,11 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkRoomTypeV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkRoomTypeV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkRoomTypeR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkRoomTypeR", required.Value, LocateBy.Id);
             }
         }
 
@@ -66,11 +66,11 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkBedTypeV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkBedTypeV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkBedTypeR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkBedTypeR", required.Value, LocateBy.Id);
             }
         }
 
@@ -78,11 +78,11 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSmokingPreferenceV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkSmokingPreferenceV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSmokingPreferenceR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkSmokingPreferenceR", required.Value, LocateBy.Id);
             }
         }
 
@@ -90,11 +90,11 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSharingWithV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkSharingWithV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkSharingWithR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkSharingWithR", required.Value, LocateBy.Id);
             }
         }
 
@@ -102,25 +102,25 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdjoiningWithV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkAdjoiningWithV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdjoiningWithR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkAdjoiningWithR", required.Value, LocateBy.Id);
             }
         }
 
         public void SetCheckInOutDate(bool visible, bool required)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkCheckInOutDateV", visible, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkCheckInOutDateR", required, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkCheckInOutDateV", visible, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkCheckInOutDateR", required, LocateBy.Id);
         }
 
         public void SetValidDateRangeForCheckInOut(DateTime from, DateTime to)
         {
-            UIUtilityProvider.UIHelper.SetDateTimeById("ctl00_cph_dtpLodgingDateFrom", from);
-            UIUtilityProvider.UIHelper.SetDateTimeById("ctl00_cph_dtpLodgingDateTo", to);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("tblLodgingStandardFields", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cph_dtpLodgingDateFrom", from);
+            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cph_dtpLodgingDateTo", to);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("tblLodgingStandardFields", LocateBy.Id);
         }
 
         public void SetValidDateRangeForCheckInOutDefault()
@@ -132,11 +132,11 @@
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdditionalInfoV", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkAdditionalInfoV", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkAdditionalInfoR", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkAdditionalInfoR", required.Value, LocateBy.Id);
             }
         }
     }

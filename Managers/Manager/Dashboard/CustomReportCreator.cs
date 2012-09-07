@@ -171,98 +171,98 @@ using System.Reflection;
 
         public void Apply()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnSave", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnSave", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void Cancel()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnCancel", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnCancel", LocateBy.Id);
             Utility.ThreadSleep(2);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void OpenCustomReportCreator()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Add Custom Report", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Add Custom Report", LocateBy.LinkText);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void ClickEditCustomReport(string reportName)
         {
             string editReportLocator = string.Format("//*[text()='{0}']/../..//*[@title='Edit report']/..", reportName);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(editReportLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(editReportLocator, LocateBy.XPath);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void SetName(string name)
         {
-            UIUtilityProvider.UIHelper.Type("crGeneral_tbReportName", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("crGeneral_tbReportName", name, LocateBy.Id);
         }
 
         public void ChooseTab(Tab tab)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("Tabimg_M{0}", (int)tab), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("Tabimg_M{0}", (int)tab), LocateBy.Id);
         }
 
         public void ChooseFieldsCategory(FieldsCategory category)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("crFields_radioListFields_{0}", (int)category), LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("crFields_radioListFields_{0}", (int)category), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void VerifyFieldsCategorySelected(FieldsCategory category)
         {
             string categoryLocator = string.Format("//input[@id='crFields_radioListFields_{0}'][@checked='checked']", (int)category);
-            UIUtilityProvider.UIHelper.VerifyElementPresent(categoryLocator, true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(categoryLocator, true, LocateBy.XPath);
         }
 
         public void AddField(string field)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//select[@id='crFields_bFly_Migrated_listBoxAvailable']/*[text()='{0}']", field), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//select[@id='crFields_bFly_Migrated_listBoxAvailable']/*[text()='{0}']", field), LocateBy.XPath);
             this.MoveSelectedItemToCurrentChoices();
         }
 
         public void DeleteField(string field)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//select[@id='crFields_bFly_Migrated_listBoxSelected']/*[text()='{0}']", field), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//select[@id='crFields_bFly_Migrated_listBoxSelected']/*[text()='{0}']", field), LocateBy.XPath);
             this.MoveSelectedItemToUnChoosed();
         }
 
         public void MoveSelectedItemToCurrentChoices()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFields_bFly_addButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFields_bFly_addButton", LocateBy.Id);
         }
 
         public void MoveSelectedItemToUnChoosed()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFields_bFly_removeButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFields_bFly_removeButton", LocateBy.Id);
         }
 
         public void MoveAllItemsToCurrentChoices()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFields_bFly_addAllButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFields_bFly_addAllButton", LocateBy.Id);
         }
 
         public void MoveAllItemsToUnChoosed()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFields_bFly_removeAllButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFields_bFly_removeAllButton", LocateBy.Id);
         }
 
         public void AdjustCurrentChoicesOrder(StandardFields field, MoveActions action)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//*[text()='{0}']", StringEnum.GetStringValue(field)), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//*[text()='{0}']", StringEnum.GetStringValue(field)), LocateBy.XPath);
             
             switch(action)
             {
                 case MoveActions.Up:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("moveItemUp", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("moveItemUp", LocateBy.Id);
                     break;
                 case MoveActions.Down:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("moveItemDown", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("moveItemDown", LocateBy.Id);
                     break;
                 default:
                     break;
@@ -273,23 +273,23 @@ using System.Reflection;
         {
             string fromLocator = "crFilters_datePicker_Migrated_dpStart_dateInput_text";
             string toLocator = "crFilters_datePicker_Migrated_dpEnd_dateInput_text";
-            UIUtilityProvider.UIHelper.Type(fromLocator, from, LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(toLocator, to, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(fromLocator, from, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(toLocator, to, LocateBy.Id);
         }
 
         public void SelectFiltersRegType(string regType)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("crFilters_ddlRegTypes", regType, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("crFilters_ddlRegTypes", regType, LocateBy.Id);
         }
 
         public void SelectFiltersRegStatus(FilterRegStatus status)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("crFilters_ddlRegStatus", CustomStringAttribute.GetCustomString(status), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("crFilters_ddlRegStatus", CustomStringAttribute.GetCustomString(status), LocateBy.Id);
         }
 
         public void SelectFiltersBalance(FilterBalance balance)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("crFilters_ddlBalance", CustomStringAttribute.GetCustomString(balance), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("crFilters_ddlBalance", CustomStringAttribute.GetCustomString(balance), LocateBy.Id);
         }
 
         public void SelectFilterLogic(FilterLogics filterLogic)
@@ -297,98 +297,98 @@ using System.Reflection;
             switch(filterLogic)
             {
                 case FilterLogics.And:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFilters_customFilters_radioAND", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFilters_customFilters_radioAND", LocateBy.Id);
                     break;
                 case FilterLogics.Or:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crFilters_customFilters_radioOR", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crFilters_customFilters_radioOR", LocateBy.Id);
                     break;
                 default:
-                    UIUtilityProvider.UIHelper.FailTest("No such logic!");
+                    WebDriverUtility.DefaultProvider.FailTest("No such logic!");
                     break;
             }
         }
 
         public void SetCustomFilterOne(CustomFilter field, FilterOperators operatorOne, string value)
         {
-            UIUtilityProvider.UIHelper.SelectWithValue("crFilters_customFilters_ddlFieldFilter_0", CustomFilterValueAttribute.GetFilterValue(field), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithValue("crFilters_customFilters_ddlFilterOperator_0", CustomStringAttribute.GetCustomString(operatorOne), LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type("crFilters_customFilters_tbValue_0", value, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crFilters_customFilters_ddlFieldFilter_0", CustomFilterValueAttribute.GetFilterValue(field), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crFilters_customFilters_ddlFilterOperator_0", CustomStringAttribute.GetCustomString(operatorOne), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("crFilters_customFilters_tbValue_0", value, LocateBy.Id);
         }
 
         public void SetCustomFilterTwo(CustomFilter field, FilterOperators operatorTwo, string value)
         {
-            UIUtilityProvider.UIHelper.SelectWithValue("crFilters_customFilters_ddlFieldFilter_1", CustomFilterValueAttribute.GetFilterValue(field), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithValue("crFilters_customFilters_ddlFilterOperator_1", CustomStringAttribute.GetCustomString(operatorTwo), LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type("crFilters_customFilters_tbValue_1", value, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crFilters_customFilters_ddlFieldFilter_1", CustomFilterValueAttribute.GetFilterValue(field), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crFilters_customFilters_ddlFilterOperator_1", CustomStringAttribute.GetCustomString(operatorTwo), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("crFilters_customFilters_tbValue_1", value, LocateBy.Id);
         }
 
         public void ClickAddCustomFilter()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("AddFilter2", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("AddFilter2", LocateBy.Id);
         }
 
         public void ClickClearCustomFilters()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ClearFilters2", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ClearFilters2", LocateBy.Id);
         }
 
         public void VerifyThirdFilterPresents(bool presents)
         {
             if (presents == true)
-                UIUtilityProvider.UIHelper.VerifyElementPresent("crFilters_customFilters_ddlFieldFilter_2", presents, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.VerifyElementPresent("crFilters_customFilters_ddlFieldFilter_2", presents, LocateBy.Id);
             else
-                NUnit.Framework.Assert.True(UIUtilityProvider.UIHelper.IsElementHidden("//*[@id='crFilters_customFilters_ddlFieldFilter_2']/../..", LocateBy.XPath));
+                NUnit.Framework.Assert.True(WebDriverUtility.DefaultProvider.IsElementHidden("//*[@id='crFilters_customFilters_ddlFieldFilter_2']/../..", LocateBy.XPath));
         }
 
         public void SelectGroupBy(string groupBy)
         {
-            UIUtilityProvider.UIHelper.SelectWithValue("crSorts_ddlGrouping", groupBy, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crSorts_ddlGrouping", groupBy, LocateBy.Id);
         }
 
         public void SelectFirstSortBy(SortingFields sortBy)
         {
-            UIUtilityProvider.UIHelper.SelectWithValue("crSorts_ddlSort1", CustomStringAttribute.GetCustomString(sortBy), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithValue("crSorts_ddlSort1", CustomStringAttribute.GetCustomString(sortBy), LocateBy.Id);
         }
 
         public void SetEnableSmartLink(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("crAdvanced_cbShareReport", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("crAdvanced_cbShareReport", check, LocateBy.Id);
         }
 
         public void TypeSmartLinkPassword(string password)
         {
-            UIUtilityProvider.UIHelper.Type("crAdvanced_tbPassword", password, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("crAdvanced_tbPassword", password, LocateBy.Id);
         }
 
         public void ClickViewSmartLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("crAdvanced_hlShareLink", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("crAdvanced_hlShareLink", LocateBy.Id);
         }
 
         public void SelectSmartLinkPopupWindow()
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectWindowByName("ReportHome");
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByName("ReportHome");
         }
 
         public void CloseSmartLinkPopupWindow()
         {
             SelectSmartLinkPopupWindow();
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void TypeSmartLinkPasswordAndSubmit(string password)
         {
-            UIUtilityProvider.UIHelper.Type("txtPassword", password, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.Type("txtPassword", password, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("submit", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void VerifySmartLinkNeedsPassword(bool needs)
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent("txtPassword", needs, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent("txtPassword", needs, LocateBy.Id);
         }
 
         public void SetShownColumn(EventFeeAndAgendaFieldsColumn column, bool isShow)
@@ -400,7 +400,7 @@ using System.Reflection;
                 case EventFeeAndAgendaFieldsColumn.Amount:
                     break;
                 case EventFeeAndAgendaFieldsColumn.Taxes:
-                    UIUtilityProvider.UIHelper.SetCheckbox("crFields_cbTax", isShow, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.SetCheckbox("crFields_cbTax", isShow, LocateBy.Id);
                     break;
                 case EventFeeAndAgendaFieldsColumn.Credit:
                     break;

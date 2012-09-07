@@ -64,16 +64,16 @@
         {
             Utility.ThreadSleep(1);
 
-            ConfigurationProvider.XmlConfig.ReloadAllConfiguration();
+            ConfigReader.DefaultProvider.ReloadAllConfiguration();
 
             if (RequiresBrowser)
             {
-                UIUtilityProvider.UIHelper.Initialize();
+                WebDriverUtility.DefaultProvider.Initialize();
             }
 
             this.ResetManagers();
 
-            if (ConfigurationProvider.XmlConfig.AccountConfiguration.XAuthVersion == "Old")
+            if (ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "Old")
             {
                 ManagerProvider.XAuthMgr = new Managers.Manager.XAuthManager(Managers.Manager.XAuthManager.XAuthVersion.Old);
             }
@@ -88,7 +88,7 @@
         {
             if (RequiresBrowser)
             {
-                UIUtilityProvider.UIHelper.Exit();
+                WebDriverUtility.DefaultProvider.Exit();
             }
         }
     }

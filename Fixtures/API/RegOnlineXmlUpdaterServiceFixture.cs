@@ -28,10 +28,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.XmlUpdaterService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.XmlUpdaterService].Url);
 
             this.service = new XmlUpdaterSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.XmlUpdaterService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.XmlUpdaterService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -44,8 +44,8 @@
             this.CreateRegistration();
 
             string response = this.service.UpdateRegistrations(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 this.eventId, 
                 this.GetXmlData());
 

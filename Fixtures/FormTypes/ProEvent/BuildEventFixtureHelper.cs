@@ -148,8 +148,8 @@
             RegisterMgr.EnterPersonalInfoPhoneNumbers("Test", "Test", "Test", "Test", "Test");
             RegisterMgr.EnterPersonalInfoDateOfBirthGender(new DateTime(1986, 2, 18), RegisterManager.Gender.Male);
             RegisterMgr.EnterPersonalInfoTaxNumberMembershipNumberCustomerNumber("1234", "4321", "1111");
-            RegisterMgr.TypePersonalInfoPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
-            RegisterMgr.TypePersonalInfoVerifyPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoVerifyPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.SetCustomFieldCheckBox("CF-Checkbox", true);
             RegisterMgr.SelectCustomFieldRadioButtons("CF-Radio", "Yes");
             RegisterMgr.SelectCustomFieldDropDown("CF-DropDown", "Agree");
@@ -188,7 +188,7 @@
             ManagerSiteMgr.OpenLogin();
             string username = System.Guid.NewGuid().ToString();
             username = username.Replace("-", "");
-            ManagerSiteMgr.CreateNewAccount(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, currencyName);
+            ManagerSiteMgr.CreateNewAccount(username, ConfigReader.DefaultProvider.AccountConfiguration.Password, currencyName);
 
             string eventTitle = "Account Currency? " + currencyName;
             BuilderMgr.SetEventNameAndShortcut(eventTitle);
@@ -201,7 +201,7 @@
             //NewCustomerDb . BillingAdmin . lbSaveACH_Click.
 
             ManagerSiteMgr.OpenLogin();
-            ManagerSiteMgr.Login(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            ManagerSiteMgr.Login(username, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             
             // Deal with the 'Validate Email' popup
             ManagerSiteMgr.SkipEmailValidation();
@@ -268,7 +268,7 @@
         {
             RegisterMgr.EnterEmailAddress(emailAddr);
             RegisterMgr.Continue();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
             RegisterMgr.OnAttendeeCheckPage();
             RegisterMgr.Continue();

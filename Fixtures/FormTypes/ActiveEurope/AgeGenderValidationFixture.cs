@@ -33,7 +33,7 @@
         [Description("866")]
         public void AgeGenderWithConditionalLogicAndLimits()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
             CreateEvent();
             RegisterForEvent(Managers.Register.RegisterManager.Gender.Male, 19);
             RegisterForEvent(Managers.Register.RegisterManager.Gender.Female, 19);

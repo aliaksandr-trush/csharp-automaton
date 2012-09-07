@@ -23,32 +23,32 @@
 
         public void SelectByName()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Name);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Name);
         }
 
         public void SelectById()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameById(Id);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameById(Id);
         }
 
         public void SelectByIndex()
         {
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(Index);
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(Index);
         }
 
         public void SwitchToMain()
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
         public void WaitForAJAX()
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void WaitForLoad()
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

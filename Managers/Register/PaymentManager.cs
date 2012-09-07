@@ -209,7 +209,7 @@
                 SetFieldValue(CCField.CC, cardNumber);
             if (!string.IsNullOrEmpty(cardCVV))
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(GetLocator(CCField.CVV, LocatorType.Edit), LocateBy.XPath))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(GetLocator(CCField.CVV, LocatorType.Edit), LocateBy.XPath))
                 {
                     SetFieldValue(CCField.CVV, cardCVV);
                 }
@@ -236,7 +236,7 @@
         {
             if (!string.IsNullOrEmpty(CCPhone))
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(GetLocator(CCField.CCPhone, LocatorType.Edit), LocateBy.XPath))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(GetLocator(CCField.CCPhone, LocatorType.Edit), LocateBy.XPath))
                 {
                     SetFieldValue(CCField.CCPhone, CCPhone);
                 }

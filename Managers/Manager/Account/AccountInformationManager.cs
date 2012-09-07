@@ -11,58 +11,58 @@
         [Step]
         public void ClickEditBillingInfo()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
         public void ClickSaveBillingInfo()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
         public void ClickCancelBillingInfo()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator_A_CancelBillingInfo_Id, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_A_CancelBillingInfo_Id, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Verify]
         public void VerifyCanEditBillingInfo(bool canOrCannot)
         {
-            UIUtilityProvider.UIHelper.VerifyElementEditable(
+            WebDriverUtility.DefaultProvider.VerifyElementEditable(
                 "Billing first name",
                 canOrCannot,
-                UIUtilityProvider.UIHelper.IsEditable("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_textBillingFirstName", LocateBy.Id));
+                WebDriverUtility.DefaultProvider.IsEditable("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_textBillingFirstName", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyButtonVisible_SameAsPrimary(bool visible)
         {
-            UIUtilityProvider.UIHelper.VerifyElementDisplay(
+            WebDriverUtility.DefaultProvider.VerifyElementDisplay(
                 "SameAsPrimary button", 
                 visible,
-                UIUtilityProvider.UIHelper.IsElementDisplay("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_btnSame", LocateBy.Id));
+                WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_btnSame", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyButtonVisible_Save(bool visible)
         {
-            UIUtilityProvider.UIHelper.VerifyElementDisplay(
+            WebDriverUtility.DefaultProvider.VerifyElementDisplay(
                 "Save button",
                 visible,
-                UIUtilityProvider.UIHelper.IsElementDisplay(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id));
+                WebDriverUtility.DefaultProvider.IsElementDisplay(Locator_A_EditOrSaveBillingInfo_Id, LocateBy.Id));
         }
 
         [Verify]
         public void VerifyButtonVisible_Cancel(bool visible)
         {
-            UIUtilityProvider.UIHelper.VerifyElementDisplay(
+            WebDriverUtility.DefaultProvider.VerifyElementDisplay(
                 "Cancel button",
                 visible,
-                UIUtilityProvider.UIHelper.IsElementDisplay(Locator_A_CancelBillingInfo_Id, LocateBy.Id));
+                WebDriverUtility.DefaultProvider.IsElementDisplay(Locator_A_CancelBillingInfo_Id, LocateBy.Id));
         }
     }
 }

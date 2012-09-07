@@ -26,10 +26,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveAllRegsService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RetrieveAllRegsService].Url);
 
             this.service = new RetrieveAllRegistrationsManagerSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RetrieveAllRegsService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RetrieveAllRegsService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -42,8 +42,8 @@
             this.CreateRegistration();
 
             string response = this.service.RetrieveAllRegistrations(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 this.eventId);
 
             byte[] encoded = Convert.FromBase64String(response);

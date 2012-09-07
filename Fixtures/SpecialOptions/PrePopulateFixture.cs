@@ -594,7 +594,7 @@
             {
                 BuilderMgr.CFMgr.SetParagraphCharacterLimit(10000);
             }
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
             BuilderMgr.CFMgr.PrePopulateGroupSelections(prePopulate);
             if (groupEdit)
             {
@@ -619,7 +619,7 @@
             {
                 BuilderMgr.CFMgr.SetParagraphCharacterLimit(10000);
             }
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
             BuilderMgr.CFMgr.PrePopulateGroupSelections(prePopulate);
             if (groupEdit)
             {

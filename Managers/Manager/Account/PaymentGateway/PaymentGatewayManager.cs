@@ -204,10 +204,10 @@
         [Step]
         public void ClickAddPaymentGateway()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Add Payment Gateway", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Add Payment Gateway", LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         /// <summary>
@@ -216,11 +216,11 @@
         [Step]
         public void ClickOK()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='OK']/parent::a", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/parent::a", LocateBy.XPath);
             Utility.ThreadSleep(5);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -228,9 +228,9 @@
         /// </summary>
         public void ClickCancel()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='Cancel']/parent::a", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Cancel']/parent::a", LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
         #endregion
 
@@ -246,15 +246,15 @@
         {
             string linkText = name;
 
-            if (!UIUtilityProvider.UIHelper.IsElementPresent(linkText, LocateBy.LinkText))
+            if (!WebDriverUtility.DefaultProvider.IsElementPresent(linkText, LocateBy.LinkText))
             {
                 Assert.AreEqual(linkText, "Not in list!");
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(linkText, LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(linkText, LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         /// <summary>
@@ -264,7 +264,7 @@
         /// <returns></returns>
         public bool HasPaymentGateway(string name)
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(this.LocatorComposer_XPath_GatewayLinkText(name), LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(this.LocatorComposer_XPath_GatewayLinkText(name), LocateBy.XPath);
         }
 
         /// <summary>
@@ -276,21 +276,21 @@
             ManagerSiteManager managerSiteManager = new ManagerSiteManager();
             string eventSessionId = managerSiteManager.GetEventSessionId();
             managerSiteManager.SetSuperadmin(eventSessionId, true);
-            UIUtilityProvider.UIHelper.RefreshPage();
+            WebDriverUtility.DefaultProvider.RefreshPage();
 
-            while (UIUtilityProvider.UIHelper.IsElementDisplay(this.LocatorComposer_XPath_GatewayLinkText(gatewayName), LocateBy.XPath))
+            while (WebDriverUtility.DefaultProvider.IsElementDisplay(this.LocatorComposer_XPath_GatewayLinkText(gatewayName), LocateBy.XPath))
             {
                 managerSiteManager.AccountMgr.GatewayMgr.ClickGridAction(PaymentGatewayManager.GridActions.AdminDelete, gatewayName);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='OK']/parent::a", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/parent::a", LocateBy.XPath);
                 Utility.ThreadSleep(2);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             }
 
             managerSiteManager.SetSuperadmin(eventSessionId, false);
-            UIUtilityProvider.UIHelper.RefreshPage();
+            WebDriverUtility.DefaultProvider.RefreshPage();
         }
 
         private string LocatorComposer_XPath_GatewayLinkText(string gatewayName)
@@ -307,7 +307,7 @@
         public void ClickGridAction(GridActions gridAction, string name)
         {
             string xPath = ComposeGridLocator(gridAction, name);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(xPath, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(xPath, LocateBy.XPath);
         }
 
         /// <summary>
@@ -329,10 +329,10 @@
                 case GridColumns.Currency:
                 case GridColumns.ModifiedBy:
                 case GridColumns.LastModified:
-                    value = UIUtilityProvider.UIHelper.GetText(xPath, LocateBy.XPath);
+                    value = WebDriverUtility.DefaultProvider.GetText(xPath, LocateBy.XPath);
                     break;
                 case GridColumns.Default:
-                    value = UIUtilityProvider.UIHelper.IsElementPresent(xPath + "/img[@id='imgDefaultGateway']", LocateBy.XPath).ToString();
+                    value = WebDriverUtility.DefaultProvider.IsElementPresent(xPath + "/img[@id='imgDefaultGateway']", LocateBy.XPath).ToString();
                     break;
                 case GridColumns.CardTypes:
                     CreditCardOptions ccOptions = new CreditCardOptions();
@@ -427,7 +427,7 @@
         private bool IsVerifiedCC(CCTypes ccType, string name)
         {
             string xPath = ComposeGridLocator(ccType, name) + "[contains(@src,'sm_True.gif')]";
-            return UIUtilityProvider.UIHelper.IsElementPresent(xPath, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(xPath, LocateBy.XPath);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@
         {
             string xPath = ComposeGridLocator(gridAction, name);
 
-            return UIUtilityProvider.UIHelper.IsElementPresent(xPath, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(xPath, LocateBy.XPath);
         }
         #endregion
 	}

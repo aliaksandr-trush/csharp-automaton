@@ -1,6 +1,7 @@
 ﻿namespace RegOnline.RegressionTest.UIUtility
 {
     using System;
+    using System.Collections;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
@@ -25,58 +26,52 @@
         private DesiredCapabilities capa = DesiredCapabilities.Firefox();
         private Uri remoteServerUrl;
 
-        private void ResetBinary()
+        private void SetStartupOptions()
         {
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            // Firefox binary
+            if (ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Enable)
             {
-                this.binary = new FirefoxBinary(ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+                this.binary = new FirefoxBinary(ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Path);
 
                 this.capa.SetCapability(
                     "firefox_binary",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+                    ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Path);
             }
             else
             {
                 this.binary = new FirefoxBinary();
             }
-        }
 
-        private void ResetProfile()
-        {
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            // Firefox profile
+            if (ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Enable)
             {
-                this.profile = new FirefoxProfile(ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+                this.profile = new FirefoxProfile(ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path);
 
                 this.capa.SetCapability(
                     "firefox_profile",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
-
-                this.capa.SetCapability(
-                    "acceptSslCerts",
-                    true);
+                    ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path);
             }
             else
             {
                 this.profile = new FirefoxProfile();
                 this.profile.AcceptUntrustedCertificates = true;
             }
-        }
 
-        private void ResetRemoteServerUrl()
-        {
+            // SSL certificate exception
+            this.capa.SetCapability("acceptSslCerts", true);
+
+            // Remote server url
             this.remoteServerUrl = new Uri(string.Format(
-                "http://{0}:{1}/wd/hub", 
-                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Host,
-                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Port));
+                "http://{0}:{1}/wd/hub",
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Host,
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Port));
         }
 
         public IWebDriver GetWebDriver()
         {
-            this.ResetProfile();
-            this.ResetBinary();
-            this.ResetRemoteServerUrl();
+            this.SetStartupOptions();
 
-            if (ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.DirectStartup)
+            if (ConfigReader.DefaultProvider.AllConfiguration.Browsers.DirectStartup)
             {
                 return new FirefoxDriver(this.binary, this.profile);
             }
@@ -89,58 +84,61 @@
 
     internal class Browser_Chrome : IGetWebDriver
     {
+        private ChromeDriverService driverService;
         private ChromeOptions options = new ChromeOptions();
         private DesiredCapabilities capa = DesiredCapabilities.Chrome();
+        private ArrayList switches = new ArrayList(2);
         private Uri remoteServerUrl;
 
-        private void ResetBinary()
+        private void SetStartupOptions()
         {
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            // Chrome binary
+            if (ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Enable)
             {
                 this.options.BinaryLocation =
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path;
+                    ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Path;
 
                 this.capa.SetCapability(
                     "chrome.binary",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+                    ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Path);
             }
-        }
 
-        private void ResetProfile()
-        {
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            // Chrome profile
+            if (ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Enable)
             {
                 this.options.AddArgument(string.Format(
-                    "user-data-dir={0}",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path));
+                    "--user-data-dir={0}",
+                    ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path));
 
-                this.capa.SetCapability(
-                    "chrome.switches",
-                    string.Format("user-data-dir={0}", ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path));
-
-                this.capa.SetCapability(
-                    "acceptSslCerts",
-                    true);
+                this.switches.Add(string.Format(
+                    "--user-data-dir={0}", 
+                    ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path));
             }
-        }
 
-        private void ResetRemoteServerUrl()
-        {
+            // SSL certificate exception
+            this.capa.SetCapability("acceptSslCerts", true);
+
+            // Allow running insecure content from http in https
+            this.options.AddArgument("--allow-running-insecure-content");
+            this.switches.Add("--allow-running-insecure-content");
+
+            // Chrome switches (see a full list of switches here: http://peter.sh/experiments/chromium-command-line-switches/)
+            this.capa.SetCapability("chrome.switches", this.switches);
+
+            // Remote server url
             this.remoteServerUrl = new Uri(string.Format(
                 "http://{0}:{1}",
-                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Host,
-                ConfigurationProvider.XmlConfig.CurrentBrowser.Server.Port));
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Host,
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Port));
         }
 
         public IWebDriver GetWebDriver()
         {
-            this.ResetProfile();
-            this.ResetBinary();
-            this.ResetRemoteServerUrl();
+            this.SetStartupOptions();
 
-            if (ConfigurationProvider.XmlConfig.AllConfiguration.Browsers.DirectStartup)
+            if (ConfigReader.DefaultProvider.AllConfiguration.Browsers.DirectStartup)
             {
-                return new ChromeDriver(this.options);
+                return new ChromeDriver(ConfigReader.DefaultProvider.CurrentBrowser.Server.Path, this.options);
             }
             else
             {
@@ -155,18 +153,18 @@
         {
             DesiredCapabilities capa = DesiredCapabilities.HtmlUnitWithJavaScript();
 
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Enable)
+            if (ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Enable)
             {
                 capa.SetCapability(
                     "firefox_binary",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.BinaryPath.Path);
+                    ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Path);
             }
 
-            if (ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Enable)
+            if (ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Enable)
             {
                 capa.SetCapability(
                     "firefox_profile",
-                    ConfigurationProvider.XmlConfig.CurrentBrowser.ProfilePath.Path);
+                    ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path);
             }
 
             return new RemoteWebDriver(capa);

@@ -273,25 +273,25 @@
 
         public string GetButtonCode()
         {
-            return UIUtilityProvider.UIHelper.GetText("ctl00_cphDialog_Wizard1_txtBtnHtml", LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.GetText("ctl00_cphDialog_Wizard1_txtBtnHtml", LocateBy.Id);
         }
 
         public void ClickButtonDesignerNext()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//input[contains(@id,'NextButton')]", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//input[contains(@id,'NextButton')]", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickButtonDesignerPrevious()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//input[contains(@id,'PreviousButton')]", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//input[contains(@id,'PreviousButton')]", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickButtonDesignerClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_Wizard1_FinishNavigationTemplateContainerID_FinishButton", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_Wizard1_FinishNavigationTemplateContainerID_FinishButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
     }
 }

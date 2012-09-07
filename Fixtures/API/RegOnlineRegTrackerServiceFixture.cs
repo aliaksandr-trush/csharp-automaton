@@ -28,10 +28,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegTrackerService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegTrackerService].Url);
 
             this.service = new WSRegBugSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.RegTrackerService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.RegTrackerService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -43,7 +43,7 @@
         [Description("790")]
         public void Validate_Returns_True_For_Valid_Credentials()
         {
-            Assert.That(this.service.Validate(ConfigurationProvider.XmlConfig.AccountConfiguration.Id, ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password));
+            Assert.That(this.service.Validate(ConfigReader.DefaultProvider.AccountConfiguration.Id, ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password));
         }
 
         [Test]
@@ -59,7 +59,7 @@
         [Description("788")]
         public void GetUserForms_Returns_DataSet()
         {
-            DataSet ds = this.service.GetUserForms(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            DataSet ds = this.service.GetUserForms(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsNotNull(ds);
             Assert.IsTrue(ds.Tables[0].Rows.Count > 0);
         }
@@ -71,7 +71,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            DataSet ds = this.service.GetUserFormsStatistics(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), this.eventId.ToString(), DateTime.Now);
+            DataSet ds = this.service.GetUserFormsStatistics(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), this.eventId.ToString(), DateTime.Now);
             Assert.IsNotNull(ds);
             Assert.IsTrue(ds.Tables[0].Rows.Count > 0);
         }
@@ -81,8 +81,8 @@
         [Description("777")]
         public void CreateWebSession_Returns_UniqueId_String()
         {
-            int uniqueIdLength = (this.service.CreateWebSession(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password)).Length;
-            Assert.AreNotEqual(String.Empty, this.service.CreateWebSession(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password));
+            int uniqueIdLength = (this.service.CreateWebSession(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password)).Length;
+            Assert.AreNotEqual(String.Empty, this.service.CreateWebSession(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password));
             Assert.IsTrue(uniqueIdLength > 0);
         }
 
@@ -92,7 +92,7 @@
         public void GetLoginUrl_Returns_Url_String_With_True_DirectAccess()
         {
             string url = "/LoginDirector.ashx?EventsessionID=";
-            string return_url = this.service.GetLoginUrl(true, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetLoginUrl(true, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsTrue(return_url.Contains(url));
         }
 
@@ -102,7 +102,7 @@
         public void GetLoginUrl_Returns_Url_String_With_False_DirectAccess()
         {
             string url = "/manager/login.aspx";
-            string return_url = this.service.GetLoginUrl(false, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetLoginUrl(false, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsTrue(return_url.Contains(url));
         }
 
@@ -113,7 +113,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetSnapshotReportUrl(true, this.eventId, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetSnapshotReportUrl(true, this.eventId, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsTrue(return_url.Contains(SnapshotReportUrl));
         }
 
@@ -124,7 +124,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetSnapshotReportUrl(false, this.eventId, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetSnapshotReportUrl(false, this.eventId, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsFalse(return_url.Contains(SnapshotReportUrl));
         }
 
@@ -135,7 +135,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetAttendeeReportUrl(true, this.eventId, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetAttendeeReportUrl(true, this.eventId, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsTrue(return_url.Contains(AttendeeReportUrl));
         }
 
@@ -146,7 +146,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetAttendeeReportUrl(false, this.eventId, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetAttendeeReportUrl(false, this.eventId, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsFalse(return_url.Contains(AttendeeReportUrl));
         }
 
@@ -157,7 +157,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetAttendeeReportUrlWithDate(true, this.eventId, DateTime.Now, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetAttendeeReportUrlWithDate(true, this.eventId, DateTime.Now, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsTrue(return_url.Contains(DateTimeStringInUrl));
         }
 
@@ -168,7 +168,7 @@
         {
             this.PrepareEventAndRegistrations();
 
-            string return_url = this.service.GetAttendeeReportUrlWithDate(false, this.eventId, DateTime.Now, Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            string return_url = this.service.GetAttendeeReportUrlWithDate(false, this.eventId, DateTime.Now, Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.IsFalse(return_url.Contains(DateTimeStringInUrl));
         }
 

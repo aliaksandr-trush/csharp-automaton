@@ -215,18 +215,18 @@
         }
         public void SetMembershipRenewalOptions(AutoRenewals renewal, Frequency frequency, bool fixedDate, bool prorate)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(AutoRenewalLocator, StringEnum.GetStringValue(renewal), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithText(RenewalFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithText(PaymentFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(AutoRenewalLocator, StringEnum.GetStringValue(renewal), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(RenewalFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(PaymentFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
             
             //there is a lot of logic around this and the renewal/payment frequency, more work is needed here
             //but for now this should suffice for our basic needs, I would recommend leaving fixedDate false
             if (fixedDate)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(FixedRenewalLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FixedRenewalLocator, LocateBy.Id);
             }
 
-            UIUtilityProvider.UIHelper.SetCheckbox(ProratePaymentsLocator, prorate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(ProratePaymentsLocator, prorate, LocateBy.Id);
         }
     }
 }

@@ -19,13 +19,13 @@
         [Test]
         public void WarmUp()
         {
-            UIUtilityProvider.UIHelper.SetTimeoutSpan(TimeSpan.FromMinutes(4));
+            WebDriverUtility.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(4));
             this.TouchManagerSite();
             this.TouchBuilderSite();
             this.TouchRegisterSite();
             this.TouchDashboardAndReportSite();
             this.TouchRegTransferPage();
-            UIUtilityProvider.UIHelper.SetTimeoutSpan();
+            WebDriverUtility.DefaultProvider.SetTimeoutSpan();
         }
 
         [Step]
@@ -86,7 +86,7 @@
             string url__Format_regTransferPage = 
                 "https://beta.regonline.com/reports/RegTransfer.aspx?EventSessionId={0}&EventId={1}&RegisterId=0";
 
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(url__Format_regTransferPage, this.eventSessionId, this.eventId));
+            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(url__Format_regTransferPage, this.eventSessionId, this.eventId));
         }
     }
 }

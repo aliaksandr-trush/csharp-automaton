@@ -147,6 +147,9 @@
 
     public class Server
     {
+        [XmlAttributeAttribute("Path")]
+        public string Path { get; set; }
+
         [XmlAttributeAttribute("Host")]
         public string Host { get; set; }
 

@@ -21,7 +21,7 @@
             this.HtmlMode.Click();
             Utility.ThreadSleep(1);
             WaitForAJAX();
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
         }
 
         public void Content_Type(string content)

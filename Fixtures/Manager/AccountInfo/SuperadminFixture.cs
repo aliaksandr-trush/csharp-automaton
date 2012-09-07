@@ -145,7 +145,7 @@
         private void SetSuperadmin(string eventSessionId, bool enable)
         {
             ManagerSiteMgr.SetSuperadmin(eventSessionId, enable);
-            UIUtilityProvider.UIHelper.RefreshPage();
+            WebDriverUtility.DefaultProvider.RefreshPage();
         }
     }
 }

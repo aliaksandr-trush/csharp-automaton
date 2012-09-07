@@ -218,8 +218,8 @@
             this.Title.WaitForDisplay();
             this.Title.Click();
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

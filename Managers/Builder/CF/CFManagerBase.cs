@@ -106,31 +106,31 @@
 
         public void SetName(string name)
         {
-            UIUtilityProvider.UIHelper.Type(this.NameOnFormTxtboxId, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(this.NameOnFormTxtboxId, name, LocateBy.Id);
         }
 
         public void SelectType(string type)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(TypeLocator_Id, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(TypeLocator_Id, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(TypeDropDown, type), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(TypeLocator_Id, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(TypeLocator_Id, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(TypeDropDown, type), LocateBy.XPath);
         }
 
         public void SetOneLineLength(int length)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(this.OneLineLengthLocator, length);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.OneLineLengthLocator, length);
             ClearDatePopUp();
         }
 
         public void SetParagraphCharacterLimit(int charLimit)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(this.ParagraphCharacterLimitLocator, charLimit.ToString());
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.ParagraphCharacterLimitLocator, charLimit.ToString());
         }
 
         public void SetGroupName(string name)
         {
-            UIUtilityProvider.UIHelper.Type(this.GroupNameLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(this.GroupNameLocator, name, LocateBy.Id);
         }
 
         public void SetShowDate(DateTime showDate)
@@ -138,7 +138,7 @@
             string date = string.Format("{0}/{1}/{2}", showDate.Month, showDate.Day, showDate.Year);
 
             // Set start date
-            UIUtilityProvider.UIHelper.Type(this.ShowDateLocator, date, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(this.ShowDateLocator, date, LocateBy.Id);
             this.ClearDatePopUp();
         }
 
@@ -147,7 +147,7 @@
             string date = string.Format("{0}/{1}/{2}", hideDate.Month, hideDate.Day, hideDate.Year);
 
             // Set end date
-            UIUtilityProvider.UIHelper.Type(this.HideDateLocator, date, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(this.HideDateLocator, date, LocateBy.Id);
             this.ClearDatePopUp();
         }
 
@@ -160,18 +160,18 @@
 
         public void ClearDatePopUp()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ClearDatePopUpLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ClearDatePopUpLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ExpandAdvanced()
         {
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
         }
 
         public void ExpandConditionalLogic()
         {
-            while (UIUtilityProvider.UIHelper.IsElementPresent(ExpandConditionalLogicButtonLocator, LocateBy.XPath))
+            while (WebDriverUtility.DefaultProvider.IsElementPresent(ExpandConditionalLogicButtonLocator, LocateBy.XPath))
             {
                 this.ClickExpandConditionalLogic();
             }
@@ -179,8 +179,8 @@
 
         protected void ClickExpandConditionalLogic()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ExpandConditionalLogicButtonLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ExpandConditionalLogicButtonLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetConditionalLogic(bool check, string conditionalItem)
@@ -189,26 +189,26 @@
             string forLocator = ("//div[@id='" + this.ConditionalLogicDIVLocator + "']//*[text()='{0}']/../input");
             checkBox = string.Format(forLocator, conditionalItem);
 
-            while (!UIUtilityProvider.UIHelper.IsElementPresent(checkBox, LocateBy.XPath))
+            while (!WebDriverUtility.DefaultProvider.IsElementPresent(checkBox, LocateBy.XPath))
             {
                 this.ClickExpandConditionalLogic();
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(checkBox, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(checkBox, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             Utility.ThreadSleep(1.5);
         }
 
         protected void ClickShowHideAllRegTypes()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ShowHideAllRegTypesLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ShowHideAllRegTypesLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ShowAllRegTypes()
         {
 
-            if (UIUtilityProvider.UIHelper.GetText(ShowHideAllRegTypesLinkLocator, LocateBy.Id).Equals("Show"))
+            if (WebDriverUtility.DefaultProvider.GetText(ShowHideAllRegTypesLinkLocator, LocateBy.Id).Equals("Show"))
             {
                 this.ClickShowHideAllRegTypes();
             }
@@ -217,7 +217,7 @@
         public void HideAllRegTypes()
         {
 
-            if (UIUtilityProvider.UIHelper.GetText(ShowHideAllRegTypesLinkLocator, LocateBy.Id).Equals("Hide"))
+            if (WebDriverUtility.DefaultProvider.GetText(ShowHideAllRegTypesLinkLocator, LocateBy.Id).Equals("Hide"))
             {
                 this.ClickShowHideAllRegTypes();
             }
@@ -232,8 +232,8 @@
         {
             string locator = this.GetLocatorVisibilityOption(option, regTypeName);
 
-            UIUtilityProvider.UIHelper.SetCheckbox(locator, check, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SetCheckbox(locator, check, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void VerifyVisibilityRegTypesVisible(bool expValue)
@@ -243,7 +243,7 @@
             string styleFound = string.Empty;
             string locator = "//div[@id='" + this.AllRegTypesVisibilityDIVLocator + "']";
 
-            actValue = !UIUtilityProvider.UIHelper.IsElementHidden(locator, LocateBy.XPath);
+            actValue = !WebDriverUtility.DefaultProvider.IsElementHidden(locator, LocateBy.XPath);
 
             Assert.AreEqual(string.Format(errMssgFormat, expValue), string.Format(errMssgFormat, actValue));
         }
@@ -289,9 +289,9 @@
             string locator = this.GetLocatorVisibilityOption(option, regTypeName);
 
             ////UIUtilityProvider.UIHelper.VerifyElementPresent(locator, VisibilityErrorExpectedMessage, VisibilityErrorActualMessage);
-            UIUtilityProvider.UIHelper.VerifyElementPresent(locator, true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(locator, true, LocateBy.XPath);
 
-            isChecked = UIUtilityProvider.UIHelper.IsChecked(locator, LocateBy.XPath);
+            isChecked = WebDriverUtility.DefaultProvider.IsChecked(locator, LocateBy.XPath);
 
             return isChecked;
         }
@@ -307,9 +307,9 @@
             string locator = this.GetLocatorVisibilityOption(option, regTypeName);
 
             ////UIUtilityProvider.UIHelper.VerifyElementPresent(locator, VisibilityErrorExpectedMessage, VisibilityErrorActualMessage);
-            UIUtilityProvider.UIHelper.VerifyElementPresent(locator, true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(locator, true, LocateBy.XPath);
 
-            isEnabled = UIUtilityProvider.UIHelper.IsEditable(locator, LocateBy.XPath);
+            isEnabled = WebDriverUtility.DefaultProvider.IsEditable(locator, LocateBy.XPath);
 
             return isEnabled;
         }
@@ -368,7 +368,7 @@
         {
             bool regTypes = false;
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(this.AllRegTypesVisibilityDIVLocator, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(this.AllRegTypesVisibilityDIVLocator, LocateBy.Id))
             {
                 regTypes = true;
             }
@@ -378,53 +378,53 @@
 
         public void SelectFieldPosition(FieldPosition position)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(this.FieldPositionLocator, StringEnum.GetStringValue(position), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(this.FieldPositionLocator, StringEnum.GetStringValue(position), LocateBy.Id);
         }
 
         public void CheckSeparatorLine(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_cfCF_chkSeparator", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_cfCF_chkSeparator", check, LocateBy.Id);
         }
 
         public void AddDetailMessage(string message)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(CFDetailsLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", message + "<br>", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CFDetailsLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", message + "<br>", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void AddDetailURL(string url)
         {
-            UIUtilityProvider.UIHelper.Type(CFDetailsURLLocator, url, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(CFDetailsURLLocator, url, LocateBy.Id);
         }
 
         public void EnterAgeGenderValidation(Register.RegisterManager.Gender? gender, string ageGreaterThan, 
             string ageGreaterThanDate, string ageLessThan, string ageLessThanDate)
         {
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
             if (gender != null)
             {
-                UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_ucCF_ddlVisibleForGender", gender.ToString(), LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_ucCF_ddlVisibleForGender", gender.ToString(), LocateBy.Id);
             }
             if (!string.IsNullOrEmpty(ageGreaterThan))
             {
-                UIUtilityProvider.UIHelper.Type("ctl00_cph_ucCF_rntVisibleIfAgeGreater_text", ageGreaterThan, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type("ctl00_cph_ucCF_dtpVisibleIfAgeGreater_tbDate", ageGreaterThanDate, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_rntVisibleIfAgeGreater_text", ageGreaterThan, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_dtpVisibleIfAgeGreater_tbDate", ageGreaterThanDate, LocateBy.Id);
             }
             if (!string.IsNullOrEmpty(ageLessThan))
             {
-                UIUtilityProvider.UIHelper.Type("ctl00_cph_ucCF_rntVisibleIfAgeLess_text", ageLessThan, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type("ctl00_cph_ucCF_dtpVisibleIfAgeLess_tbDate", ageLessThanDate, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_rntVisibleIfAgeLess_text", ageLessThan, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_dtpVisibleIfAgeLess_tbDate", ageLessThanDate, LocateBy.Id);
 
             }
         }

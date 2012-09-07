@@ -77,10 +77,10 @@
 
             this.RemoteAddressUri = new Uri(
                 BaseUriWithHttps,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.Default].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.Default].Url);
 
             this.service = new RegOnlineAPISoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.Default].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.Default].EndpointConfigName,
                 RemoteAddressUri.ToString());
 
             header = new TokenHeader();
@@ -107,8 +107,8 @@
         public void Login()
         {
             userAPIToken = this.LoginToGetAPIToken(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
             Assert.That(!string.IsNullOrEmpty(userAPIToken));
         }
 
@@ -153,8 +153,8 @@
         [Description("832")]
         public void GetEvents()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(
-                XmlConfiguration.AccountType.Alternative);
+            ConfigReader.DefaultProvider.ReloadAccount(
+                ConfigReader.AccountType.Alternative);
 
             this.Login();
             header.APIToken = userAPIToken;
@@ -189,7 +189,7 @@
                 
             ResultsOfListOfEvent result = this.service.GetPublicEvents(
                 header,
-                string.Format("CustomerID={0}", Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id)), 
+                string.Format("CustomerID={0}", Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id)), 
                 "ID DESC");
 
             Assert.IsTrue(result.Success);
@@ -215,7 +215,7 @@
             APIEvent evt = result.Data[0];
             Assert.IsTrue(result.Success);
             Assert.AreEqual(this.eventId, evt.ID);
-            Assert.AreEqual(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), evt.CustomerID);
+            Assert.AreEqual(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), evt.CustomerID);
             Assert.AreEqual(EventName, evt.Title);
             Assert.AreEqual(DashboardManager.EventStatus.Testing.ToString(), evt.Status);
             Assert.AreEqual(this.eventRegCount, evt.TotalRegistrations);
@@ -554,7 +554,7 @@
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data);
 
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
                 var response = from cfResponse in db.Custom_Field_Responses
                                 where cfResponse.rRegisterId == this.registrationId
                                 && cfResponse.EventId == this.eventId
@@ -671,7 +671,7 @@
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data);
 
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var response = from agendaResponse in db.Custom_Field_Responses
                             where agendaResponse.rRegisterId == this.registrationId
                             && agendaResponse.EventId == this.eventId
@@ -971,7 +971,7 @@
             ResultsOfListOfRegistration result = this.service.LoginRegistrant(
                 eventId, 
                 email,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
 
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data.Length > 0);
@@ -1069,7 +1069,7 @@
             ManagerSiteMgr.DashboardMgr.ReturnToList();
 
             // Publish event
-            ClientDataContext db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            ClientDataContext db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             string command = "Exec SAV_EventPublicizeData " +
                                 "{0}," +    //@eventId int,
                                 "{1}," +    //@Title nvarchar(510),
@@ -1114,7 +1114,7 @@
                 FormDetailManager.StartPageDefaultInfo.City,//@City nvarchar(200),
                 FormDetailManager.StartPageDefaultInfo.State,//@State nvarchar(100),
                 FormDetailManager.StartPageDefaultInfo.ZipCode,//@Zip varchar(20),
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, //@VenueURL nvarchar(255),
+                ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl, //@VenueURL nvarchar(255),
                 "",                  //@VenueImage nvarchar(50) = null,
                 "V0-001-000268888-3",  //@EventfulVenueId varchar(50),
                 "21662",               //@UpcomingVenueId varchar(50),
@@ -1214,7 +1214,7 @@
 
         public ResultsOfListOfRegistration FetchRegistration(int registrationId)
         {
-            return this.FetchRegistration(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, registrationId);
+            return this.FetchRegistration(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, registrationId);
         }
 
         public ResultsOfListOfEvent FetchEvent(string userName, string password, int eventId)

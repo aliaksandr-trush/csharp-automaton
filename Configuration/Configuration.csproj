@@ -49,9 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestConfig.cs" />
-    <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlConfiguration.cs" />
+    <Compile Include="ConfigReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestConfig.xml">
