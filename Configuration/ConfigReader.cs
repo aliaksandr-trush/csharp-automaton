@@ -16,7 +16,7 @@
             Production
         }
 
-        public enum AccountType
+        public enum AccountEnum
         {
             Default,
             Alternative,
@@ -99,7 +99,7 @@
         /// </summary>
         /// <param name="environment"></param>
         /// <param name="accountType"></param>
-        public void ReloadAllConfiguration(Environment environment, AccountType accountType)
+        public void ReloadAllConfiguration(Environment environment, AccountEnum accountType)
         {
             this.ReloadAllConfiguration(environment.ToString(), accountType.ToString());
         }
@@ -113,7 +113,7 @@
 
             // Cos preferred environment and private-label must be read from xml first, 
             // we cannot call this.ReloadAllConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel)
-            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel);
+            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.CurrentEnvironment, this.AllConfiguration.Environments.CurrentAccount);
             
             this.LoadWebServiceConfiguration();
             this.LoadBrowser();
@@ -142,7 +142,7 @@
         /// Switch to another private label under the current environment
         /// </summary>
         /// <param name="accountType"></param>
-        public void ReloadAccount(AccountType accountType)
+        public void ReloadAccount(AccountEnum accountType)
         {
             this.LoadAccountConfiguration(accountType.ToString());
         }

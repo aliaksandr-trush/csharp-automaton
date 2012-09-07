@@ -120,17 +120,26 @@
         public static void ReportResultToSpiraTeam(TestResult result)
         {
             // Extract the other information
-            string testCaseId = string.Empty;
+            int testCaseId = -2;
 
             if (!string.IsNullOrEmpty(result.Description))
             {
-                testCaseId = result.Description;
-                ReportResultToSpiraTeam(result, Convert.ToInt32(testCaseId));
+                testCaseId = Convert.ToInt32(result.Description);
+
+                // "-1" means we don't have to give a corresponding id to that test case
+                if (testCaseId == -1)
+                {
+                    return;
+                }
+                else
+                {
+                    ReportResultToSpiraTeam(result, testCaseId);
+                }
             }
             else
             {
-                // If there's no corresponding test case id, do not report back to SpiraTeam
-                return;
+                // If there's no corresponding test case id, throw an exception
+                throw new Exception("SpiraTeamTestCaseId not set!");
             }
         }
     }

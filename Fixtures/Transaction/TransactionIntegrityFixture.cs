@@ -245,7 +245,7 @@
         public void EnduranceEvent_SingleReg_USD()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.ActiveEurope);
+                ConfigReader.AccountEnum.ActiveEurope);
 
             this.LoginAndGoToRegressionFolder();
             this.eventId = ManagerSiteMgr.GetFirstEventId(EnduranceEvent_USD.EventName);
@@ -277,7 +277,7 @@
         public void EnduranceEvent_SingleReg_Pound()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.ActiveEurope);
+                ConfigReader.AccountEnum.ActiveEurope);
 
             this.LoginAndGoToRegressionFolder();
             this.eventId = ManagerSiteMgr.GetFirstEventId(EnduranceEvent_Pound.EventName);
@@ -310,7 +310,7 @@
             Billing();
             FinalizeBilling();
 
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
             LoginAndGoToRegressionFolder();
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.ActiveEventName);
             VerifyBilling(EventType.Endurance_USD);
@@ -319,7 +319,7 @@
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.DifferentCurrencies);
             VerifyBilling(EventType.Endurance_Pound);
             VerifyFinalizeBilling(EventType.Endurance_Pound);
-            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountType.Default);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.Default);
             LoginAndGoToRegressionFolder();
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.EventName);
             VerifyBilling(EventType.ProEvent);

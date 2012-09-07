@@ -154,7 +154,7 @@
         public void GetEvents()
         {
             ConfigReader.DefaultProvider.ReloadAccount(
-                ConfigReader.AccountType.Alternative);
+                ConfigReader.AccountEnum.Alternative);
 
             this.Login();
             header.APIToken = userAPIToken;

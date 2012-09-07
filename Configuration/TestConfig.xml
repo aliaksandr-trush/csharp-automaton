@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
-  <Environments>
-	<Preferred Environment="CBeta" PrivateLabel="Default" />
+  <Environments CurrentEnvironment="CBeta" CurrentAccount="Default" CurrentMachineTimeZoneOffset="8">
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -10,30 +9,23 @@
 		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
 	  <Account Name="Default">
-		<DomainName>alpha.regonline.com</DomainName>
-		<Id>377595</Id>
-		<Login>rol4ever</Login>
-		<Password>rol4ever</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>alpha.regonline.com</DomainName>
+		  <Id>377595</Id>
+		  <Login>rol4ever</Login>
+		  <Password>rol4ever</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
-		<DomainName>alpha.regonline.com</DomainName>
-		<Id>377566</Id>
-		<Login>alphaKK0</Login>
-		<Password>alphaKK0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
-	  </Account>
-
-	  <Account Name="ActiveEurope">
-		<DomainName>activeeuropealpha.regonline.com</DomainName>
-		<Id>377567</Id>
-		<Login>AlphaCC1</Login>
-		<Password>AlphaCC1</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>alpha.regonline.com</DomainName>
+		  <Id>377566</Id>
+		  <Login>alphaKK0</Login>
+		  <Password>alphaKK0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	</Environment>
@@ -45,39 +37,43 @@
 		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
 	  <Account Name="Default">
-		<DomainName>beta.regonline.com</DomainName>
-		<Id>377977</Id>
-		<Login>regression</Login>
-		<Password>regression0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>beta.regonline.com</DomainName>
+		  <Id>377977</Id>
+		  <Login>regression</Login>
+		  <Password>regression0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
-		<DomainName>beta.regonline.com</DomainName>
-		<Id>377969</Id>
-		<Login>brucesun0</Login>
-		<Password>brucesun0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>beta.regonline.com</DomainName>
+		  <Id>377969</Id>
+		  <Login>brucesun0</Login>
+		  <Password>brucesun0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="ActiveEurope">
-		<DomainName>activeeuropebeta.regonline.com</DomainName>
-		<Id>378150</Id>
-		<Login>regressioneur</Login>
-		<Password>regression0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>activeeuropebeta.regonline.com</DomainName>
+		  <Id>378150</Id>
+		  <Login>regressioneur</Login>
+		  <Password>regression0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>1</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="SSO">
-		<DomainName>beta.regonline.com</DomainName>
-		<Id>245012</Id>
-		<Login>sn00ch37</Login>
-		<Password>sn00ch37</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>New</XAuthVersion>
+		  <DomainName>beta.regonline.com</DomainName>
+		  <Id>245012</Id>
+		  <Login>sn00ch37</Login>
+		  <Password>sn00ch37</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>New</XAuthVersion>
+      <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 	</Environment>
 
@@ -88,39 +84,43 @@
 		   DataPath="\\10.109.0.80\QA\RegressionTestData\">
 
 	  <Account Name="Default">
-		<DomainName>cbeta.regonline.com</DomainName>
-		<Id>377977</Id>
-		<Login>regression</Login>
-		<Password>regression0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>cbeta.regonline.com</DomainName>
+		  <Id>377977</Id>
+		  <Login>regression</Login>
+		  <Password>regression0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
-		<DomainName>cbeta.regonline.com</DomainName>
-		<Id>377969</Id>
-		<Login>brucesun0</Login>
-		<Password>brucesun0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>cbeta.regonline.com</DomainName>
+		  <Id>377969</Id>
+		  <Login>brucesun0</Login>
+		  <Password>brucesun0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="ActiveEurope">
-		<DomainName>cbeta.regonline.com</DomainName>
-		<Id>378150</Id>
-		<Login>regressioneur</Login>
-		<Password>regression0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>cbeta.regonline.com</DomainName>
+		  <Id>378150</Id>
+		  <Login>regressioneur</Login>
+		  <Password>regression0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="SSO">
-		<DomainName>cbeta.regonline.com</DomainName>
-		<Id>245012</Id>
-		<Login>sn00ch37</Login>
-		<Password>sn00ch37</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>New</XAuthVersion>
+		  <DomainName>cbeta.regonline.com</DomainName>
+		  <Id>245012</Id>
+		  <Login>sn00ch37</Login>
+		  <Password>sn00ch37</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>New</XAuthVersion>
+      <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 	</Environment>
 
@@ -131,12 +131,13 @@
 			 DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
 
 	  <Account Name="Default">
-		<DomainName>www.regonline.com</DomainName>
-		<Id>299725</Id>
-		<Login>ROLChina</Login>
-		<Password>ROLChina0</Password>
-		<Folder>Regression</Folder>
-		<XAuthVersion>Old</XAuthVersion>
+		  <DomainName>www.regonline.com</DomainName>
+		  <Id>299725</Id>
+		  <Login>ROLChina</Login>
+		  <Password>ROLChina0</Password>
+		  <Folder>Regression</Folder>
+		  <XAuthVersion>Old</XAuthVersion>
+      <TimeZoneOffset>8</TimeZoneOffset>
 	  </Account>
 	</Environment>
   </Environments>
@@ -241,8 +242,6 @@
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
   </Browsers>
-
-  <TimeZoneDifference>14</TimeZoneDifference>
 
   <NUnitAddin ReportBack="false" />
 </TestConfig>
