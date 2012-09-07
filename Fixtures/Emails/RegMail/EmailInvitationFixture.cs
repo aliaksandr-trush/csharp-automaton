@@ -249,18 +249,18 @@
 			EmailMgr.EmailWizardFinishClick();
 			EmailMgr.SelectManagerWindow();
 
-            ////EmailMgr.OpenEmailInvitationEmailUrl(eventId, Convert.ToInt32(attendeeID), emailTitle);
+            EmailMgr.OpenEmailInvitationEmailUrl(eventId, Convert.ToInt32(attendeeID), emailTitle);
 
-            ////Utilities.VerifyTool.VerifyValue(
-            ////    string.Format("{0}CustImages/{1}/email{2}", 
-            ////        ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.BaseUrlWithHttps, 
-            ////        Convert.ToInt32(ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.AccountId), 
-            ////        EmailManager.LogoFileName),
-            ////    EmailMgr.GetHeaderImgPathAttribute(),
-            ////    "Image Path: {0}");
+            Utilities.VerifyTool.VerifyValue(
+                string.Format("{0}CustImages/{1}/email{2}",
+                    ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps,
+                    Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id),
+                    EmailManager.LogoFileName),
+                EmailMgr.GetHeaderImgPathAttribute(),
+                "Image Path: {0}");
 
-            ////Utilities.VerifyTool.VerifyValue("Custom Title", EmailMgr.GetEmailHeaderTitle(), "Email Title: {0}");
-            ////Utilities.VerifyTool.VerifyValue(ExpectedEmailInvitationText, EmailMgr.GetBodyText(), "Body Text: {0}");
+            Utilities.VerifyTool.VerifyValue("Custom Title", EmailMgr.GetEmailHeaderTitle(), "Email Title: {0}");
+            Utilities.VerifyTool.VerifyValue(ExpectedEmailInvitationText, EmailMgr.GetBodyText(), "Body Text: {0}");
 		}
 
 		[Step]

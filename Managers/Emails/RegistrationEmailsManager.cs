@@ -160,28 +160,28 @@
         protected const string HeaderImgLocator = "//div[@id='emailHeaderImgVail']/img";
         protected const string BodyTextLocator = "EmailContent";
 
-        ////[Step]
-        ////public void OpenConfirmationEmailUrl(EmailCategory category, int eventId, int registrationId)
-        ////{
-        ////    string url = ComposeConfirmationEmailURL(category, eventId, registrationId);
-        ////    UIUtilityProvider.UIHelper.OpenUrl(url);
-        ////}
+        [Step]
+        public void OpenConfirmationEmailUrl(EmailCategory category, int eventId, int registrationId)
+        {
+            string url = ComposeConfirmationEmailURL(category, eventId, registrationId);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
+        }
 
-        ////[Step]
-        ////public void OpenEmailInvitationEmailUrl(int eventId, int attendeeId, string emailName)
-        ////{
-        ////    string emailId = FetchInvitationEmailId(emailName); 
-        ////    string url = ComposeEmailInvitationURL(eventId, attendeeId.ToString(), emailId);
-        ////    UIUtilityProvider.UIHelper.OpenUrl(url);
-        ////}
+        [Step]
+        public void OpenEmailInvitationEmailUrl(int eventId, int attendeeId, string emailName)
+        {
+            string emailId = FetchInvitationEmailId(emailName);
+            string url = ComposeEmailInvitationURL(eventId, attendeeId.ToString(), emailId);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
+        }
 
-        ////[Verify]
-        ////public void OpenVirtualEventConfirmationLink()
-        ////{
-        ////    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
-        ////    UIUtilityProvider.UIHelper.WaitForPageToLoad();
-        ////    Assert.True(OnWebEventJoinPage());
-        ////}
+        [Verify]
+        public void OpenVirtualEventConfirmationLink()
+        {
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            Assert.True(OnWebEventJoinPage());
+        }
 
         public bool OnWebEventJoinPage()
         {

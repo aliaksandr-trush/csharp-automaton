@@ -170,27 +170,27 @@
             RegisterMgr.ConfirmRegistration();
         }
 
-        ////private void OpenEmailUrlAndVerify(EmailManager.ConfirmationEmailBody body)
-        ////{
-        ////    EmailMgr.OpenConfirmationEmailUrl(body.Category, this.eventId, this.registrationId);
-        ////    EmailMgr.VerifyConfirmationEmailBodyText(body);
+        private void OpenEmailUrlAndVerify(EmailManager.ConfirmationEmailBody body)
+        {
+            EmailMgr.OpenConfirmationEmailUrl(body.Category, this.eventId, this.registrationId);
+            EmailMgr.VerifyConfirmationEmailBodyText(body);
 
-        ////    if (body.Category == EmailManager.EmailCategory.Complete || body.Category == EmailManager.EmailCategory.Update)
-        ////    {
-        ////        EmailMgr.ClickReviewChangeUpdateLinkInConfirmationEmail();
-        ////        RegisterMgr.VerifyOnConfirmationPage();
+            if (body.Category == EmailManager.EmailCategory.Complete || body.Category == EmailManager.EmailCategory.Update)
+            {
+                EmailMgr.ClickReviewChangeUpdateLinkInConfirmationEmail();
+                RegisterMgr.VerifyOnConfirmationPage();
 
-        ////        VerifyTool.VerifyValue(
-        ////        this.registrationId,
-        ////        RegisterMgr.GetRegistrationIdOnConfirmationPage(),
-        ////        "RegistrationId in confirmation email: {0}");
-        ////    }
-        ////    else if (body.Category == EmailManager.EmailCategory.Incomplete)
-        ////    {
-        ////        EmailMgr.ClickClickHereLinkInIncompleteConfirmationEmail();
-        ////        RegisterMgr.VerifyOnCheckinPage(true);
-        ////    }
-        ////}
+                VerifyTool.VerifyValue(
+                this.registrationId,
+                RegisterMgr.GetRegistrationIdOnConfirmationPage(),
+                "RegistrationId in confirmation email: {0}");
+            }
+            else if (body.Category == EmailManager.EmailCategory.Incomplete)
+            {
+                EmailMgr.ClickClickHereLinkInIncompleteConfirmationEmail();
+                RegisterMgr.VerifyOnCheckinPage(true);
+            }
+        }
 
         private void LoginAndEditEmail(EmailManager.EmailCategory category, string appendedEmailBodyText)
         {

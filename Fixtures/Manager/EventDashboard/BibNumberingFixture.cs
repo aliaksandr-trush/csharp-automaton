@@ -192,8 +192,8 @@
             this.CheckBibNumber(12, 13, 109, true);
             VerifyTool.VerifyValue(this.teamName, ReportMgr.GetTeamName(this.regs), "Team name for group regs in the same team: {0}");
             ReportMgr.CloseReportPopupWindow();
-            ////this.VerifyBibInEmail(104);
-            ////this.CheckTeamNameInEmail();
+            this.VerifyBibInEmail(104);
+            this.CheckTeamNameInEmail();
         }
 
         [Test]
@@ -214,7 +214,7 @@
         {
             this.BibNumberingTool();
             this.CheckTeamNameInReport();
-            ////this.CheckTeamNameInEmail();
+            this.CheckTeamNameInEmail();
         }
 
         public void CheckTeamNameInReport()
@@ -232,11 +232,11 @@
             ReportMgr.CloseReportPopupWindow();
         }
 
-        ////public void CheckTeamNameInEmail()
-        ////{
-        ////    EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
-        ////    EmailMgr.VerifyCustomFieldPresent(this.teamName, true);
-        ////}
+        public void CheckTeamNameInEmail()
+        {
+            EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
+            EmailMgr.VerifyCustomFieldPresent(this.teamName, true);
+        }
 
         private void CreateNewTeamWithRegType()
         {
@@ -285,11 +285,11 @@
             RegisterMgr.VerifyCustomFieldRequired("Team Name", true);
         }
 
-        ////private void VerifyBibInEmail(int bib)
-        ////{
-        ////    EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
-        ////    EmailMgr.VerifyCustomFieldPresent(bib.ToString(), true);
-        ////}
+        private void VerifyBibInEmail(int bib)
+        {
+            EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
+            EmailMgr.VerifyCustomFieldPresent(bib.ToString(), true);
+        }
 
         private void UpdateReg(string emailAddress)
         {
