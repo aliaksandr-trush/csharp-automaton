@@ -15,13 +15,8 @@
             for (int i = 1; i <= PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Count; i++)
             {
                 ButtonOrLink choiceItem = new ButtonOrLink(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Locator + "[" + i + "]//a", LocateBy.XPath);
-                string tmp = choiceItem.GetAttribute("href").Trim();
-                tmp = tmp.Replace("%20", "");
-                tmp = tmp.Split(new string[] { "(" }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
-                tmp = tmp.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)[2].Trim();
                 ChoiceItem choice = new ChoiceItem(choiceItem.Text);
                 
-                choice.Id = Convert.ToInt32(tmp);
                 choiceItems.Add(choice);
             }
 

@@ -60,6 +60,9 @@
 
         public AgendaRow(AgendaItem agenda)
         {
+            Label agendaNameLabel = new Label(string.Format("//*[contains(text(),'{0}')]", agenda.NameOnForm), LocateBy.XPath);
+            agenda.Id = Convert.ToInt32(agendaNameLabel.GetAttribute("for"));
+
             switch (agenda.Type)
             {
                 case FormData.CustomFieldType.AlwaysSelected:

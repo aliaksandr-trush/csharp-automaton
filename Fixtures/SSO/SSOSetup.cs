@@ -54,10 +54,8 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SaveAndClose_Click();
             PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.RegTypeName);
-            regType1.RegTypeId = row1.RegTypeId;
             KeywordProvider.AddRegType.Add_RegType(regType2, evt);
             PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.RegTypeName);
-            regType2.RegTypeId = row2.RegTypeId;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();

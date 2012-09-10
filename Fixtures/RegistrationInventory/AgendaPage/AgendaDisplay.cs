@@ -86,9 +86,7 @@
             AG3.ConditionalLogic.Add(AG2.NameOnForm);
 
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG2, evt);
-            AG2.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG3, evt);
-            AG3.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(AG2);
             row1.Delete_Click();
             PageObject.Builder.RegistrationFormPages.AgendaRow row2 = new PageObject.Builder.RegistrationFormPages.AgendaRow(AG1);
@@ -102,7 +100,6 @@
             AgendaItem_CheckBox AG4 = new AgendaItem_CheckBox("AG4");
             AG4.ConditionalLogic.Add(AG3.NameOnForm);
             KeywordProvider.AddAgendaItem.AddAgendaItems(AG4, evt);
-            AG4.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
 
             Registrant reg1 = new Registrant(evt);
             CFResponse_Checkbox resp = new CFResponse_Checkbox();

@@ -77,7 +77,7 @@
                     DataCollection.AgendaResponse re = resp as DataCollection.AgendaResponse;
 
                     ButtonOrLink addToCart = new ButtonOrLink(
-                        string.Format("//a[@onclick='DisplayInfo({0},{1});return false;']/parent::td/following-sibling::td/a", reg.Event.Id, re.AgendaItem.Id), 
+                        string.Format("//a[contains(text(),'{0}')]/../following-sibling::td/a", re.AgendaItem.NameOnForm), 
                         UIUtility.LocateBy.XPath);
 
                     addToCart.WaitForDisplay();

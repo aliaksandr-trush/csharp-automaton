@@ -92,7 +92,7 @@
             Assert.True(results.Find(r => r.Contains(AgendaItem3.NameOnReports)) != null);
         }
 
-        public void VerifySelectedAgendaItems(DataCollection.Registrant reg)
+        private void VerifySelectedAgendaItems(DataCollection.Registrant reg)
         {
             List<Label> selectedAgendaItems = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
 
@@ -105,7 +105,7 @@
                     resps.Add(resp as AgendaResponse);
                 }
 
-                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnForm).AgendaItem;
+                AgendaItem agendaItem = resps.Find(r => agenda.Text.Trim() == r.AgendaItem.NameOnReceipt).AgendaItem;
                 Assert.True(agendaItem != null);
             }
         }
@@ -244,7 +244,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsChoiceItemPresent(AG1Choice1));
             Assert.IsNull(((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG4).AgendaType).Options.Find(
-                o => o.Value == AG4Choice1.Id.ToString()));
+                o => o.Text == AG4Choice1.Name));
         }
 
         [Test]
@@ -574,6 +574,9 @@
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(AgendaShowCapacity);
+            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(AgendaHideReached);
+            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(AgendaShowMessage);
+            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(AgendaWaitlist);
             Assert.True(row1.AgendaLabel.Text.Contains("1 remaining"));
             KeywordProvider.RegistrationCreation.Agenda(reg1);
             KeywordProvider.RegistrationCreation.Checkout(reg1);
@@ -582,9 +585,6 @@
             reg2.CustomField_Responses.Add(resp4);
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(AgendaHideReached);
-            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(AgendaShowMessage);
-            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(AgendaWaitlist);
             Assert.False(row1.AgendaType.IsPresent);
             Assert.False(row2.AgendaType.IsPresent);
             Assert.True(row3.LimitFullMessage.IsPresent);

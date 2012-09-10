@@ -61,15 +61,15 @@
                     {
                         if (visbleOption.Visible.HasValue)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.VisibleToRegType(visbleOption.RegType.RegTypeId).Set(visbleOption.Visible.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.VisibleToRegType(visbleOption.RegType).Set(visbleOption.Visible.Value);
                         }
                         if (visbleOption.Required.HasValue)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.RequiredByRegType(visbleOption.RegType.RegTypeId).Set(visbleOption.Required.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.RequiredByRegType(visbleOption.RegType).Set(visbleOption.Required.Value);
                         }
                         if (visbleOption.AdminOnly.HasValue)
                         {
-                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AdminOnlyToRegType(visbleOption.RegType.RegTypeId).Set(visbleOption.AdminOnly.Value);
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AdminOnlyToRegType(visbleOption.RegType).Set(visbleOption.AdminOnly.Value);
                         }
                     }
                 }
@@ -365,13 +365,6 @@
                         {
                             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.MultipleChoiceDefine.SaveAndNew_Click();
                         }
-                    }
-
-                    List<ChoiceItem> choiceItems = KeywordProvider.BuilderDefault.GetAgendaChoiceItem();
-
-                    for (int i = 0; i < ag.ChoiceItems.Count; i++)
-                    {
-                        ag.ChoiceItems[i].Id = choiceItems[i].Id;
                     }
                 }
 

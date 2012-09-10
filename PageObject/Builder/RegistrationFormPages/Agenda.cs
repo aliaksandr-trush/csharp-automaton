@@ -104,19 +104,19 @@
         #endregion
 
         #region Generate Some Elements
-        public CheckBox VisibleToRegType(int regTypeId)
+        public CheckBox VisibleToRegType(RegType regType)
         {
-            return new CheckBox(string.Format("ctl00_cph_ucCF_chkCFRegTypeActive{0}", regTypeId), LocateBy.Id);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Active')]", regType.RegTypeName), LocateBy.XPath);
         }
 
-        public CheckBox RequiredByRegType(int regTypeId)
+        public CheckBox RequiredByRegType(RegType regType)
         {
-            return new CheckBox(string.Format("ctl00_cph_ucCF_chkCFRegTypeRequired{0}", regTypeId), LocateBy.Id);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Required')]", regType.RegTypeName), LocateBy.XPath);
         }
 
-        public CheckBox AdminOnlyToRegType(int regTypeId)
+        public CheckBox AdminOnlyToRegType(RegType regType)
         {
-            return new CheckBox(string.Format("ctl00_cph_ucCF_chkCFRegTypeAdminOnly{0}", regTypeId), LocateBy.Id);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'AdminOnly')]", regType.RegTypeName), LocateBy.XPath);
         }
 
         public CheckBox ConditionalLogicParent(string name)
@@ -519,9 +519,13 @@
 
         public AgendaRow(DataCollection.AgendaItem agendaItem)
         {
-            this.Agenda = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}2']", agendaItem.Id), LocateBy.XPath);
-            this.Delete = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItem.Id), LocateBy.XPath);
-            this.Copy = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItem.Id), LocateBy.XPath);
+            Label agendaNameTd = new Label(string.Format("//span[@class='bold'][text()='{0}']/..", agendaItem.NameOnForm), LocateBy.XPath);
+            string agendaNameOnclickAttriText = agendaNameTd.GetAttribute("onclick");
+            int agendaItemId = Convert.ToInt32(agendaNameOnclickAttriText.Split(new string[] { "'" }, StringSplitOptions.RemoveEmptyEntries)[1]);
+
+            this.Agenda = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}2']", agendaItemId), LocateBy.XPath);
+            this.Delete = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItemId), LocateBy.XPath);
+            this.Copy = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItemId), LocateBy.XPath);
         }
 
         public void Agenda_Click()

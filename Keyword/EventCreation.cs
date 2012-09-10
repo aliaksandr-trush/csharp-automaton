@@ -323,7 +323,6 @@
                 {
                     KeywordProvider.CustomFieldCreation.AddCustomField(details.PersonalInfoPage.CustomFields[i]);
                     PageObject.Builder.RegistrationFormPages.PICustomFieldRow row = new PageObject.Builder.RegistrationFormPages.PICustomFieldRow(details.PersonalInfoPage.CustomFields[i].NameOnForm);
-                    details.PersonalInfoPage.CustomFields[i].Id = row.CustomFieldId;
 
                     if (i < details.PersonalInfoPage.CustomFields.Count - 1)
                     {
@@ -343,7 +342,6 @@
                 foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
                 {
                     KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem, details);
-                    agendaItem.Id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
                 }
 
                 if (details.AgendaPage.DoNotAllowOverlapping.HasValue)

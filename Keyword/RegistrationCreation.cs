@@ -312,6 +312,8 @@
                             case FormData.CustomFieldType.RadioButton:
                                 {
                                     AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
+                                    Label choiceItemLabel = new Label(string.Format("//*[contains(text(),'{0}')]", resp.ChoiceItem.Name), LocateBy.XPath);
+                                    resp.ChoiceItem.Id = Convert.ToInt32(choiceItemLabel.GetAttribute("for"));
                                     RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
                                     radio.Click();
 
@@ -330,7 +332,7 @@
 
                                     AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
 
-                                    ((MultiChoiceDropdown)row.AgendaType).SelectWithValue(resp.ChoiceItem.Id.ToString());
+                                    ((MultiChoiceDropdown)row.AgendaType).SelectWithText(resp.ChoiceItem.Name);
 
                                     if (resp.Code != null)
                                     {
