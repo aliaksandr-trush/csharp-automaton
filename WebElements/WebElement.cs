@@ -12,7 +12,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.GetText(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.GetText(Locator, TypeOfLocator);
             }
         }
 
@@ -20,7 +20,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.GetValue(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.GetValue(Locator, TypeOfLocator);
             }
         }
 
@@ -28,7 +28,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.GetElementsCount(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.GetElementsCount(Locator, TypeOfLocator);
             }
         }
 
@@ -36,7 +36,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.IsElementPresent(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.IsElementPresent(Locator, TypeOfLocator);
             }
         }
 
@@ -44,7 +44,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.IsElementDisplay(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.IsElementDisplay(Locator, TypeOfLocator);
             }
         }
 
@@ -52,7 +52,7 @@
         {
             get
             {
-                return UIUtilityProvider.UIHelper.IsElementHidden(Locator, TypeOfLocator);
+                return WebDriverUtility.DefaultProvider.IsElementHidden(Locator, TypeOfLocator);
             }
         }
 
@@ -66,17 +66,17 @@
 
         public virtual void WaitForPresent()
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(Locator, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(Locator, TypeOfLocator);
         }
 
         public virtual void WaitForDisplay()
         {
-            UIUtilityProvider.UIHelper.WaitForElementDisplay(Locator, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.WaitForElementDisplay(Locator, TypeOfLocator);
         }
 
         public string GetAttribute(string att)
         {
-            return UIUtilityProvider.UIHelper.GetAttribute(Locator, att, TypeOfLocator);
+            return WebDriverUtility.DefaultProvider.GetAttribute(Locator, att, TypeOfLocator);
         }
 
         public bool HasAttribute(string att)

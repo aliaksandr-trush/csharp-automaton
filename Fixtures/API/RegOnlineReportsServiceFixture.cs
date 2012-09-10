@@ -30,15 +30,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineReportsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.RegistrationService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.ReportsService].Url);
-
             this.service = new RegonlineWebServicesSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.ReportsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -62,9 +59,9 @@
             string endDate = DateTime.Now.ToShortDateString();
 
             string response = this.service.getReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), 
                 this.reportId,
                 this.eventId, 
                 startDate, 
@@ -88,9 +85,9 @@
             string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id),
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id),
                 this.reportId,
                 this.eventId, 
                 startDate, 
@@ -107,7 +104,7 @@
         [Description("1343")]
         public void GetNonCompressedReport_CheckDateFormat_BritishEnglishCulture()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -133,16 +130,16 @@
                 RegisterMgr.ClickCheckoutActiveWaiver();
                 RegisterMgr.FinishRegistration();
                 RegisterMgr.ConfirmRegistration();
-                this.regDates.Add(DateTimeTool.ConvertTo(DateTime.Now, DateTimeTool.TimeZoneIdentifier.GMTStandardTime));
+                this.regDates.Add(DateTimeTool.ConvertForCurrentAccount(DateTime.Now, ConfigReader.AccountEnum.ActiveEurope));
             }
 
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
             string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id),
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id),
                 this.reportId,
                 this.eventId,
                 startDate,

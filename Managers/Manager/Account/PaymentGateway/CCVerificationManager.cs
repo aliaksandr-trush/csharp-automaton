@@ -105,12 +105,12 @@
         #region Buttons
         public void ClickVerifyCard()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Verify Card", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Verify Card", LocateBy.LinkText);
         }
 
         public void ClickClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Close", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Close", LocateBy.LinkText);
         }
 
         #endregion
@@ -119,7 +119,7 @@
         public void VerifyFieldEnabled(Fields aField, bool isEnabled)
         {
             string locator = GetLocator(aField, LocatorType.Edit);
-            Assert.AreEqual(isEnabled, UIUtilityProvider.UIHelper.IsEditable(locator, LocateBy.XPath));
+            Assert.AreEqual(isEnabled, WebDriverUtility.DefaultProvider.IsEditable(locator, LocateBy.XPath));
         }
         #endregion
 

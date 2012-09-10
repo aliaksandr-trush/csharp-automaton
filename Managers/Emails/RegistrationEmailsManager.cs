@@ -160,47 +160,47 @@
         protected const string HeaderImgLocator = "//div[@id='emailHeaderImgVail']/img";
         protected const string BodyTextLocator = "EmailContent";
 
-        ////[Step]
-        ////public void OpenConfirmationEmailUrl(EmailCategory category, int eventId, int registrationId)
-        ////{
-        ////    string url = ComposeConfirmationEmailURL(category, eventId, registrationId);
-        ////    UIUtilityProvider.UIHelper.OpenUrl(url);
-        ////}
+        [Step]
+        public void OpenConfirmationEmailUrl(EmailCategory category, int eventId, int registrationId)
+        {
+            string url = ComposeConfirmationEmailURL(category, eventId, registrationId);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
+        }
 
-        ////[Step]
-        ////public void OpenEmailInvitationEmailUrl(int eventId, int attendeeId, string emailName)
-        ////{
-        ////    string emailId = FetchInvitationEmailId(emailName); 
-        ////    string url = ComposeEmailInvitationURL(eventId, attendeeId.ToString(), emailId);
-        ////    UIUtilityProvider.UIHelper.OpenUrl(url);
-        ////}
+        [Step]
+        public void OpenEmailInvitationEmailUrl(int eventId, int attendeeId, string emailName)
+        {
+            string emailId = FetchInvitationEmailId(emailName);
+            string url = ComposeEmailInvitationURL(eventId, attendeeId.ToString(), emailId);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
+        }
 
-        ////[Verify]
-        ////public void OpenVirtualEventConfirmationLink()
-        ////{
-        ////    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
-        ////    UIUtilityProvider.UIHelper.WaitForPageToLoad();
-        ////    Assert.True(OnWebEventJoinPage());
-        ////}
+        [Verify]
+        public void OpenVirtualEventConfirmationLink()
+        {
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            Assert.True(OnWebEventJoinPage());
+        }
 
         public bool OnWebEventJoinPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/WebEvent/join.aspx");
+            return WebDriverUtility.DefaultProvider.UrlContainsPath("register/WebEvent/join.aspx");
         }
 
         public string GetEmailHeaderTitle()
         {
-            return UIUtilityProvider.UIHelper.GetText(HeaderTitleLocator, LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.GetText(HeaderTitleLocator, LocateBy.Id);
         }
 
         public string GetHeaderImgPathAttribute()
         {
-            return UIUtilityProvider.UIHelper.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
+            return WebDriverUtility.DefaultProvider.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
         }
 
         public string GetBodyText()
         {
-            return UIUtilityProvider.UIHelper.GetText(BodyTextLocator, LocateBy.Id); 
+            return WebDriverUtility.DefaultProvider.GetText(BodyTextLocator, LocateBy.Id); 
         }
 
         public class ConfirmationEmailBody
@@ -267,14 +267,14 @@
 
         public void ClickReviewChangeUpdateLinkInConfirmationEmail()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickClickHereLinkInIncompleteConfirmationEmail()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("click here", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("click here", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ModifyEmailHtmlContent(EmailCategory category, string appendedContentText)

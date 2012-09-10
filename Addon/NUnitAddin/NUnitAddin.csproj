@@ -71,7 +71,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Web References\SpiraImportExport\ImportExport.wsdl" />
     <None Include="Web References\SpiraImportExport\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

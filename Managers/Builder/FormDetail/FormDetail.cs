@@ -181,82 +181,82 @@
         {
             // Click Yes on splash page, if needed
             string locator = string.Format(SplashButton, "Yes");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         [Step]
         public void SaveAndStay()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveStay", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveStay", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         [Step]
         public void SaveAndClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void Close()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_hplReturnToManger", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_hplReturnToManger", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void Next()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnNext", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnNext", LocateBy.Id);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Previous()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnPrev", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnPrev", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         [Verify]
         public void VerifySplashPage()
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(SplashButton, "Yes"), true, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(SplashButton, "No"), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(SplashButton, "Yes"), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(SplashButton, "No"), true, LocateBy.XPath);
         }
 
         [Step]
         public int GetEventId()
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent("eventId", LocateBy.Name);
-            return Convert.ToInt32(UIUtilityProvider.UIHelper.GetValue("eventId", LocateBy.Name));
+            WebDriverUtility.DefaultProvider.WaitForElementPresent("eventId", LocateBy.Name);
+            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetValue("eventId", LocateBy.Name));
         }
 
         public string GetEventWebsiteUrl()
         {
             string eventWebsite;
-            string shortCut = UIUtilityProvider.UIHelper.GetValue("ctl00_cph_txtEventsShortcutDescription", LocateBy.Id);
-            eventWebsite = ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + shortCut;
+            string shortCut = WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_txtEventsShortcutDescription", LocateBy.Id);
+            eventWebsite = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + shortCut;
             return eventWebsite;
         }
 
         public void ClickAdvancedOnFrame()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='Advanced']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Advanced']", LocateBy.XPath);
             Utility.ThreadSleep(0.5);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public bool OnPage(Page page)
         {
             string accessKeyAttribute = PageAccessKeyAttribute.GetAccessKey(page);
-            string accessKeyAttributeString = UIUtilityProvider.UIHelper.GetAttribute(string.Format(PageLinkLocatorFormat, accessKeyAttribute), "class", LocateBy.XPath);
+            string accessKeyAttributeString = WebDriverUtility.DefaultProvider.GetAttribute(string.Format(PageLinkLocatorFormat, accessKeyAttribute), "class", LocateBy.XPath);
 
             if (accessKeyAttributeString.Equals("rtsLink rtsSelected"))
             {
@@ -307,38 +307,38 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(PageLinkLocatorFormat, accesskey), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(PageLinkLocatorFormat, accesskey), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void GotoTab(Tab tab)
         {
             string tabLocatorFormat = "//div[@id='ctl00_mainTabs']//span[text()='{0}']";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(tabLocatorFormat, StringEnum.GetStringValue(tab)), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(tabLocatorFormat, StringEnum.GetStringValue(tab)), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         [Step]
         public void TogglePreviewAndEditMode()
         {
             string previewButtonLocator = "ctl00_btnPreview";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(previewButtonLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(previewButtonLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         [Step]
         public void SelectRegTypeWhenPreview(string regTypeName)
         {
             string regTypeDropdownLocator = "ctl00_cph_ddlRegTypes";
-            string selectedRegType = UIUtilityProvider.UIHelper.GetSelectedLabel(regTypeDropdownLocator, LocateBy.Id);
+            string selectedRegType = WebDriverUtility.DefaultProvider.GetSelectedLabel(regTypeDropdownLocator, LocateBy.Id);
 
             if (!selectedRegType.Equals(regTypeName))
             {
-                UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_ddlRegTypes", regTypeName, LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_ddlRegTypes", regTypeName, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             }
         }
 
@@ -346,7 +346,7 @@
         {
             string addLocator = prefix + "hlAddNew";
 
-            if (!UIUtilityProvider.UIHelper.IsElementPresent(addLocator, LocateBy.Id))
+            if (!WebDriverUtility.DefaultProvider.IsElementPresent(addLocator, LocateBy.Id))
             {
                 addLocator = prefix + "lnkEmptyAdd";
             }
@@ -361,38 +361,38 @@
                 switch (page)
                 {
                     case Page.Start:
-                        UIUtilityProvider.UIHelper.Click(StartPageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(StartPageHeaderLocator, LocateBy.XPath);
                         break;
                     case Page.PI:
-                        UIUtilityProvider.UIHelper.Click(PersonalInfoPageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(PersonalInfoPageHeaderLocator, LocateBy.XPath);
                         break;
                     case Page.Agenda:
-                        UIUtilityProvider.UIHelper.Click(AgendaPageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(AgendaPageHeaderLocator, LocateBy.XPath);
                         break;
                     case Page.LodgingTravel:
-                        UIUtilityProvider.UIHelper.Click(LodgingTravelPageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(LodgingTravelPageHeaderLocator, LocateBy.XPath);
                         break;
                     case Page.Merchandise:
-                        UIUtilityProvider.UIHelper.Click(MerchandisePageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(MerchandisePageHeaderLocator, LocateBy.XPath);
                         break;
                     case Page.Checkout:
-                        UIUtilityProvider.UIHelper.Click(CheckoutPageHeaderLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(CheckoutPageHeaderLocator, LocateBy.XPath);
                         break;
                     default:
                         break;
                 }
 
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-                UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-                UIUtilityProvider.UIHelper.Type("//textarea", pageHeader, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                UIUtilityProvider.UIHelper.Click("ctl00_btnSaveClose", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+                WebDriverUtility.DefaultProvider.Type("//textarea", pageHeader, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.Click("ctl00_btnSaveClose", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
                 Utility.ThreadSleep(2);
             }
 
@@ -401,38 +401,38 @@
                 switch (page)
                 {
                     case Page.Start:
-                        UIUtilityProvider.UIHelper.Click(StartPageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(StartPageFooterLocator, LocateBy.XPath);
                         break;
                     case Page.PI:
-                        UIUtilityProvider.UIHelper.Click(PersonalInfoPageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(PersonalInfoPageFooterLocator, LocateBy.XPath);
                         break;
                     case Page.Agenda:
-                        UIUtilityProvider.UIHelper.Click(AgendaPageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(AgendaPageFooterLocator, LocateBy.XPath);
                         break;
                     case Page.LodgingTravel:
-                        UIUtilityProvider.UIHelper.Click(LodgingTravelPageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(LodgingTravelPageFooterLocator, LocateBy.XPath);
                         break;
                     case Page.Merchandise:
-                        UIUtilityProvider.UIHelper.Click(MerchandisePageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(MerchandisePageFooterLocator, LocateBy.XPath);
                         break;
                     case Page.Checkout:
-                        UIUtilityProvider.UIHelper.Click(CheckoutPageFooterLocator, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.Click(CheckoutPageFooterLocator, LocateBy.XPath);
                         break;
                     default:
                         break;
                 }
 
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-                UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-                UIUtilityProvider.UIHelper.Type("//textarea", pageFooter, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
-                UIUtilityProvider.UIHelper.Click("ctl00_btnSaveClose", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+                WebDriverUtility.DefaultProvider.Type("//textarea", pageFooter, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.Click("ctl00_btnSaveClose", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
                 Utility.ThreadSleep(2);
             }
         }

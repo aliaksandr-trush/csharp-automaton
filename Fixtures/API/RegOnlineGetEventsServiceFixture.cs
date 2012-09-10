@@ -23,15 +23,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineGetEventsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.GetEventsService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventsService].Url);
-
             this.service = new getEventsSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -67,9 +64,9 @@
             this.PrepareEvent();
 
             string response = this.service.ByAccountIDWithFilters(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 string.Format(XmlFilterDataFormat, EventInternalCode), 
                 FilterOperator,
                 false);
@@ -82,17 +79,17 @@
         [Description("773")]
         public void ByAccountID_No_Exception_For_Valid_Params()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(
-                XmlConfiguration.AccountType.Alternative);
+            ConfigReader.DefaultProvider.ReloadAccount(
+                ConfigReader.AccountEnum.Alternative);
 
             this.PrepareEvent();
 
             // This service call returns a very large response (~4MB).  The app.config has been 
             // edited to account for this.
             string response = this.service.ByAccountID(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
 
             Assert.That(response.Contains(string.Format("<ID>{0}</ID>", this.eventId.ToString())));
         }
@@ -105,9 +102,9 @@
             this.PrepareEvent();
 
             string response = this.service.ByAccountIDEventID(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 this.eventId);
 
             Assert.That(response.Contains(string.Format("<ID>{0}</ID>", this.eventId.ToString())));
@@ -118,30 +115,30 @@
         [Description("772")]
         public void All_Methods_Return_EventFeeAmount()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(
-                XmlConfiguration.AccountType.Alternative);
+            ConfigReader.DefaultProvider.ReloadAccount(
+                ConfigReader.AccountEnum.Alternative);
 
             this.PrepareEvent();
 
             string response = this.service.ByAccountIDEventID(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 eventId);
 
             Assert.That(response.Contains(this.GetEventFeeAmountString()));
 
             response = this.service.ByAccountID(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
 
             Assert.That(response.Contains(this.GetEventFeeAmountString()));
 
             response = this.service.ByAccountIDWithFilters(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Id, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Id, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 string.Format(XmlFilterDataFormat, EventInternalCode), 
                 FilterOperator, 
                 false);

@@ -4,9 +4,10 @@
     using System.Xml;
     using System.Xml.Serialization;
 
-    public class XmlConfiguration
+    public class ConfigReader
     {
-        private readonly string XmlConfigFilePath = "RegressionTestConfig.xml";
+        private readonly string XmlConfigFilePath = "TestConfig.xml";
+        private static ConfigReader Default = new ConfigReader();
 
         public enum EnvironmentEnum
         {
@@ -15,7 +16,7 @@
             Production
         }
 
-        public enum AccountType
+        public enum AccountEnum
         {
             Default,
             Alternative,
@@ -80,7 +81,15 @@
             private set;
         }
 
-        public XmlConfiguration()
+        public static ConfigReader DefaultProvider
+        {
+            get
+            {
+                return ConfigReader.Default;
+            }
+        }
+
+        public ConfigReader()
         {
             this.ReloadAllConfiguration();
         }
@@ -90,7 +99,7 @@
         /// </summary>
         /// <param name="environment"></param>
         /// <param name="accountType"></param>
-        public void ReloadAllConfiguration(Environment environment, AccountType accountType)
+        public void ReloadAllConfiguration(Environment environment, AccountEnum accountType)
         {
             this.ReloadAllConfiguration(environment.ToString(), accountType.ToString());
         }
@@ -104,7 +113,7 @@
 
             // Cos preferred environment and private-label must be read from xml first, 
             // we cannot call this.ReloadAllConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel)
-            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel);
+            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.CurrentEnvironment, this.AllConfiguration.Environments.CurrentAccount);
             
             this.LoadWebServiceConfiguration();
             this.LoadBrowser();
@@ -133,7 +142,7 @@
         /// Switch to another private label under the current environment
         /// </summary>
         /// <param name="accountType"></param>
-        public void ReloadAccount(AccountType accountType)
+        public void ReloadAccount(AccountEnum accountType)
         {
             this.LoadAccountConfiguration(accountType.ToString());
         }

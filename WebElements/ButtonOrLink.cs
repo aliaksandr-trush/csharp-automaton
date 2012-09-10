@@ -9,7 +9,7 @@
 
         public void Click()
         {
-            UIUtilityProvider.UIHelper.Click(Locator, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
     }
 }

@@ -22,15 +22,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineGetEventRegistrationsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.GetEventRegistrationsService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventRegistrationsService].Url);
-
             this.service = new getEventRegistrationsSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.GetEventRegistrationsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -40,7 +37,7 @@
         [ExpectedException()]
         public void RetrieveRegistrationInfo_Throws_Exception_For_Invalid_Params()
         {
-            string response = this.service.RetrieveRegistrationInfo(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, ManagerBase.InvalidId);
+            string response = this.service.RetrieveRegistrationInfo(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, ManagerBase.InvalidId);
             Assert.Fail();
         }
 
@@ -51,7 +48,7 @@
         {
             this.PrepareEventAndRegistration();
 
-            string response = this.service.RetrieveRegistrationInfo(ConfigurationProvider.XmlConfig.AccountConfiguration.Login, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, this.eventId);
+            string response = this.service.RetrieveRegistrationInfo(ConfigReader.DefaultProvider.AccountConfiguration.Login, ConfigReader.DefaultProvider.AccountConfiguration.Password, this.eventId);
                 
             foreach (int registrationId in this.registrationIds)
             {

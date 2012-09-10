@@ -128,7 +128,7 @@
             BuilderMgr.AGMgr.SetName(StringEnum.GetStringValue(Agendas.AgendaAdminOnly));
             BuilderMgr.AGMgr.SetVisibilityOption(true, CFManagerBase.VisibilityOption.Admin);
             BuilderMgr.AGMgr.ClickSaveItem();
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
 
             BuilderMgr.Next();
 

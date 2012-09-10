@@ -25,7 +25,7 @@
         public void TestWithRegTypes()
         {
             // Use endurance event with reg types that collect Team Name
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -190,9 +190,9 @@
         private void ValidateTeamName(string tName)
         {
             // Verify the unique Team Name displays and cannot be edited
-            Assert.IsFalse(UIUtilityProvider.UIHelper.IsElementPresent("Team Name", LocateBy.Name));
-            Assert.IsTrue(UIUtilityProvider.UIHelper.IsTextPresent(tName));
-            bool isEditable = UIUtilityProvider.UIHelper.IsElementPresent("//td[text()='Team Name:']/../td/input", LocateBy.XPath);
+            Assert.IsFalse(WebDriverUtility.DefaultProvider.IsElementPresent("Team Name", LocateBy.Name));
+            Assert.IsTrue(WebDriverUtility.DefaultProvider.IsTextPresent(tName));
+            bool isEditable = WebDriverUtility.DefaultProvider.IsElementPresent("//td[text()='Team Name:']/../td/input", LocateBy.XPath);
 
             Assert.IsFalse(isEditable);
         }

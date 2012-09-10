@@ -129,7 +129,7 @@
             LoginAndGoToRegressionFolder();
             BackendMgr.OpenAttendeeInfoURL(eventSessionId, regId);
             BackendMgr.OpenPaymentMethod();
-            Assert.True(UIUtilityProvider.UIHelper.IsElementPresent("//select[@id='creditCardType'][@disabled]", LocateBy.XPath));
+            Assert.True(WebDriverUtility.DefaultProvider.IsElementPresent("//select[@id='creditCardType'][@disabled]", LocateBy.XPath));
 
             ////this.PerformBackendCharge();
 
@@ -244,8 +244,8 @@
         [Description("752")]
         public void EnduranceEvent_SingleReg_USD()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(
-                XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(
+                ConfigReader.AccountEnum.ActiveEurope);
 
             this.LoginAndGoToRegressionFolder();
             this.eventId = ManagerSiteMgr.GetFirstEventId(EnduranceEvent_USD.EventName);
@@ -276,8 +276,8 @@
         [Description("761")]
         public void EnduranceEvent_SingleReg_Pound()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(
-                XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(
+                ConfigReader.AccountEnum.ActiveEurope);
 
             this.LoginAndGoToRegressionFolder();
             this.eventId = ManagerSiteMgr.GetFirstEventId(EnduranceEvent_Pound.EventName);
@@ -310,7 +310,7 @@
             Billing();
             FinalizeBilling();
 
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
             LoginAndGoToRegressionFolder();
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.ActiveEventName);
             VerifyBilling(EventType.Endurance_USD);
@@ -319,7 +319,7 @@
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.DifferentCurrencies);
             VerifyBilling(EventType.Endurance_Pound);
             VerifyFinalizeBilling(EventType.Endurance_Pound);
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.Default);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.Default);
             LoginAndGoToRegressionFolder();
             eventId = ManagerSiteMgr.GetFirstEventId(TxnIntegrityConstants.EventName);
             VerifyBilling(EventType.ProEvent);
@@ -971,8 +971,8 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         // verifies pertinant data in transaction fees report
@@ -982,8 +982,8 @@
             ManagerSiteMgr.DashboardMgr.OpenCommonReport(ReportManager.CommonReportType.TransactionFees);
             ReportMgr.ExpandTransactionFeesReportRow(regId);
             ReportMgr.VerifyExpandedTransactionFeeRowData(regId, expectedData);
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         // Verifies all pertinant data and rows in the transactions report
@@ -1003,8 +1003,8 @@
             }
 
             ReportMgr.VerifyTransactionsReportData(regId, expectedData);
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         // Method to charge somone on the attendee info page
@@ -1029,7 +1029,7 @@
         [Verify]
         public void VerifyTransactionDataInDB(string[] TransactionAmount, string[] BillableAmount, string[] addAndModBy, string SharedFeePct, EventType type)
         {
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var transactions = (from t in db.Transactions where t.RegisterId == regId && t.TypeId == 2 select t).ToList();
 
             for (int i = 0; i < transactions.Count; i++)
@@ -1127,7 +1127,7 @@
         [Step]
         private void Billing()
         {
-            SqlConnection sqlConnection1 = new SqlConnection(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            SqlConnection sqlConnection1 = new SqlConnection(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             SqlCommand spcmd = new SqlCommand();
             Int32 rowsAffeted;
 
@@ -1148,7 +1148,7 @@
         private void FinalizeBilling()
         {
             ClearPreviousInvoiceData();
-            SqlConnection sqlConnection1 = new SqlConnection(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
+            SqlConnection sqlConnection1 = new SqlConnection(ConfigReader.DefaultProvider.EnvironmentConfiguration.ROMasterConnection);
             SqlCommand spcmd = new SqlCommand();
             Int32 rowsAffeted;
 
@@ -1170,7 +1170,7 @@
         [Verify]
         private void VerifyBilling(EventType type)
         {
-            var db = new DataAccess.ROWarehouseDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROWarehouseConnection);
+            var db = new DataAccess.ROWarehouseDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ROWarehouseConnection);
             var billing = (from i in db.InvoiceItems_AdHocs where i.StartDate == DateTime.Today && i.EventId == eventId select i).ToList();
             if (billing.Count == 0)
             {
@@ -1247,7 +1247,7 @@
         [Verify]
         public void VerifyFinalizeBilling(EventType type)
         {
-            var db = new DataAccess.ROMasterDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
+            var db = new DataAccess.ROMasterDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ROMasterConnection);
             var finalBilling = (from i in db.CustomerInvoiceItems where i.EventId == eventId select i).ToList();
             if (finalBilling.Count == 0)
             {
@@ -1336,7 +1336,7 @@
 
         public void ClearPreviousInvoiceData()
         {
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ROMasterConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ROMasterConnection);
             int rowsAffected;
             string Command = string.Format(
                 "DELETE FROM ct FROM dbo.CustomerTransactions ct INNER JOIN dbo.CustomerInvoices ci ON ci.EndDate = ct.TransDate AND ci.EndDate BETWEEN '{0}' AND '{1}'",

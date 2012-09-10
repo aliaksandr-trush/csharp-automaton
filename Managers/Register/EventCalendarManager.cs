@@ -22,23 +22,23 @@
             switch (viewBy)
             {
                 case ViewBy.Calendar:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("viewList_0", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("viewList_0", LocateBy.Id);
                     break;
 
                 case ViewBy.Location:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("viewList_1", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("viewList_1", LocateBy.Id);
                     break;
 
                 case ViewBy.Month:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("viewList_2", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("viewList_2", LocateBy.Id);
                     break;
 
                 case ViewBy.Day:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("viewList_3", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("viewList_3", LocateBy.Id);
                     break;
 
                 case ViewBy.Category:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("viewList_4", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("viewList_4", LocateBy.Id);
                     break;
 
                 default:
@@ -50,15 +50,15 @@
         public void AddToCart(int agendaItemId)
         {
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//table[@id='dgCategory']//img[contains(@id, {0})]", agendaItemId), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//table[@id='dgCategory']//img[contains(@id, {0})]", agendaItemId), LocateBy.XPath);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void OpenRegister()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnRegister2", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnRegister2", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             AllowCookies();
         }
     }

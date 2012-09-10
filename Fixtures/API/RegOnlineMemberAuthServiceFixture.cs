@@ -27,15 +27,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineMemberAuthServiceFixture()
+            : base(ConfigReader.WebServiceEnum.MemberAuthService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.MemberAuthService].Url);
-
             this.service = new memberAuthorizationSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebServiceEnum.MemberAuthService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -48,11 +45,11 @@
             this.CreateRegistration();
 
             this.xmlDoc = this.service.authorizeMember(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventId, 
                 this.membershipNumber.ToString(), 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
 
             this.Verify();
         }
@@ -66,11 +63,11 @@
             this.CreateRegistration();
 
             this.xmlDoc = this.service.authorizeMemberWithEmailAddress(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventId,
                 this.emailAddress, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                ConfigReader.DefaultProvider.AccountConfiguration.Password);
 
             this.Verify();
         }
@@ -113,10 +110,10 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]

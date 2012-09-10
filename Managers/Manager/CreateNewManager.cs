@@ -18,7 +18,7 @@
         /// <returns></returns>
         public int GetCurrentAccountId()
         {
-            string accountHeader = UIUtilityProvider.UIHelper.GetText(HeaderAccountLocator, LocateBy.XPath);
+            string accountHeader = WebDriverUtility.DefaultProvider.GetText(HeaderAccountLocator, LocateBy.XPath);
             int start = accountHeader.IndexOf("Account:") + 9;
             int end = accountHeader.IndexOf(")");
             accountHeader = accountHeader.Substring(start, end - start);
@@ -34,8 +34,8 @@
 
         public void AddProEvent()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddProEventLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddProEventLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

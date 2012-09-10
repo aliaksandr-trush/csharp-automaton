@@ -184,11 +184,11 @@
         public int GetRegID()
         {
             int regId = InvalidId;
-            bool result = int.TryParse(UIUtilityProvider.UIHelper.GetValue("//input[@name='RegisterId']", LocateBy.XPath), out regId);
+            bool result = int.TryParse(WebDriverUtility.DefaultProvider.GetValue("//input[@name='RegisterId']", LocateBy.XPath), out regId);
 
             if (!result)
             {
-                UIUtilityProvider.UIHelper.FailTest("Invalid reg ID!");
+                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -196,13 +196,13 @@
 
         public string GetSessionId()
         {
-            return UIUtilityProvider.UIHelper.GetQueryStringValue("SessionId");
+            return WebDriverUtility.DefaultProvider.GetQueryStringValue("SessionId");
         }
 
         public int GetEventId()
         {
             return Convert.ToInt32(
-                UIUtilityProvider.UIHelper.GetQueryStringValue("EventId"));
+                WebDriverUtility.DefaultProvider.GetQueryStringValue("EventId"));
         }
 
         /// <summary>
@@ -212,7 +212,7 @@
         /// <returns></returns>
         public bool OnPage(string pagePath)
         {
-            return UIUtilityProvider.UIHelper.UrlContainsAbsolutePath(pagePath);
+            return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(pagePath);
         }
 
         [Step]
@@ -228,7 +228,7 @@
 
             if (regId == 0)
             {
-                UIUtilityProvider.UIHelper.FailTest("Invalid reg ID!");
+                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -236,11 +236,11 @@
 
         public int GetCurrentRegIDFromQueryString()
         {
-            int regId = Convert.ToInt32(UIUtilityProvider.UIHelper.GetQueryStringValue("RegisterId"));
+            int regId = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetQueryStringValue("RegisterId"));
 
             if (regId == InvalidId)
             {
-                UIUtilityProvider.UIHelper.FailTest("Invalid reg ID!");
+                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -248,8 +248,8 @@
 
         public void SelectPreFillDropDown(string name)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(PreFillDropDown, name, LocateBy.CssSelector);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWithText(PreFillDropDown, name, LocateBy.CssSelector);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
 
@@ -261,9 +261,9 @@
             bool onCardinal = false;
 
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("regonline.com/register/cc/enrollment.aspx?"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("regonline.com/register/cc/enrollment.aspx?"))
             {
                 onCardinal = true;
             }
@@ -274,14 +274,14 @@
         [Step]
         public void SubmitCardinalPassword(string cardinalPassword)
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectUpperFrame();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.Type("external.field.password", cardinalPassword, LocateBy.Name);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("UsernamePasswordEntry", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectUpperFrame();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.Type("external.field.password", cardinalPassword, LocateBy.Name);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("UsernamePasswordEntry", LocateBy.Name);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

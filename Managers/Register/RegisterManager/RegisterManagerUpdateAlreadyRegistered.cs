@@ -19,8 +19,8 @@
                 personalInformationLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(personalInformationLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(personalInformationLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickEditAgendaLink(int index)
@@ -31,8 +31,8 @@
                 agendaLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(agendaLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(agendaLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickEditLodgingAndTravelLink(int index)
@@ -43,8 +43,8 @@
                 agendaLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(agendaLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(agendaLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickSubstituteLink(int index)
@@ -56,8 +56,8 @@
                 substituteLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(substituteLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(substituteLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void VerifyHasSubstituteLink(int index, bool isHas)
@@ -74,7 +74,7 @@
                 substituteLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            return UIUtilityProvider.UIHelper.IsElementDisplay(substituteLinkLocator, LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.IsElementDisplay(substituteLinkLocator, LocateBy.Id);
         }
 
         public void ClickCancelLink(int index,bool isCancel)
@@ -87,30 +87,30 @@
                 cancelLinkLocatorFormat,
                 ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString());
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(cancelLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(cancelLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             if (isCancel)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='OK']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='OK']", LocateBy.XPath);
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='Cancel']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='Cancel']", LocateBy.XPath);
             }
         }
 
         public void ClickFinalizeButton()
         {
             string finalizeButtonLocator = "//button[text()='Continue']";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(finalizeButtonLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(finalizeButtonLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public string GetRegTypeText(int index)
         {
             string regTypeTextLocator = string.Format("//div[@id='pageContent']/table/tbody/tr[{0}]/td[2]", index.ToString());
-            return UIUtilityProvider.UIHelper.GetText(regTypeTextLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(regTypeTextLocator, LocateBy.XPath);
         }
         #endregion
     }

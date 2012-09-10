@@ -16,7 +16,7 @@
         public void OpenRegisterPage(int eventId)
         {
             this.CurrentEventId = eventId;
-            UIUtilityProvider.UIHelper.OpenUrl(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + eventId);
+            WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + eventId);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -24,7 +24,7 @@
         public void OpenRegTypeDirectUrl(int eventId, int regTypeId)
         {
             this.CurrentEventId = eventId;
-            UIUtilityProvider.UIHelper.OpenUrl(string.Format(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
+            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -32,7 +32,7 @@
         public void OpenOnSiteRegisterPage(int eventId)
         {
             this.CurrentEventId = eventId;
-            UIUtilityProvider.UIHelper.OpenUrl(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + "register/checkin.aspx?MethodId=2&eventsessionId=&eventID=" + eventId);
+            WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "register/checkin.aspx?MethodId=2&eventsessionId=&eventID=" + eventId);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -54,7 +54,7 @@
         public void OpenRegisterPage(int eventId, string url)
         {
             this.CurrentEventId = eventId;
-            UIUtilityProvider.UIHelper.OpenUrl(url);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -68,13 +68,13 @@
         public void OpenAdminRegisterPage(int eventID, string eventSessionId)
         {
             string adminRegTargetUrl = 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl +
+                ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
                 "register/checkin.aspx?MethodId=1&eventsessionId={0}&eventID={1}&UseNewSecurity=true";
 
             string adminRegUrl = string.Format(adminRegTargetUrl, eventSessionId, eventID);
 
             this.CurrentEventId = eventID;
-            UIUtilityProvider.UIHelper.OpenUrl(adminRegUrl);
+            WebDriverUtility.DefaultProvider.OpenUrl(adminRegUrl);
             AllowCookies();
         }
 
@@ -87,7 +87,7 @@
         {
             ROMasterDataContext db = new ROMasterDataContext();
             Shortcut shortcut = (from s in db.Shortcuts where s.EventId == eventID select s).Single();
-            return ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + shortcut.Description;
+            return ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + shortcut.Description;
         }
     }
 }

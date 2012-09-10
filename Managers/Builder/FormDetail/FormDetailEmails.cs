@@ -25,7 +25,7 @@
 
         public void SelectEmailEditFrame()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Locator.EmailRADWindowId);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Locator.EmailRADWindowId);
         }
 
         public void OpenEditConfirmationEmail(RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory category)
@@ -33,26 +33,26 @@
             switch (category)
             {
                 case RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory.Complete:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.CompleteConfirmationToRegistrant, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.CompleteConfirmationToRegistrant, LocateBy.XPath);
                     break;
                 case RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory.Incomplete:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.IncompleteNotificationToCustomer, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.IncompleteNotificationToCustomer, LocateBy.XPath);
                     break;
                 case RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory.Update:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.UpdateConfirmationToRegistrant, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.UpdateConfirmationToRegistrant, LocateBy.XPath);
                     break;
                 case RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory.Substitute:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.SubstituteConfirmationToRegistrant, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.SubstituteConfirmationToRegistrant, LocateBy.XPath);
                     break;
                 case RegOnline.RegressionTest.Managers.Emails.EmailManager.EmailCategory.Cancel:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.CancelConfirmationToRegistrant, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.CancelConfirmationToRegistrant, LocateBy.XPath);
                     break;
                 default:
                     break;
             }
 
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Locator.EmailRADWindowId);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Locator.EmailRADWindowId);
         }
 
         public void SaveAndStayEditEmail()
@@ -68,7 +68,7 @@
 
         public void CancelEditEmail()
         {
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             SelectBuilderWindow();
         }
 
@@ -77,16 +77,16 @@
             switch (mode)
             {
                 case Mode.Edit:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radEdit", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radEdit", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case Mode.Html:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radHtml", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radHtml", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case Mode.Preview:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radPreview", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucEmail_ucContent_radPreview", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     throw new ArgumentException(string.Format("No such mode: {0}", mode.ToString()));
@@ -95,14 +95,14 @@
 
         public void TypeContentInHTML(string content)
         {
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", content, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", content, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
         public void SetWhetherToSendIncompleteNotificationEmail(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_chkIncomplete", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkIncomplete", check, LocateBy.Id);
         }
     }
 }

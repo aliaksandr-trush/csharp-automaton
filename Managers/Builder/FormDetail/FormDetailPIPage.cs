@@ -552,39 +552,39 @@
             switch(field)
             {
                 case PersonalInfoField.OptOut:
-                    UIUtilityProvider.UIHelper.SetCheckbox(string.Format(PIPageOptOutVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(PIPageOptOutVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
                     break;
 
                 case PersonalInfoField.SocialSecurityNumber:
                     if (checkVisibleOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(PIPageSSNVisibleLocator, checkVisibleOption.Value, LocateBy.Id);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(PIPageSSNVisibleLocator, checkVisibleOption.Value, LocateBy.Id);
                     }
                     if (checkRequiredOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(PIPageSSNRequiredLocator, checkRequiredOption.Value, LocateBy.Id);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(PIPageSSNRequiredLocator, checkRequiredOption.Value, LocateBy.Id);
                     }
                     break;
 
                 case PersonalInfoField.ContactInfo:
                     if (checkVisibleOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(string.Format(PIPageContactInfoVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(PIPageContactInfoVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
                     }
                     if (checkRequiredOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(string.Format(PIPageContactInfoRequiredLocator, StringEnum.GetStringValue(field)), checkRequiredOption.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(PIPageContactInfoRequiredLocator, StringEnum.GetStringValue(field)), checkRequiredOption.Value, LocateBy.XPath);
                     }
                     break;
 
                 default:
                     if (checkVisibleOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(string.Format(PIPageStandardFieldVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(PIPageStandardFieldVisibleLocator, StringEnum.GetStringValue(field)), checkVisibleOption.Value, LocateBy.XPath);
                     }
                     if (checkRequiredOption.HasValue)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(string.Format(PIPageStandardFieldRequiredLocator, StringEnum.GetStringValue(field)), checkRequiredOption.Value, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(PIPageStandardFieldRequiredLocator, StringEnum.GetStringValue(field)), checkRequiredOption.Value, LocateBy.XPath);
                     }
                     break;
             }
@@ -698,12 +698,12 @@
                 // Verify visible option when option parameter is set to 'Visible' or 'All'
                 VerifyTool.VerifyValue(
                     disabledAttributeTrueString,
-                    UIUtilityProvider.UIHelper.GetAttribute(PersonalInfoFieldLocator.EmailVisibleOptionLocator, disabledAttributeString, LocateBy.Id),
+                    WebDriverUtility.DefaultProvider.GetAttribute(PersonalInfoFieldLocator.EmailVisibleOptionLocator, disabledAttributeString, LocateBy.Id),
                     "'Email' field visible option disabled: {0}");
 
                 VerifyTool.VerifyValue(
                     checkVisibleOption.Value,
-                    UIUtilityProvider.UIHelper.IsChecked(PersonalInfoFieldLocator.EmailVisibleOptionLocator, LocateBy.Id), 
+                    WebDriverUtility.DefaultProvider.IsChecked(PersonalInfoFieldLocator.EmailVisibleOptionLocator, LocateBy.Id), 
                     "'Email' field visible option checked: {0}");
             }
 
@@ -712,12 +712,12 @@
                 // Verify required option when option parameter is set to 'Required' or 'All'
                 VerifyTool.VerifyValue(
                     disabledAttributeTrueString,
-                    UIUtilityProvider.UIHelper.GetAttribute(PersonalInfoFieldLocator.EmailRequiredOptionLocator, disabledAttributeString, LocateBy.Id),
+                    WebDriverUtility.DefaultProvider.GetAttribute(PersonalInfoFieldLocator.EmailRequiredOptionLocator, disabledAttributeString, LocateBy.Id),
                     "'Email' field required option disabled: {0}");
 
                 VerifyTool.VerifyValue(
                     checkRequiredOption.Value,
-                    UIUtilityProvider.UIHelper.IsChecked(PersonalInfoFieldLocator.EmailRequiredOptionLocator, LocateBy.Id),
+                    WebDriverUtility.DefaultProvider.IsChecked(PersonalInfoFieldLocator.EmailRequiredOptionLocator, LocateBy.Id),
                     "'Email' field required option checked: {0}");
             }
         }
@@ -733,7 +733,7 @@
             {
                 VerifyTool.VerifyValue(
                     checkVisibleOption.Value,
-                    UIUtilityProvider.UIHelper.IsChecked(this.personalInfoFieldVisibleOptionLocator[field], LocateBy.Id),
+                    WebDriverUtility.DefaultProvider.IsChecked(this.personalInfoFieldVisibleOptionLocator[field], LocateBy.Id),
                     "'" + fieldName + "' field visible option checked: {0}");
             }
 
@@ -741,7 +741,7 @@
             {
                 VerifyTool.VerifyValue(
                     checkRequiredOption.Value,
-                    UIUtilityProvider.UIHelper.IsChecked(this.personalInfoFieldRequiredOptionLocator[field], LocateBy.Id),
+                    WebDriverUtility.DefaultProvider.IsChecked(this.personalInfoFieldRequiredOptionLocator[field], LocateBy.Id),
                     "'" + fieldName + "' field required option checked: {0}");
             }
         }
@@ -819,7 +819,7 @@
         public int GetCustomFieldID(string name)
         {
             return Convert.ToInt32(
-                UIUtilityProvider.UIHelper.ExtractElementInQueryString(UIUtilityProvider.UIHelper.GetAttribute(string.Format("//a[text()='{0}']", name), "href", LocateBy.XPath), "cfId"));
+                WebDriverUtility.DefaultProvider.ExtractElementInQueryString(WebDriverUtility.DefaultProvider.GetAttribute(string.Format("//a[text()='{0}']", name), "href", LocateBy.XPath), "cfId"));
         }
     }
 }

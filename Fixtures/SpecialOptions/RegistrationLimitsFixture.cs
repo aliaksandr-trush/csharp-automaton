@@ -355,9 +355,9 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventID, this.sessionID);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
         }
 
@@ -577,7 +577,7 @@
 
             RegisterMgr.CheckinWithEmail(this.primaryEmail);
             RegisterMgr.Continue();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
 
             string regType = string.Empty;
@@ -985,7 +985,7 @@
             }
             else
             {
-                RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+                RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
                 RegisterMgr.Continue();
 
                 RegisterMgr.VerifyHasAddAnotherPersonButton(false);

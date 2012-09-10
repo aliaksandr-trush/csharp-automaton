@@ -18,7 +18,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -29,9 +29,9 @@
         public void SaveAndNew()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndNew();
+            WebDriverUtility.DefaultProvider.ClickSaveAndNew();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public abstract void SaveAndClose();
@@ -46,27 +46,27 @@
 
         public void SetNameOnForm(string name)
         {
-            UIUtilityProvider.UIHelper.Type(NameOnFormTxtboxLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(NameOnFormTxtboxLocator, name, LocateBy.Id);
         }
 
         public void SetNameOnReport(string name)
         {
-            UIUtilityProvider.UIHelper.Type(NameOnReportTxtboxLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(NameOnReportTxtboxLocator, name, LocateBy.Id);
         }
 
         public void SetLimit(int? limit)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(LimitTxtboxLocator, limit);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(LimitTxtboxLocator, limit);
         }
 
         public void SetLimitPerGroup(int? limit)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(PerGroupLimitTxtboxLocator, limit);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(PerGroupLimitTxtboxLocator, limit);
         }
 
         public void SetVisibility(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(VisibilityCheckboxLocator, check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(VisibilityCheckboxLocator, check, LocateBy.Id);
         }
     }
 }

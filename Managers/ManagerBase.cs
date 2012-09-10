@@ -128,41 +128,41 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectWindowByName(BuilderWindowId);
+                WebDriverUtility.DefaultProvider.SelectWindowByName(BuilderWindowId);
             }
             catch
             {
-                UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             }
         }
 
         public void SelectManagerWindow()
         {
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
 
         protected void SelectPreviewFrame()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameById(PreviewFrameLocator);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameById(PreviewFrameLocator);
         }
 
         [Step]
         public void SelectReportPopupWindow()
         {
             Utility.ThreadSleep(1.5);
-            UIUtilityProvider.UIHelper.SelectWindowByIndex(1);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByIndex(1);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public string GetEventSessionId()
         {
-            return UIUtilityProvider.UIHelper.GetQueryStringValue("EventSessionId");
+            return WebDriverUtility.DefaultProvider.GetQueryStringValue("EventSessionId");
         }
 
         public string GetWindowID(string idString)
         {
-            List<string> windowHandles = UIUtilityProvider.UIHelper.GetAllWindows();
+            List<string> windowHandles = WebDriverUtility.DefaultProvider.GetAllWindows();
 
             foreach (string s in windowHandles)
             {
@@ -201,20 +201,20 @@
         [Verify]
         public void VerifyCustomFieldPresent(string name, bool present)
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]", name), present, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]", name), present, LocateBy.XPath);
         }
 
         public void VerifyCustomFieldRequired(string name, bool required)
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]//img[@alt='Required']", name), required, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]//img[@alt='Required']", name), required, LocateBy.XPath);
         }
 
         public void AllowCookies()
         {
-            if (UIUtilityProvider.UIHelper.IsElementPresent(AllowCookiesLocator, LocateBy.XPath))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(AllowCookiesLocator, LocateBy.XPath))
             {
                 Utility.ThreadSleep(1);
-                UIUtilityProvider.UIHelper.Click(AllowCookiesLocator, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.Click(AllowCookiesLocator, LocateBy.XPath);
             }
         }
 
@@ -301,7 +301,7 @@
         /// <returns></returns>
         protected string GetFieldLabel(string locator)
         {
-            return UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath);
         }
         #endregion
 
@@ -421,7 +421,7 @@
         public virtual void VerifyFieldPresent<TEnum>(TEnum fieldEnum, bool? isPresent)
         {
             string locator = GetLocator(fieldEnum, LocatorType.Edit);
-            VerifyTool.VerifyValue(isPresent, UIUtilityProvider.UIHelper.IsElementPresent(locator, LocateBy.Id), fieldEnum.ToString() + " visible is {0}");
+            VerifyTool.VerifyValue(isPresent, WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.Id), fieldEnum.ToString() + " visible is {0}");
         }
         #endregion
 
@@ -455,7 +455,7 @@
             string locator = GetLocator(fieldEnum, LocatorType.Edit);
             string assertText = string.Concat(fieldEnum.ToString(), " enabled is {0}");
             string expected = string.Format(assertText, isEnabled.ToString());
-            string found = string.Format(assertText, UIUtilityProvider.UIHelper.IsEditable(locator, LocateBy.XPath).ToString());
+            string found = string.Format(assertText, WebDriverUtility.DefaultProvider.IsEditable(locator, LocateBy.XPath).ToString());
             if (isEnabled != null)
             {
                 Assert.AreEqual(expected, found);
@@ -531,11 +531,11 @@
                 case InputType.Checkbox:
                     if (setValue != null)
                     {
-                        UIUtilityProvider.UIHelper.SetCheckbox(locator, Boolean.Parse(setValue.ToString()), LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.SetCheckbox(locator, Boolean.Parse(setValue.ToString()), LocateBy.XPath);
                     }
                     break;
                 case InputType.Textarea:
-                    UIUtilityProvider.UIHelper.Type(locator, setValue.ToString(), LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.Type(locator, setValue.ToString(), LocateBy.XPath);
                     Utility.ThreadSleep(0.5);
                     break;
                 default:
@@ -561,7 +561,7 @@
         /// <param name="locator"></param>
         protected void ClickField(string locator)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
             Utility.ThreadSleep(0.5);
         }
         #endregion
@@ -712,7 +712,7 @@
         protected void SetTextValue(string locator, string value)
         {
             VerifyIsTextField(locator);
-            UIUtilityProvider.UIHelper.Type(locator, value, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(locator, value, LocateBy.XPath);
             //System.Threading.Thread.Sleep(500);
         }
 
@@ -724,7 +724,7 @@
         protected string GetTextValue(string locator)
         {
             VerifyIsTextField(locator);
-            return UIUtilityProvider.UIHelper.GetValue(locator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetValue(locator, LocateBy.XPath);
         }
 
         /// <summary>
@@ -747,7 +747,7 @@
         {
             string assertTrue = string.Format("Type of text, password, or file: {0}", locator);
             string assertFalse = string.Format("Type not of text, password, or file: {0}", locator);
-            string typeAttibute = UIUtilityProvider.UIHelper.GetAttribute(locator, "type", LocateBy.XPath).ToLower();
+            string typeAttibute = WebDriverUtility.DefaultProvider.GetAttribute(locator, "type", LocateBy.XPath).ToLower();
 
             if (typeAttibute == "text" ||
                 typeAttibute == "password" ||
@@ -772,7 +772,7 @@
         protected void SetDropdownValue(string locator, string value)
         {
             VerifyIsDropdownField(locator);
-            UIUtilityProvider.UIHelper.SelectWithText(locator, /*"label="+*/ value, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectWithText(locator, /*"label="+*/ value, LocateBy.XPath);
             Utility.ThreadSleep(0.5);
         }
 
@@ -784,7 +784,7 @@
         protected string GetDropdownValue(string locator)
         {
             VerifyIsDropdownField(locator);
-            return UIUtilityProvider.UIHelper.GetSelectedLabel(locator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetSelectedLabel(locator, LocateBy.XPath);
         }
 
         /// <summary>
@@ -806,7 +806,7 @@
         {
             string assertTrue = string.Format("Type of dropdown: {0}", locator);
             string assertFalse = string.Format("Type not of dropdown: {0}", locator);
-            if (UIUtilityProvider.UIHelper.IsElementPresent(locator + "/option", LocateBy.XPath))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(locator + "/option", LocateBy.XPath))
             {
                 Assert.AreEqual(assertTrue, assertTrue);
             }
@@ -827,7 +827,7 @@
         protected bool IsFieldChecked(string locator)
         {
             VerifyIsCheckboxField(locator);
-            return UIUtilityProvider.UIHelper.IsChecked(locator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsChecked(locator, LocateBy.XPath);
         }
 
         /// <summary>
@@ -838,7 +838,7 @@
         protected void VerifyCheckbox(string locator, bool toChecked)
         {
             VerifyIsCheckboxField(locator);
-            Assert.AreEqual(toChecked, UIUtilityProvider.UIHelper.IsChecked(locator, LocateBy.XPath));
+            Assert.AreEqual(toChecked, WebDriverUtility.DefaultProvider.IsChecked(locator, LocateBy.XPath));
         }
 
         /// <summary>
@@ -849,8 +849,8 @@
         {
             string assertTrue = string.Format("Type of checkbox, or radio: {0}", locator);
             string assertFalse = string.Format("Type not of checkbox, or radio: {0}", locator);
-            if ((UIUtilityProvider.UIHelper.IsElementPresent(locator + "[@type='checkbox']", LocateBy.XPath) ||
-                (UIUtilityProvider.UIHelper.IsElementPresent(locator + "[@type='radio']", LocateBy.XPath))))
+            if ((WebDriverUtility.DefaultProvider.IsElementPresent(locator + "[@type='checkbox']", LocateBy.XPath) ||
+                (WebDriverUtility.DefaultProvider.IsElementPresent(locator + "[@type='radio']", LocateBy.XPath))))
             {
                 Assert.AreEqual(assertTrue, assertTrue);
             }
@@ -866,7 +866,7 @@
 
         protected string GetReadValue(string locator)
         {
-            return UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath);
         }
 
         protected void VerifyReadValue(string locator, string value)

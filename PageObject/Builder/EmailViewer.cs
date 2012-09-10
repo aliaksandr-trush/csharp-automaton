@@ -16,11 +16,11 @@
             string encryptAttendeeId = DataAccess.AccessData.GetEncryptString(attendeeId);
             string encryptEmailId = DataAccess.AccessData.GetEncryptString(emailId);
 
-            string url = ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl +
+            string url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
                 string.Format(ConfirmationEmailURLConstructor, eventId, encryptAttendeeId, encryptEmailId);
 
-            UIUtilityProvider.UIHelper.OpenUrl(url);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
         }
     }
 }

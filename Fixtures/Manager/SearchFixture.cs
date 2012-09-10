@@ -108,8 +108,8 @@
             RegisterMgr.SelectPersonalInfoState(RegisterManager.DefaultPersonalInfo.State);
             RegisterMgr.TypePersonalInfoZipCode(RegisterManager.DefaultPersonalInfo.ZipCode);
             RegisterMgr.TypePersonalInfoWorkPhone(RegisterManager.DefaultPersonalInfo.WorkPhone);
-            RegisterMgr.TypePersonalInfoPassword(Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
-            RegisterMgr.TypePersonalInfoVerifyPassword(Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoPassword(Configuration.ConfigReader.DefaultProvider.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoVerifyPassword(Configuration.ConfigReader.DefaultProvider.AccountConfiguration.Password);
         }
 
         private void SetStartPage(string eventName)

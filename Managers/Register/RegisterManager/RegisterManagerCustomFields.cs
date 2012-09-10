@@ -35,8 +35,8 @@
 
             foreach (Custom_Field customField in customFieldsList)
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
-                    || UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
+                    || WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
                 {
                     this.DoSeleniumActionForCustomField(customField);
                 }
@@ -54,8 +54,8 @@
 
             foreach (Custom_Field customField in travelCustomFields)
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
-                    || UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
+                    || WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
                 {
                     this.DoSeleniumActionForCustomField(customField);
                 }
@@ -73,8 +73,8 @@
 
             foreach (Custom_Field customField in lodgingCustomFields)
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
-                    || UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
+                    || WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
                 {
                     this.DoSeleniumActionForCustomField(customField);
                 }
@@ -92,8 +92,8 @@
 
             foreach (Custom_Field customField in preferencesCustomFields)
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
-                    || UIUtilityProvider.UIHelper.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Id)
+                    || WebDriverUtility.DefaultProvider.IsElementPresent(customField.Id.ToString(), LocateBy.Name))
                 {
                     this.DoSeleniumActionForCustomField(customField);
                 }
@@ -122,13 +122,13 @@
 
         public List<string> GetCustomFieldNames()
         {
-            int count = UIUtilityProvider.UIHelper.GetXPathCountByXPath(CustomFieldsListItemLocator);
+            int count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(CustomFieldsListItemLocator);
 
             List<string> names = new List<string>();
 
             for (int i = 0; i < count; i++)
             {
-                names.Add(UIUtilityProvider.UIHelper.GetText(string.Format(CustomFieldsListItemLocator + "[{0}]", i + 1), LocateBy.XPath));
+                names.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldsListItemLocator + "[{0}]", i + 1), LocateBy.XPath));
             }
 
             return names;
@@ -138,7 +138,7 @@
         public void SetCustomFieldCheckBox(string customFieldName, bool isChecked)
         {
             string xPath = string.Format(FindCheckBox, customFieldName);
-            UIUtilityProvider.UIHelper.SetCheckbox(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), isChecked, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), isChecked, LocateBy.Id);
             this.WaitForConditionalLogic();
         }
 
@@ -148,25 +148,25 @@
 
             VerifyTool.VerifyValue(
                 isChecked,
-                UIUtilityProvider.UIHelper.IsChecked(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id), 
+                WebDriverUtility.DefaultProvider.IsChecked(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id), 
                 "Checkbox " + customFieldName + " is checked: {0}");
 
             VerifyTool.VerifyValue(
                 editable,
-                UIUtilityProvider.UIHelper.IsEditable(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
+                WebDriverUtility.DefaultProvider.IsEditable(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
                 "Checkbox " + customFieldName + "is editable: {0}");
         }
 
         public void SelectCustomFieldDropDown(string customFieldName, string choice)
         {
             string xPath = string.Format(FindDropDown, customFieldName);
-            UIUtilityProvider.UIHelper.SelectWithText(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), choice, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), choice, LocateBy.Id);
             this.WaitForConditionalLogic();
         }
         
         public void SelectCustomFieldDropDown(int id, string choice)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(UIUtilityProvider.UIHelper.GetAttribute(id.ToString(), "for", LocateBy.Id), choice, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute(id.ToString(), "for", LocateBy.Id), choice, LocateBy.Id);
             this.WaitForConditionalLogic();
         }
 
@@ -178,27 +178,27 @@
             {
                 VerifyTool.VerifyValue(
                     choice,
-                    UIUtilityProvider.UIHelper.GetSelectedOptionFromDropdownByXPath("//*[@id='" + UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath) + "']"),
+                    WebDriverUtility.DefaultProvider.GetSelectedOptionFromDropdownByXPath("//*[@id='" + WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath) + "']"),
                     "Dropdown " + customFieldName + " selection: {0}");
             }
             else
             {
                 Utilities.VerifyTool.VerifyValue(
                     false,
-                    UIUtilityProvider.UIHelper.IsAnySelectionMadeOnDropDownByXPath("//*[@id='" + UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath) + "']"),
+                    WebDriverUtility.DefaultProvider.IsAnySelectionMadeOnDropDownByXPath("//*[@id='" + WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath) + "']"),
                     "Dropdown " + customFieldName + " has a selection");
             }
 
             VerifyTool.VerifyValue(
                 editable,
-               UIUtilityProvider.UIHelper.IsEditable(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
+               WebDriverUtility.DefaultProvider.IsEditable(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
                "Dropdown " + customFieldName + " is editable: {0}");
         }
 
         public void SelectCustomFieldRadioButtons(string customFieldName, string choice)
         {
             string xPath = string.Format(FindRadioButtons, customFieldName, choice);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id);
             this.WaitForConditionalLogic();
         }
 
@@ -208,12 +208,12 @@
 
             VerifyTool.VerifyValue(
                 isChecked,
-                UIUtilityProvider.UIHelper.IsChecked(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
+                WebDriverUtility.DefaultProvider.IsChecked(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
                 "Radio Buttons " + customFieldName + " selection {0}");
 
             VerifyTool.VerifyValue(
                 editable,
-                UIUtilityProvider.UIHelper.IsEditable(UIUtilityProvider.UIHelper.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
+                WebDriverUtility.DefaultProvider.IsEditable(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "for", LocateBy.XPath), LocateBy.Id),
                 "Radio Buttons " + customFieldName + " is editable: {0}");
         }
 
@@ -221,12 +221,12 @@
         public void FillOutCustomOneLineTextOrNumberOrContribution(string customFieldName, string input)
         {
             string xPath = string.Format(FindOneLineTextContributionNumber, customFieldName);
-            UIUtilityProvider.UIHelper.Type(xPath, input, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(xPath, input, LocateBy.XPath);
         }
 
         public void FillOutCustomOneLineTextOrNumberOrContribution(int id, string input)
         {
-            UIUtilityProvider.UIHelper.Type(id.ToString(), input, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(id.ToString(), input, LocateBy.Id);
         }
 
         public void VerifyCustomOneLineTextOrNumberOrContribution(string customFieldName, string text, bool editable)
@@ -235,68 +235,68 @@
 
             VerifyTool.VerifyValue(
                 text,
-                UIUtilityProvider.UIHelper.GetAttribute(xPath, "value", LocateBy.XPath), 
+                WebDriverUtility.DefaultProvider.GetAttribute(xPath, "value", LocateBy.XPath), 
                 "Field " + customFieldName + "'s text : {0}");
 
             VerifyTool.VerifyValue(
                 editable,
-                UIUtilityProvider.UIHelper.IsEditable(UIUtilityProvider.UIHelper.GetAttribute(xPath, "id", LocateBy.XPath), LocateBy.Id),
+                WebDriverUtility.DefaultProvider.IsEditable(WebDriverUtility.DefaultProvider.GetAttribute(xPath, "id", LocateBy.XPath), LocateBy.Id),
                 "Field " + customFieldName + "is editable: {0}");
         }
 
         public void FillOutCustomParagraphField(string customFieldName, string textToEnter)
         {
             string xPath = string.Format(FindParagraph, customFieldName);
-            string id = UIUtilityProvider.UIHelper.GetAttribute(xPath, "id", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.Type(id, textToEnter, LocateBy.Id);
+            string id = WebDriverUtility.DefaultProvider.GetAttribute(xPath, "id", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(id, textToEnter, LocateBy.Id);
         }
 
         public void FillOutCustomParagraphField(int id, string textToEnter)
         {
-            UIUtilityProvider.UIHelper.Type(id.ToString(), textToEnter, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(id.ToString(), textToEnter, LocateBy.Id);
         }
 
         public void VerifyCustomParagraphField(string customFieldName, string text, bool editable)
         {
             string xPath = string.Format(FindParagraph, customFieldName);
-            string id = UIUtilityProvider.UIHelper.GetAttribute(xPath, "id", LocateBy.XPath);
-            VerifyTool.VerifyValue(text, UIUtilityProvider.UIHelper.GetText(id, LocateBy.Id), "Paragraph " + customFieldName + " text: {0}");
-            VerifyTool.VerifyValue(editable, UIUtilityProvider.UIHelper.IsEditable(id, LocateBy.Id), "Paragraph " + customFieldName + " is editable: {0}");
+            string id = WebDriverUtility.DefaultProvider.GetAttribute(xPath, "id", LocateBy.XPath);
+            VerifyTool.VerifyValue(text, WebDriverUtility.DefaultProvider.GetText(id, LocateBy.Id), "Paragraph " + customFieldName + " text: {0}");
+            VerifyTool.VerifyValue(editable, WebDriverUtility.DefaultProvider.IsEditable(id, LocateBy.Id), "Paragraph " + customFieldName + " is editable: {0}");
         }
 
         public void FillOutCustomDateField(string customFieldName, string date)
         {
             string xPath = string.Format(FindDate, customFieldName);
-            UIUtilityProvider.UIHelper.WaitForElementPresent(xPath, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.Type(xPath, date, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(xPath + "/following-sibling::img", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(xPath, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(xPath, date, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(xPath + "/following-sibling::img", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void FillOutCustomDateField(int id, string date)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(id.ToString(), LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(id.ToString(), date, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//input[@id='{0}']/following-sibling::img", id), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(id.ToString(), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(id.ToString(), date, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//input[@id='{0}']/following-sibling::img", id), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Uploadfile(string customFieldName, string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(FindUpload, customFieldName), LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SelectWindowByTitle("File Upload Page");
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(FindUpload, customFieldName), LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SelectWindowByTitle("File Upload Page");
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
                 //WebDriverBase.WebDriverManager.driver.FindElement(By.Id("ctl00_cphBody_ruFilefile0")).SendKeys(
                 //    Fixtures.ConfigurationProvider.XmlConfig.AllSettings.DataPath + fileName);
 
-                UIUtilityProvider.UIHelper.SendKeys("ctl00_cphBody_ruFilefile0", ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + fileName, LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphBody_btnSubmit", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphBody_btnCancel", LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                WebDriverUtility.DefaultProvider.SendKeys("ctl00_cphBody_ruFilefile0", ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + fileName, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnSubmit", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnCancel", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             }
         }
 
@@ -304,41 +304,41 @@
         public void VerifyCustomDateField(string customFieldName, string date, bool editable)
         {
             string xPath = string.Format(FindDate, customFieldName);
-            UIUtilityProvider.UIHelper.WaitForElementPresent(xPath, LocateBy.XPath);
-            VerifyTool.VerifyValue(date, UIUtilityProvider.UIHelper.GetAttribute(xPath, "value", LocateBy.XPath), "Date " + customFieldName + ":{0}");
-            VerifyTool.VerifyValue(editable, UIUtilityProvider.UIHelper.IsEditable(xPath, LocateBy.XPath), "Date " + customFieldName + " is editable: {0}");
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(xPath, LocateBy.XPath);
+            VerifyTool.VerifyValue(date, WebDriverUtility.DefaultProvider.GetAttribute(xPath, "value", LocateBy.XPath), "Date " + customFieldName + ":{0}");
+            VerifyTool.VerifyValue(editable, WebDriverUtility.DefaultProvider.IsEditable(xPath, LocateBy.XPath), "Date " + customFieldName + " is editable: {0}");
             //UIUtilityProvider.UIHelper.Click(UIUtilityProvider.UIHelper.GetLocatorPrefix(UIBase.UIManager.FindLocatorBy.Id) + "outsideWrapper");
         }
 
         public void FillOutCustomTimeField(string customFieldName, string time)
         {
             string xPath = string.Format(FindTime, customFieldName);
-            UIUtilityProvider.UIHelper.WaitForElementPresent(xPath, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.Type(xPath, time, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(xPath + "/..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(xPath, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(xPath, time, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(xPath + "/..", LocateBy.XPath);
         }
 
         public void FillOutCustomTimeField(int id, string time)
         {
             string locator_Id = id.ToString();
-            UIUtilityProvider.UIHelper.Type(locator_Id, time, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.Type(locator_Id, time, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             //clears the time drop down picker that can interfere with webdriver. 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//ol[@class='fieldList custom']", LocateBy.XPath);/*//label[@for='" + id + "']"  + "/../.."*/
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//ol[@class='fieldList custom']", LocateBy.XPath);/*//label[@for='" + id + "']"  + "/../.."*/
         }
 
         public void VerifyCustomTimeField(string customFieldName, string time, bool editable)
         {
             string xPath = string.Format(FindTime, customFieldName);
-            VerifyTool.VerifyValue(time, UIUtilityProvider.UIHelper.GetAttribute(xPath, "value", LocateBy.XPath), "Time " + customFieldName + ":{0}");
-            VerifyTool.VerifyValue(editable, UIUtilityProvider.UIHelper.IsEditable(xPath, LocateBy.XPath), "Time " + customFieldName + " is editable: {0}");
+            VerifyTool.VerifyValue(time, WebDriverUtility.DefaultProvider.GetAttribute(xPath, "value", LocateBy.XPath), "Time " + customFieldName + ":{0}");
+            VerifyTool.VerifyValue(editable, WebDriverUtility.DefaultProvider.IsEditable(xPath, LocateBy.XPath), "Time " + customFieldName + " is editable: {0}");
         }
 
         public void SetCustomFieldCheckbox(int id, bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(id.ToString(), check, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SetCheckbox(id.ToString(), check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -349,7 +349,7 @@
 
         public void TypeCustomField(int id, string text)
         {
-            UIUtilityProvider.UIHelper.Type(id.ToString(), text, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(id.ToString(), text, LocateBy.Id);
         }
 
         [Step]
@@ -366,7 +366,7 @@
         [Step]
         public int GetCustomFieldIDForCheckboxItem(string name)
         {
-            return Convert.ToInt32(UIUtilityProvider.UIHelper.GetAttribute("//label[text()='" + name + "']", "for", LocateBy.XPath));
+            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetAttribute("//label[text()='" + name + "']", "for", LocateBy.XPath));
         }
 
         /// <summary>
@@ -376,7 +376,7 @@
         /// <returns></returns>
         public int GetCustomFieldIdOnPIPage(int cfIndexInRow)
         {
-            return Convert.ToInt32(UIUtilityProvider.UIHelper.GetAttribute(string.Format(
+            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetAttribute(string.Format(
                 "//legend[text()='Other Personal Information']/following-sibling::ol/li[@data-z='{0}']",
                 cfIndexInRow), "data - id", LocateBy.XPath));
         }
@@ -388,7 +388,7 @@
         /// <returns></returns>
         public int GetCustomFieldIdOnAgendaPage(int cfIndexInRow)
         {
-            return Convert.ToInt32(UIUtilityProvider.UIHelper.GetAttribute(string.Format(
+            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetAttribute(string.Format(
                 "//div[@id='pageContent']/fieldset/ol/li[@data-z='{0}']",
                 cfIndexInRow), "data-id", LocateBy.XPath));
         }

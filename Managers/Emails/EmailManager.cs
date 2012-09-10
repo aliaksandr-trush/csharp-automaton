@@ -7,6 +7,7 @@
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using RegOnline.RegressionTest.DataAccess;
 
     public partial class EmailManager : ManagerBase
     {
@@ -95,33 +96,33 @@
         private const string ConfirmationEmailURLConstructor = "builder/site/emailviewer.aspx?eventid={0}&aid={1}&emailid={2}=&typeid=2&themeid=-1";
         private const string EmailInvitationURLConstructor = "builder/site/emailviewer.aspx?eventid={0}&aid={1}&emailid={2}=&typeid=9&themeid=-1";
 
-        ////public string ComposeConfirmationEmailURL(EmailCategory category, int eventId, int registrationId)
-        ////{
-        ////    string url = string.Empty;
-        ////    string emailId = FetchConfirmationEmailId(category, eventId);
-        ////    string attendeeId = FetchAttendeeId(registrationId);
+        public string ComposeConfirmationEmailURL(EmailCategory category, int eventId, int registrationId)
+        {
+            string url = string.Empty;
+            string emailId = FetchConfirmationEmailId(category, eventId);
+            string attendeeId = FetchAttendeeId(registrationId);
 
-        ////    url = ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.BaseUrl + 
-        ////        string.Format(ConfirmationEmailURLConstructor, eventId, U.EncryptionTools.Encrypt(attendeeId), U.EncryptionTools.Encrypt(emailId));
+            url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
+                string.Format(ConfirmationEmailURLConstructor, eventId, AccessData.GetEncryptString(attendeeId), AccessData.GetEncryptString(emailId));
 
-        ////    return url;
-        ////}
+            return url;
+        }
 
-        ////public string ComposeEmailInvitationURL(int eventId, string attendeeId, string emailId)
-        ////{
-        ////    string url = string.Empty;
+        public string ComposeEmailInvitationURL(int eventId, string attendeeId, string emailId)
+        {
+            string url = string.Empty;
 
-        ////    url = ConfigurationProvider.XmlConfig.PrivateLabelConfiguration.BaseUrl + 
-        ////        string.Format(EmailInvitationURLConstructor, eventId, U.EncryptionTools.Encrypt(attendeeId), U.EncryptionTools.Encrypt(emailId));
-            
-        ////    return url;
-        ////}
+            url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
+                string.Format(EmailInvitationURLConstructor, eventId, AccessData.GetEncryptString(attendeeId), AccessData.GetEncryptString(emailId));
+
+            return url;
+        }
 
         public string FetchConfirmationEmailId(EmailCategory category, int eventId)
         {
             int regMailTriggerId = RegMailTriggerIdAttribute.GetRegMailTriggerId(category);
             string emailId = string.Empty;
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var id = (from i in db.RegMailResponders where i.EventId == eventId && i.RegMailTypeId == 2 && i.RegMailTriggerId == regMailTriggerId orderby i.Id descending select i.Id).ToList();
             emailId = id[0].ToString();
             return emailId;
@@ -130,8 +131,8 @@
         public string FetchInvitationEmailId(string emailName)
         {
             string emailId = string.Empty;
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
-            var id = (from i in db.EmailJobs where i.CustomerId == Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id) && i.Description == emailName select i.Id).ToList();
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            var id = (from i in db.EmailJobs where i.CustomerId == Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id) && i.Description == emailName select i.Id).ToList();
             emailId = id[0].ToString();
             return emailId;
         }
@@ -139,7 +140,7 @@
         public string FetchAttendeeId(int registrationId)
         {
             string attendeeID = string.Empty;
-            var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var id = (from i in db.Registrations where i.Register_Id == registrationId select i.Attendee_Id).ToList();
             attendeeID = id[0].ToString();
             return attendeeID;
@@ -148,21 +149,21 @@
         [Step]
         public void SaveAndClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(@"Save & Close", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & Close", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void SaveAndStay()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(@"Save & Stay", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & Stay", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void SaveAndNew()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(@"Save & New", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & New", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
@@ -170,7 +171,7 @@
         [Step]
         public void Cancel()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(@"Cancel", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Cancel", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }

@@ -47,7 +47,7 @@
         {
             //step 1
             //bib numbers are ActiveEurope only.
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             //Avoid the known bug which causes overlap. (per QA: It's not in regression scope.)
             //when preparing these, ensure that StartingNumber is far enough away from each other and from the event starting number.
@@ -65,8 +65,8 @@
 
             //popup separate window
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.TestRegister);
-            UIUtilityProvider.UIHelper.SelectWindowByTitle(EventNameWithRegType);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle(EventNameWithRegType);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             this.regs = 0;
 
@@ -95,7 +95,7 @@
             //shut down the confirmation page / register project.
             //if we were in the same window, must navigate back. That means: relogin, reenter the Manager.
             //if Register had popped up, must close popup.
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
 
             //step 5
             ManagerSiteMgr.DashboardMgr.OpenAttendeeReportFromEventDashboard();
@@ -103,7 +103,7 @@
             ReportMgr.CloseReportPopupWindow();
 
             //step 6
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             ManagerSiteMgr.ChangeBibNumberingOption(BibNumberingToolManager.AssignNumberToMember.SameToEvery, _teams);
 
             //step 7
@@ -117,7 +117,7 @@
         [Description("637")]
         public void TeamWithoutRegType()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreatTeamWithoutRegType();
         }
@@ -127,7 +127,7 @@
         [Description("636")]
         public void TeamWithRegType()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateTeamWithRegType();
         }
@@ -137,7 +137,7 @@
         [Description("258")]
         public void BibNumberingToolWithoutRegType()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreatTeamWithoutRegType();
             this.BibSetting();
@@ -153,7 +153,7 @@
         [Description("259")]
         public void BibNumberingToolUpdates()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateTeamWithRegType();
             this.BibSetting();
@@ -192,8 +192,8 @@
             this.CheckBibNumber(12, 13, 109, true);
             VerifyTool.VerifyValue(this.teamName, ReportMgr.GetTeamName(this.regs), "Team name for group regs in the same team: {0}");
             ReportMgr.CloseReportPopupWindow();
-            ////this.VerifyBibInEmail(104);
-            ////this.CheckTeamNameInEmail();
+            this.VerifyBibInEmail(104);
+            this.CheckTeamNameInEmail();
         }
 
         [Test]
@@ -201,7 +201,7 @@
         [Description("261")]
         public void TeamNameWithRegType()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
             this.CreateNewTeamWithRegType();
             this.RegisterAndCheckTeamName();
@@ -214,7 +214,7 @@
         {
             this.BibNumberingTool();
             this.CheckTeamNameInReport();
-            ////this.CheckTeamNameInEmail();
+            this.CheckTeamNameInEmail();
         }
 
         public void CheckTeamNameInReport()
@@ -232,11 +232,11 @@
             ReportMgr.CloseReportPopupWindow();
         }
 
-        ////public void CheckTeamNameInEmail()
-        ////{
-        ////    EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
-        ////    EmailMgr.VerifyCustomFieldPresent(this.teamName, true);
-        ////}
+        public void CheckTeamNameInEmail()
+        {
+            EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
+            EmailMgr.VerifyCustomFieldPresent(this.teamName, true);
+        }
 
         private void CreateNewTeamWithRegType()
         {
@@ -266,9 +266,9 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
 
             this.GoToEmailTabAddConfirmation(EventNameWithRegType);
@@ -285,18 +285,18 @@
             RegisterMgr.VerifyCustomFieldRequired("Team Name", true);
         }
 
-        ////private void VerifyBibInEmail(int bib)
-        ////{
-        ////    EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
-        ////    EmailMgr.VerifyCustomFieldPresent(bib.ToString(), true);
-        ////}
+        private void VerifyBibInEmail(int bib)
+        {
+            EmailMgr.OpenConfirmationEmailUrl(EmailManager.EmailCategory.Complete, this.eventId, this.registrantId);
+            EmailMgr.VerifyCustomFieldPresent(bib.ToString(), true);
+        }
 
         private void UpdateReg(string emailAddress)
         {
             RegisterMgr.OpenRegisterPage(this.eventId);
             RegisterMgr.CheckinWithEmail(emailAddress);
             RegisterMgr.ClickCheckinAlreadyRegistered();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
             RegisterMgr.Continue();
             RegisterMgr.ClickCheckoutActiveWaiver();
@@ -308,7 +308,7 @@
             RegisterMgr.OpenRegisterPage();
             RegisterMgr.CheckinWithEmail(emailAddress);
             RegisterMgr.ClickCheckinAlreadyRegistered();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
 
             if (RegisterMgr.HasSubstituteLink(1))

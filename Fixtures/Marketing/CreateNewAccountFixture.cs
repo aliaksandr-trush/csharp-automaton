@@ -16,14 +16,14 @@
             string username = System.Guid.NewGuid().ToString();
             username = username.Replace("-", "");
             ManagerSiteMgr.OpenLogin();
-            ManagerSiteMgr.CreateNewAccount(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, "US Dollar");
+            ManagerSiteMgr.CreateNewAccount(username, ConfigReader.DefaultProvider.AccountConfiguration.Password, "US Dollar");
             
             string EventTitle = "New Account Event";
             BuilderMgr.SetEventNameAndShortcut(EventTitle);
             BuilderMgr.SaveAndClose();
 
             ManagerSiteMgr.OpenLogin();
-            ManagerSiteMgr.Login(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            ManagerSiteMgr.Login(username, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             ManagerSiteMgr.SkipEmailValidation();
             ManagerSiteMgr.GetFirstEventId(EventTitle);
         }

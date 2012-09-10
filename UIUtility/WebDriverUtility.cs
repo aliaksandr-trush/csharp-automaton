@@ -18,8 +18,17 @@
 
     public class WebDriverUtility
     {
+        private static WebDriverUtility Default = new WebDriverUtility();
         private TimeSpan timeOutSpan;
         public IWebDriver driver;
+
+        public static WebDriverUtility DefaultProvider
+        {
+            get
+            {
+                return WebDriverUtility.Default;
+            }
+        }
 
         private By GetLocatorFinder(string locator, LocateBy locateBy)
         {
@@ -64,17 +73,17 @@
 
         private void StartWebDriver()
         {
-            XmlConfiguration.BrowserEnum browser;
-            Enum.TryParse<XmlConfiguration.BrowserEnum>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            ConfigReader.BrowserEnum browser;
+            Enum.TryParse<ConfigReader.BrowserEnum>(ConfigReader.DefaultProvider.CurrentBrowser.Name, out browser);
             IGetWebDriver br;
 
             switch (browser)
             {
-                case XmlConfiguration.BrowserEnum.Firefox:
+                case ConfigReader.BrowserEnum.Firefox:
                     br = new Browser_Firefox();
                     break;
 
-                case XmlConfiguration.BrowserEnum.Chrome:
+                case ConfigReader.BrowserEnum.Chrome:
                     br = new Browser_Chrome();
                     break;
 

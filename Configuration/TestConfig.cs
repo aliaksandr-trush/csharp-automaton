@@ -14,29 +14,23 @@
         [XmlElement(ElementName = "Browsers")]
         public Browsers Browsers { get; set; }
 
-        [XmlElement(ElementName = "TimeZoneDifference")]
-        public int TimeZoneDifference { get; set; }
-
         [XmlElement(ElementName = "NUnitAddin")]
         public NUnitAddin NUnitAddin { get; set; }
     }
 
     public class Environments
     {
-        [XmlElement(ElementName = "Preferred")]
-        public Preferred Preferred { get; set; }
+        [XmlAttribute("CurrentEnvironment")]
+        public string CurrentEnvironment { get; set; }
+
+        [XmlAttribute("CurrentAccount")]
+        public string CurrentAccount { get; set; }
+
+        [XmlAttribute("CurrentMachineTimeZoneOffset")]
+        public int CurrentMachineTimeZoneOffset { get; set; }
 
         [XmlElement(ElementName = "Environment")]
         public Environment[] Environment { get; set; }
-    }
-
-    public class Preferred
-    {
-        [XmlAttribute("Environment")]
-        public string Environment { get; set; }
-
-        [XmlAttribute("PrivateLabel")]
-        public string PrivateLabel { get; set; }
     }
 
     public class Environment
@@ -60,7 +54,7 @@
         public Account[] Account { get; set; }
     }
 
-    public partial class Account
+    public class Account
     {
         [XmlElement(ElementName = "DomainName")]
         public string DomainName { get; set; }
@@ -80,8 +74,27 @@
         [XmlElement(ElementName = "XAuthVersion")]
         public string XAuthVersion { get; set; }
 
+        [XmlElement(ElementName = "TimeZoneOffset")]
+        public int TimeZoneOffset { get; set; }
+
         [XmlAttribute("Name")]
         public string Name { get; set; }
+
+        public string BaseUrl
+        {
+            get
+            {
+                return string.Format("http://{0}/", this.DomainName);
+            }
+        }
+
+        public string BaseUrlWithHttps
+        {
+            get
+            {
+                return string.Format("https://{0}/", this.DomainName);
+            }
+        }
     }
 
     public class WebServices
@@ -100,22 +113,28 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+
+        [XmlAttribute("HTTPS")]
+        public bool HTTPS { get; set; }
     }
 
     public class Browsers
     {
-        [XmlElement(ElementName = "ChromeDriverPath")]
-        public string ChromeDriverPath { get; set; }
-
         [XmlElement(ElementName = "Browser")]
         public Browser[] Browser { get; set; }
 
         [XmlAttribute("Current")]
         public string Current { get; set; }
+
+        [XmlAttribute("DirectStartup")]
+        public bool DirectStartup { get; set; }
     }
 
     public class Browser
     {
+        [XmlElementAttribute(ElementName = "Server")]
+        public Server Server { get; set; }
+
         [XmlElementAttribute(ElementName = "BinaryPath")]
         public BinaryPath BinaryPath { get; set; }
 
@@ -124,6 +143,18 @@
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
+    }
+
+    public class Server
+    {
+        [XmlAttributeAttribute("Path")]
+        public string Path { get; set; }
+
+        [XmlAttributeAttribute("Host")]
+        public string Host { get; set; }
+
+        [XmlAttributeAttribute("Port")]
+        public int Port { get; set; }
     }
 
     [XmlTypeAttribute]

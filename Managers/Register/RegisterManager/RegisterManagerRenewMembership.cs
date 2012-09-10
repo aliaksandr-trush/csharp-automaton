@@ -37,14 +37,14 @@
 
         public void LoginToMembersip()
         {
-            this.EnterMemberPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            this.EnterMemberPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             this.ClickLoginToMembership();
         }
 
         private void EnterMemberPassword(string password)
         {
             VerifyOnMemberLoginPage();
-            UIUtilityProvider.UIHelper.Type(MemberPasswordLocator, password, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(MemberPasswordLocator, password, LocateBy.Id);
         }
 
         public void ClickLoginToMembership()
@@ -57,24 +57,24 @@
         public void ClickRenewNowButton()
         {
             Assert.True(OnAttendeeCheckPage(), "Not on Attendee Check Page");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(RenewNowButtonLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RenewNowButtonLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ChooseRenewPaymentOptions(RenewalPaymentOptions paymentOption)
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent("//*[@id='ctl00_cphMemberships_stepVerify'][@class='rmpHiddenView']", false, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent("//*[@id='ctl00_cphMemberships_stepVerify'][@class='rmpHiddenView']", false, LocateBy.XPath);
 
             switch (paymentOption)
             {
                 case RenewalPaymentOptions.UseExistingPaymentInfo:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(UseExistingPaymentInfoLocator, LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(UseExistingPaymentInfoLocator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                     
                 case RenewalPaymentOptions.UseNewPaymentInfo:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(UseNewPaymentInfoLocator, LocateBy.Id);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(UseNewPaymentInfoLocator, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     //TO DO: add new method to enter new payment info
                     break;
             }
@@ -84,10 +84,10 @@
         {
             if (!this.OnAttendeeCheckPage())
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on Attendee Check Page");
+                WebDriverUtility.DefaultProvider.FailTest("Not on Attendee Check Page");
             }
 
-            string renewalDate = UIUtilityProvider.UIHelper.GetText(AttendeeCheckRenewalDateLocator, LocateBy.XPath);
+            string renewalDate = WebDriverUtility.DefaultProvider.GetText(AttendeeCheckRenewalDateLocator, LocateBy.XPath);
             return renewalDate;
         }
 
@@ -104,7 +104,7 @@
         {
             if (!this.OnLoginPage())
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on member login page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on member login page!");
             }
         }
 
@@ -112,13 +112,13 @@
         {
             if (!this.OnAttendeeCheckPage())
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on member account details page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on member account details page!");
             }
         }
 
         public bool OnMemberLoginPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsAbsolutePath(MemberLoginPagePath);
+            return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(MemberLoginPagePath);
         }
     }
 }

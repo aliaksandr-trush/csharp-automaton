@@ -28,7 +28,7 @@
         
         public void SetTeamNumbers(AssignNumberToMember which)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(BibLocator, (int)which), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(BibLocator, (int)which), LocateBy.Id);
         }
 
         /// <summary>
@@ -38,12 +38,12 @@
         /// <param name="num"></param>
         public void SetStartingNumber(int regTypeSequence, int num)
         {
-            UIUtilityProvider.UIHelper.Type(string.Format(StartingNumberLocator, regTypeSequence), num, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(string.Format(StartingNumberLocator, regTypeSequence), num, LocateBy.Id);
         }
 
         public void SetStartingNumberDefault(int num)
         {
-            UIUtilityProvider.UIHelper.Type(DefaultStartingNumberLocator, num, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(DefaultStartingNumberLocator, num, LocateBy.Id);
         }
 
         public void SaveAndClose()
@@ -53,31 +53,31 @@
 
         public void SaveAndClose(bool reassign)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Assign", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Assign", LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
 
             string subElementOKbutton = "OK";
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(subElementOKbutton, LocateBy.LinkText))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(subElementOKbutton, LocateBy.LinkText))
             {
                 if (reassign)
                 {
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(subElementOKbutton, LocateBy.LinkText);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(subElementOKbutton, LocateBy.LinkText);
                 }
                 else
                 {
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
                 }
 
                 Utility.ThreadSleep(1);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Close", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Close", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //the calling form will switch back to the main
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
         }
     }
 }
