@@ -284,6 +284,14 @@
         }
     }
 
+    public class MerchandiseResponseList : List<MerchandiseResponse>
+    {
+        public new void Add(MerchandiseResponse response)
+        {
+            base.Add(response.Clone());
+        }
+    }
+
     public class MerchandiseResponse
     {
         public MerchandiseItem Merchandise_Item;

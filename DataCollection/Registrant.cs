@@ -92,8 +92,8 @@
         public string Password;
         public PaymentMethod Payment_Method;
         public RegisterMethod Register_Method = RegisterMethod.EventId;
-        public List<CustomFieldResponse> CustomField_Responses = new List<CustomFieldResponse>();
-        public List<MerchandiseResponse> Merchandise_Responses = new List<MerchandiseResponse>();
+        public CustomFieldResponseList CustomField_Responses = new CustomFieldResponseList();
+        public MerchandiseResponseList Merchandise_Responses = new MerchandiseResponseList();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
 
