@@ -130,12 +130,12 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
                 }
 
-                if (agenda.NameOnReceipt != null)
+                if (agenda.NameOnReceipt != null && !agenda.NameOnReceipt.Equals(agenda.NameOnForm))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReceipt.Type(agenda.NameOnReceipt);
                 }
 
-                if (agenda.NameOnReports != null)
+                if (agenda.NameOnReports != null && !agenda.NameOnReports.Equals(agenda.NameOnForm))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnReports.Type(agenda.NameOnReports);
                 }
@@ -148,7 +148,7 @@
             {
                 AgendaItem_Common ag = agenda as AgendaItem_Common;
 
-                if (ag.NameOnBadge != null)
+                if (ag.NameOnBadge != null && !agenda.NameOnBadge.Equals(agenda.NameOnForm))
                 {
                     if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.IsPresent)
                     {

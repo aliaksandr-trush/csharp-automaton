@@ -57,10 +57,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="RegOnline.RegressionTest.All.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="RegOnline.RegressionTest.All.nunit">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
