@@ -20,10 +20,10 @@
 
     public class Environments
     {
-        [XmlAttribute("CurrentEnvironment")]
+        [XmlAttribute("EnvironmentChosen")]
         public string CurrentEnvironment { get; set; }
 
-        [XmlAttribute("CurrentAccount")]
+        [XmlAttribute("AccountChosen")]
         public string CurrentAccount { get; set; }
 
         [XmlAttribute("CurrentMachineTimeZoneOffset")]

@@ -18,11 +18,11 @@
         {
             Event evt = new Event("AgendaEmailAddendum");
             evt.AgendaPage = new AgendaPage();
-            AgendaItem_CheckBox agendaWithEmailAddendum = new AgendaItem_CheckBox("EmailAddendum");
+            AgendaItem_CheckBox agendaWithEmailAddendum = new AgendaItem_CheckBox("EmailAddendumAG");
             agendaWithEmailAddendum.ConfirmationAddendum = "ConfirmationAddendum";
             evt.AgendaPage.AgendaItems.Add(agendaWithEmailAddendum);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             AgendaResponse_Checkbox resp = new AgendaResponse_Checkbox();
@@ -59,7 +59,7 @@
             evt.AgendaPage.AgendaItems.Add(agendaAddToCalenda);
             evt.AgendaPage.AgendaItems.Add(includeOnEventWeb);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             reg.Register_Method = RegisterMethod.EventWebsite;
@@ -106,7 +106,7 @@
             evt.AgendaPage.AgendaItems.Add(agendaGroup1);
             evt.AgendaPage.AgendaItems.Add(agendaGroup2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();

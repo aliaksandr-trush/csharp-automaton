@@ -205,7 +205,6 @@
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
                             PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);
-                            dc.Id = row.CodeId;
                         }
                     }
 

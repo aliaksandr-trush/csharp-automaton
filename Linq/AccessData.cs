@@ -38,5 +38,11 @@
             var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             return (from r in db.Registrations where r.Register_Id == registrantId select r.Attendee_Id).Single();
         }
+
+        public static int FetchRegTypeId(int eventId, string regTypeName)
+        {
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
+            return (from r in db.EventRegTypes where r.EventId == eventId && r.Description == regTypeName select r.Id).Single();
+        }
     }
 }

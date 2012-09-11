@@ -195,7 +195,7 @@
             regType.AdditionalDetails = "This is additional details.";
             evt.StartPage.RegTypes.Add(regType);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             reg.EventFee_Response = new EventFeeResponse(regType);

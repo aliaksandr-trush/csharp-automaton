@@ -119,8 +119,6 @@
                 foreach (RegType regType in details.StartPage.RegTypes)
                 {
                     KeywordProvider.AddRegType.Add_RegType(regType, details);
-                    PageObject.Builder.RegistrationFormPages.RegTypeRow row = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType.RegTypeName);
-                    regType.RegTypeId = row.RegTypeId;
                 }
             }
 
@@ -423,7 +421,6 @@
                 {
                     KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
                     PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
-                    merch.Id = row.MerchandiseId;
                 }
 
                 if (details.MerchandisePage.PageHeader != null)

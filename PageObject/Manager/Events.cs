@@ -56,6 +56,7 @@
         public int EventId;
         public ButtonOrLink Title;
         public ButtonOrLink Delete;
+        public string URL;
 
         public EventList_EventRow(int eventId)
         {
@@ -75,6 +76,10 @@
             this.Delete = new ButtonOrLink(
                 string.Format("{0}/td/div[@class='actions']/a[@title='Delete event']", this.Tr.Locator),
                 LocateBy.XPath);
+
+            this.URL = new ButtonOrLink(
+                string.Format("{0}/td//a[contains(@title,'regonline.com')]", this.Tr.Locator),
+                LocateBy.XPath).GetAttribute("href");
         }
 
         public static List<EventList_EventRow> GetEventRows(string eventName)

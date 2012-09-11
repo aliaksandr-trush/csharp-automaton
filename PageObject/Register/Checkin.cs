@@ -1,10 +1,12 @@
 ﻿namespace RegOnline.RegressionTest.PageObject.Register
 {
+    using System;
+    using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
-    using RegOnline.RegressionTest.Configuration;
 
     public class Checkin : Window
     {
@@ -43,14 +45,14 @@
                 case RegisterMethod.EventWebsite:
                 case RegisterMethod.EventCalendar:
 
-                    url = string.Format(
-                        "{0}{1}",
-                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
-                        reg.Event.Shortcut);
+                    Manager.EventList_EventRow eventRow = new Manager.EventList_EventRow(reg.Event.Id);
+                    url = eventRow.URL;
 
                     break;
 
                 case RegisterMethod.RegTypeDirectUrl:
+
+                    reg.EventFee_Response.RegType.RegTypeId = AccessData.FetchRegTypeId(reg.Event.Id, reg.EventFee_Response.RegType.RegTypeName);
 
                     url = string.Format(string.Format(
                         "{0}?eventID={1}&rTypeID={2}", 
@@ -79,6 +81,11 @@
 
         public RadioButton RegTypeRadio(RegType regType)
         {
+            Label regTypeNameLabel = new Label(string.Format("//ol[@id='radRegTypes']//*[contains(text(),'{0}')]", regType.RegTypeName), LocateBy.XPath);
+            string regTypeForString = regTypeNameLabel.GetAttribute("for");
+            string tmp = regTypeForString.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
+            regType.RegTypeId = Convert.ToInt32(tmp);
+
             return new RadioButton(
                 string.Format("//input[@value='{0}']", regType.RegTypeId), LocateBy.XPath);
         }

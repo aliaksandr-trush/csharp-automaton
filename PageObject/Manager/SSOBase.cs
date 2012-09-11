@@ -22,7 +22,7 @@
 
         public CheckBox RegTypeEnabled(RegType regType)
         {
-            return new CheckBox(string.Format("ctl00_cphDialog_xAuth_{0}", regType.RegTypeId), LocateBy.Id);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input", regType.RegTypeName), LocateBy.XPath);
         }
 
         public void SaveAndClose_Click()

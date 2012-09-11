@@ -84,7 +84,6 @@
 
     internal class Browser_Chrome : IGetWebDriver
     {
-        private ChromeDriverService driverService;
         private ChromeOptions options = new ChromeOptions();
         private DesiredCapabilities capa = DesiredCapabilities.Chrome();
         private ArrayList switches = new ArrayList(2);
