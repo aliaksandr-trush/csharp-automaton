@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
-  <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
+  <Environments EnvironmentChosen="Beta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -233,7 +233,7 @@
   <Browsers Current="Firefox" DirectStartup="false">
 	<Browser Name="Firefox">
     <Server Path="" Host="127.0.0.1" Port="9999"/>
-	  <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	  <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
 	<Browser Name="Chrome">
