@@ -113,7 +113,7 @@
 
             // Cos preferred environment and private-label must be read from xml first, 
             // we cannot call this.ReloadAllConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel)
-            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.CurrentEnvironment, this.AllConfiguration.Environments.CurrentAccount);
+            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.EnvironmentChosen, this.AllConfiguration.Environments.AccountChosen);
             
             this.LoadWebServiceConfiguration();
             this.LoadBrowser();
