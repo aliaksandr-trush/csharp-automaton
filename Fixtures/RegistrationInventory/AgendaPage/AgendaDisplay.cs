@@ -164,16 +164,11 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
-            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(visToAll);
-            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(visToType1);
-            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(reqByType2);
-            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(adminOnly);
-            PageObject.Register.AgendaRow row5 = new PageObject.Register.AgendaRow(adminAndReq);
-            Assert.True(row1.AgendaLabel.IsPresent);
-            Assert.True(row2.AgendaLabel.IsPresent);
-            Assert.False(row3.AgendaLabel.IsPresent);
-            Assert.True(row4.AgendaLabel.IsPresent);
-            Assert.True(row5.AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToAll));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToType1));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(reqByType2));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminOnly));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminAndReq));
             KeywordProvider.RegistrationCreation.Agenda(reg3);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
@@ -182,11 +177,11 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            Assert.True(row1.AgendaLabel.IsPresent);
-            Assert.False(row2.AgendaLabel.IsPresent);
-            Assert.True(row3.AgendaLabel.IsPresent);
-            Assert.False(row4.AgendaLabel.IsPresent);
-            Assert.False(row5.AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToAll));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToType1));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(reqByType2));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminOnly));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminAndReq));
             KeywordProvider.RegistrationCreation.Agenda(reg2);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
@@ -195,11 +190,11 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            Assert.True(row1.AgendaLabel.IsPresent);
-            Assert.True(row2.AgendaLabel.IsPresent);
-            Assert.False(row3.AgendaLabel.IsPresent);
-            Assert.False(row4.AgendaLabel.IsPresent);
-            Assert.False(row5.AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToAll));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(visToType1));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(reqByType2));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminOnly));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminAndReq));
         }
 
         [Test]
@@ -232,16 +227,11 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(showInPast);
-            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(showInFuture);
-            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(hideInPast);
-            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(hideInFuture);
-            PageObject.Register.AgendaRow row5 = new PageObject.Register.AgendaRow(sIPHIF);
-            Assert.True(row1.AgendaLabel.IsPresent);
-            Assert.False(row2.AgendaLabel.IsPresent);
-            Assert.False(row3.AgendaLabel.IsPresent);
-            Assert.True(row4.AgendaLabel.IsPresent);
-            Assert.True(row5.AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showInPast));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showInFuture));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(hideInPast));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(hideInFuture));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(sIPHIF));
         }
 
         [Test]
@@ -272,17 +262,12 @@
             reg1.Gender = FormData.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
 
-            PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(showToMale);
-            PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(showToFemale);
-            PageObject.Register.AgendaRow row3 = new PageObject.Register.AgendaRow(showOver20);
-            PageObject.Register.AgendaRow row4 = new PageObject.Register.AgendaRow(showLT20);
-
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            Assert.True(row1.AgendaLabel.IsPresent);
-            Assert.False(row2.AgendaLabel.IsPresent);
-            Assert.True(row3.AgendaLabel.IsPresent);
-            Assert.False(row4.AgendaLabel.IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showToMale));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showToFemale));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showOver20));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showLT20));
 
             Registrant reg2 = new Registrant(evt);
             reg2.Gender = FormData.Gender.Female;
@@ -290,10 +275,10 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            Assert.False(row1.AgendaLabel.IsPresent);
-            Assert.True(row2.AgendaLabel.IsPresent);
-            Assert.False(row3.AgendaLabel.IsPresent);
-            Assert.True(row4.AgendaLabel.IsPresent);
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showToMale));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showToFemale));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showOver20));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(showLT20));
         }
     }
 }

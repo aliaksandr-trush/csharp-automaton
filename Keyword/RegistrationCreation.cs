@@ -76,7 +76,15 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
                 PersonalInfo(group.Secondaries[i]);
                 Agenda(group.Secondaries[i]);
-                Merchandise(group.Secondaries[i]);
+
+                if (group.Secondaries[i].Merchandise_Responses.Count != 0)
+                {
+                    Merchandise(group.Secondaries[i]);
+                }
+                else if (group.Primary.Event.MerchandisePage != null)
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+                }
             }
 
             Checkout(group.Primary);
@@ -141,10 +149,10 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
-        public void PersonalInfo(Registrant reg)
+        public void PerformDefaultActions_PersonalInfo(Registrant reg)
         {
             reg.SetCurrentRegistrantLastName();
-            
+
             if (reg.FirstName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
@@ -156,7 +164,7 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(reg.LastName);
-            
+
             if (reg.JobTitle != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
@@ -206,7 +214,7 @@
             if (reg.BirthDate.HasValue)
             {
                 string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.SetValue(date);
             }
 
             if (reg.Gender.HasValue)
@@ -253,14 +261,22 @@
                             case FormData.CustomFieldType.Contribution:
                             case FormData.CustomFieldType.Date:
                             case FormData.CustomFieldType.Time:
+                                // To implement
+                                break;
                             case FormData.CustomFieldType.FileUpload:
-                                //To implement
+                                // Impossible
+                                break;
                             default:
                                 break;
                         }
                     }
                 }
             }
+        }
+
+        public void PersonalInfo(Registrant reg)
+        {
+            this.PerformDefaultActions_PersonalInfo(reg);
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish.IsPresent)
             {
@@ -272,169 +288,171 @@
             }
         }
 
-        public void Agenda(Registrant reg)
+        public void PerformDefaultActions_Agenda(Registrant reg)
         {
-            if (reg.CustomField_Responses.Count != 0)
+            foreach (CustomFieldResponse responses in reg.CustomField_Responses)
             {
-                foreach (CustomFieldResponse responses in reg.CustomField_Responses)
+                if (responses is AgendaResponse)
                 {
-                    if (responses is AgendaResponse)
+                    AgendaResponse response = responses as AgendaResponse;
+
+                    switch (response.AgendaItem.Type)
                     {
-                        AgendaResponse response = responses as AgendaResponse;
+                        case FormData.CustomFieldType.AlwaysSelected:
+                            {
+                                AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
+                                AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
 
-                        switch (response.AgendaItem.Type)
-                        {
-                            case FormData.CustomFieldType.AlwaysSelected:
+                                if (resp.Code != null)
                                 {
-                                    AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
-                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
-
-                                    if (resp.Code != null)
-                                    {
-                                        row.DiscountCodeInput.Type(resp.Code.Code);
-                                    }
+                                    row.DiscountCodeInput.Type(resp.Code.Code);
                                 }
-                                break;
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.CheckBox:
+                        case FormData.CustomFieldType.CheckBox:
+                            {
+                                AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
+                                AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+                                ((CheckBox)row.AgendaType).Set(resp.Checked.Value);
+
+                                if (resp.Code != null)
                                 {
-                                    AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
-                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
-                                    ((CheckBox)row.AgendaType).Set(resp.Checked.Value);
-                                    
-                                    if (resp.Code != null)
-                                    {
-                                        row.DiscountCodeInput.Type(resp.Code.Code);
-                                    }
+                                    row.DiscountCodeInput.Type(resp.Code.Code);
                                 }
-                                break;
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.RadioButton:
+                        case FormData.CustomFieldType.RadioButton:
+                            {
+                                AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
+                                Label choiceItemLabel = new Label(string.Format("//*[contains(text(),'{0}')]", resp.ChoiceItem.Name), LocateBy.XPath);
+                                resp.ChoiceItem.Id = Convert.ToInt32(choiceItemLabel.GetAttribute("for"));
+                                RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
+                                radio.Click();
+
+                                AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+
+                                if (resp.Code != null)
                                 {
-                                    AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
-                                    Label choiceItemLabel = new Label(string.Format("//*[contains(text(),'{0}')]", resp.ChoiceItem.Name), LocateBy.XPath);
-                                    resp.ChoiceItem.Id = Convert.ToInt32(choiceItemLabel.GetAttribute("for"));
-                                    RadioButton radio = new RadioButton(resp.ChoiceItem.Id.ToString(), LocateBy.Id);
-                                    radio.Click();
-
-                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
-
-                                    if (resp.Code != null)
-                                    {
-                                        row.DiscountCodeInput.Type(resp.Code.Code);
-                                    }
+                                    row.DiscountCodeInput.Type(resp.Code.Code);
                                 }
-                                break;
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Dropdown:
+                        case FormData.CustomFieldType.Dropdown:
+                            {
+                                AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
+
+                                AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
+
+                                ((MultiChoiceDropdown)row.AgendaType).SelectWithText(resp.ChoiceItem.Name);
+
+                                if (resp.Code != null)
                                 {
-                                    AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
-
-                                    AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
-
-                                    ((MultiChoiceDropdown)row.AgendaType).SelectWithText(resp.ChoiceItem.Name);
-
-                                    if (resp.Code != null)
-                                    {
-                                        row.DiscountCodeInput.Type(resp.Code.Code);
-                                    }
+                                    row.DiscountCodeInput.Type(resp.Code.Code);
                                 }
-                                break;
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Number:
-                            case FormData.CustomFieldType.OneLineText:
-                            case FormData.CustomFieldType.Paragraph:
-                                {
-                                    AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
-                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(resp.CharToInput);
-                                }
-                                break;
+                        case FormData.CustomFieldType.Number:
+                        case FormData.CustomFieldType.OneLineText:
+                        case FormData.CustomFieldType.Paragraph:
+                            {
+                                AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
+                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                    response.AgendaItem).AgendaType).Type(resp.CharToInput);
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Contribution:
-                                {
-                                    AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
-                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
-                                }
-                                break;
+                        case FormData.CustomFieldType.Contribution:
+                            {
+                                AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
+                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                    response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Date:
-                                {
-                                    AgendaResponse_Date resp = response as AgendaResponse_Date;
-                                    string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
-                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(date);
-                                }
-                                break;
+                        case FormData.CustomFieldType.Date:
+                            {
+                                AgendaResponse_Date resp = response as AgendaResponse_Date;
+                                string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
+                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                    response.AgendaItem).AgendaType).Type(date);
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Time:
-                                {
-                                    AgendaResponse_Time resp = response as AgendaResponse_Time;
-                                    string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
-                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Type(time);
-                                }
-                                break;
+                        case FormData.CustomFieldType.Time:
+                            {
+                                AgendaResponse_Time resp = response as AgendaResponse_Time;
+                                string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
+                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                    response.AgendaItem).AgendaType).Type(time);
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.FileUpload:
-                                {
-                                    AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
-                                    ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
-                                        response.AgendaItem).AgendaType).Click();
-                                    AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
-                                }
-                                break;
+                        case FormData.CustomFieldType.FileUpload:
+                            {
+                                AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
+                                ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                    response.AgendaItem).AgendaType).Click();
+                                AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
+                            }
+                            break;
 
-                            case FormData.CustomFieldType.Duration:
-                                {
-                                    AgendaResponse_Duration resp = response as AgendaResponse_Duration;
-                                    ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
-                                }
-                                break;
+                        case FormData.CustomFieldType.Duration:
+                            {
+                                AgendaResponse_Duration resp = response as AgendaResponse_Duration;
+                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
+                            }
+                            break;
 
-                            default:
-                                throw new InvalidOperationException(string.Format("No action defined for specified type of agenda item: {0}", response.AgendaItem.Type.ToString()));
-                        }
+                        default:
+                            throw new InvalidOperationException(string.Format("No action defined for specified type of agenda item: {0}", response.AgendaItem.Type.ToString()));
                     }
                 }
             }
+        }
 
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
+        public void Agenda(Registrant reg)
+        {
+            if (reg.CustomField_Responses.Count != 0 && reg.CustomField_Responses.HasAgendaResponse())
             {
+                this.PerformDefaultActions_Agenda(reg);
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
+        }
+
+        public void PerformDefaultActions_Merchandise(Registrant reg)
+        {
+            foreach (MerchandiseResponse response in reg.Merchandise_Responses)
+            {
+                if (response is MerchResponse_FixedPrice)
+                {
+                    MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
+                    PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Quantity);
+
+                    if (resp.Discount_Code != null)
+                    {
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
+                    }
+                }
+
+                if (response is MerchResponse_VariableAmount)
+                {
+                    MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
+                    PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Amount);
+                }
+            }
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.ClickPageContentDivToRefresh();
         }
 
         public void Merchandise(Registrant reg)
         {
             if (reg.Merchandise_Responses.Count != 0)
             {
-                foreach (MerchandiseResponse response in reg.Merchandise_Responses)
-                {
-                    if (response is MerchResponse_FixedPrice)
-                    {
-                        MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
-                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Quantity);
-                        
-                        if (resp.Discount_Code != null)
-                        {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
-                        }
-                    }
-
-                    if (response is MerchResponse_VariableAmount)
-                    {
-                        MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
-                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Amount);
-                    }
-                }
-            }
-
-            PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.ClickPageContentDivToRefresh();
-
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
-            {
+                this.PerformDefaultActions_Merchandise(reg);
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
         }

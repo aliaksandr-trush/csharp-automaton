@@ -24,7 +24,7 @@
             evt.AgendaPage.AgendaItems.Add(agenda2);
             evt.AgendaPage.AgendaItems.Add(agenda3);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
@@ -77,7 +77,7 @@
             evt.AgendaPage.AgendaItems.Add(agenda4);
             evt.AgendaPage.AgendaItems.Add(agenda5);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             Registrant reg1 = new Registrant(evt);
             reg1.Gender = FormData.Gender.Male;
@@ -95,11 +95,12 @@
             resp4.Checked = true;
             AgendaResponse_Checkbox resp5 = new AgendaResponse_Checkbox();
             resp5.AgendaItem = agenda5;
-            resp5.Checked = true;
+            resp5.Checked = false;
             reg1.CustomField_Responses.Add(resp1);
             reg1.CustomField_Responses.Add(resp2);
             reg1.CustomField_Responses.Add(resp3);
             reg1.CustomField_Responses.Add(resp4);
+            reg1.CustomField_Responses.Add(resp5);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
 
@@ -113,8 +114,10 @@
             PageObject.Backend.AttendeeInfo attendeeInfo = new PageObject.Backend.AttendeeInfo();
             attendeeInfo.OpenUrl(reg2.Id);
             resp2.Checked = false;
+            reg2.CustomField_Responses.Add(resp2);
             reg2.CustomField_Responses.Add(resp3);
             reg2.CustomField_Responses.Add(resp4);
+            resp5.Checked = true;
             reg2.CustomField_Responses.Add(resp5);
             KeywordProvider.BackendUpdate.UpdateCustomField(reg2);
             Assert.True(attendeeInfo.AgendaLable(agenda1).IsPresent);

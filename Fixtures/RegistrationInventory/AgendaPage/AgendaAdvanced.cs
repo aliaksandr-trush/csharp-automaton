@@ -208,9 +208,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.Agenda(reg1);
-
-            PageObject.PageObjectProvider.Register.RegistationSite.GoToPage(FormData.RegisterPage.Agenda);
+            KeywordProvider.RegistrationCreation.PerformDefaultActions_Agenda(reg1);
 
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(ag1);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(ag2);

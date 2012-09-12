@@ -56,7 +56,7 @@
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merch);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             Registrant reg1 = this.GenerateReg(ac1, ac3, ac5);
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);

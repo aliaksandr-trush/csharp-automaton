@@ -9,6 +9,21 @@
         {
             base.Add(response.Clone());
         }
+
+        public bool HasAgendaResponse()
+        {
+            bool hasAgendaResponse = false;
+            
+            foreach (CustomFieldResponse re in this)
+            {
+                if (re is AgendaResponse)
+                {
+                    hasAgendaResponse = true;
+                }
+            }
+
+            return hasAgendaResponse;
+        }
     }
 
     public class CustomFieldResponse
@@ -200,7 +215,7 @@
         {
             AgendaResponse_TextInput copy = new AgendaResponse_TextInput();
             copy.AgendaItem = this.AgendaItem;
-            this.CharToInput = string.Copy(copy.CharToInput);
+            copy.CharToInput = string.Copy(this.CharToInput);
             return copy;
         }
     }
