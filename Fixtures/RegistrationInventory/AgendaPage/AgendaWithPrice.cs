@@ -176,7 +176,7 @@
             evt.AgendaPage.AgendaItems.Add(agendaDCWithLimit);
             evt.AgendaPage.AgendaItems.Add(agendaDCRequired);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             DataCollection.Registrant reg = new DataCollection.Registrant(evt);
             reg.Payment_Method = paymentMethod;
@@ -278,7 +278,7 @@
             evt.AgendaPage.AgendaItems.Add(accessWithLimit);
             evt.AgendaPage.AgendaItems.Add(accessBulkCode);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             DataCollection.AgendaResponse_Checkbox resp1 = new DataCollection.AgendaResponse_Checkbox();
@@ -365,7 +365,7 @@
             group1.Secondaries.Add(reg2);
 
             KeywordProvider.RegistrationCreation.GroupRegistration(group1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 5 * 4);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 280);
 
             KeywordProvider.SignIn.SignIn(DataCollection.EventFolders.Folders.RegistrationInventory);
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);

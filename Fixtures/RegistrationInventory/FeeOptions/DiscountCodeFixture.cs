@@ -154,7 +154,7 @@
             evt.MerchandisePage.Merchandises.Add(merch1);
             evt.MerchandisePage.Merchandises.Add(merch2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             EventFeeResponse resp1 = new EventFeeResponse(regType1);
             resp1.Code = dc1;
@@ -277,7 +277,7 @@
             diffDcEvt.MerchandisePage = new MerchandisePage();
             diffDcEvt.MerchandisePage.Merchandises.Add(diffDcMerch);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffDcEvt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffDcEvt, false);
 
             this.GenerateRegDiffDc(dc1, dc5, dc9);
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 120);
@@ -340,7 +340,7 @@
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merchandise);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             EventFeeResponse resp1 = new EventFeeResponse(regType);
             resp1.Code = dc1;
@@ -485,7 +485,7 @@
 
             evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethod.Check));
 
-            Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             // First registration: no code
             DataCollection.EventFeeResponse evtFeeResponse = new EventFeeResponse();
@@ -667,7 +667,7 @@
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merchDCPercentIncreaceUnderZero);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             EventFeeResponse resp1 = new EventFeeResponse(regType);
             resp1.Code = dCFix;

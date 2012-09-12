@@ -46,7 +46,7 @@
                 case RegisterMethod.EventCalendar:
 
                     Manager.EventList_EventRow eventRow = new Manager.EventList_EventRow(reg.Event.Id);
-                    url = eventRow.URL;
+                    url = eventRow.EventURL;
 
                     break;
 

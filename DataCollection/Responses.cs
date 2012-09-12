@@ -9,6 +9,21 @@
         {
             base.Add(response.Clone());
         }
+
+        public bool HasAgendaResponse()
+        {
+            bool hasAgendaResponse = false;
+            
+            foreach (CustomFieldResponse re in this)
+            {
+                if (re is AgendaResponse)
+                {
+                    hasAgendaResponse = true;
+                }
+            }
+
+            return hasAgendaResponse;
+        }
     }
 
     public class CustomFieldResponse

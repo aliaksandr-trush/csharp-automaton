@@ -20,6 +20,13 @@
             return new AgendaRow(agenda);
         }
 
+        public bool IsAgendaItemPresent(AgendaItem agenda)
+        {
+            WebElement a = new WebElement(string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
+                        LocateBy.XPath);
+            return a.IsPresent;
+        }
+
         public bool IsChoiceItemPresent(ChoiceItem choice)
         {
             WebElement a = new WebElement(string.Format("//*[contains(text(),'{0}')]", choice.Name), LocateBy.XPath);
@@ -109,7 +116,7 @@
 
                 case FormData.CustomFieldType.FileUpload:
                     this.AgendaType = new ButtonOrLink(
-                        string.Format("//li[@data-id='{0}']//a[@class='add_button']", agenda.Id.ToString()), 
+                        string.Format("//li[@data-id='{0}']//a[@class='add_button']", agenda.Id.ToString()),
                         LocateBy.XPath);
 
                     this.GetAgendaLocation(agenda);
@@ -131,7 +138,7 @@
         private int GetAgendaItemId(AgendaItem agenda)
         {
             WebElement element_Li = null;
-            
+
             switch (agenda.Type)
             {
                 case FormData.CustomFieldType.OneLineText:
@@ -161,7 +168,7 @@
                 case FormData.CustomFieldType.FileUpload:
                 case FormData.CustomFieldType.ContinueButton:
                     element_Li = new WebElement(
-                        string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[p[text()='{0}']]]", agenda.NameOnForm), 
+                        string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[p[text()='{0}']]]", agenda.NameOnForm),
                         LocateBy.XPath);
 
                     break;
@@ -169,7 +176,7 @@
                 default:
                     break;
             }
-            
+
             return Convert.ToInt32(element_Li.GetAttribute("data-id"));
         }
 
@@ -188,19 +195,19 @@
                 case FormData.CustomFieldType.Dropdown:
                 case FormData.CustomFieldType.Duration:
                     return new Label(
-                        string.Format("//li[@data-id='{0}']//label[@for='{0}']", agenda.Id.ToString()), 
+                        string.Format("//li[@data-id='{0}']//label[@for='{0}']", agenda.Id.ToString()),
                         LocateBy.XPath);
 
                 case FormData.CustomFieldType.SectionHeader:
                     return new Label(
                         string.Format("//li[@data-id='{0}']//div[contains(text(),'{1}')]", agenda.Id.ToString(), agenda.NameOnForm),
                         LocateBy.XPath);
-                    
+
                 case FormData.CustomFieldType.RadioButton:
                 case FormData.CustomFieldType.FileUpload:
                 case FormData.CustomFieldType.ContinueButton:
                     return new Label(
-                        string.Format("//li[@data-id='{0}']//p[text()='{1}']", agenda.Id.ToString(), agenda.NameOnForm), 
+                        string.Format("//li[@data-id='{0}']//p[text()='{1}']", agenda.Id.ToString(), agenda.NameOnForm),
                         LocateBy.XPath);
 
                 default:
@@ -212,7 +219,7 @@
         {
             Label dateTime = new Label(string.Format("//li[@data-id='{0}']//div[@class='place'][span[text()='Date:']]", agenda.Id.ToString()), LocateBy.XPath);
             Label time = new Label(string.Format("//li[@data-id='{0}']//div[@class='place'][span[text()='Time:']]", agenda.Id.ToString()), LocateBy.XPath);
-            
+
             if (time.IsPresent)
             {
                 dateTime = time;

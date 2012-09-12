@@ -66,6 +66,19 @@
         #endregion
 
         #region Basic Actions
+        public void GoToPage(DataCollection.FormData.RegisterPage registerPage)
+        {
+            ButtonOrLink pageLink = new ButtonOrLink(
+                string.Format("//a[contains(@id,'StepBar')][text()='{0}']",
+                CustomStringAttribute.GetCustomString(registerPage)), LocateBy.XPath);
+
+            pageLink.WaitForDisplay();
+            pageLink.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
         public Label Text(string text)
         {
             return new Label(string.Format("//*[contains(text(),'{0}')]", text), LocateBy.XPath);
