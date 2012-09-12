@@ -200,7 +200,7 @@
         {
             AgendaResponse_TextInput copy = new AgendaResponse_TextInput();
             copy.AgendaItem = this.AgendaItem;
-            this.CharToInput = string.Copy(copy.CharToInput);
+            copy.CharToInput = string.Copy(this.CharToInput);
             return copy;
         }
     }
