@@ -15,7 +15,7 @@
 	public class EmailInvitationFixture : FixtureBase
 	{
 		#region emailContent
-		private const string HTMLContentToEnter = @"<font face=""DejaVu Sans Mono""><strong>Dear /*Merge: FirstName*/,"+
+		private readonly static string HTMLContentToEnter = @"<font face=""DejaVu Sans Mono""><strong>Dear /*Merge: FirstName*/,"+
 			@"</strong><br><br>We are proud to announce the opening of registrations for /*Merge: EventTitle*/. We hope " + 
 			@"you will be able to join us this year.</font><font face=""DejaVu Sans Mono""><br><br></font><div align=""right"">" +
 			@"<font face=""DejaVu Sans Mono""><em>The Event</em></font><font face=""DejaVu Sans Mono""> is located at: /*Merge:" +
@@ -23,20 +23,22 @@
 			@"wish to join us, /*RegisterLink: Click Here to Register for this Event*/.</font><font face=""DejaVu Sans Mono""><br>" +
 			@"<br>Thank you for your continued interest in our events. </font><font face=""DejaVu Sans Mono""><span style=""text" +
 			@"-decoration: underline;"">We hope to see you there. <br></span><br>Sincerely, <br>RegOnline</font><br>" + 
-			@"<a href=""https://beta.regonline.com/custImages/377977/betaregonline.txt""><br>A link to our flier.</a><br><br>" + 
-			@"<img style="""" src=""https://beta.regonline.com/custImages/377977/book-spine_thumb.png""><br>";
-		private const string ExpectedPreviewText = "<font face=\"DejaVu Sans Mono\"><b>Dear Jon,</b><br />\r\n<br />\r\nWe are " +
+			"<a href=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/betaregonline.txt\"><br>A link to our flier.</a><br><br>" + 
+			"<img style=\"\" src=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/book-spine_thumb.png\"><br>";
+
+        private readonly static string ExpectedPreviewText = "<font face=\"DejaVu Sans Mono\"><b>Dear Jon,</b><br />\r\n<br />\r\nWe are " +
 			"proud to announce the opening of registrations for Event Title. We hope you will be able to join us this year.</font>" +
 			"<font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\n</font>\r\n<div align=\"right\"><font face=\"DejaVu Sans Mono\">" +
 			"<i>The Event</i></font><font face=\"DejaVu Sans Mono\"> is located at: /*Merge:LocationName*/, in Boulder. </font>" +
 			"<br />\r\n</div>\r\n<font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\n<br />\r\nIf you wish to join us, <a href=" +
-			"\"https://beta.regonline.com/t/c.aspx?0=0&amp;2=0&amp;8=1&amp;9=M1N8MSnv9mI=&amp;10=7&amp;1=0&amp;3=\">Click Here to" +
+			"\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "t/c.aspx?0=0&amp;2=0&amp;8=1&amp;9=M1N8MSnv9mI=&amp;10=7&amp;1=0&amp;3=\">Click Here to" +
 			" Register for this Event</a>.</font><font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\nThank you for your continued " + 
 			"interest in our events. </font><font face=\"DejaVu Sans Mono\"><u>We hope to see you there. <br />\r\n</u><br />\r" +
-			"\nSincerely, <br />\r\nRegOnline</font><br />\r\n<a href=\"https://beta.regonline.com/custImages/377977/betaregonline.txt\"" + 
+			"\nSincerely, <br />\r\nRegOnline</font><br />\r\n<a href=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/betaregonline.txt\"" + 
 			" re_target=\"\" target=\"_blank\"><br />\r\nA link to our flier.</a><br />\r\n<br />\r\n<img " + 
-			"src=\"https://beta.regonline.com/custImages/377977/book-spine_thumb.png\" style=\"\" /><br />";
-		private const string UpdatedHTMLContentToEnter = @"<font face=""DejaVu Sans Mono""><strong>Dear /*Merge: FirstName*/," +
+			"src=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/book-spine_thumb.png\" style=\"\" /><br />";
+
+        private readonly static string UpdatedHTMLContentToEnter = @"<font face=""DejaVu Sans Mono""><strong>Dear /*Merge: FirstName*/," +
 			@"</strong><br><br>We are proud to announce the opening of registrations for /*Merge: EventTitle*/. We hope " +
 			@"you will be able to join us this year.</font><font face=""DejaVu Sans Mono""><br><br></font><div align=""right"">" +
 			@"<font face=""DejaVu Sans Mono""><em>The Event</em></font><font face=""DejaVu Sans Mono""> is located at: /*Merge:" +
@@ -45,21 +47,23 @@
 			@"<br>Don't forget to mark the date! /*Merge: AddToCalendar*/<br>" +
 			@"<br>Thank you for your continued interest in our events. </font><font face=""DejaVu Sans Mono""><span style=""text" +
 			@"-decoration: underline;"">We hope to see you there. <br></span><br>Sincerely, <br>RegOnline</font><br>" +
-			@"<a href=""https://beta.regonline.com/custImages/377977/betaregonline.txt""><br>A link to our flier.</a><br><br>" +
-			@"<img style="""" src=""https://beta.regonline.com/custImages/377977/book-spine_thumb.png""><br>";
-		private const string ExpectedUpdatedPreviewText = "<font face=\"DejaVu Sans Mono\"><b>Dear Jon,</b><br />\r\n<br />\r\nWe are " +
+			"<a href=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/betaregonline.txt\"><br>A link to our flier.</a><br><br>" +
+			"<img style=\"\" src=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/book-spine_thumb.png\"><br>";
+
+        private readonly static string ExpectedUpdatedPreviewText = "<font face=\"DejaVu Sans Mono\"><b>Dear Jon,</b><br />\r\n<br />\r\nWe are " +
 			"proud to announce the opening of registrations for Event Title. We hope you will be able to join us this year.</font>" +
 			"<font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\n</font>\r\n<div align=\"right\"><font face=\"DejaVu Sans Mono\">" +
 			"<i>The Event</i></font><font face=\"DejaVu Sans Mono\"> is located at: /*Merge:LocationName*/, in Boulder. </font>" +
 			"<br />\r\n</div>\r\n<font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\n<br />\r\nIf you wish to join us, <a href=" +
-			"\"https://beta.regonline.com/t/c.aspx?0=0&amp;2=0&amp;8=1&amp;9=M1N8MSnv9mI=&amp;10=7&amp;1=0&amp;3=\">Click Here to" +
+			"\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "t/c.aspx?0=0&amp;2=0&amp;8=1&amp;9=M1N8MSnv9mI=&amp;10=7&amp;1=0&amp;3=\">Click Here to" +
 			" Register for this Event</a>.</font><font face=\"DejaVu Sans Mono\"><br />\r\n<br />\r\n" +
 			"Don't forget to mark the date! <br />\r\n<br />\r\nThank you for your continued " +
 			"interest in our events. </font><font face=\"DejaVu Sans Mono\"><u>We hope to see you there. <br />\r\n</u><br />\r" +
-			"\nSincerely, <br />\r\nRegOnline</font><br />\r\n<a href=\"https://beta.regonline.com/custImages/377977/betaregonline.txt\"" +
+			"\nSincerely, <br />\r\nRegOnline</font><br />\r\n<a href=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/betaregonline.txt\"" +
 			" re_target=\"\" target=\"_blank\"><br />\r\nA link to our flier.</a><br />\r\n<br />\r\n<img " +
-			"src=\"https://beta.regonline.com/custImages/377977/book-spine_thumb.png\" style=\"\" /><br />";
-		private const string ExpectedEmailInvitationText = "Hello a,\r\n   We wanted to remind you that the " + EventName +
+			"src=\"" + ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "custImages/377977/book-spine_thumb.png\" style=\"\" /><br />";
+		
+        private const string ExpectedEmailInvitationText = "Hello a,\r\n   We wanted to remind you that the " + EventName +
 			" is taking place on at Location:\r\nAutomation Test Room One\r\n4750 Walnut Street\r\nBoulder, CO 99701.   \r\n   We " +
 			"expect the available registrations to fill up quickly. So, we would like to offer you the opportunity to reserve your " +
 			"spot at a reduced early bird rate! To RSVP, click here .  \r\n   We look forward to hearing from you!  \r\n   Thank you,   " +

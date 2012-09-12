@@ -14,7 +14,7 @@
             this.Name = name;
         }
 
-        public string URL
+        public string CurrentURL
         {
             get
             {

@@ -100,7 +100,7 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventHome_Click();
-            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.URL;
+            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CurrentURL;
             PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventContactInfo_Click();
