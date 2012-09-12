@@ -171,7 +171,7 @@
             evt.AgendaPage.AgendaItems.Add(ag6);
             evt.AgendaPage.AgendaItems.Add(ag7);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = ag1;
@@ -208,7 +208,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(reg1);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.Agenda(reg1);
+            KeywordProvider.RegistrationCreation.PerformDefaultActions_Agenda(reg1);
 
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(ag1);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(ag2);

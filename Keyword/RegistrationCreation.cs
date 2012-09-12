@@ -141,10 +141,10 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
-        public void PersonalInfo(Registrant reg)
+        public void PerformDefaultActions_PersonalInfo(Registrant reg)
         {
             reg.SetCurrentRegistrantLastName();
-            
+
             if (reg.FirstName != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.FirstName.Type(reg.FirstName);
@@ -156,7 +156,7 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.LastName.Type(reg.LastName);
-            
+
             if (reg.JobTitle != null)
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type(reg.JobTitle);
@@ -206,7 +206,7 @@
             if (reg.BirthDate.HasValue)
             {
                 string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
-                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.SetValue(date);
             }
 
             if (reg.Gender.HasValue)
@@ -253,14 +253,22 @@
                             case FormData.CustomFieldType.Contribution:
                             case FormData.CustomFieldType.Date:
                             case FormData.CustomFieldType.Time:
+                                // To implement
+                                break;
                             case FormData.CustomFieldType.FileUpload:
-                                //To implement
+                                // Impossible
+                                break;
                             default:
                                 break;
                         }
                     }
                 }
             }
+        }
+
+        public void PersonalInfo(Registrant reg)
+        {
+            this.PerformDefaultActions_PersonalInfo(reg);
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish.IsPresent)
             {
@@ -272,7 +280,7 @@
             }
         }
 
-        public void Agenda(Registrant reg)
+        public void PerformDefaultActions_Agenda(Registrant reg)
         {
             if (reg.CustomField_Responses.Count != 0)
             {
@@ -301,7 +309,7 @@
                                     AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                     AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
                                     ((CheckBox)row.AgendaType).Set(resp.Checked.Value);
-                                    
+
                                     if (resp.Code != null)
                                     {
                                         row.DiscountCodeInput.Type(resp.Code.Code);
@@ -399,14 +407,15 @@
                     }
                 }
             }
-
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            }
         }
 
-        public void Merchandise(Registrant reg)
+        public void Agenda(Registrant reg)
+        {
+            this.PerformDefaultActions_Agenda(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+        }
+
+        public void PerformDefaultActions_Merchandise(Registrant reg)
         {
             if (reg.Merchandise_Responses.Count != 0)
             {
@@ -416,7 +425,7 @@
                     {
                         MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                         PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchInputField(resp.Merchandise_Item).Type(resp.Quantity);
-                        
+
                         if (resp.Discount_Code != null)
                         {
                             PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
@@ -432,11 +441,12 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.ClickPageContentDivToRefresh();
+        }
 
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Continue.IsPresent)
-            {
-                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            }
+        public void Merchandise(Registrant reg)
+        {
+            this.PerformDefaultActions_Merchandise(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
         }
 
         public void Checkout(Registrant reg)
