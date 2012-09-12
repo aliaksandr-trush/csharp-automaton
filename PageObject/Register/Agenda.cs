@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.WebElements;
+    using OpenQA.Selenium;
 
     public class Agenda : Window
     {
@@ -61,93 +62,106 @@
         public AgendaRow(AgendaItem agenda)
         {
             Label agendaNameLabel = new Label(string.Format("//legend[text()='Agenda']/..//*[contains(text(),'{0}')]", agenda.NameOnForm), LocateBy.XPath);
-            agenda.Id = Convert.ToInt32(agendaNameLabel.GetAttribute("for"));
 
-            switch (agenda.Type)
+            if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.Name == "ActiveEurope")
             {
-                case FormData.CustomFieldType.AlwaysSelected:
-                    AgendaType = new CheckBox(string.Format("//input[@id='{0}'][@disabled='disabled'][@checked='checked']", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
-                    this.GetAgendaDate(agenda);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+                agendaNameLabel = new Label(string.Format("//legend[text()='Activities']/..//*[contains(text(),'{0}')]", agenda.NameOnForm), LocateBy.XPath);
+            }
 
-                case FormData.CustomFieldType.CheckBox:
-                    AgendaType = new CheckBox(string.Format(locator + "//input", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
-                    LimitFullMessage = new Label(string.Format(locator + "//div[@class='capacityMsg']", agenda.Id.ToString()), LocateBy.XPath);
-                    WaitlistMessage = new Label(string.Format(locator + "//span[@class='wlist']", agenda.Id.ToString()), LocateBy.XPath);
-                    Details = new ButtonOrLink(string.Format(locator + "//span/a[@href]", agenda.Id.ToString()), LocateBy.XPath);
-                    this.GetAgendaDate(agenda);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+            if (agendaNameLabel.IsPresent)
+            {
+                agenda.Id = Convert.ToInt32(agendaNameLabel.GetAttribute("for"));
 
-                case FormData.CustomFieldType.RadioButton:
-                    AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
-                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
-                    this.GetAgendaDate(agenda);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+                switch (agenda.Type)
+                {
+                    case FormData.CustomFieldType.AlwaysSelected:
+                        AgendaType = new CheckBox(string.Format("//input[@id='{0}'][@disabled='disabled'][@checked='checked']", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                        this.GetAgendaDate(agenda);
+                        this.GetAgendaLocation(agenda);
+                        this.GetAgendaPrice(agenda);
+                        break;
 
-                case FormData.CustomFieldType.Dropdown:
-                    AgendaType = new MultiChoiceDropdown(string.Format(locator + "//select", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
-                    this.GetAgendaDate(agenda);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+                    case FormData.CustomFieldType.CheckBox:
+                        AgendaType = new CheckBox(string.Format(locator + "//input", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                        LimitFullMessage = new Label(string.Format(locator + "//div[@class='capacityMsg']", agenda.Id.ToString()), LocateBy.XPath);
+                        WaitlistMessage = new Label(string.Format(locator + "//span[@class='wlist']", agenda.Id.ToString()), LocateBy.XPath);
+                        Details = new ButtonOrLink(string.Format(locator + "//span/a[@href]", agenda.Id.ToString()), LocateBy.XPath);
+                        this.GetAgendaDate(agenda);
+                        this.GetAgendaLocation(agenda);
+                        this.GetAgendaPrice(agenda);
+                        break;
 
-                case FormData.CustomFieldType.Number:
-                case FormData.CustomFieldType.OneLineText:
-                case FormData.CustomFieldType.Contribution:
-                case FormData.CustomFieldType.Paragraph:
-                    AgendaType = new TextBox(agenda.Id.ToString(), LocateBy.Id);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    break;
+                    case FormData.CustomFieldType.RadioButton:
+                        AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
+                        DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                        this.GetAgendaDate(agenda);
+                        this.GetAgendaLocation(agenda);
+                        this.GetAgendaPrice(agenda);
+                        break;
 
-                case FormData.CustomFieldType.Date:
-                    AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Datepicker')]", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    break;
+                    case FormData.CustomFieldType.Dropdown:
+                        AgendaType = new MultiChoiceDropdown(string.Format(locator + "//select", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                        this.GetAgendaDate(agenda);
+                        this.GetAgendaLocation(agenda);
+                        this.GetAgendaPrice(agenda);
+                        break;
 
-                case FormData.CustomFieldType.Time:
-                    AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Timepicker')]", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
-                    break;
+                    case FormData.CustomFieldType.Number:
+                    case FormData.CustomFieldType.OneLineText:
+                    case FormData.CustomFieldType.Contribution:
+                    case FormData.CustomFieldType.Paragraph:
+                        AgendaType = new TextBox(agenda.Id.ToString(), LocateBy.Id);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        break;
 
-                case FormData.CustomFieldType.FileUpload:
-                    AgendaType = new ButtonOrLink(string.Format(locator + "//a[@class='add_button']", agenda.Id.ToString()), LocateBy.XPath);
-                    AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
-                    this.GetAgendaLocation(agenda);
-                    this.GetAgendaPrice(agenda);
-                    break;
+                    case FormData.CustomFieldType.Date:
+                        AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Datepicker')]", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        break;
 
-                case FormData.CustomFieldType.SectionHeader:
-                    AgendaLabel = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
-                    break;
+                    case FormData.CustomFieldType.Time:
+                        AgendaType = new TextBox(string.Format("//input[@id='{0}'][contains(@class, 'Timepicker')]", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//label", agenda.Id.ToString()), LocateBy.XPath);
+                        break;
 
-                case FormData.CustomFieldType.ContinueButton:
-                    AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
-                    break;
+                    case FormData.CustomFieldType.FileUpload:
+                        AgendaType = new ButtonOrLink(string.Format(locator + "//a[@class='add_button']", agenda.Id.ToString()), LocateBy.XPath);
+                        AgendaLabel = new Label(string.Format(locator + "//p[@class='label']", agenda.Id.ToString()), LocateBy.XPath);
+                        this.GetAgendaLocation(agenda);
+                        this.GetAgendaPrice(agenda);
+                        break;
 
-                case FormData.CustomFieldType.Duration:
+                    case FormData.CustomFieldType.SectionHeader:
+                        AgendaLabel = new Label(string.Format(locator + "//div", agenda.Id.ToString()), LocateBy.XPath);
+                        break;
 
-                    AgendaType = new TextBox(
-                        string.Format(locator + "//input[@id='{0}'][@class='durationEntry hasTimepicker dtPickerShadow']", agenda.Id), 
-                        LocateBy.XPath);
+                    case FormData.CustomFieldType.ContinueButton:
+                        AgendaType = new ButtonOrLink(string.Format(locator + "//button", agenda.Id.ToString()), LocateBy.XPath);
+                        break;
 
-                    AgendaLabel = new Label(string.Format(locator + "//label[@for='{0}']", agenda.Id), LocateBy.XPath);
+                    case FormData.CustomFieldType.Duration:
 
-                    break;
+                        AgendaType = new TextBox(
+                            string.Format(locator + "//input[@id='{0}'][@class='durationEntry hasTimepicker dtPickerShadow']", agenda.Id),
+                            LocateBy.XPath);
 
-                default:
-                    break;
+                        AgendaLabel = new Label(string.Format(locator + "//label[@for='{0}']", agenda.Id), LocateBy.XPath);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                AgendaLabel = agendaNameLabel;
             }
         }
 

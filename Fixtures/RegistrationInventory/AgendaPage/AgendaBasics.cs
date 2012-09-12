@@ -54,7 +54,7 @@
             AgendaPage.AgendaItems.Add(AgendaItem3);
             evt.AgendaPage = AgendaPage;
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
@@ -203,7 +203,7 @@
             evt.AgendaPage.AgendaItems.Add(AG3);
             evt.AgendaPage.AgendaItems.Add(AG4);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
@@ -437,7 +437,7 @@
             DataCollection.AgendaItem_Duration duration = new AgendaItem_Duration("AG_Duration");
             evt.AgendaPage.AgendaItems.Add(duration);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
             AgendaResponse_Duration duration_Response = new AgendaResponse_Duration();
@@ -515,7 +515,7 @@
             AGCheckbox.Location = DataCollection.DefaultPersonalInfo.AddressLineOne;
             evt.AgendaPage.AgendaItems.Add(AGCheckbox);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg = new Registrant(evt);
 
@@ -551,7 +551,7 @@
             evt.AgendaPage.AgendaItems.Add(AgendaShowMessage);
             evt.AgendaPage.AgendaItems.Add(AgendaWaitlist);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             Registrant reg1 = new Registrant(evt);
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();

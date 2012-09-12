@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
-  <Environments EnvironmentChosen="Beta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
+  <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -15,7 +15,7 @@
 		  <Password>rol4ever</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-6</TimeZoneOffset>
+	  <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
@@ -25,7 +25,7 @@
 		  <Password>alphaKK0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-6</TimeZoneOffset>
+	  <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	</Environment>
@@ -43,7 +43,7 @@
 		  <Password>regression0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-6</TimeZoneOffset>
+	  <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
@@ -53,7 +53,7 @@
 		  <Password>brucesun0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-6</TimeZoneOffset>
+	  <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="ActiveEurope">
@@ -63,7 +63,7 @@
 		  <Password>regression0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>1</TimeZoneOffset>
+	  <TimeZoneOffset>1</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="SSO">
@@ -73,7 +73,7 @@
 		  <Password>sn00ch37</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>New</XAuthVersion>
-      <TimeZoneOffset>-6</TimeZoneOffset>
+	  <TimeZoneOffset>-6</TimeZoneOffset>
 	  </Account>
 	</Environment>
 
@@ -90,7 +90,7 @@
 		  <Password>regression0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-7</TimeZoneOffset>
+	  <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="Alternative">
@@ -100,7 +100,7 @@
 		  <Password>brucesun0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-7</TimeZoneOffset>
+	  <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="ActiveEurope">
@@ -110,7 +110,7 @@
 		  <Password>regression0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>-7</TimeZoneOffset>
+	  <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 
 	  <Account Name="SSO">
@@ -120,7 +120,7 @@
 		  <Password>sn00ch37</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>New</XAuthVersion>
-      <TimeZoneOffset>-7</TimeZoneOffset>
+	  <TimeZoneOffset>-7</TimeZoneOffset>
 	  </Account>
 	</Environment>
 
@@ -137,107 +137,107 @@
 		  <Password>ROLChina0</Password>
 		  <Folder>Regression</Folder>
 		  <XAuthVersion>Old</XAuthVersion>
-      <TimeZoneOffset>8</TimeZoneOffset>
+	  <TimeZoneOffset>8</TimeZoneOffset>
 	  </Account>
 	</Environment>
   </Environments>
 
   <WebServices>
 	  <WebService Name="LoginService" HTTPS="false">
-	    <Url>webservices/users/login.asmx</Url>
-	    <EndpointConfigName>LoginSoap</EndpointConfigName>
+		<Url>webservices/users/login.asmx</Url>
+		<EndpointConfigName>LoginSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="RegistrationService" HTTPS="false">
-	    <Url>webservices/Registrations/RegistrationService.asmx</Url>
-	    <EndpointConfigName>RegistrationServiceSoap</EndpointConfigName>
+		<Url>webservices/Registrations/RegistrationService.asmx</Url>
+		<EndpointConfigName>RegistrationServiceSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="EventService" HTTPS="true">
-	    <Url>webservices/Events/EventService.asmx</Url>
-	    <EndpointConfigName>EventServiceSoap</EndpointConfigName>
+		<Url>webservices/Events/EventService.asmx</Url>
+		<EndpointConfigName>EventServiceSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="Default" HTTPS="true">
-	    <Url>api/default.asmx</Url>
-	    <EndpointConfigName>RegOnline APISoap</EndpointConfigName>
+		<Url>api/default.asmx</Url>
+		<EndpointConfigName>RegOnline APISoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="CFResponseService" HTTPS="false">
-	    <Url>webservices/CustomFieldResponseWS.asmx</Url>
-	    <EndpointConfigName>CustomFieldResponseWSSoap</EndpointConfigName>
+		<Url>webservices/CustomFieldResponseWS.asmx</Url>
+		<EndpointConfigName>CustomFieldResponseWSSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="CheckInRegService" HTTPS="false">
-	    <Url>webservices/CheckInReg.asmx</Url>
-	    <EndpointConfigName>CheckInRegSoap</EndpointConfigName>
+		<Url>webservices/CheckInReg.asmx</Url>
+		<EndpointConfigName>CheckInRegSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="CheckinService" HTTPS="false">
-	    <Url>webservices/Checkin.asmx</Url>
-	    <EndpointConfigName>CheckInSoap</EndpointConfigName>
+		<Url>webservices/Checkin.asmx</Url>
+		<EndpointConfigName>CheckInSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="GetEventFieldsService" HTTPS="false">
-	    <Url>webservices/geteventfields.asmx</Url>
-	    <EndpointConfigName>getEventFieldsSoap</EndpointConfigName>
+		<Url>webservices/geteventfields.asmx</Url>
+		<EndpointConfigName>getEventFieldsSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="GetEventRegistrationsService" HTTPS="false">
-	    <Url>webservices/geteventregistrations.asmx</Url>
-	    <EndpointConfigName>getEventRegistrationsSoap</EndpointConfigName>
+		<Url>webservices/geteventregistrations.asmx</Url>
+		<EndpointConfigName>getEventRegistrationsSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="GetEventsService" HTTPS="false">
-	    <Url>webservices/getEvents.asmx</Url>
-	    <EndpointConfigName>getEventsSoap</EndpointConfigName>
+		<Url>webservices/getEvents.asmx</Url>
+		<EndpointConfigName>getEventsSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="MemberAuthService" HTTPS="false">
-	    <Url>webservices/memberAuthorization.asmx</Url>
-	    <EndpointConfigName>memberAuthorizationSoap</EndpointConfigName>
+		<Url>webservices/memberAuthorization.asmx</Url>
+		<EndpointConfigName>memberAuthorizationSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="RegTrackerService" HTTPS="false">
-	    <Url>webservices/WSRegBug.asmx</Url>
-	    <EndpointConfigName>WSRegBugSoap</EndpointConfigName>
+		<Url>webservices/WSRegBug.asmx</Url>
+		<EndpointConfigName>WSRegBugSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="RegUpdateService" HTTPS="false">
-	    <Url>webservices/RegistrationUpdateService.asmx</Url>
-	    <EndpointConfigName>RegistrationUpdateServiceSoap</EndpointConfigName>
+		<Url>webservices/RegistrationUpdateService.asmx</Url>
+		<EndpointConfigName>RegistrationUpdateServiceSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="ReportsService" HTTPS="false">
-	    <Url>activeReports/regOnline.asmx</Url>
-	    <EndpointConfigName>Regonline Web ServicesSoap</EndpointConfigName>
+		<Url>activeReports/regOnline.asmx</Url>
+		<EndpointConfigName>Regonline Web ServicesSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="RetrieveAllRegsService" HTTPS="false">
-	    <Url>webservices/retrieveallregistrations.asmx</Url>
-	    <EndpointConfigName>RetrieveAllRegistrationsManagerSoap</EndpointConfigName>
+		<Url>webservices/retrieveallregistrations.asmx</Url>
+		<EndpointConfigName>RetrieveAllRegistrationsManagerSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="RetrieveSingleRegService" HTTPS="false">
-	    <Url>webservices/RetrieveSingleRegistration.asmx</Url>
-	    <EndpointConfigName>RetrieveSingleRegistrationManagerSoap</EndpointConfigName>
+		<Url>webservices/RetrieveSingleRegistration.asmx</Url>
+		<EndpointConfigName>RetrieveSingleRegistrationManagerSoap</EndpointConfigName>
 	  </WebService>
 
 	  <WebService Name="XmlUpdaterService" HTTPS="false">
-	    <Url>webservices/XmlUpdater.asmx</Url>
-	    <EndpointConfigName>XmlUpdaterSoap</EndpointConfigName>
+		<Url>webservices/XmlUpdater.asmx</Url>
+		<EndpointConfigName>XmlUpdaterSoap</EndpointConfigName>
 	  </WebService>
   </WebServices>
 	
   <!-- "DirectStartup": whether to startup browser directly (i.e. without selenium server) -->
   <Browsers Current="Firefox" DirectStartup="false">
 	<Browser Name="Firefox">
-    <Server Path="" Host="127.0.0.1" Port="9999"/>
-	  <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	<Server Path="" Host="127.0.0.1" Port="9999"/>
+	  <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
 	<Browser Name="Chrome">
-    <Server Path="../Reference/ChromeDriver" Host="127.0.0.1" Port="9998"/>
+	<Server Path="../Reference/ChromeDriver" Host="127.0.0.1" Port="9998"/>
 	  <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
 	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	</Browser>
