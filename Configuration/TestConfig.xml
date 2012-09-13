@@ -243,5 +243,5 @@
 	</Browser>
   </Browsers>
 
-  <NUnitAddin ReportBack="true" />
+  <NUnitAddin ReportBack="false" />
 </TestConfig>
