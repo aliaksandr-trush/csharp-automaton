@@ -10,6 +10,7 @@
         public Label AgendaDetailsPopup = new Label(
             "//div[@class='tooltipWrapper tooltipLightbox ui-dialog-content ui-widget-content']/div[@class='tooltipWrapperContent']",
             LocateBy.XPath);
+
         public ButtonOrLink CloseDetailsPopup = new ButtonOrLink("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
         public Window AgendaDetailsWindow = new Window();
         public ButtonOrLink RecalculateTotal = new ButtonOrLink("//div[@class='sectionTotal']/button[text()='Recalculate Total']", LocateBy.XPath);
@@ -22,8 +23,10 @@
 
         public bool IsAgendaItemPresent(AgendaItem agenda)
         {
-            WebElement a = new WebElement(string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
-                        LocateBy.XPath);
+            WebElement a = new WebElement(
+                string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
+                LocateBy.XPath);
+
             return a.IsPresent;
         }
 
@@ -97,7 +100,7 @@
                     break;
 
                 case FormData.CustomFieldType.Dropdown:
-                    this.AgendaType = new MultiChoiceDropdown(agenda.Id.ToString(), LocateBy.Id);
+                    this.AgendaType = new MultiChoiceDropdown(string.Format("//select[@id='{0}']", agenda.Id.ToString()), LocateBy.XPath);
                     this.DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
@@ -137,6 +140,11 @@
 
         private int GetAgendaItemId(AgendaItem agenda)
         {
+            return Convert.ToInt32(this.GetAgendaLiElement(agenda).GetAttribute("data-id"));
+        }
+
+        public WebElement GetAgendaLiElement(AgendaItem agenda)
+        {
             WebElement element_Li = null;
 
             switch (agenda.Type)
@@ -151,9 +159,23 @@
                 case FormData.CustomFieldType.Number:
                 case FormData.CustomFieldType.Dropdown:
                 case FormData.CustomFieldType.Duration:
+
                     element_Li = new WebElement(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
                         LocateBy.XPath);
+
+                    if (agenda is AgendaItem_Common)
+                    {
+                        AgendaItem_Common a = agenda as AgendaItem_Common;
+
+                        if (a.SpacesAvailable.HasValue)
+                        {
+                            element_Li.Locator = string.Format(
+                                "//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[contains(text(),'{0}')]]]", 
+                                agenda.NameOnForm, 
+                                a.SpacesAvailable.Value);
+                        }
+                    }
 
                     break;
 
@@ -177,7 +199,7 @@
                     break;
             }
 
-            return Convert.ToInt32(element_Li.GetAttribute("data-id"));
+            return element_Li;
         }
 
         private Label GetAngedaLabel(AgendaItem agenda)

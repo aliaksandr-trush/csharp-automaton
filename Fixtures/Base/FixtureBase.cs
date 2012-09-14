@@ -88,6 +88,12 @@
         {
             if (RequiresBrowser)
             {
+                if (ConfigReader.DefaultProvider.AllConfiguration.Browsers.DirectStartup)
+                {
+                    WebDriverUtility.DefaultProvider.CaptureScreenshot();
+                }
+
+                Utility.ThreadSleep(1);
                 WebDriverUtility.DefaultProvider.Exit();
             }
         }

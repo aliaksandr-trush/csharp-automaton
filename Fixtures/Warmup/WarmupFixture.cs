@@ -83,10 +83,13 @@
         /// </summary>
         private void TouchRegTransferPage()
         {
-            string url__Format_regTransferPage = 
-                "https://beta.regonline.com/reports/RegTransfer.aspx?EventSessionId={0}&EventId={1}&RegisterId=0";
+            string url__Format_regTransferPage = "{0}reports/RegTransfer.aspx?EventSessionId={1}&EventId={2}&RegisterId=0";
 
-            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(url__Format_regTransferPage, this.eventSessionId, this.eventId));
+            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(
+                url__Format_regTransferPage, 
+                Configuration.ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, 
+                this.eventSessionId, 
+                this.eventId));
         }
     }
 }

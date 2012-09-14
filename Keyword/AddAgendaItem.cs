@@ -148,15 +148,7 @@
             {
                 AgendaItem_Common ag = agenda as AgendaItem_Common;
 
-                if (ag.NameOnBadge != null && !agenda.NameOnBadge.Equals(agenda.NameOnForm))
-                {
-                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.IsPresent)
-                    {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
-                    }
-
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.Type(ag.NameOnBadge);
-                }
+                this.SetNameOnBadge(ag);
 
                 if (ag.StartDate.HasValue)
                 {
@@ -404,15 +396,7 @@
             {
                 AgendaItem_TextInput ag = agenda as AgendaItem_TextInput;
 
-                if (ag.NameOnBadge != null)
-                {
-                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.IsPresent)
-                    {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
-                    }
-
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.Type(ag.NameOnBadge);
-                }
+                this.SetNameOnBadge(ag);
 
                 if (ag.CharLimit.HasValue)
                 {
@@ -536,6 +520,19 @@
             #endregion
 
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
+        }
+
+        private void SetNameOnBadge(AgendaItem agenda)
+        {
+            if (agenda.NameOnBadge != null && !agenda.NameOnBadge.Equals(agenda.NameOnForm))
+            {
+                if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.IsPresent)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOptions_Click();
+                }
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnBadge.Type(agenda.NameOnBadge);
+            }
         }
     }
 }

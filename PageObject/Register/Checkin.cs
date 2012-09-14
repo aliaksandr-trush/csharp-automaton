@@ -81,13 +81,25 @@
 
         public RadioButton RegTypeRadio(RegType regType)
         {
-            Label regTypeNameLabel = new Label(string.Format("//ol[@id='radRegTypes']//*[contains(text(),'{0}')]", regType.RegTypeName), LocateBy.XPath);
-            string regTypeForString = regTypeNameLabel.GetAttribute("for");
-            string tmp = regTypeForString.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
+            Label label = this.GetRegTypeLabel(regType);
+            string attribute_For = label.GetAttribute("for");
+            string tmp = attribute_For.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
             regType.RegTypeId = Convert.ToInt32(tmp);
 
-            return new RadioButton(
-                string.Format("//input[@value='{0}']", regType.RegTypeId), LocateBy.XPath);
+            return new RadioButton(attribute_For, LocateBy.Id);
+        }
+
+        public void VerifyRegTypeDisplay(RegType regType, bool isDisplay)
+        {
+            Label label = this.GetRegTypeLabel(regType);
+            WebElement.VerifyDisplay(label, isDisplay);
+        }
+
+        private Label GetRegTypeLabel(RegType regType)
+        {
+            return new Label(
+                string.Format("//ol[@id='radRegTypes']//label[contains(text(),'{0}')]", regType.RegTypeName), 
+                LocateBy.XPath);
         }
 
         public void SelectRegTypeRadioButton(RegType regType)

@@ -276,15 +276,15 @@
             Registrant reg = new Registrant(evt1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType1).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType2).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType3).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType4).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType5).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType6).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType7).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType8).IsPresent);
+            WebElements.WebElement.VerifyDisplay(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType4, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType5, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType6, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType7, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType8, false);
 
             Event evt2 = new Event("RI-RegTypeOptions-DropDown");
 
