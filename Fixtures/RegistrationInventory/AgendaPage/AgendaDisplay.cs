@@ -169,7 +169,7 @@
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(reqByType2));
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminOnly));
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminAndReq));
-            KeywordProvider.RegistrationCreation.Agenda(reg3);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg2 = new Registrant(evt);
@@ -182,7 +182,7 @@
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(reqByType2));
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminOnly));
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsAgendaItemPresent(adminAndReq));
-            KeywordProvider.RegistrationCreation.Agenda(reg2);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg1 = new Registrant(evt);

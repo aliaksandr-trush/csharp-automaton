@@ -192,7 +192,7 @@
             this.CheckBibNumber(12, 13, 109, true);
             VerifyTool.VerifyValue(this.teamName, ReportMgr.GetTeamName(this.regs), "Team name for group regs in the same team: {0}");
             ReportMgr.CloseReportPopupWindow();
-            this.VerifyBibInEmail(104);
+            this.VerifyBibInEmail(109);
             this.CheckTeamNameInEmail();
         }
 

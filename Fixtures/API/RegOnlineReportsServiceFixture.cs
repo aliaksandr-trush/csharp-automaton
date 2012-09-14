@@ -30,7 +30,7 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineReportsServiceFixture()
-            : base(ConfigReader.WebServiceEnum.RegistrationService)
+            : base(ConfigReader.WebServiceEnum.ReportsService)
         {
             RequiresBrowser = true;
 

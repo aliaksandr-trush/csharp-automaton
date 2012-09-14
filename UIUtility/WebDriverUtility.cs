@@ -142,17 +142,19 @@
             this.timeOutSpan = timeOut;
         }
 
-        public void CaptureFailureScreenshot()
+        public void CaptureScreenshot()
         {
-            this.CaptureScreenshot(UIUtilityHelper.FAILURE_SCREENSHOT_FILE_NAME);
+            this.CaptureScreenshot(string.Format(
+                UIUtilityHelper.ScreenshotFileNameFormat, 
+                DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt")));
         }
 
         public void CaptureScreenshot(string fileName)
         {
-            this.CaptureScreenshot(System.IO.Directory.GetCurrentDirectory(), fileName);
+            this.CaptureScreenshot(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Screenshot"), fileName);
         }
 
-        public void CaptureScreenshot(string directoryName, string fileName)
+        private void CaptureScreenshot(string directoryName, string fileName)
         {
             if (!Directory.Exists(directoryName))
             {
@@ -160,7 +162,6 @@
             }
 
             string fullFileName = Path.Combine(directoryName, fileName);
-            this.MaximizeWindow();
 
             // Wait for 1 second before taking screenshot till the page can fully load
             Utility.ThreadSleep(1);

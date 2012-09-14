@@ -167,7 +167,7 @@
             catch
             {
                 // doesn't seem to be working on integrator...
-                WebDriverUtility.DefaultProvider.CaptureFailureScreenshot();
+                WebDriverUtility.DefaultProvider.CaptureScreenshot();
                 throw;
             }
             finally

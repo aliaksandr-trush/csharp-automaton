@@ -288,20 +288,20 @@
             this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Number, StringEnum.GetStringValue(LodgingCustomField.Numeric));
             this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.OneLineText, StringEnum.GetStringValue(LodgingCustomField.OneLineText));
             this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Time, StringEnum.GetStringValue(LodgingCustomField.Time));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.SectionHeader, StringEnum.GetStringValue(LodgingCustomField.SectionHeader));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.AlwaysSelected, StringEnum.GetStringValue(LodgingCustomField.AlwaysSelected));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.ContinueButton, StringEnum.GetStringValue(LodgingCustomField.ContinueButton));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Paragraph, StringEnum.GetStringValue(LodgingCustomField.Paragraph));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Date, StringEnum.GetStringValue(LodgingCustomField.Date));
-            this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.FileUpload, StringEnum.GetStringValue(LodgingCustomField.FileUpload));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.SectionHeader, StringEnum.GetStringValue(LodgingCustomField.SectionHeader));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.AlwaysSelected, StringEnum.GetStringValue(LodgingCustomField.AlwaysSelected));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.ContinueButton, StringEnum.GetStringValue(LodgingCustomField.ContinueButton));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Paragraph, StringEnum.GetStringValue(LodgingCustomField.Paragraph));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.Date, StringEnum.GetStringValue(LodgingCustomField.Date));
+            ////this.AddAndVerifyLodgingCustomField(CustomFieldManager.CustomFieldType.FileUpload, StringEnum.GetStringValue(LodgingCustomField.FileUpload));
 
             // Add/verify travel custom fields of each type
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.CheckBox, StringEnum.GetStringValue(TravelCustomField.Checkbox));
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.RadioButton, StringEnum.GetStringValue(TravelCustomField.RadioButton));
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Dropdown, StringEnum.GetStringValue(TravelCustomField.DropDown));
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Number, StringEnum.GetStringValue(TravelCustomField.Numeric));
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.OneLineText, StringEnum.GetStringValue(TravelCustomField.OneLineText));
-            this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Time, StringEnum.GetStringValue(TravelCustomField.Time));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.CheckBox, StringEnum.GetStringValue(TravelCustomField.Checkbox));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.RadioButton, StringEnum.GetStringValue(TravelCustomField.RadioButton));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Dropdown, StringEnum.GetStringValue(TravelCustomField.DropDown));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Number, StringEnum.GetStringValue(TravelCustomField.Numeric));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.OneLineText, StringEnum.GetStringValue(TravelCustomField.OneLineText));
+            ////this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.Time, StringEnum.GetStringValue(TravelCustomField.Time));
             this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.SectionHeader, StringEnum.GetStringValue(TravelCustomField.SectionHeader));
             this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.AlwaysSelected, StringEnum.GetStringValue(TravelCustomField.AlwaysSelected));
             this.AddAndVerifyTravelCustomField(CustomFieldManager.CustomFieldType.ContinueButton, StringEnum.GetStringValue(TravelCustomField.ContinueButton));

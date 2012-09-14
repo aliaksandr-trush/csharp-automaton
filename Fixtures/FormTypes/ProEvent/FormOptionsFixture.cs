@@ -271,20 +271,20 @@
             BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Number, "LDG-Numeric");
             BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.OneLineText, "LDG-Text");
             BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Time, "LDG-Time");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.SectionHeader, "LDG-Header");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.AlwaysSelected, "LDG-Always");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.ContinueButton, "LDG-Continue");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Paragraph, "LDG-Paragraph");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Date, "LDG-Date");
-            BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.FileUpload, "LDG-File");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.SectionHeader, "LDG-Header");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.AlwaysSelected, "LDG-Always");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.ContinueButton, "LDG-Continue");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Paragraph, "LDG-Paragraph");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Date, "LDG-Date");
+            ////BuilderMgr.VerifyLodgingCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.FileUpload, "LDG-File");
 
             // verify travel custom fields of each type
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.CheckBox, "TRV-Checkbox");
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.RadioButton, "TRV-Radio");
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Dropdown, "TRV-DropDown");
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Number, "TRV-Numeric");
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.OneLineText, "TRV-Text");
-            BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Time, "TRV-Time");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.CheckBox, "TRV-Checkbox");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.RadioButton, "TRV-Radio");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Dropdown, "TRV-DropDown");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Number, "TRV-Numeric");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.OneLineText, "TRV-Text");
+            ////BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Time, "TRV-Time");
             BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.SectionHeader, "TRV-Header");
             BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.AlwaysSelected, "TRV-Always");
             BuilderMgr.VerifyTravelCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.ContinueButton, "TRV-Continue");
