@@ -148,9 +148,15 @@
 
     internal class Browser_HtmlUnit : IGetWebDriver
     {
+        private DesiredCapabilities capa = DesiredCapabilities.HtmlUnitWithJavaScript();
+        private Uri remoteServerUrl;
+
         public IWebDriver GetWebDriver()
         {
-            DesiredCapabilities capa = DesiredCapabilities.HtmlUnitWithJavaScript();
+            this.remoteServerUrl = new Uri(string.Format(
+                "http://{0}:{1}/wd/hub",
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Host,
+                ConfigReader.DefaultProvider.CurrentBrowser.Server.Port));
 
             if (ConfigReader.DefaultProvider.CurrentBrowser.BinaryPath.Enable)
             {
@@ -166,7 +172,9 @@
                     ConfigReader.DefaultProvider.CurrentBrowser.ProfilePath.Path);
             }
 
-            return new RemoteWebDriver(capa);
+            capa.SetCapability("acceptSslCerts", true);
+
+            return new RemoteWebDriver(this.remoteServerUrl, capa);
         }
     }
 }

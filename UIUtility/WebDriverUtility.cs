@@ -21,6 +21,7 @@
         private static WebDriverUtility Default = new WebDriverUtility();
         private TimeSpan timeOutSpan;
         public IWebDriver driver;
+        private ConfigReader.BrowserEnum browser;
 
         public static WebDriverUtility DefaultProvider
         {
@@ -68,13 +69,16 @@
         {
             this.StartWebDriver();
             this.SetTimeoutSpan();
-            this.MaximizeWindow();
+
+            if (this.browser != ConfigReader.BrowserEnum.HtmlUnit)
+            {
+                this.MaximizeWindow();
+            }
         }
 
         private void StartWebDriver()
         {
-            ConfigReader.BrowserEnum browser;
-            Enum.TryParse<ConfigReader.BrowserEnum>(ConfigReader.DefaultProvider.CurrentBrowser.Name, out browser);
+            Enum.TryParse<ConfigReader.BrowserEnum>(ConfigReader.DefaultProvider.CurrentBrowser.Name, out this.browser);
             IGetWebDriver br;
 
             switch (browser)
@@ -85,6 +89,10 @@
 
                 case ConfigReader.BrowserEnum.Chrome:
                     br = new Browser_Chrome();
+                    break;
+
+                case ConfigReader.BrowserEnum.HtmlUnit:
+                    br = new Browser_HtmlUnit();
                     break;
 
                 default:
