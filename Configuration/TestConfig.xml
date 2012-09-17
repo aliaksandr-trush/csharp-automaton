@@ -231,16 +231,21 @@
 	
   <!-- "DirectStartup": whether to startup browser directly (i.e. without selenium server) -->
   <Browsers Current="Firefox" DirectStartup="true">
-	<Browser Name="Firefox">
-	<Server Path="" Host="127.0.0.1" Port="9999"/>
-	  <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
-	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
-	</Browser>
-	<Browser Name="Chrome">
-	<Server Path="../Reference/ChromeDriver" Host="127.0.0.1" Port="9998"/>
-	  <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
-	  <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
-	</Browser>
+	  <Browser Name="Firefox">
+	    <Server Path="" Host="127.0.0.1" Port="9999"/>
+	    <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	    <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
+	  </Browser>
+	  <Browser Name="Chrome">
+	    <Server Path="../Reference/ChromeDriver" Host="127.0.0.1" Port="9998"/>
+	    <BinaryPath Enable="false">D:\GreenSoft\Browser\Chrome\chrome.exe</BinaryPath>
+	    <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
+	  </Browser>
+    <Browser Name="HtmlUnit">
+      <Server Path="" Host="127.0.0.1" Port="9999"/>
+      <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+      <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
+    </Browser>
   </Browsers>
 
   <NUnitAddin ReportBack="false" />

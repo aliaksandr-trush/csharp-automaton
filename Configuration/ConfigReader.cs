@@ -48,7 +48,8 @@
         public enum BrowserEnum
         {
             Firefox,
-            Chrome
+            Chrome,
+            HtmlUnit
         }
 
         public TestConfig AllConfiguration
@@ -230,13 +231,22 @@
 
         private void LoadBrowser(string browserString)
         {
+            this.CurrentBrowser = this.LookupBrowser(browserString);
+        }
+
+        private Browser LookupBrowser(string browserString)
+        {
+            Browser targetBrowser = null;
+
             foreach (Browser br in this.AllConfiguration.Browsers.Browser)
             {
                 if (br.Name.Equals(browserString))
                 {
-                    this.CurrentBrowser = br;
+                    targetBrowser = br;
                 }
             }
+
+            return targetBrowser;
         }
     }
 }
