@@ -89,10 +89,15 @@
             return new RadioButton(attribute_For, LocateBy.Id);
         }
 
-        public void VerifyRegTypeDisplay(RegType regType, bool isDisplay)
+        public void VerifyRegTypeDisplay(RegType regType, bool expected)
         {
             Label label = this.GetRegTypeLabel(regType);
-            WebElement.VerifyDisplay(label, isDisplay);
+            bool actual = label.IsDisplay;
+
+            WebDriverUtility.DefaultProvider.VerifyValue(
+                expected,
+                actual,
+                string.Format("Check display of regtype '{0}'", regType.RegTypeName));
         }
 
         private Label GetRegTypeLabel(RegType regType)
