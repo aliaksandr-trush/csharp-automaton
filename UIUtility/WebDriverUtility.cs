@@ -9,18 +9,17 @@
     using System.Text.RegularExpressions;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;
+    using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Utilities;
-    using RegOnline.RegressionTest.Attributes;
 
     public class WebDriverUtility
     {
         private static WebDriverUtility Default = new WebDriverUtility();
         private TimeSpan timeOutSpan;
-        public IWebDriver driver;
+        private IWebDriver driver;
         private ConfigReader.BrowserEnum browser;
 
         public static WebDriverUtility DefaultProvider
@@ -1245,6 +1244,26 @@
             errorMessage.Append(message);
             errorMessage.Append(this.GetCurrentPageOrSiteErrorIdIfNecessary());
             throw new Exception(errorMessage.ToString());
+        }
+
+        public void VerifyValue(string expectedValue, string actualValue, string message)
+        {
+            FailTest(string.Format("{0} Expected value:{1} Actual value:{2}", message, expectedValue, actualValue));
+        }
+
+        public void VerifyValue(bool expectedValue, bool actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
+        }
+
+        public void VerifyValue(int expectedValue, int actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
+        }
+
+        public void VerifyValue(double expectedValue, double actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
         }
         #endregion
     }

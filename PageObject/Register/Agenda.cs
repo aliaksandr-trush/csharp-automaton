@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.WebElements;
+    using RegOnline.RegressionTest.Utilities;
 
     public class Agenda : Window
     {
@@ -21,19 +22,26 @@
             return new AgendaRow(agenda);
         }
 
-        public bool IsAgendaItemPresent(AgendaItem agenda)
+        public void VerifyAgendaItemDisplay(AgendaItem agenda, bool expected)
         {
-            WebElement a = new WebElement(
-                string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
-                LocateBy.XPath);
-
-            return a.IsPresent;
+            WebElement a = AgendaRow.GetAgendaLiElement(agenda);
+            bool actual = a.IsDisplay;
+            
+            WebDriverUtility.DefaultProvider.VerifyValue(
+                expected, 
+                actual,
+                string.Format("Check display of agenda item '{0}'", agenda.NameOnForm));
         }
 
-        public bool IsChoiceItemPresent(ChoiceItem choice)
+        public void VerifyChoiceItemDisplay(ChoiceItem choice, bool expected)
         {
             WebElement a = new WebElement(string.Format("//*[contains(text(),'{0}')]", choice.Name), LocateBy.XPath);
-            return a.IsPresent;
+            bool actual = a.IsDisplay;
+            
+            WebDriverUtility.DefaultProvider.VerifyValue(
+                expected, 
+                actual,
+                string.Format("Check display of choice item '{0}'", choice.Name));
         }
 
         public void CloseDetailsPopup_Click()
@@ -140,10 +148,10 @@
 
         private int GetAgendaItemId(AgendaItem agenda)
         {
-            return Convert.ToInt32(this.GetAgendaLiElement(agenda).GetAttribute("data-id"));
+            return Convert.ToInt32(GetAgendaLiElement(agenda).GetAttribute("data-id"));
         }
 
-        public WebElement GetAgendaLiElement(AgendaItem agenda)
+        public static WebElement GetAgendaLiElement(AgendaItem agenda)
         {
             WebElement element_Li = null;
 
