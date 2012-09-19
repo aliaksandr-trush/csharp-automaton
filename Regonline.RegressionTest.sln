@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixtures.New.Checkin", "Fix
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixtures.New.FeeOptions", "Fixtures\New.FeeOptions\Fixtures.New.FeeOptions.csproj", "{0BFDDFEB-E22D-4795-8CA9-C29002B8F2EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixtures.New.DisplayVerification", "Fixtures\New.DisplayVerification\Fixtures.New.DisplayVerification.csproj", "{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -423,6 +425,16 @@ Global
 		{0BFDDFEB-E22D-4795-8CA9-C29002B8F2EC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0BFDDFEB-E22D-4795-8CA9-C29002B8F2EC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0BFDDFEB-E22D-4795-8CA9-C29002B8F2EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -450,5 +462,6 @@ Global
 		{2E12607E-B944-45B2-BDB6-F7735B18C4FC} = {3D9FC771-E994-4651-B635-E211FECE9570}
 		{1076D289-738E-495D-8D10-E759FBD0DCEE} = {3D9FC771-E994-4651-B635-E211FECE9570}
 		{0BFDDFEB-E22D-4795-8CA9-C29002B8F2EC} = {3D9FC771-E994-4651-B635-E211FECE9570}
+		{D89F5AAE-6E97-4EF3-8763-BE2635912BB3} = {3D9FC771-E994-4651-B635-E211FECE9570}
 	EndGlobalSection
 EndGlobal
