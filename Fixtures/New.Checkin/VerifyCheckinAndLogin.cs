@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Fixtures.RegistrationInventory.CheckinPage
+﻿namespace RegOnline.RegressionTest.Fixtures.New.Checkin
 {
     using System.Collections.Generic;
     using NUnit.Framework;

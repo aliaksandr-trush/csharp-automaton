@@ -8,8 +8,8 @@
     <ProjectGuid>{D89F5AAE-6E97-4EF3-8763-BE2635912BB3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RegOnline.RegressionTest.Fixtures.RegistrationInventory</RootNamespace>
-    <AssemblyName>RegOnline.RegressionTest.Fixtures.RegistrationInventory</AssemblyName>
+    <RootNamespace>RegOnline.RegressionTest.Fixtures.New.DisplayVerification</RootNamespace>
+    <AssemblyName>RegOnline.RegressionTest.Fixtures.New.DisplayVerification</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -52,20 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgendaPage\AgendaAdvanced.cs" />
-    <Compile Include="AgendaPage\AgendaBasics.cs" />
-    <Compile Include="AgendaPage\AgendaDisplay.cs" />
-    <Compile Include="AgendaPage\AgendaUpdate.cs" />
-    <Compile Include="AgendaPage\AgendaWithPrice.cs" />
-    <Compile Include="AgendaPage\OtherTestsRelatedToAgenda.cs" />
-    <Compile Include="CheckinPage\GroupRegistration.cs" />
-    <Compile Include="CheckinPage\RegTypeCreation.cs" />
-    <Compile Include="CheckinPage\SingleRegistration.cs" />
-    <Compile Include="CheckinPage\VerifyCheckinAndLogin.cs" />
     <Compile Include="Display.cs" />
-    <Compile Include="FeeOptions\AccessCodeFixture.cs" />
-    <Compile Include="FeeOptions\DiscountCodeFixture.cs" />
-    <Compile Include="FeeOptions\TaxFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,10 +71,6 @@
     <ProjectReference Include="..\..\PageObject\PageObject.csproj">
       <Project>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</Project>
       <Name>PageObject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
-      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
-      <Name>Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebElements\WebElements.csproj">
       <Project>{58A621EF-54DC-418C-B002-A8083712B243}</Project>
