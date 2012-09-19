@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Fixtures.RegistrationInventory
+﻿namespace RegOnline.RegressionTest.Fixtures.New.DisplayVerification
 {
     using System;
     using NUnit.Framework;

@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Fixtures.RegistrationInventory.AgendaPage
+﻿namespace RegOnline.RegressionTest.Fixtures.New.Agenda
 {
     using System.Collections.Generic;
     using NUnit.Framework;
