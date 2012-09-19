@@ -16,7 +16,10 @@
     <assembly path="RegOnline.RegressionTest.Fixtures.Transaction.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Gateway.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Marketing.dll" />
-    <assembly path="RegOnline.RegressionTest.Fixtures.RegistrationInventory.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.New.Agenda.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.New.Checkin.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.New.FeeOptions.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.New.DisplayVerification.dll" />
     <assembly path="RegOnline.RegressionTest.NUnitAddin.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto" />
