@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Fixtures.RegistrationInventory.AgendaPage
+﻿namespace RegOnline.RegressionTest.Fixtures.New.Agenda
 {
     using System;
     using System.Collections.Generic;
@@ -242,7 +242,8 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.IsChoiceItemPresent(AG1Choice1));
+            PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyChoiceItemDisplay(AG1Choice1, false);
+            
             Assert.IsNull(((MultiChoiceDropdown)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG4).AgendaType).Options.Find(
                 o => o.Text == AG4Choice1.Name));
         }

@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.Fixtures.RegistrationInventory.FeeOptions
+﻿namespace RegOnline.RegressionTest.Fixtures.New.FeeOptions
 {
     using NUnit.Framework;
     using RegOnline.RegressionTest.Fixtures.Base;

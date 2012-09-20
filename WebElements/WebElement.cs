@@ -56,7 +56,9 @@
             }
         }
 
-        public WebElement() { }
+        public WebElement()
+        {
+        }
 
         public WebElement(string locator, LocateBy locatorType)
         {
@@ -64,21 +66,9 @@
             TypeOfLocator = locatorType;
         }
 
-        public static void VerifyPresent(WebElement element, bool isPresent)
-        {
-            bool actual = WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
-            Utilities.VerifyTool.VerifyValue(isPresent, actual, "Element '" + element.Locator + "' is present: {0}");
-        }
-
         public virtual void WaitForPresent()
         {
             WebDriverUtility.DefaultProvider.WaitForElementPresent(Locator, TypeOfLocator);
-        }
-
-        public static void VerifyDisplay(WebElement element, bool isDisplayed)
-        {
-            bool actual = WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
-            Utilities.VerifyTool.VerifyValue(isDisplayed, actual, "Element '" + element.Locator + "' is display: {0}");
         }
 
         public virtual void WaitForDisplay()
@@ -110,6 +100,28 @@
             {
                 return false;
             }
+        }
+
+        public static bool IsElementPresent(WebElement element)
+        {
+            return WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
+        }
+
+        public static bool IsElementDisplay(WebElement element)
+        {
+            return WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
+        }
+
+        public static void VerifyPresent(WebElement element, bool isPresent)
+        {
+            bool actual = WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
+            Utilities.VerifyTool.VerifyValue(isPresent, actual, "Element '" + element.Locator + "' is present: {0}");
+        }
+
+        public static void VerifyDisplay(WebElement element, bool isDisplayed)
+        {
+            bool actual = WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
+            Utilities.VerifyTool.VerifyValue(isDisplayed, actual, "Element '" + element.Locator + "' is display: {0}");
         }
     }
 }
