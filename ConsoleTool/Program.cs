@@ -17,6 +17,7 @@
             ////{
             ////    AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
             ////}
+            Console.WriteLine(98 / 100.0);
             Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
             Console.Read();
         }

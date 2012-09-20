@@ -104,9 +104,16 @@
         public GroupDiscount_GroupSizeOption GroupSizeOption;
         public double DiscountAmount;
         public GroupDiscount_DiscountType GroupDiscountType;
-        public GroupDiscount_AdditionalRegOption AddtionalRegOption;
+        public GroupDiscount_AdditionalRegOption? AddtionalRegOption;
         public int? NumberOfAdditionalReg;
         public GroupDiscount_ApplyOption? ApplyOption;
+        public List<AgendaItem> ApplyToAgendaItems = new List<AgendaItem>();
+        public List<RegType> ApplyToRegTypes = new List<RegType>();
+
+        public double CalculateDiscountedPrice(double originalPrice)
+        {
+            return 0;
+        }
     }
 
     public class PaymentMethod

@@ -27,5 +27,6 @@
         public static VerifyStandardReports VerifyStandardReports = new VerifyStandardReports();
         public static CustomFieldCreation CustomFieldCreation = new CustomFieldCreation();
         public static BackendUpdate BackendUpdate = new BackendUpdate();
+        public static CalculateFee CalculateFee = new CalculateFee();
     }
 }

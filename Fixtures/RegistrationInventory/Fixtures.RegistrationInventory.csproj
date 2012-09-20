@@ -65,6 +65,7 @@
     <Compile Include="Display.cs" />
     <Compile Include="FeeOptions\AccessCodeFixture.cs" />
     <Compile Include="FeeOptions\DiscountCodeFixture.cs" />
+    <Compile Include="FeeOptions\GroupDiscountFixture.cs" />
     <Compile Include="FeeOptions\TaxFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -22,6 +22,24 @@
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
+        public CheckBox ApplyToAgendaItem(DataCollection.AgendaItem agenda)
+        {
+            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}']]", agenda.NameOnForm), LocateBy.XPath);
+        }
+
+        public CheckBox ApplyToRegType(DataCollection.RegType regType)
+        {
+            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}']]", regType.RegTypeName), LocateBy.XPath);
+        }
+
+        public void ApplyToSelectedFees_Click()
+        {
+            this.ApplyToSelectedFees.WaitForDisplay();
+            this.ApplyToSelectedFees.Click();
+            Utilities.Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
+
         public void SaveAndStay_Click()
         {
             popupFrameHelper.SaveAndStay_Click();
