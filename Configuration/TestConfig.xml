@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
-  <Environments EnvironmentChosen="DBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
+
+  <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
@@ -230,10 +231,10 @@
   </WebServices>
 	
   <!-- "DirectStartup": whether to startup browser directly (i.e. without selenium server) -->
-  <Browsers Current="Firefox" DirectStartup="false">
+  <Browsers Current="Firefox" DirectStartup="true">
 	  <Browser Name="Firefox">
 	    <Server Path="" Host="127.0.0.1" Port="9999"/>
-	    <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+	    <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
 	    <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
 	  </Browser>
 	  <Browser Name="Chrome">
@@ -243,7 +244,7 @@
 	  </Browser>
     <Browser Name="HtmlUnit">
       <Server Path="" Host="127.0.0.1" Port="9999"/>
-      <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
+      <BinaryPath Enable="false">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
       <ProfilePath Enable="false">CustomProfilePath</ProfilePath>
     </Browser>
   </Browsers>
