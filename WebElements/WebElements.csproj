@@ -48,15 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonOrLink.cs" />
+    <Compile Include="Clickable.cs" />
     <Compile Include="CheckBox.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="MultiChoiceDropdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Label.cs" />
     <Compile Include="RadioButton.cs" />
-    <Compile Include="TextBox.cs" />
-    <Compile Include="WebElement.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="ElementBase.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>

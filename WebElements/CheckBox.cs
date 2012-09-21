@@ -3,7 +3,7 @@
     using RegOnline.RegressionTest.WebElements;
     using RegOnline.RegressionTest.UIUtility;
 
-    public class CheckBox : WebElement
+    public class CheckBox : ElementBase
     {
         public CheckBox(string locator, LocateBy locatorType)
             : base(locator, locatorType){ }

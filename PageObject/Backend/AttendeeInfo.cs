@@ -7,7 +7,7 @@
 
     public class AttendeeInfo : Window
     {
-        public ButtonOrLink AgendaEdit = new ButtonOrLink("//div[@id='agenda']//a/img", LocateBy.XPath);
+        public Clickable AgendaEdit = new Clickable("//div[@id='agenda']//a/img", LocateBy.XPath);
 
         public void OpenUrl(int registerId)
         {

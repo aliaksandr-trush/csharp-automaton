@@ -10,20 +10,20 @@
 
     public class Checkin : Window
     {
-        public TextBox EmailAddress = new TextBox("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
-        public TextBox VerifyEmailAddress = new TextBox("//input[@id='ctl00_cph_ctlEmailMemID_txtVerifyEmail']", LocateBy.XPath);
+        public Input EmailAddress = new Input("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
+        public Input VerifyEmailAddress = new Input("//input[@id='ctl00_cph_ctlEmailMemID_txtVerifyEmail']", LocateBy.XPath);
         public MultiChoiceDropdown RegTypeDropDown = new MultiChoiceDropdown("//select[@id='ctl00_cph_ctlRegType_ddlRegistrantTypes']", LocateBy.XPath);
-        public TextBox EventFeeDiscountCode = new TextBox("//input[@id='ctl00_cph_ctlRegType_txtDiscountCode']", LocateBy.XPath);
+        public Input EventFeeDiscountCode = new Input("//input[@id='ctl00_cph_ctlRegType_txtDiscountCode']", LocateBy.XPath);
         public Label DiscountCodeRequired = new Label("//img[@alt='Required']/..[following-sibling::*[text()='Enter a discount code:']]", LocateBy.XPath);
-        public ButtonOrLink ViewExistingRegistration = new ButtonOrLink("ctl00_cph_lnkLogin", LocateBy.Id);
+        public Clickable ViewExistingRegistration = new Clickable("ctl00_cph_lnkLogin", LocateBy.Id);
         public Label RegTypeRadioButton = new Label("//li[@class='radioRight']", LocateBy.XPath);
         public Label EventLimitReachedMessage = new Label("//div[@id = 'pageContent']/p", LocateBy.XPath);
-        public ButtonOrLink GoBack = new ButtonOrLink("Go back", LocateBy.LinkText);
+        public Clickable GoBack = new Clickable("Go back", LocateBy.LinkText);
         public Label AdditionalDetails = new Label(
             "//*[@class='tooltipWrapper tooltipLightbox ui-dialog-content ui-widget-content'][last()]//*[@class='tooltipWrapperContent']",
             LocateBy.XPath);
-        public ButtonOrLink AdditionalDetailsClose = new ButtonOrLink("//*[text()='close']", LocateBy.XPath);
-        public ButtonOrLink AddToWaitlist = new ButtonOrLink("//div[@class='buttonGroup']/button[text()='Add Yourself to Waitlist']", LocateBy.XPath);
+        public Clickable AdditionalDetailsClose = new Clickable("//*[text()='close']", LocateBy.XPath);
+        public Clickable AddToWaitlist = new Clickable("//div[@class='buttonGroup']/button[text()='Add Yourself to Waitlist']", LocateBy.XPath);
         public Label AddedToWaitlistOfEvent = new Label("//*[text()='You have been added to the waitlist for this event.']", LocateBy.XPath);
 
         public void OpenUrl(DataCollection.Registrant reg)
@@ -133,7 +133,7 @@
 
         public void RegTypeDetails_Click(RegType regType)
         {
-            ButtonOrLink detailsLink = new ButtonOrLink(string.Format(
+            Clickable detailsLink = new Clickable(string.Format(
                 "//label[contains(text(),'AdditionalDetails')]//a", regType.RegTypeName), LocateBy.XPath);
 
             detailsLink.WaitForDisplay();

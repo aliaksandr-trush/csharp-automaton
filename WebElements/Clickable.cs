@@ -2,9 +2,9 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class Label : ElementBase
+    public class Clickable : ElementBase
     {
-        public Label(string locator, LocateBy locatorType)
+        public Clickable(string locator, LocateBy locatorType)
             : base(locator, locatorType) { }
     }
 }

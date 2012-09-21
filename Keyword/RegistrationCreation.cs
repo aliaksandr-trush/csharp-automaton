@@ -360,7 +360,7 @@
                         case FormData.CustomFieldType.Paragraph:
                             {
                                 AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(resp.CharToInput);
                             }
                             break;
@@ -368,7 +368,7 @@
                         case FormData.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
                             }
                             break;
@@ -377,7 +377,7 @@
                             {
                                 AgendaResponse_Date resp = response as AgendaResponse_Date;
                                 string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(date);
                             }
                             break;
@@ -386,7 +386,7 @@
                             {
                                 AgendaResponse_Time resp = response as AgendaResponse_Time;
                                 string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(time);
                             }
                             break;
@@ -394,7 +394,7 @@
                         case FormData.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
-                                ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Clickable)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Click();
                                 AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
                             }
@@ -403,7 +403,7 @@
                         case FormData.CustomFieldType.Duration:
                             {
                                 AgendaResponse_Duration resp = response as AgendaResponse_Duration;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
                             }
                             break;
 

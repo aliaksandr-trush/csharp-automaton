@@ -2,7 +2,7 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class RadioButton : ButtonOrLink
+    public class RadioButton : Clickable
     {
         public RadioButton(string locator, LocateBy locatorType)
             : base(locator, locatorType) { }

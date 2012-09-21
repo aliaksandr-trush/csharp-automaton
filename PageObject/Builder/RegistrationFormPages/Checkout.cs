@@ -6,11 +6,11 @@
 
     public class Checkout : Window
     {
-        public ButtonOrLink AddPaymentMethod = new ButtonOrLink("//*[@id='ctl00_cph_divAddPaymentMethod']/a", LocateBy.XPath);
+        public Clickable AddPaymentMethod = new Clickable("//*[@id='ctl00_cph_divAddPaymentMethod']/a", LocateBy.XPath);
         public PaymentMethodSelections PaymentMethodSelections = new PaymentMethodSelections("dialog");
-        public ButtonOrLink CheckoutPageHeader = new ButtonOrLink("//*[text()='Add Checkout Page Header']", LocateBy.XPath);
+        public Clickable CheckoutPageHeader = new Clickable("//*[text()='Add Checkout Page Header']", LocateBy.XPath);
         public HtmlEditor CheckoutPageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink CheckoutPageFooter = new ButtonOrLink("//*[text()='Add Checkout Page Footer']", LocateBy.XPath);
+        public Clickable CheckoutPageFooter = new Clickable("//*[text()='Add Checkout Page Footer']", LocateBy.XPath);
         public HtmlEditor CheckoutPageFooterEditor = new HtmlEditor("dialog");
 
         public void AddPaymentMethod_Click()
@@ -47,17 +47,15 @@
 
         public MultiChoiceDropdown PaymentMethods = new MultiChoiceDropdown("ctl00_cphDialog_ddlPaymentMethod", LocateBy.Id);
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
     }

@@ -17,7 +17,7 @@
             Id = id;
         }
 
-        public ButtonOrLink ShowNavigation = new ButtonOrLink("//div[@id='ctl00_ctl00_efTabsPanel']//a[text()='Show']", LocateBy.XPath);
+        public Clickable ShowNavigation = new Clickable("//div[@id='ctl00_ctl00_efTabsPanel']//a[text()='Show']", LocateBy.XPath);
 
         public void ShowNavigation_Click()
         {

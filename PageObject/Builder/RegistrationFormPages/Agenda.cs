@@ -9,96 +9,96 @@
     public class Agenda : Window
     {
         #region WebElements
-        public ButtonOrLink CreateAgendaItem = new ButtonOrLink("Create Agenda Item", LocateBy.LinkText);
-        public ButtonOrLink AddAgendaItem = new ButtonOrLink("Add Agenda Item", LocateBy.LinkText);
-        public ButtonOrLink CreateActivities = new ButtonOrLink("Create Activities", LocateBy.LinkText);
-        public ButtonOrLink AddActivities = new ButtonOrLink("Add Activities", LocateBy.LinkText);
-        public TextBox NameOnForm = new TextBox("ctl00_cph_ucCF_mipNam_elDesc_TextArea", LocateBy.Id);
-        public ButtonOrLink NameOptions = new ButtonOrLink("ctl00_cph_ucCF_mipNam_bccMoreInfoNaming_optionsLink", LocateBy.Id);
-        public TextBox NameOnReceipt = new TextBox("ctl00_cph_ucCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
-        public TextBox NameOnReports = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtFieldName", LocateBy.Id);
-        public TextBox NameOnBadge = new TextBox("ctl00_cph_ucCF_mipNam_ip1_txtBadgeCaption", LocateBy.Id);
-        public ButtonOrLink FieldType = new ButtonOrLink("ctl00_cph_ucCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
-        public ButtonOrLink SaveItem = new ButtonOrLink("Save Item", LocateBy.LinkText);
-        public ButtonOrLink SaveAndNew = new ButtonOrLink("Save & New", LocateBy.LinkText);
-        public ButtonOrLink Cancel = new ButtonOrLink("Cancel", LocateBy.LinkText);
-        public ButtonOrLink AgendaPageHeader = new ButtonOrLink("//*[text()='Add Agenda Page Header']", LocateBy.XPath);
+        public Clickable CreateAgendaItem = new Clickable("Create Agenda Item", LocateBy.LinkText);
+        public Clickable AddAgendaItem = new Clickable("Add Agenda Item", LocateBy.LinkText);
+        public Clickable CreateActivities = new Clickable("Create Activities", LocateBy.LinkText);
+        public Clickable AddActivities = new Clickable("Add Activities", LocateBy.LinkText);
+        public Input NameOnForm = new Input("ctl00_cph_ucCF_mipNam_elDesc_TextArea", LocateBy.Id);
+        public Clickable NameOptions = new Clickable("ctl00_cph_ucCF_mipNam_bccMoreInfoNaming_optionsLink", LocateBy.Id);
+        public Input NameOnReceipt = new Input("ctl00_cph_ucCF_mipNam_ip1_elRptDesc_TextArea", LocateBy.Id);
+        public Input NameOnReports = new Input("ctl00_cph_ucCF_mipNam_ip1_txtFieldName", LocateBy.Id);
+        public Input NameOnBadge = new Input("ctl00_cph_ucCF_mipNam_ip1_txtBadgeCaption", LocateBy.Id);
+        public Clickable FieldType = new Clickable("ctl00_cph_ucCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
+        public Clickable SaveItem = new Clickable("Save Item", LocateBy.LinkText);
+        public Clickable SaveAndNew = new Clickable("Save & New", LocateBy.LinkText);
+        public Clickable Cancel = new Clickable("Cancel", LocateBy.LinkText);
+        public Clickable AgendaPageHeader = new Clickable("//*[text()='Add Agenda Page Header']", LocateBy.XPath);
         public HtmlEditor AgendaPageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink AgendaPageFooter = new ButtonOrLink("//*[text()='Add Agenda Page Footer']", LocateBy.XPath);
+        public Clickable AgendaPageFooter = new Clickable("//*[text()='Add Agenda Page Footer']", LocateBy.XPath);
         public HtmlEditor AgendaPageFooterEditor = new HtmlEditor("dialog");
-        public TextBox StartDate = new TextBox("ctl00_cph_ucCF_dtpSD_dateInput_text", LocateBy.Id);
-        public TextBox StartTime = new TextBox("ctl00_cph_ucCF_dtpST_dateInput_text", LocateBy.Id);
-        public TextBox EndDate = new TextBox("ctl00_cph_ucCF_dtpED_dateInput_text", LocateBy.Id);
-        public TextBox EndTime = new TextBox("ctl00_cph_ucCF_dtpET_dateInput_text", LocateBy.Id);
-        public TextBox Location = new TextBox("ctl00_cph_ucCF_txtRoom", LocateBy.Id);
-        public TextBox StandardPrice = new TextBox("ctl00_cph_ucCF_mipPrc_rntAmount_text", LocateBy.Id);
-        public ButtonOrLink PriceOptionsLink = new ButtonOrLink("ctl00_cph_ucCF_mipPrc_MoreInfoButtonPricing1_optionsLink", LocateBy.Id);
-        public ButtonOrLink AddEarlyPrice = new ButtonOrLink("//*[@id='ctl00_cph_ucCF_mipPrc_ip3_trEarlyPriceLink']/td/a", LocateBy.XPath);
-        public TextBox EarlyPrice = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_rntElyAmt_text", LocateBy.Id);
+        public Input StartDate = new Input("ctl00_cph_ucCF_dtpSD_dateInput_text", LocateBy.Id);
+        public Input StartTime = new Input("ctl00_cph_ucCF_dtpST_dateInput_text", LocateBy.Id);
+        public Input EndDate = new Input("ctl00_cph_ucCF_dtpED_dateInput_text", LocateBy.Id);
+        public Input EndTime = new Input("ctl00_cph_ucCF_dtpET_dateInput_text", LocateBy.Id);
+        public Input Location = new Input("ctl00_cph_ucCF_txtRoom", LocateBy.Id);
+        public Input StandardPrice = new Input("ctl00_cph_ucCF_mipPrc_rntAmount_text", LocateBy.Id);
+        public Clickable PriceOptionsLink = new Clickable("ctl00_cph_ucCF_mipPrc_MoreInfoButtonPricing1_optionsLink", LocateBy.Id);
+        public Clickable AddEarlyPrice = new Clickable("//*[@id='ctl00_cph_ucCF_mipPrc_ip3_trEarlyPriceLink']/td/a", LocateBy.XPath);
+        public Input EarlyPrice = new Input("ctl00_cph_ucCF_mipPrc_ip3_rntElyAmt_text", LocateBy.Id);
         public RadioButton EarlyPriceDateTime = new RadioButton("ctl00_cph_ucCF_mipPrc_ip3_rbEarlyPriceOptionDate", LocateBy.Id);
-        public TextBox EarlyPriceDate = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_dtpElyDt_tbDate", LocateBy.Id);
-        public TextBox EarlyPriceTime = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_tpElyEdT_dateInput_text", LocateBy.Id);
+        public Input EarlyPriceDate = new Input("ctl00_cph_ucCF_mipPrc_ip3_dtpElyDt_tbDate", LocateBy.Id);
+        public Input EarlyPriceTime = new Input("ctl00_cph_ucCF_mipPrc_ip3_tpElyEdT_dateInput_text", LocateBy.Id);
         public RadioButton EarlyPriceRegLimit = new RadioButton("ctl00_cph_ucCF_mipPrc_ip3_rbEarlyPriceOptionQuantity", LocateBy.Id);
-        public TextBox EarlyPriceRegistrations = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_rntEarlyPriceQuantity_text", LocateBy.Id);
-        public ButtonOrLink AddLatePrice = new ButtonOrLink("//*[@id='ctl00_cph_ucCF_mipPrc_ip3_trLatePriceLink']/td/a", LocateBy.XPath);
-        public TextBox LatePrice = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_rntLtAmt_text", LocateBy.Id);
-        public TextBox LatePriceDate = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_dtpLtDt_tbDate", LocateBy.Id);
-        public TextBox LatePriceTime = new TextBox("ctl00_cph_ucCF_mipPrc_ip3_tpLtSD_dateInput_text", LocateBy.Id);
-        public ButtonOrLink AddDiscountCode = new ButtonOrLink("ctl00_cph_ucCF_mipPrc_ip4_hrefOpenCodeWindow", LocateBy.Id);
-        public ButtonOrLink AddBulkCodes = new ButtonOrLink("ctl00_cph_ucCF_mipPrc_ip4_hrefOpenBulkCodesWindow", LocateBy.Id);
+        public Input EarlyPriceRegistrations = new Input("ctl00_cph_ucCF_mipPrc_ip3_rntEarlyPriceQuantity_text", LocateBy.Id);
+        public Clickable AddLatePrice = new Clickable("//*[@id='ctl00_cph_ucCF_mipPrc_ip3_trLatePriceLink']/td/a", LocateBy.XPath);
+        public Input LatePrice = new Input("ctl00_cph_ucCF_mipPrc_ip3_rntLtAmt_text", LocateBy.Id);
+        public Input LatePriceDate = new Input("ctl00_cph_ucCF_mipPrc_ip3_dtpLtDt_tbDate", LocateBy.Id);
+        public Input LatePriceTime = new Input("ctl00_cph_ucCF_mipPrc_ip3_tpLtSD_dateInput_text", LocateBy.Id);
+        public Clickable AddDiscountCode = new Clickable("ctl00_cph_ucCF_mipPrc_ip4_hrefOpenCodeWindow", LocateBy.Id);
+        public Clickable AddBulkCodes = new Clickable("ctl00_cph_ucCF_mipPrc_ip4_hrefOpenBulkCodesWindow", LocateBy.Id);
         public CodeDefine CodeDefine = new CodeDefine("dialog");
         public BulkLoadCodesDefine BulkLoadCodesDefine = new BulkLoadCodesDefine("dialog");
         public CheckBox RequireCode = new CheckBox("ctl00_cph_ucCF_mipPrc_ip4_chkPasswordRequired", LocateBy.Id);
-        public ButtonOrLink AddTaxRate = new ButtonOrLink("//div[@id='ctl00_cph_ucCF_mipPrc_ip6_dvTxWarn']/a", LocateBy.XPath);
+        public Clickable AddTaxRate = new Clickable("//div[@id='ctl00_cph_ucCF_mipPrc_ip6_dvTxWarn']/a", LocateBy.XPath);
         public TaxRateDefine TaxRateDefine = new TaxRateDefine("dialog");
         public CheckBox ApplyTaxOne = new CheckBox("ctl00_cph_ucCF_mipPrc_ip6_chkListTaxRates_0", LocateBy.Id);
         public CheckBox ApplyTaxTwo = new CheckBox("ctl00_cph_ucCF_mipPrc_ip6_chkListTaxRates_1", LocateBy.Id);
-        public TextBox Capacity = new TextBox("ctl00_cph_ucCF_mipCap_rntMaxQuantity_text", LocateBy.Id);
-        public ButtonOrLink CapacityOptionsLink = new ButtonOrLink("ctl00_cph_ucCF_mipCap_MoreInfoButtonCapacity_optionsLink", LocateBy.Id);
+        public Input Capacity = new Input("ctl00_cph_ucCF_mipCap_rntMaxQuantity_text", LocateBy.Id);
+        public Clickable CapacityOptionsLink = new Clickable("ctl00_cph_ucCF_mipCap_MoreInfoButtonCapacity_optionsLink", LocateBy.Id);
         public CheckBox ShowRemainingCapacity = new CheckBox("ctl00_cph_ucCF_mipCap_ip7_cbShowRemainingCapacity", LocateBy.Id);
         public RadioButton HideWhenLimitReached = new RadioButton("ctl00_cph_ucCF_mipCap_ip7_rbHideThisItem", LocateBy.Id);
         public RadioButton ShowMessageWhenLimitReached = new RadioButton("ctl00_cph_ucCF_mipCap_ip7_rbDisplayThisMessage", LocateBy.Id);
-        public ButtonOrLink AddLimitReachedMessage = new ButtonOrLink("ctl00_cph_ucCF_mipCap_ip7_elSoldOutMessage_linkCheckmarkCustomField0SoldOutMessage", LocateBy.Id);
+        public Clickable AddLimitReachedMessage = new Clickable("ctl00_cph_ucCF_mipCap_ip7_elSoldOutMessage_linkCheckmarkCustomField0SoldOutMessage", LocateBy.Id);
         public HtmlEditor LimitReachedMessageEditor = new HtmlEditor("dialog");
         public RadioButton WaitlistWhenLimitReached = new RadioButton("ctl00_cph_ucCF_mipCap_ip7_rbActivateWaitlist", LocateBy.Id);
-        public ButtonOrLink AddTextToConfirmation = new ButtonOrLink("ctl00_cph_ucCF_mipCap_ip7_elWaitlistConfirmation_linkCheckmarkCustomField0", LocateBy.Id);
+        public Clickable AddTextToConfirmation = new Clickable("ctl00_cph_ucCF_mipCap_ip7_elWaitlistConfirmation_linkCheckmarkCustomField0", LocateBy.Id);
         public EmailEditor TextToConfirmationEditor = new EmailEditor("dialog");
-        public ButtonOrLink ShowAllRegTypes = new ButtonOrLink("//*[@id='tblRegTypesLink']//td[@class='fieldCaption']/a", LocateBy.XPath);
+        public Clickable ShowAllRegTypes = new Clickable("//*[@id='tblRegTypesLink']//td[@class='fieldCaption']/a", LocateBy.XPath);
         public CheckBox VisibleToAll = new CheckBox("ctl00_cph_ucCF_chkActive", LocateBy.Id);
         public CheckBox RequiredByAll = new CheckBox("ctl00_cph_ucCF_chkRequired", LocateBy.Id);
         public CheckBox AdminOnlyToAll = new CheckBox("ctl00_cph_ucCF_chkAdminOnly", LocateBy.Id);
-        public ButtonOrLink ExpandConditionalLogic = new ButtonOrLink("//div[@id='ctl00_cph_ucCF_CFParentTree']//span[@class='rtPlus']", LocateBy.XPath);
+        public Clickable ExpandConditionalLogic = new Clickable("//div[@id='ctl00_cph_ucCF_CFParentTree']//span[@class='rtPlus']", LocateBy.XPath);
         public CheckBox AddToCalendar = new CheckBox("ctl00_cph_ucCF_chkDisplayCalendar", LocateBy.Id);
         public CheckBox IncludeOnEventWeb = new CheckBox("ctl00_cph_ucCF_chkIncludeOnAgenda", LocateBy.Id);
-        public TextBox ShowStarting = new TextBox("ctl00_cph_ucCF_dtpShowDate_tbDate", LocateBy.Id);
-        public TextBox HideStarting = new TextBox("ctl00_cph_ucCF_dtpHideDate_tbDate", LocateBy.Id);
+        public Input ShowStarting = new Input("ctl00_cph_ucCF_dtpShowDate_tbDate", LocateBy.Id);
+        public Input HideStarting = new Input("ctl00_cph_ucCF_dtpHideDate_tbDate", LocateBy.Id);
         public MultiChoiceDropdown Gender = new MultiChoiceDropdown("ctl00_cph_ucCF_ddlVisibleForGender", LocateBy.Id);
-        public TextBox AgeGreaterThan = new TextBox("ctl00_cph_ucCF_rntVisibleIfAgeGreater_text", LocateBy.Id);
-        public TextBox AgeGreaterThanDate = new TextBox("ctl00_cph_ucCF_dtpVisibleIfAgeGreater_tbDate", LocateBy.Id);
-        public TextBox AgeLessThan = new TextBox("ctl00_cph_ucCF_rntVisibleIfAgeLess_text", LocateBy.Id);
-        public TextBox AgeLessThanDate = new TextBox("ctl00_cph_ucCF_dtpVisibleIfAgeLess_tbDate", LocateBy.Id);
+        public Input AgeGreaterThan = new Input("ctl00_cph_ucCF_rntVisibleIfAgeGreater_text", LocateBy.Id);
+        public Input AgeGreaterThanDate = new Input("ctl00_cph_ucCF_dtpVisibleIfAgeGreater_tbDate", LocateBy.Id);
+        public Input AgeLessThan = new Input("ctl00_cph_ucCF_rntVisibleIfAgeLess_text", LocateBy.Id);
+        public Input AgeLessThanDate = new Input("ctl00_cph_ucCF_dtpVisibleIfAgeLess_tbDate", LocateBy.Id);
         public MultiChoiceDropdown DateFormat = new MultiChoiceDropdown("ctl00_cph_ucCF_ddlDateFormats", LocateBy.Id);
-        public ButtonOrLink AddDetails = new ButtonOrLink("ctl00_cph_ucCF_elSessionInfo_linkCheckmarktext_elSessionInfo", LocateBy.Id);
+        public Clickable AddDetails = new Clickable("ctl00_cph_ucCF_elSessionInfo_linkCheckmarktext_elSessionInfo", LocateBy.Id);
         public HtmlEditor DetailsEditor = new HtmlEditor("dialog");
-        public TextBox DetailsURL = new TextBox("ctl00_cph_ucCF_txtSessionLink", LocateBy.Id);
-        public TextBox GroupName = new TextBox("ctl00_cph_ucCF_txtGroupName", LocateBy.Id);
+        public Input DetailsURL = new Input("ctl00_cph_ucCF_txtSessionLink", LocateBy.Id);
+        public Input GroupName = new Input("ctl00_cph_ucCF_txtGroupName", LocateBy.Id);
         public CheckBox ForceGroupToMatch = new CheckBox("ctl00_cph_ucCF_chkEnablePrePopulate", LocateBy.Id);
         public MultiChoiceDropdown InitialStatus = new MultiChoiceDropdown("ctl00_cph_ucCF_ddlDefaultStatusID", LocateBy.Id);
-        public ButtonOrLink AddConfirmationAddendum = new ButtonOrLink("ctl00_cph_ucCF_elNonWaitlistConfirmation_linkCheckmarktext_elNonWaitlistConfirmation", LocateBy.Id);
+        public Clickable AddConfirmationAddendum = new Clickable("ctl00_cph_ucCF_elNonWaitlistConfirmation_linkCheckmarktext_elNonWaitlistConfirmation", LocateBy.Id);
         public EmailEditor ConfirmationAddendumEditor = new EmailEditor("dialog");
         public Label AgendaItemId = new Label("ctl00_cph_ucCF_currentCustomFieldId", LocateBy.Id);
-        public ButtonOrLink AddMultipleChoiceItem = new ButtonOrLink("Add Multiple Choice Item", LocateBy.LinkText);
+        public Clickable AddMultipleChoiceItem = new Clickable("Add Multiple Choice Item", LocateBy.LinkText);
         public MultipleChoiceDefine MultipleChoiceDefine = new MultipleChoiceDefine("dialog");
-        public ButtonOrLink AddCommonlyUsedItem = new ButtonOrLink("Add Commonly-Used Items", LocateBy.LinkText);
+        public Clickable AddCommonlyUsedItem = new Clickable("Add Commonly-Used Items", LocateBy.LinkText);
         public CommonlyUsedItemsDefine CommonlyUsedItemsDefine = new CommonlyUsedItemsDefine("dialog");
-        public TextBox CharacterLimit = new TextBox("ctl00_cph_ucCF_rntLn_text", LocateBy.Id);
-        public TextBox ParagraphLimit = new TextBox("ctl00_cph_ucCF_rntMultipleLineLn_text", LocateBy.Id);
+        public Input CharacterLimit = new Input("ctl00_cph_ucCF_rntLn_text", LocateBy.Id);
+        public Input ParagraphLimit = new Input("ctl00_cph_ucCF_rntMultipleLineLn_text", LocateBy.Id);
         public Label AgendaChoiceItemCount = new Label("//*[@id='ctl00_cph_ucCF_grdLI_tblGrid']/tbody/tr[@class='dragTR']", LocateBy.XPath);
-        public TextBox MinAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMinVarAmount_text", LocateBy.Id);
-        public TextBox MaxAmount = new TextBox("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount_text", LocateBy.Id);
-        public TextBox CopyAgendaAmount = new TextBox("//input[@class='rwDialogInput'][@value='1']", LocateBy.XPath);
-        public ButtonOrLink OK = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='OK']", LocateBy.XPath);
-        public ButtonOrLink CancelCopy = new ButtonOrLink("//span[@class='rwInnerSpan'][text()='Cancel']", LocateBy.XPath);
+        public Input MinAmount = new Input("ctl00_cph_ucCF_mipPrc_rntMinVarAmount_text", LocateBy.Id);
+        public Input MaxAmount = new Input("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount_text", LocateBy.Id);
+        public Input CopyAgendaAmount = new Input("//input[@class='rwDialogInput'][@value='1']", LocateBy.XPath);
+        public Clickable OK = new Clickable("//span[@class='rwInnerSpan'][text()='OK']", LocateBy.XPath);
+        public Clickable CancelCopy = new Clickable("//span[@class='rwInnerSpan'][text()='Cancel']", LocateBy.XPath);
         public CheckBox DoNotAllowOverlapping = new CheckBox("ctl00_cph_chkEnableScheduleConflictChecking", LocateBy.Id);
         public CheckBox IsShoppingCart = new CheckBox("ctl00_cph_chkEventsIsCart", LocateBy.Id);
         #endregion
@@ -176,7 +176,7 @@
 
         public void AgendaType_Select(DataCollection.FormData.CustomFieldType type)
         {
-            ButtonOrLink Type = new ButtonOrLink(
+            Clickable Type = new Clickable(
                 string.Format("//div[@id='divMoreFormats']//span[text()='{0}']", CustomStringAttribute.GetCustomString(type)), 
                 LocateBy.XPath);
 
@@ -454,29 +454,27 @@
     {
         public MultipleChoiceDefine(string name) : base(name) { }
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
-        public TextBox NameOnForm = new TextBox("ctl00_cphDialog_txtDescription", LocateBy.Id);
-        public TextBox NameOnReports = new TextBox("ctl00_cphDialog_txtFieldName", LocateBy.Id);
-        public TextBox Price = new TextBox("ctl00_cphDialog_rntAmount_text", LocateBy.Id);
-        public TextBox Limit = new TextBox("ctl00_cphDialog_rntMaxQuantity_text", LocateBy.Id);
-        public TextBox GroupLimit = new TextBox("ctl00_cphDialog_rntPerGroupLimit_text", LocateBy.Id);
+        public Input NameOnForm = new Input("ctl00_cphDialog_txtDescription", LocateBy.Id);
+        public Input NameOnReports = new Input("ctl00_cphDialog_txtFieldName", LocateBy.Id);
+        public Input Price = new Input("ctl00_cphDialog_rntAmount_text", LocateBy.Id);
+        public Input Limit = new Input("ctl00_cphDialog_rntMaxQuantity_text", LocateBy.Id);
+        public Input GroupLimit = new Input("ctl00_cphDialog_rntPerGroupLimit_text", LocateBy.Id);
         public CheckBox Visible = new CheckBox("ctl00_cphDialog_chkActive", LocateBy.Id);
 
         public void SaveAndNew_Click()
         {
-            popupFrameHelper.SaveAndNew_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndNew_Click();
         }
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
     }
@@ -485,11 +483,9 @@
     {
         public CommonlyUsedItemsDefine(string name) : base(name) { }
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
         public void CommonlyUsedItem_Click(FormData.CommonlyUsedMultipleChoice choiceItem)
         {
-            ButtonOrLink item = new ButtonOrLink(string.Format("//div[@id='divPredefinedTypes']/div[text()='{0}']",
+            Clickable item = new Clickable(string.Format("//div[@id='divPredefinedTypes']/div[text()='{0}']",
                 CustomStringAttribute.GetCustomString(choiceItem)), LocateBy.XPath);
 
             item.WaitForDisplay();
@@ -500,22 +496,22 @@
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
     }
 
     public class AgendaRow
     {
-        public ButtonOrLink Agenda;
-        public ButtonOrLink Delete;
-        public ButtonOrLink Copy;
+        public Clickable Agenda;
+        public Clickable Delete;
+        public Clickable Copy;
 
         public AgendaRow(DataCollection.AgendaItem agendaItem)
         {
@@ -523,9 +519,9 @@
             string agendaNameOnclickAttriText = agendaNameTd.GetAttribute("onclick");
             int agendaItemId = Convert.ToInt32(agendaNameOnclickAttriText.Split(new string[] { "'" }, StringSplitOptions.RemoveEmptyEntries)[1]);
 
-            this.Agenda = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}2']", agendaItemId), LocateBy.XPath);
-            this.Delete = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItemId), LocateBy.XPath);
-            this.Copy = new ButtonOrLink(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItemId), LocateBy.XPath);
+            this.Agenda = new Clickable(string.Format("//*[@id='listGridTD{0}2']", agendaItemId), LocateBy.XPath);
+            this.Delete = new Clickable(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']/../../following-sibling::*//img", agendaItemId), LocateBy.XPath);
+            this.Copy = new Clickable(string.Format("//*[@id='listGridTD{0}5']//img[@title='Copy']", agendaItemId), LocateBy.XPath);
         }
 
         public void Agenda_Click()
@@ -555,12 +551,12 @@
 
     public class CodeRow
     {
-        public ButtonOrLink Code;
+        public Clickable Code;
         public int CodeId;
 
         public CodeRow(DiscountCode code)
         {
-            this.Code = new ButtonOrLink(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.Code), LocateBy.XPath);
+            this.Code = new Clickable(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.Code), LocateBy.XPath);
 
             string OnClickAttributeOfCode = this.Code.GetAttribute("onclick");
 

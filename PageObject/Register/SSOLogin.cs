@@ -8,7 +8,7 @@
     {
         public MultiChoiceDropdown Email = new MultiChoiceDropdown("emailList", LocateBy.Id);
         public MultiChoiceDropdown Password = new MultiChoiceDropdown("ddlPasswords", LocateBy.Id);
-        public ButtonOrLink Login = new ButtonOrLink("btnLogin", LocateBy.Id);
+        public Clickable Login = new Clickable("btnLogin", LocateBy.Id);
 
         public void Login_Click()
         {

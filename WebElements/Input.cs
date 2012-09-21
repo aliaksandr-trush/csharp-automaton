@@ -3,9 +3,9 @@
     using System;
     using RegOnline.RegressionTest.UIUtility;
 
-    public class TextBox : WebElement
+    public class Input : ElementBase
     {
-        public TextBox(string locator, LocateBy locatorType)
+        public Input(string locator, LocateBy locatorType)
             : base(locator, locatorType) { }
 
         public void Type(object value)
@@ -21,11 +21,6 @@
             }
 
             WebDriverUtility.DefaultProvider.ExecuteJavaScript(string.Format("document.getElementById('{0}').value='{1}';", this.Locator, value));
-        }
-
-        public void Click()
-        {
-            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
     }
 }

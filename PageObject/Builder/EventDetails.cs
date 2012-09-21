@@ -10,12 +10,12 @@
     {
         public RegistrationFormPages.RegistrationFormPages FormPages = new RegistrationFormPages.RegistrationFormPages();
 
-        public ButtonOrLink Button_RegistrationFormPages = new ButtonOrLink("//a[@accesskey='P']", UIUtility.LocateBy.XPath);
-        public ButtonOrLink EventWebsite = new ButtonOrLink("//a[@accesskey='W']", UIUtility.LocateBy.XPath);
-        public ButtonOrLink Preview = new ButtonOrLink("ctl00_btnPreview", UIUtility.LocateBy.Id);
-        public ButtonOrLink SaveAndStay = new ButtonOrLink("ctl00_btnSaveStay", UIUtility.LocateBy.Id);
-        public ButtonOrLink SaveAndClose = new ButtonOrLink("ctl00_btnSaveClose", UIUtility.LocateBy.Id);
-        public ButtonOrLink CloseButton = new ButtonOrLink("ctl00_hplReturnToManger", UIUtility.LocateBy.Id);
+        public Clickable Button_RegistrationFormPages = new Clickable("//a[@accesskey='P']", UIUtility.LocateBy.XPath);
+        public Clickable EventWebsite = new Clickable("//a[@accesskey='W']", UIUtility.LocateBy.XPath);
+        public Clickable Preview = new Clickable("ctl00_btnPreview", UIUtility.LocateBy.Id);
+        public Clickable SaveAndStay = new Clickable("ctl00_btnSaveStay", UIUtility.LocateBy.Id);
+        public Clickable SaveAndClose = new Clickable("ctl00_btnSaveClose", UIUtility.LocateBy.Id);
+        public Clickable CloseButton = new Clickable("ctl00_hplReturnToManger", UIUtility.LocateBy.Id);
 
         public void RegistrationFormPages_Click()
         {

@@ -18,15 +18,22 @@
 
         public static string GetCustomString(Enum value)
         {
-            string customStringValue = null;
-            Type type = value.GetType();
+            return GetCustomStrings(value)[0];
+        }
 
+        public static string[] GetCustomStrings(Enum value)
+        {
+            Type type = value.GetType();
             FieldInfo fi = type.GetField(value.ToString());
             CustomStringAttribute[] attrs = fi.GetCustomAttributes(typeof(CustomStringAttribute), false) as CustomStringAttribute[];
-            if (attrs.Length > 0)
-                customStringValue = attrs[0].CustomStringValue;
+            string[] customStringValues = new string[attrs.Length];
 
-            return customStringValue;
+            for (int cnt = 0; cnt < attrs.Length; cnt++)
+            {
+                customStringValues[cnt] = attrs[cnt].CustomStringValue;
+            }
+
+            return customStringValues;
         }
     }
 }

@@ -10,10 +10,10 @@
         public SSOBase(string name) : base(name) { }
 
         public RadioButton SSORadio = new RadioButton("ctl00_cphDialog_xAuth_rdoSSO", LocateBy.Id);
-        public TextBox EndpointURL = new TextBox("ctl00_cphDialog_xAuth_txtSSOEndpointUrl", LocateBy.Id);
-        public TextBox LoginURL = new TextBox("ctl00_cphDialog_xAuth_txtSSOLoginUrl", LocateBy.Id);
-        public ButtonOrLink SaveAndClose = new ButtonOrLink("ctl00_cphDialog_saveForm", LocateBy.Id);
-        public ButtonOrLink Cancel = new ButtonOrLink("//div[@class='divButtons']/input[@class='ButtonCancel']", LocateBy.XPath);
+        public Input EndpointURL = new Input("ctl00_cphDialog_xAuth_txtSSOEndpointUrl", LocateBy.Id);
+        public Input LoginURL = new Input("ctl00_cphDialog_xAuth_txtSSOLoginUrl", LocateBy.Id);
+        public Clickable SaveAndClose = new Clickable("ctl00_cphDialog_saveForm", LocateBy.Id);
+        public Clickable Cancel = new Clickable("//div[@class='divButtons']/input[@class='ButtonCancel']", LocateBy.XPath);
 
         public Label ErrorMessage(string errorMessage)
         {

@@ -12,9 +12,9 @@
             "//div[@class='tooltipWrapper tooltipLightbox ui-dialog-content ui-widget-content']/div[@class='tooltipWrapperContent']",
             LocateBy.XPath);
 
-        public ButtonOrLink CloseDetailsPopup = new ButtonOrLink("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
+        public Clickable CloseDetailsPopup = new Clickable("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
         public Window AgendaDetailsWindow = new Window();
-        public ButtonOrLink RecalculateTotal = new ButtonOrLink("//div[@class='sectionTotal']/button[text()='Recalculate Total']", LocateBy.XPath);
+        public Clickable RecalculateTotal = new Clickable("//div[@class='sectionTotal']/button[text()='Recalculate Total']", LocateBy.XPath);
         public Label Total = new Label("totalAmt", LocateBy.Id);
 
         public AgendaRow GetAgendaItem(AgendaItem agenda)
@@ -24,7 +24,7 @@
 
         public void VerifyAgendaItemDisplay(AgendaItem agenda, bool expected)
         {
-            WebElement a = AgendaRow.GetAgendaLiElement(agenda);
+            ElementBase a = AgendaRow.GetAgendaLiElement(agenda);
             bool actual = a.IsDisplay;
             
             WebDriverUtility.DefaultProvider.VerifyValue(
@@ -35,7 +35,7 @@
 
         public void VerifyChoiceItemDisplay(ChoiceItem choice, bool expected)
         {
-            WebElement a = new WebElement(string.Format("//*[contains(text(),'{0}')]", choice.Name), LocateBy.XPath);
+            ElementBase a = new ElementBase(string.Format("//*[contains(text(),'{0}')]", choice.Name), LocateBy.XPath);
             bool actual = a.IsDisplay;
             
             WebDriverUtility.DefaultProvider.VerifyValue(
@@ -63,16 +63,16 @@
 
     public class AgendaRow
     {
-        public WebElement AgendaType = new WebElement();
-        public WebElement AgendaLabel = new WebElement();
+        public ElementBase AgendaType = new ElementBase();
+        public ElementBase AgendaLabel = new ElementBase();
         public DateTime? StartDate;
         public DateTime? EndDate;
         public string Location;
         public double? Price;
-        public TextBox DiscountCodeInput;
+        public Input DiscountCodeInput;
         public Label LimitFullMessage;
         public Label WaitlistMessage;
-        public ButtonOrLink Details;
+        public Clickable Details;
 
         public AgendaRow(AgendaItem agenda)
         {
@@ -83,7 +83,7 @@
             {
                 case FormData.CustomFieldType.AlwaysSelected:
                     this.AgendaType = new CheckBox(agenda.Id.ToString(), LocateBy.Id);
-                    this.DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                    this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
@@ -91,17 +91,17 @@
 
                 case FormData.CustomFieldType.CheckBox:
                     this.AgendaType = new CheckBox(agenda.Id.ToString(), LocateBy.Id);
-                    this.DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                    this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.LimitFullMessage = new Label(string.Format("//li[@data-id='{0}']//div[@class='capacityMsg']", agenda.Id.ToString()), LocateBy.XPath);
                     this.WaitlistMessage = new Label(string.Format("//li[@data-id='{0}']//span[@class='wlist']", agenda.Id.ToString()), LocateBy.XPath);
-                    this.Details = new ButtonOrLink(string.Format("//li[@data-id='{0}']//span/a[@href]", agenda.Id.ToString()), LocateBy.XPath);
+                    this.Details = new Clickable(string.Format("//li[@data-id='{0}']//span/a[@href]", agenda.Id.ToString()), LocateBy.XPath);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
 
                 case FormData.CustomFieldType.RadioButton:
-                    this.DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                    this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
@@ -109,7 +109,7 @@
 
                 case FormData.CustomFieldType.Dropdown:
                     this.AgendaType = new MultiChoiceDropdown(string.Format("//select[@id='{0}']", agenda.Id.ToString()), LocateBy.XPath);
-                    this.DiscountCodeInput = new TextBox("dc" + agenda.Id.ToString(), LocateBy.Id);
+                    this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
@@ -122,11 +122,11 @@
                 case FormData.CustomFieldType.Date:
                 case FormData.CustomFieldType.Time:
                 case FormData.CustomFieldType.Duration:
-                    this.AgendaType = new TextBox(agenda.Id.ToString(), LocateBy.Id);
+                    this.AgendaType = new Input(agenda.Id.ToString(), LocateBy.Id);
                     break;
 
                 case FormData.CustomFieldType.FileUpload:
-                    this.AgendaType = new ButtonOrLink(
+                    this.AgendaType = new Clickable(
                         string.Format("//li[@data-id='{0}']//a[@class='add_button']", agenda.Id.ToString()),
                         LocateBy.XPath);
 
@@ -138,7 +138,7 @@
                     break;
 
                 case FormData.CustomFieldType.ContinueButton:
-                    this.AgendaType = new ButtonOrLink(string.Format("ctl00${0}", agenda.Id.ToString()), LocateBy.Name);
+                    this.AgendaType = new Clickable(string.Format("ctl00${0}", agenda.Id.ToString()), LocateBy.Name);
                     break;
 
                 default:
@@ -151,9 +151,9 @@
             return Convert.ToInt32(GetAgendaLiElement(agenda).GetAttribute("data-id"));
         }
 
-        public static WebElement GetAgendaLiElement(AgendaItem agenda)
+        public static ElementBase GetAgendaLiElement(AgendaItem agenda)
         {
-            WebElement element_Li = null;
+            ElementBase element_Li = null;
 
             switch (agenda.Type)
             {
@@ -168,7 +168,7 @@
                 case FormData.CustomFieldType.Dropdown:
                 case FormData.CustomFieldType.Duration:
 
-                    element_Li = new WebElement(
+                    element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
                         LocateBy.XPath);
 
@@ -188,7 +188,7 @@
                     break;
 
                 case FormData.CustomFieldType.SectionHeader:
-                    element_Li = new WebElement(
+                    element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[contains(text(),'{0}')]]", agenda.NameOnForm),
                         LocateBy.XPath);
 
@@ -197,7 +197,7 @@
                 case FormData.CustomFieldType.RadioButton:
                 case FormData.CustomFieldType.FileUpload:
                 case FormData.CustomFieldType.ContinueButton:
-                    element_Li = new WebElement(
+                    element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[p[text()='{0}']]]", agenda.NameOnForm),
                         LocateBy.XPath);
 

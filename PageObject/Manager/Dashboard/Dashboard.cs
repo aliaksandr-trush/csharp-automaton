@@ -11,11 +11,11 @@
         public Reports Reports = new Reports();
         public AttendeeDirectory AttendeeDirectory = new AttendeeDirectory();
 
-        public ButtonOrLink Activate = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_btnStatusChange", LocateBy.Id);
+        public Clickable Activate = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_btnStatusChange", LocateBy.Id);
         public ActivateEvent ActivateEvent = new ActivateEvent("plain");
-        public ButtonOrLink ChangeStatus = new ButtonOrLink("//*[@id='ctl00_ctl00_cphDialog_cpMgrMain_wrpStatusChange']/a", LocateBy.XPath);
+        public Clickable ChangeStatus = new Clickable("//*[@id='ctl00_ctl00_cphDialog_cpMgrMain_wrpStatusChange']/a", LocateBy.XPath);
         public ChangeStatusFrame ChangeStatusFrame = new ChangeStatusFrame("plain");
-        public ButtonOrLink ReturnToList = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_hplBack", LocateBy.Id);
+        public Clickable ReturnToList = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_hplBack", LocateBy.Id);
 
         public void ReturnToList_Click()
         {
@@ -46,7 +46,7 @@
 
         public void DashboardTab_Click(FormData.DashboardTab tab)
         {
-            ButtonOrLink targetTab = new ButtonOrLink(CustomStringAttribute.GetCustomString(tab), LocateBy.LinkText);
+            Clickable targetTab = new Clickable(CustomStringAttribute.GetCustomString(tab), LocateBy.LinkText);
             targetTab.WaitForDisplay();
             targetTab.Click();
             Utility.ThreadSleep(2);
@@ -60,8 +60,8 @@
         public ActivateEvent(string name) : base(name) { }
 
         public CheckBox RemoveTestReg = new CheckBox("chkDeleteTestRegs", LocateBy.Id);
-        public ButtonOrLink Activate = new ButtonOrLink("//span[@class='BiggerButtonBaseBlue']/a", LocateBy.XPath);
-        public ButtonOrLink Cancel = new ButtonOrLink("//span[@class='BiggerButtonBase']/a", LocateBy.XPath);
+        public Clickable Activate = new Clickable("//span[@class='BiggerButtonBaseBlue']/a", LocateBy.XPath);
+        public Clickable Cancel = new Clickable("//span[@class='BiggerButtonBase']/a", LocateBy.XPath);
 
         public void Activate_Click()
         {
@@ -90,8 +90,8 @@
 
         public CheckBox ChangeStatusNow = new CheckBox("chkChangeStatusNow", LocateBy.Id);
         public MultiChoiceDropdown Status = new MultiChoiceDropdown("ddlStatusesCurrent", LocateBy.Id);
-        public ButtonOrLink OK = new ButtonOrLink("btnOK", LocateBy.Id);
-        public ButtonOrLink Cancel = new ButtonOrLink("btnCancel", LocateBy.Id);
+        public Clickable OK = new Clickable("btnOK", LocateBy.Id);
+        public Clickable Cancel = new Clickable("btnCancel", LocateBy.Id);
 
         public void ChangeStatusNow_Set(bool check)
         {

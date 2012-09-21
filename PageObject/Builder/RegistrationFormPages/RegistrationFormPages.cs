@@ -18,7 +18,7 @@
         public PersonalInfo PersonalInfoPage = new PersonalInfo();
         public XAuthOld XAuthOld = new XAuthOld();
 
-        public ButtonOrLink YesOnSplashPage = new ButtonOrLink("//div[@id='splashChoicePage']//span[text()='Yes']", LocateBy.XPath);
+        public Clickable YesOnSplashPage = new Clickable("//div[@id='splashChoicePage']//span[text()='Yes']", LocateBy.XPath);
         public Label AgendaErrorMessage = new Label("//div[@id='ctl00_cph_valSummaryCF']/ul/li", LocateBy.XPath);
 
         public void YesOnSplashPage_Click()
@@ -67,7 +67,7 @@
                     break;
             }
 
-            ButtonOrLink Page = new ButtonOrLink(string.Format("//a[@accesskey='{0}']", accesskey), LocateBy.XPath);
+            Clickable Page = new Clickable(string.Format("//a[@accesskey='{0}']", accesskey), LocateBy.XPath);
             Page.WaitForDisplay();
             Page.Click();
             WaitForLoad();

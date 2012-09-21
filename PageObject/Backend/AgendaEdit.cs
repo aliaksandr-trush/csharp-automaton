@@ -5,9 +5,9 @@
 
     public class AgendaEdit : Window
     {
-        public ButtonOrLink SaveAndClose = new ButtonOrLink("btnSaveAndClose", UIUtility.LocateBy.Id);
+        public Clickable SaveAndClose = new Clickable("btnSaveAndClose", UIUtility.LocateBy.Id);
 
-        public WebElement AgendaType(AgendaItem agenda)
+        public ElementBase AgendaType(AgendaItem agenda)
         {
             switch (agenda.Type)
             {

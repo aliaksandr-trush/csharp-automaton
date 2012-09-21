@@ -6,35 +6,35 @@
 
     public class AttendeeCheck : Window
     {
-        public ButtonOrLink OK = new ButtonOrLink("//div[@class='buttonGroup']/a[@class='okButton button']", LocateBy.XPath);
+        public Clickable OK = new Clickable("//div[@class='buttonGroup']/a[@class='okButton button']", LocateBy.XPath);
 
-        public ButtonOrLink PersonalInfo(int index)
+        public Clickable PersonalInfo(int index)
         {
-            return new ButtonOrLink(string.Format(
+            return new Clickable(string.Format(
                                       "ctl00_cph_grdMembers_ctl{0}_lnkPersInfo",
                                       ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString()),
                                       LocateBy.Id);
         }
 
-        public ButtonOrLink Agenda(int index)
+        public Clickable Agenda(int index)
         {
-            return new ButtonOrLink(string.Format(
+            return new Clickable(string.Format(
                                       "ctl00_cph_grdMembers_ctl{0}_lnkAgenda",
                                       ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString()),
                                       LocateBy.Id);
         }
 
-        public ButtonOrLink Cancel(int index)
+        public Clickable Cancel(int index)
         {
-            return new ButtonOrLink(string.Format(
+            return new Clickable(string.Format(
                                                  "ctl00_cph_grdMembers_ctl{0}_lnkCancel",
                                                  ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString()),
                                                  LocateBy.Id);
         }
 
-        public ButtonOrLink Substitute(int index)
+        public Clickable Substitute(int index)
         {
-            return new ButtonOrLink(string.Format(
+            return new Clickable(string.Format(
                            "ctl00_cph_grdMembers_ctl{0}_lnkSubst",
                            ((index + 1) < 10 ? "0" : string.Empty) + (index + 1).ToString()),
                            LocateBy.Id);
@@ -42,7 +42,7 @@
 
         public void PersonalInfoLink_Click(int index)
         {
-            ButtonOrLink PersonalInfo = this.PersonalInfo(index);
+            Clickable PersonalInfo = this.PersonalInfo(index);
 
             PersonalInfo.WaitForDisplay();
             PersonalInfo.Click();
@@ -53,7 +53,7 @@
 
         public void Agenda_Click(int index)
         {
-            ButtonOrLink Agenda = this.Agenda(index);
+            Clickable Agenda = this.Agenda(index);
 
             Agenda.WaitForDisplay();
             Agenda.Click();
@@ -64,7 +64,7 @@
 
         public void Cancel_Click(int index)
         {
-            ButtonOrLink Cancel = this.Cancel(index);
+            Clickable Cancel = this.Cancel(index);
 
             Cancel.WaitForDisplay();
             Cancel.Click();
@@ -83,7 +83,7 @@
 
         public void SubstituteLink_Click(int index)
         {
-            ButtonOrLink Substitute = this.Substitute(index);
+            Clickable Substitute = this.Substitute(index);
 
             Substitute.WaitForDisplay();
             Substitute.Click();

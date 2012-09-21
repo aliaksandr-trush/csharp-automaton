@@ -66,7 +66,7 @@
                 Label AttendeeFollowingTrIsAgenda = new Label(string.Format(attendeeFollowingTrIsAgenda, i), LocateBy.XPath);
                 AttendeeRow attendeeRow = new AttendeeRow();
                 attendeeRow.CheckAttendee = new CheckBox(string.Format(attendeeTr, agendaIndex, i) + "/td[1]/input", LocateBy.XPath);
-                attendeeRow.AttendeeId = new ButtonOrLink(string.Format(attendeeTr, agendaIndex, i) + "/td[2]/a", LocateBy.XPath);
+                attendeeRow.AttendeeId = new Clickable(string.Format(attendeeTr, agendaIndex, i) + "/td[2]/a", LocateBy.XPath);
                 attendeeRow.AgendaStatus = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[3]", LocateBy.XPath);
                 attendeeRow.AttendeeName = new Label(string.Format(attendeeTr,agendaIndex, i) + "/td[4]", LocateBy.XPath);
                 attendeeRow.AttendeeCompany = new Label(string.Format(attendeeTr, agendaIndex, i) + "/td[5]", LocateBy.XPath);
@@ -89,7 +89,7 @@
     public class AttendeeRow
     {
         public CheckBox CheckAttendee;
-        public ButtonOrLink AttendeeId;
+        public Clickable AttendeeId;
         public Label AgendaStatus;
         public Label AttendeeName;
         public Label AttendeeCompany;

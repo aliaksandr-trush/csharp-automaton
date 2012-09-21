@@ -276,7 +276,7 @@
             Registrant reg = new Registrant(evt1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            WebElements.WebElement.VerifyDisplay(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton, true);
+            WebElements.ElementBase.VerifyDisplay(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, true);

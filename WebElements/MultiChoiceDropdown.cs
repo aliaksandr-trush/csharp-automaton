@@ -6,7 +6,7 @@
     using System.Text;
     using RegOnline.RegressionTest.UIUtility;
 
-    public class MultiChoiceDropdown : WebElement
+    public class MultiChoiceDropdown : ElementBase
     {
         public MultiChoiceDropdown(string locator, LocateBy locatorType)
             : base(locator, locatorType) 

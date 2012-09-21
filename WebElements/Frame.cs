@@ -2,7 +2,7 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class Frame : WebElement
+    public class Frame : ElementBase
     {
         public string Name;
         public int Index;

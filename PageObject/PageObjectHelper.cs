@@ -6,9 +6,11 @@
 
     public class PageObjectHelper
     {
+        public static PopupFrameHelper PopupFrame_Helper = new PopupFrameHelper();
+
         public static void AllowCookie_Click()
         {
-            ButtonOrLink Allow = new ButtonOrLink("//button[@class='ui-button ui-widget ui-corner-all ui-button-text-only dialog-allow-button']", LocateBy.XPath);
+            Clickable Allow = new Clickable("//button[@class='ui-button ui-widget ui-corner-all ui-button-text-only dialog-allow-button']", LocateBy.XPath);
 
             if (Allow.IsPresent)
             {

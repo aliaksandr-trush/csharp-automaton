@@ -9,10 +9,8 @@
         public EmailEditor(string name) : base(name) { }
         public EmailEditor(int index) : base(index) { }
 
-        public ButtonOrLink HtmlMode = new ButtonOrLink("ctl00_cphDialog_ucEmailEditor_ucContent_radHtml", LocateBy.Id);
-        public TextBox Content = new TextBox("//textarea", LocateBy.XPath);
-
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
+        public Clickable HtmlMode = new Clickable("ctl00_cphDialog_ucEmailEditor_ucContent_radHtml", LocateBy.Id);
+        public Input Content = new Input("//textarea", LocateBy.XPath);
 
         #region Basic Actions
         public void HtmlMode_Click()
@@ -33,18 +31,18 @@
 
         public void SaveAndStay_Click()
         {
-            popupFrameHelper.SaveAndStay_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndStay_Click();
         }
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
         #endregion

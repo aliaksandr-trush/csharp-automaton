@@ -9,7 +9,7 @@
 
     public class Reports : Window
     {
-        public ButtonOrLink AgendaReportLink = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_lnkAgendaReport", LocateBy.Id);
+        public Clickable AgendaReportLink = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkAgendaReport", LocateBy.Id);
 
         public void AgendaReportLink_Click()
         {

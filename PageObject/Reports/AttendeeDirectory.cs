@@ -6,10 +6,10 @@
 
     public class AttendeeDirectory : Window
     {
-        public TextBox EmailAddress = new TextBox("ctl00_cphDirectory_loginDirectory_UserName", LocateBy.Id);
-        public TextBox Password = new TextBox("ctl00_cphDirectory_loginDirectory_Password", LocateBy.Id);
-        public ButtonOrLink Continue = new ButtonOrLink("ctl00_cphDirectory_loginDirectory_LoginButton", LocateBy.Id);
-        public ButtonOrLink SignOut = new ButtonOrLink("//a[contains(@onclick,'SignOut')]", LocateBy.XPath);
+        public Input EmailAddress = new Input("ctl00_cphDirectory_loginDirectory_UserName", LocateBy.Id);
+        public Input Password = new Input("ctl00_cphDirectory_loginDirectory_Password", LocateBy.Id);
+        public Clickable Continue = new Clickable("ctl00_cphDirectory_loginDirectory_LoginButton", LocateBy.Id);
+        public Clickable SignOut = new Clickable("//a[contains(@onclick,'SignOut')]", LocateBy.XPath);
 
         public void Continue_Click()
         {

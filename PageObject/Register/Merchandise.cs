@@ -6,20 +6,20 @@
 
     public class Merchandise : Window
     {
-        private TextBox PageContent_Div = new TextBox("pageContent", LocateBy.Id);
+        private Input PageContent_Div = new Input("pageContent", LocateBy.Id);
 
-        public TextBox MerchInputField(DataCollection.MerchandiseItem merch)
+        public Input MerchInputField(DataCollection.MerchandiseItem merch)
         {
             Label merchNameLabel = new Label(string.Format("//label[text()='{0}']", merch.Name), LocateBy.XPath);
             merch.Id = Convert.ToInt32(merchNameLabel.GetAttribute("for"));
-            return new TextBox(merch.Id.ToString(), LocateBy.Id);
+            return new Input(merch.Id.ToString(), LocateBy.Id);
         }
 
-        public TextBox MerchDiscountCode(DataCollection.MerchandiseItem merch)
+        public Input MerchDiscountCode(DataCollection.MerchandiseItem merch)
         {
             Label merchNameLabel = new Label(string.Format("//label[text()='{0}']", merch.Name), LocateBy.XPath);
             merch.Id = Convert.ToInt32(merchNameLabel.GetAttribute("for"));
-            return new TextBox("dc" + merch.Id.ToString(), LocateBy.Id);
+            return new Input("dc" + merch.Id.ToString(), LocateBy.Id);
         }
 
         public void ClickPageContentDivToRefresh()

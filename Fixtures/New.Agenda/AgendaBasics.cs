@@ -419,7 +419,7 @@
             //Will uncomment after the bug is resolved
             //Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).GetAgendaLocation(ChangeToHeader) == Registrant.Default.AddressLineOne);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(ChangeToHeader).GetAgendaPrice(ChangeToHeader) == 10);
-            ((TextBox)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGConribution).AgendaType)).Type(1);
+            ((Input)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AGConribution).AgendaType)).Type(1);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.ContributionNotInMinAndMax, MoneyTool.FormatMoney(10), MoneyTool.FormatMoney(100)));
             KeywordProvider.RegistrationCreation.Agenda(reg);

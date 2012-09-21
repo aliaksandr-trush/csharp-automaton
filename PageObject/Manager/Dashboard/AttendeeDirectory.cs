@@ -6,11 +6,11 @@
 
     public class AttendeeDirectory : Window
     {
-        public ButtonOrLink AddDirectory = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_aNewDirectory", LocateBy.Id);
+        public Clickable AddDirectory = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_aNewDirectory", LocateBy.Id);
         public DirectoryDefine DirectoryDefine = new DirectoryDefine("dialog");
-        public ButtonOrLink DeleteFirstDirectory = new ButtonOrLink(
+        public Clickable DeleteFirstDirectory = new Clickable(
             "ctl00_ctl00_cphDialog_cpMgrMain_grdDirectories_ctl02_lnkDeleteDirectory", LocateBy.Id);
-        private ButtonOrLink OKButton_DeletePopup = new ButtonOrLink("//span[text()='OK']", LocateBy.XPath);
+        private Clickable OKButton_DeletePopup = new Clickable("//span[text()='OK']", LocateBy.XPath);
 
         public void AddDirectory_Click()
         {
@@ -42,12 +42,12 @@
     {
         public DirectoryDefine(string name) : base(name) { }
 
-        public TextBox DirectoryName = new TextBox("crGeneral_tbReportName", LocateBy.Id);
-        public ButtonOrLink LinksAndSecurity = new ButtonOrLink("Tabimg_M4", LocateBy.Id);
+        public Input DirectoryName = new Input("crGeneral_tbReportName", LocateBy.Id);
+        public Clickable LinksAndSecurity = new Clickable("Tabimg_M4", LocateBy.Id);
         public CheckBox RequireLogin = new CheckBox("crAdvanced_cbRequireLogin", LocateBy.Id);
-        public ButtonOrLink Apply = new ButtonOrLink("btnSave", LocateBy.Id);
-        public ButtonOrLink Cancel = new ButtonOrLink("btnCancel", LocateBy.Id);
-        public TextBox DirectoryLink = new TextBox("crAdvanced_txtShareLink", LocateBy.Id);
+        public Clickable Apply = new Clickable("btnSave", LocateBy.Id);
+        public Clickable Cancel = new Clickable("btnCancel", LocateBy.Id);
+        public Input DirectoryLink = new Input("crAdvanced_txtShareLink", LocateBy.Id);
         public CheckBox ShareDirectory = new CheckBox("crAdvanced_cbShareReport", LocateBy.Id);
 
         public void LinksAndSecurity_Click()

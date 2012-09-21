@@ -22,30 +22,30 @@
         #endregion
 
         #region WebElements
-        public ButtonOrLink Trustwave = new ButtonOrLink("logo1", LocateBy.ClassName);
+        public Clickable Trustwave = new Clickable("logo1", LocateBy.ClassName);
         public Window TrustwaveWeb = new Window();
-        public ButtonOrLink EventHome = new ButtonOrLink("ctl00_lnkHome", LocateBy.Id);
+        public Clickable EventHome = new Clickable("ctl00_lnkHome", LocateBy.Id);
         public Window EventHomeWindow = new Window();
-        public ButtonOrLink EventContactInfo = new ButtonOrLink("ctl00_lnkContactInfo", LocateBy.Id);
+        public Clickable EventContactInfo = new Clickable("ctl00_lnkContactInfo", LocateBy.Id);
         public ContactInfo PopupContactInfo = new ContactInfo(0);
-        public ButtonOrLink Facebook = new ButtonOrLink("social1", LocateBy.ClassName);
+        public Clickable Facebook = new Clickable("social1", LocateBy.ClassName);
         public Window FacebookWeb = new Window();
-        public ButtonOrLink Twitter = new ButtonOrLink("social2", LocateBy.ClassName);
+        public Clickable Twitter = new Clickable("social2", LocateBy.ClassName);
         public Window TwitterWeb = new Window();
-        public ButtonOrLink Linkedin = new ButtonOrLink("social3", LocateBy.ClassName);
+        public Clickable Linkedin = new Clickable("social3", LocateBy.ClassName);
         public Window LinkedinWeb = new Window();
         public Label Copyright = new Label("activeCopyright", LocateBy.Id);
-        public ButtonOrLink TermsOfUse = new ButtonOrLink("//*[@id='activeLinks']/li/a[text()='Terms of Use']", LocateBy.XPath);
+        public Clickable TermsOfUse = new Clickable("//*[@id='activeLinks']/li/a[text()='Terms of Use']", LocateBy.XPath);
         public Window TermsOfUseWindow = new Window();
-        public ButtonOrLink PrivacyPolicy = new ButtonOrLink("//*[@id='activeLinks']/li/a[text()='Privacy Policy']", LocateBy.XPath);
+        public Clickable PrivacyPolicy = new Clickable("//*[@id='activeLinks']/li/a[text()='Privacy Policy']", LocateBy.XPath);
         public Window PrivacyPolicyWindow = new Window();
-        public ButtonOrLink CookiePolicy = new ButtonOrLink("//*[@id='activeLinks']/li/a[text()='Cookie Policy']", LocateBy.XPath);
+        public Clickable CookiePolicy = new Clickable("//*[@id='activeLinks']/li/a[text()='Cookie Policy']", LocateBy.XPath);
         public Window CookiePolicyWindow = new Window();
-        public ButtonOrLink About = new ButtonOrLink("//*[@id='activeLinks']/li/a[text()='About Active.com']", LocateBy.XPath);
+        public Clickable About = new Clickable("//*[@id='activeLinks']/li/a[text()='About Active.com']", LocateBy.XPath);
         public Window AboutWindow = new Window();
-        public ButtonOrLink ActiveCom = new ButtonOrLink("//*[@id='activeLogo']/a", LocateBy.XPath);
+        public Clickable ActiveCom = new Clickable("//*[@id='activeLogo']/a", LocateBy.XPath);
         public Window ActiveComWeb = new Window();
-        public ButtonOrLink EventDetails = new ButtonOrLink("//*[text()='(View Details)']", LocateBy.XPath);
+        public Clickable EventDetails = new Clickable("//*[text()='(View Details)']", LocateBy.XPath);
         public Label Location = new Label("//*[@id='fullEventDetails']//span[@class='fn org']", LocateBy.XPath);
         public Label AddressOne = new Label("//*[@id='fullEventDetails']//span[@class='street-address']", LocateBy.XPath);
         public Label AddressTwo = new Label("//*[@id='fullEventDetails']//span[@class='extended-address']", LocateBy.XPath);
@@ -55,20 +55,20 @@
         public Label Country = new Label("//*[@id='fullEventDetails']//span[@class='country-name']", LocateBy.XPath);
         public Label Phone = new Label("//*[@id='fullEventDetails']//span[@class='tel']", LocateBy.XPath);
         public Label Contact = new Label("//*[@id='fullEventDetails']//*[@class='contact']", LocateBy.XPath);
-        public ButtonOrLink PopupContactInfoClose = new ButtonOrLink("//*[text()='close']", LocateBy.XPath);
+        public Clickable PopupContactInfoClose = new Clickable("//*[text()='close']", LocateBy.XPath);
         public Label EventTitle = new Label("summary", LocateBy.ClassName);
         public Label PageHeader = new Label("//*[@id='pageHeader']", LocateBy.XPath);
         public Label PageFooter = new Label("//*[@id='pageFooter']", LocateBy.XPath);
-        public ButtonOrLink Continue = new ButtonOrLink("//div[@class='buttonGroup']/button[text()='Continue']", LocateBy.XPath);
-        public ButtonOrLink AddAnotherPerson = new ButtonOrLink("//*[text()='Add Another Person']", LocateBy.XPath);
-        public ButtonOrLink AddPersonToWaitlist = new ButtonOrLink("//*[text()='Add a Person to the Waitlist']", LocateBy.XPath);
+        public Clickable Continue = new Clickable("//div[@class='buttonGroup']/button[text()='Continue']", LocateBy.XPath);
+        public Clickable AddAnotherPerson = new Clickable("//*[text()='Add Another Person']", LocateBy.XPath);
+        public Clickable AddPersonToWaitlist = new Clickable("//*[text()='Add a Person to the Waitlist']", LocateBy.XPath);
         public Label ErrorMessages = new Label("//div[@id='ctl00_valSummary']/ul/li", LocateBy.XPath);
         #endregion
 
         #region Basic Actions
         public void GoToPage(DataCollection.FormData.RegisterPage registerPage)
         {
-            ButtonOrLink pageLink = new ButtonOrLink(
+            Clickable pageLink = new Clickable(
                 string.Format("//a[contains(@id,'StepBar')][text()='{0}']",
                 CustomStringAttribute.GetCustomString(registerPage)), LocateBy.XPath);
 

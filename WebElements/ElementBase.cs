@@ -2,7 +2,7 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class WebElement
+    public class ElementBase
     {
         public string Locator { get; set; }
 
@@ -56,11 +56,11 @@
             }
         }
 
-        public WebElement()
+        public ElementBase()
         {
         }
 
-        public WebElement(string locator, LocateBy locatorType)
+        public ElementBase(string locator, LocateBy locatorType)
         {
             Locator = locator;
             TypeOfLocator = locatorType;
@@ -74,6 +74,11 @@
         public virtual void WaitForDisplay()
         {
             WebDriverUtility.DefaultProvider.WaitForElementDisplay(Locator, TypeOfLocator);
+        }
+
+        public virtual void Click()
+        {
+            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
 
         public string GetAttribute(string att)
@@ -102,23 +107,23 @@
             }
         }
 
-        public static bool IsElementPresent(WebElement element)
+        public static bool IsElementPresent(ElementBase element)
         {
             return WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
         }
 
-        public static bool IsElementDisplay(WebElement element)
+        public static bool IsElementDisplay(ElementBase element)
         {
             return WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
         }
 
-        public static void VerifyPresent(WebElement element, bool isPresent)
+        public static void VerifyPresent(ElementBase element, bool isPresent)
         {
             bool actual = WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
             Utilities.VerifyTool.VerifyValue(isPresent, actual, "Element '" + element.Locator + "' is present: {0}");
         }
 
-        public static void VerifyDisplay(WebElement element, bool isDisplayed)
+        public static void VerifyDisplay(ElementBase element, bool isDisplayed)
         {
             bool actual = WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
             Utilities.VerifyTool.VerifyValue(isDisplayed, actual, "Element '" + element.Locator + "' is display: {0}");
