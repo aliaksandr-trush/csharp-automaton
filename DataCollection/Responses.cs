@@ -144,7 +144,7 @@
     public class AgendaResponse_AlwaysSelected : AgendaResponse
     {
         public double Fee { get; set; }
-        public DiscountCode Code { get; set; }
+        public CustomFieldCode Code { get; set; }
 
         public override CustomFieldResponse Clone()
         {
@@ -160,7 +160,7 @@
     {
         public bool? Checked;
         public double Fee { get; set; }
-        public DiscountCode Code;
+        public CustomFieldCode Code;
 
         public override CustomFieldResponse Clone()
         {
@@ -177,7 +177,7 @@
     {
         public ChoiceItem ChoiceItem;
         public double Fee { get; set; }
-        public DiscountCode Code;
+        public CustomFieldCode Code;
 
         public override CustomFieldResponse Clone()
         {
@@ -194,7 +194,7 @@
     {
         public ChoiceItem ChoiceItem;
         public double Fee { get; set; }
-        public DiscountCode Code;
+        public CustomFieldCode Code;
 
         public override CustomFieldResponse Clone()
         {
@@ -260,7 +260,7 @@
     {
         public string FileSource;
         public double Fee { get; set; }
-        public DiscountCode Code;
+        public CustomFieldCode Code;
 
         public override CustomFieldResponse Clone()
         {
@@ -322,7 +322,7 @@
     public class MerchResponse_FixedPrice : MerchandiseResponse
     {
         public int Quantity;
-        public DiscountCode Discount_Code;
+        public CustomFieldCode Discount_Code;
 
         public override MerchandiseResponse Clone()
         {
@@ -350,7 +350,7 @@
     public class EventFeeResponse
     {
         public RegType RegType;
-        public DiscountCode Code;
+        public CustomFieldCode Code;
         public double Fee { get; set; }
 
         public EventFeeResponse() { }

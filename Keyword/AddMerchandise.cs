@@ -58,7 +58,7 @@
 
             if (merch.DiscountCodes.Count != 0)
             {
-                string discountCodeString = DiscountCode.GenerateBulkCodes(merch.DiscountCodes);
+                string discountCodeString = CustomFieldCode.GenerateBulkCodes(merch.DiscountCodes);
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.DiscountCodes.Type(discountCodeString);
             }

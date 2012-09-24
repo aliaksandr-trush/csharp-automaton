@@ -25,33 +25,33 @@
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             regType = new RegType("RegType");
             regType.Price = 50;
-            DiscountCode ac1 = new DiscountCode("ac1");
-            ac1.CodeType = FormData.DiscountCodeType.AccessCode;
+            CustomFieldCode ac1 = new CustomFieldCode("ac1");
+            ac1.CodeType = FormData.CustomFieldCodeType.AccessCode;
             ac1.Limit = 2;
-            regType.DiscountCode.Add(ac1);
-            DiscountCode ac2 = new DiscountCode("ac2");
-            ac2.CodeType = FormData.DiscountCodeType.AccessCode;
-            regType.DiscountCode.Add(ac2);
+            regType.AllCustomCode.Add(ac1);
+            CustomFieldCode ac2 = new CustomFieldCode("ac2");
+            ac2.CodeType = FormData.CustomFieldCodeType.AccessCode;
+            regType.AllCustomCode.Add(ac2);
             evt.StartPage.RegTypes.Add(regType);
 
             agenda = new AgendaItem_CheckBox("Agenda");
             agenda.Price = 80;
-            DiscountCode ac3 = new DiscountCode("ac3");
-            ac3.CodeType = FormData.DiscountCodeType.AccessCode;
+            CustomFieldCode ac3 = new CustomFieldCode("ac3");
+            ac3.CodeType = FormData.CustomFieldCodeType.AccessCode;
             ac3.Limit = 2;
-            DiscountCode ac4 = new DiscountCode("ac4");
-            ac4.CodeType = FormData.DiscountCodeType.AccessCode;
+            CustomFieldCode ac4 = new CustomFieldCode("ac4");
+            ac4.CodeType = FormData.CustomFieldCodeType.AccessCode;
             agenda.DiscountCodes.Add(ac3);
             agenda.DiscountCodes.Add(ac4);
-            agenda.BulkCodes = DiscountCode.GenerateBulkCodes(agenda.DiscountCodes);
+            agenda.BulkCodes = CustomFieldCode.GenerateBulkCodes(agenda.DiscountCodes);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
 
             merch = new MerchandiseItem("Merch");
             merch.Type = FormData.MerchandiseType.Fixed;
             merch.Price = 110;
-            DiscountCode ac5 = new DiscountCode("ac5");
-            ac5.CodeType = FormData.DiscountCodeType.AccessCode;
+            CustomFieldCode ac5 = new CustomFieldCode("ac5");
+            ac5.CodeType = FormData.CustomFieldCodeType.AccessCode;
             merch.DiscountCodes.Add(ac5);
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merch);
@@ -77,7 +77,7 @@
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 240);
         }
 
-        private Registrant GenerateReg(DiscountCode regTypeDc, DiscountCode agendaDc, DiscountCode merchDc)
+        private Registrant GenerateReg(CustomFieldCode regTypeDc, CustomFieldCode agendaDc, CustomFieldCode merchDc)
         {
             Registrant reg = new Registrant(evt);
             reg.Payment_Method = paymentMethod;

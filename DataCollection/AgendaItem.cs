@@ -27,7 +27,7 @@
         public double? Price;
         public EarlyPrice EarlyPrice;
         public LatePrice LatePrice;
-        public List<DiscountCode> DiscountCodes = new List<DiscountCode>();
+        public List<CustomFieldCode> DiscountCodes = new List<CustomFieldCode>();
         public string BulkCodes;
         public bool? RequireDC;
         public bool? ApplyTaxOne;
