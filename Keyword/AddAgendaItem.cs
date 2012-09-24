@@ -193,7 +193,7 @@
 
                     if ((ag.DiscountCodes.Count != 0) && (ag.BulkCodes == null))
                     {
-                        foreach (DiscountCode dc in ag.DiscountCodes)
+                        foreach (CustomFieldCode dc in ag.DiscountCodes)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
                             PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);

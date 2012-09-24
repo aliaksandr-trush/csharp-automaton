@@ -3,24 +3,24 @@
     using System;
     using System.Collections.Generic;
 
-    public class DiscountCode
+    public class CustomFieldCode
     {
         public int Id;
-        public FormData.DiscountCodeType CodeType;
+        public FormData.CustomFieldCodeType CodeType;
         public FormData.ChangePriceDirection? CodeDirection;
         public string Code;
         public double Amount;
         public FormData.ChangeType CodeKind;
         public int? Limit;
 
-        public DiscountCode(string code)
+        public CustomFieldCode(string code)
         {
             this.Code = code;
         }
 
         public double CalculateDiscountedPrice(double originalPrice)
         {
-            if (this.CodeType == FormData.DiscountCodeType.AccessCode)
+            if (this.CodeType == FormData.CustomFieldCodeType.AccessCode)
             {
                 return originalPrice;
             }
@@ -53,7 +53,7 @@
             }
         }
 
-        public static string GenerateBulkCodes(List<DiscountCode> codes)
+        public static string GenerateBulkCodes(List<CustomFieldCode> codes)
         {
             string discountCodeString = string.Empty;
 
@@ -61,7 +61,7 @@
             {
                 discountCodeString += codes[i].Code;
 
-                if (codes[i].CodeType != FormData.DiscountCodeType.AccessCode)
+                if (codes[i].CodeType != FormData.CustomFieldCodeType.AccessCode)
                 {
                     discountCodeString += "=";
 

@@ -558,7 +558,7 @@
         public ButtonOrLink Code;
         public int CodeId;
 
-        public CodeRow(DiscountCode code)
+        public CodeRow(CustomFieldCode code)
         {
             this.Code = new ButtonOrLink(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.Code), LocateBy.XPath);
 

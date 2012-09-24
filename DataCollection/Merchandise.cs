@@ -12,7 +12,7 @@
         public string Name;
         public bool? ApplyTaxOne;
         public bool? ApplyTaxTwo;
-        public List<DiscountCode> DiscountCodes = new List<DiscountCode>();
+        public List<CustomFieldCode> DiscountCodes = new List<CustomFieldCode>();
 
         public MerchandiseItem(string merchandiseName)
         {

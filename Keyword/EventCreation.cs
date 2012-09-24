@@ -159,7 +159,7 @@
 
                     if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
                     {
-                        foreach (DataCollection.DiscountCode code in details.StartPage.Event_Fee.DiscountCodes)
+                        foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.DiscountCodes)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
                         }

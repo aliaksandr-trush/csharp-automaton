@@ -147,11 +147,11 @@
             agenda1.Price = 50;
             AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
             agenda2.Price = 60;
-            DiscountCode discount = new DiscountCode("discount");
+            CustomFieldCode discount = new CustomFieldCode("discount");
             discount.Amount = 10;
             discount.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discount.CodeKind = FormData.ChangeType.Percent;
-            discount.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discount.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             agenda2.DiscountCodes.Add(discount);
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);

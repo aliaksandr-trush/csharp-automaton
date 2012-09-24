@@ -40,15 +40,15 @@
             latePrice2.latePrice = 60;
             latePrice2.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice2.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode2 = new DiscountCode("code2");
+            CustomFieldCode discountCode2 = new CustomFieldCode("code2");
             discountCode2.Amount = 5;
             discountCode2.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode2.CodeKind = FormData.ChangeType.FixedAmount;
-            discountCode2.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discountCode2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             regType2.Price = 50;
             regType2.EarlyPrice = earlyPrice2;
             regType2.LatePrice = latePrice2;
-            regType2.DiscountCode.Add(discountCode2);
+            regType2.AllCustomCode.Add(discountCode2);
 
             RegType regType3 = new RegType("EarlyLateFeeDCPercent");
             EarlyPrice earlyPrice3 = new EarlyPrice();
@@ -60,15 +60,15 @@
             latePrice3.latePrice = 60;
             latePrice3.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice3.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode3 = new DiscountCode("code3");
+            CustomFieldCode discountCode3 = new CustomFieldCode("code3");
             discountCode3.Amount = 10;
             discountCode3.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode3.CodeKind = FormData.ChangeType.Percent;
-            discountCode3.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discountCode3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             regType3.Price = 50;
             regType3.EarlyPrice = earlyPrice3;
             regType3.LatePrice = latePrice3;
-            regType3.DiscountCode.Add(discountCode3);
+            regType3.AllCustomCode.Add(discountCode3);
 
             RegType regType4 = new RegType("EarlyLateFeeDCPositiveDollar");
             EarlyPrice earlyPrice4 = new EarlyPrice();
@@ -80,15 +80,15 @@
             latePrice4.latePrice = 60;
             latePrice4.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice4.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode4 = new DiscountCode("code4");
+            CustomFieldCode discountCode4 = new CustomFieldCode("code4");
             discountCode4.Amount = -5;
             discountCode4.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode4.CodeKind = FormData.ChangeType.FixedAmount;
-            discountCode4.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discountCode4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             regType4.Price = 50;
             regType4.EarlyPrice = earlyPrice4;
             regType4.LatePrice = latePrice4;
-            regType4.DiscountCode.Add(discountCode4);
+            regType4.AllCustomCode.Add(discountCode4);
 
             RegType regType5 = new RegType("EarlyLateFeeDCRequired");
             EarlyPrice earlyPrice5 = new EarlyPrice();
@@ -100,15 +100,15 @@
             latePrice5.latePrice = 60;
             latePrice5.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice5.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode5 = new DiscountCode("code5");
+            CustomFieldCode discountCode5 = new CustomFieldCode("code5");
             discountCode5.Amount = 5;
             discountCode5.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode5.CodeKind = FormData.ChangeType.FixedAmount;
-            discountCode5.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discountCode5.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             regType5.Price = 50;
             regType5.EarlyPrice = earlyPrice5;
             regType5.LatePrice = latePrice5;
-            regType5.DiscountCode.Add(discountCode5);
+            regType5.AllCustomCode.Add(discountCode5);
             regType5.RequireDC = true;
 
             RegType regType6 = new RegType("EarlyLateFeeAC");
@@ -121,12 +121,12 @@
             latePrice6.latePrice = 60;
             latePrice6.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice6.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode6 = new DiscountCode("code6");
-            discountCode6.CodeType = FormData.DiscountCodeType.AccessCode;
+            CustomFieldCode discountCode6 = new CustomFieldCode("code6");
+            discountCode6.CodeType = FormData.CustomFieldCodeType.AccessCode;
             regType6.Price = 50;
             regType6.EarlyPrice = earlyPrice6;
             regType6.LatePrice = latePrice6;
-            regType6.DiscountCode.Add(discountCode6);
+            regType6.AllCustomCode.Add(discountCode6);
 
             EarlyPrice earlyPrice7 = new EarlyPrice();
             earlyPrice7.earlyPrice = 40;
@@ -137,11 +137,11 @@
             latePrice7.latePrice = 60;
             latePrice7.LatePriceDate = DateTime.Today.AddDays(2);
             latePrice7.LatePriceTime = DateTime.Now;
-            DiscountCode discountCode7 = new DiscountCode("code7");
+            CustomFieldCode discountCode7 = new CustomFieldCode("code7");
             discountCode7.Amount = 5;
             discountCode7.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discountCode7.CodeKind = FormData.ChangeType.FixedAmount;
-            discountCode7.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discountCode7.CodeType = FormData.CustomFieldCodeType.DiscountCode;
 
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
 
