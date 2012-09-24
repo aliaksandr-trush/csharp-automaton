@@ -6,9 +6,9 @@
 
     public class SignIn : Window
     {
-        public TextBox UserName = new TextBox("ctl00_cphMaster_txtLogin", LocateBy.Id);
-        public TextBox Password = new TextBox("ctl00_cphMaster_txtPassword", LocateBy.Id);
-        public ButtonOrLink SignInButton = new ButtonOrLink("//span[@class='BiggerButtonBase']/a", LocateBy.XPath);
+        public Input UserName = new Input("ctl00_cphMaster_txtLogin", LocateBy.Id);
+        public Input Password = new Input("ctl00_cphMaster_txtPassword", LocateBy.Id);
+        public Clickable SignInButton = new Clickable("//span[@class='BiggerButtonBase']/a", LocateBy.XPath);
 
         public void SignInButton_Click()
         {

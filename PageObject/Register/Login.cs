@@ -6,10 +6,10 @@
 
     public class Login : Window
     {
-        public TextBox EmailAddress = new TextBox("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
-        public TextBox Password = new TextBox("ctl00_cph_txtPassword", LocateBy.Id);
-        public ButtonOrLink StartNewRegistration = new ButtonOrLink("ctl00_cph_lnkNotRegistered", LocateBy.Id);
-        public ButtonOrLink ForgotPassword = new ButtonOrLink("//input[@id='ctl00_cph_txtPassword']/following-sibling::a", LocateBy.XPath);
+        public Input EmailAddress = new Input("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
+        public Input Password = new Input("ctl00_cph_txtPassword", LocateBy.Id);
+        public Clickable StartNewRegistration = new Clickable("ctl00_cph_lnkNotRegistered", LocateBy.Id);
+        public Clickable ForgotPassword = new Clickable("//input[@id='ctl00_cph_txtPassword']/following-sibling::a", LocateBy.XPath);
         public ForgotPasswordPopup ForgotPasswordPopup = new ForgotPasswordPopup(0);
         public Label PasswordOnDupEmail = new Label("//p[contains(text(),'Our records show that this email address was used to register for this event')]", LocateBy.XPath);
         public Label PasswordOnAutoRecall = new Label("//p[contains(text(),'To automatically recall your personal information')]", LocateBy.XPath);
@@ -35,8 +35,8 @@
     {
         public ForgotPasswordPopup(int index) : base(index) { }
 
-        public ButtonOrLink Close = new ButtonOrLink("//*[@id='ctl00_cph_wrpEmailMembershipID']/div/a", LocateBy.XPath);
-        public TextBox EmailAddress = new TextBox("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
+        public Clickable Close = new Clickable("//*[@id='ctl00_cph_wrpEmailMembershipID']/div/a", LocateBy.XPath);
+        public Input EmailAddress = new Input("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id);
 
         public void Close_Click()
         {

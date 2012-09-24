@@ -12,34 +12,32 @@
         { }
 
         #region WebElements
-        public TextBox NameOnForm = new TextBox("ctl00_cphDialog_txtDescription", LocateBy.Id);
-        public TextBox NameOnReports = new TextBox("ctl00_cphDialog_txtReportDescription", LocateBy.Id);
+        public Input NameOnForm = new Input("ctl00_cphDialog_txtDescription", LocateBy.Id);
+        public Input NameOnReports = new Input("ctl00_cphDialog_txtReportDescription", LocateBy.Id);
         public CheckBox RegTypeLimit = new CheckBox("ctl00_cphDialog_nonEnduranceLimiting_chkLimitRegs", LocateBy.Id);
         public RadioButton LimitToIndividual = new RadioButton("ctl00_cphDialog_nonEnduranceLimiting_rbInvidividualLimit", LocateBy.Id);
-        public TextBox IndividualLimit = new TextBox("ctl00_cphDialog_nonEnduranceLimiting_txtLimit0_text", LocateBy.Id);
+        public Input IndividualLimit = new Input("ctl00_cphDialog_nonEnduranceLimiting_txtLimit0_text", LocateBy.Id);
         public RadioButton LimitToGroup = new RadioButton("ctl00_cphDialog_nonEnduranceLimiting_rbGroupLimit", LocateBy.Id);
-        public TextBox GroupLimit = new TextBox("ctl00_cphDialog_nonEnduranceLimiting_txtLimitGroups_text", LocateBy.Id);
-        public TextBox SoldOutMessage = new TextBox("ctl00_cphDialog_nonEnduranceLimiting_LimitMessage", LocateBy.Id);
-        public ButtonOrLink AdditionalDetails = new ButtonOrLink("ctl00_cphDialog_elRegTypeInfo_linkCheckmarktext_elRegTypeInfo", LocateBy.Id);
+        public Input GroupLimit = new Input("ctl00_cphDialog_nonEnduranceLimiting_txtLimitGroups_text", LocateBy.Id);
+        public Input SoldOutMessage = new Input("ctl00_cphDialog_nonEnduranceLimiting_LimitMessage", LocateBy.Id);
+        public Clickable AdditionalDetails = new Clickable("ctl00_cphDialog_elRegTypeInfo_linkCheckmarktext_elRegTypeInfo", LocateBy.Id);
         public HtmlEditor AdditionalDetailsEditor = new HtmlEditor("dialog2");
         public CheckBox Public = new CheckBox("ctl00_cphDialog_chkPublic", LocateBy.Id);
         public CheckBox Admin = new CheckBox("ctl00_cphDialog_chkAdmin", LocateBy.Id);
         public CheckBox OnSite = new CheckBox("ctl00_cphDialog_chkOnsite", LocateBy.Id);
-        public TextBox EventFee = new TextBox("ctl00_cphDialog_txtCost_text", LocateBy.Id);
-        public ButtonOrLink EventFeeAdvanced = new ButtonOrLink("ctl00_cphDialog_mdCostLink", LocateBy.Id);
+        public Input EventFee = new Input("ctl00_cphDialog_txtCost_text", LocateBy.Id);
+        public Clickable EventFeeAdvanced = new Clickable("ctl00_cphDialog_mdCostLink", LocateBy.Id);
         public RegTypeFeeDefine RegTypeFee_Define = new RegTypeFeeDefine("dialog2");
-        public TextBox ShowDate = new TextBox("ctl00_cphDialog_dtpShowDate_tbDate", LocateBy.Id);
-        public TextBox HideDate = new TextBox("ctl00_cphDialog_dtpHideDate_tbDate", LocateBy.Id);
-        public TextBox MinGroupSize = new TextBox("ctl00_cphDialog_MinRegs_text", LocateBy.Id);
-        public TextBox MaxGroupSize = new TextBox("ctl00_cphDialog_MaxRegs_text", LocateBy.Id);
-        public ButtonOrLink AddMinRegMessage = new ButtonOrLink("ctl00_cphDialog_elMinRegsMessage_linkCheckmarktext_elMinRegsMessage", LocateBy.Id);
+        public Input ShowDate = new Input("ctl00_cphDialog_dtpShowDate_tbDate", LocateBy.Id);
+        public Input HideDate = new Input("ctl00_cphDialog_dtpHideDate_tbDate", LocateBy.Id);
+        public Input MinGroupSize = new Input("ctl00_cphDialog_MinRegs_text", LocateBy.Id);
+        public Input MaxGroupSize = new Input("ctl00_cphDialog_MaxRegs_text", LocateBy.Id);
+        public Clickable AddMinRegMessage = new Clickable("ctl00_cphDialog_elMinRegsMessage_linkCheckmarktext_elMinRegsMessage", LocateBy.Id);
         public HtmlEditor MinRegMessageEditor = new HtmlEditor("dialog2");
-        public ButtonOrLink ExternalAuthentication = new ButtonOrLink("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id);
+        public Clickable ExternalAuthentication = new Clickable("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id);
         public Manager.SSOBase ExternalAuthenticationSetup = new Manager.SSOBase("dialog2");
         public CheckBox EnableExternalAuthentication = new CheckBox("ctl00_cphDialog_chkXAuthEnable", LocateBy.Id);
         #endregion
-
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
         #region Basic Actions
         public void RegTypeLimit_Set(bool check)
@@ -114,18 +112,18 @@
 
         public void SaveAndStay_Click()
         {
-            popupFrameHelper.SaveAndStay_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndStay_Click();
         }
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
         #endregion

@@ -98,7 +98,7 @@
 
         public void FullRegTypeDirectLinkErrorMessage(string expectedMessage)
         {
-            string actualMessage = WebDriverUtility.DefaultProvider.GetText("//div[@id='ctl00_valSummary']/ul/li", LocateBy.XPath);
+            string actualMessage = UIUtil.DefaultProvider.GetText("//div[@id='ctl00_valSummary']/ul/li", LocateBy.XPath);
             Assert.AreEqual(expectedMessage, actualMessage);
         }
 
@@ -215,13 +215,13 @@
 
             if (HasErrors())
             {
-                int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
+                int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
                 string oneErrorFormat = ErrorLocator + "/li[{0}]";
                 errorList = new string[count];
 
                 for (int i = 1; i <= count; i++)
                 {
-                    errorList[i - 1] = WebDriverUtility.DefaultProvider.GetText(string.Format(oneErrorFormat, i), LocateBy.XPath);
+                    errorList[i - 1] = UIUtil.DefaultProvider.GetText(string.Format(oneErrorFormat, i), LocateBy.XPath);
                 }
             }
 
@@ -234,13 +234,13 @@
 
             if (this.HasErrors())
             {
-                int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
+                int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
                 string oneErrorFormat = ErrorLocator + "/li[{0}]";
                 errorMessagesList = new List<string>(count);
 
                 for (int i = 1; i <= count; i++)
                 {
-                    errorMessagesList.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(oneErrorFormat, i), LocateBy.XPath));
+                    errorMessagesList.Add(UIUtil.DefaultProvider.GetText(string.Format(oneErrorFormat, i), LocateBy.XPath));
                 }
             }
 
@@ -268,7 +268,7 @@
 
         public bool HasErrors()
         {
-            return WebDriverUtility.DefaultProvider.GetAttribute(ErrorDIVLocator, "@style", LocateBy.XPath) != "display:none;";
+            return UIUtil.DefaultProvider.GetAttribute(ErrorDIVLocator, "@style", LocateBy.XPath) != "display:none;";
         }
 
         public void VerifyHasErrors(bool hasErrors)

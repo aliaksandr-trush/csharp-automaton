@@ -98,30 +98,30 @@
         public void ClickAddEarlyPriceButton()
         {
             // Click add agenda early price button if it's present
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(addEarlyPriceLinkLocator, LocateBy.XPath))
+            if (UIUtil.DefaultProvider.IsElementPresent(addEarlyPriceLinkLocator, LocateBy.XPath))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(addEarlyPriceLinkLocator, LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(addEarlyPriceLinkLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
         }
 
         public void ClickAddLatePriceButton()
         {
             // Click add agenda late price button if it's present
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(addLatePriceLinkLocator, LocateBy.XPath))
+            if (UIUtil.DefaultProvider.IsElementPresent(addLatePriceLinkLocator, LocateBy.XPath))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(addLatePriceLinkLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(addLatePriceLinkLocator, LocateBy.XPath);
             }
         }
 
         public void ClickEarlyRegLimitRadioButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(earlyPriceRegLimitRadioButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(earlyPriceRegLimitRadioButton, LocateBy.Id);
         }
 
         public void ClickEarlyDatetimeRadioButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(earlyPriceDatetimeRadioButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(earlyPriceDatetimeRadioButton, LocateBy.Id);
         }
 
         public void ClearEarlyPricingSchedule()
@@ -162,36 +162,36 @@
 
         public void SetEarlyRegLimit(int? limitNum)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.earlyPriceRegLimitTxtbox, Convert.ToString(limitNum));
+            UIUtil.DefaultProvider.TypeRADNumericById(this.earlyPriceRegLimitTxtbox, Convert.ToString(limitNum));
         }
 
         public int GetEarlyRegLimit()
         {
-            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetValue(this.earlyPriceRegLimitTxtbox, LocateBy.Id));
+            return Convert.ToInt32(UIUtil.DefaultProvider.GetValue(this.earlyPriceRegLimitTxtbox, LocateBy.Id));
         }
 
         public void SetEarlyPrice(double? price)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(earlyPriceTxtbox, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(earlyPriceTxtbox, Convert.ToString(price));
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(this.earlyPriceTxtbox, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.earlyPriceTxtbox, Convert.ToString(price));
+            UIUtil.DefaultProvider.WaitForElementPresent(earlyPriceTxtbox, LocateBy.Id);
+            UIUtil.DefaultProvider.TypeRADNumericById(earlyPriceTxtbox, Convert.ToString(price));
+            UIUtil.DefaultProvider.WaitForElementPresent(this.earlyPriceTxtbox, LocateBy.Id);
+            UIUtil.DefaultProvider.TypeRADNumericById(this.earlyPriceTxtbox, Convert.ToString(price));
         }
 
         public double GetEarlyPrice()
         {
-            return Convert.ToDouble(WebDriverUtility.DefaultProvider.GetValue(this.earlyPriceTxtbox, LocateBy.Id));
+            return Convert.ToDouble(UIUtil.DefaultProvider.GetValue(this.earlyPriceTxtbox, LocateBy.Id));
         }
 
         public void SetLatePrice(double? price)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(latePriceTxtbox, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(latePriceTxtbox, Convert.ToString(price));
+            UIUtil.DefaultProvider.WaitForElementPresent(latePriceTxtbox, LocateBy.Id);
+            UIUtil.DefaultProvider.TypeRADNumericById(latePriceTxtbox, Convert.ToString(price));
         }
 
         public double GetLatePrice()
         {
-            return Convert.ToDouble(WebDriverUtility.DefaultProvider.GetValue(this.latePriceTxtbox, LocateBy.Id));
+            return Convert.ToDouble(UIUtil.DefaultProvider.GetValue(this.latePriceTxtbox, LocateBy.Id));
         }
 
         public void SetEarlyDateTime(DateTime dateTime)
@@ -205,7 +205,7 @@
             string edate = string.Format("{0}/{1}/{2}", date.Month, date.Day, date.Year);
 
             //set early date
-            WebDriverUtility.DefaultProvider.Type(earlyDateBox, edate, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(earlyDateBox, edate, LocateBy.Id);
         }
 
         public void SetEarlyTime(DateTime time)
@@ -214,7 +214,7 @@
             string eTime = string.Format("{0:h:mm tt}", time);
 
             //set early time   
-            WebDriverUtility.DefaultProvider.Type(earlyTimeBox + "_dateInput_text", eTime, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(earlyTimeBox + "_dateInput_text", eTime, LocateBy.Id);
             //Type(earlyTimeBox + "_dateInput", earlytime);
             //Type(earlyTimeBox, earlytime);
         }
@@ -230,7 +230,7 @@
             string ldate = string.Format("{0}/{1}/{2}", date.Month, date.Day, date.Year);
 
             //set early date
-            WebDriverUtility.DefaultProvider.Type(lateDateBox, ldate, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(lateDateBox, ldate, LocateBy.Id);
         }
 
         public void SetLateTime(DateTime time)
@@ -239,7 +239,7 @@
             string lTime = string.Format("{0:h:mm tt}", time);
 
             //set early time
-            WebDriverUtility.DefaultProvider.Type(lateTimeBox + "_dateInput_text", lTime, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(lateTimeBox + "_dateInput_text", lTime, LocateBy.Id);
             //Type(lateTimeBox + "_dateInput", latetime);
             //Type(lateTimeBox, latetime);
         }
@@ -257,14 +257,14 @@
 
         public void ClearEarlyDate()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(earlyDateBox, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(earlyDateBox, "", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(earlyDateBox, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(earlyDateBox, "", LocateBy.Id);
         }
 
         public void ClearEarlyTime()
         {
             ////UIUtilityProvider.UIHelper.Type(earlyTimeBox + "_dateInput_text", Keys.Delete, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(earlyTimeBox + "_dateInput_text", string.Empty, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(earlyTimeBox + "_dateInput_text", string.Empty, LocateBy.Id);
             //Type(earlyTimeBox + "_dateInput", "");
             //Type(earlyTimeBox, "");
         }
@@ -287,13 +287,13 @@
 
         public void ClearLateDate()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(lateDateBox, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(lateDateBox, string.Empty, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(lateDateBox, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(lateDateBox, string.Empty, LocateBy.Id);
         }
 
         public void ClearLateTime()
         {
-            WebDriverUtility.DefaultProvider.Type(lateTimeBox + "_dateInput_text", string.Empty, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(lateTimeBox + "_dateInput_text", string.Empty, LocateBy.Id);
             //Type(lateTimeBox + "_dateInput", "");
             //Type(lateTimeBox, "");
         }
@@ -302,7 +302,7 @@
         #region Verify methods
         public void VerifyStandardPriceText(double price)
         {
-            string standardPriceText = WebDriverUtility.DefaultProvider.GetText("liStdPrice", LocateBy.Id);
+            string standardPriceText = UIUtil.DefaultProvider.GetText("liStdPrice", LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 string.Format("Standard price is $ {0}", Convert.ToString(price)),
@@ -313,15 +313,15 @@
         #region Verify early price options
         public void VerifyAddEarlyPriceOptionsLink()
         {
-            if (WebDriverUtility.DefaultProvider.IsElementHidden("ctl00_cphDialog_cfCF_mipPrc_ip3_trEarlyPriceLink", LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementHidden("ctl00_cphDialog_cfCF_mipPrc_ip3_trEarlyPriceLink", LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.FailTest("The add early price link is not displayed!");
+                UIUtil.DefaultProvider.FailTest("The add early price link is not displayed!");
             }
         }
 
         public void VerifyEarlyPriceText(double price, int limit)
         {
-            string earlyPriceText = WebDriverUtility.DefaultProvider.GetText("liEarlyPrice", LocateBy.Id);
+            string earlyPriceText = UIUtil.DefaultProvider.GetText("liEarlyPrice", LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 string.Format("Early price of $ {0} is effective for the first {1} registrants", Convert.ToString(price), Convert.ToString(limit)),
@@ -334,7 +334,7 @@
             string earlyDate = dateTime.ToString("M/d/yyyy", DateTimeFormatInfo.InvariantInfo);
             string earlyTime = dateTime.ToString("h:mm tt", DateTimeFormatInfo.InvariantInfo);
 
-            string earlyPriceText = WebDriverUtility.DefaultProvider.GetText("liEarlyPrice", LocateBy.Id);
+            string earlyPriceText = UIUtil.DefaultProvider.GetText("liEarlyPrice", LocateBy.Id);
             
             VerifyTool.VerifyValue(
                 string.Format("Early price of $ {0} ends on {1} {2}", Convert.ToString(price), Convert.ToString(earlyDate), Convert.ToString(earlyTime)),
@@ -356,18 +356,18 @@
 
         public void VerifyEarlyPrice(double price)
         {
-            VerifyTool.VerifyValue(Convert.ToString(price), WebDriverUtility.DefaultProvider.GetValue(earlyPriceTxtbox, LocateBy.Id), "The early price amount is : {0}");
+            VerifyTool.VerifyValue(Convert.ToString(price), UIUtil.DefaultProvider.GetValue(earlyPriceTxtbox, LocateBy.Id), "The early price amount is : {0}");
         }
 
         public void VerifyEarlyRegLimit(int limit)
         {
-            VerifyTool.VerifyValue(true, WebDriverUtility.DefaultProvider.IsChecked(earlyPriceRegLimitRadioButton, LocateBy.Id), "The early price reg limit radio button is checked : {0}");
-            VerifyTool.VerifyValue(Convert.ToString(limit), WebDriverUtility.DefaultProvider.GetValue(earlyPriceRegLimitTxtbox, LocateBy.Id), "The early reg limit is : {0}");
+            VerifyTool.VerifyValue(true, UIUtil.DefaultProvider.IsChecked(earlyPriceRegLimitRadioButton, LocateBy.Id), "The early price reg limit radio button is checked : {0}");
+            VerifyTool.VerifyValue(Convert.ToString(limit), UIUtil.DefaultProvider.GetValue(earlyPriceRegLimitTxtbox, LocateBy.Id), "The early reg limit is : {0}");
         }
 
         public void VerifyEarlyDateTime(DateTime dateTime)
         {
-            VerifyTool.VerifyValue(true, WebDriverUtility.DefaultProvider.IsChecked(earlyPriceDatetimeRadioButton, LocateBy.Id), "The early price datetime radio button is checked : {0}");
+            VerifyTool.VerifyValue(true, UIUtil.DefaultProvider.IsChecked(earlyPriceDatetimeRadioButton, LocateBy.Id), "The early price datetime radio button is checked : {0}");
             VerifyEarlyDate(dateTime);
             VerifyEarlyTime(dateTime);
         }
@@ -375,22 +375,22 @@
         public void VerifyEarlyDate(DateTime date)
         {
             string earlyDate = string.Format("{0}/{1}/{2}", date.Month, date.Day, date.Year);
-            VerifyTool.VerifyValue(earlyDate, WebDriverUtility.DefaultProvider.GetValue(earlyDateBox, LocateBy.Id), "The early date is : {0}");
+            VerifyTool.VerifyValue(earlyDate, UIUtil.DefaultProvider.GetValue(earlyDateBox, LocateBy.Id), "The early date is : {0}");
         }
 
         public void VerifyEarlyTime(DateTime time)
         {
             string earlyTime = string.Format("{0:h:mm tt}", time);
-            VerifyTool.VerifyValue(earlyTime, WebDriverUtility.DefaultProvider.GetValue(earlyTimeBox + "_dateInput_text", LocateBy.Id), "The early time is: {0}");
+            VerifyTool.VerifyValue(earlyTime, UIUtil.DefaultProvider.GetValue(earlyTimeBox + "_dateInput_text", LocateBy.Id), "The early time is: {0}");
         }
         #endregion
 
         #region Verify late price options
         public void VerifyAddLatePriceOptionsLink()
         {
-            if (WebDriverUtility.DefaultProvider.IsElementHidden("ctl00_cphDialog_cfCF_mipPrc_ip3_trLatePriceLink", LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementHidden("ctl00_cphDialog_cfCF_mipPrc_ip3_trLatePriceLink", LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.FailTest("The add late price link is not displayed!");
+                UIUtil.DefaultProvider.FailTest("The add late price link is not displayed!");
             }
         }
 
@@ -399,7 +399,7 @@
             string lateDate = dateTime.ToString("M/d/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo);
             string lateTime = dateTime.ToString("h:mm tt", System.Globalization.DateTimeFormatInfo.InvariantInfo);
 
-            string latePriceText = WebDriverUtility.DefaultProvider.GetText("liLatePrice", LocateBy.Id);
+            string latePriceText = UIUtil.DefaultProvider.GetText("liLatePrice", LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 string.Format("Late/Onsite price of $ {0} starts on {1} {2}", Convert.ToString(price), Convert.ToString(lateDate), Convert.ToString(lateTime)),
@@ -415,8 +415,8 @@
 
         public void VerifyLatePrice(double price)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(latePriceTxtbox, LocateBy.Id);
-            VerifyTool.VerifyValue(Convert.ToString(price), WebDriverUtility.DefaultProvider.GetValue(latePriceTxtbox, LocateBy.Id), "The late price amount is : {0}");
+            UIUtil.DefaultProvider.WaitForElementPresent(latePriceTxtbox, LocateBy.Id);
+            VerifyTool.VerifyValue(Convert.ToString(price), UIUtil.DefaultProvider.GetValue(latePriceTxtbox, LocateBy.Id), "The late price amount is : {0}");
         }
 
         public void VerifyLateDateTime(DateTime dateTime)
@@ -428,13 +428,13 @@
         public void VerifyLateDate(DateTime date)
         {
             string lateDate = string.Format("{0}/{1}/{2}", date.Month, date.Day, date.Year);
-            VerifyTool.VerifyValue(lateDate, WebDriverUtility.DefaultProvider.GetValue(lateDateBox, LocateBy.Id), "The late date is : {0}");
+            VerifyTool.VerifyValue(lateDate, UIUtil.DefaultProvider.GetValue(lateDateBox, LocateBy.Id), "The late date is : {0}");
         }
 
         public void VerifyLateTime(DateTime time)
         {
             string lateTime = string.Format("{0:h:mm tt}", time);
-            VerifyTool.VerifyValue(lateTime, WebDriverUtility.DefaultProvider.GetValue(lateTimeBox + "_dateInput_text", LocateBy.Id), "The late time is: {0}");
+            VerifyTool.VerifyValue(lateTime, UIUtil.DefaultProvider.GetValue(lateTimeBox + "_dateInput_text", LocateBy.Id), "The late time is: {0}");
         }
         #endregion
 

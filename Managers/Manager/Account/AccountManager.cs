@@ -84,16 +84,16 @@
         [Step]
         public void ChooseTab(AccountTab accountTab)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(AccountTabLocator, GetAccountTabName(accountTab)), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(AccountTabLocator, GetAccountTabName(accountTab)), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
         public void ChooseTabAndVerify(AccountTab accountTab)
         {
             ChooseTab(accountTab);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             VerifyTab(accountTab);
         }
 
@@ -105,42 +105,42 @@
             {
                 case AccountTab.Info:
                     //Verify presence of contact, billing, and defaults sections
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlContactInfo", LocateBy.Id) &&
-                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlBillingInfo", LocateBy.Id) &&
-                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlDefaults", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlContactInfo", LocateBy.Id) &&
+                        UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlBillingInfo", LocateBy.Id) &&
+                        UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_uclMA_pnlDefaults", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.Reports:
                     //Verify presence of account activity and payment sections
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlAcctActivity", LocateBy.Id) &&
-                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlPayments", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlAcctActivity", LocateBy.Id) &&
+                        UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlPayments", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.XEventReports:
                     //Verify presence of standard and custom XEvent Report list
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlStandardXReports", LocateBy.Id) &&
-                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlCustomXEventReports", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlStandardXReports", LocateBy.Id) &&
+                        UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_listXEventReports_pnlCustomXEventReports", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.Hotels:
                     //Verify presence of hotel templates list
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlHotels", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlHotels", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.Users:
                     //Verify presence of user list
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlUsers", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlUsers", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.Roles:
                     //Verify presence of system roles list and custom roles list
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlSystemRoles", LocateBy.Id) &&
-                        WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomRoles", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlSystemRoles", LocateBy.Id) &&
+                        UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomRoles", LocateBy.Id))
                         isCorrect = true;
                     break;
                 case AccountTab.Gateways:
                     //Verify presence of merchant gateway list
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomerMerchants", LocateBy.Id))
+                    if (UIUtil.DefaultProvider.IsElementPresent("ctl00_ctl00_cphDialog_cpMgrMain_pnlCustomerMerchants", LocateBy.Id))
                         isCorrect = true;
                     break;
             }

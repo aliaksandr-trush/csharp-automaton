@@ -59,7 +59,7 @@
             {
                 case (int)CustomFieldManager.CustomFieldType.CheckBox:
                     //Click(customFieldId.ToString());
-                    WebDriverUtility.DefaultProvider.SetCheckbox(customFieldId.ToString(), true, LocateBy.Id);
+                    UIUtil.DefaultProvider.SetCheckbox(customFieldId.ToString(), true, LocateBy.Id);
                     this.WaitForConditionalLogic();
                     break;
 
@@ -70,7 +70,7 @@
                     {
                         response = Convert.ToString(dropDownListItems[0].Description);
                         amount = Convert.ToDecimal(dropDownListItems[0].Amount);
-                        WebDriverUtility.DefaultProvider.SelectWithText(customFieldId.ToString(), response, LocateBy.Id);
+                        UIUtil.DefaultProvider.SelectWithText(customFieldId.ToString(), response, LocateBy.Id);
                         this.WaitForConditionalLogic();
                     }
 
@@ -84,7 +84,7 @@
                         int listItemId = Convert.ToInt32(radioListItems[0].Id);
                         response = Convert.ToString(radioListItems[0].Description);
                         amount = Convert.ToDecimal(radioListItems[0].Amount);
-                        WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(listItemId.ToString(), LocateBy.Id);
+                        UIUtil.DefaultProvider.WaitForDisplayAndClick(listItemId.ToString(), LocateBy.Id);
                         this.WaitForConditionalLogic();
                     }
 
@@ -96,7 +96,7 @@
                 case (int)CustomFieldManager.CustomFieldType.OneLineText:
                 case (int)CustomFieldManager.CustomFieldType.Paragraph:
                     response = "some text " + CurrentTicks;
-                    WebDriverUtility.DefaultProvider.Type(customFieldId.ToString(), response, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(customFieldId.ToString(), response, LocateBy.Id);
                     break;
 
                 case (int)CustomFieldManager.CustomFieldType.ContinueButton:
@@ -182,7 +182,7 @@
             switch (customFieldType.Id)
             {
                 case (int)CustomFieldManager.CustomFieldType.CheckBox:
-                    WebDriverUtility.DefaultProvider.SetCheckbox(customFieldId.ToString(), true, LocateBy.Id);
+                    UIUtil.DefaultProvider.SetCheckbox(customFieldId.ToString(), true, LocateBy.Id);
                     this.WaitForConditionalLogic();
                     break;
 
@@ -193,7 +193,7 @@
                     {
                         response = dropDownListItems[0].Description;
                         amount = Convert.ToDecimal(dropDownListItems[0].Amount);
-                        WebDriverUtility.DefaultProvider.SelectWithText(customFieldId.ToString(), response, LocateBy.Id);
+                        UIUtil.DefaultProvider.SelectWithText(customFieldId.ToString(), response, LocateBy.Id);
                         this.WaitForConditionalLogic();
                     }
 
@@ -207,7 +207,7 @@
                         int listItemId = radioListItems[0].Id;
                         response = radioListItems[0].Description;
                         amount = Convert.ToDecimal(radioListItems[0].Amount);
-                        WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(listItemId.ToString(), LocateBy.Id);
+                        UIUtil.DefaultProvider.WaitForDisplayAndClick(listItemId.ToString(), LocateBy.Id);
                         this.WaitForConditionalLogic();
                     }
 
@@ -219,7 +219,7 @@
                 case (int)CustomFieldManager.CustomFieldType.OneLineText:
                 case (int)CustomFieldManager.CustomFieldType.Paragraph:
                     response = "some text " + this.CurrentTicks;
-                    WebDriverUtility.DefaultProvider.Type(customFieldId.ToString(), response, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(customFieldId.ToString(), response, LocateBy.Id);
                     break;
 
                 case (int)CustomFieldManager.CustomFieldType.ContinueButton:
@@ -263,15 +263,15 @@
         {
             string customFieldPasswordFieldId = "dc" + customFieldId.ToString();
 
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(customFieldPasswordFieldId, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementPresent(customFieldPasswordFieldId, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.Type(customFieldPasswordFieldId, code, LocateBy.Id);
+                UIUtil.DefaultProvider.Type(customFieldPasswordFieldId, code, LocateBy.Id);
             }
         }
 
         public void WaitForConditionalLogic()
         {
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
         #endregion
     }

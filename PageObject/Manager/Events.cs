@@ -9,7 +9,7 @@
 
     public class Events : Window
     {
-        public ButtonOrLink AddEvent = new ButtonOrLink("//div[@id='createNewEvent']//img[@class='rmLeftImage'][1]", LocateBy.XPath);
+        public Clickable AddEvent = new Clickable("//div[@id='createNewEvent']//img[@class='rmLeftImage'][1]", LocateBy.XPath);
 
         public void AddEvent_Click()
         {
@@ -21,22 +21,22 @@
 
         public void EventType_Select(DataCollection.FormData.FormType formType)
         {
-            ButtonOrLink EventType = new ButtonOrLink(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", CustomStringAttribute.GetCustomString(formType)), LocateBy.XPath);
+            Clickable EventType = new Clickable(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", CustomStringAttribute.GetCustomString(formType)), LocateBy.XPath);
 
             EventType.WaitForDisplay();
             EventType.Click();
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Folder_Click(string folderName)
         {
             string folderLocator = string.Format("//div[@id='tree']//span[text()='{0}']", folderName);
-            ButtonOrLink Folder = new ButtonOrLink(folderLocator, LocateBy.XPath);
+            Clickable Folder = new Clickable(folderLocator, LocateBy.XPath);
             Folder.WaitForDisplay();
-            string folderDivClassAttribute = WebDriverUtility.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
+            string folderDivClassAttribute = UIUtil.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
 
             if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
             {
@@ -50,41 +50,41 @@
 
     public class EventList_EventRow : Window
     {
-        private WebElement Tr;
-        private ButtonOrLink OKButton_EventDeletePopup = new ButtonOrLink("//span[text()='OK']", LocateBy.XPath);
+        private ElementBase Tr;
+        private Clickable OKButton_EventDeletePopup = new Clickable("//span[text()='OK']", LocateBy.XPath);
         public int RowIndex;
         public int EventId;
-        public ButtonOrLink Title;
-        public ButtonOrLink Delete;
+        public Clickable Title;
+        public Clickable Delete;
         public string EventURL;
 
         public EventList_EventRow(int eventId)
         {
             this.EventId = eventId;
 
-            this.Tr = new WebElement(
+            this.Tr = new ElementBase(
                 string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr[@data-id='{0}']", eventId),
                 LocateBy.XPath);
 
             string[] idAttribute = Tr.GetAttribute("id").Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
             this.RowIndex = Convert.ToInt32(idAttribute[idAttribute.Length - 1]) + 1;
 
-            this.Title = new ButtonOrLink(
+            this.Title = new Clickable(
                 string.Format("{0}/td/a[@class='listEventTile']", this.Tr.Locator),
                 LocateBy.XPath);
 
-            this.Delete = new ButtonOrLink(
+            this.Delete = new Clickable(
                 string.Format("{0}/td/div[@class='actions']/a[@title='Delete event']", this.Tr.Locator),
                 LocateBy.XPath);
 
-            this.EventURL = new ButtonOrLink(
+            this.EventURL = new Clickable(
                 string.Format("{0}/td//a[contains(@title,'regonline.com')]", this.Tr.Locator),
                 LocateBy.XPath).GetAttribute("href");
         }
 
         public static List<EventList_EventRow> GetEventRows(string eventName)
         {
-            List<IWebElement> elements = WebDriverUtility.DefaultProvider.GetElements(
+            List<IWebElement> elements = UIUtil.DefaultProvider.GetElements(
                 string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr/td/a[text()='{0}']/parent::td/parent::tr", eventName),
                 LocateBy.XPath);
 

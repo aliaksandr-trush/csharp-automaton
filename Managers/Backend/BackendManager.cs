@@ -374,7 +374,7 @@
         [Step]
         public void OpenAttendeeInfoURL(string sessionID, int regID)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(HttpUtility.UrlDecode(string.Format(
+            UIUtil.DefaultProvider.OpenUrl(HttpUtility.UrlDecode(string.Format(
                 "{0}reports/Attendee.aspx?EventSessionId={1}&registerId={2}", 
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, 
                 sessionID, 
@@ -383,7 +383,7 @@
 
         public void CloseAttendeeInfo()
         {
-            WebDriverUtility.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.CloseWindow();
         }
 
         [Step]
@@ -392,34 +392,34 @@
             switch (attendeeSubPage)
             {
                 case AttendeeSubPage.ViewAll:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//input[@value=' View All ']", LocateBy.XPath);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("//input[@value=' View All ']", LocateBy.XPath);
                     break;
                 case AttendeeSubPage.PersonalInformation:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_personal", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_personal", LocateBy.Id);
                     break;
                 case AttendeeSubPage.EventCost:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("lnkEventCost", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("lnkEventCost", LocateBy.Id);
                     break;
                 case AttendeeSubPage.CustomFields:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_cf", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_cf", LocateBy.Id);
                     break;
                 case AttendeeSubPage.Agenda:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_agenda", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_agenda", LocateBy.Id);
                     break;
                 case AttendeeSubPage.Merchandise:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_fees", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_fees", LocateBy.Id);
                     break;
                 case AttendeeSubPage.Transactions:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_transactions", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_transactions", LocateBy.Id);
                     break;
                 case AttendeeSubPage.LodgingAndTravel:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_lodgingTravel", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_lodgingTravel", LocateBy.Id);
                     break;
                 case AttendeeSubPage.UpdateHistory:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_update", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_update", LocateBy.Id);
                     break;
                 case AttendeeSubPage.EmailHistory:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("link_email", LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("link_email", LocateBy.Id);
                     break;
                 default:
                     throw new ArgumentException(string.Format("No such attendee sub page: {0}", attendeeSubPage.ToString()));
@@ -431,7 +431,7 @@
         [Step]
         public int GetMembershipNumber()
         {
-            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetText("//b[text()='Membership Number:']/../following-sibling::td", LocateBy.XPath));
+            return Convert.ToInt32(UIUtil.DefaultProvider.GetText("//b[text()='Membership Number:']/../following-sibling::td", LocateBy.XPath));
         }
 
         #region Locator helper methods
@@ -463,7 +463,7 @@
             }
             else
             {
-                WebDriverUtility.DefaultProvider.FailTest("Unknown enum type: " + enumString);
+                UIUtil.DefaultProvider.FailTest("Unknown enum type: " + enumString);
             }
 
             return locator;
@@ -623,7 +623,7 @@
             }
             else
             {
-                WebDriverUtility.DefaultProvider.FailTest("Invalid enum '" + enumString + "' of type '" + enumType.ToString() + "'!");
+                UIUtil.DefaultProvider.FailTest("Invalid enum '" + enumString + "' of type '" + enumType.ToString() + "'!");
             }
 
             return inputType;
@@ -954,7 +954,7 @@
                     break;
 
                 case LodgingEditField.ArrivalDate:
-                    WebDriverUtility.DefaultProvider.FailTest("Please call individual method to type lodging arrival date field!");
+                    UIUtil.DefaultProvider.FailTest("Please call individual method to type lodging arrival date field!");
                     break;
 
                 case LodgingEditField.ArrivalTime:
@@ -962,7 +962,7 @@
                     break;
 
                 case LodgingEditField.DepartureDate:
-                    WebDriverUtility.DefaultProvider.FailTest("Please call individual method to type lodging departure date field!");
+                    UIUtil.DefaultProvider.FailTest("Please call individual method to type lodging departure date field!");
                     break;
 
                 case LodgingEditField.DepartureTime:
@@ -1002,7 +1002,7 @@
                     break;
 
                 default:
-                    WebDriverUtility.DefaultProvider.FailTest("Invalid enum for '" + field.ToString() + "' of 'LodgingEditField'!");
+                    UIUtil.DefaultProvider.FailTest("Invalid enum for '" + field.ToString() + "' of 'LodgingEditField'!");
                     break;
             }
 
@@ -1078,7 +1078,7 @@
                     break;
 
                 case TravelEditField.ArrivalDate:
-                    WebDriverUtility.DefaultProvider.FailTest("Please call individual method to type travel arrival date field!");
+                    UIUtil.DefaultProvider.FailTest("Please call individual method to type travel arrival date field!");
                     break;
 
                 case TravelEditField.ArrivalTime:
@@ -1102,7 +1102,7 @@
                     break;
 
                 case TravelEditField.DepartureDate:
-                    WebDriverUtility.DefaultProvider.FailTest("Please call individual method to type travel departure date field!");
+                    UIUtil.DefaultProvider.FailTest("Please call individual method to type travel departure date field!");
                     break;
 
                 case TravelEditField.DepartureTime:
@@ -1126,7 +1126,7 @@
                     break;
 
                 case TravelEditField.CreditCardExpiration:
-                    WebDriverUtility.DefaultProvider.FailTest("Please call the method 'SelectTravelCCExpirationDate()'!");
+                    UIUtil.DefaultProvider.FailTest("Please call the method 'SelectTravelCCExpirationDate()'!");
                     break;
 
                 case TravelEditField.CreditCardHolderName:
@@ -1146,7 +1146,7 @@
                     break;
 
                 default:
-                    WebDriverUtility.DefaultProvider.FailTest("Invalid enum for '" + field.ToString() + "' of 'TravelEditField'!");
+                    UIUtil.DefaultProvider.FailTest("Invalid enum for '" + field.ToString() + "' of 'TravelEditField'!");
                     break;
             }
 

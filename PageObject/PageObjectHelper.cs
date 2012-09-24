@@ -6,9 +6,11 @@
 
     public class PageObjectHelper
     {
+        public static PopupFrameHelper PopupFrame_Helper = new PopupFrameHelper();
+
         public static void AllowCookie_Click()
         {
-            ButtonOrLink Allow = new ButtonOrLink("//button[@class='ui-button ui-widget ui-corner-all ui-button-text-only dialog-allow-button']", LocateBy.XPath);
+            Clickable Allow = new Clickable("//button[@class='ui-button ui-widget ui-corner-all ui-button-text-only dialog-allow-button']", LocateBy.XPath);
 
             if (Allow.IsPresent)
             {
@@ -20,12 +22,12 @@
 
         public static void NavigateTo(string url)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         public static void AdjustRADWindowPosition(string locator_Id_RADWindowDiv, int leftPx, int topPx)
         {
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
 
             string js = string.Format(
                 "var div = document.getElementById('{0}');div.style.left='{1}px';div.style.top='{2}px';",
@@ -33,13 +35,13 @@
                 leftPx,
                 topPx);
 
-            WebDriverUtility.DefaultProvider.ExecuteJavaScript(js);
+            UIUtil.DefaultProvider.ExecuteJavaScript(js);
             Utility.ThreadSleep(1);
         }
 
         public static void ResizeRADWindow(string frameName, int widthPx, int heightPx)
         {
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
 
             string js = string.Format(
                 "var frame = document.getElementsByName('{0}')[0];frame.style.width='{1}px';frame.style.height='{2}px';",
@@ -47,7 +49,7 @@
                 widthPx,
                 heightPx);
 
-            WebDriverUtility.DefaultProvider.ExecuteJavaScript(js);
+            UIUtil.DefaultProvider.ExecuteJavaScript(js);
             Utility.ThreadSleep(1);
         }
 
@@ -59,31 +61,31 @@
 
         public static void SelectTopWindow()
         {
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.SelectTopWindow();
         }
 
         public static void ClickConfirmation(DataCollection.FormData.ConfirmationOptions option)
         {
             if (option == DataCollection.FormData.ConfirmationOptions.OK)
             {
-                WebDriverUtility.DefaultProvider.GetConfirmation();
+                UIUtil.DefaultProvider.GetConfirmation();
                 Utility.ThreadSleep(3);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForPageToLoad();
             }
 
             if (option == DataCollection.FormData.ConfirmationOptions.Cancel)
             {
-                WebDriverUtility.DefaultProvider.ChooseCancelOnNextConfirmation();
+                UIUtil.DefaultProvider.ChooseCancelOnNextConfirmation();
                 Utility.ThreadSleep(3);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForPageToLoad();
             }
         }
 
         public static string GetSessionId()
         {
-            return WebDriverUtility.DefaultProvider.GetQueryStringValue("SessionId");
+            return UIUtil.DefaultProvider.GetQueryStringValue("SessionId");
         }
     }
 }

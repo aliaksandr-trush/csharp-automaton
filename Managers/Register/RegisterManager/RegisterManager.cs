@@ -184,11 +184,11 @@
         public int GetRegID()
         {
             int regId = InvalidId;
-            bool result = int.TryParse(WebDriverUtility.DefaultProvider.GetValue("//input[@name='RegisterId']", LocateBy.XPath), out regId);
+            bool result = int.TryParse(UIUtil.DefaultProvider.GetValue("//input[@name='RegisterId']", LocateBy.XPath), out regId);
 
             if (!result)
             {
-                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
+                UIUtil.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -196,13 +196,13 @@
 
         public string GetSessionId()
         {
-            return WebDriverUtility.DefaultProvider.GetQueryStringValue("SessionId");
+            return UIUtil.DefaultProvider.GetQueryStringValue("SessionId");
         }
 
         public int GetEventId()
         {
             return Convert.ToInt32(
-                WebDriverUtility.DefaultProvider.GetQueryStringValue("EventId"));
+                UIUtil.DefaultProvider.GetQueryStringValue("EventId"));
         }
 
         /// <summary>
@@ -212,7 +212,7 @@
         /// <returns></returns>
         public bool OnPage(string pagePath)
         {
-            return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(pagePath);
+            return UIUtil.DefaultProvider.UrlContainsAbsolutePath(pagePath);
         }
 
         [Step]
@@ -228,7 +228,7 @@
 
             if (regId == 0)
             {
-                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
+                UIUtil.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -236,11 +236,11 @@
 
         public int GetCurrentRegIDFromQueryString()
         {
-            int regId = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetQueryStringValue("RegisterId"));
+            int regId = Convert.ToInt32(UIUtil.DefaultProvider.GetQueryStringValue("RegisterId"));
 
             if (regId == InvalidId)
             {
-                WebDriverUtility.DefaultProvider.FailTest("Invalid reg ID!");
+                UIUtil.DefaultProvider.FailTest("Invalid reg ID!");
             }
 
             return regId;
@@ -248,8 +248,8 @@
 
         public void SelectPreFillDropDown(string name)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(PreFillDropDown, name, LocateBy.CssSelector);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectWithText(PreFillDropDown, name, LocateBy.CssSelector);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
 
@@ -261,9 +261,9 @@
             bool onCardinal = false;
 
             Utility.ThreadSleep(3);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             
-            if (WebDriverUtility.DefaultProvider.UrlContainsPath("regonline.com/register/cc/enrollment.aspx?"))
+            if (UIUtil.DefaultProvider.UrlContainsPath("regonline.com/register/cc/enrollment.aspx?"))
             {
                 onCardinal = true;
             }
@@ -274,14 +274,14 @@
         [Step]
         public void SubmitCardinalPassword(string cardinalPassword)
         {
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.SelectUpperFrame();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.Type("external.field.password", cardinalPassword, LocateBy.Name);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("UsernamePasswordEntry", LocateBy.Name);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectUpperFrame();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.Type("external.field.password", cardinalPassword, LocateBy.Name);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("UsernamePasswordEntry", LocateBy.Name);
             Utility.ThreadSleep(3);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

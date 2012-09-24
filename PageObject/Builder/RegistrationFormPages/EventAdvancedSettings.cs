@@ -14,8 +14,6 @@
             : base(name)
         { }
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
         public CheckBox ThisIsAParentEvent = new CheckBox("ctl00_cphDialog_chkIsParent", UIUtility.LocateBy.Id);
         public CheckBox ThisIsAChildEvent = new CheckBox("ctl00_cphDialog_chkIsChild", UIUtility.LocateBy.Id);
         public MultiChoiceDropdown ParentEventList = new MultiChoiceDropdown("ctl00_cphDialog_ddlParentEventList", LocateBy.Id);
@@ -24,6 +22,7 @@
         {
             Utility.ThreadSleep(1);
             this.ParentEventList.WaitForDisplay();
+
             this.ParentEventList.SelectWithText(string.Format(
                 "{0} ({1})", 
                 evt.StartPage.AdvancedSettings.ParentEvent.Title, 
@@ -32,18 +31,18 @@
 
         public void SaveAndStay_Click()
         {
-            popupFrameHelper.SaveAndStay_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndStay_Click();
         }
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
     }

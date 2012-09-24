@@ -7,12 +7,12 @@
 
     public class Merchandise : Window
     {
-        public ButtonOrLink EmptyAddMerchandise = new ButtonOrLink("ctl00_cph_grdFees_lnkEmptyAdd", LocateBy.Id);
-        public ButtonOrLink AddMerchandise = new ButtonOrLink("ctl00_cph_grdFees_hlAddNew", LocateBy.Id);
+        public Clickable EmptyAddMerchandise = new Clickable("ctl00_cph_grdFees_lnkEmptyAdd", LocateBy.Id);
+        public Clickable AddMerchandise = new Clickable("ctl00_cph_grdFees_hlAddNew", LocateBy.Id);
         public MerchandiseDefine MerchandiseDefine = new MerchandiseDefine("dialog");
-        public ButtonOrLink MerchandisePageHeader = new ButtonOrLink("//*[text()='Add Merchandise Page Header']", LocateBy.XPath);
+        public Clickable MerchandisePageHeader = new Clickable("//*[text()='Add Merchandise Page Header']", LocateBy.XPath);
         public HtmlEditor MerchandisePageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink MerchandisePageFooter = new ButtonOrLink("//*[text()='Add Merchandise Page Footer']", LocateBy.XPath);
+        public Clickable MerchandisePageFooter = new Clickable("//*[text()='Add Merchandise Page Footer']", LocateBy.XPath);
         public HtmlEditor MerchandisePageFooterEditor = new HtmlEditor("dialog");
 
         public void EmptyAddMerchandise_Click()
@@ -55,11 +55,11 @@
     public class MerchandiseRow
     {
         public int MerchandiseId;
-        public ButtonOrLink Merchandise;
+        public Clickable Merchandise;
 
         public MerchandiseRow(DataCollection.MerchandiseItem merch)
         {
-            this.Merchandise = new ButtonOrLink(string.Format("//table[@id='ctl00_cph_grdFees_tblGrid']//a[text()='{0}']", merch.Name), LocateBy.XPath);
+            this.Merchandise = new Clickable(string.Format("//table[@id='ctl00_cph_grdFees_tblGrid']//a[text()='{0}']", merch.Name), LocateBy.XPath);
 
             string merchHrefAttriString = this.Merchandise.GetAttribute("href");
 

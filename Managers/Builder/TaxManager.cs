@@ -92,15 +92,15 @@
         public void SetAndVerifyEUCountry(bool check, string sessionId, int eventId)
         {
             string CheckoutPageUrl = string.Format(CheckoutPageUrlFormat, sessionId, eventId.ToString());
-            WebDriverUtility.DefaultProvider.OpenUrl(CheckoutPageUrl);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SetCheckbox(TaxOptionApplyTaxToCountriesCheckboxLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.OpenUrl(CheckoutPageUrl);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SetCheckbox(TaxOptionApplyTaxToCountriesCheckboxLocator, check, LocateBy.Id);
 
             // Uncheck Australia
-            WebDriverUtility.DefaultProvider.SetCheckbox("c_31", false, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("c_31", false, LocateBy.Id);
 
             // Check EU
-            WebDriverUtility.DefaultProvider.SetCheckbox("c_1001", check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("c_1001", check, LocateBy.Id);
 
             //verify EU countries
             VerifyCountry(check, "Austria");//Austria
@@ -141,7 +141,7 @@
             params string[] countryNames)
         {
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_chxDefineTaxRates", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_chxDefineTaxRates", LocateBy.Id);
             SetTaxOptionTitle(title);
             SetTaxRateOneAndTwo(captionOne, percentageOne, captionTwo, percentageTwo);
 
@@ -154,7 +154,7 @@
 
         public void SetTaxOptionTitle(string title)
         {
-            WebDriverUtility.DefaultProvider.Type(TaxOptionTitleTxtboxLocator, title, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(TaxOptionTitleTxtboxLocator, title, LocateBy.Id);
         }
 
         public void SetTaxRateOneAndTwo(string captionOne, double? percentageOne, string captionTwo, double? percentageTwo)
@@ -178,7 +178,7 @@
         [Step]
         public void SetApplyTaxToCountriesCheckbox(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(TaxOptionApplyTaxToCountriesCheckboxLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(TaxOptionApplyTaxToCountriesCheckboxLocator, check, LocateBy.Id);
         }
 
         // Check the checkboxes which match the names of the countries
@@ -200,7 +200,7 @@
             country = (from c in db.Countries where c.Description == countryName select c).Single();
 
             // The locator of the checkbox of a specific country is "c_" plus the country id
-            WebDriverUtility.DefaultProvider.SetCheckbox("c_" + country.CountryId, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("c_" + country.CountryId, check, LocateBy.Id);
         }
 
         #region Verify tax options
@@ -220,7 +220,7 @@
             ClientDataContext db = new ClientDataContext();
             country = (from c in db.Countries where c.Description == countryName select c).Single();
 
-            VerifyTool.VerifyValue(check, WebDriverUtility.DefaultProvider.IsChecked("c_" + country.CountryId.ToString(), LocateBy.Id), "The country " + countryName + " is selected : {0}");
+            VerifyTool.VerifyValue(check, UIUtil.DefaultProvider.IsChecked("c_" + country.CountryId.ToString(), LocateBy.Id), "The country " + countryName + " is selected : {0}");
         }
         #endregion
 
@@ -229,22 +229,22 @@
         #region Helper methods
         private void SetCaptionOne(string caption)
         {
-            WebDriverUtility.DefaultProvider.Type(TaxRateOneCaptionTxtboxLocator, caption, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(TaxRateOneCaptionTxtboxLocator, caption, LocateBy.Id);
         }
 
         private void SetCaptionTwo(string caption)
         {
-            WebDriverUtility.DefaultProvider.Type(TaxRateTwoCaptionTxtboxLocator, caption, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(TaxRateTwoCaptionTxtboxLocator, caption, LocateBy.Id);
         }
 
         private void SetPercentageOne(double? percentage)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(TaxRateOnePercentageTxtboxLocator, Convert.ToString(percentage));
+            UIUtil.DefaultProvider.TypeRADNumericById(TaxRateOnePercentageTxtboxLocator, Convert.ToString(percentage));
         }
 
         private void SetPercentageTwo(double? percentage)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(TaxRateTwoPercentageTxtboxLocator, Convert.ToString(percentage));
+            UIUtil.DefaultProvider.TypeRADNumericById(TaxRateTwoPercentageTxtboxLocator, Convert.ToString(percentage));
         }
         #endregion
     }

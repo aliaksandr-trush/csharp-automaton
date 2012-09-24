@@ -16,7 +16,7 @@
         public void OpenRegisterPage(int eventId)
         {
             this.CurrentEventId = eventId;
-            WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + eventId);
+            UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + eventId);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -24,7 +24,7 @@
         public void OpenRegTypeDirectUrl(int eventId, int regTypeId)
         {
             this.CurrentEventId = eventId;
-            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
+            UIUtil.DefaultProvider.OpenUrl(string.Format(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}", eventId, regTypeId));
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -32,7 +32,7 @@
         public void OpenOnSiteRegisterPage(int eventId)
         {
             this.CurrentEventId = eventId;
-            WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "register/checkin.aspx?MethodId=2&eventsessionId=&eventID=" + eventId);
+            UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "register/checkin.aspx?MethodId=2&eventsessionId=&eventID=" + eventId);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -54,7 +54,7 @@
         public void OpenRegisterPage(int eventId, string url)
         {
             this.CurrentEventId = eventId;
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
             AllowCookies();
             ClickStartNewRegistration();
         }
@@ -74,7 +74,7 @@
             string adminRegUrl = string.Format(adminRegTargetUrl, eventSessionId, eventID);
 
             this.CurrentEventId = eventID;
-            WebDriverUtility.DefaultProvider.OpenUrl(adminRegUrl);
+            UIUtil.DefaultProvider.OpenUrl(adminRegUrl);
             AllowCookies();
         }
 

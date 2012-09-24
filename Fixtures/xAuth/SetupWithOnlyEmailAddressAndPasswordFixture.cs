@@ -34,13 +34,13 @@
 
             if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "Old")
             {
-                Assert.AreEqual(true, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_rdoMembership", LocateBy.Id));
-                Assert.AreEqual(false, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_rdoEmail", LocateBy.Id));
+                Assert.AreEqual(true, UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_rdoMembership", LocateBy.Id));
+                Assert.AreEqual(false, UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_rdoEmail", LocateBy.Id));
             }
             else
             {
-                Assert.AreEqual(true, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoMembership", LocateBy.Id));
-                Assert.AreEqual(false, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoEmail", LocateBy.Id));
+                Assert.AreEqual(true, UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoMembership", LocateBy.Id));
+                Assert.AreEqual(false, UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_xAuth_rdoEmail", LocateBy.Id));
             }        
 
             //4.2 

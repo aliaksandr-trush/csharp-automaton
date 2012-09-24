@@ -17,21 +17,21 @@
         public override void SaveAndClose()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
+            UIUtil.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CustomFieldManager.FrameID);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(CustomFieldManager.FrameID);
         }
 
         public override void Cancel()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickCancel();
+            UIUtil.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(CustomFieldManager.FrameID);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(CustomFieldManager.FrameID);
         }
     }
 }

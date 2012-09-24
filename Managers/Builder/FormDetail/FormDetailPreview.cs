@@ -11,7 +11,7 @@
         public void VerifyHasRegTypeWhenPreview(string name, bool has)
         {
             SelectPreviewFrame();
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(RegisterSiteLocator.CheckinRegTypeLabelFormat, name), has, LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format(RegisterSiteLocator.CheckinRegTypeLabelFormat, name), has, LocateBy.XPath);
             SelectBuilderWindow();
         }
 
@@ -32,9 +32,9 @@
         public void VerifyContactInfoPresentWhenPreview(bool present)
         {
             SelectPreviewFrame();
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoNameLocator, present, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoPhoneLocator, present, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoEmailLocator, present, LocateBy.Id);
+            UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoNameLocator, present, LocateBy.Id);
+            UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoPhoneLocator, present, LocateBy.Id);
+            UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoEmailLocator, present, LocateBy.Id);
             SelectBuilderWindow();
         }
 
@@ -93,20 +93,20 @@
         public void SetMobileViewMode(bool on)
         {
             string mobileViewCheckboxLocator = "ctl00_cph_cbMobileView";
-            bool actual = WebDriverUtility.DefaultProvider.IsChecked(mobileViewCheckboxLocator, LocateBy.Id);
+            bool actual = UIUtil.DefaultProvider.IsChecked(mobileViewCheckboxLocator, LocateBy.Id);
 
             if (actual != on)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_cbMobileView", on, LocateBy.Id);
-                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_cbMobileView", on, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForPageToLoad();
             }
         }
 
         public void VerifyLodgingOptionsDisplayWhenPreview()
         {
             SelectPreviewFrame();
-            Assert.True(WebDriverUtility.DefaultProvider.IsElementPresent(DontPreferLodgingLocator, LocateBy.Id));
-            Assert.True(WebDriverUtility.DefaultProvider.IsElementPresent(PreferLodgingLocator, LocateBy.Id));
+            Assert.True(UIUtil.DefaultProvider.IsElementPresent(DontPreferLodgingLocator, LocateBy.Id));
+            Assert.True(UIUtil.DefaultProvider.IsElementPresent(PreferLodgingLocator, LocateBy.Id));
             SelectBuilderWindow();
         }
 
@@ -117,10 +117,10 @@
             switch (pl)
             {
                 case PreferLodging.Yes:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(PreferLodgingLocator, LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(PreferLodgingLocator, LocateBy.Id);
                     break;
                 case PreferLodging.No:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(DontPreferLodgingLocator, LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(DontPreferLodgingLocator, LocateBy.Id);
                     break;
                 default:
                     break;

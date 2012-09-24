@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AgendaItem.cs" />
     <Compile Include="AttendeeDirectory.cs" />
+    <Compile Include="HtmlButton.cs" />
     <Compile Include="CustomField.cs" />
     <Compile Include="DiscountCode.cs" />
     <Compile Include="EarlyLatePrice.cs" />

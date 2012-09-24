@@ -15,10 +15,10 @@
 
         public void ClickAddMerchandiseItem()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdFees_"), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdFees_"), LocateBy.Id);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForRADWindow();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            UIUtil.DefaultProvider.WaitForRADWindow();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
         }
 
         [Step]
@@ -82,15 +82,15 @@
 
         public void OpenMerchandiseItem(string merchName)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(merchName, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(merchName, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForRADWindow();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            UIUtil.DefaultProvider.WaitForRADWindow();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
         }
 
         public string GetMerchandiseIDByMerchName(string merchname)
         {
-            string MerchHref = WebDriverUtility.DefaultProvider.GetAttribute(merchname, "href", LocateBy.LinkText);
+            string MerchHref = UIUtil.DefaultProvider.GetAttribute(merchname, "href", LocateBy.LinkText);
             char[] sp1 = { '=' };
             char[] sp2 = { '&' };
 

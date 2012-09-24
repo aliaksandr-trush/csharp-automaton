@@ -253,15 +253,15 @@
         {
             if (OnEmailSplashPage())
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(EmailSplashPageLocator + "//*[span='Create Contact List']", LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(EmailSplashPageLocator + "//*[span='Create Contact List']", LocateBy.XPath);
             }
             else
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CreateNewContactListLocator, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(CreateNewContactListLocator, LocateBy.Id);
             }
 
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             // TODO: Remove this and change the call to clickandwaitrad once we can check in changes to the JS for rad windows in M3
             Utility.ThreadSleep(2);
         }
@@ -276,24 +276,24 @@
         {
             //UIUtilityProvider.UIHelper.SelectPopUpFrame("plain");
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.Type(ListNameLocator, listName, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(ContactListTemsLocator, termsAgree, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ListNameLocator, listName, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(ContactListTemsLocator, termsAgree, LocateBy.Id);
 
             switch(method)
             {
                 case ContactMethod.Import:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 0), LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 0), LocateBy.Id);
                     break;
                 case ContactMethod.Manual:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 1), LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 1), LocateBy.Id);
                     break;
                 case ContactMethod.Filtered:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 2), LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(MethodLocatorConstructor, 2), LocateBy.Id);
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContactListStartNextLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ContactListStartNextLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -303,7 +303,7 @@
         /// <param name="option">Use RegOnline.RegressionTests.Manager.Emails.EmailManager.FieldMappingOptions</param>
         public void MapFields(int locationIndex, FieldMappingOptions fieldToMap)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(string.Format(FieldMapConstructor, locationIndex), StringEnum.GetStringValue(fieldToMap), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(string.Format(FieldMapConstructor, locationIndex), StringEnum.GetStringValue(fieldToMap), LocateBy.Id);
         }
 
         /// <summary>
@@ -311,16 +311,16 @@
         /// </summary>
         public void NextStep()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContactListWizardNextLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ContactListWizardNextLocator, LocateBy.Id);
             int i = 0;
 
             while (i < 210)
             {
                 try
                 {
-                    WebDriverUtility.DefaultProvider.WaitForElementPresent(CloseLocator, LocateBy.LinkText);
+                    UIUtil.DefaultProvider.WaitForElementPresent(CloseLocator, LocateBy.LinkText);
 
-                    if (WebDriverUtility.DefaultProvider.IsElementPresent(CloseLocator, LocateBy.LinkText))
+                    if (UIUtil.DefaultProvider.IsElementPresent(CloseLocator, LocateBy.LinkText))
                     {
                         i = 210;
                     }
@@ -340,9 +340,9 @@
         /// </summary>
         public void CloseContactListImport()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContactListWizardCloseLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ContactListWizardCloseLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         /// <summary>
@@ -355,22 +355,22 @@
         /// <param name="errorsRemaining"></param>
         public void CorrectUploadErrors(string correctText, int index, int expectedNewContacts, int expectedTotalContacts, int errorsRemaining)
         {
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(SuccessWithErrorMessage));
+            UIUtil.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
+            UIUtil.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.SetTimeoutSpan();
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(SuccessWithErrorMessage));
             VerifyUploadedContactCounts(expectedNewContacts, expectedTotalContacts, errorsRemaining + 1);
 
-            if (WebDriverUtility.DefaultProvider.IsElementDisplay(FixErrorsLocator, LocateBy.LinkText))
+            if (UIUtil.DefaultProvider.IsElementDisplay(FixErrorsLocator, LocateBy.LinkText))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FixErrorsLocator, LocateBy.LinkText);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(FixErrorsLocator, LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
 
-            WebDriverUtility.DefaultProvider.Type(string.Format(CorrectUploadTextLocator, index), correctText, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(AddCorrectedContactLocator, index), LocateBy.Id);
+            UIUtil.DefaultProvider.Type(string.Format(CorrectUploadTextLocator, index), correctText, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(AddCorrectedContactLocator, index), LocateBy.Id);
             Utility.ThreadSleep(1.5);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             VerifyUploadedContactCounts(expectedNewContacts + 1, expectedTotalContacts + 1, errorsRemaining); 
         }
 
@@ -384,8 +384,8 @@
         public void RemoveContactWithError(int expectedNewContacts, int expectedTotalContacts, int index, int errorsRemaining)
         {
             VerifyUploadedContactCounts(expectedNewContacts, expectedTotalContacts, (errorsRemaining + 1));
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(RemoveContactWithErrorLocator, index), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(RemoveContactWithErrorLocator, index), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             VerifyUploadedContactCounts(expectedNewContacts, expectedTotalContacts, errorsRemaining); 
         }
 
@@ -397,11 +397,11 @@
         /// <param name="expectedErrors"></param>
         public void ConfirmContactListUploadWithErrorReport(int expectedNewContacts, int expectedTotalContacts, int expectedErrors)
         {
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(SuccessWithErrorMessage));
-            Assert.True(!WebDriverUtility.DefaultProvider.IsElementHidden(DownloadErrorReportLocator, LocateBy.LinkText));
+            UIUtil.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
+            UIUtil.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.SetTimeoutSpan();
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(SuccessWithErrorMessage));
+            Assert.True(!UIUtil.DefaultProvider.IsElementHidden(DownloadErrorReportLocator, LocateBy.LinkText));
             VerifyUploadedContactCounts(expectedNewContacts, expectedTotalContacts, expectedErrors);
         }
 
@@ -412,10 +412,10 @@
         /// <param name="expectedTotalContacts"></param>
         public void ConfirmContactListUpload(int expectedNewContacts, int expectedTotalContacts)
         {
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(SuccessfulMessage));
+            UIUtil.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(TimeOutInMinutes_Longer));
+            UIUtil.DefaultProvider.WaitForElementDisplay(CloseLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.SetTimeoutSpan();
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(SuccessfulMessage));
             VerifyUploadedContactCounts(expectedNewContacts, expectedTotalContacts, null); 
         }
 
@@ -427,14 +427,14 @@
         /// <param name="expectedErrorCount">Total Contacts at the bottom</param>
         public void VerifyUploadedContactCounts(int expectedNewContacts, int expectedTotalContacts, int? expectedErrorCount)
         {
-            Utilities.VerifyTool.VerifyValue(expectedNewContacts.ToString(), WebDriverUtility.DefaultProvider.GetText(ImportedTotalLocator, LocateBy.Id), "New Contacts: {0}");
+            Utilities.VerifyTool.VerifyValue(expectedNewContacts.ToString(), UIUtil.DefaultProvider.GetText(ImportedTotalLocator, LocateBy.Id), "New Contacts: {0}");
 
             if (expectedErrorCount.HasValue)
             {
-                Utilities.VerifyTool.VerifyValue(expectedErrorCount.ToString(), WebDriverUtility.DefaultProvider.GetText(ErrorCountLcoator, LocateBy.Id), "Total Errors: {0}"); 
+                Utilities.VerifyTool.VerifyValue(expectedErrorCount.ToString(), UIUtil.DefaultProvider.GetText(ErrorCountLcoator, LocateBy.Id), "Total Errors: {0}"); 
             }
 
-            Utilities.VerifyTool.VerifyValue(expectedTotalContacts.ToString(), WebDriverUtility.DefaultProvider.GetText(TotalNewContactsLocator, LocateBy.Id), "New Contacts: {0}"); 
+            Utilities.VerifyTool.VerifyValue(expectedTotalContacts.ToString(), UIUtil.DefaultProvider.GetText(TotalNewContactsLocator, LocateBy.Id), "New Contacts: {0}"); 
         }
 
         /// <summary>
@@ -443,12 +443,12 @@
         /// <param name="filePath"></param>
         public void ChooseContactListToUpload(string filePath)
         {
-            WebDriverUtility.DefaultProvider.Type(ImportFileLocator, filePath, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(StartContactListWizardNextLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(TopRowHeadersLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ImportFileLocator, filePath, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(StartContactListWizardNextLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.WaitForElementDisplay(TopRowHeadersLocator, LocateBy.Id);
         }
         #endregion
 
@@ -464,15 +464,15 @@
         {
             OpenContactList(listName);
             VerifyNameInList(expectedFirstName, expectedFirstEmail, 0);
-            string total = WebDriverUtility.DefaultProvider.GetText(TotalLocator, LocateBy.XPath);
+            string total = UIUtil.DefaultProvider.GetText(TotalLocator, LocateBy.XPath);
             Utilities.VerifyTool.VerifyValue(expectedTotal.ToString() + "  ", Regex.Split(total, @"Total: |Date Created: ")[1], "Total: {0}");
         }
 
         public void VerifyNameInList(string expectedFullName, string expectedEmail, int index)
         {
-            string firstNameInList = WebDriverUtility.DefaultProvider.GetText(string.Format(FirstNameLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.Id);
+            string firstNameInList = UIUtil.DefaultProvider.GetText(string.Format(FirstNameLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.Id);
 
-            string firstEmail = WebDriverUtility.DefaultProvider.GetText(string.Format(FirstEmailLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.XPath);
+            string firstEmail = UIUtil.DefaultProvider.GetText(string.Format(FirstEmailLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.XPath);
 
             Utilities.VerifyTool.VerifyValue(expectedFullName, firstNameInList, "Name In List: {0}");
             Utilities.VerifyTool.VerifyValue(expectedEmail, firstEmail, "Email in List: {0}");
@@ -481,15 +481,15 @@
         [Step]
         public void ExpandContactLists()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ExpandContactListsLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ExpandContactListsLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
         public int GetContactListIdFromLink(string contactListName)
         {
             string listId;
-            listId = WebDriverUtility.DefaultProvider.GetAttribute(contactListName, "href", LocateBy.LinkText);
+            listId = UIUtil.DefaultProvider.GetAttribute(contactListName, "href", LocateBy.LinkText);
             string[] testing = Regex.Split(listId, @"EmailListID=");
             listId = testing[1]; 
             return Convert.ToInt32(listId);
@@ -497,43 +497,43 @@
 
         public void OpenContactList(string listName)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(ContactListLocator, listName), LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad(TimeSpan.FromMinutes(3));
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(ContactListLocator, listName), LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad(TimeSpan.FromMinutes(3));
         }
 
         [Step]
         public void DeleteContactList()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(DeleteListLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(DeleteLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(DeleteListLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(DeleteLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void ReturnToEmailAndContactLists()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(EmailAndContactListReturnLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(EmailAndContactListReturnLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ReturnToContactListDetails()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ContactListDetailsReturnLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ContactListDetailsReturnLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickAddContact()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddContactLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddContactLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         public void OpenContactDetails(string name, int index)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(FirstNameLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(FirstNameLocator, Utilities.ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(index + 2)), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -547,21 +547,21 @@
 
             if (fieldToVerify == ManualFieldOptions.FirstName || fieldToVerify == ManualFieldOptions.LastName)
             {
-                actualData = WebDriverUtility.DefaultProvider.GetText("builderSectionHeaderText", LocateBy.ClassName);
+                actualData = UIUtil.DefaultProvider.GetText("builderSectionHeaderText", LocateBy.ClassName);
                 Utilities.VerifyTool.VerifyValue(expectedData, actualData, "Data: {0}");
                 return;
             }
 
             if (fieldToVerify == ManualFieldOptions.EmailAddress || fieldToVerify == ManualFieldOptions.Company)
             {
-                actualData = WebDriverUtility.DefaultProvider.GetText(string.Format(ContactDetailsLocator, StringEnum.GetStringValue(fieldToVerify)), LocateBy.XPath);
+                actualData = UIUtil.DefaultProvider.GetText(string.Format(ContactDetailsLocator, StringEnum.GetStringValue(fieldToVerify)), LocateBy.XPath);
                 Utilities.VerifyTool.VerifyValue(expectedData, actualData, "Data: {0}");
                 return;
             }
 
             if (fieldToVerify == ManualFieldOptions.WorkPhone)
             {
-                actualData = WebDriverUtility.DefaultProvider.GetText(string.Format(ContactDetailsLocator, "Phone Number"), LocateBy.XPath);
+                actualData = UIUtil.DefaultProvider.GetText(string.Format(ContactDetailsLocator, "Phone Number"), LocateBy.XPath);
                 Utilities.VerifyTool.VerifyValue(expectedData, actualData, "Data: {0}");
                 return;
             }
@@ -572,19 +572,19 @@
                 || fieldToVerify == ManualFieldOptions.Zip
                 || fieldToVerify == ManualFieldOptions.City)
             {
-                actualData = WebDriverUtility.DefaultProvider.GetText("//address", LocateBy.XPath); 
+                actualData = UIUtil.DefaultProvider.GetText("//address", LocateBy.XPath); 
                 Assert.True(actualData.Contains(expectedData), "Data: " + expectedData + ", was not found");
                 return;
             }
             else
             {
-                if(WebDriverUtility.DefaultProvider.IsElementPresent("Show All Fields", LocateBy.LinkText))
+                if(UIUtil.DefaultProvider.IsElementPresent("Show All Fields", LocateBy.LinkText))
                 {
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Show All Fields", LocateBy.LinkText);
-                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick("Show All Fields", LocateBy.LinkText);
+                    UIUtil.DefaultProvider.WaitForAJAXRequest();
                 }
 
-                actualData = WebDriverUtility.DefaultProvider.GetText(string.Format(ContactDetailsLocator, StringEnum.GetStringValue(fieldToVerify)), LocateBy.XPath);
+                actualData = UIUtil.DefaultProvider.GetText(string.Format(ContactDetailsLocator, StringEnum.GetStringValue(fieldToVerify)), LocateBy.XPath);
                 Utilities.VerifyTool.VerifyValue(expectedData, actualData, "Data: {0}"); 
             }
         }
@@ -597,7 +597,7 @@
         public void EnterNewContactInfo(ManualFieldOptions field, string textToEnter)
         {
             string fieldLocator = "//label[contains(text(),'{0}')][@for='txtValue']/following-sibling::input";
-            WebDriverUtility.DefaultProvider.Type(string.Format(fieldLocator, StringEnum.GetStringValue(field)), textToEnter, LocateBy.XPath);
+            UIUtil.DefaultProvider.Type(string.Format(fieldLocator, StringEnum.GetStringValue(field)), textToEnter, LocateBy.XPath);
         }
 
         public void TypeManulContactInfo(string email, string firstName, string lastName, string company)
@@ -610,34 +610,34 @@
 
         public void TypeContactEmailAddress(string email)
         {
-            WebDriverUtility.DefaultProvider.Type(ContactEmailLocator, email, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ContactEmailLocator, email, LocateBy.Id);
         }
 
         public void TypeContactFirstName(string firstName)
         {
-            WebDriverUtility.DefaultProvider.Type(ContactFirstNameLocator, firstName, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ContactFirstNameLocator, firstName, LocateBy.Id);
         }
 
         public void TypeContactLastName(string lastName)
         {
-            WebDriverUtility.DefaultProvider.Type(ContactLastNameLocator, lastName, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ContactLastNameLocator, lastName, LocateBy.Id);
         }
 
         public void TypeContactCompany(string company)
         {
-            WebDriverUtility.DefaultProvider.Type(ContactCompanyLocator, company, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ContactCompanyLocator, company, LocateBy.Id);
         }
 
         public void SaveCloseContactInfo()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveCloseContactInfoLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveCloseContactInfoLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         public void OpenEditFields()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(EditFieldsLinkLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(EditFieldsLinkLocator, LocateBy.LinkText);
         }
 
         public void ChooseFieldToDisplay(ManualFieldOptions field, bool visible, bool required)
@@ -653,28 +653,28 @@
                 || field == ManualFieldOptions.AdditionalField9
                 || field == ManualFieldOptions.AdditionalField10)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(AdditionalFieldVisibleLocator, StringEnum.GetStringValue(field)), visible, LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(AdditionalFieldRequiredLocator, StringEnum.GetStringValue(field)), required, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(AdditionalFieldVisibleLocator, StringEnum.GetStringValue(field)), visible, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(AdditionalFieldRequiredLocator, StringEnum.GetStringValue(field)), required, LocateBy.XPath);
             }
             else
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(FieldVisibleLocator, StringEnum.GetStringValue(field)), visible, LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(FieldRequiredLocator, StringEnum.GetStringValue(field)), required, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(FieldVisibleLocator, StringEnum.GetStringValue(field)), visible, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(FieldRequiredLocator, StringEnum.GetStringValue(field)), required, LocateBy.XPath);
             }
         }
 
         public void CloseEditFields()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CloseEditFieldsLocator, LocateBy.LinkText); 
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(CloseEditFieldsLocator, LocateBy.LinkText); 
         }
 
         public string GetAddManualContactError(int index)
         {
             string errorMessageLocator = "//div[@id='ctl00_cphDialog_vsValidationSummary']/ul/li[" + index + "]";
 
-            if (!WebDriverUtility.DefaultProvider.IsElementHidden(errorMessageLocator, LocateBy.XPath))
+            if (!UIUtil.DefaultProvider.IsElementHidden(errorMessageLocator, LocateBy.XPath))
             {
-                string error = WebDriverUtility.DefaultProvider.GetText(errorMessageLocator, LocateBy.XPath);
+                string error = UIUtil.DefaultProvider.GetText(errorMessageLocator, LocateBy.XPath);
                 return error;
             }
             else

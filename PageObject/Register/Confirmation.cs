@@ -8,12 +8,12 @@
     public class Confirmation : Window
     {
         public Label Total = new Label("//td[text()='Total:']/following-sibling::td[@class='currency']", LocateBy.XPath);
-        public ButtonOrLink ChangeMyRegistration = new ButtonOrLink("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
+        public Clickable ChangeMyRegistration = new Clickable("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
         public Label RegistrationId = new Label("//th[@scope='row'][text()='Registration ID:']/../td", LocateBy.XPath);
 
-        public ButtonOrLink AddToCalendar(DataCollection.AgendaItem agendaItem)
+        public Clickable AddToCalendar(DataCollection.AgendaItem agendaItem)
         {
-            return new ButtonOrLink(string.Format("//li[@class='addToCalendar']/a[contains(@href,'{0}')]", agendaItem.Id), LocateBy.XPath);
+            return new Clickable(string.Format("//li[@class='addToCalendar']/a[contains(@href,'{0}')]", agendaItem.Id), LocateBy.XPath);
         }
 
         public void ChangeMyRegistration_Click()

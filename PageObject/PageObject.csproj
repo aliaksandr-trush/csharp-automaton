@@ -76,6 +76,7 @@
     <Compile Include="Builder\RegistrationFormPages\RegistrationFormPages.cs" />
     <Compile Include="Builder\RegistrationFormPages\XAuthOld.cs" />
     <Compile Include="Manager\Dashboard\AttendeeDirectory.cs" />
+    <Compile Include="Manager\Dashboard\ButtonDesigner.cs" />
     <Compile Include="Manager\Dashboard\Dashboard.cs" />
     <Compile Include="Manager\Dashboard\EventDtails.cs" />
     <Compile Include="Manager\Dashboard\Reports.cs" />

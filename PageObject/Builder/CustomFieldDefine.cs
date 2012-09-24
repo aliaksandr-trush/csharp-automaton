@@ -8,10 +8,8 @@
     {
         public CustomFieldDefine(string name) : base(name) { }
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
-        public TextBox NameOnForm = new TextBox("ctl00_cphDialog_cfCF_mipNam_elDesc_TextArea", LocateBy.Id);
-        public ButtonOrLink FieldType = new ButtonOrLink("ctl00_cphDialog_cfCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
+        public Input NameOnForm = new Input("ctl00_cphDialog_cfCF_mipNam_elDesc_TextArea", LocateBy.Id);
+        public Clickable FieldType = new Clickable("ctl00_cphDialog_cfCF_selectedFieldTypeToggleImageSpan", LocateBy.Id);
 
         public void FieldType_Click()
         {
@@ -24,7 +22,7 @@
 
         public void CFType_Select(DataCollection.FormData.CustomFieldType type)
         {
-            ButtonOrLink Type = new ButtonOrLink(
+            Clickable Type = new Clickable(
                 string.Format("//div[@id='divMoreFormats']//span[text()='{0}']", CustomStringAttribute.GetCustomString(type)),
                 LocateBy.XPath);
 
@@ -34,7 +32,7 @@
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
     }

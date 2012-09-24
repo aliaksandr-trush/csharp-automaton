@@ -19,8 +19,8 @@
             string url = ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl +
                 string.Format(ConfirmationEmailURLConstructor, eventId, encryptAttendeeId, encryptEmailId);
 
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.SelectTopWindow();
         }
     }
 }

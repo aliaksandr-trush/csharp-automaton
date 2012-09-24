@@ -33,15 +33,15 @@
         public void SelectPricingOption(int pricingOptionIndex)
         {
             string locator = string.Format(PricingOptionId, pricingOptionIndex);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
         }
 
         [Step]
         public void ActivateEvent()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ActivateButton, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ActivateButton, LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
         
         /// <summary>
@@ -51,7 +51,7 @@
         [Step]
         public void RemoveTestRegs(bool removeTestRegistrations)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(RemoveTestRegistrationsLocator, removeTestRegistrations, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(RemoveTestRegistrationsLocator, removeTestRegistrations, LocateBy.Id);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@
         [Verify]
         public void IsCheckRemoveTestRegs(bool isCheck)
         {
-            Assert.AreEqual(WebDriverUtility.DefaultProvider.IsChecked(RemoveTestRegistrationsLocator, LocateBy.Id), isCheck);
+            Assert.AreEqual(UIUtil.DefaultProvider.IsChecked(RemoveTestRegistrationsLocator, LocateBy.Id), isCheck);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@
         public void IsCommentUnderBankCountryFor(string currency)
         {
             Assert.AreEqual(
-                WebDriverUtility.DefaultProvider.GetText(CommentUnderBankCountryLocator, LocateBy.Id), 
+                UIUtil.DefaultProvider.GetText(CommentUnderBankCountryLocator, LocateBy.Id), 
                 string.Format("Important Note: To prevent delays in payment, ensure that your bank can accept payments in {0}.", currency));
         }
 
@@ -87,8 +87,8 @@
         {
             string StatusToChangeTo = string.Empty;
             string ExceptionMessage = "Could not find status {0}, is this your first time activating the event? Then {1} will not appear";
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AutomaticallyChangeStatusLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AutomaticallyChangeStatusLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
             switch (status)
             {
@@ -98,7 +98,7 @@
                     try
                     {
                         StatusToChangeTo = "Cancelled";
-                        WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                        UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     }
                     catch
                     {
@@ -109,7 +109,7 @@
                     try
                     {
                         StatusToChangeTo = "On-Site";
-                        WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                        UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     }
                     catch
                     {
@@ -120,7 +120,7 @@
                     try
                     {
                         StatusToChangeTo = "Sold Out";
-                        WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                        UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     }
                     catch
                     {
@@ -129,44 +129,44 @@
                     break;
                 case DashboardManager.EventStatus.Inactive:
                     StatusToChangeTo = "Inactive";
-                    WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     break;
                 case DashboardManager.EventStatus.Archived:
                     StatusToChangeTo = "Archived";
-                    WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     break;
                 case DashboardManager.EventStatus.Testing:
                     StatusToChangeTo = "Testing";
-                    WebDriverUtility.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithText(StatusLocator, StatusToChangeTo, LocateBy.Id);
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.Type(ChangeStatusDateLocator, date, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(ChangeStatusTimeLocator, time, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ChangeStatusDateLocator, date, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ChangeStatusTimeLocator, time, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AutomaticallyChangeStatusMessageLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.TypeContentEditorOnFrame(statusMessage);
-            WebDriverUtility.DefaultProvider.SaveAndCloseContentEditorFrame();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AutomaticallyChangeStatusMessageLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.TypeContentEditorOnFrame(statusMessage);
+            UIUtil.DefaultProvider.SaveAndCloseContentEditorFrame();
         }
 
         [Step]
         public void CheckAgreementForTermsOfService(bool check)
         {
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(AgreeTOSLocator, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementPresent(AgreeTOSLocator, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(AgreeTOSLocator, check, LocateBy.Id);
+                UIUtil.DefaultProvider.SetCheckbox(AgreeTOSLocator, check, LocateBy.Id);
             }
         }
 
         [Step]
         public void TypeInitialing(string txt)
         {
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(InitialingLocator, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementPresent(InitialingLocator, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.Type(InitialingLocator, txt, LocateBy.Id);
+                UIUtil.DefaultProvider.Type(InitialingLocator, txt, LocateBy.Id);
             }
         }
 
@@ -196,14 +196,14 @@
         {
             List<string> errorList = new List<string>();
 
-            if (WebDriverUtility.DefaultProvider.GetAttribute(ErrorDIVLocator, "@style", LocateBy.XPath) != "display: none;")
+            if (UIUtil.DefaultProvider.GetAttribute(ErrorDIVLocator, "@style", LocateBy.XPath) != "display: none;")
             {
-                int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
+                int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
                 string errorFormat = ErrorLocator + "/li[{0}]";
 
                 for (int i = 1; i <= count; i++)
                 {
-                    errorList.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(errorFormat, i), LocateBy.XPath));
+                    errorList.Add(UIUtil.DefaultProvider.GetText(string.Format(errorFormat, i), LocateBy.XPath));
                 }
             }
 

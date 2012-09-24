@@ -45,40 +45,40 @@
 		public void EnterPersonalInfoFieldsEmailFirstMiddleLastCompanyMembershipId(string email,
 			string first, string middle, string last, string company, string membershipId)
 		{
-			if (email != null) WebDriverUtility.DefaultProvider.Type("Text4", email, LocateBy.Id);
+			if (email != null) UIUtil.DefaultProvider.Type("Text4", email, LocateBy.Id);
 			if (first != null) this.TypePersonalInfoFirstName(first);
 			if (middle != null) this.TypePersonalInfoMiddleName(middle);
 			if (last != null) this.TypePersonalInfoLastName(last);
 			if (company != null) this.TypePersonalInfoCompany(company);
-			if (membershipId != null) WebDriverUtility.DefaultProvider.Type("Text25", membershipId, LocateBy.Id);
+			if (membershipId != null) UIUtil.DefaultProvider.Type("Text25", membershipId, LocateBy.Id);
 		}
 
 		[Step]
 		public void EnterPersonalInfoEnduranceNewsletterPartners(bool? eNewsletters, bool? partnerEmails)
 		{
-			if (eNewsletters != null) WebDriverUtility.DefaultProvider.SetCheckbox("AllowNewsletter", (bool)eNewsletters, LocateBy.Id);
-			if (partnerEmails != null) WebDriverUtility.DefaultProvider.SetCheckbox("AllowPartnersCommunication", (bool)partnerEmails, LocateBy.Id);
+			if (eNewsletters != null) UIUtil.DefaultProvider.SetCheckbox("AllowNewsletter", (bool)eNewsletters, LocateBy.Id);
+			if (partnerEmails != null) UIUtil.DefaultProvider.SetCheckbox("AllowPartnersCommunication", (bool)partnerEmails, LocateBy.Id);
 		}
 
 		public void VerifyPersonalInfoFieldsEmailFirstMiddleLastCompanyMembershipId(string email,
 			string first, string middle, string last, string company, string membershipId)
 		{
-			if (email != null) Assert.AreEqual(email, WebDriverUtility.DefaultProvider.GetValue("Text4", LocateBy.Id));
-			if (first != null) Assert.AreEqual(first, WebDriverUtility.DefaultProvider.GetValue("Text8", LocateBy.Id));
-			if (middle != null) Assert.AreEqual(middle, WebDriverUtility.DefaultProvider.GetValue("Text9", LocateBy.Id));
-			if (last != null) Assert.AreEqual(last, WebDriverUtility.DefaultProvider.GetValue("Text11", LocateBy.Id));
-			if (company != null) Assert.AreEqual(company, WebDriverUtility.DefaultProvider.GetValue("Text14", LocateBy.Id));
-			if (membershipId != null) Assert.AreEqual(membershipId, WebDriverUtility.DefaultProvider.GetValue("Text25", LocateBy.Id));
+			if (email != null) Assert.AreEqual(email, UIUtil.DefaultProvider.GetValue("Text4", LocateBy.Id));
+			if (first != null) Assert.AreEqual(first, UIUtil.DefaultProvider.GetValue("Text8", LocateBy.Id));
+			if (middle != null) Assert.AreEqual(middle, UIUtil.DefaultProvider.GetValue("Text9", LocateBy.Id));
+			if (last != null) Assert.AreEqual(last, UIUtil.DefaultProvider.GetValue("Text11", LocateBy.Id));
+			if (company != null) Assert.AreEqual(company, UIUtil.DefaultProvider.GetValue("Text14", LocateBy.Id));
+			if (membershipId != null) Assert.AreEqual(membershipId, UIUtil.DefaultProvider.GetValue("Text25", LocateBy.Id));
 		}
 
 		public void VerifyPersonalInfoFieldsUpdateHidden(string email,
 			string first, string middle, string last, string membershipId)
 		{
-			if (email != null) Assert.AreEqual(email, WebDriverUtility.DefaultProvider.GetValue("//input[@name='EMail_Address']", LocateBy.XPath));
-			if (first != null) Assert.AreEqual(first, WebDriverUtility.DefaultProvider.GetValue("//input[@name='First_Name']", LocateBy.XPath));
-			if (middle != null) Assert.AreEqual(middle, WebDriverUtility.DefaultProvider.GetValue("//input[@name='Middle_Name']", LocateBy.XPath));
-			if (last != null) Assert.AreEqual(last, WebDriverUtility.DefaultProvider.GetValue("//input[@name='Last_Name']", LocateBy.XPath));
-			if (membershipId != null) Assert.AreEqual(membershipId, WebDriverUtility.DefaultProvider.GetValue("//input[@name='MembershipId']", LocateBy.XPath));
+			if (email != null) Assert.AreEqual(email, UIUtil.DefaultProvider.GetValue("//input[@name='EMail_Address']", LocateBy.XPath));
+			if (first != null) Assert.AreEqual(first, UIUtil.DefaultProvider.GetValue("//input[@name='First_Name']", LocateBy.XPath));
+			if (middle != null) Assert.AreEqual(middle, UIUtil.DefaultProvider.GetValue("//input[@name='Middle_Name']", LocateBy.XPath));
+			if (last != null) Assert.AreEqual(last, UIUtil.DefaultProvider.GetValue("//input[@name='Last_Name']", LocateBy.XPath));
+			if (membershipId != null) Assert.AreEqual(membershipId, UIUtil.DefaultProvider.GetValue("//input[@name='MembershipId']", LocateBy.XPath));
 		}
 
 		public bool DoesPersonalInfoHavePassword()
@@ -86,7 +86,7 @@
 			bool hasPassword = false;
 			//Assert.IsTrue(OnPersonalInfoPageOld());
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent("Password1", LocateBy.Id))
+			if (UIUtil.DefaultProvider.IsElementPresent("Password1", LocateBy.Id))
 			{
 				hasPassword = true;
 			}
@@ -99,13 +99,13 @@
 		[Step]
 		public bool OnPersonalInfoPage()
 		{
-			return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(PersonalInfoPagePathNew);
+			return UIUtil.DefaultProvider.UrlContainsAbsolutePath(PersonalInfoPagePathNew);
 		}
 
 		[Step]
 		public string EnterProfileInfo()
 		{
-			WebDriverUtility.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
+			UIUtil.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
 			string lastName = this.SetDefaultStandardPersonalInfoFields();
 			this.EnterPersonalInfoPassword();
 
@@ -114,7 +114,7 @@
 
 		public string EnterProfileInfoEnduranceNew()
 		{
-			WebDriverUtility.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
+			UIUtil.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
 			string lastName = this.SetDefaultStandardPersonalInfoEnduranceFields();
 			this.EnterPersonalInfoPassword();
 
@@ -124,7 +124,7 @@
 		[Step]
 		public string EnterProfileInfoWithoutPassword()
 		{
-			WebDriverUtility.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
+			UIUtil.DefaultProvider.VerifyOnPage(OnPersonalInfoPage(), PersonalInfoPageTitle);
 			return this.SetDefaultStandardPersonalInfoFields();
 		}
 
@@ -319,7 +319,7 @@
 		{
 			if (!string.IsNullOrEmpty(email))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", email, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", email, LocateBy.Id);
 			}
 		}
 
@@ -370,20 +370,20 @@
 
 		public void VerifyContactInfoPresent(bool present)
 		{
-			WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoNameLocator, present, LocateBy.Id);
-			WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoPhoneLocator, present, LocateBy.Id);
-			WebDriverUtility.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoEmailLocator, present, LocateBy.Id);
+			UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoNameLocator, present, LocateBy.Id);
+			UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoPhoneLocator, present, LocateBy.Id);
+			UIUtil.DefaultProvider.VerifyElementPresent(RegisterSiteLocator.ContactInfoEmailLocator, present, LocateBy.Id);
 		}
 
 		public bool IsEmailFieldPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", LocateBy.Id);
 		}
 		public void TypePersonalInfoVerifyEmail(string email)
 		{
 			if (!string.IsNullOrEmpty(email))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl03_sf_txtResponse", email, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl03_sf_txtResponse", email, LocateBy.Id);
 			}
 		}
 
@@ -391,7 +391,7 @@
 		{
 			if (!string.IsNullOrEmpty(email))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Secondary Email Address (cc Email):']", "for", LocateBy.XPath), email, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Secondary Email Address (cc Email):']", "for", LocateBy.XPath), email, LocateBy.Id);
 			}
 		}
 
@@ -399,7 +399,7 @@
 		{
 			if (!string.IsNullOrEmpty(teamname))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Team Name:']", "for", LocateBy.XPath), teamname, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Team Name:']", "for", LocateBy.XPath), teamname, LocateBy.Id);
 			}
 		}
 
@@ -407,7 +407,7 @@
 		{
 			if (!string.IsNullOrEmpty(prefix))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl05_sf_txtResponse", prefix, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl05_sf_txtResponse", prefix, LocateBy.Id);
 			}
 		}
 
@@ -415,7 +415,7 @@
 		{
 			if (!string.IsNullOrEmpty(prefix))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Prefix (Mr, Mrs, etc):']", "for", LocateBy.XPath), prefix, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Prefix (Mr, Mrs, etc):']", "for", LocateBy.XPath), prefix, LocateBy.Id);
 			}
 		}
 
@@ -423,7 +423,7 @@
 		{
 			if (!string.IsNullOrEmpty(suffix))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl09_sf_txtResponse", suffix, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl09_sf_txtResponse", suffix, LocateBy.Id);
 			}
 		}
 
@@ -432,19 +432,19 @@
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", name, LocateBy.Id);
 			}
 		}
 
 		public bool IsFirstNameFieldPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id);
 		}
 		public void TypePersonalInfoEnduranceForename(string name)
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Forename:']", "for", LocateBy.XPath), name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Forename:']", "for", LocateBy.XPath), name, LocateBy.Id);
 			}
 		}
 
@@ -453,12 +453,12 @@
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", name, LocateBy.Id);
 			}
 		}
 		public bool IsMiddleNameFieldPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id);
 		}
 
 		[Step]
@@ -466,30 +466,30 @@
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type(PersonalInfoLastNameLocator, name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(PersonalInfoLastNameLocator, name, LocateBy.Id);
 			}
 		}
 		public bool IsLastNameFieldPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(PersonalInfoLastNameLocator, LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent(PersonalInfoLastNameLocator, LocateBy.Id);
 		}
 
 		public void VerifyPersonalInfoLastName(string name)
 		{
-			string actualValue = WebDriverUtility.DefaultProvider.GetValue(PersonalInfoLastNameLocator, LocateBy.Id);
+			string actualValue = UIUtil.DefaultProvider.GetValue(PersonalInfoLastNameLocator, LocateBy.Id);
 			Utilities.VerifyTool.VerifyValue(name, actualValue, "Last name text : {0}");
 		}
 
 		public bool IsStatusFieldPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl39_sf_ddlResponse", LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent("ctl00_cph_personalInfoStandardFields_rptFields_ctl39_sf_ddlResponse", LocateBy.Id);
 		}
 
 		public void TypePersonalInfoEnduranceSurname(string name)
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Surname:']", "for", LocateBy.XPath), name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Surname:']", "for", LocateBy.XPath), name, LocateBy.Id);
 			}
 		}
 
@@ -498,7 +498,7 @@
 		{
 			if (!string.IsNullOrEmpty(title))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Job Title:']", "for", LocateBy.XPath), title, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Job Title:']", "for", LocateBy.XPath), title, LocateBy.Id);
 			}
 		}
 		public void VerifyPersonalInfoJobTitle(string title)
@@ -510,7 +510,7 @@
 		{
 			if (!string.IsNullOrEmpty(badge))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Name as it would appear on the badge:']", "for", LocateBy.XPath), badge, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Name as it would appear on the badge:']", "for", LocateBy.XPath), badge, LocateBy.Id);
 			}
 		}
 
@@ -519,7 +519,7 @@
 		{
 			if (!string.IsNullOrEmpty(company))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Company/Organization:']", "for", LocateBy.XPath), company, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Company/Organization:']", "for", LocateBy.XPath), company, LocateBy.Id);
 			}
 		}
 
@@ -532,7 +532,7 @@
 		{
 			if (!string.IsNullOrEmpty(company))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Company/Organisation:']", "for", LocateBy.XPath), company, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Company/Organisation:']", "for", LocateBy.XPath), company, LocateBy.Id);
 			}
 		}
 
@@ -540,7 +540,7 @@
 		{
 			if (!string.IsNullOrEmpty(country))
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Country:']", "for", LocateBy.XPath), country, LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWithText(UIUtil.DefaultProvider.GetAttribute("//*[text()='Country:']", "for", LocateBy.XPath), country, LocateBy.Id);
 			}
 		}
 
@@ -548,7 +548,7 @@
 		{
 			if (!string.IsNullOrEmpty(address))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Address Line 1:']", "for", LocateBy.XPath), address, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Address Line 1:']", "for", LocateBy.XPath), address, LocateBy.Id);
 			}
 		}
 
@@ -557,7 +557,7 @@
 		{
 			if (!string.IsNullOrEmpty(address))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Address Line 2:']", "for", LocateBy.XPath), address, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Address Line 2:']", "for", LocateBy.XPath), address, LocateBy.Id);
 			}
 		}
 
@@ -566,7 +566,7 @@
 		{
 			if (!string.IsNullOrEmpty(city))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='City:']", "for", LocateBy.XPath), city, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='City:']", "for", LocateBy.XPath), city, LocateBy.Id);
 			}
 		}
 
@@ -574,7 +574,7 @@
 		{
 			if (!string.IsNullOrEmpty(city))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Town/City:']", "for", LocateBy.XPath), city, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Town/City:']", "for", LocateBy.XPath), city, LocateBy.Id);
 			}
 		}
 
@@ -582,7 +582,7 @@
 		{
 			if (!string.IsNullOrEmpty(region))
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='US State/Canadian Province:']", "for", LocateBy.XPath), region, LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWithText(UIUtil.DefaultProvider.GetAttribute("//*[text()='US State/Canadian Province:']", "for", LocateBy.XPath), region, LocateBy.Id);
 			}
 		}
 
@@ -590,7 +590,7 @@
 		{
 			if (!string.IsNullOrEmpty(nonUSRegion))
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='State/Province/Region (Non US/Canada):']", "for", LocateBy.XPath), nonUSRegion, LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWithText(UIUtil.DefaultProvider.GetAttribute("//*[text()='State/Province/Region (Non US/Canada):']", "for", LocateBy.XPath), nonUSRegion, LocateBy.Id);
 			}
 		}
 
@@ -598,7 +598,7 @@
 		{
 			if (!string.IsNullOrEmpty(nonUSRegion))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='State/Province/Region:']", "for", LocateBy.XPath), nonUSRegion, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='State/Province/Region:']", "for", LocateBy.XPath), nonUSRegion, LocateBy.Id);
 			}
 		}
 
@@ -606,7 +606,7 @@
 		{
 			if (!string.IsNullOrEmpty(zip))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Zip (Postal Code):']", "for", LocateBy.XPath), zip, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Zip (Postal Code):']", "for", LocateBy.XPath), zip, LocateBy.Id);
 			}
 		}
 
@@ -614,7 +614,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Home Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Home Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
@@ -622,7 +622,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Home Telephone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Home Telephone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
@@ -630,7 +630,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Work Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Work Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
@@ -638,7 +638,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Work Telephone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Work Telephone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
@@ -646,7 +646,7 @@
 		{
 			if (!string.IsNullOrEmpty(extension))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Extension:']", "for", LocateBy.XPath), extension, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Extension:']", "for", LocateBy.XPath), extension, LocateBy.Id);
 			}
 		}
 
@@ -655,7 +655,7 @@
 		{
 			if (!string.IsNullOrEmpty(fax))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Fax:']", "for", LocateBy.XPath), fax, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Fax:']", "for", LocateBy.XPath), fax, LocateBy.Id);
 			}
 		}
 
@@ -663,7 +663,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Cell Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Cell Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
@@ -671,18 +671,18 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Mobile Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Mobile Phone:']", "for", LocateBy.XPath), phone, LocateBy.Id);
 			}
 		}
 
 		public bool HasPasswordTextbox()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cph_ctlPassword_txtPassword", LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent("ctl00_cph_ctlPassword_txtPassword", LocateBy.Id);
 		}
 
 		public void VerifyHasPersonalInfoPassword(bool expected)
 		{
-			VerifyTool.VerifyValue(expected, WebDriverUtility.DefaultProvider.IsElementDisplay(PasswordEnterPassword, LocateBy.Id), "Need to enter password on PI page: {0}");
+			VerifyTool.VerifyValue(expected, UIUtil.DefaultProvider.IsElementDisplay(PasswordEnterPassword, LocateBy.Id), "Need to enter password on PI page: {0}");
 		}
 
 		[Step]
@@ -690,7 +690,7 @@
 		{
 			if (!string.IsNullOrEmpty(password))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_ctlPassword_txtPassword", password, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_ctlPassword_txtPassword", password, LocateBy.Id);
 			}
 		}
 
@@ -699,18 +699,18 @@
 		{
 			if (!string.IsNullOrEmpty(verifyPassword))
 			{
-				WebDriverUtility.DefaultProvider.Type("ctl00_cph_ctlPassword_txtVerifyPassword", verifyPassword, LocateBy.Id);
+				UIUtil.DefaultProvider.Type("ctl00_cph_ctlPassword_txtVerifyPassword", verifyPassword, LocateBy.Id);
 			}
 		}
 
 		public void TypePersonalInfoDateOfBirth(DateTime dateOfBirth)
 		{
-			WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Date of Birth:']", "for", LocateBy.XPath), this.GetBirthDateString(dateOfBirth, false), LocateBy.Id);
+			UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Date of Birth:']", "for", LocateBy.XPath), this.GetBirthDateString(dateOfBirth, false), LocateBy.Id);
 		}
 
 		public void TypePersonalInfoDateOfBirth_Endurance(DateTime dateOfBirth)
 		{
-			WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Date of Birth:']", "for", LocateBy.XPath), this.GetBirthDateString(dateOfBirth, true), LocateBy.Id);
+			UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Date of Birth:']", "for", LocateBy.XPath), this.GetBirthDateString(dateOfBirth, true), LocateBy.Id);
 		}
 
 		private string GetBirthDateString(DateTime dateOfBirth, bool isEndurance)
@@ -740,7 +740,7 @@
 		{
 			if (gender.HasValue)
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Gender:']", "for", LocateBy.XPath), gender.Value.ToString(), LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWithText(UIUtil.DefaultProvider.GetAttribute("//*[text()='Gender:']", "for", LocateBy.XPath), gender.Value.ToString(), LocateBy.Id);
 			}
 		}
 
@@ -748,7 +748,7 @@
 		{
 			if (!string.IsNullOrEmpty(nationality))
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Nationality:']", "for", LocateBy.XPath), nationality, LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWithText(UIUtil.DefaultProvider.GetAttribute("//*[text()='Nationality:']", "for", LocateBy.XPath), nationality, LocateBy.Id);
 			}
 		}
 
@@ -756,7 +756,7 @@
 		{
 			if (!string.IsNullOrEmpty(taxNumber))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Tax Identification Number:']", "for", LocateBy.XPath), taxNumber, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Tax Identification Number:']", "for", LocateBy.XPath), taxNumber, LocateBy.Id);
 			}
 		}
 
@@ -764,7 +764,7 @@
 		{
 			if (!string.IsNullOrEmpty(ssn))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Social Security Number:']", "for", LocateBy.XPath), ssn, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Social Security Number:']", "for", LocateBy.XPath), ssn, LocateBy.Id);
 			}
 		}
 
@@ -772,7 +772,7 @@
 		{
 			if (!string.IsNullOrEmpty(contactName))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Emergency Contact Name:']", "for", LocateBy.XPath), contactName, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Emergency Contact Name:']", "for", LocateBy.XPath), contactName, LocateBy.Id);
 			}
 		}
 
@@ -780,7 +780,7 @@
 		{
 			if (!string.IsNullOrEmpty(contactPhone))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Emergency Contact Phone:']", "for", LocateBy.XPath), contactPhone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Emergency Contact Phone:']", "for", LocateBy.XPath), contactPhone, LocateBy.Id);
 			}
 		}
 
@@ -788,7 +788,7 @@
 		{
 			if (!string.IsNullOrEmpty(membershipNumber))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Membership Number:']", "for", LocateBy.XPath), membershipNumber, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Membership Number:']", "for", LocateBy.XPath), membershipNumber, LocateBy.Id);
 			}
 		}
 
@@ -796,7 +796,7 @@
 		{
 			if (!string.IsNullOrEmpty(customerNumber))
 			{
-				WebDriverUtility.DefaultProvider.Type(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Customer Number:']", "for", LocateBy.XPath), customerNumber, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(UIUtil.DefaultProvider.GetAttribute("//*[text()='Customer Number:']", "for", LocateBy.XPath), customerNumber, LocateBy.Id);
 			}
 		}
 
@@ -804,18 +804,18 @@
 		{
 			if (!string.IsNullOrEmpty(fileName))
 			{
-				WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("auplPhoto", LocateBy.Id);
-				WebDriverUtility.DefaultProvider.SelectWindowByTitle("File Upload Page");
-				WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+				UIUtil.DefaultProvider.WaitForDisplayAndClick("auplPhoto", LocateBy.Id);
+				UIUtil.DefaultProvider.SelectWindowByTitle("File Upload Page");
+				UIUtil.DefaultProvider.WaitForPageToLoad();
 
 				//WebDriverBase.WebDriverManager.driver.FindElement(By.Id("ctl00_cphBody_ruFilefile0")).SendKeys(
 				//    Fixtures.ConfigurationProvider.XmlConfig.AllSettings.DataPath + fileName);
 
-				WebDriverUtility.DefaultProvider.SendKeys("ctl00_cphBody_ruFilefile0", ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + fileName, LocateBy.Id);
-				WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnSubmit", LocateBy.Id);
-				WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-				WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnCancel", LocateBy.Id);
-				WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+				UIUtil.DefaultProvider.SendKeys("ctl00_cphBody_ruFilefile0", ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + fileName, LocateBy.Id);
+				UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnSubmit", LocateBy.Id);
+				UIUtil.DefaultProvider.WaitForPageToLoad();
+				UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphBody_btnCancel", LocateBy.Id);
+				UIUtil.DefaultProvider.SelectOriginalWindow();
 			}
 		}
 
@@ -823,7 +823,7 @@
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
-				WebDriverUtility.DefaultProvider.Type(RegisterSiteLocator.ContactInfoNameLocator, name, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(RegisterSiteLocator.ContactInfoNameLocator, name, LocateBy.Id);
 			}
 		}
 		
@@ -831,7 +831,7 @@
 		{
 			if (!string.IsNullOrEmpty(phone))
 			{
-				WebDriverUtility.DefaultProvider.Type(RegisterSiteLocator.ContactInfoPhoneLocator, phone, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(RegisterSiteLocator.ContactInfoPhoneLocator, phone, LocateBy.Id);
 			}
 		}
 		
@@ -839,15 +839,15 @@
 		{
 			if (!string.IsNullOrEmpty(email))
 			{
-				WebDriverUtility.DefaultProvider.Type(RegisterSiteLocator.ContactInfoEmailLocator, email, LocateBy.Id);
+				UIUtil.DefaultProvider.Type(RegisterSiteLocator.ContactInfoEmailLocator, email, LocateBy.Id);
 			}
 		}
 
 		[Step]
 		public void EnterPersonalInfoStatus(RegistrationStatus status)
 		{
-			WebDriverUtility.DefaultProvider.SelectWithText(
-				WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='Status:']", "for", LocateBy.XPath),
+			UIUtil.DefaultProvider.SelectWithText(
+				UIUtil.DefaultProvider.GetAttribute("//*[text()='Status:']", "for", LocateBy.XPath),
 				StringEnum.GetStringValue(status), 
 				LocateBy.Id);
 		}
@@ -855,9 +855,9 @@
 		[Step]
 		public void ClickEditRegistrationType()
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_lnkChangeRegType", LocateBy.Id);
-			WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-			WebDriverUtility.DefaultProvider.SelectIFrame(0);
+			UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_lnkChangeRegType", LocateBy.Id);
+			UIUtil.DefaultProvider.WaitForAJAXRequest();
+			UIUtil.DefaultProvider.SelectIFrame(0);
 		}
 
 		[Verify]
@@ -869,26 +869,26 @@
 		[Step]
 		public void ChangeRegistrationType(string typeName)
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//ol[@id='radRegTypes']/li/label[contains(text(),'{0}')]", typeName), LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format("//ol[@id='radRegTypes']/li/label[contains(text(),'{0}')]", typeName), LocateBy.XPath);
 		}
 
 		[Step]
 		public void ConfirmChangingRegistrationType()
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//button[text()='OK']", LocateBy.XPath);
-			WebDriverUtility.DefaultProvider.SwitchToMainContent();
+			UIUtil.DefaultProvider.WaitForDisplayAndClick("//button[text()='OK']", LocateBy.XPath);
+			UIUtil.DefaultProvider.SwitchToMainContent();
 		}
 
 		private List<string> GetRegTypeOptions()
 		{
 			List<string> types = new List<string>();
 			string regTypeLocator = "//ol[@id='radRegTypes']";
-			int count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(regTypeLocator + "/li");
+			int count = UIUtil.DefaultProvider.GetXPathCountByXPath(regTypeLocator + "/li");
 			string regTypeFormat = regTypeLocator + "/li[{0}]/label";
 
 			for (int i = 1; i <= count; i++)
 			{
-				types.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(regTypeFormat, i), LocateBy.XPath).Trim());
+				types.Add(UIUtil.DefaultProvider.GetText(string.Format(regTypeFormat, i), LocateBy.XPath).Trim());
 			}
 
 			return types;
@@ -896,15 +896,15 @@
 
 		private void VerifyPersonalInfoStandardFieldText(string label, string expectedValue)
 		{
-			string actualValue = WebDriverUtility.DefaultProvider.GetValue(WebDriverUtility.DefaultProvider.GetAttribute("//*[text()='" + label + ":']", "for", LocateBy.XPath), LocateBy.Id);
+			string actualValue = UIUtil.DefaultProvider.GetValue(UIUtil.DefaultProvider.GetAttribute("//*[text()='" + label + ":']", "for", LocateBy.XPath), LocateBy.Id);
 			Utilities.VerifyTool.VerifyValue(expectedValue, actualValue, label + " text : {0}");
 		}
 
 		public bool IsPersonalInfoRecalled(string firstName, string middleName)
 		{
-			string actualFirstName = WebDriverUtility.DefaultProvider.GetText("//span[contains(text(),'First Name')]/../following-sibling::*", LocateBy.XPath);
-			string actualMiddleName = WebDriverUtility.DefaultProvider.GetText("//span[contains(text(),'Middle Name')]/../following-sibling::*", LocateBy.XPath);
-			string password = WebDriverUtility.DefaultProvider.GetAttribute("//*[@for='ctl00_cph_ctlPassword_txtPassword']/../following-sibling::*/input", "value", LocateBy.XPath);
+			string actualFirstName = UIUtil.DefaultProvider.GetText("//span[contains(text(),'First Name')]/../following-sibling::*", LocateBy.XPath);
+			string actualMiddleName = UIUtil.DefaultProvider.GetText("//span[contains(text(),'Middle Name')]/../following-sibling::*", LocateBy.XPath);
+			string password = UIUtil.DefaultProvider.GetAttribute("//*[@for='ctl00_cph_ctlPassword_txtPassword']/../following-sibling::*/input", "value", LocateBy.XPath);
 
             bool firstNameIsCorrect = actualFirstName.Contains(firstName);
             bool middleNameIsCorrect = actualMiddleName.Contains(middleName);

@@ -8,45 +8,45 @@
     public class EventStart : Window
     {
         #region WebElements
-        public TextBox Title = new TextBox("ctl00_cph_txtEventsEventTitle", LocateBy.Id);
-        public TextBox Shortcut = new TextBox("ctl00_cph_txtEventsShortcutDescription", LocateBy.Id);
+        public Input Title = new Input("ctl00_cph_txtEventsEventTitle", LocateBy.Id);
+        public Input Shortcut = new Input("ctl00_cph_txtEventsShortcutDescription", LocateBy.Id);
         public MultiChoiceDropdown EventType = new MultiChoiceDropdown("ctl00_cph_ddlChannels", LocateBy.Id);
-        public TextBox EventFee = new TextBox("ctl00_cph_txtEventCost_text", LocateBy.Id);
-        public ButtonOrLink EventFeeAdvanced = new ButtonOrLink("ctl00_cph_mdDefineCost", LocateBy.Id);
+        public Input EventFee = new Input("ctl00_cph_txtEventCost_text", LocateBy.Id);
+        public Clickable EventFeeAdvanced = new Clickable("ctl00_cph_mdDefineCost", LocateBy.Id);
         public EventFeeDefine EventFeeDefine = new EventFeeDefine("dialog");
-        public ButtonOrLink AdvancedSettings = new ButtonOrLink("AdvSetting", LocateBy.Id);
+        public Clickable AdvancedSettings = new Clickable("AdvSetting", LocateBy.Id);
         public EventAdvancedSettings EventAdvancedSettings = new EventAdvancedSettings("dialog");
-        public TextBox StartDate = new TextBox("ctl00_cph_dtpEventsStartDate_dateInput_text", LocateBy.Id);
-        public TextBox StartTime = new TextBox("ctl00_cph_dtpEventsStartTime_dateInput_text", LocateBy.Id);
-        public TextBox EndDate = new TextBox("ctl00_cph_dtpEventsEndDate_dateInput_text", LocateBy.Id);
-        public TextBox EndTime = new TextBox("ctl00_cph_dtpEventsEndTime_dateInput_text", LocateBy.Id);
-        public TextBox LocationName = new TextBox("ctl00_cph_txtEventsLocName", LocateBy.Id);
-        public TextBox LocationPhone = new TextBox("ctl00_cph_txtEventsLocPhone", LocateBy.Id);
+        public Input StartDate = new Input("ctl00_cph_dtpEventsStartDate_dateInput_text", LocateBy.Id);
+        public Input StartTime = new Input("ctl00_cph_dtpEventsStartTime_dateInput_text", LocateBy.Id);
+        public Input EndDate = new Input("ctl00_cph_dtpEventsEndDate_dateInput_text", LocateBy.Id);
+        public Input EndTime = new Input("ctl00_cph_dtpEventsEndTime_dateInput_text", LocateBy.Id);
+        public Input LocationName = new Input("ctl00_cph_txtEventsLocName", LocateBy.Id);
+        public Input LocationPhone = new Input("ctl00_cph_txtEventsLocPhone", LocateBy.Id);
         public MultiChoiceDropdown Country = new MultiChoiceDropdown("ctl00_cph_ddlEventsLocCountry", LocateBy.Id);
-        public TextBox AddressLineOne = new TextBox("ctl00_cph_txtEventsLocAddress1", LocateBy.Id);
-        public TextBox AddressLineTwo = new TextBox("ctl00_cph_txtEventsLocAddress2", LocateBy.Id);
-        public TextBox City = new TextBox("ctl00_cph_txtEventsLocCity", LocateBy.Id);
+        public Input AddressLineOne = new Input("ctl00_cph_txtEventsLocAddress1", LocateBy.Id);
+        public Input AddressLineTwo = new Input("ctl00_cph_txtEventsLocAddress2", LocateBy.Id);
+        public Input City = new Input("ctl00_cph_txtEventsLocCity", LocateBy.Id);
         public MultiChoiceDropdown State = new MultiChoiceDropdown("ctl00_cph_ctl00_cph_ddlRegion_ddlRegion", LocateBy.Id);
-        public TextBox Province = new TextBox("ctl00_cph_ctl00_cph_ddlRegion_txtRegion", LocateBy.Id);
-        public TextBox PostalCode = new TextBox("ctl00_cph_txtEventsLocPostalCode", LocateBy.Id);
-        public ButtonOrLink EditContactInfo = new ButtonOrLink("ctl00_cph_elHomeContactInfo_linkCheckmarkfrmEventTextsHomeContactInfo", LocateBy.Id);
+        public Input Province = new Input("ctl00_cph_ctl00_cph_ddlRegion_txtRegion", LocateBy.Id);
+        public Input PostalCode = new Input("ctl00_cph_txtEventsLocPostalCode", LocateBy.Id);
+        public Clickable EditContactInfo = new Clickable("ctl00_cph_elHomeContactInfo_linkCheckmarkfrmEventTextsHomeContactInfo", LocateBy.Id);
         public HtmlEditor ContactInfo = new HtmlEditor("dialog");
-        public ButtonOrLink AddRegType = new ButtonOrLink("ctl00_cph_grdRegTypes_hlAddNew", LocateBy.Id);
-        public ButtonOrLink EmptyAddRegType = new ButtonOrLink("ctl00_cph_grdRegTypes_lnkEmptyAdd", LocateBy.Id);
+        public Clickable AddRegType = new Clickable("ctl00_cph_grdRegTypes_hlAddNew", LocateBy.Id);
+        public Clickable EmptyAddRegType = new Clickable("ctl00_cph_grdRegTypes_lnkEmptyAdd", LocateBy.Id);
         public RegTypeDefine RegTypeDefine = new RegTypeDefine("dialog");
         public CheckBox RegTypeDisplayOption = new CheckBox("ctl00_cph_chkShowRegTypeOptions", LocateBy.Id);
         public MultiChoiceDropdown RegTypeDisplayFormat = new MultiChoiceDropdown("ctl00_cph_ddlEventsRegTypeTypeID", LocateBy.Id);
         public CheckBox AllGroupReg = new CheckBox("ctl00_cph_chkAllowGroups", LocateBy.Id);
         public CheckBox ForceSameGroupType = new CheckBox("ctl00_cph_chkEventsForceSameRegTypes", LocateBy.Id);
-        public ButtonOrLink AddGroupDiscount = new ButtonOrLink("//*[@id='ctl00_cph_mdDiscountRules']/a", LocateBy.XPath);
+        public Clickable AddGroupDiscount = new Clickable("//*[@id='ctl00_cph_mdDiscountRules']/a", LocateBy.XPath);
         public GroupDiscountDefine GroupDiscountDefine = new GroupDiscountDefine("dialog");
         public CheckBox LimitRegs = new CheckBox("ctl00_cph_chkLimit", LocateBy.Id);
-        public TextBox RegSpaces = new TextBox("ctl00_cph_txtEventCapacity_text", LocateBy.Id);
+        public Input RegSpaces = new Input("ctl00_cph_txtEventCapacity_text", LocateBy.Id);
         public CheckBox EnableWaitlist = new CheckBox("ctl00_cph_chkEnableEventWaitlist", LocateBy.Id);
-        public TextBox EventHome = new TextBox("ctl00_cph_txtHomeLink", LocateBy.Id);
-        public ButtonOrLink StartPageHeader = new ButtonOrLink("//*[text()='Add Start Page Header']", LocateBy.XPath);
+        public Input EventHome = new Input("ctl00_cph_txtHomeLink", LocateBy.Id);
+        public Clickable StartPageHeader = new Clickable("//*[text()='Add Start Page Header']", LocateBy.XPath);
         public HtmlEditor StartPageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink StartPageFooter = new ButtonOrLink("//*[text()='Add Start Page Footer']", LocateBy.XPath);
+        public Clickable StartPageFooter = new Clickable("//*[text()='Add Start Page Footer']", LocateBy.XPath);
         public HtmlEditor StartPageFooterEditor = new HtmlEditor("dialog");
         public Label EventId = new Label("eventId", LocateBy.Name);
         public CheckBox AllowChangeRegType = new CheckBox("ctl00_cph_chkEventsAllowRegTypeUpdates", LocateBy.Id);
@@ -192,13 +192,13 @@
     {
         public int RegTypeId;
         public string RegTypeName;
-        public ButtonOrLink Title;
+        public Clickable Title;
 
         public RegTypeRow(string regTypeName)
         {
             this.RegTypeName = regTypeName;
 
-            this.Title = new ButtonOrLink(
+            this.Title = new Clickable(
                 string.Format("//table[@id='ctl00_cph_grdRegTypes_tblGrid']/tbody/tr/td/a[text()='{0}']", this.RegTypeName),
                 LocateBy.XPath);
 
@@ -218,8 +218,8 @@
             this.Title.WaitForDisplay();
             this.Title.Click();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

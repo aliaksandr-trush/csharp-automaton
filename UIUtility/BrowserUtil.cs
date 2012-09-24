@@ -1,4 +1,4 @@
-﻿namespace RegOnline.RegressionTest.UIUtility
+﻿namespace RegOnline.RegressionTest.UIUtility.BrowserUtil
 {
     using System;
     using System.Collections;
@@ -13,7 +13,7 @@
         IWebDriver GetWebDriver();
     }
 
-    internal class Browser_Firefox : IGetWebDriver
+    internal class Firefox : IGetWebDriver
     {
         // To startup Firefox directly is not stable,
         // because the port number used to start Firefox may be occupied by some other programs.
@@ -82,7 +82,7 @@
         }
     }
 
-    internal class Browser_Chrome : IGetWebDriver
+    internal class Chrome : IGetWebDriver
     {
         private ChromeOptions options = new ChromeOptions();
         private DesiredCapabilities capa = DesiredCapabilities.Chrome();
@@ -146,7 +146,7 @@
         }
     }
 
-    internal class Browser_HtmlUnit : IGetWebDriver
+    internal class HtmlUnit : IGetWebDriver
     {
         private DesiredCapabilities capa = DesiredCapabilities.HtmlUnitWithJavaScript();
         private Uri remoteServerUrl;

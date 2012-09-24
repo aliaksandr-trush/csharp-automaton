@@ -31,7 +31,7 @@
         {
             bool onMerchandise = false;
 
-            if (WebDriverUtility.DefaultProvider.UrlContainsPath("Registrations/Fees/Fees.asp") || WebDriverUtility.DefaultProvider.UrlContainsPath("register/merchandise.aspx"))
+            if (UIUtil.DefaultProvider.UrlContainsPath("Registrations/Fees/Fees.asp") || UIUtil.DefaultProvider.UrlContainsPath("register/merchandise.aspx"))
             {
                 onMerchandise = true;
             }
@@ -42,20 +42,20 @@
         [Step]
         public int GetMerchandiseItemId(string itemName)
         {
-            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetAttribute(string.Format("//label[text()='{0}']", itemName), "for", LocateBy.XPath));
+            return Convert.ToInt32(UIUtil.DefaultProvider.GetAttribute(string.Format("//label[text()='{0}']", itemName), "for", LocateBy.XPath));
         }
         
         [Step]
         public void SelectMerchandise(int quantity)
         {
-            WebDriverUtility.DefaultProvider.VerifyOnPage(OnMerchandisePage(), "Merchandise");
+            UIUtil.DefaultProvider.VerifyOnPage(OnMerchandisePage(), "Merchandise");
 
             List<Fee> merchandise = Fetch_Merchandise(CurrentEventId);
 
             foreach (Fee m in merchandise)
             {
-                if (WebDriverUtility.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Id)
-                    || WebDriverUtility.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Name))
+                if (UIUtil.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Id)
+                    || UIUtil.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Name))
                 {
                     DoSeleniumActionForMerchandise(m, quantity);
                 }
@@ -66,44 +66,44 @@
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseQuantityInRow + "//input";
 
-            WebDriverUtility.DefaultProvider.Type(xPath, quantity.ToString(), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(xPath, quantity.ToString(), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseVariableAmountByName(string merchName, double amount)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseAmountInRow + "//input";
 
-            WebDriverUtility.DefaultProvider.Type(xPath, amount.ToString(), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(xPath, amount.ToString(), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectMerchandiseMultipleChoiceByName(string merchName, string multipleItemName)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseMultipleChoiceInRow;
 
-            WebDriverUtility.DefaultProvider.SelectWithText(xPath, multipleItemName, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectWithText(xPath, multipleItemName, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseDiscountCodeByName(string merchName, string discountCode)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseDiscountCodeInRow + "//input";
 
-            WebDriverUtility.DefaultProvider.Type(xPath, discountCode, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(xPath, discountCode, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseDiscountCodeById(int id, string discountCode)
         {
             string locator_Id = "dc" + id; 
 
-            WebDriverUtility.DefaultProvider.Type(locator_Id, discountCode, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(locator_Id, discountCode, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public bool HasMerchandiseDiscountCodeByName(string merchName)
@@ -112,34 +112,34 @@
 
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseDiscountCodeInRow + "//input";
 
-            hasDC = WebDriverUtility.DefaultProvider.IsElementPresent(xPath, LocateBy.XPath);
+            hasDC = UIUtil.DefaultProvider.IsElementPresent(xPath, LocateBy.XPath);
 
             return hasDC;
         }
 
         public void VerifyMerchandisePageTotal(double expectedTotal)
         {
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             Utility.ThreadSleep(1);
-            string amount = WebDriverUtility.DefaultProvider.GetText("//*[@id='totalAmt']", LocateBy.XPath);
+            string amount = UIUtil.DefaultProvider.GetText("//*[@id='totalAmt']", LocateBy.XPath);
             double actualTotal = ConversionTools.CurrencyToDouble(amount);
 
             if (expectedTotal != actualTotal)
             {
-                WebDriverUtility.DefaultProvider.FailTest("The expected merchandise total of " + expectedTotal + " does not match the actual: " + actualTotal);
+                UIUtil.DefaultProvider.FailTest("The expected merchandise total of " + expectedTotal + " does not match the actual: " + actualTotal);
             }
         }
 
         public void VerifyMerchandisePageShippingFee(double expectedTotal)
         {
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             Utilities.Utility.ThreadSleep(1);
-            string amount = WebDriverUtility.DefaultProvider.GetText("divShippingTotal", LocateBy.Id);
+            string amount = UIUtil.DefaultProvider.GetText("divShippingTotal", LocateBy.Id);
             double actualTotal = ConversionTools.CurrencyToDouble(amount);
 
             if (expectedTotal != actualTotal)
             {
-                WebDriverUtility.DefaultProvider.FailTest("The expected shipping fee of " + expectedTotal + " does not match the actual: " + actualTotal);
+                UIUtil.DefaultProvider.FailTest("The expected shipping fee of " + expectedTotal + " does not match the actual: " + actualTotal);
             }
         }
 
@@ -147,12 +147,12 @@
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseSubTotalInRow;
 
-            return WebDriverUtility.DefaultProvider.GetText(xPath, LocateBy.XPath);
+            return UIUtil.DefaultProvider.GetText(xPath, LocateBy.XPath);
         }
 
         public void VerifyMerchandiseItemPresent(string name, bool present)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", name), present, LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", name), present, LocateBy.XPath);
         }
         #endregion
     }

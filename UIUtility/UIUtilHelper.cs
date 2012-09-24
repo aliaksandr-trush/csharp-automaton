@@ -12,7 +12,7 @@
         TagName
     }
 
-    internal class UIUtilityHelper
+    internal class UIUtilHelper
     {
         internal const string ScreenshotFileNameFormat = "FailureScreenshot_{0}.png";
         internal const string SaveAndNewButtonLocator = "ctl00_btnSaveNew";

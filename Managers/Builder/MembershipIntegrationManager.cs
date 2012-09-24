@@ -42,14 +42,14 @@
         public void ClickIntegrationLink()
         {
             //Click 'Integrate with membership'
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(MembershipIntegrationLinkLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(MembershipIntegrationLinkLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectUpperFrame();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectUpperFrame();
 
             try
             {
-                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(DialogID);
+                UIUtil.DefaultProvider.SelectPopUpFrameByName(DialogID);
             }
             catch
             {
@@ -68,7 +68,7 @@
         {
             try
             {
-                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(DialogID);
+                UIUtil.DefaultProvider.SelectPopUpFrameByName(DialogID);
             }
             catch
             {
@@ -79,38 +79,38 @@
         public void SaveAndStay()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
+            UIUtil.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
         public void SaveAndClose()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
+            UIUtil.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickCancel();
+            UIUtil.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectMembership(int membershipEventID, string membershipEventName)
         {
             // Select a membership
-            WebDriverUtility.DefaultProvider.SelectWithText(MembershipNameDropDownLocator, membershipEventID.ToString() + " - " + membershipEventName, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(MembershipNameDropDownLocator, membershipEventID.ToString() + " - " + membershipEventName, LocateBy.Id);
         }
 
         // Use a boolean variable to decide whether to select all
         public void SetMembershipTypeSelection(bool checkEach, params string[] membershipTypeNames)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(MembershipTypeTableLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(MembershipTypeTableLocator, LocateBy.Id);
 
             foreach (string membershipTypeName in membershipTypeNames)
             {
@@ -118,25 +118,25 @@
                 string membershipTypeCheckboxLocator =
                     string.Format(MembershipTypeCheckboxLocatorFormat, membershipTypeName);
 
-                WebDriverUtility.DefaultProvider.SetCheckbox(membershipTypeCheckboxLocator, checkEach, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(membershipTypeCheckboxLocator, checkEach, LocateBy.XPath);
             }
         }
 
         // Check or uncheck the 'CheckAll' checkbox according to the parameter isCheckAll
         public void SetMembershipTypeSelection(bool checkAll)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(SelectAllMembershipTypeCheckboxLocator, true, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(SelectAllMembershipTypeCheckboxLocator, true, LocateBy.Id);
 
             // Check the checkbox to select all first, uncheck it, then all membership types are unchecked
             if (checkAll == false)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(SelectAllMembershipTypeCheckboxLocator, false, LocateBy.Id);
+                UIUtil.DefaultProvider.SetCheckbox(SelectAllMembershipTypeCheckboxLocator, false, LocateBy.Id);
             }
         }
 
         public void SetMembershipStatusSelection(bool checkEach, params MembershipStatus[] membershipStatuses)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(MembershipStatusTableLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(MembershipStatusTableLocator, LocateBy.Id);
 
             foreach (MembershipStatus membershipStatus in membershipStatuses)
             {
@@ -144,17 +144,17 @@
                 string membershipStatusCheckboxLocator =
                         string.Format(MembershipStatusCheckboxLocatorFormat, membershipStatus.ToString());
 
-                WebDriverUtility.DefaultProvider.SetCheckbox(membershipStatusCheckboxLocator, checkEach, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(membershipStatusCheckboxLocator, checkEach, LocateBy.XPath);
             }
         }
 
         public void SetMembershipStatusSelection(bool checkAll)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(SelectAllMembershipStatusCheckboxLocator, true, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(SelectAllMembershipStatusCheckboxLocator, true, LocateBy.Id);
 
             if (checkAll == false)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(SelectAllMembershipStatusCheckboxLocator, false, LocateBy.Id);
+                UIUtil.DefaultProvider.SetCheckbox(SelectAllMembershipStatusCheckboxLocator, false, LocateBy.Id);
             }
         }
 
@@ -162,21 +162,21 @@
         public void VerifyIntegrationImage(bool isIntegrated)
         {
             // Verify whether the image is present or not
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(MembershipIntegrationLinkLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(MembershipIntegrationLinkLocator, LocateBy.Id);
             
             VerifyTool.VerifyValue(
                 isIntegrated,
-                WebDriverUtility.DefaultProvider.IsElementPresent("//img[@id='ctl00_cphDialog_integratedImage']", LocateBy.XPath),
+                UIUtil.DefaultProvider.IsElementPresent("//img[@id='ctl00_cphDialog_integratedImage']", LocateBy.XPath),
                 "The membership integration image is present : {0}");
         }
 
         public void VerifyMembershipEventIdAndName(int membershipEventID, string membershipEventName)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(MembershipNameDropDownLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(MembershipNameDropDownLocator, LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 membershipEventID.ToString() + " - " + membershipEventName,
-                WebDriverUtility.DefaultProvider.GetSelectedLabel(MembershipNameDropDownLocator, LocateBy.Id),
+                UIUtil.DefaultProvider.GetSelectedLabel(MembershipNameDropDownLocator, LocateBy.Id),
                 "The selected membership event to integrate with : {0}");
         }
 
@@ -187,22 +187,22 @@
                 string membershipTypeCheckboxLocator =
                     string.Format(MembershipTypeCheckboxLocatorFormat, membershipTypeName);
 
-                WebDriverUtility.DefaultProvider.WaitForElementPresent(membershipTypeCheckboxLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForElementPresent(membershipTypeCheckboxLocator, LocateBy.XPath);
 
                 VerifyTool.VerifyValue(
                     isCheckAll,
-                    WebDriverUtility.DefaultProvider.GetValue(membershipTypeCheckboxLocator, LocateBy.XPath) == "on",
+                    UIUtil.DefaultProvider.GetValue(membershipTypeCheckboxLocator, LocateBy.XPath) == "on",
                     "The checkbox for membership type '" + membershipTypeName + "' is checked : {0}");
             }
         }
 
         public void VerifyMembershipTypeSelection(bool isCheckAll)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(SelectAllMembershipTypeCheckboxLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(SelectAllMembershipTypeCheckboxLocator, LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 isCheckAll,
-                WebDriverUtility.DefaultProvider.GetValue(SelectAllMembershipTypeCheckboxLocator, LocateBy.Id) == "on",
+                UIUtil.DefaultProvider.GetValue(SelectAllMembershipTypeCheckboxLocator, LocateBy.Id) == "on",
                 "All membership types are checked : {0}");
         }
 
@@ -213,22 +213,22 @@
                 string membershipStatusCheckboxLocator =
                     string.Format(MembershipStatusCheckboxLocatorFormat, membershipStatus);
 
-                WebDriverUtility.DefaultProvider.WaitForElementPresent(membershipStatusCheckboxLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForElementPresent(membershipStatusCheckboxLocator, LocateBy.XPath);
 
                 VerifyTool.VerifyValue(
                     isCheckAll,
-                    WebDriverUtility.DefaultProvider.GetValue(membershipStatusCheckboxLocator, LocateBy.XPath) == "on",
+                    UIUtil.DefaultProvider.GetValue(membershipStatusCheckboxLocator, LocateBy.XPath) == "on",
                     "The checkbox for membership status '" + membershipStatus + "' is checked : {0}");
             }
         }
 
         public void VerifyMembershipStatusSelection(bool isCheckAll)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(SelectAllMembershipStatusCheckboxLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(SelectAllMembershipStatusCheckboxLocator, LocateBy.Id);
 
             VerifyTool.VerifyValue(
                 isCheckAll,
-                WebDriverUtility.DefaultProvider.GetValue(SelectAllMembershipStatusCheckboxLocator, LocateBy.Id) == "on",
+                UIUtil.DefaultProvider.GetValue(SelectAllMembershipStatusCheckboxLocator, LocateBy.Id) == "on",
                 "All membership statuses are checked : {0}");
         }
         #endregion

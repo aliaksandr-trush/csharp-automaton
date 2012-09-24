@@ -16,7 +16,7 @@
 
         public void SignIn(string userName, string password, EventFolders.Folders folder)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(
+            UIUtil.DefaultProvider.OpenUrl(
                 string.Format("{0}manager/login.aspx", 
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps));
 

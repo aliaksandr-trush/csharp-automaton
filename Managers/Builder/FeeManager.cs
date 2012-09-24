@@ -69,18 +69,18 @@
         // However you can set it to 0.00
         public void SetStandardPrice(double? price)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(this.standardPriceTxtboxLocator, price);
+            UIUtil.DefaultProvider.TypeRADNumericById(this.standardPriceTxtboxLocator, price);
         }
 
         public double GetStandardPrice()
         {
-            return Convert.ToDouble(WebDriverUtility.DefaultProvider.GetValue(this.standardPriceTxtboxLocator, LocateBy.Id));
+            return Convert.ToDouble(UIUtil.DefaultProvider.GetValue(this.standardPriceTxtboxLocator, LocateBy.Id));
         }
 
         protected void ClickOptionLink()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.optionLinkLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(this.optionLinkLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             System.Threading.Thread.Sleep(3000);
         }
 
@@ -88,7 +88,7 @@
         public void ExpandOption()
         {
             // Some Expand options - like with pricing - do an AJAX thing. So it might not even have rendered to HTML yet.
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(this.pricingScheduleDIVLocator, LocateBy.Id) || WebDriverUtility.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsElementPresent(this.pricingScheduleDIVLocator, LocateBy.Id) || UIUtil.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
             {
                 this.ClickOptionLink();
             }
@@ -96,7 +96,7 @@
 
         public void CollapseOption()
         {
-            if (!WebDriverUtility.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsElementHidden(this.pricingScheduleDIVLocator, LocateBy.Id))
             {
                 this.ClickOptionLink();
             }

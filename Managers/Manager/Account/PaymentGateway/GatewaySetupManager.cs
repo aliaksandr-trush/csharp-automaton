@@ -213,7 +213,7 @@
         /// <param name="errorMessage"></param>
         public void VerifyErrorMessage(string errorMessage)
         {
-            string errorText = WebDriverUtility.DefaultProvider.GetText("//div[@id='bsMerchantGatewaySetup_ADV']/div/div[2]", LocateBy.XPath);
+            string errorText = UIUtil.DefaultProvider.GetText("//div[@id='bsMerchantGatewaySetup_ADV']/div/div[2]", LocateBy.XPath);
             Assert.AreEqual(errorMessage, errorText);
         }
         #endregion
@@ -238,7 +238,7 @@
                     locator = GetLocator(PaymentGatewayManager.SetupFields.CertP12Upload, LocatorType.Edit);
                 }
 
-                Assert.IsFalse(WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.XPath));
+                Assert.IsFalse(UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.XPath));
             }
             else
             {

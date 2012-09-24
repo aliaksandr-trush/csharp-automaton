@@ -33,7 +33,7 @@
 
         public void SelectThisFrame()
         {
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Locator_Name_Frame);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(Locator_Name_Frame);
         }
 
         public void ConfigureSelfRegistrationKioskOptions(
@@ -47,14 +47,14 @@
             bool allowGroupCheckIn, 
             bool allowBadgePrinting)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.BarcodeScanningSearchByRegId, enableBarcodeSearchByRegId, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.RequireRegistrantsToBePaidInFull, paidInFull, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.BarcodeScanningSearchByRegId, enableBarcodeSearchByRegId, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.RequireRegistrantsToBePaidInFull, paidInFull, LocateBy.Id);
 
             if (paidInFull)
             {
                 if (allowCC)
                 {
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_SelfRegKioskConfig.AllowCCPayments, LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(Locator_SelfRegKioskConfig.AllowCCPayments, LocateBy.Id);
                 }
                 else
                 {
@@ -62,11 +62,11 @@
                 }
             }
 
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.RequirePassword, requirePassword, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowOnSiteRegistrations, allowOnSiteRegs, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowUpdates, allowUpdates, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowGroupCheckIn, allowGroupCheckIn, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowPrintBadge, allowBadgePrinting, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.RequirePassword, requirePassword, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowOnSiteRegistrations, allowOnSiteRegs, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowUpdates, allowUpdates, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowGroupCheckIn, allowGroupCheckIn, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(Locator_SelfRegKioskConfig.AllowPrintBadge, allowBadgePrinting, LocateBy.Id);
 
             if (allowBadgePrinting)
             {
@@ -79,71 +79,71 @@
             RADContentEditorHelper radContentEditorHelper = new RADContentEditorHelper();
             string locator_Name_ContentEditorFrame = "dialog2";
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_SelfRegKioskConfig.DisplayMessage, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(EditPaidInFullMessageLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_ContentEditorFrame);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(Locator_SelfRegKioskConfig.DisplayMessage, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(EditPaidInFullMessageLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(locator_Name_ContentEditorFrame);
             radContentEditorHelper.SwitchMode(RADContentEditorHelper.Mode.HTML);
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
             radContentEditorHelper.TypeHTMLTextarea(message);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(locator_Name_ContentEditorFrame);
-            WebDriverUtility.DefaultProvider.SaveAndCloseContentEditorFrame();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(locator_Name_ContentEditorFrame);
+            UIUtil.DefaultProvider.SaveAndCloseContentEditorFrame();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             this.SelectThisFrame();
         }
 
         public void AddKioskWelcomeMessage(string message)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddWelcomeMessage, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.TypeContentEditorOnFrame(message);
-            WebDriverUtility.DefaultProvider.SaveAndCloseContentEditorFrame();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddWelcomeMessage, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.TypeContentEditorOnFrame(message);
+            UIUtil.DefaultProvider.SaveAndCloseContentEditorFrame();
         }
 
         public void AddKioskConfirmationMessage(string message)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddConfirmationMessage, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.TypeContentEditorOnFrame(message);
-            WebDriverUtility.DefaultProvider.SaveAndCloseContentEditorFrame();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddConfirmationMessage, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.TypeContentEditorOnFrame(message);
+            UIUtil.DefaultProvider.SaveAndCloseContentEditorFrame();
         }
 
         public void EditKioskTimeOut(int timeout)
         {
-            WebDriverUtility.DefaultProvider.Type(KioskTimeOutPeriod, timeout, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(KioskTimeOutPeriod, timeout, LocateBy.Id);
         }
 
         public void ClickLaunchSelfRegistrationKiosk()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(LaunchKiosk, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(LaunchKiosk, LocateBy.Id);
             Utility.ThreadSleep(5);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             AllowCookies();
         }
 
         public void SaveAndCloseKioskConfig()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveAndClose, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveAndClose, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void CancelKioskConfig()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CancelButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(CancelButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectFirstBadgeOption()
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(BadgeDropDown, WebDriverUtility.DefaultProvider.GetText("//option[2]", LocateBy.XPath), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(BadgeDropDown, UIUtil.DefaultProvider.GetText("//option[2]", LocateBy.XPath), LocateBy.Id);
         }
     }
 }

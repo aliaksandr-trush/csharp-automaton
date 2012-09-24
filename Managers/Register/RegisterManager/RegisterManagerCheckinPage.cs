@@ -58,11 +58,11 @@
 			{
 				if (expected)
 				{
-					WebDriverUtility.DefaultProvider.FailTest("NOT on checkin page!");
+					UIUtil.DefaultProvider.FailTest("NOT on checkin page!");
 				}
 				else
 				{
-					WebDriverUtility.DefaultProvider.FailTest("ON checkin page!");
+					UIUtil.DefaultProvider.FailTest("ON checkin page!");
 				}
 			}
 		}
@@ -70,20 +70,20 @@
 		[Step]
 		public bool OnCheckinPage()
 		{
-			bool onCheckin = WebDriverUtility.DefaultProvider.UrlContainsPath("checkin.aspx");
+			bool onCheckin = UIUtil.DefaultProvider.UrlContainsPath("checkin.aspx");
 			return onCheckin;
 		}
 
 		public bool OnEventWebsite()
 		{
-			bool onEventWebsite = WebDriverUtility.DefaultProvider.UrlContainsPath("/builder/site/Default.aspx");
+			bool onEventWebsite = UIUtil.DefaultProvider.UrlContainsPath("/builder/site/Default.aspx");
 			return onEventWebsite; 
 		}
 
 		public void ClickRegisterNowButton()
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RegisterNow, LocateBy.Id);
-			WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(RegisterNow, LocateBy.Id);
+			UIUtil.DefaultProvider.WaitForPageToLoad();
 		}
 		[Step]
 		public string ComposeUniqueEmailAddress()
@@ -116,7 +116,7 @@
 			bool hasEmail = false;
 			Assert.IsTrue(OnCheckinPage());
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEmailAddress, LocateBy.Id))
+			if (UIUtil.DefaultProvider.IsElementPresent(CheckinEmailAddress, LocateBy.Id))
 			{
 				hasEmail = true;
 			}
@@ -128,7 +128,7 @@
 		{
 			bool hasEmail = false;
 			
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEmailAddress, LocateBy.Id))
+			if (UIUtil.DefaultProvider.IsElementPresent(CheckinEmailAddress, LocateBy.Id))
 			{
 				hasEmail = true;
 			}
@@ -141,7 +141,7 @@
 			bool hasMemId = false;
 			Assert.IsTrue(OnCheckinPage());
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(CheckinMembershipId, LocateBy.XPath))
+			if (UIUtil.DefaultProvider.IsElementPresent(CheckinMembershipId, LocateBy.XPath))
 			{
 				hasMemId = true;
 			}
@@ -157,7 +157,7 @@
 			CurrentTicks = System.DateTime.Now.Ticks;
 			this.CurrentEmail = email;
 
-			if (WebDriverUtility.DefaultProvider.IsElementDisplay(CheckinEmailAddressVerify, LocateBy.XPath))
+			if (UIUtil.DefaultProvider.IsElementDisplay(CheckinEmailAddressVerify, LocateBy.XPath))
 			{
 				EnterVerifyEmailAddress(email);
 			}
@@ -166,18 +166,18 @@
 		[Step]
 		public void EnterEmailAddress(string email)
 		{
-			WebDriverUtility.DefaultProvider.Type(CheckinEmailAddress, email, LocateBy.Id);
+			UIUtil.DefaultProvider.Type(CheckinEmailAddress, email, LocateBy.Id);
 		}
 
 		public bool IsVerifyEmailAddressPresent()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEmailAddressVerify, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(CheckinEmailAddressVerify, LocateBy.XPath);
 		}
 
 		[Step]
 		public void EnterVerifyEmailAddress(string email)
 		{
-			WebDriverUtility.DefaultProvider.Type(CheckinEmailAddressVerify, email, LocateBy.XPath);
+			UIUtil.DefaultProvider.Type(CheckinEmailAddressVerify, email, LocateBy.XPath);
 		}
 
 		[Step]
@@ -189,12 +189,12 @@
 		[Step]
 		public void TypeLoginPagePassword(string password)
 		{
-			WebDriverUtility.DefaultProvider.Type(PasswordTextboxOnLoginPage, password, LocateBy.Id);
+			UIUtil.DefaultProvider.Type(PasswordTextboxOnLoginPage, password, LocateBy.Id);
 		}
 
 		public void CheckinWithMembershipId(string memId)
 		{
-			WebDriverUtility.DefaultProvider.Type(CheckinMembershipId, memId, LocateBy.XPath);
+			UIUtil.DefaultProvider.Type(CheckinMembershipId, memId, LocateBy.XPath);
 			CurrentEmail = string.Empty;
 		}
 
@@ -203,8 +203,8 @@
 		{
 			if (OnLoginPage())
 			{
-				WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(StartNewRegistration, LocateBy.Id);
-				WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+				UIUtil.DefaultProvider.WaitForDisplayAndClick(StartNewRegistration, LocateBy.Id);
+				UIUtil.DefaultProvider.WaitForPageToLoad();
 			}
 
 			AllowCookies();
@@ -212,34 +212,34 @@
 
 		public bool HasEventDiscountCodeField()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEventFeeDiscountCode, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(CheckinEventFeeDiscountCode, LocateBy.XPath);
 		}
 
 		public void EnterEventDiscoutCode(string discountCode)
 		{
-			WebDriverUtility.DefaultProvider.Type(CheckinEventFeeDiscountCode, discountCode, LocateBy.XPath);
+			UIUtil.DefaultProvider.Type(CheckinEventFeeDiscountCode, discountCode, LocateBy.XPath);
 		}
 
 		public bool IsCodeRequired()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent("//img[@alt='Required']/..[following-sibling::*[text()='Enter a discount code:']]", LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent("//img[@alt='Required']/..[following-sibling::*[text()='Enter a discount code:']]", LocateBy.XPath);
 		}
 
 		public void TypeInvitationCode(string invitationCode)
 		{
-			WebDriverUtility.DefaultProvider.Type(CheckinInvitationCode, invitationCode, LocateBy.XPath);
+			UIUtil.DefaultProvider.Type(CheckinInvitationCode, invitationCode, LocateBy.XPath);
 		}
 
 		[Step]
 		public void ClickCheckinAlreadyRegistered()
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CheckinAlreadyRegistered, LocateBy.Id);
-			WebDriverUtility.DefaultProvider.WaitForPageToLoad(TimeSpan.FromMinutes(1));
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(CheckinAlreadyRegistered, LocateBy.Id);
+			UIUtil.DefaultProvider.WaitForPageToLoad(TimeSpan.FromMinutes(1));
 		}
 
 		public bool HasCheckinErrorMessage()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(CheckinErrorMessageLocator, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(CheckinErrorMessageLocator, LocateBy.XPath);
 		}
 
 		public void VerifyHasCheckinErrorMessage(bool expected)
@@ -250,11 +250,11 @@
 			{
 				if (expected)
 				{
-					WebDriverUtility.DefaultProvider.FailTest("There is no checkin error message!");
+					UIUtil.DefaultProvider.FailTest("There is no checkin error message!");
 				}
 				else
 				{
-					WebDriverUtility.DefaultProvider.FailTest(string.Format("Got checkin error message: {0}", this.GetCheckinErrorMessage()));
+					UIUtil.DefaultProvider.FailTest(string.Format("Got checkin error message: {0}", this.GetCheckinErrorMessage()));
 				}
 			}
 		}
@@ -267,38 +267,38 @@
 		[Verify]
 		public void VerifyForgotYourPasswordLinkVisibility(bool isVisible)
 		{
-			VerifyTool.VerifyValue(isVisible, WebDriverUtility.DefaultProvider.IsElementDisplay(ForgetYourPasswordLinkLocator, LocateBy.XPath), "Has Forgot Your Password Link: {0}");
+			VerifyTool.VerifyValue(isVisible, UIUtil.DefaultProvider.IsElementDisplay(ForgetYourPasswordLinkLocator, LocateBy.XPath), "Has Forgot Your Password Link: {0}");
 		}
 
 		public void VerifyLoginPageForgotYourPasswordLinkURL(string expURL)
 		{
-			VerifyTool.VerifyValue(expURL, WebDriverUtility.DefaultProvider.GetAttribute(ForgetYourPasswordLinkLocator, "href", LocateBy.XPath), "Forgot Your Password Link URL: {0}");
+			VerifyTool.VerifyValue(expURL, UIUtil.DefaultProvider.GetAttribute(ForgetYourPasswordLinkLocator, "href", LocateBy.XPath), "Forgot Your Password Link URL: {0}");
 		}
 
 		public void ClickLoginPageForgotYourPasswordLinkAndVerify(string expectedURL)
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ForgetYourPasswordLinkLocator, LocateBy.XPath);
-			WebDriverUtility.DefaultProvider.SelectTopWindow();
-			WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-			VerifyTool.VerifyValue(expectedURL, WebDriverUtility.DefaultProvider.GetLocation(), "Opened window's URL: {0}");
-			WebDriverUtility.DefaultProvider.ClosePopUpWindow();
-			WebDriverUtility.DefaultProvider.SelectTopWindow();
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(ForgetYourPasswordLinkLocator, LocateBy.XPath);
+			UIUtil.DefaultProvider.SelectTopWindow();
+			UIUtil.DefaultProvider.WaitForPageToLoad();
+			VerifyTool.VerifyValue(expectedURL, UIUtil.DefaultProvider.GetLocation(), "Opened window's URL: {0}");
+			UIUtil.DefaultProvider.ClosePopUpWindow();
+			UIUtil.DefaultProvider.SelectTopWindow();
 		}
 
 		public string ClickLoginPageForgotYourPasswordLinkAndGetEmail()
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ForgetYourPasswordLinkLocator, LocateBy.XPath);
-			WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-			WebDriverUtility.DefaultProvider.SelectIFrame(0);
-			string email = WebDriverUtility.DefaultProvider.GetAttribute(CheckinEmailAddress, "value", LocateBy.Id);
-			WebDriverUtility.DefaultProvider.Click("//*[@id='ctl00_cph_wrpEmailMembershipID']/div/a", LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(ForgetYourPasswordLinkLocator, LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForPageToLoad();
+			UIUtil.DefaultProvider.SelectIFrame(0);
+			string email = UIUtil.DefaultProvider.GetAttribute(CheckinEmailAddress, "value", LocateBy.Id);
+			UIUtil.DefaultProvider.Click("//*[@id='ctl00_cph_wrpEmailMembershipID']/div/a", LocateBy.XPath);
 
 			return email;
 		}
 
 		public string GetCheckinErrorMessage()
 		{
-			return WebDriverUtility.DefaultProvider.GetText(CheckinErrorMessageLocator, LocateBy.XPath);
+			return UIUtil.DefaultProvider.GetText(CheckinErrorMessageLocator, LocateBy.XPath);
 		}
 
 		public void VerifyEventLimitReachedMessage(string expMessage)
@@ -314,33 +314,33 @@
 
 		public bool HasEventLimitReachedMessage()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
 		}
 
 		public bool IsAddedToWaitlist()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(AddedToWaitlistOfEvent, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(AddedToWaitlistOfEvent, LocateBy.XPath);
 		}
 
 		public string GetEventLimitReachedMessage()
 		{
-			WebDriverUtility.DefaultProvider.WaitForElementPresent(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForElementPresent(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(CheckinEventLimitReachedMessageForRegTypeDirectLinkLocator, LocateBy.XPath))
+			if (UIUtil.DefaultProvider.IsElementPresent(CheckinEventLimitReachedMessageForRegTypeDirectLinkLocator, LocateBy.XPath))
 			{
-				return WebDriverUtility.DefaultProvider.GetText(CheckinEventLimitReachedMessageForRegTypeDirectLinkLocator, LocateBy.XPath);
+				return UIUtil.DefaultProvider.GetText(CheckinEventLimitReachedMessageForRegTypeDirectLinkLocator, LocateBy.XPath);
 			}
 			else
 			{
-				return WebDriverUtility.DefaultProvider.GetText(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
+				return UIUtil.DefaultProvider.GetText(CheckinEventLimitReachedMessageLocator, LocateBy.XPath);
 			}
 		}
 
 		public bool VerifyEventIsArchivedStatus()
 		{
-			WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+			UIUtil.DefaultProvider.WaitForPageToLoad();
 
-			if (ArchivedMessageOne.Equals(WebDriverUtility.DefaultProvider.GetText("//p[2]", LocateBy.XPath)) && ArchivedMessageTwo.Equals(WebDriverUtility.DefaultProvider.GetText("//p[4]", LocateBy.XPath)))
+			if (ArchivedMessageOne.Equals(UIUtil.DefaultProvider.GetText("//p[2]", LocateBy.XPath)) && ArchivedMessageTwo.Equals(UIUtil.DefaultProvider.GetText("//p[4]", LocateBy.XPath)))
 			{
 				return true;
 			}
@@ -354,7 +354,7 @@
 		#region Checkin RegTypes
 		public bool IsRegTypeAvailable(int regTypeID)
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(this.Compose_XPath_CheckinRegTypeGroupSizeMessageLocator(regTypeID), LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(this.Compose_XPath_CheckinRegTypeGroupSizeMessageLocator(regTypeID), LocateBy.XPath);
 		}
 
 		public void VerifyRegTypeAvailability(int regTypeID, bool available)
@@ -370,12 +370,12 @@
 
 		public bool HasRegTypeList()
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(CheckinRegTypesListLocator, LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent(CheckinRegTypesListLocator, LocateBy.Id);
 		}
 
 		public bool HasRegType(int regTypeID)
 		{
-			return WebDriverUtility.DefaultProvider.IsElementPresent(this.ComposeRegTypeInputLocator(regTypeID), LocateBy.Id);
+			return UIUtil.DefaultProvider.IsElementPresent(this.ComposeRegTypeInputLocator(regTypeID), LocateBy.Id);
 		}
 
 		public string ComposeRegTypeInputLocator(int regTypeID)
@@ -390,7 +390,7 @@
 
 		public string GetRegTypeLabel(int regTypeID)
 		{
-			return WebDriverUtility.DefaultProvider.GetText(this.ComposeRegTypeLabelLocator(regTypeID), LocateBy.XPath);
+			return UIUtil.DefaultProvider.GetText(this.ComposeRegTypeLabelLocator(regTypeID), LocateBy.XPath);
 		}
 
 		public int CountRegTypes()
@@ -399,11 +399,11 @@
 
 			if (HasRegTypeRadioButton())
 			{
-				count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(CheckinRegTypeRadioButton + CheckinRegTypeRadioButtonRows);
+				count = UIUtil.DefaultProvider.GetXPathCountByXPath(CheckinRegTypeRadioButton + CheckinRegTypeRadioButtonRows);
 			}
 			else if (HasRegTypeDropDown())
 			{
-				count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(CheckinRegTypeDropDown + "/option") - 1;
+				count = UIUtil.DefaultProvider.GetXPathCountByXPath(CheckinRegTypeDropDown + "/option") - 1;
 			}
 
 			return count;
@@ -411,7 +411,7 @@
 
 		public void SelectRegTypeByIndex(int index)
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(CheckinRegTypeRadioButtonRowsSelector, index), LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(CheckinRegTypeRadioButtonRowsSelector, index), LocateBy.XPath);
 		}
 
 		public void VerifyHasRegTypes(bool hasRegTypes)
@@ -438,7 +438,7 @@
 		{
 			bool hasRadioButton = false;
 
-			hasRadioButton = WebDriverUtility.DefaultProvider.IsElementPresent(CheckinRegTypeRadioButton, LocateBy.XPath);
+			hasRadioButton = UIUtil.DefaultProvider.IsElementPresent(CheckinRegTypeRadioButton, LocateBy.XPath);
 
 			return hasRadioButton;
 		}
@@ -447,7 +447,7 @@
 		{
 			bool hasDropDown = false;
 
-			hasDropDown = WebDriverUtility.DefaultProvider.IsElementPresent(CheckinRegTypeDropDown, LocateBy.XPath);
+			hasDropDown = UIUtil.DefaultProvider.IsElementPresent(CheckinRegTypeDropDown, LocateBy.XPath);
 
 			return hasDropDown;
 		}
@@ -460,13 +460,13 @@
 
 			string locator = string.Format(RegisterSiteLocator.CheckinRegTypeLabelFormat, regTypeName);
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.XPath))
+			if (UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.XPath))
 			{
-				WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
+				UIUtil.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
 			}
 			else
 			{
-				WebDriverUtility.DefaultProvider.FailTest("RegType '" + regTypeName + "' not found!");
+				UIUtil.DefaultProvider.FailTest("RegType '" + regTypeName + "' not found!");
 			}
 		}
 
@@ -474,9 +474,9 @@
 		{
 			string locator = string.Format(CheckinRegTypeDropDown + CheckinRegTypeDropDownFindByName, regTypeName);
 
-			if (WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.XPath))
+			if (UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.XPath))
 			{
-				WebDriverUtility.DefaultProvider.SelectWithText(CheckinRegTypeDropDown, regTypeName, LocateBy.XPath);
+				UIUtil.DefaultProvider.SelectWithText(CheckinRegTypeDropDown, regTypeName, LocateBy.XPath);
 			}
 			else
 			{
@@ -499,14 +499,14 @@
 
 		public void VerifyRegTypeDetails(string regTypeName, string details)
 		{
-			WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(RegTypeDetailsLocator, regTypeName), LocateBy.XPath);
+			UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(RegTypeDetailsLocator, regTypeName), LocateBy.XPath);
 			
-			string detailsString = WebDriverUtility.DefaultProvider.GetText(
+			string detailsString = UIUtil.DefaultProvider.GetText(
 				"//*[@class='tooltipWrapper tooltipLightbox ui-dialog-content ui-widget-content'][last()]//*[@class='tooltipWrapperContent']", 
 				LocateBy.XPath);
 
 			Assert.True(detailsString.Contains(details));
-			WebDriverUtility.DefaultProvider.Click("//*[text()='close']", LocateBy.XPath);
+			UIUtil.DefaultProvider.Click("//*[text()='close']", LocateBy.XPath);
 		}
 
 		public void VerifyCountOfRegTypes(int expectQuantity)
@@ -538,14 +538,14 @@
 		{
 			string locator = this.Compose_XPath_CheckinRegTypeGroupSizeMessageLocator(regType);
 
-			return WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.XPath);
 		}
 
 		public string GetCheckinRegTypeGroupSizeMessage(string regType)
 		{
 			string locator = this.Compose_XPath_CheckinRegTypeGroupSizeMessageLocator(regType);
 
-			return WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath);
+			return UIUtil.DefaultProvider.GetText(locator, LocateBy.XPath);
 		}
 
 		public void VerifyCheckinRegTypeGroupSizeMessage(string regType, int? min, int? max)
@@ -589,7 +589,7 @@
 
 		public bool IsRegTypeEditable(string regTypeName)
 		{
-			return WebDriverUtility.DefaultProvider.IsEditable(string.Format(LocatorFormat_RegtypeRadioItem, regTypeName), LocateBy.XPath);
+			return UIUtil.DefaultProvider.IsEditable(string.Format(LocatorFormat_RegtypeRadioItem, regTypeName), LocateBy.XPath);
 		}
 		#endregion
 	}

@@ -79,14 +79,14 @@
 
         public void KioskSearch(string emailNameOrRegId)
         {
-            WebDriverUtility.DefaultProvider.Type(SearchTextBox, emailNameOrRegId, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SearchEnterButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(SearchTextBox, emailNameOrRegId, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SearchEnterButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskEnterUserId(string userId)
         {
-            WebDriverUtility.DefaultProvider.Type(UserIdField, userId, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(UserIdField, userId, LocateBy.Id);
         }
 
         public void KioskEnterPassword()
@@ -96,33 +96,33 @@
 
         public void KioskEnterPassword(string password)
         {
-            WebDriverUtility.DefaultProvider.Type(PasswordField, password, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(PassowrdEnterButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(PasswordField, password, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(PassowrdEnterButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskClickCheckinReg()
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(ProfileInfo, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CheckIn, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForElementPresent(ProfileInfo, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(CheckIn, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
        
         public void KioskUnselectGroupMemberToCheckin(string email)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(GroupCheckInCheckBoxEmail, email), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(GroupCheckInCheckBoxEmail, email), LocateBy.XPath);
         }
 
         public void KioskEditGroupMemberInfo(string email)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(GroupMemberEditEmail, email), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(GroupMemberEditEmail, email), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskClickChangeIndividualRegistrationInfo(string email)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(UpdateIndividualRegistration, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(UpdateIndividualRegistration, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskUpdateRegistrationInfo(KioskPersonalInfo itemToUpdate, string newInfo)
@@ -133,130 +133,130 @@
             {
                 case KioskPersonalInfo.FirstName:
                     id = "ctl00_cph_txtProfileFirstName";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.LastName:
                     id = "ctl00_cph_txtProfileLastName";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.Address1:
                     id = "ctl00_cph_txtProfileAddress";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.City:
                     id = "ctl00_cph_txtProfileCity";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.State:
                     id = "ctl00_cph_ddRegion";
-                    WebDriverUtility.DefaultProvider.SelectWithText(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithText(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.Zip:
                     id = "ctl00_cph_txtProfilePostalCode";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
                 case KioskPersonalInfo.Company:
                     id = "ctl00_cph_txtProfileCompany";
-                    WebDriverUtility.DefaultProvider.Type(id, newInfo, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(id, newInfo, LocateBy.Id);
                     break;
             }
         }
 
         public void KioskEnterCCInfoToPayInFull()
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(StringEnum.GetStringValue(KioskCCLocators.CCNumberLocator), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(StringEnum.GetStringValue(KioskCCLocators.CCNumberLocator), LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCNumberLocator), PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCNumberLocator), PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCCVVLocator), PaymentManager.DefaultPaymentInfo.CVV, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCCVVLocator), PaymentManager.DefaultPaymentInfo.CVV, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCExpMonthLocator), PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCExpMonthLocator), PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCExpYearLocator), PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCExpYearLocator), PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCNameLocator), PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCNameLocator), PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCAddressLocator), PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCAddressLocator), PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCCityLocator), PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCCityLocator), PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCStateLocator), PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StringEnum.GetStringValue(KioskCCLocators.CCStateLocator), PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCCountryLocator), PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(StringEnum.GetStringValue(KioskCCLocators.CCCountryLocator), PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
         }
 
         public void KioskClickMakePaymentButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(MakePaymentButton, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(MakePaymentButton, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskStartOverButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(StartOverButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(StartOverButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskSaveUpdate()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveUpdateLink, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveUpdateLink, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskExitCheckIn()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ExitButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ExitButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskClickNewSearch()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(NewSearchButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(NewSearchButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void KioskVerifyBadgeGenerated()
         {
-            Assert.True(WebDriverUtility.DefaultProvider.IsElementPresent(BadgeLoadedLocator, LocateBy.XPath));
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            Assert.True(UIUtil.DefaultProvider.IsElementPresent(BadgeLoadedLocator, LocateBy.XPath));
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         public void ClickPrintBadge()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator_Id_PrintBadge, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(Locator_Id_PrintBadge, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
-            if (WebDriverUtility.DefaultProvider.IsAlertPresent())
+            if (UIUtil.DefaultProvider.IsAlertPresent())
             {
-                WebDriverUtility.DefaultProvider.GetConfirmation();
+                UIUtil.DefaultProvider.GetConfirmation();
             }
         }
 
         public void FinishCheckin()
         {
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
-            if (!WebDriverUtility.DefaultProvider.IsElementHidden(KioskFinishButton, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsElementHidden(KioskFinishButton, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(KioskFinishButton, LocateBy.Id);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(KioskFinishButton, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
             else
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(KioskFinishButtonTwo, LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(KioskFinishButtonTwo, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
         }
 
         public void KioskStartOnsiteRegistration()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RegisterOnSiteLink, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(RegisterOnSiteLink, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public string GetPaidInFullMessage()
         {
-            return WebDriverUtility.DefaultProvider.GetText(MustBePaidInFullMessage, LocateBy.XPath);
+            return UIUtil.DefaultProvider.GetText(MustBePaidInFullMessage, LocateBy.XPath);
         }
     }
 }

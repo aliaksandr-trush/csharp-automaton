@@ -18,7 +18,7 @@
         {
             try
             {
-                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
+                UIUtil.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -29,9 +29,9 @@
         public void SaveAndNew()
         {
             this.SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndNew();
+            UIUtil.DefaultProvider.ClickSaveAndNew();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public abstract void SaveAndClose();
@@ -46,27 +46,27 @@
 
         public void SetNameOnForm(string name)
         {
-            WebDriverUtility.DefaultProvider.Type(NameOnFormTxtboxLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(NameOnFormTxtboxLocator, name, LocateBy.Id);
         }
 
         public void SetNameOnReport(string name)
         {
-            WebDriverUtility.DefaultProvider.Type(NameOnReportTxtboxLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(NameOnReportTxtboxLocator, name, LocateBy.Id);
         }
 
         public void SetLimit(int? limit)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(LimitTxtboxLocator, limit);
+            UIUtil.DefaultProvider.TypeRADNumericById(LimitTxtboxLocator, limit);
         }
 
         public void SetLimitPerGroup(int? limit)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(PerGroupLimitTxtboxLocator, limit);
+            UIUtil.DefaultProvider.TypeRADNumericById(PerGroupLimitTxtboxLocator, limit);
         }
 
         public void SetVisibility(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(VisibilityCheckboxLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(VisibilityCheckboxLocator, check, LocateBy.Id);
         }
     }
 }

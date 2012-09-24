@@ -129,7 +129,7 @@
             LoginAndGoToRegressionFolder();
             BackendMgr.OpenAttendeeInfoURL(eventSessionId, regId);
             BackendMgr.OpenPaymentMethod();
-            Assert.True(WebDriverUtility.DefaultProvider.IsElementPresent("//select[@id='creditCardType'][@disabled]", LocateBy.XPath));
+            Assert.True(UIUtil.DefaultProvider.IsElementPresent("//select[@id='creditCardType'][@disabled]", LocateBy.XPath));
 
             ////this.PerformBackendCharge();
 
@@ -971,8 +971,8 @@
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.ClosePopUpWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         // verifies pertinant data in transaction fees report
@@ -982,8 +982,8 @@
             ManagerSiteMgr.DashboardMgr.OpenCommonReport(ReportManager.CommonReportType.TransactionFees);
             ReportMgr.ExpandTransactionFeesReportRow(regId);
             ReportMgr.VerifyExpandedTransactionFeeRowData(regId, expectedData);
-            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.ClosePopUpWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         // Verifies all pertinant data and rows in the transactions report
@@ -1003,8 +1003,8 @@
             }
 
             ReportMgr.VerifyTransactionsReportData(regId, expectedData);
-            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.ClosePopUpWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         // Method to charge somone on the attendee info page

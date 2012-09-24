@@ -65,8 +65,8 @@
 
             // test row count
             ReportMgr.VerifyAttendeeReportRowCount(this.eventID);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -93,8 +93,8 @@
 
             // verify results
             ReportMgr.VerifyReportFilteredByRegType(this.regTypeIDs[regType]);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -151,8 +151,8 @@
 
             //verify results
             ReportMgr.VerifyReportFilteredByRegStatus(this.eventID, 9);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -173,11 +173,11 @@
             ReportMgr.ClickSmartLinkButton();
             string smartLinkReportUrl = ReportMgr.EnableSmartLinkAccess(true);
             ReportMgr.SelectReportPopupWindow();
-            WebDriverUtility.DefaultProvider.OpenUrl(smartLinkReportUrl);
+            UIUtil.DefaultProvider.OpenUrl(smartLinkReportUrl);
             ReportMgr.LoginToSmartLinkReport(ReportManager.DefaultSmartLinkPassword);
             ReportMgr.VerifyAttendeeReportRowCount(this.eventID);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -234,8 +234,8 @@
                 regID[1],
                 ReportManager.AttendeeStatus.Attended);
 
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
 
             // cleanup
             ReportMgr.UndoCheckIn(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, regID[0]);
@@ -296,8 +296,8 @@
 
             // cleanup
             ReportMgr.SetRegistrationStatus(FirstRegID, 2, evt);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -334,7 +334,7 @@
             ReportMgr.SendGroupEmail(emailSubject, "regression group email content, event id: " + this.eventID.ToString());
             ReportMgr.CloseReportPopupWindow();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
 
             // verify results
             ReportMgr.VerifyGroupEmailJobWasCreated(this.eventID, emailSubject, regs[0].Attendee_Id);
@@ -395,8 +395,8 @@
             // Click the ID column for the first time, and this will perform a descending order
             ReportMgr.ClickAttendeeReportColumnHeader(1);
             ReportMgr.VerifyReportValue(1, 2, maxRegID.ToString());
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -464,10 +464,10 @@
             ReportMgr.ClickSmartLinkButton();
             string smartLinkReportUrl = ReportMgr.EnableSmartLinkAccess(false);
             ReportMgr.SelectReportPopupWindow();
-            WebDriverUtility.DefaultProvider.OpenUrl(smartLinkReportUrl);
+            UIUtil.DefaultProvider.OpenUrl(smartLinkReportUrl);
             ReportMgr.VerifyReportTableRowCount(regs.Count - 2);
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 

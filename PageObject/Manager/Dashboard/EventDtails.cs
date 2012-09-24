@@ -6,13 +6,13 @@
 
     public class EventDetails : Window
     {
-        public ButtonOrLink DeleteTestReg = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_lnkDeleteTestRegs", LocateBy.Id);
+        public Clickable DeleteTestReg = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkDeleteTestRegs", LocateBy.Id);
         public DeleteTestRegFrame DeleteTestRegFrame = new DeleteTestRegFrame("plain");
-        public ButtonOrLink EditForm = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_lnkEdit", LocateBy.Id);
-        public ButtonOrLink ThirdParty = new ButtonOrLink("lnkIntegrations", LocateBy.Id);
+        public Clickable EditForm = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkEdit", LocateBy.Id);
+        public Clickable ThirdParty = new Clickable("lnkIntegrations", LocateBy.Id);
         public ThirdParty ThirdPartyIntegrations = new ThirdParty("plain");
-        public ButtonOrLink TotalRegs = new ButtonOrLink("ctl00_ctl00_cphDialog_cpMgrMain_lnkTotalRegs", LocateBy.Id);
-        public ButtonOrLink SelfKiosk = new ButtonOrLink("//a[@class='frmDashLink kiosk']", LocateBy.XPath);
+        public Clickable TotalRegs = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkTotalRegs", LocateBy.Id);
+        public Clickable SelfKiosk = new Clickable("//a[@class='frmDashLink kiosk']", LocateBy.XPath);
         public LaunchSelfKiosk LaunchSelfKiosk = new LaunchSelfKiosk("plain");
 
         public void SelfKiosk_Click()
@@ -56,7 +56,7 @@
     {
         public DeleteTestRegFrame(string name) : base(name) { }
 
-        public ButtonOrLink Delete = new ButtonOrLink("//a[contains(@onclick,'DeleteTestRegistrations')]/span", LocateBy.XPath);
+        public Clickable Delete = new Clickable("//a[contains(@onclick,'DeleteTestRegistrations')]/span", LocateBy.XPath);
 
         public void Delete_Click()
         {
@@ -75,7 +75,7 @@
 
         public CheckBox RequireAuthentication = new CheckBox("ctl00_cphDialog_chkRequirePassword", LocateBy.Id);
         public CheckBox AllowOnsiteReg = new CheckBox("ctl00_cphDialog_chkAllowOnsiteRegistrations", LocateBy.Id);
-        public ButtonOrLink LaunchKiosk = new ButtonOrLink("ctl00_cphDialog_btnContinue", LocateBy.Id);
+        public Clickable LaunchKiosk = new Clickable("ctl00_cphDialog_btnContinue", LocateBy.Id);
 
         public void LaunchKiosk_Click()
         {
@@ -91,7 +91,7 @@
     {
         public ThirdParty(string name) : base(name) { }
 
-        public ButtonOrLink ExternalAuthentication = new ButtonOrLink("//div[@id='ctl00_cphDialog_rtsIntegrations']//ul[@class='rtsUL']/li[5]/a[@class='rtsLink']", LocateBy.XPath);
+        public Clickable ExternalAuthentication = new Clickable("//div[@id='ctl00_cphDialog_rtsIntegrations']//ul[@class='rtsUL']/li[5]/a[@class='rtsLink']", LocateBy.XPath);
 
         public void ExternalAuthentication_Click()
         {

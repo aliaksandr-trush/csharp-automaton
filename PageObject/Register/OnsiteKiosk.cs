@@ -6,12 +6,12 @@
 
     public class OnsiteKiosk : Window
     {
-        public TextBox SearchCondition = new TextBox("ctl00_cph_txtSearch", LocateBy.Id);
-        public ButtonOrLink Enter = new ButtonOrLink("ctl00_cph_btnSearch", LocateBy.Id);
-        public ButtonOrLink OnsiteRegister = new ButtonOrLink("ctl00_cph_lnkRegister", LocateBy.Id);
-        public ButtonOrLink NewSearch = new ButtonOrLink("ctl00_cph_btnReset", LocateBy.Id);
-        public TextBox Password = new TextBox("ctl00_cph_txtPassword", LocateBy.Id);
-        public ButtonOrLink SubmitPassword = new ButtonOrLink("ctl00_cph_btnPassword", LocateBy.Id);
+        public Input SearchCondition = new Input("ctl00_cph_txtSearch", LocateBy.Id);
+        public Clickable Enter = new Clickable("ctl00_cph_btnSearch", LocateBy.Id);
+        public Clickable OnsiteRegister = new Clickable("ctl00_cph_lnkRegister", LocateBy.Id);
+        public Clickable NewSearch = new Clickable("ctl00_cph_btnReset", LocateBy.Id);
+        public Input Password = new Input("ctl00_cph_txtPassword", LocateBy.Id);
+        public Clickable SubmitPassword = new Clickable("ctl00_cph_btnPassword", LocateBy.Id);
 
         public void Enter_Click()
         {

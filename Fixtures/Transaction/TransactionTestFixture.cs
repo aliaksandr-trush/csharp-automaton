@@ -446,7 +446,7 @@
 
         private void OpenTransactionReport(string eventName)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(managerURL);
+            UIUtil.DefaultProvider.OpenUrl(managerURL);
             ManagerSiteMgr.OpenEventDashboard(eventName);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.Reports);
             ////M3.Dashboard.ClickOption(DashboardManager.ReportsFinancialReport.Transactions);

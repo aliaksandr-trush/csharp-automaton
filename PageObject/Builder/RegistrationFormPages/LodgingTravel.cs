@@ -7,9 +7,9 @@
 
     public class LodgingTravel : Window
     {
-        public ButtonOrLink LTPageHeader = new ButtonOrLink("//*[text()='Add Lodging & Travel Page Header']", LocateBy.XPath);
+        public Clickable LTPageHeader = new Clickable("//*[text()='Add Lodging & Travel Page Header']", LocateBy.XPath);
         public HtmlEditor LTPageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink LTPageFooter = new ButtonOrLink("//*[text()='Add Lodging & Travel Page Footer']", LocateBy.XPath);
+        public Clickable LTPageFooter = new Clickable("//*[text()='Add Lodging & Travel Page Footer']", LocateBy.XPath);
         public HtmlEditor LTPageFooterEditor = new HtmlEditor("dialog");
 
         public void SetLodgingStandardFieldVisible(FormData.LodgingStandardFields field, bool visible)
