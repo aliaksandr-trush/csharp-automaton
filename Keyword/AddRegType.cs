@@ -78,7 +78,7 @@
             }
             #endregion
 
-            if ((regType.AllCustomCode.Count != 0) || (regType.EarlyPrice != null) ||
+            if ((regType.AllCustomCodes.Count != 0) || (regType.EarlyPrice != null) ||
                 (regType.LatePrice != null) || (evt.TaxRateOne != null) ||
                 (evt.TaxRateTwo != null))
             {
@@ -113,14 +113,14 @@
                 #endregion
 
                 #region AddDiscountCode
-                if (regType.AllCustomCode.Count != 0)
+                if (regType.AllCustomCodes.Count != 0)
                 {
                     if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddDiscountCode.IsPresent)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
-                    foreach (CustomFieldCode dc in regType.AllCustomCode)
+                    foreach (CustomFieldCode dc in regType.AllCustomCodes)
                     {
                         KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.RegType);
                     }

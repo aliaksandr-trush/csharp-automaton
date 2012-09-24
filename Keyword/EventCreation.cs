@@ -139,7 +139,7 @@
 
                 if (details.StartPage.Event_Fee.Early_Price != null ||
                     details.StartPage.Event_Fee.Late_Price != null ||
-                    (details.StartPage.Event_Fee.DiscountCodes != null && details.StartPage.Event_Fee.DiscountCodes.Count > 0))
+                    (details.StartPage.Event_Fee.AllCustomCodes != null && details.StartPage.Event_Fee.AllCustomCodes.Count > 0))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeAdvanced_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AdjustRADWindowPositionAndResize();
@@ -157,9 +157,9 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
                     }
 
-                    if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
+                    if (details.StartPage.Event_Fee.AllCustomCodes.Count != 0)
                     {
-                        foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.DiscountCodes)
+                        foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.AllCustomCodes)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
                         }

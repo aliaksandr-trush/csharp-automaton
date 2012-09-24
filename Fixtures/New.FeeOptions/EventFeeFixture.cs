@@ -35,9 +35,9 @@
             dc1.CodeKind = FormData.ChangeType.FixedAmount;
             dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             CustomFieldCode ac1 = new CustomFieldCode("ac1");
-            ac1.CodeType = FormData.CustomFieldCodeType.AccessCode;            
-            regType3.AllCustomCode.Add(dc1);
-            regType3.AllCustomCode.Add(ac1);
+            ac1.CodeType = FormData.CustomFieldCodeType.AccessCode;
+            regType3.AllCustomCodes.Add(dc1);
+            regType3.AllCustomCodes.Add(ac1);
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
             evt.StartPage.RegTypes.Add(regType3);
@@ -63,6 +63,42 @@
             reg4.EventFee_Response = new EventFeeResponse(regType3);
             reg4.EventFee_Response.Code = ac1;
             KeywordProvider.RegistrationCreation.CreateRegistration(reg4);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 100);
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("")]
+        public void TestEventFeeWithDiscountCodeAccessCode()
+        {
+            evt = new Event("TestEventFeeWithDiscountCodeAccessCode");
+            paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
+            EventFee ef = new EventFee();
+            ef.StandardPrice = 100;
+            CustomFieldCode dc1 = new CustomFieldCode("dc1");
+            dc1.Amount = 10;
+            dc1.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dc1.CodeKind = FormData.ChangeType.FixedAmount;
+            dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            CustomFieldCode ac1 = new CustomFieldCode("ac1");
+            ac1.CodeType = FormData.CustomFieldCodeType.AccessCode;
+            ef.AllCustomCodes.Add(dc1);
+            ef.AllCustomCodes.Add(ac1);
+            evt.StartPage.Event_Fee = ef;
+
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
+            Registrant reg1 = new Registrant(evt);
+            reg1.Payment_Method = paymentMethod;
+            reg1.EventFee_Response = new EventFeeResponse();
+            reg1.EventFee_Response.Code = dc1;
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
+            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 90);
+            Registrant reg2 = new Registrant(evt);
+            reg2.Payment_Method = paymentMethod;
+            reg2.EventFee_Response = new EventFeeResponse();
+            reg2.EventFee_Response.Code = ac1;
+            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 100);
         }
     }

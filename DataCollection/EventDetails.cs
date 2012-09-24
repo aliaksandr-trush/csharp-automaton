@@ -42,12 +42,12 @@
         public string Name { get; set; }
         public EarlyPrice Early_Price { get; set; }
         public LatePrice Late_Price { get; set; }
-        public List<CustomFieldCode> DiscountCodes { get; set; }
+        public List<CustomFieldCode> AllCustomCodes { get; set; }
         public bool RequireDC { get; set; }
 
         public EventFee()
         {
-            this.DiscountCodes = new List<CustomFieldCode>();
+            this.AllCustomCodes = new List<CustomFieldCode>();
         }
     }
 

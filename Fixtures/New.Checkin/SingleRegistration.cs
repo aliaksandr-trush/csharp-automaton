@@ -246,7 +246,7 @@
             dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc.Amount = 10;
             dc.CodeKind = FormData.ChangeType.Percent;
-            regType2.AllCustomCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
@@ -284,7 +284,7 @@
             dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc.Amount = 10;
             dc.CodeKind = FormData.ChangeType.FixedAmount;
-            regType2.AllCustomCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
@@ -310,7 +310,7 @@
             dc.Amount = 10;
             dc.Limit = 1;
             dc.CodeKind = FormData.ChangeType.FixedAmount;
-            regType2.AllCustomCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             regType2.RequireDC = true;
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             eventFeeDCRequired.StartPage.RegTypes.Add(regType1);

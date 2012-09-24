@@ -28,10 +28,10 @@
             CustomFieldCode ac1 = new CustomFieldCode("ac1");
             ac1.CodeType = FormData.CustomFieldCodeType.AccessCode;
             ac1.Limit = 2;
-            regType.AllCustomCode.Add(ac1);
+            regType.AllCustomCodes.Add(ac1);
             CustomFieldCode ac2 = new CustomFieldCode("ac2");
             ac2.CodeType = FormData.CustomFieldCodeType.AccessCode;
-            regType.AllCustomCode.Add(ac2);
+            regType.AllCustomCodes.Add(ac2);
             evt.StartPage.RegTypes.Add(regType);
 
             agenda = new AgendaItem_CheckBox("Agenda");

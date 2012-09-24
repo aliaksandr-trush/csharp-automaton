@@ -47,10 +47,10 @@
             dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc4.CodeKind = FormData.ChangeType.Percent;
             dc4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
-            regType1.AllCustomCode.Add(dc1);
-            regType1.AllCustomCode.Add(dc2);
-            regType2.AllCustomCode.Add(dc3);
-            regType2.AllCustomCode.Add(dc4);
+            regType1.AllCustomCodes.Add(dc1);
+            regType1.AllCustomCodes.Add(dc2);
+            regType2.AllCustomCodes.Add(dc3);
+            regType2.AllCustomCodes.Add(dc4);
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
 
@@ -109,8 +109,8 @@
             dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc2.CodeKind = FormData.ChangeType.Percent;
             dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
-            regType1.AllCustomCode.Add(dc1);
-            regType2.AllCustomCode.Add(dc2);
+            regType1.AllCustomCodes.Add(dc1);
+            regType2.AllCustomCodes.Add(dc2);
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
             AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("Agenda1");
@@ -227,9 +227,9 @@
             dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc3.CodeKind = FormData.ChangeType.FixedAmount;
             dc3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
-            diffDcRegType.AllCustomCode.Add(dc1);
-            diffDcRegType.AllCustomCode.Add(dc2);
-            diffDcRegType.AllCustomCode.Add(dc3);
+            diffDcRegType.AllCustomCodes.Add(dc1);
+            diffDcRegType.AllCustomCodes.Add(dc2);
+            diffDcRegType.AllCustomCodes.Add(dc3);
             diffDcEvt.StartPage.RegTypes.Add(diffDcRegType);
             diffDcAgenda = new AgendaItem_CheckBox("Agenda");
             diffDcAgenda.Price = 80;
@@ -308,8 +308,8 @@
             dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc2.CodeKind = FormData.ChangeType.Percent;
             dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
-            regType.AllCustomCode.Add(dc1);
-            regType.AllCustomCode.Add(dc2);
+            regType.AllCustomCodes.Add(dc1);
+            regType.AllCustomCodes.Add(dc2);
             evt.StartPage.RegTypes.Add(regType);
             AgendaItem_CheckBox agenda = new AgendaItem_CheckBox("Agenda");
             agenda.Price = 60;
@@ -426,10 +426,10 @@
 
             evt.StartPage.Event_Fee = new EventFee();
             evt.StartPage.Event_Fee.StandardPrice = 100;
-            evt.StartPage.Event_Fee.DiscountCodes.Add(half);
-            evt.StartPage.Event_Fee.DiscountCodes.Add(fixedAmount);
-            evt.StartPage.Event_Fee.DiscountCodes.Add(enter);
-            evt.StartPage.Event_Fee.DiscountCodes.Add(free);
+            evt.StartPage.Event_Fee.AllCustomCodes.Add(half);
+            evt.StartPage.Event_Fee.AllCustomCodes.Add(fixedAmount);
+            evt.StartPage.Event_Fee.AllCustomCodes.Add(enter);
+            evt.StartPage.Event_Fee.AllCustomCodes.Add(free);
 
             DataCollection.AgendaItem_CheckBox checkbox = new AgendaItem_CheckBox("Checkbox");
             checkbox.Price = 50;
@@ -626,8 +626,8 @@
             dCPercentUnderZero.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dCPercentUnderZero.Amount = -10;
             dCPercentUnderZero.CodeKind = FormData.ChangeType.Percent;
-            regType.AllCustomCode.Add(dCFix);
-            regType.AllCustomCode.Add(dCPercentUnderZero);
+            regType.AllCustomCodes.Add(dCFix);
+            regType.AllCustomCodes.Add(dCPercentUnderZero);
             evt.StartPage.RegTypes.Add(regType);
 
             AgendaItem_CheckBox agendaDCFixUnderZero = new AgendaItem_CheckBox("AgendaDCFixUnderZero");

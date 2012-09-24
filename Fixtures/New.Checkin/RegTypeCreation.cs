@@ -48,7 +48,7 @@
             regType2.Price = 50;
             regType2.EarlyPrice = earlyPrice2;
             regType2.LatePrice = latePrice2;
-            regType2.AllCustomCode.Add(discountCode2);
+            regType2.AllCustomCodes.Add(discountCode2);
 
             RegType regType3 = new RegType("EarlyLateFeeDCPercent");
             EarlyPrice earlyPrice3 = new EarlyPrice();
@@ -68,7 +68,7 @@
             regType3.Price = 50;
             regType3.EarlyPrice = earlyPrice3;
             regType3.LatePrice = latePrice3;
-            regType3.AllCustomCode.Add(discountCode3);
+            regType3.AllCustomCodes.Add(discountCode3);
 
             RegType regType4 = new RegType("EarlyLateFeeDCPositiveDollar");
             EarlyPrice earlyPrice4 = new EarlyPrice();
@@ -88,7 +88,7 @@
             regType4.Price = 50;
             regType4.EarlyPrice = earlyPrice4;
             regType4.LatePrice = latePrice4;
-            regType4.AllCustomCode.Add(discountCode4);
+            regType4.AllCustomCodes.Add(discountCode4);
 
             RegType regType5 = new RegType("EarlyLateFeeDCRequired");
             EarlyPrice earlyPrice5 = new EarlyPrice();
@@ -108,7 +108,7 @@
             regType5.Price = 50;
             regType5.EarlyPrice = earlyPrice5;
             regType5.LatePrice = latePrice5;
-            regType5.AllCustomCode.Add(discountCode5);
+            regType5.AllCustomCodes.Add(discountCode5);
             regType5.RequireDC = true;
 
             RegType regType6 = new RegType("EarlyLateFeeAC");
@@ -126,7 +126,7 @@
             regType6.Price = 50;
             regType6.EarlyPrice = earlyPrice6;
             regType6.LatePrice = latePrice6;
-            regType6.AllCustomCode.Add(discountCode6);
+            regType6.AllCustomCodes.Add(discountCode6);
 
             EarlyPrice earlyPrice7 = new EarlyPrice();
             earlyPrice7.earlyPrice = 40;

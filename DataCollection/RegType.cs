@@ -9,7 +9,7 @@
         public string RegTypeName;
         public string FeeName;
         public double? Price;
-        public List<CustomFieldCode> AllCustomCode = new List<CustomFieldCode>();
+        public List<CustomFieldCode> AllCustomCodes = new List<CustomFieldCode>();
         public bool? RequireDC;
         public EarlyPrice EarlyPrice;
         public LatePrice LatePrice;
