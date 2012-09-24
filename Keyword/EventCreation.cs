@@ -386,6 +386,9 @@
                     }
                 }
 
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ShowAndApply.Set(
+                    details.StartPage.GroupDiscount.ShowAndApply);
+
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
             }
         }

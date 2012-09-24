@@ -26,6 +26,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1373")]
         public void OrMore()
         {
             GroupDiscount groupDiscount = new GroupDiscount();
@@ -41,6 +42,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1374")]
         public void JustSizeAndAll()
         {
             GroupDiscount groupDiscount = new GroupDiscount();
@@ -59,13 +61,14 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1378")]
         public void JustSizeAndAnyAdditional()
         {
             GroupDiscount groupDiscount = new GroupDiscount();
             groupDiscount.GroupSize = 2;
             groupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.JustSize;
-            groupDiscount.DiscountAmount = 10;
-            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.Percent;
+            groupDiscount.DiscountAmount = 5;
+            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.USDollar;
             groupDiscount.AddtionalRegOption = GroupDiscount_AdditionalRegOption.AnyAdditional;
 
             this.CreateEventAndAddGroupDiscount(groupDiscount, "GroupDiscount-AnyAdditional");
@@ -76,6 +79,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1375")]
         public void JustSizeAndAdditional()
         {
             GroupDiscount groupDiscount = new GroupDiscount();
@@ -94,6 +98,7 @@
 
         [Test]
         [Category(Priority.Three)]
+        [Description("1383")]
         public void ApplyToSelectedFee()
         {
             GroupDiscount groupDiscount = new GroupDiscount();
@@ -109,7 +114,119 @@
             this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
         }
 
-        private void CreateEventAndAddGroupDiscount(GroupDiscount groupDiscount, string eventName)
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1379")]
+        public void OneHundredPercent()
+        {
+            GroupDiscount groupDiscount = new GroupDiscount();
+            groupDiscount.GroupSize = 2;
+            groupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
+            groupDiscount.DiscountAmount = 100;
+            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.Percent;
+
+            this.CreateEventAndAddGroupDiscount(groupDiscount, "GroupDiscount-100Percent");
+
+            this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
+            this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(4));
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1384")]
+        public void ShowAndApply()
+        {
+            GroupDiscount groupDiscount = new GroupDiscount();
+            groupDiscount.GroupSize = 2;
+            groupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
+            groupDiscount.DiscountAmount = 50;
+            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.Percent;
+            groupDiscount.ShowAndApply = false;
+
+            this.CreateEventAndAddGroupDiscount(groupDiscount, "GroupDiscount-ShowApply");
+
+            this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
+            this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(4));
+        }
+
+        [Test]
+        [Category(Priority.Three)]
+        [Description("1381")]
+        public void ChangeDiscount()
+        {
+            GroupDiscount groupDiscount = new GroupDiscount();
+            groupDiscount.GroupSize = 2;
+            groupDiscount.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
+            groupDiscount.DiscountAmount = 50;
+            groupDiscount.GroupDiscountType = GroupDiscount_DiscountType.Percent;
+
+            this.CreateEventAndAddGroupDiscount(groupDiscount, "GroupDiscount-Change", true);
+            Group group = this.GenerateGroup(2);
+            this.GroupRegistrationAndVerifyTotal(group);
+
+            KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
+
+            GroupDiscount groupDiscount2 = new GroupDiscount();
+            groupDiscount2.GroupSize = 2;
+            groupDiscount2.GroupSizeOption = GroupDiscount_GroupSizeOption.SizeOrMore;
+            groupDiscount2.DiscountAmount = 10;
+            groupDiscount2.GroupDiscountType = GroupDiscount_DiscountType.Percent;
+
+            KeywordProvider.AddGroupDiscount.Add_GroupDiscount(evt1, groupDiscount2);
+
+            Registrant reg = new Registrant(evt1);
+            reg.Payment_Method = paymentMethod;
+            reg.EventFee_Response = resp1;
+            reg.CustomField_Responses.Add(resp4);
+            group.Secondaries.Add(reg);
+
+            KeywordProvider.RegistrationCreation.Checkin(group.Primary);
+            KeywordProvider.RegistrationCreation.Login(group.Primary);
+            PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.RegistrationCreation.Agenda(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegistrationCreation.Checkout(reg);
+
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(group));
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
+            KeywordProvider.RegistrationCreation.Login(group.Primary);
+            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(1);
+            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(2);
+            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegistrationCreation.Checkout(group.Primary);
+
+            Group group1 = this.GenerateGroup(2);
+            group1.Primary.Email = group.Primary.Email;
+
+            evt1.StartPage.GroupDiscount = groupDiscount2;
+
+            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
+            KeywordProvider.RegistrationCreation.Login(group1.Primary);
+            PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group1.Secondaries[0].Email);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group1.Secondaries[0].EventFee_Response.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegistrationCreation.PersonalInfo(group1.Secondaries[0]);
+            KeywordProvider.RegistrationCreation.Agenda(group1.Secondaries[0]);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            KeywordProvider.RegistrationCreation.Checkout(group1.Primary);
+
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(group1));
+
+            this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
+        }
+
+        private void CreateEventAndAddGroupDiscount(GroupDiscount groupDiscount, string eventName, bool recreate = false)
         {
             this.evt1 = new Event(eventName);
             this.evt1.CheckoutPage.PaymentMethods.Add(this.paymentMethod);
@@ -132,7 +249,7 @@
             this.evt1.MerchandisePage.Merchandises.Add(this.merch1);
             this.evt1.MerchandisePage.Merchandises.Add(this.merch2);
 
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1, false);
+            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1, recreate);
 
             this.resp1.RegType = this.regType1;
             this.resp1.Fee = 20;
@@ -176,7 +293,7 @@
             Registrant reg4 = new Registrant(evt1);
             reg4.Payment_Method = paymentMethod;
             reg4.EventFee_Response = resp2;
-            reg2.CustomField_Responses.Add(resp3);
+            reg4.CustomField_Responses.Add(resp3);
             reg4.CustomField_Responses.Add(resp4);
 
             Group group = new Group();

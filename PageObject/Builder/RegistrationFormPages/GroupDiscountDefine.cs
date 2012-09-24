@@ -19,6 +19,7 @@
         public RadioButton ApplyToAllEventFees = new RadioButton("ctl00_cphDialog_rbApplyAll", LocateBy.Id);
         public RadioButton ApplyToSelectedFees = new RadioButton("ctl00_cphDialog_rbApplySelected", LocateBy.Id);
         public CheckBox All = new CheckBox("//li[@class='rtLI rtFirst rtLast']/div/input", LocateBy.XPath);
+        public CheckBox ShowAndApply = new CheckBox("ctl00_cphDialog_groupDiscountEnabledCheckBox", LocateBy.Id);
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
@@ -29,7 +30,7 @@
 
         public CheckBox ApplyToRegType(DataCollection.RegType regType)
         {
-            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}']]", regType.RegTypeName), LocateBy.XPath);
+            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}_Event_Fee']]", regType.RegTypeName), LocateBy.XPath);
         }
 
         public void ApplyToSelectedFees_Click()

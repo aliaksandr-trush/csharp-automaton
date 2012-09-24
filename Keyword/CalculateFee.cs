@@ -26,7 +26,41 @@
 
             if (reg.EventFee_Response != null)
             {
-                reg.Fee_Summary.Total += reg.EventFee_Response.Fee;
+                if (reg.EventFee_Response.RegType.EarlyPrice != null)
+                {
+                    if ((reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.DateAndTime)
+                        && (reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceDate.Value > DateTime.Now))
+                    {
+                        reg.Fee_Summary.Total += reg.EventFee_Response.RegType.EarlyPrice.earlyPrice;
+                    }
+
+                    if (reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.Registrants)
+                    {
+                        int previousRegsForThisRegType = 0;
+
+                        foreach (Registrant previousReg in reg.Event.Registrants)
+                        {
+                            if (previousReg.EventFee_Response.RegType == reg.EventFee_Response.RegType)
+                            {
+                                previousRegsForThisRegType += 1;
+                            }
+                        }
+
+                        if (previousRegsForThisRegType <= reg.EventFee_Response.RegType.EarlyPrice.FirstNRegistrants.Value)
+                        {
+                            reg.Fee_Summary.Total += reg.EventFee_Response.RegType.EarlyPrice.earlyPrice;
+                        }
+                    }
+                }
+                else if ((reg.EventFee_Response.RegType.LatePrice != null)
+                    && (reg.EventFee_Response.RegType.LatePrice.LatePriceDate < DateTime.Now))
+                {
+                    reg.Fee_Summary.Total += reg.EventFee_Response.RegType.LatePrice.latePrice;
+                }
+                else
+                {
+                    reg.Fee_Summary.Total += reg.EventFee_Response.Fee;
+                }
             }
 
             foreach (CustomFieldResponse responses in reg.CustomField_Responses)
@@ -34,48 +68,55 @@
                 if (responses is AgendaResponse)
                 {
                     AgendaResponse response = responses as AgendaResponse;
+                    AgendaItem_Common agenda;
 
                     switch (response.AgendaItem.Type)
                     {
                         case FormData.CustomFieldType.AlwaysSelected:
                             {
                                 AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
-                                reg.Fee_Summary.Total += resp.Fee;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
                         case FormData.CustomFieldType.CheckBox:
                             {
                                 AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
-                                reg.Fee_Summary.Total += resp.Fee;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
                         case FormData.CustomFieldType.RadioButton:
                             {
                                 AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
-                                reg.Fee_Summary.Total += resp.Fee;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
                         case FormData.CustomFieldType.Dropdown:
                             {
                                 AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
-                                reg.Fee_Summary.Total += resp.Fee;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
                         case FormData.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
-                                reg.Fee_Summary.Total += resp.ContributionAmount;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
                         case FormData.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
-                                reg.Fee_Summary.Total += resp.Fee;
+                                agenda = resp.AgendaItem as AgendaItem_Common;
+                                reg.Fee_Summary.Total += this.CalculateAgenda(agenda, reg.Event);
                             }
                             break;
 
@@ -174,11 +215,23 @@
                 {
                     eventFeeResponseCount.Find(e => e.EventFee_Response.RegType == resp.RegType).count += 1;
                 }
+                else if ((group.Primary.Event.StartPage.GroupDiscount != null) 
+                    && group.Primary.Event.StartPage.GroupDiscount.ApplyToRegTypes.Count != 0)
+                {
+                    if (group.Primary.Event.StartPage.GroupDiscount.ApplyToRegTypes.Exists(r => r == resp.RegType))
+                    {
+                        EventFeeResponseCount responseCount = new EventFeeResponseCount();
+                        responseCount.EventFee_Response = resp;
+                        responseCount.count = 1;
+                        eventFeeResponseCount.Add(responseCount);
+                    }
+                }
                 else
                 {
                     EventFeeResponseCount responseCount = new EventFeeResponseCount();
                     responseCount.EventFee_Response = resp;
                     responseCount.count = 1;
+                    eventFeeResponseCount.Add(responseCount);
                 }
             }
 
@@ -188,17 +241,31 @@
                 {
                     agendaResponseCount.Find(a => a.Agenda_Response.AgendaItem == resp.AgendaItem).count += 1;
                 }
+                else if ((group.Primary.Event.StartPage.GroupDiscount != null) 
+                    && group.Primary.Event.StartPage.GroupDiscount.ApplyToAgendaItems.Count != 0)
+                {
+                    if (group.Primary.Event.StartPage.GroupDiscount.ApplyToAgendaItems.Exists(a => a == resp.AgendaItem))
+                    {
+                        AgendaResponseCount responseCount = new AgendaResponseCount();
+                        responseCount.Agenda_Response = resp;
+                        responseCount.count = 1;
+                        agendaResponseCount.Add(responseCount);
+                    }
+                }
                 else
                 {
                     AgendaResponseCount responseCount = new AgendaResponseCount();
                     responseCount.Agenda_Response = resp;
                     responseCount.count = 1;
+                    agendaResponseCount.Add(responseCount);
                 }
             }
 
             foreach (EventFeeResponseCount count in eventFeeResponseCount)
             {
-                if ((group.Primary.Event.StartPage.GroupDiscount != null) && (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize))
+                if ((group.Primary.Event.StartPage.GroupDiscount != null) && 
+                    (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize) &&
+                    (group.Primary.Event.StartPage.GroupDiscount.ShowAndApply))
                 {
                     if (group.Primary.Event.StartPage.GroupDiscount.GroupSizeOption == GroupDiscount_GroupSizeOption.SizeOrMore)
                     {
@@ -262,7 +329,8 @@
             foreach (AgendaResponseCount count in agendaResponseCount)
             {
                 if ((group.Primary.Event.StartPage.GroupDiscount != null)
-                    && (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize))
+                    && (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize)
+                    && (group.Primary.Event.StartPage.GroupDiscount.ShowAndApply))
                 {
                     double fee = 0;
 
@@ -339,7 +407,7 @@
                     {
                         for (int i = 1; i <= count.count; i++)
                         {
-                            if ((i > group.Primary.Event.StartPage.GroupDiscount.GroupSize) && (i <= group.Primary.Event.StartPage.GroupDiscount.NumberOfAdditionalReg.Value))
+                            if ((i > group.Primary.Event.StartPage.GroupDiscount.GroupSize) && (i <= group.Primary.Event.StartPage.GroupDiscount.NumberOfAdditionalReg.Value + count.count))
                             {
                                 if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                                 {
@@ -457,6 +525,56 @@
             }
 
             return total;
+        }
+
+        private double CalculateAgenda(AgendaItem_Common agenda, Event evt)
+        {
+            double agendaFee = 0;
+
+            if (agenda.EarlyPrice != null)
+            {
+                if ((agenda.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.DateAndTime)
+                    && (agenda.EarlyPrice.EarlyPriceDate.Value > DateTime.Now))
+                {
+                    agendaFee = agenda.EarlyPrice.earlyPrice;
+                }
+                else if (agenda.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.Registrants)
+                {
+                    int previousRegsForThisAgenda = 0;
+
+                    foreach (Registrant previousReg in evt.Registrants)
+                    {
+                        foreach (CustomFieldResponse cfResponse in previousReg.CustomField_Responses)
+                        {
+                            if (cfResponse is AgendaResponse)
+                            {
+                                AgendaResponse agResponse = cfResponse as AgendaResponse;
+
+                                if (agResponse.AgendaItem.NameOnForm == agenda.NameOnForm)
+                                {
+                                    previousRegsForThisAgenda += 1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (agenda.EarlyPrice.FirstNRegistrants.Value >= previousRegsForThisAgenda)
+                    {
+                        agendaFee = agenda.EarlyPrice.earlyPrice;
+                    }
+                }
+            }
+            else if ((agenda.LatePrice != null)
+                && (agenda.LatePrice.LatePriceDate < DateTime.Now))
+            {
+                agendaFee = agenda.LatePrice.latePrice;
+            }
+            else
+            {
+                agendaFee = agenda.Price.Value;
+            }
+
+            return agendaFee;
         }
 
         private class EventFeeResponseCount

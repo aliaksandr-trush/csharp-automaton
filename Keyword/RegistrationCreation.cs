@@ -497,6 +497,8 @@
             }
 
             reg.Id = Convert.ToInt32(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.RegistrationId.Text);
+
+            reg.Event.Registrants.Add(reg);
         }
 
         public void SSOLogin(Registrant reg)
