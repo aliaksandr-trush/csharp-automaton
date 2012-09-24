@@ -58,6 +58,7 @@
             RegisterMgr.Continue();
             RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.FillOutLodgingCCInfo_Default();
             RegisterMgr.Continue();
             RegisterMgr.PayMoney(Managers.ManagerBase.PaymentMethod.CreditCard);
@@ -108,7 +109,6 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.Reports);
             ManagerSiteMgr.DashboardMgr.OpenCommonReport(Managers.Report.ReportManager.CommonReportType.RoomingList);
-            UIUtility.UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnApply", UIUtility.LocateBy.Id);
             ManagerSiteMgr.DashboardMgr.SelectReportPopupWindow();
 
             if (withAccess)

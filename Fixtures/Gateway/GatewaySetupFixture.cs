@@ -77,7 +77,7 @@
             ccOptions_old.Amex = true;
             PaymentGatewayManager.GridActionOptions actionOptions = new PaymentGatewayManager.GridActionOptions();
             actionOptions.VerifyCC = true;
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.AccountMgr.GatewayMgr.VerifyGridRow(gatewayName, "False", "PayFlowPro", ccOptions_old.ToString(), "USD", null, null, actionOptions.ToString());
 
             //Open and re-verify values

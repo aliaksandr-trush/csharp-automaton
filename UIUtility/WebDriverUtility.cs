@@ -9,17 +9,26 @@
     using System.Text.RegularExpressions;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;
+    using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Utilities;
-    using RegOnline.RegressionTest.Attributes;
 
     public class WebDriverUtility
     {
+        private static WebDriverUtility Default = new WebDriverUtility();
         private TimeSpan timeOutSpan;
-        public IWebDriver driver;
+        private IWebDriver driver;
+        private ConfigReader.BrowserEnum browser;
+
+        public static WebDriverUtility DefaultProvider
+        {
+            get
+            {
+                return WebDriverUtility.Default;
+            }
+        }
 
         private By GetLocatorFinder(string locator, LocateBy locateBy)
         {
@@ -59,23 +68,30 @@
         {
             this.StartWebDriver();
             this.SetTimeoutSpan();
-            this.MaximizeWindow();
+
+            if (this.browser != ConfigReader.BrowserEnum.HtmlUnit)
+            {
+                this.MaximizeWindow();
+            }
         }
 
         private void StartWebDriver()
         {
-            XmlConfiguration.Browser browser;
-            Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
+            Enum.TryParse<ConfigReader.BrowserEnum>(ConfigReader.DefaultProvider.CurrentBrowser.Name, out this.browser);
             IGetWebDriver br;
 
             switch (browser)
             {
-                case XmlConfiguration.Browser.Firefox:
+                case ConfigReader.BrowserEnum.Firefox:
                     br = new Browser_Firefox();
                     break;
 
-                case XmlConfiguration.Browser.Chrome:
+                case ConfigReader.BrowserEnum.Chrome:
                     br = new Browser_Chrome();
+                    break;
+
+                case ConfigReader.BrowserEnum.HtmlUnit:
+                    br = new Browser_HtmlUnit();
                     break;
 
                 default:
@@ -133,17 +149,19 @@
             this.timeOutSpan = timeOut;
         }
 
-        public void CaptureFailureScreenshot()
+        public void CaptureScreenshot()
         {
-            this.CaptureScreenshot(UIUtilityHelper.FAILURE_SCREENSHOT_FILE_NAME);
+            this.CaptureScreenshot(string.Format(
+                UIUtilityHelper.ScreenshotFileNameFormat, 
+                DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt")));
         }
 
         public void CaptureScreenshot(string fileName)
         {
-            this.CaptureScreenshot(System.IO.Directory.GetCurrentDirectory(), fileName);
+            this.CaptureScreenshot(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Screenshot"), fileName);
         }
 
-        public void CaptureScreenshot(string directoryName, string fileName)
+        private void CaptureScreenshot(string directoryName, string fileName)
         {
             if (!Directory.Exists(directoryName))
             {
@@ -151,7 +169,6 @@
             }
 
             string fullFileName = Path.Combine(directoryName, fileName);
-            this.MaximizeWindow();
 
             // Wait for 1 second before taking screenshot till the page can fully load
             Utility.ThreadSleep(1);
@@ -565,6 +582,11 @@
         public string GetValue(string locator, LocateBy locateBy)
         {
             return this.GetAttribute(locator, "value", locateBy);
+        }
+
+        public string GetId(string locator, LocateBy locateBy)
+        {
+            return this.GetAttribute(locator, "id", locateBy);
         }
 
         public string GetText(string locator, LocateBy locateBy)
@@ -1222,6 +1244,26 @@
             errorMessage.Append(message);
             errorMessage.Append(this.GetCurrentPageOrSiteErrorIdIfNecessary());
             throw new Exception(errorMessage.ToString());
+        }
+
+        public void VerifyValue(string expectedValue, string actualValue, string message)
+        {
+            FailTest(string.Format("{0} Expected value:{1} Actual value:{2}", message, expectedValue, actualValue));
+        }
+
+        public void VerifyValue(bool expectedValue, bool actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
+        }
+
+        public void VerifyValue(int expectedValue, int actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
+        }
+
+        public void VerifyValue(double expectedValue, double actualValue, string message)
+        {
+            VerifyValue(expectedValue.ToString(), actualValue.ToString(), message);
         }
         #endregion
     }

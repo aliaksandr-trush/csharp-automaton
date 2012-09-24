@@ -100,13 +100,13 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventHome_Click();
-            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.URL;
+            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CurrentURL;
             PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventContactInfo_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.SelectByIndex();
             results.EventContactInfo = PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.PopupContactInfo.Text;
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.WaitForPresent();
             Utility.ThreadSleep(1);
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.Click();

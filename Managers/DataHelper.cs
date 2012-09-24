@@ -24,7 +24,7 @@
 
         public int HideEventsInDeletedFolder()
         {
-            return this.HideEventsInDeletedFolder(ConfigurationProvider.XmlConfig.AccountConfiguration.Id);
+            return this.HideEventsInDeletedFolder(ConfigReader.DefaultProvider.AccountConfiguration.Id);
         }
 
         public void ChangeAllRegsToTestForEvent(int eventId)
@@ -86,7 +86,7 @@
         {
             List<Registration> registrations = new List<Registration>();
 
-            ClientDataContext db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            ClientDataContext db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var regs = (from r in db.Registrations where r.Event_Id == eventId select r).ToList();
             registrations = regs;
 
@@ -97,7 +97,7 @@
         {
             string email = null;
 
-            ClientDataContext db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            ClientDataContext db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             var attendee = (from a in db.Attendees where a.Id == reg.Attendee_Id select a).Single();
             email = attendee.Email_Address;
 

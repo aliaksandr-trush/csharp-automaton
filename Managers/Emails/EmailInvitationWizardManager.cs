@@ -48,12 +48,12 @@
 
         private bool OnEmailSplashPage()
         {
-            return UIUtilityProvider.UIHelper.IsElementPresent(EmailSplashPageLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementPresent(EmailSplashPageLocator, LocateBy.XPath);
         }
 
         public void BackToEmailInvitation()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@id='divBreadCrumbs']/a", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@id='divBreadCrumbs']/a", LocateBy.XPath);
         }
 
         /// <summary>
@@ -64,11 +64,11 @@
         {
             if (OnEmailSplashPage())
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(EmailSplashPageLocator + "//*[span='Create Email Invitation']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(EmailSplashPageLocator + "//*[span='Create Email Invitation']", LocateBy.XPath);
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Create Email Invitation", LocateBy.LinkText);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Create Email Invitation", LocateBy.LinkText);
             }
 
             Utility.ThreadSleep(2);
@@ -81,8 +81,8 @@
         [Step]
         public void SelectWizardFrame()
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         [Step]
@@ -110,22 +110,22 @@
 
         private void TypeEmailTitle(string title)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_wzEmailInvitation_txtName", title, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_wzEmailInvitation_txtName", title, LocateBy.Id);
         }
 
         private void TypeEmailSubject(string subject)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_wzEmailInvitation_txtSubject", subject, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_wzEmailInvitation_txtSubject", subject, LocateBy.Id);
         }
 
         private void TypeEmailBounceBackEmail(string bounceBackEmail)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_wzEmailInvitation_txtBounceEmail", bounceBackEmail, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_wzEmailInvitation_txtBounceEmail", bounceBackEmail, LocateBy.Id);
         }
 
         public void SelectContactList(string contactListName)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_wzEmailInvitation_ddlList", contactListName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_wzEmailInvitation_ddlList", contactListName, LocateBy.Id);
             Utility.ThreadSleep(1);
         }
 
@@ -140,16 +140,16 @@
         [Step]
         public void SelectEvent(int eventId, string eventName)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(EventDropdownLocator, this.ComposeEventDropdownLabel(eventId, eventName), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(EventDropdownLocator, this.ComposeEventDropdownLabel(eventId, eventName), LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectEvent(int index)
         {
-            UIUtilityProvider.UIHelper.SelectWithIndex(EventDropdownLocator, index, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithIndex(EventDropdownLocator, index, LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectEvent()
@@ -176,11 +176,11 @@
         [Verify]
         public void VerifyErrorMessage(string message)
         {
-            Assert.That(UIUtilityProvider.UIHelper.IsElementPresent("ctl00_cphDialog_vsValidationSummary", LocateBy.Id));
+            Assert.That(WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cphDialog_vsValidationSummary", LocateBy.Id));
 
             if (!string.IsNullOrEmpty(message))
             {
-                Assert.That(UIUtilityProvider.UIHelper.IsTextPresent(string.Empty));
+                Assert.That(WebDriverUtility.DefaultProvider.IsTextPresent(string.Empty));
             }
         }
 
@@ -190,7 +190,7 @@
         [Step]
         public void EmailWizardFinishClick()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@id='divButtons']//span[text()='Send']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@id='divButtons']//span[text()='Send']", LocateBy.XPath);
             ////UIUtilityProvider.UIHelper.ExecuteJavaScript("javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions('ctl00$cphDialog$wzEmailInvitation$FinishNavigationTemplateContainerID$btnSave$ctl00', '', true, '', '', false, true))");
             //UIUtilityProvider.UIHelper.Click("//div[@id='divButtons']/span[1]/a", LocateBy.XPath);
             Utility.ThreadSleep(2);
@@ -204,10 +204,10 @@
         public void ClickAndInsertContentTemplate(string templateName)
         {
             // Popup the preview window
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(ContentTemplateButton, templateName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(ContentTemplateButton, templateName), LocateBy.XPath);
 
             // Click the insert button
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("insertButton", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("insertButton", LocateBy.Id);
         }
 
         /// <summary>
@@ -217,23 +217,23 @@
         public void EmailWizardNextClick()
         {
             // See if we are on the first step or not
-            if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_cphDialog_wzEmailInvitation_StartNavigationTemplateContainerID_btnNext", LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cphDialog_wzEmailInvitation_StartNavigationTemplateContainerID_btnNext", LocateBy.Id))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_StartNavigationTemplateContainerID_btnNext", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_StartNavigationTemplateContainerID_btnNext", LocateBy.Id);
             }
-            else if (UIUtilityProvider.UIHelper.IsElementPresent("ctl00_cphDialog_wzEmailInvitation_StepNavigationTemplateContainerID_btnNext", LocateBy.Id))
+            else if (WebDriverUtility.DefaultProvider.IsElementPresent("ctl00_cphDialog_wzEmailInvitation_StepNavigationTemplateContainerID_btnNext", LocateBy.Id))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_StepNavigationTemplateContainerID_btnNext", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_StepNavigationTemplateContainerID_btnNext", LocateBy.Id);
             }
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void ChooseDeliveryOption(Delivery delivery)
         {
-            UIUtilityProvider.UIHelper.WaitForElementDisplay(StringEnum.GetStringValue(Delivery.SendNow), LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(StringEnum.GetStringValue(delivery), LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForElementDisplay(StringEnum.GetStringValue(Delivery.SendNow), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(StringEnum.GetStringValue(delivery), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         /// <summary>
@@ -243,9 +243,9 @@
         [Verify]
         public void EmailWizardVerifySendNowStatus(bool enabled)
         {
-            UIUtilityProvider.UIHelper.WaitForElementDisplay("ctl00_cphDialog_wzEmailInvitation_radSendNow", LocateBy.Id);
-            Assert.That(UIUtilityProvider.UIHelper.IsEditable("ctl00_cphDialog_wzEmailInvitation_radSendNow", LocateBy.Id) == enabled);
-            Assert.That(UIUtilityProvider.UIHelper.IsEditable("ctl00_cphDialog_wzEmailInvitation_radScheduleFor", LocateBy.Id) == enabled);
+            WebDriverUtility.DefaultProvider.WaitForElementDisplay("ctl00_cphDialog_wzEmailInvitation_radSendNow", LocateBy.Id);
+            Assert.That(WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_wzEmailInvitation_radSendNow", LocateBy.Id) == enabled);
+            Assert.That(WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_wzEmailInvitation_radScheduleFor", LocateBy.Id) == enabled);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@
         [Step]
         public void EmailWizardBreadCrumbClick(EmailWizardSteps step)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//span[@id='ctl00_cphDialog_bcTop']/ul/li/a/span[text()='{0}']", step.ToString()), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//span[@id='ctl00_cphDialog_bcTop']/ul/li/a/span[text()='{0}']", step.ToString()), LocateBy.XPath);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@
         [Step]
         public void CheckEmailTerms()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_chkNotice", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_chkNotice", LocateBy.Id);
         }
 
         /// <summary>
@@ -273,8 +273,8 @@
         /// <param name="themeName"></param>
         public void SelectTheme(string themeName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//div/p[text()='{0}']", themeName), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//div/p[text()='{0}']", themeName), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -296,8 +296,8 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         /// <summary>
@@ -306,8 +306,8 @@
         [Step]
         public void UploadLogo()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_hlEditLogo", LocateBy.Id);
-            UIUtilityProvider.UIHelper.UploadEmailLogo(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.DataPath + LogoFileName);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_wzEmailInvitation_hlEditLogo", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.UploadEmailLogo(ConfigReader.DefaultProvider.EnvironmentConfiguration.DataPath + LogoFileName);
         }
 
         /// <summary>
@@ -317,7 +317,7 @@
         [Step]
         public void SetCustomTitle(string title)
         {
-            UIUtilityProvider.UIHelper.Type("eventtitle", title, LocateBy.Name);
+            WebDriverUtility.DefaultProvider.Type("eventtitle", title, LocateBy.Name);
         }
 
         /// <summary>
@@ -328,29 +328,29 @@
         [Step]
         public void VerifyReviewTab(string theme, string title)
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             //Thread.Sleep(60000);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
-            UIUtilityProvider.UIHelper.SelectIFrame(0);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SelectIFrame(0);
             //UIUtilityProvider.UIHelper.SelectPopUpFrameById("ifPreview");
             
 
-            string source = UIUtilityProvider.UIHelper.GetPageSource();
+            string source = WebDriverUtility.DefaultProvider.GetPageSource();
 
-            UIUtilityProvider.UIHelper.SelectPopUpFrameById("ifPreview");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameById("ifPreview");
 
             // Cannot verify by text after TD is online
             ////Assert.That(driver.PageSource.ToLower().Contains(theme.ToLower()));
 
-            Assert.That(UIUtilityProvider.UIHelper.GetPageSource().ToLower().Contains(title.ToLower()));
+            Assert.That(WebDriverUtility.DefaultProvider.GetPageSource().ToLower().Contains(title.ToLower()));
 
             // TODO: Better way to test the specific logo?
-            Assert.That(UIUtilityProvider.UIHelper.GetPageSource().ToLower().Contains(LogoFileName.ToLower()));
+            Assert.That(WebDriverUtility.DefaultProvider.GetPageSource().ToLower().Contains(LogoFileName.ToLower()));
 
             // Pick the parent frame again
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             ////WebDriverManager.driver.SwitchTo().Frame("plain");
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("plain");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
         }
     }
 }

@@ -230,7 +230,7 @@ namespace RegOnline.RegressionTest.NUnitAddin.SpiraImportExport {
         
         /// <remarks/>
         public ImportExport() {
-            this.Url = RegOnline.RegressionTest.NUnitAddin.ResultReporter.SpiraTeam.WebServiceUrl;
+            this.Url = "http://10.119.33.66/SpiraTeam/Services/v2_2/ImportExport.asmx";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

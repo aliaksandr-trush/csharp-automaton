@@ -13,11 +13,11 @@
         {
             string url = string.Format(
                 "{0}reports/Attendee.aspx?EventSessionId={1}&registerId={2}",
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
                 FormData.EventSessionId,
                 registerId);
 
-            UIUtilityProvider.UIHelper.OpenUrl(url);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
         }
 
         public Label AgendaLable(AgendaItem agenda)

@@ -19,9 +19,9 @@
 
         public void TestFinished(TestResult result)
         {
-            if (ConfigurationProvider.XmlConfig.AllConfiguration.NUnitAddin.ReportBack)
+            if (ConfigReader.DefaultProvider.AllConfiguration.NUnitAddin.ReportBack)
             {
-                ResultReporter.ReportResultToSpiraTeam(result);
+                Communicator.ReportResultToSpiraTeam(result);
             }
         }
 

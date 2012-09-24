@@ -102,52 +102,52 @@
 
         public void SelectType(FieldType type)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(Locator.TypeLocator, StringEnum.GetStringValue(type), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(Locator.TypeLocator, StringEnum.GetStringValue(type), LocateBy.Id);
         }
 
         public void SetQuestionDescription(string name)
         {
-            UIUtilityProvider.UIHelper.Type(Locator.DescriptionLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(Locator.DescriptionLocator, name, LocateBy.Id);
         }
 
         public void SetTitle(string title)
         {
-            UIUtilityProvider.UIHelper.Type(Locator.TitleLocator, title, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(Locator.TitleLocator, title, LocateBy.Id);
         }
 
         public void SetNameOnReports(string nameOnReports)
         {
-            UIUtilityProvider.UIHelper.Type(Locator.NameOnReportsLocator, nameOnReports, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(Locator.NameOnReportsLocator, nameOnReports, LocateBy.Id);
         }
 
         public void SetLineTextItemLength(int length)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(Locator.LineTextLengthLocator, length);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(Locator.LineTextLengthLocator, length);
         }
 
         public void SetFieldVisibility(bool isVisible)
         {
             string locator = "ctl00_cphDialog_chkActive";
-            UIUtilityProvider.UIHelper.SetCheckbox(locator, isVisible, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(locator, isVisible, LocateBy.Id);
         }
 
         public void SaveAndCloseAgendaOrCFItem()
         {
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetRegularPrice(double price)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(Locator.RegularPriceLocator, price);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(Locator.RegularPriceLocator, price);
         }
 
         public void SetVariableAmount(double min, double max)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(Locator.MinAmountLocator, min);
-            UIUtilityProvider.UIHelper.TypeRADNumericById(Locator.MaxAmountLocator, max);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(Locator.MinAmountLocator, min);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(Locator.MaxAmountLocator, max);
         }
 
         public void SetMembershipFeeType(FeeType feeType)
@@ -155,32 +155,32 @@
             switch (feeType)
             {
                 case FeeType.OneTimeFee:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.FeeTypeLocator + "0", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.FeeTypeLocator + "0", LocateBy.Id);
                     break;
                 case FeeType.ReccuringMembershipFee:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.FeeTypeLocator + "1", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.FeeTypeLocator + "1", LocateBy.Id);
                     break;
             }
         }
 
         public void ExpandAdvancedPriceOption()
         {
-            if (UIUtilityProvider.UIHelper.IsElementHidden(Locator.AdvancedPriceOptionsDIV, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementHidden(Locator.AdvancedPriceOptionsDIV, LocateBy.Id))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.AdvancedPriceOptions, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.AdvancedPriceOptions, LocateBy.XPath);
             }
         }
 
         public void AddMembershipDiscountCodes(string description, string formattedCodes, bool requied)
         {
-            UIUtilityProvider.UIHelper.Type(Locator.DiscountDescriptionLocator, description, LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(Locator.DiscountCodeLocator, formattedCodes, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SetCheckbox(Locator.DiscountRequiredLocator, requied, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(Locator.DiscountDescriptionLocator, description, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(Locator.DiscountCodeLocator, formattedCodes, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(Locator.DiscountRequiredLocator, requied, LocateBy.Id);
         }
 
         public void ApplyMembershipDiscountCodeOnce(bool applyOnce)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(Locator.ApplyOnceLocator, applyOnce, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(Locator.ApplyOnceLocator, applyOnce, LocateBy.Id);
         }
 
         public void SetTypeWithDefaultsOld(FieldType type)
@@ -218,9 +218,9 @@
 
         public void ClickAddMultipleChoiceItemsOld()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(Locator.AddMultipleChoiceItemLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(Locator.AddMultipleChoiceItemLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameId2);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameId2);
         }
 
         public void AddPredefinedMultipleChoiceItemsOld(PredefinedOptionsOld choice)
@@ -256,19 +256,19 @@
 
         private void SaveAndCloseMCItem()
         {
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameId);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameId);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         private void SaveAndNewMCItem()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameId2);
-            UIUtilityProvider.UIHelper.ClickSaveAndNew();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameId2);
+            WebDriverUtility.DefaultProvider.ClickSaveAndNew();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
     }
 }

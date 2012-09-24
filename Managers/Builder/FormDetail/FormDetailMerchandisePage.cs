@@ -15,10 +15,10 @@
 
         public void ClickAddMerchandiseItem()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdFees_"), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdFees_"), LocateBy.Id);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForRADWindow();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            WebDriverUtility.DefaultProvider.WaitForRADWindow();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
         }
 
         [Step]
@@ -34,32 +34,38 @@
         [Step]
         public void AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType type, string name, double? fee, double? minFee, double? maxFee)
         {
-            ClickAddMerchandiseItem();
+            
+            ClickAddMerchandiseItem ();
             this.MerchMgr.SetName(name);
             this.MerchMgr.SetType(type);
             this.MerchMgr.SetMerchItemPrice(type, fee, minFee, maxFee);
             this.MerchMgr.SaveAndClose();
         }
 
+        [Step]
+        public void AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType type, string name, double? fee, double? minFee, double? maxFee, string[] itemname, int? limit)
+        {
+            ClickAddMerchandiseItem();
+            this.MerchMgr.SetName(name);
+            this.MerchMgr.SetType(type);
+            this.MerchMgr.SetMerchItemPrice(type, fee, minFee, maxFee);
+
+            this.MerchMgr.ExpandAdvanced();
+            for (int i = 0; i < itemname.Length; i++)
+            {
+                this.MerchMgr.AddMerchandiseMultipleChoiceItem(itemname[i], limit);
+            }
+            this.MerchMgr.SaveAndClose();
+        }
+
         [Verify]
         public void VerifyMerchandiseItem(MerchandiseManager.MerchandiseType type, string name)
         {
-            ////ReloadEvent();
-
             Fee fee = null;
 
             ClientDataContext db = new ClientDataContext();
             fee = (from f in db.Fees where f.Description == name && f.AmountTypeId == (int)type orderby f.Id ascending select f).ToList().Last();
 
-            //E.Fees fee = Event.FeesCollection.Find(
-            //    delegate(E.Fees feeInner)
-            //    {
-            //        return feeInner.Description == name &&
-            //            feeInner.ReportDescription == feeInner.Description &&
-            //            feeInner.Fieldname == feeInner.Description &&
-            //            feeInner.AmountTypeId == (int)type;
-            //    }
-            //);
             Assert.That(fee != null);
 
             switch (type)
@@ -71,23 +77,20 @@
                     Assert.That(fee.MinVarAmount > 0);
                     Assert.That(fee.MaxVarAmount > 0);
                     break;
-                ////case MerchandiseManager.MerchandiseType.Percentage:
-                ////    Assert.That(fee.Pct > 0);
-                ////    break;
             }
         }
 
         public void OpenMerchandiseItem(string merchName)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(merchName, LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(merchName, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForRADWindow();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
+            WebDriverUtility.DefaultProvider.WaitForRADWindow();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseManager.MerchItemDetailDialogID);
         }
 
         public string GetMerchandiseIDByMerchName(string merchname)
         {
-            string MerchHref = UIUtilityProvider.UIHelper.GetAttribute(merchname, "href", LocateBy.LinkText);
+            string MerchHref = WebDriverUtility.DefaultProvider.GetAttribute(merchname, "href", LocateBy.LinkText);
             char[] sp1 = { '=' };
             char[] sp2 = { '&' };
 

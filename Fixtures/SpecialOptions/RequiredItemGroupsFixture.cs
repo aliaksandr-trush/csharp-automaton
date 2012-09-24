@@ -204,7 +204,7 @@
                 BuilderMgr.AGMgr.SetName(name);
                 BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.CheckBox);
                 BuilderMgr.AGMgr.SetVisibilityOption(true, CFManagerBase.VisibilityOption.Required);
-                UIUtilityProvider.UIHelper.ExpandAdvanced();
+                WebDriverUtility.DefaultProvider.ExpandAdvanced();
                 BuilderMgr.AGMgr.SetGroupName(group);
                 BuilderMgr.AGMgr.ClickSaveItem();
             }
@@ -228,7 +228,7 @@
                 BuilderMgr.CFMgr.SetName(name);
                 BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.CheckBox);
                 BuilderMgr.CFMgr.SetVisibilityOption(true, CFManagerBase.VisibilityOption.Required);
-                UIUtilityProvider.UIHelper.ExpandAdvanced();
+                WebDriverUtility.DefaultProvider.ExpandAdvanced();
                 BuilderMgr.CFMgr.SetGroupName(group);
                 BuilderMgr.CFMgr.SaveAndClose();
             }

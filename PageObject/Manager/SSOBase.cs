@@ -8,7 +8,6 @@
     public class SSOBase : Frame
     {
         public SSOBase(string name) : base(name) { }
-        public SSOBase(string name, string parentFrame) : base(name, parentFrame) { }
 
         public RadioButton SSORadio = new RadioButton("ctl00_cphDialog_xAuth_rdoSSO", LocateBy.Id);
         public TextBox EndpointURL = new TextBox("ctl00_cphDialog_xAuth_txtSSOEndpointUrl", LocateBy.Id);
@@ -23,7 +22,7 @@
 
         public CheckBox RegTypeEnabled(RegType regType)
         {
-            return new CheckBox(string.Format("ctl00_cphDialog_xAuth_{0}", regType.RegTypeId), LocateBy.Id);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input", regType.RegTypeName), LocateBy.XPath);
         }
 
         public void SaveAndClose_Click()
@@ -34,7 +33,6 @@
             WaitForAJAX();
             WaitForLoad();
             SwitchToMain();
-            SelectParentFrame();
         }
 
         public void Cancel_Click()
@@ -45,7 +43,6 @@
             WaitForAJAX();
             WaitForLoad();
             SwitchToMain();
-            SelectParentFrame();
         }
     }
 }

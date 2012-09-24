@@ -23,15 +23,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineRetrieveSingleRegServiceFixture()
+            : base(ConfigReader.WebServiceEnum.RetrieveSingleRegService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RetrieveSingleRegService].Url);
-
             this.service = new RetrieveSingleRegistrationManagerSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.RetrieveSingleRegService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -45,8 +42,8 @@
 
             //The registrant belongs to specific event
             string response = this.service.RetrieveSingleRegistration(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventIdRegistrantBelongsTo,
                 this.registerId);
 
@@ -74,8 +71,8 @@
 
             // The registrant doesn't belong to specific event
             string response = this.service.RetrieveSingleRegistration(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login, 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
+                ConfigReader.DefaultProvider.AccountConfiguration.Login, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
                 this.eventIdRegistrantDoesNotBelongTo,
                 this.registerId);
 

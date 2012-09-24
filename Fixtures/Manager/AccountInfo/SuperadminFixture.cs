@@ -93,6 +93,7 @@
             RegisterMgr.Continue();
             RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
+            RegisterMgr.ClickNeedAccommodations();
             RegisterMgr.FillOutLodgingCCInfo_Default();
             RegisterMgr.Continue();
             RegisterMgr.FinishRegistration();
@@ -144,7 +145,7 @@
         private void SetSuperadmin(string eventSessionId, bool enable)
         {
             ManagerSiteMgr.SetSuperadmin(eventSessionId, enable);
-            UIUtilityProvider.UIHelper.RefreshPage();
+            WebDriverUtility.DefaultProvider.RefreshPage();
         }
     }
 }

@@ -176,7 +176,7 @@
             RunReportAndVerifyAllRegistrantsPresent(2, 1, 2, 0, 0, 0, 0, 0, 0);
             ReportMgr.SelectAllAttendees();
             ReportMgr.ClickCheckInButton();
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
             CloseReportAndSelectCheckInPage();
 
@@ -186,7 +186,7 @@
             RunReportAndVerifyAllRegistrantsPresent(2, 0, 0, 2, 1, 0, 0, 0, 0);
             ReportMgr.SelectAllAttendees();
             ReportMgr.ClickCheckInButton();
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
             CloseReportAndSelectCheckInPage();
 
@@ -196,7 +196,7 @@
             RunReportAndVerifyAllRegistrantsPresent(2, 0, 0, 0, 0, 2, 1, 0, 0);
             ReportMgr.SelectAllAttendees();
             ReportMgr.ClickCheckInButton();
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
             CloseReportAndSelectCheckInPage();
 
@@ -207,7 +207,7 @@
             RunReportAndVerifyAllRegistrantsPresent(2, 0, 0, 0, 0, 0, 0, 1, 2);
             ReportMgr.SelectAllAttendees();
             ReportMgr.ClickCheckInButton();
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
             CloseReportAndSelectCheckInPage();
         }
@@ -276,14 +276,14 @@
 
         private void SelectAttendeeReportPopUp()
         {
-            UIUtilityProvider.UIHelper.SelectWindowByName("attendee");
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByName("attendee");
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         private void CloseReportAndSelectCheckInPage()
         {
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
-            UIUtilityProvider.UIHelper.SelectWindowByTitle("RegOnline");
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.SelectWindowByTitle("RegOnline");
         }
 
         [Step]

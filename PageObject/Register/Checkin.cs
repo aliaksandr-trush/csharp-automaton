@@ -1,10 +1,12 @@
 ﻿namespace RegOnline.RegressionTest.PageObject.Register
 {
+    using System;
+    using RegOnline.RegressionTest.Configuration;
+    using RegOnline.RegressionTest.DataAccess;
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
-    using RegOnline.RegressionTest.Configuration;
 
     public class Checkin : Window
     {
@@ -28,13 +30,13 @@
         {
             string url = string.Empty;
 
-            switch (reg.RegisterMethod)
+            switch (reg.Register_Method)
             {
                 case RegisterMethod.EventId:
 
                     url = string.Format(
                         "{0}{1}", 
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl, 
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl, 
                         reg.Event.Id);
 
                     break;
@@ -43,20 +45,20 @@
                 case RegisterMethod.EventWebsite:
                 case RegisterMethod.EventCalendar:
 
-                    url = string.Format(
-                        "{0}{1}",
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
-                        reg.Event.Shortcut);
+                    Manager.EventList_EventRow eventRow = new Manager.EventList_EventRow(reg.Event.Id);
+                    url = eventRow.EventURL;
 
                     break;
 
                 case RegisterMethod.RegTypeDirectUrl:
 
+                    reg.EventFee_Response.RegType.RegTypeId = AccessData.FetchRegTypeId(reg.Event.Id, reg.EventFee_Response.RegType.RegTypeName);
+
                     url = string.Format(string.Format(
                         "{0}?eventID={1}&rTypeID={2}", 
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl,
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
                         reg.Event.Id, 
-                        reg.RegType.RegTypeId));
+                        reg.EventFee_Response.RegType.RegTypeId));
 
                     break;
 
@@ -64,7 +66,7 @@
 
                     url = string.Format(
                         "{0}register/checkin.aspx?MethodId=1&eventsessionId={1}&eventID={2}",
-                        ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps,
+                        ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps,
                         DataCollection.FormData.EventSessionId,
                         reg.Event.Id);
 
@@ -74,13 +76,35 @@
                     break;
             }
 
-            UIUtilityProvider.UIHelper.OpenUrl(url);
+            WebDriverUtility.DefaultProvider.OpenUrl(url);
         }
 
         public RadioButton RegTypeRadio(RegType regType)
         {
-            return new RadioButton(
-                string.Format("//input[@value='{0}']", regType.RegTypeId), LocateBy.XPath);
+            Label label = this.GetRegTypeLabel(regType);
+            string attribute_For = label.GetAttribute("for");
+            string tmp = attribute_For.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
+            regType.RegTypeId = Convert.ToInt32(tmp);
+
+            return new RadioButton(attribute_For, LocateBy.Id);
+        }
+
+        public void VerifyRegTypeDisplay(RegType regType, bool expected)
+        {
+            Label label = this.GetRegTypeLabel(regType);
+            bool actual = label.IsDisplay;
+
+            WebDriverUtility.DefaultProvider.VerifyValue(
+                expected,
+                actual,
+                string.Format("Check display of regtype '{0}'", regType.RegTypeName));
+        }
+
+        private Label GetRegTypeLabel(RegType regType)
+        {
+            return new Label(
+                string.Format("//ol[@id='radRegTypes']//label[contains(text(),'{0}')]", regType.RegTypeName), 
+                LocateBy.XPath);
         }
 
         public void SelectRegTypeRadioButton(RegType regType)

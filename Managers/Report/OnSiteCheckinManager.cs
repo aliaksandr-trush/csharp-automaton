@@ -66,19 +66,19 @@
         public void SelectWhichNamesYouWishToView(OnSiteNameFilter filter)
         {
             string locator_XPath = string.Format(WhichNamesToViewLocator, StringEnum.GetStringValue(filter));
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
         }
 
         public void SortNames(OnSiteSortByOptions sortOption, OnSiteOrderByOptions orderOptions)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(SortByDropDownLocator, StringEnum.GetStringValue(sortOption), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SelectWithText(OrderByDropDownLocator, StringEnum.GetStringValue(orderOptions), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectWithText(SortByDropDownLocator, StringEnum.GetStringValue(sortOption), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectWithText(OrderByDropDownLocator, StringEnum.GetStringValue(orderOptions), LocateBy.XPath);
         }
 
         public void SelectSearchByNameOrCompany(OnSiteSearchByNameOrCompany nameOrCompany)
         {
             string locator_XPath = string.Format(SearchByNameOrCoLocator, StringEnum.GetStringValue(nameOrCompany));
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
         }
 
         public void FilterReportByCharacter(string characterOrNullToSelectAll)
@@ -86,18 +86,18 @@
             if (characterOrNullToSelectAll == null)
             {
                 string locator_XPath = string.Format(AlphabetFilterLocator, 0);
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
             }
             else
             {
                 string locator_XPath = string.Format(AlphabetFilterLocator, characterOrNullToSelectAll);
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
             }
         }
 
         public void RunReport()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(RunReportButton, LocateBy.Name);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RunReportButton, LocateBy.Name);
         }
     }
 }

@@ -143,9 +143,9 @@
         [Step]
         public void SaveAndBypassTransaction()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
@@ -154,8 +154,8 @@
             string transactionWindowName = "Transaction";
 
             this.OpenAttendeeSubPage(AttendeeSubPage.Transactions);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("New Transaction", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.SelectWindowByName(transactionWindowName);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("New Transaction", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.SelectWindowByName(transactionWindowName);
         }
 
         [Step]
@@ -164,31 +164,31 @@
             switch (type)
             {
                 case TransactionType.OnlineCCPayment:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ROnlineCCPayment", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ROnlineCCPayment", LocateBy.Id);
                     break;
 
                 case TransactionType.OnlineCCRefund:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ROnlineCCRefund", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ROnlineCCRefund", LocateBy.Id);
                     break;
 
                 case TransactionType.ManualOfflinePayment:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ROfflinePayment", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ROfflinePayment", LocateBy.Id);
                     break;
 
                 case TransactionType.ManualOfflineRefund:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ROfflineRefund", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ROfflineRefund", LocateBy.Id);
                     break;
 
                 case TransactionType.RevenueAdjustments:
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_RRevenueBalanceDue", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_RRevenueBalanceDue", LocateBy.Id);
                     break;
 
                 default:
                     throw new ArgumentException(string.Format("No such transaction type: {0}", type.ToString()));
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(NextButton, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(NextButton, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -210,37 +210,37 @@
         // Specify 'newCCNumber' as null is to use the original CCNumber
         public void EnterNewCCNumber(string newCCNumber)
         {
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
             {
 
                 string ccNumberRadioButtonLocator = "ctl00_cphDialog_rCCNumber";
                 string ccNumberTextboxLocator = "ctl00_cphDialog_ccNumber";
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
             }
-            else if (UIUtilityProvider.UIHelper.UrlContainsPath("/register/checkout.aspx"))
+            else if (WebDriverUtility.DefaultProvider.UrlContainsPath("/register/checkout.aspx"))
             {
                 string ccNumberRadioButtonLocator = "ctl00_cph_rbNewCC";
                 string ccNumberTextboxLocator = "ctl00_cph_txtCC";
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ccNumberRadioButtonLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(ccNumberTextboxLocator, newCCNumber, LocateBy.Id);
             }
             else
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on NewCC page or checkout page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on NewCC page or checkout page!");
             }
         }
 
         [Step]
         public void EnterCCAmount(double amount)
         {
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
             {
-                UIUtilityProvider.UIHelper.Type(CCAmountLocator + "_text", amount, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCAmountLocator + "_text", amount, LocateBy.Id);
             }
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("/register/checkout.aspx"))
             {
-                UIUtilityProvider.UIHelper.Type(CCAmountLocatorNew, amount, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCAmountLocatorNew, amount, LocateBy.Id);
             }            
         }
 
@@ -251,7 +251,7 @@
         [Step]
         public void SelectCCNumber(int index)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(CCNumberRadioButtonLocatorFormat, index), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(CCNumberRadioButtonLocatorFormat, index), LocateBy.Id);
         }
 
         /// <summary>
@@ -264,21 +264,21 @@
         {
             VerifyTool.VerifyValue(
                 check,
-                UIUtilityProvider.UIHelper.IsChecked(string.Format(CCNumberRadioButtonLocatorFormat, index), LocateBy.Id),
+                WebDriverUtility.DefaultProvider.IsChecked(string.Format(CCNumberRadioButtonLocatorFormat, index), LocateBy.Id),
                 "CC number " + index.ToString() + " is selected: {0}");
         }
 
         public void ConfirmCCRefund()
         {
             string confirmYesButtonLocator = "actionYes";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(confirmYesButtonLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(confirmYesButtonLocator, LocateBy.Id);
         }
 
         [Step]
         public void EnterRevenueAdjustmentsInfo(NewTransactionPayMethod payMethod, double amount)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(NewTransactionPayMethodDropDownLocator, StringEnum.GetStringValue(payMethod), LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_TransAmount_text", amount, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(NewTransactionPayMethodDropDownLocator, StringEnum.GetStringValue(payMethod), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_TransAmount_text", amount, LocateBy.Id);
             Utility.ThreadSleep(0.75);
         }
 
@@ -287,61 +287,61 @@
         /// </summary>
         public void EnterTransactionDefaultCCInfo()
         {
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
             {
                 this.EnterNewCCNumber(PaymentManager.DefaultPaymentInfo.CCNumber);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorOld.ExpirationMonth, DefaultCCExpirationMonth, LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorOld.ExpirationYear, PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorOld.ExpirationMonth, DefaultCCExpirationMonth, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorOld.ExpirationYear, PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
                 this.EnterDefaultHolderName();
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorOld.BillingAddressLineOne, PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorOld.BillingCity, PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorOld.BillingState, PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorOld.ZipCode, PaymentManager.DefaultPaymentInfo.ZipCode, LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorOld.Country, PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorOld.BillingAddressLineOne, PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorOld.BillingCity, PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorOld.BillingState, PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorOld.ZipCode, PaymentManager.DefaultPaymentInfo.ZipCode, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorOld.Country, PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
             }
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
                 this.EnterNewCCNumber(PaymentManager.DefaultPaymentInfo.CCNumber);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorNew.ExpirationMonth, DefaultCCExpirationMonthNew, LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorNew.ExpirationYear, PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorNew.ExpirationMonth, DefaultCCExpirationMonthNew, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorNew.ExpirationYear, PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
                 this.EnterDefaultHolderName();
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorNew.BillingAddressLineOne, PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorNew.BillingCity, PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorNew.BillingState, PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorNew.ZipCode, PaymentManager.DefaultPaymentInfo.ZipCode, LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectWithText(CCInfoLocatorNew.Country, PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorNew.BillingAddressLineOne, PaymentManager.DefaultPaymentInfo.BillingAddressLineOne, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorNew.BillingCity, PaymentManager.DefaultPaymentInfo.BillingCity, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorNew.BillingState, PaymentManager.DefaultPaymentInfo.BillingState, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorNew.ZipCode, PaymentManager.DefaultPaymentInfo.ZipCode, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectWithText(CCInfoLocatorNew.Country, PaymentManager.DefaultPaymentInfo.Country, LocateBy.Id);
             }
         }
 
         public void EnterDefaultHolderName()
         {
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("/reports/transactions/New_CC.aspx?"))
             {
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorOld.HolderName, PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorOld.HolderName, PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
             }
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
-                UIUtilityProvider.UIHelper.Type(CCInfoLocatorNew.HolderName, PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type(CCInfoLocatorNew.HolderName, PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
             }
         }
 		
         [Step]
         public void SaveAndCloseTransaction()
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//button[@name='ctl00$cph$btnFinalize']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//button[@name='ctl00$cph$btnFinalize']", LocateBy.XPath);
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
             }
 
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         /// <summary>
@@ -369,32 +369,33 @@
                 /*decimal.Truncate(charge),
                 (charge - decimal.Truncate(charge)).ToString("F2", CultureInfo.InvariantCulture).Remove(0, 1)*/ format);
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("inButCharge", LocateBy.Id);
-            string confirmationMessage = UIUtilityProvider.UIHelper.GetConfirmationText();
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("inButCharge", LocateBy.Id);
+            Utility.ThreadSleep(2);
+            string confirmationMessage = WebDriverUtility.DefaultProvider.GetConfirmationText();
+            WebDriverUtility.DefaultProvider.GetConfirmation();
             VerifyTool.VerifyValue(confirmationPattern, confirmationMessage, "Confirmation: {0}");
 
             Utility.ThreadSleep(1.5);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
 
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
-                UIUtilityProvider.UIHelper.SelectWindowByName("Charge");
+                WebDriverUtility.DefaultProvider.SelectWindowByName("Charge");
                 string totalCharges;
 
-                if (UIUtilityProvider.UIHelper.IsElementPresent(TotalToBeChargedLocator, LocateBy.XPath))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(TotalToBeChargedLocator, LocateBy.XPath))
                 {
-                    totalCharges = UIUtilityProvider.UIHelper.GetText(TotalToBeChargedLocator, LocateBy.XPath);
+                    totalCharges = WebDriverUtility.DefaultProvider.GetText(TotalToBeChargedLocator, LocateBy.XPath);
                 }
                 else
                 {
-                    totalCharges = UIUtilityProvider.UIHelper.GetText(AmountToBeChargedLocator, LocateBy.XPath);
+                    totalCharges = WebDriverUtility.DefaultProvider.GetText(AmountToBeChargedLocator, LocateBy.XPath);
                 }
 
                 VerifyTool.VerifyValue("$" + format, totalCharges, "Total to be charged: {0}");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(SaveAndClose, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveAndClose, LocateBy.XPath);
                 Utility.ThreadSleep(2);
-                UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             }
 
             Utility.ThreadSleep(2);
@@ -409,7 +410,7 @@
 
         private void RefundCreditDue(decimal charge)
         {
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("register/checkout.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx"))
             {
                 string confirmationPattern = "Are you sure want to REFUND test test for -${0}{1}?";
                 //"^Are you sure want to REFUND "
@@ -421,30 +422,30 @@
                     decimal.Truncate(charge),
                     (charge - decimal.Truncate(charge)).ToString("F2", CultureInfo.InvariantCulture).Remove(0, 1));
 
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("inButRefund", LocateBy.Id);
-                string confirmationMessage = UIUtilityProvider.UIHelper.GetConfirmationText();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("inButRefund", LocateBy.Id);
+                string confirmationMessage = WebDriverUtility.DefaultProvider.GetConfirmationText();
 
                 VerifyTool.VerifyValue(confirmationPattern, confirmationMessage, "Confirmation: {0}");
 
                 // After clicking 'OK' in the js confirmation dialog, a 'Online credit card refund' window will popup
-                UIUtilityProvider.UIHelper.GetConfirmation();
+                WebDriverUtility.DefaultProvider.GetConfirmation();
                 string refundPopupWindowName = "Charge";
-                UIUtilityProvider.UIHelper.SelectWindowByName(refundPopupWindowName);
+                WebDriverUtility.DefaultProvider.SelectWindowByName(refundPopupWindowName);
                 string totalCharges;
 
-                if (UIUtilityProvider.UIHelper.IsElementPresent(TotalToBeChargedLocator, LocateBy.XPath))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(TotalToBeChargedLocator, LocateBy.XPath))
                 {
-                    totalCharges = UIUtilityProvider.UIHelper.GetText(TotalToBeChargedLocator, LocateBy.XPath);
+                    totalCharges = WebDriverUtility.DefaultProvider.GetText(TotalToBeChargedLocator, LocateBy.XPath);
                 }
                 else
                 {
-                    totalCharges = UIUtilityProvider.UIHelper.GetText(AmountToBeChargedLocator, LocateBy.XPath);
+                    totalCharges = WebDriverUtility.DefaultProvider.GetText(AmountToBeChargedLocator, LocateBy.XPath);
                 }
 
                 VerifyTool.VerifyValue("$" + charge, totalCharges, "Total to be refunded: {0}");
 
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(SaveAndClose, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveAndClose, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SelectOriginalWindow();
 
                 Utility.ThreadSleep(2);
             }
@@ -460,12 +461,12 @@
                     decimal.Truncate(charge),
                     (charge - decimal.Truncate(charge)).ToString("F2", CultureInfo.InvariantCulture).Remove(0, 1));
 
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("inButRefund", LocateBy.Id);
-                string confirmationMessage = UIUtilityProvider.UIHelper.GetConfirmationText();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("inButRefund", LocateBy.Id);
+                string confirmationMessage = WebDriverUtility.DefaultProvider.GetConfirmationText();
 
                 VerifyTool.VerifyValue(confirmationPattern, confirmationMessage, "Confirmation: {0}");
 
-                UIUtilityProvider.UIHelper.GetConfirmation();
+                WebDriverUtility.DefaultProvider.GetConfirmation();
                 //if (!Regex.IsMatch(confirmationMessage, confirmationPattern))
                 //{
                 //    Assert.Fail(string.Format("Confirmation msg:{0}; Regex pattern:{1}", confirmationMessage, confirmationPattern));
@@ -474,7 +475,7 @@
                 // After clicking 'OK' in the js confirmation dialog, a 'Online credit card refund' window will popup
                 string refundPopupWindowName = "Charge";
                 //WaitForPopUp(refundPopupWindowName);
-                UIUtilityProvider.UIHelper.SelectWindowByName(refundPopupWindowName);
+                WebDriverUtility.DefaultProvider.SelectWindowByName(refundPopupWindowName);
                 //string totalCharges;
                 //if(IsElementPresent(TotalToBeChargedLocator))
                 //{
@@ -486,8 +487,8 @@
                 //}
                 //VerifyValue("$" + charge, totalCharges, "Total to be refunded: {0}");
 
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00$cph$btnFinalize", LocateBy.Name);
-                UIUtilityProvider.UIHelper.SelectOriginalWindow();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00$cph$btnFinalize", LocateBy.Name);
+                WebDriverUtility.DefaultProvider.SelectOriginalWindow();
 
                 Utility.ThreadSleep(2);
             }
@@ -523,8 +524,8 @@
             if ((order > 0) && (order <= transactions.Length))
             {
                 locator = string.Format("//div[@id='transactions']/div[2]/table/tbody/tr[{0}]/td", order + 1) + "[4]/input";
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SelectWindowByName("Transaction");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SelectWindowByName("Transaction");
 
             }
             else
@@ -539,9 +540,9 @@
             ClickAlterTransaction(order);
 
             //this.EnterTransactionDefaultCCInfo();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("actionYes", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("actionYes", LocateBy.Id);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
             Utility.ThreadSleep(2);
         }
         
@@ -590,13 +591,13 @@
                     " (Details)";
             }
 
-            string actualTransactionTypeCellString = UIUtilityProvider.UIHelper.GetText(transactionTypeCellInRowLocator, LocateBy.XPath);
+            string actualTransactionTypeCellString = WebDriverUtility.DefaultProvider.GetText(transactionTypeCellInRowLocator, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedTransactionTypeCellString, actualTransactionTypeCellString, "Transaction type: {0}");
 
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(amount),
-                UIUtilityProvider.UIHelper.GetText(transactionAmountCellInRowLocator, LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(transactionAmountCellInRowLocator, LocateBy.XPath),
                 "Transaction amount: {0}");
         }
 
@@ -620,10 +621,10 @@
                 detailLinkLocator = TransactionRows + string.Format("[{0}]", "last()-1") + "/td[3]/a";
             }
 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(detailLinkLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(detailLinkLocator, LocateBy.XPath);
             //WaitForPopUp(detailsWindowName);
-            UIUtilityProvider.UIHelper.SelectWindowByName(detailsWindowName);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWindowByName(detailsWindowName);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Verify]
@@ -641,34 +642,34 @@
 
             VerifyTool.VerifyValue(
                 StringEnum.GetStringValue(typeString),
-                UIUtilityProvider.UIHelper.GetText(string.Format(detailResponseLocatorFormat, "Type:"), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format(detailResponseLocatorFormat, "Type:"), LocateBy.XPath),
                 "Transaction type: {0}");
 
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(amount),
-                UIUtilityProvider.UIHelper.GetText(string.Format(detailResponseLocatorFormat, "Amount:"), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format(detailResponseLocatorFormat, "Amount:"), LocateBy.XPath),
                 "Transaction amount: {0}");
 
             VerifyTool.VerifyValue(
                 creditCardType.ToString(),
-                UIUtilityProvider.UIHelper.GetText(string.Format(detailResponseLocatorFormat, "Credit Card Type:"), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format(detailResponseLocatorFormat, "Credit Card Type:"), LocateBy.XPath),
                 "Transaction credit card type: {0}");
 
             VerifyTool.VerifyValue(
                 Utility.GetEncryptedCCNumber(ccNumber),
-                UIUtilityProvider.UIHelper.GetText(string.Format(detailResponseLocatorFormat, "Credit Card Number:"), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format(detailResponseLocatorFormat, "Credit Card Number:"), LocateBy.XPath),
                 "Transaction credit card number: {0}");
 
             VerifyTool.VerifyValue(
                 holderName,
-                UIUtilityProvider.UIHelper.GetText(string.Format(detailResponseLocatorFormat, "Cardholder Name:"), LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText(string.Format(detailResponseLocatorFormat, "Cardholder Name:"), LocateBy.XPath),
                 "Transaction cardholder name: {0}");
         }
 
         [Step]
         public void CloseTransactionDetails()
         {
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
         }
 
         // Specify the 'maxRefundable' to null so that max refundable will not be verified
@@ -686,12 +687,12 @@
             }
 
             string expectedString = stringToVerify.ToString();
-            int ccNumberCount = UIUtilityProvider.UIHelper.GetXPathCountByXPath("//*[@id='" + CCNumberListLocator + "']/input");
+            int ccNumberCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//*[@id='" + CCNumberListLocator + "']/input");
             string actualString = string.Empty;
 
             for (int cnt = 1; cnt <= ccNumberCount; cnt++)
             {
-                actualString = UIUtilityProvider.UIHelper.GetText(string.Format("//*[@id='{0}']/label[{1}]", CCNumberListLocator, cnt), LocateBy.XPath);
+                actualString = WebDriverUtility.DefaultProvider.GetText(string.Format("//*[@id='{0}']/label[{1}]", CCNumberListLocator, cnt), LocateBy.XPath);
                 
                 // If max refundable amount is not to be verified, remove them from the actual string
                 if (!maxRefundable.HasValue)
@@ -705,13 +706,13 @@
                 }
             }
 
-            UIUtilityProvider.UIHelper.FailTest(string.Format("Expected: {0}; Actual: {1}", expectedString, actualString));
+            WebDriverUtility.DefaultProvider.FailTest(string.Format("Expected: {0}; Actual: {1}", expectedString, actualString));
         }
 
         [Verify]
         public void VerifyCCAmount(double amount)
         {
-            string actual = StringTool.FormatAmount(Convert.ToDecimal(UIUtilityProvider.UIHelper.GetValue(CCAmountLocatorNew, LocateBy.Id)));
+            string actual = StringTool.FormatAmount(Convert.ToDecimal(WebDriverUtility.DefaultProvider.GetValue(CCAmountLocatorNew, LocateBy.Id)));
             VerifyTool.VerifyValue(amount + ".00", actual, "CC amount: {0}");
         }
 
@@ -762,42 +763,42 @@
 
             VerifyTool.VerifyValue(
                 DefaultCCExpirationMonthNew,
-                UIUtilityProvider.UIHelper.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.ExpirationMonth + "']"),
+                WebDriverUtility.DefaultProvider.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.ExpirationMonth + "']"),
                 "CC expiration month: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.ExpirationYear,
-                UIUtilityProvider.UIHelper.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.ExpirationYear + "']"),
+                WebDriverUtility.DefaultProvider.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.ExpirationYear + "']"),
                 "CC expiration year: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.HolderName,
-                UIUtilityProvider.UIHelper.GetValue(CCInfoLocatorNew.HolderName, LocateBy.Id),
+                WebDriverUtility.DefaultProvider.GetValue(CCInfoLocatorNew.HolderName, LocateBy.Id),
                 "CC holder name: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.BillingAddressLineOne,
-                UIUtilityProvider.UIHelper.GetValue(CCInfoLocatorNew.BillingAddressLineOne, LocateBy.Id),
+                WebDriverUtility.DefaultProvider.GetValue(CCInfoLocatorNew.BillingAddressLineOne, LocateBy.Id),
                 "CC billing address one: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.BillingCity,
-                UIUtilityProvider.UIHelper.GetValue(CCInfoLocatorNew.BillingCity, LocateBy.Id),
+                WebDriverUtility.DefaultProvider.GetValue(CCInfoLocatorNew.BillingCity, LocateBy.Id),
                 "CC billing city: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.BillingState,
-                UIUtilityProvider.UIHelper.GetValue(CCInfoLocatorNew.BillingState, LocateBy.Id),
+                WebDriverUtility.DefaultProvider.GetValue(CCInfoLocatorNew.BillingState, LocateBy.Id),
                 "CC billing state: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.ZipCode,
-                UIUtilityProvider.UIHelper.GetValue(CCInfoLocatorNew.ZipCode, LocateBy.Id),
+                WebDriverUtility.DefaultProvider.GetValue(CCInfoLocatorNew.ZipCode, LocateBy.Id),
                 "CC zip code: {0}");
 
             VerifyTool.VerifyValue(
                 PaymentManager.DefaultPaymentInfo.Country,
-                UIUtilityProvider.UIHelper.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.Country + "']"),
+                WebDriverUtility.DefaultProvider.GetSelectedOptionFromDropdownByXPath("//select[@id='" + CCInfoLocatorNew.Country + "']"),
                 "CC country: {0}");
         }
     }

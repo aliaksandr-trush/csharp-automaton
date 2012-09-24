@@ -228,7 +228,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -239,33 +239,33 @@
         public void SaveAndClose()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SaveAndStay()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
         public void Cancel()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickAddPredefinedMultiChoiceItem()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddCommonlyUsedItemsLinkLocator, LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddCommonlyUsedItemsLinkLocator, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(this.PredefinedMultiChoiceItemMgr.FrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(this.PredefinedMultiChoiceItemMgr.FrameID);
         }
 
         public void AddPredefinedMultiChoiceItem(PredifinedMultiChoiceItemManagerBase.PredefinedItemType type)
@@ -273,16 +273,16 @@
             this.ClickAddPredefinedMultiChoiceItem();
             this.PredefinedMultiChoiceItemMgr.ClickPredefinedItem(type);
             this.PredefinedMultiChoiceItemMgr.SaveAndClose();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(FrameID);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickAddMultiChoiceItem()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(this.MultiChoiceItemMgr.FrameID);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(this.MultiChoiceItemMgr.FrameID);
         }
 
         public void AddMultiChoiceItem(string name)
@@ -329,23 +329,23 @@
         }
         public void PrePopulateGroupSelections(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(PrePopulateGroupSelectionLocator, check, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SetCheckbox(PrePopulateGroupSelectionLocator, check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void AllowGroupSelectionEditing(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(AllowGroupSelectionEditingLocator, check, LocateBy.Id); 
+            WebDriverUtility.DefaultProvider.SetCheckbox(AllowGroupSelectionEditingLocator, check, LocateBy.Id); 
         }
 
         public void ClickOptionsLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(OptionsLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(OptionsLinkLocator, LocateBy.Id);
         }
 
         public void SetShowRemainingCapacity(bool show)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox(ShowRemainingCapacityLocator, show, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(ShowRemainingCapacityLocator, show, LocateBy.Id);
         }
 
         public void SetLimitReachOption(LimitReachedOption option)
@@ -354,27 +354,27 @@
 
             if (option == LimitReachedOption.HideThisItem)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(HideItemWhenLimitReachedLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(HideItemWhenLimitReachedLocator, LocateBy.Id);
             }
 
             if (option == LimitReachedOption.ShowThisMessage)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(ShowMessageWhenLimitReachedLocator, LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddLimitReachedMessageLocator, LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-                UIUtilityProvider.UIHelper.SelectIFrame(1);
-                UIUtilityProvider.UIHelper.Type("//textarea", LimitReachedMessage + "<br>", LocateBy.XPath);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ShowMessageWhenLimitReachedLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddLimitReachedMessageLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.SelectIFrame(1);
+                WebDriverUtility.DefaultProvider.Type("//textarea", LimitReachedMessage + "<br>", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
             }
         }
 
         public void SetSpacesAvailable(int spaces)
         {
-            UIUtilityProvider.UIHelper.Type(SpacesAvailableLocator, spaces, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(SpacesAvailableLocator, spaces, LocateBy.Id);
         }
     }
 }

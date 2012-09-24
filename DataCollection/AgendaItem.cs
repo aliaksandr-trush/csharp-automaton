@@ -15,9 +15,9 @@
         public DateTime? AgeLessThanDate;
     }
 
-    public class AgendaItemCommon : AgendaItem
+    public class AgendaItem_Common : AgendaItem
     {
-        public AgendaItemCommon(string name) : base(name) { }
+        public AgendaItem_Common(string name) : base(name) { }
 
         public DateTime? StartDate;
         public DateTime? StartTime;
@@ -27,7 +27,7 @@
         public double? Price;
         public EarlyPrice EarlyPrice;
         public LatePrice LatePrice;
-        public List<DiscountCode> DiscountCode = new List<DiscountCode>();
+        public List<DiscountCode> DiscountCodes = new List<DiscountCode>();
         public string BulkCodes;
         public bool? RequireDC;
         public bool? ApplyTaxOne;
@@ -45,9 +45,9 @@
         public string ConfirmationAddendum;
     }
 
-    public class CharInputAgendaItem : AgendaItem
+    public class AgendaItem_TextInput : AgendaItem
     {
-        public CharInputAgendaItem(string name) : base(name) { }
+        public AgendaItem_TextInput(string name) : base(name) { }
 
         public int? CharLimit;
         public string DetailsPopup;
@@ -56,9 +56,9 @@
         public bool? ForceGroupToMatch;
     }
 
-    public class AgendaItemMultipleChoice : AgendaItemCommon
+    public class AgendaItem_MultipleChoice : AgendaItem_Common
     {
-        public AgendaItemMultipleChoice(string name) : base(name) { }
+        public AgendaItem_MultipleChoice(string name) : base(name) { }
 
         public List<ChoiceItem> ChoiceItems = new List<ChoiceItem>();
         public List<FormData.CommonlyUsedMultipleChoice> CommonlyUsedItems = new List<FormData.CommonlyUsedMultipleChoice>();
@@ -66,9 +66,9 @@
         public bool? ForceGroupToMatch;
     }
 
-    public class AgendaItemCheckBox : AgendaItemCommon
+    public class AgendaItem_CheckBox : AgendaItem_Common
     {
-        public AgendaItemCheckBox(string name)
+        public AgendaItem_CheckBox(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.CheckBox;
@@ -78,27 +78,27 @@
         public bool? ForceGroupToMatch;
     }
 
-    public class AgendaItemRadioButton : AgendaItemMultipleChoice
+    public class AgendaItem_MultipleChoice_RadioButton : AgendaItem_MultipleChoice
     {
-        public AgendaItemRadioButton(string name)
+        public AgendaItem_MultipleChoice_RadioButton(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.RadioButton;
         }
     }
 
-    public class AgendaItemDropDown : AgendaItemMultipleChoice
+    public class AgendaItem_MultipleChoice_DropDown : AgendaItem_MultipleChoice
     {
-        public AgendaItemDropDown(string name)
+        public AgendaItem_MultipleChoice_DropDown(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Dropdown;
         }
     }
 
-    public class AgendaItemTime : AgendaItemCommon
+    public class AgendaItem_Time : AgendaItem_Common
     {
-        public AgendaItemTime(string name)
+        public AgendaItem_Time(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Time;
@@ -108,9 +108,9 @@
         public bool? ForceGroupToMatch;
     }
 
-    public class AgendaItemHeader : AgendaItem
+    public class AgendaItem_Header : AgendaItem
     {
-        public AgendaItemHeader(string name)
+        public AgendaItem_Header(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.SectionHeader;
@@ -120,27 +120,27 @@
         public string DetailsURL;
     }
 
-    public class AgendaItemAlways : AgendaItemCommon
+    public class AgendaItem_AlwaysSelected : AgendaItem_Common
     {
-        public AgendaItemAlways(string name)
+        public AgendaItem_AlwaysSelected(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.AlwaysSelected;
         }
     }
 
-    public class AgendaItemContinue : AgendaItem
+    public class AgendaItem_ContinueButton : AgendaItem
     {
-        public AgendaItemContinue(string name)
+        public AgendaItem_ContinueButton(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.ContinueButton;
         }
     }
 
-    public class AgendaItemDate : AgendaItemCommon
+    public class AgendaItem_Date : AgendaItem_Common
     {
-        public AgendaItemDate(string name)
+        public AgendaItem_Date(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Date;
@@ -150,9 +150,9 @@
         public bool? ForceGroupToMatch;
     }
 
-    public class AgendaItemUpload : AgendaItemCommon
+    public class AgendaItem_FileUpload : AgendaItem_Common
     {
-        public AgendaItemUpload(string name)
+        public AgendaItem_FileUpload(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.FileUpload;
@@ -161,36 +161,36 @@
         public string GroupName;
     }
 
-    public class AgendaItemNumber : CharInputAgendaItem
+    public class AgendaItem_Number : AgendaItem_TextInput
     {
-        public AgendaItemNumber(string name)
+        public AgendaItem_Number(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Number;
         }
     }
 
-    public class AgendaItemOneLineText : CharInputAgendaItem
+    public class AgendaItem_OneLineText : AgendaItem_TextInput
     {
-        public AgendaItemOneLineText(string name)
+        public AgendaItem_OneLineText(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.OneLineText;
         }
     }
 
-    public class AgendaItemParagraph : CharInputAgendaItem
+    public class AgendaItem_Paragraph : AgendaItem_TextInput
     {
-        public AgendaItemParagraph(string name)
+        public AgendaItem_Paragraph(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Paragraph;
         }
     }
 
-    public class AgendaItemContribution : AgendaItem
+    public class AgendaItem_Contribution : AgendaItem
     {
-        public AgendaItemContribution(string name)
+        public AgendaItem_Contribution(string name)
             : base(name)
         {
             Type = FormData.CustomFieldType.Contribution;

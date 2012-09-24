@@ -29,7 +29,7 @@
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
             ManagerSiteMgr.SelectFolder();
-            htmlButtons = NewFile(string.Format(@"C:\QA\ButtonDesigner\ChecklistTest_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
+            htmlButtons = NewFile(string.Format(@"\\ws0034qaauto01\C$\QA\ButtonDesigner\ChecklistTest_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
             ManagerSiteMgr.OpenEventDashboard(formName);
 
             //Text right here- register
@@ -71,7 +71,7 @@
                 ManagerSiteMgr.DeleteEventByName(formName);
                 BuildBasicMembership(formName);
 
-                htmlButtons = NewFile(string.Format(@"C:\QA\ButtonDesigner\Membership_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
+                htmlButtons = NewFile(string.Format(@"\\ws0034qaauto01\C$\QA\ButtonDesigner\Membership_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
                 ManagerSiteMgr.OpenEventDashboard(formName);
 
                 // All possible for a text box, same window
@@ -167,7 +167,7 @@
             catch
             {
                 // doesn't seem to be working on integrator...
-                UIUtilityProvider.UIHelper.CaptureFailureScreenshot();
+                WebDriverUtility.DefaultProvider.CaptureScreenshot();
                 throw;
             }
             finally
@@ -188,7 +188,7 @@
             string extraInfo = string.Empty;
 
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventAdditionalFunction.ButtonDesigner);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickField(buttonType);
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerNext();
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickField(buttonDest);
@@ -222,7 +222,7 @@
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerNext();
             string buttonCode = ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.GetButtonCode();
             ManagerSiteMgr.DashboardMgr.ButtonDesignerMgr.ClickButtonDesignerClose();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
 
             // Write to file
             htmlButtons.WriteLine(string.Format(BaseFileText, typeAndDest));

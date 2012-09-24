@@ -10,11 +10,11 @@
 
         public void UpdateCustomField(Registrant reg)
         {
-            if (reg.CustomFieldResponses.Capacity != 0)
+            if (reg.CustomField_Responses.Count != 0)
             {
-                foreach (CustomFieldResponse resp in reg.CustomFieldResponses)
+                foreach (CustomFieldResponse resp in reg.CustomField_Responses)
                 {
-                    if (resp.IsUpdate && (resp is AgendaResponse))
+                    if (resp is AgendaResponse)
                     {
                         AgendaResponse respAgenda = resp as AgendaResponse;
                         attendeeInfo.AgendaEdit_Click();
@@ -24,7 +24,7 @@
                         {
                             case FormData.CustomFieldType.CheckBox:
                                 {
-                                    AgendaCheckboxResponse ckresp = respAgenda as AgendaCheckboxResponse;
+                                    AgendaResponse_Checkbox ckresp = respAgenda as AgendaResponse_Checkbox;
                                     ((agendaEdit.AgendaType(ckresp.AgendaItem)) as CheckBox).Set(ckresp.Checked.Value);
                                 }
                                 break;
@@ -35,8 +35,6 @@
                         agendaEdit.SaveAndClose_Click();
                         PageObject.PageObjectHelper.SelectTopWindow();
                     }
-                    
-                    resp.IsUpdate = false;
                 }
             }
         }

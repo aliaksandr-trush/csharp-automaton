@@ -17,15 +17,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public LoginServiceFixture()
+            : base(ConfigReader.WebServiceEnum.LoginService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.LoginService].Url);
-
             this.service = new LoginSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.LoginService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -51,12 +48,12 @@
             }
 
             AuthenticationHeader header = new AuthenticationHeader();
-            header.UserName = ConfigurationProvider.XmlConfig.AccountConfiguration.Login;
-            header.Password = ConfigurationProvider.XmlConfig.AccountConfiguration.Password;
+            header.UserName = ConfigReader.DefaultProvider.AccountConfiguration.Login;
+            header.Password = ConfigReader.DefaultProvider.AccountConfiguration.Password;
 
             RegOnlineResponseOfInt32 customerId = this.service.GetCustomerIdIfAuthorized(header, this.eventId);
 
-            Assert.AreEqual(Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), customerId.Value);
+            Assert.AreEqual(Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), customerId.Value);
             Assert.IsTrue(customerId.Status.Success);
         }
     }

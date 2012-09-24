@@ -148,8 +148,8 @@
             RegisterMgr.EnterPersonalInfoPhoneNumbers("Test", "Test", "Test", "Test", "Test");
             RegisterMgr.EnterPersonalInfoDateOfBirthGender(new DateTime(1986, 2, 18), RegisterManager.Gender.Male);
             RegisterMgr.EnterPersonalInfoTaxNumberMembershipNumberCustomerNumber("1234", "4321", "1111");
-            RegisterMgr.TypePersonalInfoPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
-            RegisterMgr.TypePersonalInfoVerifyPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
+            RegisterMgr.TypePersonalInfoVerifyPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.SetCustomFieldCheckBox("CF-Checkbox", true);
             RegisterMgr.SelectCustomFieldRadioButtons("CF-Radio", "Yes");
             RegisterMgr.SelectCustomFieldDropDown("CF-DropDown", "Agree");
@@ -188,7 +188,7 @@
             ManagerSiteMgr.OpenLogin();
             string username = System.Guid.NewGuid().ToString();
             username = username.Replace("-", "");
-            ManagerSiteMgr.CreateNewAccount(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password, currencyName);
+            ManagerSiteMgr.CreateNewAccount(username, ConfigReader.DefaultProvider.AccountConfiguration.Password, currencyName);
 
             string eventTitle = "Account Currency? " + currencyName;
             BuilderMgr.SetEventNameAndShortcut(eventTitle);
@@ -201,7 +201,7 @@
             //NewCustomerDb . BillingAdmin . lbSaveACH_Click.
 
             ManagerSiteMgr.OpenLogin();
-            ManagerSiteMgr.Login(username, ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            ManagerSiteMgr.Login(username, ConfigReader.DefaultProvider.AccountConfiguration.Password);
             
             // Deal with the 'Validate Email' popup
             ManagerSiteMgr.SkipEmailValidation();
@@ -227,20 +227,20 @@
             RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("LDG-Text", "Test");
             RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("LDG-Numeric", "1234");
             RegisterMgr.FillOutCustomTimeField("LDG-Time", "4:00 AM");
-            RegisterMgr.FillOutCustomParagraphField("LDG-Paragraph", "Testing");
-            RegisterMgr.FillOutCustomDateField("LDG-Date", "04/15/1996");
+            ////RegisterMgr.FillOutCustomParagraphField("LDG-Paragraph", "Testing");
+            ////RegisterMgr.FillOutCustomDateField("LDG-Date", "04/15/1996");
             RegisterMgr.FillOutSharingWith("Test Test");
             RegisterMgr.FillOutAdjoiningWith("Tester Tester");
             RegisterMgr.FillOutLodgingAdditionalInfo("Loding Additional Info");
             RegisterMgr.FillOutLodgingCCInfo_Default();
             RegisterMgr.EnterTravelInfo();
             RegisterMgr.FillOutTravelCCInfo_Default();
-            RegisterMgr.SetCustomFieldCheckBox("TRV-Checkbox", true);
-            RegisterMgr.SelectCustomFieldRadioButtons("TRV-Radio", "Yes");
-            RegisterMgr.SelectCustomFieldDropDown("TRV-DropDown", "Agree");
-            RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("TRV-Text", "Test");
-            RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("TRV-Numeric", "1234");
-            RegisterMgr.FillOutCustomTimeField("TRV-Time", "4:00 AM");
+            ////RegisterMgr.SetCustomFieldCheckBox("TRV-Checkbox", true);
+            ////RegisterMgr.SelectCustomFieldRadioButtons("TRV-Radio", "Yes");
+            ////RegisterMgr.SelectCustomFieldDropDown("TRV-DropDown", "Agree");
+            ////RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("TRV-Text", "Test");
+            ////RegisterMgr.FillOutCustomOneLineTextOrNumberOrContribution("TRV-Numeric", "1234");
+            ////RegisterMgr.FillOutCustomTimeField("TRV-Time", "4:00 AM");
             RegisterMgr.FillOutCustomParagraphField("TRV-Paragraph", "Testing");
             RegisterMgr.FillOutCustomDateField("TRV-Date", "04/15/1996");
             List<string> custFields = RegisterMgr.GetLAndTCustomFieldNames(RegisterManager.Section.Lodging);
@@ -268,7 +268,7 @@
         {
             RegisterMgr.EnterEmailAddress(emailAddr);
             RegisterMgr.Continue();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
             RegisterMgr.OnAttendeeCheckPage();
             RegisterMgr.Continue();

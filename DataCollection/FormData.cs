@@ -41,7 +41,7 @@
 
         public enum Location
         {
-            EventDetails,
+            EventFee,
             RegType,
             Agenda,
             Merchandise
@@ -412,10 +412,18 @@
             Checkin,
             Login,
             SSOLogin,
+
+            [CustomString("Personal Info")]
             PersonalInfo,
+
+            [CustomString("Agenda")]
             Agenda,
+
             LodgingTravel,
+
+            [CustomString("Merchandise")]
             Merchandise,
+
             Checkout,
             ConfirmationRedirect,
             Confirmation,

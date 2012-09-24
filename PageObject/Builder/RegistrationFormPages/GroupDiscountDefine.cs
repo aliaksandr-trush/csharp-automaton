@@ -19,8 +19,27 @@
         public RadioButton ApplyToAllEventFees = new RadioButton("ctl00_cphDialog_rbApplyAll", LocateBy.Id);
         public RadioButton ApplyToSelectedFees = new RadioButton("ctl00_cphDialog_rbApplySelected", LocateBy.Id);
         public CheckBox All = new CheckBox("//li[@class='rtLI rtFirst rtLast']/div/input", LocateBy.XPath);
+        public CheckBox ShowAndApply = new CheckBox("ctl00_cphDialog_groupDiscountEnabledCheckBox", LocateBy.Id);
 
         private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
+
+        public CheckBox ApplyToAgendaItem(DataCollection.AgendaItem agenda)
+        {
+            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}']]", agenda.NameOnForm), LocateBy.XPath);
+        }
+
+        public CheckBox ApplyToRegType(DataCollection.RegType regType)
+        {
+            return new CheckBox(string.Format("//input[following-sibling::span[text()='{0}_Event_Fee']]", regType.RegTypeName), LocateBy.XPath);
+        }
+
+        public void ApplyToSelectedFees_Click()
+        {
+            this.ApplyToSelectedFees.WaitForDisplay();
+            this.ApplyToSelectedFees.Click();
+            Utilities.Utility.ThreadSleep(3);
+            WaitForAJAX();
+        }
 
         public void SaveAndStay_Click()
         {
@@ -30,6 +49,7 @@
         public void SaveAndClose_Click()
         {
             popupFrameHelper.SaveAndClose_Click();
+            Utilities.Utility.ThreadSleep(2);
             SwitchToMain();
         }
 

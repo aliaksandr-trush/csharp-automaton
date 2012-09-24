@@ -27,17 +27,17 @@
         public TennisAustraliaServicesFixture()
         {
             // Because the provided user and password only exist on beta, we have to run this test against beta
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.Default);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.Default);
 
             // Re-initialize base uri after changing environment above
-            BaseUriWithHttps = new Uri(ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps);
+            BaseUriWithHttps = new Uri(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps);
 
             this.RemoteAddressUri = new Uri(
                 BaseUriWithHttps,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.EventService].Url);
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.EventService].Url);
 
             this.service = new EventServiceSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.EventService].EndpointConfigName,
+                ConfigReader.DefaultProvider.WebServiceConfiguration[ConfigReader.WebServiceEnum.EventService].EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -159,7 +159,7 @@
                     Assert.That(regResponse.Value.RegistrationId > 0);
                     Assert.That(regResponse.Value.URL.Length > 0);
 
-                    var db = new DataAccess.ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+                    var db = new DataAccess.ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
                     var regs = (from r in db.Registrations where r.Register_Id == regResponse.Value.RegistrationId select r).ToList();
                     Assert.That(regs[0].Test == false);
                 }

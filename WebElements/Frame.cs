@@ -5,7 +5,6 @@
     public class Frame : WebElement
     {
         public string Name;
-        public string ParentFrame;
         public int Index;
         public string Id;
 
@@ -22,48 +21,34 @@
         public Frame()
         { }
 
-        public Frame(string name, string parentFrame)
-        {
-            this.Name = name;
-            this.ParentFrame = parentFrame;
-        }
-
         public void SelectByName()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName(Name);
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Name);
         }
 
         public void SelectById()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameById(Id);
-        }
-
-        public void SelectParentFrame()
-        {
-            if (this.ParentFrame != null)
-            {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(ParentFrame);
-            }
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameById(Id);
         }
 
         public void SelectByIndex()
         {
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(Index);
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(Index);
         }
 
         public void SwitchToMain()
         {
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
         public void WaitForAJAX()
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void WaitForLoad()
         {
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

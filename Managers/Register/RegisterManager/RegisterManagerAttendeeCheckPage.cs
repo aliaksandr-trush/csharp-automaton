@@ -27,7 +27,7 @@
         {
             bool onLogin = false;
 
-            if (UIUtilityProvider.UIHelper.UrlContainsPath(RegisterLoginPath))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath(RegisterLoginPath))
             {
                 onLogin = true;
             }
@@ -40,7 +40,7 @@
         {
             bool onPassword = false;
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(PasswordEnterPassword, LocateBy.XPath))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(PasswordEnterPassword, LocateBy.XPath))
             {
                 onPassword = true;
             }
@@ -52,7 +52,7 @@
         {
             bool onPasswordUpdate = false;
 
-            if ((OnPasswordPage()) && (UIUtilityProvider.UIHelper.IsElementPresent(PasswordOnDupEmail, LocateBy.XPath)))
+            if ((OnPasswordPage()) && (WebDriverUtility.DefaultProvider.IsElementPresent(PasswordOnDupEmail, LocateBy.XPath)))
             {
                 onPasswordUpdate = true;
             }
@@ -64,7 +64,7 @@
         {
             bool onPasswordDupEmail = false;
 
-            if ((OnPasswordPage()) && (UIUtilityProvider.UIHelper.IsElementPresent(PasswordOnDupEmail, LocateBy.XPath)))
+            if ((OnPasswordPage()) && (WebDriverUtility.DefaultProvider.IsElementPresent(PasswordOnDupEmail, LocateBy.XPath)))
             {
                 onPasswordDupEmail = true;
             }
@@ -76,7 +76,7 @@
         {
             bool onPasswordAlreadyReg = false;
 
-            if ((OnPasswordPage()) && (UIUtilityProvider.UIHelper.IsElementPresent(PasswordOnAlreadyReg, LocateBy.XPath)))
+            if ((OnPasswordPage()) && (WebDriverUtility.DefaultProvider.IsElementPresent(PasswordOnAlreadyReg, LocateBy.XPath)))
             {
                 onPasswordAlreadyReg = true;
             }
@@ -88,7 +88,7 @@
         {
             bool onPasswordAutoRecallPage = false;
 
-            if ((OnPasswordPage()) && (UIUtilityProvider.UIHelper.IsElementPresent(PasswordOnAutoRecall, LocateBy.XPath)))
+            if ((OnPasswordPage()) && (WebDriverUtility.DefaultProvider.IsElementPresent(PasswordOnAutoRecall, LocateBy.XPath)))
             {
                 onPasswordAutoRecallPage = true;
             }
@@ -98,43 +98,43 @@
 
         public void EnterPassword()
         {
-            UIUtilityProvider.UIHelper.Type(
+            WebDriverUtility.DefaultProvider.Type(
                 PasswordEnterPassword, 
-                Configuration.ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                Configuration.ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 LocateBy.XPath);
         }
 
         [Step]
         public void EnterPassword(string password)
         {
-            UIUtilityProvider.UIHelper.Type(PasswordEnterPassword, password, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(PasswordEnterPassword, password, LocateBy.XPath);
         }
 
         public void ClickPasswordBeginNewReg()
         {
             if (OnPasswordDupEmailPage())
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(PasswordDupEmailBeginNew, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(PasswordDupEmailBeginNew, LocateBy.Id);
             }
             else
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on expected page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on expected page!");
             }
 
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public bool OnAttendeeCheckPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("Register/AttendeeCheck.aspx");
+            return WebDriverUtility.DefaultProvider.UrlContainsPath("Register/AttendeeCheck.aspx");
         }
 
         public bool OnUseProfilePage()
         {
             bool onUseProfile = false;
 
-            if ((OnAttendeeCheckPage()) && (UIUtilityProvider.UIHelper.IsElementPresent("//label[@for='rTypeYes']/../../td[contains(label,'Use this profile')]", LocateBy.XPath)))
+            if ((OnAttendeeCheckPage()) && (WebDriverUtility.DefaultProvider.IsElementPresent("//label[@for='rTypeYes']/../../td[contains(label,'Use this profile')]", LocateBy.XPath)))
             {
                 onUseProfile = true;
             }
@@ -146,51 +146,51 @@
         public void AttendeeCheckEditPersonalInfo()
         {
             Assert.IsTrue(OnAttendeeCheckPage());
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//a[@id='ctl00_cph_grdMembers_ctl01_lnkPersInfo']", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//a[@id='ctl00_cph_grdMembers_ctl01_lnkPersInfo']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AttendeeCheckEditAgenda()
         {
             Assert.IsTrue(OnAttendeeCheckPage());
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cph_grdMembers_ctl01_lnkAgenda", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_grdMembers_ctl01_lnkAgenda", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public bool VerifyHasSubstituteLink()
         {
-            return UIUtilityProvider.UIHelper.IsElementDisplay(SubstituteLinkLocator, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.IsElementDisplay(SubstituteLinkLocator, LocateBy.XPath);
         }
 
         public void ClickViewPrintOrEmailLink()
         {
             string locator = "//div[@id='attendeeLinks']/ul/li/a[text()='View, Print, or Email Registration Record and Invoice']";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickCancelLinkAndVerifyDialogVisibility()
         {
             string locator = "ctl00_cph_lnkGrpCancel";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
             string dialogLocator = "//div[@role='dialog']/div/p[text()='Are you sure you want to cancel this person? Once you click OK, you CANNOT reverse this action.']";
-            VerifyTool.VerifyValue(true, UIUtilityProvider.UIHelper.IsElementDisplay(dialogLocator, LocateBy.XPath), "Cancel Dialog Display: {0}");
+            VerifyTool.VerifyValue(true, WebDriverUtility.DefaultProvider.IsElementDisplay(dialogLocator, LocateBy.XPath), "Cancel Dialog Display: {0}");
         }
 
         public void ClickCancelEntireGroup(bool isCancel)
         {
             string locator = "ctl00_cph_lnkGrpCancel";
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(locator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             if (isCancel)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='OK']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='OK']", LocateBy.XPath);
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='Cancel']", LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@class='confirmDialog ui-dialog-content ui-widget-content']/div[@class='buttonGroup']/a[text()='Cancel']", LocateBy.XPath);
             }
         }
 
@@ -198,13 +198,13 @@
         {
             string dialogLocator = "//div[@role='dialog']/div/p[text()='Are you sure you want to cancel this person? Once you click OK, you CANNOT reverse this action.']";
 
-            if (UIUtilityProvider.UIHelper.IsElementDisplay(dialogLocator, LocateBy.XPath))
+            if (WebDriverUtility.DefaultProvider.IsElementDisplay(dialogLocator, LocateBy.XPath))
             {
                 string buttonLocator = "//div[@role='dialog']/div/div[@class='buttonGroup']/a[@class='okButton button']";
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(buttonLocator, LocateBy.XPath);
-                UIUtilityProvider.UIHelper.WaitForPageToLoad();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(buttonLocator, LocateBy.XPath);
+                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
                 string cancelledLabelLocator = "//table[@id='tblAttendeCheckRegistrantList']/tbody/tr/td/span[@class='warningText']/strong";
-                VerifyTool.VerifyValue("Cancelled", UIUtilityProvider.UIHelper.GetText(cancelledLabelLocator, LocateBy.XPath), "Cancle Registration State: {0}");
+                VerifyTool.VerifyValue("Cancelled", WebDriverUtility.DefaultProvider.GetText(cancelledLabelLocator, LocateBy.XPath), "Cancle Registration State: {0}");
                 return true;
             }
             else

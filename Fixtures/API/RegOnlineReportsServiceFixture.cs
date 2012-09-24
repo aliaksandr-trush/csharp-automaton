@@ -30,15 +30,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineReportsServiceFixture()
+            : base(ConfigReader.WebServiceEnum.ReportsService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.ReportsService].Url);
-
             this.service = new RegonlineWebServicesSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.ReportsService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -56,15 +53,15 @@
         [Description("802")]
         public void GetReport_No_Exception_For_Valid_Params()
         {
-            this.PrepareEventAndReportAndRegistrations(false);
+            this.PrepareEventAndReportAndRegistrations();
 
             string startDate = DateTime.Now.AddYears(-1).ToShortDateString();
             string endDate = DateTime.Now.ToShortDateString();
 
             string response = this.service.getReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id), 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), 
                 this.reportId,
                 this.eventId, 
                 startDate, 
@@ -79,7 +76,7 @@
         [Description("801")]
         public void GetNonCompressedReport_Returns_Noncompressed_Data()
         {
-            this.PrepareEventAndReportAndRegistrations(false);
+            this.PrepareEventAndReportAndRegistrations();
 
             // Search for any regs in this report modified in the last 2 days
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
@@ -88,16 +85,16 @@
             string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id),
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id),
                 this.reportId,
                 this.eventId, 
                 startDate, 
                 endDate,
                 false);
 
-            Assert.That(Regex.IsMatch(response, "<last_Name>.+</last_Name>"));
+            Assert.That(Regex.IsMatch(response, "<last_Name>[^<]+</last_Name>"));
             string returnedDateString = Regex.Match(response, "<RegDate>[^<]+</RegDate>").Value.Split(new char[]{' '})[0].Split(new char[]{'>'})[1];
             VerifyTool.VerifyValue(this.regDates[0].ToString("M/d/yyyy"), returnedDateString, "RegDate: {0}");
         }
@@ -107,17 +104,42 @@
         [Description("1343")]
         public void GetNonCompressedReport_CheckDateFormat_BritishEnglishCulture()
         {
-            ConfigurationProvider.XmlConfig.ReloadAccount(XmlConfiguration.AccountType.ActiveEurope);
+            ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.ActiveEurope);
 
-            this.PrepareEventAndReportAndRegistrations(true);
+            ManagerSiteMgr.OpenLogin();
+            ManagerSiteMgr.Login();
+            this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
+            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.DeleteEventByName(EventName);
+            ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ActiveEuropeEvent);
+            BuilderMgr.SetEventNameAndShortcut(EventName);
+            BuilderMgr.SelectEventType(Managers.Builder.FormDetailManager.ActiveEuropeEventType.Running);
+            this.eventId = BuilderMgr.GetEventId();
+            BuilderMgr.SaveAndClose();
+
+            this.PrepareCustomReport();
+            this.regDates.Clear();
+
+            for (int cnt = 0; cnt < TotalRegCount; cnt++)
+            {
+                RegisterMgr.OpenRegisterPage(this.eventId);
+                RegisterMgr.Checkin();
+                RegisterMgr.Continue();
+                RegisterMgr.EnterProfileInfoEnduranceNew();
+                RegisterMgr.Continue();
+                RegisterMgr.ClickCheckoutActiveWaiver();
+                RegisterMgr.FinishRegistration();
+                RegisterMgr.ConfirmRegistration();
+                this.regDates.Add(DateTimeTool.ConvertForCurrentAccount(DateTime.Now, ConfigReader.AccountEnum.ActiveEurope));
+            }
 
             string startDate = DateTime.Now.AddDays(-2).ToShortDateString();
             string endDate = DateTime.Now.AddDays(2).ToShortDateString();
 
             string response = this.service.getNonCompressedReport(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password,
-                Convert.ToInt32(ConfigurationProvider.XmlConfig.AccountConfiguration.Id),
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password,
+                Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id),
                 this.reportId,
                 this.eventId,
                 startDate,
@@ -128,7 +150,7 @@
             VerifyTool.VerifyValue(this.regDates[0].ToString("dd/MM/yyyy"), returnedDateString, "RegDate: {0}");
         }
 
-        private void PrepareEventAndReportAndRegistrations(bool isActiveEurope)
+        private void PrepareEventAndReportAndRegistrations()
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -137,62 +159,33 @@
 
             ManagerSiteMgr.DeleteEventByName(EventName);
 
-            this.CreateEvent(isActiveEurope);
+            this.CreateEvent();
             this.PrepareCustomReport();
             this.regDates.Clear();
 
             for (int cnt = 0; cnt < TotalRegCount; cnt++)
             {
-                this.CreateRegistration(isActiveEurope);
+                this.CreateRegistration();
             }
         }
 
         [Step]
-        private void CreateEvent(bool isActiveEurope)
+        private void CreateEvent()
         {
-            if (!isActiveEurope)
-            {
-                ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
-            }
-            else
-            {
-                ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ActiveEuropeEvent);
-            }
-
+            ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
             BuilderMgr.SetEventNameAndShortcut(EventName);
-
-            if (isActiveEurope)
-            {
-                BuilderMgr.SelectEventType(Managers.Builder.FormDetailManager.ActiveEuropeEventType.Running);
-            }
-
             this.eventId = BuilderMgr.GetEventId();
             BuilderMgr.SaveAndClose();
         }
 
         [Step]
-        private void CreateRegistration(bool isActiveEurope)
+        private void CreateRegistration()
         {
             RegisterMgr.OpenRegisterPage(this.eventId);
             RegisterMgr.Checkin();
             RegisterMgr.Continue();
-
-            if (!isActiveEurope)
-            {
-                RegisterMgr.EnterProfileInfo();
-            }
-            else
-            {
-                RegisterMgr.EnterProfileInfoEnduranceNew();
-            }
-
+            RegisterMgr.EnterProfileInfo();
             RegisterMgr.Continue();
-
-            if (isActiveEurope)
-            {
-                RegisterMgr.ClickCheckoutActiveWaiver();
-            }
-
             RegisterMgr.FinishRegistration();
             RegisterMgr.ConfirmRegistration();
             this.regDates.Add(DateTime.Now);

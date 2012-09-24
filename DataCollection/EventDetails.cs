@@ -13,6 +13,7 @@
         public FormData.FormType FormType;
         public TaxRate TaxRateOne;
         public TaxRate TaxRateTwo;
+        public List<Registrant> Registrants = new List<Registrant>();
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();
@@ -33,6 +34,21 @@
         public void ReSetShortcut()
         {
             this.Shortcut = Guid.NewGuid().ToString();
+        }
+    }
+
+    public class EventFee
+    {
+        public double StandardPrice { get; set; }
+        public string Name { get; set; }
+        public EarlyPrice Early_Price { get; set; }
+        public LatePrice Late_Price { get; set; }
+        public List<DiscountCode> DiscountCodes { get; set; }
+        public bool RequireDC { get; set; }
+
+        public EventFee()
+        {
+            this.DiscountCodes = new List<DiscountCode>();
         }
     }
 
@@ -89,9 +105,12 @@
         public GroupDiscount_GroupSizeOption GroupSizeOption;
         public double DiscountAmount;
         public GroupDiscount_DiscountType GroupDiscountType;
-        public GroupDiscount_AdditionalRegOption AddtionalRegOption;
+        public GroupDiscount_AdditionalRegOption? AddtionalRegOption;
         public int? NumberOfAdditionalReg;
         public GroupDiscount_ApplyOption? ApplyOption;
+        public List<AgendaItem> ApplyToAgendaItems = new List<AgendaItem>();
+        public List<RegType> ApplyToRegTypes = new List<RegType>();
+        public bool ShowAndApply = true;
     }
 
     public class PaymentMethod
@@ -129,6 +148,7 @@
 
     public class StartPage
     {
+        public EventFee Event_Fee { get; set; }
         public EventType? EventType;
         public EventLevelLimit EventLimit;
         public GroupDiscount GroupDiscount;
@@ -183,7 +203,7 @@
 
     public class MerchandisePage
     {
-        public List<Merchandise> Merchandises = new List<Merchandise>();
+        public List<MerchandiseItem> Merchandises = new List<MerchandiseItem>();
         public string PageHeader;
         public string PageFooter;
     }

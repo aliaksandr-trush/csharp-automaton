@@ -431,6 +431,7 @@
 
         private void PrepareRegistrationsForReport()
         {
+            this.regIds.Clear();
             this.Register(CustomStringAttribute.GetCustomString(EventBasics.First));
             this.Register(CustomStringAttribute.GetCustomString(EventBasics.Second));
             this.Register(CustomStringAttribute.GetCustomString(EventBasics.Second));

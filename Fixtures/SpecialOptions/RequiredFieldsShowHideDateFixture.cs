@@ -280,7 +280,7 @@
         {
             BuilderMgr.CFMgr.SetName(name);
             BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.CheckBox);
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
             if (showOffset != null)
             {
                 BuilderMgr.CFMgr.SetShowDate(DateTime.Now.AddDays(Convert.ToDouble(showOffset)));
@@ -300,7 +300,7 @@
             BuilderMgr.AGMgr.SetName(name);
             BuilderMgr.AGMgr.FeeMgr.SetStandardPrice(AgendaPrice);
 
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
 
             if (showOffset != null)
             {

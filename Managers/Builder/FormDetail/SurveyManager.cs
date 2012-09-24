@@ -14,42 +14,42 @@
         
         public void ClickAddCustomQuestion()
         {
-            if (UIUtilityProvider.UIHelper.IsElementPresent(AddCustomQuestionLink, LocateBy.LinkText))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(AddCustomQuestionLink, LocateBy.LinkText))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(AddCustomQuestionLink, LocateBy.LinkText);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddCustomQuestionLink, LocateBy.LinkText);
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             }
             else
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(CreateCustomQuestion, LocateBy.LinkText);
-                UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CreateCustomQuestion, LocateBy.LinkText);
+                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             }
         }
 
         public void SetCustomQuestionName(string name)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_ucCF_mipNam_elDesc_TextArea", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_mipNam_elDesc_TextArea", name, LocateBy.Id);
         }
 
         public void SetCustomQuestionVisibilities(bool? visible, bool? required, bool? admin)
         {
             if (visible.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_ucCF_chkActive", visible.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_ucCF_chkActive", visible.Value, LocateBy.Id);
             }
             if (required.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_ucCF_chkRequired", required.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_ucCF_chkRequired", required.Value, LocateBy.Id);
             }
             if (admin.HasValue)
             {
-                UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cph_ucCF_chkAdminOnly", admin.Value, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_ucCF_chkAdminOnly", admin.Value, LocateBy.Id);
             }
         }
 
         public void SetIntroductoryMessage(string message)
         {
-            UIUtilityProvider.UIHelper.TypeContentEditorOnWindowById(ContentEditorLocator, message);
+            WebDriverUtility.DefaultProvider.TypeContentEditorOnWindowById(ContentEditorLocator, message);
         }
 
         [Verify]
@@ -59,7 +59,7 @@
 
             VerifyTool.VerifyValue(
                 expectedMessage,
-                UIUtilityProvider.UIHelper.GetText("//div[@id='pageContent']/p", LocateBy.XPath), 
+                WebDriverUtility.DefaultProvider.GetText("//div[@id='pageContent']/p", LocateBy.XPath), 
                 "Introductory message: {0}");
 
             SelectBuilderWindow();
@@ -67,7 +67,7 @@
 
         public void SetConfirmationMessage(string message)
         {
-            UIUtilityProvider.UIHelper.TypeContentEditorOnWindowById(ContentEditorLocator, message);
+            WebDriverUtility.DefaultProvider.TypeContentEditorOnWindowById(ContentEditorLocator, message);
         }
 
         [Verify]
@@ -77,7 +77,7 @@
 
             VerifyTool.VerifyValue(
                 expectedMessage,
-                UIUtilityProvider.UIHelper.GetText("//div[@id='pageContent']/p", LocateBy.XPath),
+                WebDriverUtility.DefaultProvider.GetText("//div[@id='pageContent']/p", LocateBy.XPath),
                 "Confirmation message: {0}");
 
             SelectBuilderWindow();
@@ -85,13 +85,13 @@
 
         public void SaveQuestion()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='Save Item']/..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Save Item']/..", LocateBy.XPath);
             Thread.Sleep(1500);
         }
 
         public void SaveAndNewQuestion()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='Save & New']/..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Save & New']/..", LocateBy.XPath);
             Thread.Sleep(1500);
         }
     }

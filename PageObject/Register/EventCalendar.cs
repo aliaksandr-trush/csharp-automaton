@@ -60,7 +60,7 @@
         public void ClickToRegister(DataCollection.Event evt)
         {
             this.Register = new ButtonOrLink(
-                string.Format("//a[@href='{0}?{1}']", ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps, evt.Id), 
+                string.Format("//a[@href='{0}?{1}']", ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, evt.Id), 
                 UIUtility.LocateBy.XPath);
 
             this.Register.WaitForDisplay();
@@ -70,14 +70,14 @@
 
         public void AddToCart(DataCollection.Registrant reg)
         {
-            foreach(DataCollection.CustomFieldResponse resp in reg.CustomFieldResponses)
+            foreach(DataCollection.CustomFieldResponse resp in reg.CustomField_Responses)
             {
                 if (resp is DataCollection.AgendaResponse)
                 {
                     DataCollection.AgendaResponse re = resp as DataCollection.AgendaResponse;
 
                     ButtonOrLink addToCart = new ButtonOrLink(
-                        string.Format("//a[@onclick='DisplayInfo({0},{1});return false;']/parent::td/following-sibling::td/a", reg.Event.Id, re.AgendaItem.Id), 
+                        string.Format("//a[contains(text(),'{0}')]/../following-sibling::td/a", re.AgendaItem.NameOnForm), 
                         UIUtility.LocateBy.XPath);
 
                     addToCart.WaitForDisplay();

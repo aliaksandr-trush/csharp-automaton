@@ -23,6 +23,9 @@
     using TravelViewField = RegOnline.RegressionTest.Managers.Backend.BackendManager.TravelViewField;
     using WouldYou = RegOnline.RegressionTest.Managers.Builder.CFPredefinedMultiChoiceItemManager.WouldYou;
     using YesOrNo = RegOnline.RegressionTest.Managers.Builder.CFPredefinedMultiChoiceItemManager.YesOrNo;
+    using RegOnline.RegressionTest.Managers.Builder;
+    using System.Collections.Generic;
+    using RegOnline.RegressionTest.Managers.Manager;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -1026,6 +1029,277 @@
             {
                 attendeeInfoEvent.merchandiseItemsIds.Add(BackendFixtureHelper.AttendeeInfoEvent.MerchandiseItem.VariableAmountWithMCItems, merch.Id);
             }
+        }
+
+        private void CreateEventForAttendeeInfo()
+        {
+            this.LoginAndGetSessionID();
+            ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
+            this.eventId = BuilderMgr.GetEventId();
+            this.SetStartPageForAttendeeInfoEvent(BackendFixtureHelper.AttendeeInfoEvent.EventName, new DateTime(2013, 4, 25), new DateTime(2013, 5, 2));
+            this.SetPersonalInfoPageForAttendeeInfoEvent();
+            this.SetAgendaPageForAttendeeInfoEvent();
+            this.SetLTPageForAttendeeInfoEvent(5);
+            this.SetMerchandisePageForAttendeeInfoEvent();
+            this.SetCheckoutPageForAttendeeInfoEvent();
+            this.SetConfrimationPageForAttendeeInfoEvent();
+            BuilderMgr.SaveAndClose();
+        }
+
+        private void LoginAndGetSessionID()
+        {
+            ManagerSiteMgr.OpenLogin();
+            ManagerSiteMgr.Login();
+            ManagerSiteMgr.GoToEventsTabIfNeeded();
+            ManagerSiteMgr.SelectFolder();
+            this.eventSessionId = BuilderMgr.GetEventSessionId();
+        }
+
+        private void SetStartPageForAttendeeInfoEvent(string eventName, DateTime startDate, DateTime endDate)
+        {
+            BuilderMgr.SetStartPage(ManagerSiteManager.EventType.ProEvent, eventName);
+            BuilderMgr.SetEventFee(1.00);
+            BuilderMgr.SetStartDate(startDate);
+            BuilderMgr.SetEndDate(endDate);
+            BuilderMgr.SelectEventCategory(FormDetailManager.EventCategory.Other);
+            BuilderMgr.SelectEventIndustry(FormDetailManager.EventIndustry.ProfessionalAndContinuingEducation);
+            BuilderMgr.AddRegTypeWithEventFee("Reg Type one", 1.00);
+            BuilderMgr.AddRegTypeWithEventFee("Reg Type two", 2.00);
+            BuilderMgr.SaveAndStay();
+        }
+
+        private void SetPersonalInfoPageForAttendeeInfoEvent()
+        {
+            string[] ItemName1 = { "Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree", "N/A" };
+            string[] ItemName2 = { "Male", "Female", "Prefer Not to Answer" };
+            
+            BuilderMgr.GotoPage(FormDetailManager.Page.PI);
+
+            BuilderMgr.AddPICustomField(CustomFieldManager.CustomFieldType.CheckBox, "Personal info checkbox");
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info radio button");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.RadioButton);
+
+            foreach (string name in ItemName1)
+            {
+                BuilderMgr.CFMgr.AddMultiChoiceItem(name);
+            }
+
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info drop down");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Dropdown);
+
+            foreach (string name in ItemName2)
+            {
+                BuilderMgr.CFMgr.AddMultiChoiceItem(name);
+            }
+
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info number");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Number);
+            BuilderMgr.CFMgr.SetOneLineLength(6);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info 1 line text");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.OneLineText);
+            BuilderMgr.CFMgr.SetOneLineLength(5);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info time");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Time);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info paragraph");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Paragraph);
+            BuilderMgr.CFMgr.SetParagraphCharacterLimit(32000);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal Info date");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.Date);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info file upload");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.FileUpload);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.ClickAddPICustomField();
+            BuilderMgr.CFMgr.SetName("Personal info always selected");
+            BuilderMgr.CFMgr.SetType(CustomFieldManager.CustomFieldType.AlwaysSelected);
+            BuilderMgr.CFMgr.SaveAndClose();
+
+            BuilderMgr.SaveAndStay();
+        }
+
+        private void SetAgendaPageForAttendeeInfoEvent()
+        {
+            string[] ItemName1 = { "Definitely", "Probably", "Not Sure", "Probably Not", "Definitely Not" };
+
+            BuilderMgr.GotoPage(FormDetailManager.Page.Agenda);
+            BuilderMgr.ClickYesOnSplashPage();
+
+            BuilderMgr.AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType.CheckBox, "Agenda checkbox no fee");
+
+            BuilderMgr.AddAgendaItemWithPriceAndNoDate(AgendaItemManager.AgendaItemType.CheckBox, "Agenda checkbox w/fee", 1.00);
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda Radio Buttons no fee");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.RadioButton);
+
+            foreach (string name in ItemName1)
+            {
+                BuilderMgr.AGMgr.AddMultiChoiceItem(name, null);
+            }
+
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda Radio Buttons w/fee");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.RadioButton);
+            BuilderMgr.AGMgr.AddMultiChoiceItem("Yes", 1.00);
+            BuilderMgr.AGMgr.AddMultiChoiceItem("No", null);
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda dropdown no fee");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Dropdown);
+
+            foreach (string name in ItemName1)
+            {
+                BuilderMgr.AGMgr.AddMultiChoiceItem(name, null);
+            }
+
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda dropdown with fee");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Dropdown);
+            BuilderMgr.AGMgr.AddMultiChoiceItem("Yes", 1.00);
+            BuilderMgr.AGMgr.AddMultiChoiceItem("No", null);
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda number");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Number);
+            BuilderMgr.AGMgr.SetOneLineLength(10);
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType.Time, "Agenda Time");
+
+            BuilderMgr.AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType.FileUpload, "Agenda File Upload");
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda paragraph");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Paragraph);
+            BuilderMgr.AGMgr.SetParagraphCharacterLimit(32000);
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType.Date, "Agenda Date");
+
+
+            BuilderMgr.ClickAddAgendaItem();
+            BuilderMgr.AGMgr.SetName("Agenda Contribution");
+            BuilderMgr.AGMgr.SetType(AgendaItemManager.AgendaItemType.Contribution);
+            BuilderMgr.AGMgr.SetVariableMinMax(1, 1000);
+            BuilderMgr.AGMgr.ClickSaveItem();
+
+            BuilderMgr.AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType.AlwaysSelected, "Agenda Always Selected no fee");
+
+            BuilderMgr.AddAgendaItemWithPriceAndNoDate(AgendaItemManager.AgendaItemType.AlwaysSelected, "Agenda always selected w/fee", 1.00);
+
+            BuilderMgr.SaveAndStay();
+        }
+
+        private void SetLTPageForAttendeeInfoEvent(int number)
+        {
+            List<string> RoomTypes = new List<string>();
+            string[] HotalName = { "Boulder Marriott", "St. Julien Hotel & Spa" };
+            BuilderMgr.GotoPage(FormDetailManager.Page.LodgingTravel);
+            BuilderMgr.ClickYesOnSplashPage();
+
+            foreach (string hotal in HotalName)
+            {
+                BuilderMgr.ClickAddHotel();
+                BuilderMgr.HotelMgr.SelectHotelTemplate(hotal);
+                RoomTypes = BuilderMgr.GetRoomTypes();
+
+                BuilderMgr.HotelMgr.AddRoomBlock("4/26/2013");
+
+                for (int i = 0; i < number; i++)
+                {
+                    BuilderMgr.HotelMgr.AddRoomBlockNoDate();
+                }
+
+                foreach (string type in RoomTypes)
+                {
+                    BuilderMgr.HotelMgr.SetCapacityAndRates(type, 500, null, number);
+                }
+
+                BuilderMgr.HotelMgr.SaveAndClose();
+            }
+
+            BuilderMgr.LodgingSettingsAndPaymentOptionsMgr.SetAssignRoomToRegistrant(true);
+
+            BuilderMgr.LodgingStandardFieldsMgr.SetRoomType(true, true);
+            BuilderMgr.LodgingStandardFieldsMgr.SetBedType(true, false);
+            BuilderMgr.LodgingStandardFieldsMgr.SetSmokingPreference(true, false);
+            BuilderMgr.LodgingStandardFieldsMgr.SetSharingWith(true, false);
+            BuilderMgr.LodgingStandardFieldsMgr.SetAdjoiningWith(true, false);
+            BuilderMgr.LodgingStandardFieldsMgr.SetCheckInOutDate(true, true);
+            BuilderMgr.LodgingStandardFieldsMgr.SetValidDateRangeForCheckInOut(new DateTime(2013, 4, 25), new DateTime(2013, 4, 30));
+            BuilderMgr.LodgingStandardFieldsMgr.SetAdditionalInfo(true, false);
+            BuilderMgr.LodgingSettingsAndPaymentOptionsMgr.ChoosePaymentOption(LodgingSettingsAndPaymentOptionsManager.PaymentOption.ChargeForLodging);
+            BuilderMgr.LodgingSettingsAndPaymentOptionsMgr.SetHotelBookingFee(10.00);
+
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SelectPurposeForCollectingTravelInfo(TravelStandardAdditionalFieldsManager.TravelInfo.PurposeBooking);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetAirline(true, false, true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetAirport(true, false, true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetCity(true, false, true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetDateTime(true, false, true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetConnectionInfo(true, false, true, false);
+
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetFrequentFlyerNumber(true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetSeatingPreference(true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetPassportNumber(true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetGroundTransportPreference(true, false);
+            BuilderMgr.TravelStandardAdditionalFieldsMgr.SetAdditionalInfo(true, false);
+
+            BuilderMgr.SaveAndStay();
+        }
+
+        private void SetMerchandisePageForAttendeeInfoEvent()
+        {
+            string[] itemname_fixed = { "numero 1", "numero 2" };
+            string[] itemname_var = { "Letter A", "Letter B" };
+
+            BuilderMgr.GotoPage(FormDetailManager.Page.Merchandise);
+            BuilderMgr.AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType.Fixed, "Fixed price", 1.00, null, null);
+            BuilderMgr.AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType.Fixed, "Fixed price w/MC items", 1.00, null, null, itemname_fixed, null);
+
+            BuilderMgr.AddMerchandiseItemWithFeeAmount(MerchandiseManager.MerchandiseType.Variable, "Variable amount", null, 1.00, 1000.00);
+            BuilderMgr.AddMerchandiseItemWithMultipleChoiceItem(MerchandiseManager.MerchandiseType.Variable, "Variable amount w/MC items", null, 1.00, 1000.00, itemname_var, null);
+        }
+
+        private void SetCheckoutPageForAttendeeInfoEvent()
+        {
+            BuilderMgr.GotoPage(FormDetailManager.Page.Checkout);
+            BuilderMgr.EnterEventCheckoutPage();
+            BuilderMgr.SaveAndStay();
+        }
+
+        private void SetConfrimationPageForAttendeeInfoEvent()
+        {
+            BuilderMgr.GotoPage(FormDetailManager.Page.Confirmation);
+            BuilderMgr.SetEnableHotelSearchFeature(false);
         }
     }
 }

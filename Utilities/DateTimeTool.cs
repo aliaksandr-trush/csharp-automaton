@@ -5,6 +5,50 @@
 
     public class DateTimeTool
     {
+        public enum TimeZoneIdentifier
+        {
+            Local,
+
+            [CustomString("GMT Standard Time")]
+            GMTStandardTime,
+
+            [CustomString("US Mountain Standard Time")]
+            USMountainStandardTime
+        }
+
+        public static DateTime ConvertRegardingTimeZone(
+            DateTime dateTimeToConvert, 
+            TimeZoneIdentifier targetTimeZone,
+            TimeZoneIdentifier sourceTimeZone = TimeZoneIdentifier.Local)
+        {
+            TimeZoneInfo sourceTimeZoneInfo = TimeZoneInfo.Local;
+
+            if (sourceTimeZone != TimeZoneIdentifier.Local)
+            {
+                sourceTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(CustomStringAttribute.GetCustomString(sourceTimeZone));
+            }
+
+            TimeZoneInfo targetTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(CustomStringAttribute.GetCustomString(targetTimeZone));
+            return TimeZoneInfo.ConvertTime(dateTimeToConvert, targetTimeZoneInfo);
+        }
+
+        public static DateTime ConvertForCurrentAccount(DateTime dateTimeToConvert, ConfigReader.AccountEnum targetAccount)
+        {
+            Account targetAccountConfig = null;
+
+            foreach (Account ac in ConfigReader.DefaultProvider.EnvironmentConfiguration.Account)
+            {
+                if (ac.Name.Equals(targetAccount.ToString()))
+                {
+                    targetAccountConfig = ac;
+                }
+            }
+
+            return dateTimeToConvert.AddHours(
+                targetAccountConfig.TimeZoneOffset - 
+                ConfigReader.DefaultProvider.AllConfiguration.Environments.CurrentMachineTimeZoneOffset);
+        }
+
         /// <summary>
         /// This is just for china test to handle the time difference
         /// </summary>
@@ -14,7 +58,7 @@
         {
             if (TimeZone.CurrentTimeZone.StandardName == "China Standard Time")
             {
-                int diff = Convert.ToInt32(ConfigurationProvider.XmlConfig.AllConfiguration.TimeZoneDifference) * -1;
+                int diff = Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.TimeZoneOffset) * -1;
                 dateTime = dateTime.AddHours(diff);
             }
 

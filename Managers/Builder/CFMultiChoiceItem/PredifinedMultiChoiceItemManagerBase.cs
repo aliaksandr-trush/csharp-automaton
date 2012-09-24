@@ -150,25 +150,25 @@
 
         public void SaveAndClose()
         {
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickPredefinedItem(PredefinedItemType type)
         {
             string typeThing = StringEnum.GetStringValue(type);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(PredefinedTypeLocatorFormat, typeThing), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(PredefinedTypeLocatorFormat, typeThing), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
     }
 }

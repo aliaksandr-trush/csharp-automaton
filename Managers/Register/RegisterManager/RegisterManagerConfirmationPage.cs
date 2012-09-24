@@ -60,7 +60,7 @@
 
         public bool OnConfirmationPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsPath("register/confirmation.aspx");
+            return WebDriverUtility.DefaultProvider.UrlContainsPath("register/confirmation.aspx");
         }
 
         [Verify]
@@ -68,7 +68,7 @@
         {
             if (!this.OnConfirmationPage())
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on Confirmation page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on Confirmation page!");
             }
         }
 
@@ -88,7 +88,7 @@
                 primaryAttendeeDIVLocator 
                 + "/following-sibling::div[@class='detailContentWrapper']//th[text()='{0}']/following-sibling::td[1]";
 
-            return UIUtilityProvider.UIHelper.GetText(string.Format(forLocator, StringEnum.GetStringValue(fieldName)), LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(string.Format(forLocator, StringEnum.GetStringValue(fieldName)), LocateBy.XPath);
         }
 
         public object GetConfirmationPageValueForGroupMembers(ConfirmationPageField fieldName, int regIndex)
@@ -101,7 +101,7 @@
                 groupMemberDIVLocator 
                 + "[@class='detailContentWrapper']//th[text()='{0}']/following-sibling::td[1]";
 
-            object valueFound = UIUtilityProvider.UIHelper.GetText(string.Format(forLocator, StringEnum.GetStringValue(fieldName)), LocateBy.XPath);
+            object valueFound = WebDriverUtility.DefaultProvider.GetText(string.Format(forLocator, StringEnum.GetStringValue(fieldName)), LocateBy.XPath);
 
             return valueFound;
         }
@@ -113,7 +113,7 @@
         /// <param name="registrationId"></param>
         public void PullBackTransaction(int registrationId)
         {
-            var db = new ClientDataContext(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection);
+            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             db.ExecuteCommand(string.Format("update Transactions set transdate='{0}' where RegisterId={1}",
                 DateTime.Today.AddDays(-1).ToString("MM/dd/yyyy"),
                 registrationId));
@@ -122,7 +122,7 @@
         [Step]
         public void ConfirmRegistration()
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent("//div[@class='successAlert']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent("//div[@class='successAlert']", LocateBy.XPath);
             this.VerifyOnConfirmationPage();
         }
 
@@ -195,9 +195,9 @@
             string feeSummaryTableLocator = "//legend[text()='Fees']/../";
             List<FeeResponse> actResponse = new List<FeeResponse>();
 
-            int count = UIUtilityProvider.UIHelper.GetXPathCountByXPath(feeSummaryTableLocator + "/tbody/tr");
+            int count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(feeSummaryTableLocator + "/tbody/tr");
 
-            if (UIUtilityProvider.UIHelper.IsElementPresent(ConfirmationDiscountMessage, LocateBy.XPath))
+            if (WebDriverUtility.DefaultProvider.IsElementPresent(ConfirmationDiscountMessage, LocateBy.XPath))
             {
                 count -= 3;//When there is a discount message, there are 3 summary rows
             }
@@ -209,10 +209,10 @@
             for (int i = 1; i < count; i++)
             {
                 FeeResponse response = new FeeResponse();
-                response.FeeName = UIUtilityProvider.UIHelper.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td", i + 1), LocateBy.XPath);
-                response.FeeQuantity = UIUtilityProvider.UIHelper.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[2]", i + 1), LocateBy.XPath);
-                response.FeeUnitPrice = UIUtilityProvider.UIHelper.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[3]", i + 1), LocateBy.XPath);
-                response.FeeAmount = UIUtilityProvider.UIHelper.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[4]", i + 1), LocateBy.XPath);
+                response.FeeName = WebDriverUtility.DefaultProvider.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td", i + 1), LocateBy.XPath);
+                response.FeeQuantity = WebDriverUtility.DefaultProvider.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[2]", i + 1), LocateBy.XPath);
+                response.FeeUnitPrice = WebDriverUtility.DefaultProvider.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[3]", i + 1), LocateBy.XPath);
+                response.FeeAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(feeSummaryTableLocator + "/tbody/tr[{0}]/td[4]", i + 1), LocateBy.XPath);
                 actResponse.Add(response);
             }
 
@@ -224,9 +224,9 @@
             string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationTotal : {0}");
         }
@@ -236,9 +236,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationSubTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationSubTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSubTotal : {0}");
         }
@@ -248,9 +248,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationShippingFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationShippingFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Confirmation Shipping Fee : {0}");
         }
@@ -260,9 +260,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationLodgingFeeSubTotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationLodgingFeeSubTotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Subtotal : {0}");
         }
@@ -272,9 +272,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationLodgingBookingFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationLodgingBookingFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Lodging Booking Fee : {0}");
         }
@@ -284,9 +284,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationServiceFee, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationServiceFee, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Service Fee : {0}");
         }
@@ -297,9 +297,9 @@
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSaving : {0}");
         }
@@ -314,9 +314,9 @@
             string expectedValue = string.Format("Your total includes a group discount savings of {0} and a discount code savings of {1}.", groupAmount, codeAmount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "COnfirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "COnfirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSaving : {0}");
         }
@@ -327,7 +327,7 @@
             MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
             string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
-            string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(TaxLocatorConfirmation, taxLabel), LocateBy.XPath);
+            string actualAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(TaxLocatorConfirmation, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
@@ -338,9 +338,9 @@
             string expectedValue = MoneyTool.FormatMoney(subTotalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationRecurringSubtotal, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationRecurringSubtotal, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "Recurring Subtotal: {0}");
         }
@@ -351,7 +351,7 @@
             MoneyTool.CurrencyCode currency = MoneyTool.CurrencyCode.USD)
         {
             string expectedAmount = MoneyTool.FormatMoney(taxAmountToVerify, currency);
-            string actualAmount = UIUtilityProvider.UIHelper.GetText(string.Format(ConfirmationRecurringTax, taxLabel), LocateBy.XPath);
+            string actualAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(ConfirmationRecurringTax, taxLabel), LocateBy.XPath);
             VerifyTool.VerifyValue(expectedAmount, actualAmount, taxLabel + " = {0}");
         }
 
@@ -362,9 +362,9 @@
             string expectedValue = MoneyTool.FormatMoney(totalToVerify, currency);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationMembershipYearlyFees, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationMembershipYearlyFees, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "MembershipYearlyFees : {0}");
         }
@@ -377,9 +377,9 @@
             string expectedValue = string.Format("By using a discount code, you have saved: {0}.", amount);
             string actualValue = string.Empty;
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnConfirmationPage(), "Confirmation");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnConfirmationPage(), "Confirmation");
 
-            actualValue = UIUtilityProvider.UIHelper.GetText(ConfirmationMembershipDiscountMessage, LocateBy.XPath);
+            actualValue = WebDriverUtility.DefaultProvider.GetText(ConfirmationMembershipDiscountMessage, LocateBy.XPath);
 
             VerifyTool.VerifyValue(expectedValue, actualValue, "ConfirmationSaving : {0}");
         }
@@ -387,21 +387,21 @@
         [Step]
         public void UnfoldGroupMember(int memberNumber)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("ctl00_cphNoForm_membersRepeater_ctl{0}_hlRegName", ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(memberNumber)), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("ctl00_cphNoForm_membersRepeater_ctl{0}_hlRegName", ConversionTools.ConvertGroupMemberIndexToTwoDigitsString(memberNumber)), LocateBy.Id);
         }
 
         [Verify]
         public void JoinAndVerifyWebEvent(string webEventURL)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//button[text()='Join the Web Event']", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            VerifyTool.VerifyValue(Builder.FormDetailManager.StartPageDefaultInfo.ConferenceURL, UIUtilityProvider.UIHelper.GetLocation(), "URL = {0}");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//button[text()='Join the Web Event']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            VerifyTool.VerifyValue(Builder.FormDetailManager.StartPageDefaultInfo.ConferenceURL, WebDriverUtility.DefaultProvider.GetLocation(), "URL = {0}");
         }
 
         public void VerifyConfirmationRoomType(string expectedRoomType)
         {
             string locator = "//fieldset[@class='registrantDetailSection']/legend[text()='Lodging & Travel']/following-sibling::table/tbody//th[text()='Room Preference:']/following-sibling::td";
-            VerifyTool.VerifyValue(expectedRoomType, UIUtilityProvider.UIHelper.GetText(locator, LocateBy.XPath), "Confirmation RoomType: {0}");
+            VerifyTool.VerifyValue(expectedRoomType, WebDriverUtility.DefaultProvider.GetText(locator, LocateBy.XPath), "Confirmation RoomType: {0}");
         }
 
         /// <summary>
@@ -417,16 +417,16 @@
             //in page, the index need to be +2, the first tr is the "gridTextOnlyShowInMobile".
             string locator = "//fieldset/legend[text()='Fees']/following-sibling::table/tbody/tr[" + (index + 2).ToString() + "]/td[{0}]";
 
-            VerifyTool.VerifyValue(expectedName, UIUtilityProvider.UIHelper.GetText(string.Format(locator, 1), LocateBy.XPath).Trim(), "Merchandise Name: {0}"); //there is a space at the end of actual name, so Trim().
-            VerifyTool.VerifyValue(expectedQuantity, UIUtilityProvider.UIHelper.GetText(string.Format(locator, 2), LocateBy.XPath), "Merchandise Quantity: {0}");
-            VerifyTool.VerifyValue(expectedPrice, UIUtilityProvider.UIHelper.GetText(string.Format(locator, 3), LocateBy.XPath), "Merchandise Price: {0}");
-            VerifyTool.VerifyValue(expectedAmount, UIUtilityProvider.UIHelper.GetText(string.Format(locator, 4), LocateBy.XPath), "Merchandise Amount: {0}");
+            VerifyTool.VerifyValue(expectedName, WebDriverUtility.DefaultProvider.GetText(string.Format(locator, 1), LocateBy.XPath).Trim(), "Merchandise Name: {0}"); //there is a space at the end of actual name, so Trim().
+            VerifyTool.VerifyValue(expectedQuantity, WebDriverUtility.DefaultProvider.GetText(string.Format(locator, 2), LocateBy.XPath), "Merchandise Quantity: {0}");
+            VerifyTool.VerifyValue(expectedPrice, WebDriverUtility.DefaultProvider.GetText(string.Format(locator, 3), LocateBy.XPath), "Merchandise Price: {0}");
+            VerifyTool.VerifyValue(expectedAmount, WebDriverUtility.DefaultProvider.GetText(string.Format(locator, 4), LocateBy.XPath), "Merchandise Amount: {0}");
         }
 
         public void VerifyConfirmationAgenda(int index,string expectedName)
         {
             string locator = "//fieldset[@class='registrantDetailSection']/legend[text()='Agenda']/following-sibling::div[@class='detailContentWrapper']/h4[{0}]";
-            VerifyTool.VerifyValue(expectedName, UIUtilityProvider.UIHelper.GetText(string.Format(locator, index + 1), LocateBy.XPath), "Confirmation Agenda: {0}");
+            VerifyTool.VerifyValue(expectedName, WebDriverUtility.DefaultProvider.GetText(string.Format(locator, index + 1), LocateBy.XPath), "Confirmation Agenda: {0}");
         }
 
         #endregion
@@ -438,7 +438,7 @@
         {
             bool onConfRedirect = false;
 
-            if ((UIUtilityProvider.UIHelper.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (UIUtilityProvider.UIHelper.IsTextPresent("Active Advantage")))
+            if ((WebDriverUtility.DefaultProvider.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (WebDriverUtility.DefaultProvider.IsTextPresent("Active Advantage")))
             {
                 onConfRedirect = true;
             }
@@ -449,21 +449,21 @@
         [Step]
         public void ClickAdvantageNo()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//div[@class='offerSubmit']//span[text()='No thanks']/..", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@class='offerSubmit']//span[text()='No thanks']/..", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void ClickChangeMyRegistration()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickViewDirectory(string text)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//div[@class='actionsList']//a[text()='{0}']", text), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//div[@class='actionsList']//a[text()='{0}']", text), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

@@ -40,40 +40,40 @@
 
         public void ClickCancel()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnCancel"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnCancel"), LocateBy.XPath);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void ClickSaveAndClose()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveClose"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveClose"), LocateBy.XPath);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
         }
 
         public void ClickSaveAndStay()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveStay"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveStay"), LocateBy.XPath);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void SetInternalCode(string code)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_txtEventsClientEventID", code, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsClientEventID", code, LocateBy.Id);
         }
 
         [Verify]
         public void VerifyAuthernticationMethodDropDownListIsEditable(bool enabled)
         {
-            Assert.AreEqual(enabled, UIUtilityProvider.UIHelper.IsEditable("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
+            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyAuthernticationMethodType(AuthenicationMothedType type)
         {
-            Assert.AreEqual(StringEnum.GetStringValue(type), UIUtilityProvider.UIHelper.GetSelectedLabel("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
+            Assert.AreEqual(StringEnum.GetStringValue(type), WebDriverUtility.DefaultProvider.GetSelectedLabel("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
         }
 
         //public void VerifyEventsRequirePasswordOnRecallIsEnable(bool enabled)
@@ -95,19 +95,19 @@
 
         public void VerifyEventsEnableCrossAccountOnRecallIsEnable(bool enabled)
         {
-            Assert.AreEqual(enabled, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyEventsEnableCrossAccountOnRecallIsEditable(bool enabled)
         {
-            Assert.AreEqual(enabled, UIUtilityProvider.UIHelper.IsEditable("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyEventsEnableCrossAccountOnRecallIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, UIUtilityProvider.UIHelper.IsElementDisplay("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         //public void CheckEventsRequirePasswordOnRecall(bool enable)
@@ -118,33 +118,33 @@
         [Step]
         public void CheckEventsEnableCrossAccountOnRecall(bool enable)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", enable, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", enable, LocateBy.Id);
         }
 
         [Step]
         public void EnableRecall(bool enable)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkEventsEnableRecall", enable, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableRecall", enable, LocateBy.Id);
         }
 
         [Step]
         public void SetInvitationCodeAndList(string code, string list)
         {
-            if (!UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id))
+            if (!WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id))
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id);
             }
 
             if (string.IsNullOrEmpty(code))
             {
-                UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_txtEventsInvitationPassword", string.Empty, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", string.Empty, LocateBy.Id);
             }
             else
             {
-                UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_txtEventsInvitationPassword", code, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", code, LocateBy.Id);
             }
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_ddlEventsInvitationListId", list, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlEventsInvitationListId", list, LocateBy.Id);
         }
 
         #region Locators

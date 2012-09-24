@@ -10,15 +10,15 @@
     {
         public void SignIn(EventFolders.Folders folder)
         {
-            this.SignIn(ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, folder);
+            this.SignIn(ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, folder);
         }
 
         public void SignIn(string userName, string password, EventFolders.Folders folder)
         {
-            UIUtilityProvider.UIHelper.OpenUrl(
+            WebDriverUtility.DefaultProvider.OpenUrl(
                 string.Format("{0}manager/login.aspx", 
-                ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrlWithHttps));
+                ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps));
 
             PageObject.PageObjectHelper.AllowCookie_Click();
             PageObject.PageObjectProvider.Manager.SignIn.UserName.Type(userName);

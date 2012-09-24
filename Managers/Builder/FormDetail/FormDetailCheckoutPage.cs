@@ -121,6 +121,15 @@
             this.PaymentMethodMgr.CreditCardOptionsMgr.SelectPaymentGateway(
                 CreditCardOptionsManager.PaymentGateway.RegOnlineGateway);
 
+            // Bruce - 2012-8-13
+            // Sleep for 2 seconds is necessary:
+            // In case you'll meet the error 'Element is no longer attached to the DOM'.
+            // The default gateway has changed from RegOnline gateway to AMS,
+            // so every time we change it from AMS to RegOnline gateway, some related elements will be refreshed.
+            // See http://stackoverflow.com/questions/5709204/random-element-is-no-longer-attached-to-the-dom-staleelementreferenceexception as a reference,
+            // those elements are 'removed and re-added'.
+            Utility.ThreadSleep(2);
+
             ////this.PaymentMethodMgr.CreditCardOptionsMgr.SetCreditCardStatementDescription(
             ////    CreditCardOptionsManager.DefaultCreditCardStatementDescription);
 
@@ -206,18 +215,18 @@
         }
         public void SetMembershipRenewalOptions(AutoRenewals renewal, Frequency frequency, bool fixedDate, bool prorate)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(AutoRenewalLocator, StringEnum.GetStringValue(renewal), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithText(RenewalFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectWithText(PaymentFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(AutoRenewalLocator, StringEnum.GetStringValue(renewal), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(RenewalFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText(PaymentFrequencyLocator, StringEnum.GetStringValue(frequency), LocateBy.Id);
             
             //there is a lot of logic around this and the renewal/payment frequency, more work is needed here
             //but for now this should suffice for our basic needs, I would recommend leaving fixedDate false
             if (fixedDate)
             {
-                UIUtilityProvider.UIHelper.WaitForDisplayAndClick(FixedRenewalLocator, LocateBy.Id);
+                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FixedRenewalLocator, LocateBy.Id);
             }
 
-            UIUtilityProvider.UIHelper.SetCheckbox(ProratePaymentsLocator, prorate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox(ProratePaymentsLocator, prorate, LocateBy.Id);
         }
     }
 }

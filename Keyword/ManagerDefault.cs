@@ -33,6 +33,7 @@
                 eventIds.Add(row.EventId);
             }
 
+            eventIds.Sort();
             eventIds.Reverse();
             return eventIds[0];
         }
@@ -67,7 +68,7 @@
 
             for (int i = 1; i <= count; i++)
             {
-                errorList[i - 1] = UIUtilityProvider.UIHelper.GetText(string.Format(
+                errorList[i - 1] = WebDriverUtility.DefaultProvider.GetText(string.Format(
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaErrorMessage.Locator + "[{0}]", i), LocateBy.XPath);
             }
 

@@ -32,7 +32,7 @@
         {
             get
             {
-                return ConfigurationProvider.XmlConfig.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}";
+                return ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "?eventID={0}&rTypeID={1}";
             }
         }
 
@@ -95,7 +95,7 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(RegTypeDetailFrameID);
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(RegTypeDetailFrameID);
             }
             catch
             {
@@ -106,7 +106,7 @@
         public void SaveAndStay()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
@@ -114,19 +114,19 @@
         public void SaveAndClose()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -134,30 +134,30 @@
         {
             SetNameOnForm(regTypeName);
             SetNameOnReports(regTypeName);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_bsGeneral", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_bsGeneral", LocateBy.Id);
             VerifyName(regTypeName);
         }
 
         public void SetNameOnForm(string name)
         {
-            UIUtilityProvider.UIHelper.Type(FormNameLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(FormNameLocator, name, LocateBy.Id);
         }
 
         public void SetNameOnReports(string name)
         {
-            UIUtilityProvider.UIHelper.Type(ReportsNameLocator, name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(ReportsNameLocator, name, LocateBy.Id);
         }
 
         private void ClickAdvancedHeader()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[text()='Advanced']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Advanced']", LocateBy.XPath);
             Utility.ThreadSleep(0.5);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ExpandAdvancedSection()
         {
-            if (UIUtilityProvider.UIHelper.IsElementHidden(AdvancedSectionDIVLocator, LocateBy.Id))
+            if (WebDriverUtility.DefaultProvider.IsElementHidden(AdvancedSectionDIVLocator, LocateBy.Id))
             {
                 ClickAdvancedHeader();
             }
@@ -165,7 +165,7 @@
 
         public void CollapseAdvancedSection()
         {
-            if (!UIUtilityProvider.UIHelper.IsElementHidden(AdvancedSectionDIVLocator, LocateBy.Id))
+            if (!WebDriverUtility.DefaultProvider.IsElementHidden(AdvancedSectionDIVLocator, LocateBy.Id))
             {
                 ClickAdvancedHeader();
             }
@@ -173,7 +173,7 @@
 
         public void SetFee(double? regTypeFee)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(FeeTxtboxLocator, Convert.ToString(regTypeFee));
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(FeeTxtboxLocator, Convert.ToString(regTypeFee));
         }
 
         public void SetVisibilities(bool? isPublic, bool? isAdmin, bool? isOnsite)
@@ -199,13 +199,13 @@
             switch (option)
             {
                 case VisibilityOption.Public:
-                    UIUtilityProvider.UIHelper.SetCheckbox(VisibleToPublicCheckboxLocator, check, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.SetCheckbox(VisibleToPublicCheckboxLocator, check, LocateBy.Id);
                     break;
                 case VisibilityOption.Admin:
-                    UIUtilityProvider.UIHelper.SetCheckbox(VisibleToAdminCheckboxLocator, check, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.SetCheckbox(VisibleToAdminCheckboxLocator, check, LocateBy.Id);
                     break;
                 case VisibilityOption.Onsite:
-                    UIUtilityProvider.UIHelper.SetCheckbox(VisibleToOnsiteCheckboxLocator, check, LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.SetCheckbox(VisibleToOnsiteCheckboxLocator, check, LocateBy.Id);
                     break;
                 default:
                     break;
@@ -221,13 +221,13 @@
             switch (option)
             {
                 case VisibilityOption.Public:
-                    checkboxValue = UIUtilityProvider.UIHelper.GetValue(VisibleToPublicCheckboxLocator, LocateBy.Id);
+                    checkboxValue = WebDriverUtility.DefaultProvider.GetValue(VisibleToPublicCheckboxLocator, LocateBy.Id);
                     break;
                 case VisibilityOption.Admin:
-                    checkboxValue = UIUtilityProvider.UIHelper.GetValue(VisibleToAdminCheckboxLocator, LocateBy.Id);
+                    checkboxValue = WebDriverUtility.DefaultProvider.GetValue(VisibleToAdminCheckboxLocator, LocateBy.Id);
                     break;
                 case VisibilityOption.Onsite:
-                    checkboxValue = UIUtilityProvider.UIHelper.GetValue(VisibleToOnsiteCheckboxLocator, LocateBy.Id);
+                    checkboxValue = WebDriverUtility.DefaultProvider.GetValue(VisibleToOnsiteCheckboxLocator, LocateBy.Id);
                     break;
                 default:
                     break;
@@ -238,24 +238,24 @@
 
         public void SetMinGroupSize(int? min)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(MinGroupSizeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
-            UIUtilityProvider.UIHelper.TypeRADNumericById(MinGroupSizeTxtboxLocator, Convert.ToString(min));
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(MinGroupSizeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(MinGroupSizeTxtboxLocator, Convert.ToString(min));
         }
 
         public void SetMaxGroupSize(int? max)
         {
-            UIUtilityProvider.UIHelper.WaitForElementPresent(MaxGroupSizeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
-            UIUtilityProvider.UIHelper.TypeRADNumericById(MaxGroupSizeTxtboxLocator, Convert.ToString(max));
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(MaxGroupSizeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(MaxGroupSizeTxtboxLocator, Convert.ToString(max));
         }
 
         public void SetDisableGroupReg(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkDisableGroupReg", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkDisableGroupReg", check, LocateBy.Id);
         }
 
         public void SetCollectTeamName(bool check)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkCollectTeamName", check, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkCollectTeamName", check, LocateBy.Id);
         }
 
         /// <summary>
@@ -288,27 +288,27 @@
 
         public void SetMinimumRegistrantMessage(string message)
         {
-            UIUtilityProvider.UIHelper.Click("ctl00_cphDialog_elMinRegsMessage_linkCheckmarktext_elMinRegsMessage", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", message + "<br>", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.Click("ctl00_cphDialog_elMinRegsMessage_linkCheckmarktext_elMinRegsMessage", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", message + "<br>", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
             System.Threading.Thread.Sleep(1000);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
             System.Threading.Thread.Sleep(1000);
         }
 
         public void SetCompletionStatus(InitialRegStatusType statusType)
         {
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cphDialog_RegStatusId", StringEnum.GetStringValue(statusType), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_RegStatusId", StringEnum.GetStringValue(statusType), LocateBy.Id);
         }
 
         // The two steps, SetRegLimit and SetRegLimitReachedMsg are linked in workflow
@@ -316,26 +316,26 @@
         {
             SetRegLimit(type, limit);
             SetRegLimitReachedMessage(message);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_bsGeneral", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_bsGeneral", LocateBy.Id);
         }
 
         public void SetRegLimit(RegLimitType type, int limit)
         {
             // Check 'Limit the number of registrants for this registrant type'
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_chkLimitRegs", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_chkLimitRegs", LocateBy.Id);
 
             switch (type)
             {
                 case RegLimitType.Individual:
                     // Limit the number of individual registrants
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_rbInvidividualLimit", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.TypeRADNumericById("ctl00_cphDialog_nonEnduranceLimiting_txtLimit0", limit);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_rbInvidividualLimit", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_nonEnduranceLimiting_txtLimit0", limit);
                     break;
 
                 case RegLimitType.Group:
                     // Limit the number of groups
-                    UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_rbGroupLimit", LocateBy.Id);
-                    UIUtilityProvider.UIHelper.TypeRADNumericById("ctl00_cphDialog_nonEnduranceLimiting_txtLimitGroups", limit);
+                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_nonEnduranceLimiting_rbGroupLimit", LocateBy.Id);
+                    WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_nonEnduranceLimiting_txtLimitGroups", limit);
                     break;
 
                 default:
@@ -346,40 +346,40 @@
         public void SetRegLimitReachedMessage(string message)
         {
             string regLimitReachedMessageTxtboxLocator = "ctl00_cphDialog_nonEnduranceLimiting_LimitMessage";
-            UIUtilityProvider.UIHelper.Type(regLimitReachedMessageTxtboxLocator, message ?? string.Empty, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(regLimitReachedMessageTxtboxLocator, message ?? string.Empty, LocateBy.Id);
         }
 
         public void SetAdditionalDetails(string details)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_elRegTypeInfo_linkCheckmarktext_elRegTypeInfo", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SelectIFrameOnCurrentIFrame(1);
-            UIUtilityProvider.UIHelper.Type("//textarea", details + "<br>", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_elRegTypeInfo_linkCheckmarktext_elRegTypeInfo", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            WebDriverUtility.DefaultProvider.Type("//textarea", details + "<br>", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void SetShareProcessingFeePercentage(int? percentage)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById("ctl00_cphDialog_txtProcessingFeePercent", Convert.ToString(percentage));
+            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_txtProcessingFeePercent", Convert.ToString(percentage));
         }
 
         public void SetShowDate(DateTime date)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_dtpShowDate_tbDate", date.ToString("MM/dd/yyyy"), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_dtpShowDate_tbDate", date.ToString("MM/dd/yyyy"), LocateBy.Id);
         }
 
         public void SetHideDate(DateTime date)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_dtpHideDate_tbDate", date.ToString("MM/dd/yyyy"), LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_dtpHideDate_tbDate", date.ToString("MM/dd/yyyy"), LocateBy.Id);
         }
 
         public void SetShowAndHideDates(DateTime showDate, DateTime hideDate)
@@ -390,13 +390,13 @@
 
         public void ClickRegTypeDirectLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(RegTypeDirectLinkLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RegTypeDirectLinkLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
         }
 
         public string GetRegTypeDirectLink()
         {
-            return UIUtilityProvider.UIHelper.GetText(RegTypeDirectLinkLocator, LocateBy.Id);
+            return WebDriverUtility.DefaultProvider.GetText(RegTypeDirectLinkLocator, LocateBy.Id);
         }
 
         public string ComposeRegTypeDirectLink(int eventID, int regTypeID)
@@ -454,17 +454,17 @@
         public void VerifyName(string regTypeName)
         {
             // Verify "name on reports" is copied
-            VerifyTool.VerifyValue(regTypeName, UIUtilityProvider.UIHelper.GetValue(ReportsNameLocator, LocateBy.Id), "RegType name on form/reports: {0}");
+            VerifyTool.VerifyValue(regTypeName, WebDriverUtility.DefaultProvider.GetValue(ReportsNameLocator, LocateBy.Id), "RegType name on form/reports: {0}");
         }
 
         public void VerifyFee(double? regTypeFee)
         {
             string expectedValue = Convert.ToString(regTypeFee);
-            string actualValue = UIUtilityProvider.UIHelper.GetValue(FeeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
+            string actualValue = WebDriverUtility.DefaultProvider.GetValue(FeeTxtboxLocator + TxtboxLocatorSuffix, LocateBy.Id);
 
             if (!actualValue.Contains(expectedValue))
             {
-                UIUtilityProvider.UIHelper.FailTest(string.Format("Expected RegTypeFee is '{0}' but actual value was '{1}'", expectedValue, actualValue));
+                WebDriverUtility.DefaultProvider.FailTest(string.Format("Expected RegTypeFee is '{0}' but actual value was '{1}'", expectedValue, actualValue));
             }
             
             //VerifyValue(U.ConversionTools.ConvertToString(regTypeFee),
@@ -475,14 +475,14 @@
         #region RegType fee advanced
         public void ClickFeeAdvancedLink()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_mdCostLink", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_mdCostLink", LocateBy.Id);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.SwitchToMainContent();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SwitchToMainContent();
 
             try
             {
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
             }
             catch
             {
@@ -496,11 +496,11 @@
         [Step]
         public void ClickOpenXAuthSetup()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id);
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog2");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog2");
 
-            if (ConfigurationProvider.XmlConfig.AccountConfiguration.XAuthVersion == "New")
+            if (ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "New")
             {
                 ManagerProvider.XAuthMgr.SelectXAuthRadioButton();
             }
@@ -509,38 +509,38 @@
         [Step]
         public void EnableXAuth(bool enable)
         {
-            UIUtilityProvider.UIHelper.SetCheckbox("ctl00_cphDialog_chkXAuthEnable", enable, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkXAuthEnable", enable, LocateBy.Id);
         }
 
         [Verify]
         public void VerifyEnableXAuthIsChecked(bool isChecked)
         {
-            Assert.AreEqual(isChecked, UIUtilityProvider.UIHelper.IsChecked("ctl00_cphDialog_chkXAuthEnable", LocateBy.Id));
+            Assert.AreEqual(isChecked, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_chkXAuthEnable", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyEnableXAuthTextIsEnableExternalAuthentication(bool isEnable)
         {
-            Assert.AreEqual(isEnable, UIUtilityProvider.UIHelper.GetText("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id).Equals("Enable External Authentication"));
+            Assert.AreEqual(isEnable, WebDriverUtility.DefaultProvider.GetText("ctl00_cphDialog_btnSetupExAuth", LocateBy.Id).Equals("Enable External Authentication"));
         }
 
         [Step]
         public void SelectRegTypeFrame()
         {
-            UIUtilityProvider.UIHelper.SelectPopUpFrameByName("dialog");
+            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         [Step]
         public void ClickOpenAndCloseXAuthWhatIsThis()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(XAuthWhatIsThisLocator, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.ClosePopUpWindow();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(XAuthWhatIsThisLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
         }
 
         [Verify]
         public void VerifyUnableToActivateEventWhenXAuthNotApprovedMessageShown(bool isShowMessage)
         {
-            Assert.AreEqual(isShowMessage, UIUtilityProvider.UIHelper.GetAttribute("wrpUnapprovedXAuth", "@style", LocateBy.Id) != "display: none;");
+            Assert.AreEqual(isShowMessage, WebDriverUtility.DefaultProvider.GetAttribute("wrpUnapprovedXAuth", "@style", LocateBy.Id) != "display: none;");
         }
 
         #endregion 

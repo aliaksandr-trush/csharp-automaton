@@ -65,8 +65,8 @@
 
             // test row count
             ReportMgr.VerifyAttendeeReportRowCount(this.eventID);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -93,8 +93,8 @@
 
             // verify results
             ReportMgr.VerifyReportFilteredByRegType(this.regTypeIDs[regType]);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -151,8 +151,8 @@
 
             //verify results
             ReportMgr.VerifyReportFilteredByRegStatus(this.eventID, 9);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -173,11 +173,11 @@
             ReportMgr.ClickSmartLinkButton();
             string smartLinkReportUrl = ReportMgr.EnableSmartLinkAccess(true);
             ReportMgr.SelectReportPopupWindow();
-            UIUtilityProvider.UIHelper.OpenUrl(smartLinkReportUrl);
+            WebDriverUtility.DefaultProvider.OpenUrl(smartLinkReportUrl);
             ReportMgr.LoginToSmartLinkReport(ReportManager.DefaultSmartLinkPassword);
             ReportMgr.VerifyAttendeeReportRowCount(this.eventID);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -200,8 +200,8 @@
             regID.Add(regs[1].Register_Id);
 
             // make sure attendees are not checked in originally
-            ReportMgr.UndoCheckIn(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection, regID[0]);
-            ReportMgr.UndoCheckIn(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection, regID[1]);
+            ReportMgr.UndoCheckIn(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, regID[0]);
+            ReportMgr.UndoCheckIn(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, regID[1]);
 
             // pull up the attendee report
             this.LoginAndGetSessionID();
@@ -217,7 +217,7 @@
             ReportMgr.ClickCheckInButton();
 
             // click OK on the check in confirmation
-            UIUtilityProvider.UIHelper.GetConfirmation();
+            ReportMgr.ClickOKOnCheckInConfirmationPopup();
             ReportMgr.ClickOKOnCheckInConfirmationPopup();
 
             ReportMgr.OpenReportUrl(40, this.eventID);
@@ -234,12 +234,12 @@
                 regID[1],
                 ReportManager.AttendeeStatus.Attended);
 
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
 
             // cleanup
-            ReportMgr.UndoCheckIn(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection, regID[0]);
-            ReportMgr.UndoCheckIn(ConfigurationProvider.XmlConfig.EnvironmentConfiguration.ClientDbConnection, regID[1]);
+            ReportMgr.UndoCheckIn(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, regID[0]);
+            ReportMgr.UndoCheckIn(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection, regID[1]);
             this.BackToEventList();
         }
 
@@ -296,8 +296,8 @@
 
             // cleanup
             ReportMgr.SetRegistrationStatus(FirstRegID, 2, evt);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -334,7 +334,7 @@
             ReportMgr.SendGroupEmail(emailSubject, "regression group email content, event id: " + this.eventID.ToString());
             ReportMgr.CloseReportPopupWindow();
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             // verify results
             ReportMgr.VerifyGroupEmailJobWasCreated(this.eventID, emailSubject, regs[0].Attendee_Id);
@@ -395,8 +395,8 @@
             // Click the ID column for the first time, and this will perform a descending order
             ReportMgr.ClickAttendeeReportColumnHeader(1);
             ReportMgr.VerifyReportValue(1, 2, maxRegID.ToString());
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 
@@ -464,10 +464,10 @@
             ReportMgr.ClickSmartLinkButton();
             string smartLinkReportUrl = ReportMgr.EnableSmartLinkAccess(false);
             ReportMgr.SelectReportPopupWindow();
-            UIUtilityProvider.UIHelper.OpenUrl(smartLinkReportUrl);
+            WebDriverUtility.DefaultProvider.OpenUrl(smartLinkReportUrl);
             ReportMgr.VerifyReportTableRowCount(regs.Count - 2);
-            UIUtilityProvider.UIHelper.CloseWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
             this.BackToEventList();
         }
 

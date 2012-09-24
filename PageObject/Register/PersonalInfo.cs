@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
+    using System;
 
     public class PersonalInfo : Window
     {
@@ -84,6 +85,9 @@
 
         public CustomFieldRow(CustomField field)
         {
+            Label cfNameLabel = new Label(string.Format("//label[text()='{0}']", field.NameOnForm), LocateBy.XPath);
+            field.Id = Convert.ToInt32(cfNameLabel.GetAttribute("for"));
+
             if (field is CFCheckBox)
             {
                 CustomFieldType = new CheckBox(string.Format(locator + "//input", field.Id.ToString()), LocateBy.XPath);

@@ -19,19 +19,19 @@
         public override void SaveAndClose()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndClose();
+            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public override void Cancel()
         {
             SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickCancel();
+            WebDriverUtility.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetMultiChoiceItem(string name, double? price)
@@ -45,7 +45,7 @@
 
         public void SetPrice(double? price)
         {
-            UIUtilityProvider.UIHelper.TypeRADNumericById(PriceTxtboxLocator, price);
+            WebDriverUtility.DefaultProvider.TypeRADNumericById(PriceTxtboxLocator, price);
         }
     }
 }

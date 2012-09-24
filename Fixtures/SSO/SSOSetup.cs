@@ -50,13 +50,12 @@
             Assert.True(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.ErrorMessage(Messages.BuilderError.ServiceEndPointFormatError).IsPresent);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SaveAndClose_Click();
             PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.RegTypeName);
-            regType1.RegTypeId = row1.RegTypeId;
             KeywordProvider.AddRegType.Add_RegType(regType2, evt);
             PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.RegTypeName);
-            regType2.RegTypeId = row2.RegTypeId;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
@@ -89,9 +88,9 @@
 
             Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg1.Password = ExternalAuthenticationData.SSOPassword;
-            reg1.RegType = regType1;
+            reg1.EventFee_Response = new EventFeeResponse(regType1);
             Registrant reg2 = new Registrant(evt);
-            reg2.RegType = regType2;
+            reg2.EventFee_Response = new EventFeeResponse(regType2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);

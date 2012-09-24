@@ -31,7 +31,7 @@
         {
             bool onMerchandise = false;
 
-            if (UIUtilityProvider.UIHelper.UrlContainsPath("Registrations/Fees/Fees.asp") || UIUtilityProvider.UIHelper.UrlContainsPath("register/merchandise.aspx"))
+            if (WebDriverUtility.DefaultProvider.UrlContainsPath("Registrations/Fees/Fees.asp") || WebDriverUtility.DefaultProvider.UrlContainsPath("register/merchandise.aspx"))
             {
                 onMerchandise = true;
             }
@@ -42,20 +42,20 @@
         [Step]
         public int GetMerchandiseItemId(string itemName)
         {
-            return Convert.ToInt32(UIUtilityProvider.UIHelper.GetAttribute(string.Format("//label[text()='{0}']", itemName), "for", LocateBy.XPath));
+            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetAttribute(string.Format("//label[text()='{0}']", itemName), "for", LocateBy.XPath));
         }
         
         [Step]
         public void SelectMerchandise(int quantity)
         {
-            UIUtilityProvider.UIHelper.VerifyOnPage(OnMerchandisePage(), "Merchandise");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(OnMerchandisePage(), "Merchandise");
 
             List<Fee> merchandise = Fetch_Merchandise(CurrentEventId);
 
             foreach (Fee m in merchandise)
             {
-                if (UIUtilityProvider.UIHelper.IsElementPresent(m.Id.ToString(), LocateBy.Id)
-                    || UIUtilityProvider.UIHelper.IsElementPresent(m.Id.ToString(), LocateBy.Name))
+                if (WebDriverUtility.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Id)
+                    || WebDriverUtility.DefaultProvider.IsElementPresent(m.Id.ToString(), LocateBy.Name))
                 {
                     DoSeleniumActionForMerchandise(m, quantity);
                 }
@@ -66,44 +66,44 @@
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseQuantityInRow + "//input";
 
-            UIUtilityProvider.UIHelper.Type(xPath, quantity.ToString(), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.Type(xPath, quantity.ToString(), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseVariableAmountByName(string merchName, double amount)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseAmountInRow + "//input";
 
-            UIUtilityProvider.UIHelper.Type(xPath, amount.ToString(), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.Type(xPath, amount.ToString(), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectMerchandiseMultipleChoiceByName(string merchName, string multipleItemName)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseMultipleChoiceInRow;
 
-            UIUtilityProvider.UIHelper.SelectWithText(xPath, multipleItemName, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectWithText(xPath, multipleItemName, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseDiscountCodeByName(string merchName, string discountCode)
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseDiscountCodeInRow + "//input";
 
-            UIUtilityProvider.UIHelper.Type(xPath, discountCode, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.Type(xPath, discountCode, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void EnterMerchandiseDiscountCodeById(int id, string discountCode)
         {
             string locator_Id = "dc" + id; 
 
-            UIUtilityProvider.UIHelper.Type(locator_Id, discountCode, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("pageContent", LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.Type(locator_Id, discountCode, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("pageContent", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public bool HasMerchandiseDiscountCodeByName(string merchName)
@@ -112,34 +112,34 @@
 
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseDiscountCodeInRow + "//input";
 
-            hasDC = UIUtilityProvider.UIHelper.IsElementPresent(xPath, LocateBy.XPath);
+            hasDC = WebDriverUtility.DefaultProvider.IsElementPresent(xPath, LocateBy.XPath);
 
             return hasDC;
         }
 
         public void VerifyMerchandisePageTotal(double expectedTotal)
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             Utility.ThreadSleep(1);
-            string amount = UIUtilityProvider.UIHelper.GetText("//*[@id='totalAmt']", LocateBy.XPath);
+            string amount = WebDriverUtility.DefaultProvider.GetText("//*[@id='totalAmt']", LocateBy.XPath);
             double actualTotal = ConversionTools.CurrencyToDouble(amount);
 
             if (expectedTotal != actualTotal)
             {
-                UIUtilityProvider.UIHelper.FailTest("The expected merchandise total of " + expectedTotal + " does not match the actual: " + actualTotal);
+                WebDriverUtility.DefaultProvider.FailTest("The expected merchandise total of " + expectedTotal + " does not match the actual: " + actualTotal);
             }
         }
 
         public void VerifyMerchandisePageShippingFee(double expectedTotal)
         {
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             Utilities.Utility.ThreadSleep(1);
-            string amount = UIUtilityProvider.UIHelper.GetText("divShippingTotal", LocateBy.Id);
+            string amount = WebDriverUtility.DefaultProvider.GetText("divShippingTotal", LocateBy.Id);
             double actualTotal = ConversionTools.CurrencyToDouble(amount);
 
             if (expectedTotal != actualTotal)
             {
-                UIUtilityProvider.UIHelper.FailTest("The expected shipping fee of " + expectedTotal + " does not match the actual: " + actualTotal);
+                WebDriverUtility.DefaultProvider.FailTest("The expected shipping fee of " + expectedTotal + " does not match the actual: " + actualTotal);
             }
         }
 
@@ -147,12 +147,12 @@
         {
             string xPath = string.Format(MerchandiseRowByName, merchName) + MerchandiseSubTotalInRow;
 
-            return UIUtilityProvider.UIHelper.GetText(xPath, LocateBy.XPath);
+            return WebDriverUtility.DefaultProvider.GetText(xPath, LocateBy.XPath);
         }
 
         public void VerifyMerchandiseItemPresent(string name, bool present)
         {
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format("//*[text()='{0}']", name), present, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", name), present, LocateBy.XPath);
         }
         #endregion
     }

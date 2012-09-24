@@ -50,16 +50,16 @@
                 otherChargeAmount);
 
             BackendMgr.SaveAndCloseTransaction();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             System.Threading.Thread.Sleep(700);
             BackendMgr.VerifyTotalBalanceDue(otherChargeAmount);
 
             // Step #6, #7
             BackendMgr.ChargeRemainingBalance(otherChargeAmount);
             BackendMgr.SelectAttendeeInfoWindow();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             System.Threading.Thread.Sleep(700);
             BackendMgr.VerifyTotalBalanceDue(0);
             System.Threading.Thread.Sleep(700);
@@ -90,8 +90,8 @@
                 otherCreditAmount);
 
             BackendMgr.SaveAndCloseTransaction();
-            UIUtilityProvider.UIHelper.SelectOriginalWindow();
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
             System.Threading.Thread.Sleep(700);
             BackendMgr.VerifyTotalBalanceDue(0 - otherCreditAmount);
 
@@ -348,7 +348,7 @@
             BackendMgr.EnterOnlineCCPaymentInfo(PaymentManager.DefaultPaymentInfo.CCNumberAlternative, transactionAmount);
             BackendMgr.SaveAndCloseTransaction();
             BackendMgr.SelectAttendeeInfoWindow();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             System.Threading.Thread.Sleep(2000);
 
             BackendMgr.VerifyTransactionHistory(

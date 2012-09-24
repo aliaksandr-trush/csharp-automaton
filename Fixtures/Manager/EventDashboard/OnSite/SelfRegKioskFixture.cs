@@ -157,7 +157,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -181,7 +181,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -211,7 +211,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -231,7 +231,7 @@
                     RegisterMgr.KioskEnterPassword();
                     RegisterMgr.GetPaidInFullMessage();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
 
                     this.eventSessionId = this.helper.Login();
                     ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
@@ -244,7 +244,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -266,7 +266,7 @@
                     this.KioskUpdateReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -293,7 +293,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    UIUtilityProvider.UIHelper.ClosePopUpWindow();
+                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 default:
@@ -413,7 +413,7 @@
             RegisterMgr.Checkin(this.regs[0].emailAddress);
             RegisterMgr.ClickCheckinAlreadyRegistered();
             RegisterMgr.EnterEmailAddress(this.regs[0].emailAddress);
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
             RegisterMgr.ClickEditPersonalInformationLink(0);
             RegisterMgr.SetCustomFieldCheckBox("CF-Checkbox", true);

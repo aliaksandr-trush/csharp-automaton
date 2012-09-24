@@ -1,26 +1,25 @@
 ﻿namespace RegOnline.RegressionTest.ConsoleTool
 {
     using System;
+    using System.IO;
+    using System.Xml.Serialization;
+    using System.Xml;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.DataAccess;
-    using RegOnline.RegressionTest.Managers;
-    using RegOnline.RegressionTest.Configuration;
 
     public class Program
     {
         static void Main(string[] args)
         {
-            //XmlConfiguration.Browser browser;
-            //Enum.TryParse<XmlConfiguration.Browser>(ConfigurationProvider.XmlConfig.CurrentBrowser.Name, out browser);
-            //DataHelper helper = new DataHelper();
-            //helper.RemoveXAuthLiveRegistration(245012);
-            //Console.WriteLine(browser.ToString());
-            //Console.Read();
-            Console.WriteLine(AccessData.GetEncryptString("375859"));
-            Console.WriteLine(ManagerProvider.EmailMgr.FetchConfirmationEmailId(Managers.Emails.EmailManager.EmailCategory.Complete, 637115));
+            ////string input = Console.ReadLine();
+            ////string[] eventIds = input.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
+            ////foreach (string eventId in eventIds)
+            ////{
+            ////    AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
+            ////}
+            Console.WriteLine(98 / 100.0);
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
+            Console.Read();
         }
     }
 }

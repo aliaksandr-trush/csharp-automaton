@@ -1,1 +1,1 @@
-java -jar selenium-server-standalone.jar
+"%JAVA_HOME%\bin\java" -jar selenium-server-standalone.jar -browserTimeout=120 -port 9999

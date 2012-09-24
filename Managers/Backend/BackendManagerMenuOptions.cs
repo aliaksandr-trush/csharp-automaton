@@ -36,7 +36,7 @@
 
         public void ClickMenuOptionUnderMore(MoreOption option)
         {
-            string pageSource = UIUtilityProvider.UIHelper.GetPageSource();
+            string pageSource = WebDriverUtility.DefaultProvider.GetPageSource();
             string js = string.Empty;
             
             switch (option)
@@ -44,31 +44,31 @@
                 case MoreOption.Profile:
                     Regex regex = new Regex(@"LoadProfile\('[^)]+',\d+,'[^)]+'\);", RegexOptions.IgnoreCase);
                     MatchCollection matchCollection = regex.Matches(pageSource);
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript(matchCollection[0].Value);
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript(matchCollection[0].Value);
                     break;
 
                 case MoreOption.AddThisAttendeeToGroup:
                     regex = new Regex(@"LoadGrouping\('[^)]+',\d+,\d+\)");
                     matchCollection = regex.Matches(pageSource);
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript(matchCollection[0].Value);
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript(matchCollection[0].Value);
                     break;
 
                 case MoreOption.DeleteThisAttendee:
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript("DeleteRegistrant()");
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript("DeleteRegistrant()");
                     break;
 
                 case MoreOption.CreateNewGroupByAddingANewAttendee:
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript("AddNewAttendee('AddNewAttendee');");
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript("AddNewAttendee('AddNewAttendee');");
                     break;
 
                 case MoreOption.PrintThisPage:
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript("printTable('attendeeData','')");
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript("printTable('attendeeData','')");
                     break;
 
                 case MoreOption.Transfer:
                     regex = new Regex(@"TransferRegistration\('\d+','[^)]+'\);");
                     matchCollection = regex.Matches(pageSource);
-                    UIUtilityProvider.UIHelper.ExecuteJavaScript(matchCollection[0].Value);
+                    WebDriverUtility.DefaultProvider.ExecuteJavaScript(matchCollection[0].Value);
                     break;
 
                 default:
@@ -79,23 +79,23 @@
         public void VerifyMenuOptionPresent(MoreOption option, bool present)
         {
             // Click 'More'
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(@"More>>", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"More>>", LocateBy.LinkText);
 
             Utilities.Utility.ThreadSleep(2);
 
             VerifyTool.VerifyValue(
                 present,
-                UIUtilityProvider.UIHelper.IsElementPresent(StringEnum.GetStringValue(option), LocateBy.LinkText),
+                WebDriverUtility.DefaultProvider.IsElementPresent(StringEnum.GetStringValue(option), LocateBy.LinkText),
                 "More option '" + StringEnum.GetStringValue(option) + "' is present: {0}");
         }
 
         [Step]
         public void ResendConfirmation()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Resend Confirmation", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Resend Confirmation", LocateBy.LinkText);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectWindowByName("Email");
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.SelectWindowByName("Email");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("submit", LocateBy.Name);
             Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
@@ -104,14 +104,14 @@
         [Verify]
         public void GenerateInvoiceAndVerify(int registrationId)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Invoice", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Generate Invoice", LocateBy.LinkText);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectWindowByName("Invoice");
+            WebDriverUtility.DefaultProvider.SelectWindowByName("Invoice");
 
             // Verify we are on the correct page
-            if (!UIUtilityProvider.UIHelper.UrlContainsAbsolutePath("register/invoice.aspx"))
+            if (!WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath("register/invoice.aspx"))
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on invoice page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on invoice page!");
             }
 
             // Verify registration id
@@ -119,10 +119,10 @@
 
             VerifyTool.VerifyValue(
                 registrationId,
-                Convert.ToInt32(UIUtilityProvider.UIHelper.GetText(registrationIdLocator, LocateBy.XPath)), 
+                Convert.ToInt32(WebDriverUtility.DefaultProvider.GetText(registrationIdLocator, LocateBy.XPath)), 
                 "Registration Id on invoice: {0}");
 
-            UIUtilityProvider.UIHelper.CloseWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
             Utility.ThreadSleep(3);
             this.SelectAttendeeInfoWindow();
         }
@@ -130,18 +130,19 @@
         [Verify]
         public void CancelRegistrationAndVerify()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Cancel Registration", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Cancel Registration", LocateBy.LinkText);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
             Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
-            UIUtilityProvider.UIHelper.WaitForElementPresent(CancelledOnLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForElementPresent(CancelledOnLocator, LocateBy.XPath);
             
             VerifyTool.VerifyValue(
                 "This registration was cancelled on " + string.Format("{0:dd-MMM-yyyy hh:mm tt}.", expectedCancelledDateTime),
-                UIUtilityProvider.UIHelper.GetText(CancelledOnLocator, LocateBy.XPath), 
+                WebDriverUtility.DefaultProvider.GetText(CancelledOnLocator, LocateBy.XPath), 
                 "Registration cancelled message: {0}");
 
         }
@@ -149,54 +150,56 @@
         [Verify]
         public void UndoCancelRegistrationAndVerify()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Undo Cancellation", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Undo Cancellation", LocateBy.LinkText);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectTopWindow();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Action", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Action", LocateBy.Name);
+            Utility.ThreadSleep(3);
             DateTime expectedCancelledDateTime = DateTime.Now;
             this.SelectAttendeeInfoWindow();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
-            if (UIUtilityProvider.UIHelper.IsTextPresent("This registration was cancelled on "))
+            if (WebDriverUtility.DefaultProvider.IsTextPresent("This registration was cancelled on "))
             {
-                UIUtilityProvider.UIHelper.FailTest("The registration cancelled message is still there!");
+                WebDriverUtility.DefaultProvider.FailTest("The registration cancelled message is still there!");
             }
         }
 
         [Verify]
         public void GenerateRegDetailsAndVerify(int registrationId)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Generate Reg Details", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Generate Reg Details", LocateBy.LinkText);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectWindowByName("PrintMyReg");
+            WebDriverUtility.DefaultProvider.SelectWindowByName("PrintMyReg");
 
             VerifyTool.VerifyValue(
                 registrationId.ToString(),
-                UIUtilityProvider.UIHelper.GetText("//th[text()='Registration ID:']/following-sibling::td", LocateBy.XPath), 
+                WebDriverUtility.DefaultProvider.GetText("//th[text()='Registration ID:']/following-sibling::td", LocateBy.XPath), 
                 "Registration Id on reg details: {0}");
 
-            UIUtilityProvider.UIHelper.CloseWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
             Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
 
         public void PrintBadgeAndVerify()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Print Badge", LocateBy.LinkText);
-            UIUtilityProvider.UIHelper.SelectWindowByName("PersonalBadges");
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Print Badge", LocateBy.LinkText);
+            Utility.ThreadSleep(3);
+            WebDriverUtility.DefaultProvider.SelectWindowByName("PersonalBadges");
 
             // The page will be redirected to activereports/default.aspx first, loading, then redirected to badge
             // Wait for 2 minutes as the instruction on the page
             // If firefox has no pdf plugin, the browser will open a download window for the pdf file, 
             // rather than showing it directly in currect browser window
-            UIUtilityProvider.UIHelper.WaitForPageToLoad(TimeSpan.FromMinutes(2));
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad(TimeSpan.FromMinutes(2));
 
-            if (!UIUtilityProvider.UIHelper.UrlContainsAbsolutePath("RegOnlineBadges/BadgeReport.aspx"))
+            if (!WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath("RegOnlineBadges/BadgeReport.aspx"))
             {
-                UIUtilityProvider.UIHelper.FailTest("Not on badge page!");
+                WebDriverUtility.DefaultProvider.FailTest("Not on badge page!");
             }
 
-            UIUtilityProvider.UIHelper.CloseWindow();
+            WebDriverUtility.DefaultProvider.CloseWindow();
             Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
@@ -204,7 +207,7 @@
         [Verify]
         public void CheckInAndVerify()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Check-In", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Check-In", LocateBy.LinkText);
 
             // There will be a selenium exception if I call WaitForPageToLoad() after clicking Check-in! WHY?!
             Utility.ThreadSleep(3);
@@ -217,7 +220,7 @@
         [Verify]
         public void UndoCheckinAndVerify()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("Undo Check-in", LocateBy.LinkText);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Undo Check-in", LocateBy.LinkText);
             Utility.ThreadSleep(3);
 
             VerifyFieldValue(
@@ -230,9 +233,9 @@
         {
             this.ClickMenuOptionUnderMore(MoreOption.Profile);
             Utility.ThreadSleep(3);
-            UIUtilityProvider.UIHelper.SelectWindowByName("Profile");
-            VerifyTool.VerifyValue(name + " (" + emailAddress + ")", UIUtilityProvider.UIHelper.GetText("lblProfleTitle", LocateBy.Id), "Profile title: {0}");
-            UIUtilityProvider.UIHelper.CloseWindow();
+            WebDriverUtility.DefaultProvider.SelectWindowByName("Profile");
+            VerifyTool.VerifyValue(name + " (" + emailAddress + ")", WebDriverUtility.DefaultProvider.GetText("lblProfleTitle", LocateBy.Id), "Profile title: {0}");
+            WebDriverUtility.DefaultProvider.CloseWindow();
             Utility.ThreadSleep(1);
             this.SelectAttendeeInfoWindow();
         }
@@ -241,12 +244,12 @@
         public void AddToGroupAndVerify()
         {
             this.ClickMenuOptionUnderMore(MoreOption.AddThisAttendeeToGroup);
-            UIUtilityProvider.UIHelper.SelectWindowByName("Grouping");
-            UIUtilityProvider.UIHelper.Type("GroupId", "11367058", LocateBy.Name);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("submit", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.SelectWindowByName("Grouping");
+            WebDriverUtility.DefaultProvider.Type("GroupId", "11367058", LocateBy.Name);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("submit", LocateBy.Name);
             Utility.ThreadSleep(1.5);
             this.SelectAttendeeInfoWindow();
-            UIUtilityProvider.UIHelper.IsTextPresent("This Attendee is part of a group");
+            WebDriverUtility.DefaultProvider.IsTextPresent("This Attendee is part of a group");
         }
 
         /// <summary>
@@ -259,13 +262,13 @@
         public void VerifyRegTypeExistInTransferAttendee(int eventIdToTransferTo, string nameForEventToTransferTo, string regTypeName, bool exist)
         {
             this.ClickMenuOptionUnderMore(MoreOption.Transfer);
-            UIUtilityProvider.UIHelper.SelectWindowByName("RegTransfer");
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectWithText("ddEvent", nameForEventToTransferTo + " (" + eventIdToTransferTo + ")", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWindowByName("RegTransfer");
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWithText("ddEvent", nameForEventToTransferTo + " (" + eventIdToTransferTo + ")", LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
-            Assert.AreEqual(UIUtilityProvider.UIHelper.IsOptionExistInSelect("ddRegType", regTypeName, LocateBy.Id), exist);
+            Assert.AreEqual(WebDriverUtility.DefaultProvider.IsOptionExistInSelect("ddRegType", regTypeName, LocateBy.Id), exist);
         }
 
         /// <summary>
@@ -277,29 +280,30 @@
         public int TransferAttendee(int eventIdToTransferTo, string nameForEventToTransferTo)
         {
             this.ClickMenuOptionUnderMore(MoreOption.Transfer);
-            UIUtilityProvider.UIHelper.SelectWindowByName("RegTransfer");
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.SelectWithText("ddEvent", nameForEventToTransferTo + " (" + eventIdToTransferTo + ")", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWindowByName("RegTransfer");
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.SelectWithText("ddEvent", nameForEventToTransferTo + " (" + eventIdToTransferTo + ")", LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
             
             // Click 'Next'
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnStart", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnStart", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
 
             // Get new registration id
-            int newRegistrationId = Convert.ToInt32(UIUtilityProvider.UIHelper.GetText("lblNewRegisterId", LocateBy.Id));
+            int newRegistrationId = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetText("lblNewRegisterId", LocateBy.Id));
 
             // Click 'Next'
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnNextCompare", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnNextCompare", LocateBy.Id);
 
             // Click 'Next'
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnNextPayment", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnNextPayment", LocateBy.Id);
 
             // Click 'Finish', then transfering window will be closed
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("btnFinish", LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnFinish", LocateBy.Id);
 
             return newRegistrationId;
         }

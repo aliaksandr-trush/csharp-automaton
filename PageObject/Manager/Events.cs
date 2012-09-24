@@ -28,7 +28,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Folder_Click(string folderName)
@@ -36,7 +36,7 @@
             string folderLocator = string.Format("//div[@id='tree']//span[text()='{0}']", folderName);
             ButtonOrLink Folder = new ButtonOrLink(folderLocator, LocateBy.XPath);
             Folder.WaitForDisplay();
-            string folderDivClassAttribute = UIUtilityProvider.UIHelper.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
+            string folderDivClassAttribute = WebDriverUtility.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
 
             if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
             {
@@ -56,6 +56,7 @@
         public int EventId;
         public ButtonOrLink Title;
         public ButtonOrLink Delete;
+        public string EventURL;
 
         public EventList_EventRow(int eventId)
         {
@@ -75,11 +76,15 @@
             this.Delete = new ButtonOrLink(
                 string.Format("{0}/td/div[@class='actions']/a[@title='Delete event']", this.Tr.Locator),
                 LocateBy.XPath);
+
+            this.EventURL = new ButtonOrLink(
+                string.Format("{0}/td//a[contains(@title,'regonline.com')]", this.Tr.Locator),
+                LocateBy.XPath).GetAttribute("href");
         }
 
         public static List<EventList_EventRow> GetEventRows(string eventName)
         {
-            List<IWebElement> elements = UIUtilityProvider.UIHelper.GetElements(
+            List<IWebElement> elements = WebDriverUtility.DefaultProvider.GetElements(
                 string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr/td/a[text()='{0}']/parent::td/parent::tr", eventName),
                 LocateBy.XPath);
 

@@ -26,7 +26,7 @@
             this.YesOnSplashPage.WaitForDisplay();
             this.YesOnSplashPage.Click();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void GotoPage(FormData.Page page)
@@ -68,14 +68,15 @@
             }
 
             ButtonOrLink Page = new ButtonOrLink(string.Format("//a[@accesskey='{0}']", accesskey), LocateBy.XPath);
+            Page.WaitForDisplay();
             Page.Click();
             WaitForLoad();
-            UIUtilityProvider.UIHelper.HideActiveSpecificFooter(true);
+            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Advanced_Click()
         {
-            UIUtilityProvider.UIHelper.ExpandAdvanced();
+            WebDriverUtility.DefaultProvider.ExpandAdvanced();
         }
     }
 }

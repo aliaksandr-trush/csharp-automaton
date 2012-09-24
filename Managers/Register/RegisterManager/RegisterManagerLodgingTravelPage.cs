@@ -97,7 +97,7 @@
 
         public bool OnLodgingTravelPage()
         {
-            return UIUtilityProvider.UIHelper.UrlContainsAbsolutePath(LodgingTravelPagePathNew);
+            return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(LodgingTravelPagePathNew);
         }
 
         public void VerifyOnLodgingTravelPage()
@@ -107,7 +107,7 @@
             //    Assert.Fail("Not on L&T page!");
             //}
 
-            UIUtilityProvider.UIHelper.VerifyOnPage(this.OnLodgingTravelPage(), "L&T");
+            WebDriverUtility.DefaultProvider.VerifyOnPage(this.OnLodgingTravelPage(), "L&T");
         }
 
         public List<string> GetLAndTCustomFieldNames(Section section)
@@ -117,21 +117,21 @@
             switch (section)
             {
                 case Section.Lodging:
-                    count = UIUtilityProvider.UIHelper.GetXPathCountByXPath(LodgingCustomFieldLocator);
+                    count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(LodgingCustomFieldLocator);
 
                     for (int i = 0; i < count; i++)
                     {
-                        names.Add(UIUtilityProvider.UIHelper.GetText(string.Format(LodgingCustomFieldLocator + "[{0}]", i + 1), LocateBy.XPath));
+                        names.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(LodgingCustomFieldLocator + "[{0}]", i + 1), LocateBy.XPath));
                     }
 
                     break;
 
                 case Section.Travel:
-                    count = UIUtilityProvider.UIHelper.GetXPathCountByXPath(TravelCustomFieldLocator);
+                    count = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(TravelCustomFieldLocator);
 
                     for (int i = 0; i < count; i++)
                     {
-                        names.Add(UIUtilityProvider.UIHelper.GetText(string.Format(TravelCustomFieldLocator + "[{0}]", i + 1), LocateBy.XPath));
+                        names.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(TravelCustomFieldLocator + "[{0}]", i + 1), LocateBy.XPath));
                     }
 
                     break;
@@ -146,16 +146,16 @@
             switch(fieldPosition)
             {
                 case FieldPositions.Below:
-                    UIUtilityProvider.UIHelper.VerifyElementDisplay(string.Format("//*[@for='{0}']/following-sibling::*[@id='{0}']", fieldId.ToString()), true, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementDisplay(string.Format("//*[@for='{0}']/following-sibling::*[@id='{0}']", fieldId.ToString()), true, LocateBy.XPath);
                     break;
                 case FieldPositions.Above:
-                    UIUtilityProvider.UIHelper.VerifyElementDisplay(string.Format("//*[@id='{0}']/following-sibling::*[@for='{0}']", fieldId.ToString()), true, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementDisplay(string.Format("//*[@id='{0}']/following-sibling::*[@for='{0}']", fieldId.ToString()), true, LocateBy.XPath);
                     break;
                 case FieldPositions.Left:
-                    UIUtilityProvider.UIHelper.VerifyElementDisplay(string.Format("//*[@id='{0}']/../following-sibling::*//*[@for='{0}']", fieldId.ToString()), true, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementDisplay(string.Format("//*[@id='{0}']/../following-sibling::*//*[@for='{0}']", fieldId.ToString()), true, LocateBy.XPath);
                     break;
                 case FieldPositions.Right:
-                    UIUtilityProvider.UIHelper.VerifyElementDisplay(string.Format("//*[@for='{0}']/../following-sibling::*//*[@id='{0}']", fieldId.ToString()), true, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementDisplay(string.Format("//*[@for='{0}']/../following-sibling::*//*[@id='{0}']", fieldId.ToString()), true, LocateBy.XPath);
                     break;
                 default:
                     break;
@@ -164,42 +164,42 @@
 
         public void VerifyHotelDetailInfo(string info, bool present)
         {
-            VerifyTool.VerifyValue(present, UIUtilityProvider.UIHelper.GetText("//p/a[@target='_blank']/../following-sibling::*[following-sibling::*[contains(text(),'Phone')]]", LocateBy.XPath).Contains("United States"), "United States present: {0}");
+            VerifyTool.VerifyValue(present, WebDriverUtility.DefaultProvider.GetText("//p/a[@target='_blank']/../following-sibling::*[following-sibling::*[contains(text(),'Phone')]]", LocateBy.XPath).Contains("United States"), "United States present: {0}");
         }
 
         public void VerifySeparatorLineBelowField(int fieldId)
         {
-            UIUtilityProvider.UIHelper.VerifyElementDisplay(string.Format("//*[@for='{0}']/../following-sibling::hr", fieldId.ToString()), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementDisplay(string.Format("//*[@for='{0}']/../following-sibling::hr", fieldId.ToString()), true, LocateBy.XPath);
         }
 
         public void VerifyDetailsMessage(string field, string message)
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(string.Format("//*[text()='{0}']/..//*[text()='Details']", field), LocateBy.XPath);
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]", message), true, LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//*[text()='{0}']/..//*[text()='Details']", field), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[contains(text(),'{0}')]", message), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[@class='ui-icon ui-icon-closethick']", LocateBy.XPath);
         }
 
         public void VerifyDetailsURL(string field, string url)
         {
             string URLLocator = "//*[text()='{0}']/following-sibling::*/a[@href='{1}']";
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(URLLocator, field, url), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(URLLocator, field, url), true, LocateBy.XPath);
         }
 
         public void VerifyFieldInGroup(string field, string groupName)
         {
             string groupLocator = "//*[text()='{0}']/following-sibling::*[contains(text(),'{1}')]";
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(groupLocator, field, groupName.ToUpper()), true, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(groupLocator, field, groupName.ToUpper()), true, LocateBy.XPath);
         }
 
         public void ClickHotelDetailInfo(string hotelName)
         {
             string detailInfoLocator = string.Format("//*[contains(text(),'{0}')]/a", hotelName);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(detailInfoLocator, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(detailInfoLocator, LocateBy.XPath);
         }
 
         public void SelectHotelDetailInfoFrame()
         {
-            UIUtilityProvider.UIHelper.SelectIFrame(0);
+            WebDriverUtility.DefaultProvider.SelectIFrame(0);
         }
 
         public void EnterLodgingInfo()
@@ -218,39 +218,39 @@
 
         public void ClickNeedAccommodations()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(NeedAccommodationsLocator, LocateBy.Id);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(NeedAccommodationsLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickNeedNoAccommodations()
         {
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(NeedNoAccommodationsLocator, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(NeedNoAccommodationsLocator, LocateBy.Id);
             Utility.ThreadSleep(0.5);
         }
 
         public void SelectHotel(string hotelName)
         {
-            string id = UIUtilityProvider.UIHelper.GetAttribute(string.Format(HotelPreferenceLocator, hotelName), "for", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick(id, LocateBy.Id);
+            string id = WebDriverUtility.DefaultProvider.GetAttribute(string.Format(HotelPreferenceLocator, hotelName), "for", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(id, LocateBy.Id);
         }
 
         //If this is failing, look at the method below, there are two different locators depending on setup. 
         public void FillOutCheckInOutDates(string CheckInDate, string CheckOutDate)
         {
-            UIUtilityProvider.UIHelper.Type(CheckInDateLocator, CheckInDate, LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(CheckOutDateLocator, CheckOutDate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(CheckInDateLocator, CheckInDate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(CheckOutDateLocator, CheckOutDate, LocateBy.Id);
             //Clears Calendar pop-up that is blocking it from continuing. 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//ol[@class='fieldList'][1]/li[1]", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//ol[@class='fieldList'][1]/li[1]", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void FillOutCheckInOutDatesWithOpenValidDates(string CheckInDate, string CheckOutDate)
         {
-            UIUtilityProvider.UIHelper.Type(CheckInDateOtherLocator, CheckInDate, LocateBy.Id);
-            UIUtilityProvider.UIHelper.Type(CheckOutDateOtherLocator, CheckOutDate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(CheckInDateOtherLocator, CheckInDate, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type(CheckOutDateOtherLocator, CheckOutDate, LocateBy.Id);
             //Clears Calendar pop-up that is blocking it from continuing. 
-            UIUtilityProvider.UIHelper.WaitForDisplayAndClick("//ol[@class='fieldList'][1]/li[1]", LocateBy.XPath);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//ol[@class='fieldList'][1]/li[1]", LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SelectRoomPreference(RoomPreference room)
@@ -260,7 +260,7 @@
 
         public void SelectRoomPreference(string RoomPreference)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(
+            WebDriverUtility.DefaultProvider.SelectWithText(
                 "//*[text()='Room Preference:']/../../div[2]/select",
                 RoomPreference, 
                 LocateBy.XPath);
@@ -268,19 +268,19 @@
 
         public void SelectBedPreference(BedPreference bed)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(BedPreferenceLocator, StringEnum.GetStringValue(bed), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.SelectWithText(BedPreferenceLocator, StringEnum.GetStringValue(bed), LocateBy.XPath);
         }
         public void VerifyBedPreference(BedPreference bed)
         {
             Utilities.VerifyTool.VerifyValue(
                 StringEnum.GetStringValue(bed),
-                UIUtilityProvider.UIHelper.GetSelectedOptionFromDropdownByXPath(BedPreferenceLocator),                
+                WebDriverUtility.DefaultProvider.GetSelectedOptionFromDropdownByXPath(BedPreferenceLocator),                
                 "Bed preference text : {0}");
         }
 
         public void SelectSmokingPreference(SmokingPreference smoking)
         {
-            UIUtilityProvider.UIHelper.SelectWithText(
+            WebDriverUtility.DefaultProvider.SelectWithText(
                 "//*[text()='Smoking Preference:']/../../div[2]/select",
                 StringEnum.GetStringValue(smoking), 
                 LocateBy.XPath);
@@ -288,36 +288,36 @@
 
         public void FillOutSharingWith(string sharingWith)
         {
-            UIUtilityProvider.UIHelper.Type("//*[text()='Sharing With:']/../..//input", sharingWith, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type("//*[text()='Sharing With:']/../..//input", sharingWith, LocateBy.XPath);
         }
 
         public void FillOutAdjoiningWith(string adjoiningWith)
         {
-            UIUtilityProvider.UIHelper.Type("//*[text()='Adjoining With:']/../..//input", adjoiningWith, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type("//*[text()='Adjoining With:']/../..//input", adjoiningWith, LocateBy.XPath);
         }
 
         public void FillOutLodgingAdditionalInfo(string additionalInfo)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_lsf_rptLodgingFields_ctl08_sf_txtResponse", additionalInfo, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_lsf_rptLodgingFields_ctl08_sf_txtResponse", additionalInfo, LocateBy.Id);
         }
 
         [Step]
         public void FillOutLodgingCCInfo_Default()
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_lsf_rptLodgingFields_ctl10_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_lsf_rptLodgingFields_ctl10_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_lsf_rptLodgingFields_ctl11_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_lsf_rptLodgingFields_ctl11_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_lsf_rptLodgingFields_ctl12_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_lsf_rptLodgingFields_ctl12_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_lsf_rptLodgingFields_ctl12_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_lsf_rptLodgingFields_ctl12_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
         }
 
         public void VerifyLodgingStandardFieldsPresent(LodgingStandardFieldsManager.LodgingStandardFields fields, bool present)
         {
             string LodginStandardFieldsLocator = "//*[contains(@id,'LodgingFields')][contains(text(),'{0}')]";
 
-            UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(LodginStandardFieldsLocator, StringEnum.GetStringValue(fields)), present, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(LodginStandardFieldsLocator, StringEnum.GetStringValue(fields)), present, LocateBy.XPath);
         }
 
         #endregion
@@ -344,56 +344,56 @@
         {
             lodgingResponses.ArrivalDate = DefaultEventStartDate;
 
-            UIUtilityProvider.UIHelper.Type("//*[text()='Arrival Date:']/../following-sibling::div//input[1]", lodgingResponses.ArrivalDate.ToString("MM/dd/yyyy"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type("//*[text()='Arrival Date:']/../following-sibling::div//input[1]", lodgingResponses.ArrivalDate.ToString("MM/dd/yyyy"), LocateBy.XPath);
         }
 
         public void EnterDepartureDate()
         {
             lodgingResponses.DepartureDate = DefaultEventEndDate;
 
-            UIUtilityProvider.UIHelper.Type("//*[text()='Departure Date:']/../following-sibling::div//input[1]", lodgingResponses.DepartureDate.ToString("MM/dd/yyyy"), LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type("//*[text()='Departure Date:']/../following-sibling::div//input[1]", lodgingResponses.DepartureDate.ToString("MM/dd/yyyy"), LocateBy.XPath);
         }
 
         public void EnterArrivalAirline()
         {
-            UIUtilityProvider.UIHelper.Type(ArrivalHeaderLocator + "/following-sibling::ol//*[text()='Airline:']/../../div[2]/input", DefaultAirline, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(ArrivalHeaderLocator + "/following-sibling::ol//*[text()='Airline:']/../../div[2]/input", DefaultAirline, LocateBy.XPath);
         }
 
         public void EnterDepartureAirline()
         {
-            UIUtilityProvider.UIHelper.Type(DepartureHeaderLocator + "/following-sibling::ol//*[text()='Airline:']/../../div[2]/input", DefaultAirline, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(DepartureHeaderLocator + "/following-sibling::ol//*[text()='Airline:']/../../div[2]/input", DefaultAirline, LocateBy.XPath);
         }
 
         public void EnterArrivalFlightNumber()
         {
-            UIUtilityProvider.UIHelper.Type(ArrivalHeaderLocator + "/following-sibling::ol//*[text()='Flight Number:']/../../div[2]/input", DefaultArrivalFlightNumber, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(ArrivalHeaderLocator + "/following-sibling::ol//*[text()='Flight Number:']/../../div[2]/input", DefaultArrivalFlightNumber, LocateBy.XPath);
         }
 
         public void EnterDepartureFlightNumber()
         {
-            UIUtilityProvider.UIHelper.Type(DepartureHeaderLocator + "/following-sibling::ol//*[text()='Flight Number:']/../../div[2]/input", DefaultDepartureFlightNumber, LocateBy.XPath);
+            WebDriverUtility.DefaultProvider.Type(DepartureHeaderLocator + "/following-sibling::ol//*[text()='Flight Number:']/../../div[2]/input", DefaultDepartureFlightNumber, LocateBy.XPath);
         }
 
         public void FillOutTravelCCInfo_Default()
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_tsf_rptOtherFields_ctl02_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_tsf_rptOtherFields_ctl02_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_tsf_rptOtherFields_ctl03_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_tsf_rptOtherFields_ctl03_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl04_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl04_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl04_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl04_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
         }
 
         public void FillOutTravelBookingCCInfo_Default()
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_tsf_rptOtherFields_ctl05_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_tsf_rptOtherFields_ctl05_sf_txtResponse", PaymentManager.DefaultPaymentInfo.HolderName, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.Type("ctl00_cph_tsf_rptOtherFields_ctl06_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cph_tsf_rptOtherFields_ctl06_sf_txtResponse", PaymentManager.DefaultPaymentInfo.CCNumber, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl07_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl07_sf_ddlMonth", PaymentManager.DefaultPaymentInfo.ExpirationMonth, LocateBy.Id);
 
-            UIUtilityProvider.UIHelper.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl07_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_tsf_rptOtherFields_ctl07_sf_ddlYear", PaymentManager.DefaultPaymentInfo.ExpirationYear, LocateBy.Id);
         }
 
         public void VerifyTravelStandardAdditionalFieldsPresent(TravelStandardAdditionalFieldsManager.FieldTypes? type,TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields field, bool present)
@@ -413,18 +413,18 @@
                 case TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields.FlightNumber:
                     if (type == TravelStandardAdditionalFieldsManager.FieldTypes.Arrival)
                     {
-                        UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(TravelArrivalLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(TravelArrivalLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
                     }
                     if (type == TravelStandardAdditionalFieldsManager.FieldTypes.Departure)
                     {
-                        UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(TravelDepartureLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
+                        WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(TravelDepartureLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
                     }
                     break;
                 case TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields.AdditionalInfo:
-                    UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(TravelAdditionalInfoLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(TravelAdditionalInfoLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
                     break;
                 case TravelStandardAdditionalFieldsManager.TravelStandardAdditionalFields.GroundTransportationPreference:
-                    UIUtilityProvider.UIHelper.VerifyElementPresent(string.Format(TravelGroundTransportLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
+                    WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(TravelGroundTransportLocator, StringEnum.GetStringValue(field)), present, LocateBy.XPath);
                     break;
                 default:
                     break;

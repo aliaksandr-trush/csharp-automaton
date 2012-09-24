@@ -53,11 +53,17 @@
         #endregion
 
         #region Basic Actions
+        public void EventFee_Type(double price)
+        {
+            this.EventFee.WaitForDisplay();
+            this.EventFee.Type(price);
+        }
+
         public void EventFeeAdvanced_Click()
         {
             this.EventFeeAdvanced.WaitForDisplay();
             this.EventFeeAdvanced.Click();
-            Utility.ThreadSleep(2);
+            Utility.ThreadSleep(4);
             WaitForAJAX();
             WaitForLoad();
         }
@@ -212,8 +218,8 @@
             this.Title.WaitForDisplay();
             this.Title.Click();
             Utility.ThreadSleep(2);
-            UIUtilityProvider.UIHelper.WaitForAJAXRequest();
-            UIUtilityProvider.UIHelper.WaitForPageToLoad();
+            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

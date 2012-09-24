@@ -58,6 +58,7 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.HtmlMode_Click();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.Content_Type(regType.AdditionalDetails);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.AdditionalDetailsEditor.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             }
             if (regType.IsPublic.HasValue)
             {
@@ -82,22 +83,22 @@
                 (evt.TaxRateTwo != null))
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeAdvanced_Click();
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AdjustRADWindowPositionAndResize();
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AdjustRADWindowPositionAndResize();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SelectByName();
 
                 if (regType.FeeName != null)
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReceipt.Type(regType.FeeName);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.NameOnReports.Type(regType.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.FeeName);
                 }
                 else
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
                 }
 
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.StandardPrice.Type(regType.Price);
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Options_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.StandardPrice.Type(regType.Price);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
 
                 #region AddEarlyLatePrice
                 if (regType.EarlyPrice != null)
@@ -114,9 +115,9 @@
                 #region AddDiscountCode
                 if (regType.DiscountCode.Count != 0)
                 {
-                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddDiscountCode.IsPresent)
+                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddDiscountCode.IsPresent)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
                     foreach (DiscountCode dc in regType.DiscountCode)
@@ -126,7 +127,7 @@
 
                     if (regType.RequireDC.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.RequireCode.Set(regType.RequireDC.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.RequireCode.Set(regType.RequireDC.Value);
                     }
                 }
                 #endregion
@@ -134,28 +135,29 @@
                 #region AddTaxRate
                 if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                 {
-                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.AddTaxRate.IsPresent)
+                    if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddTaxRate.IsPresent)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
                     KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.RegType);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndStay_Click();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.Options_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SaveAndStay_Click();
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
 
                     if (evt.TaxRateOne != null && regType.ApplyTaxOne.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxOne.Set(regType.ApplyTaxOne.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.ApplyTaxOne.Set(regType.ApplyTaxOne.Value);
                     }
 
                     if (evt.TaxRateTwo != null && regType.ApplyTaxTwo.HasValue)
                     {
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.ApplyTaxTwo.Set(regType.ApplyTaxTwo.Value);
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.ApplyTaxTwo.Set(regType.ApplyTaxTwo.Value);
                     }
                 }
                 #endregion
 
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EventFeeDefine.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             }
 
             #region RegTypeAdvanced
@@ -182,6 +184,7 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.HtmlMode_Click();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.Content_Type(regType.MinRegistrantMessage);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.MinRegMessageEditor.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             }
             if (regType.IsSSO)
             {
@@ -196,6 +199,7 @@
                 }
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             }
             #endregion

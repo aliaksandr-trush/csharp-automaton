@@ -23,15 +23,12 @@
         protected override Uri RemoteAddressUri { get; set; }
 
         public RegOnlineXmlUpdaterServiceFixture()
+            : base(ConfigReader.WebServiceEnum.XmlUpdaterService)
         {
             RequiresBrowser = true;
 
-            this.RemoteAddressUri = new Uri(
-                BaseUri,
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.XmlUpdaterService].Url);
-
             this.service = new XmlUpdaterSoapClient(
-                ConfigurationProvider.XmlConfig.WebServiceConfiguration[XmlConfiguration.WebService.XmlUpdaterService].EndpointConfigName,
+                CurrentWebServiceConfig.EndpointConfigName,
                 RemoteAddressUri.ToString());
         }
 
@@ -44,8 +41,8 @@
             this.CreateRegistration();
 
             string response = this.service.UpdateRegistrations(
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Login,
-                ConfigurationProvider.XmlConfig.AccountConfiguration.Password, 
+                ConfigReader.DefaultProvider.AccountConfiguration.Login,
+                ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 this.eventId, 
                 this.GetXmlData());
 

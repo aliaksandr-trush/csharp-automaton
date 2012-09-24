@@ -1,5 +1,6 @@
 ﻿namespace RegOnline.RegressionTest.WebElements
 {
+    using System;
     using RegOnline.RegressionTest.UIUtility;
 
     public class TextBox : WebElement
@@ -9,12 +10,22 @@
 
         public void Type(object value)
         {
-            UIUtilityProvider.UIHelper.Type(Locator, value, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.Type(Locator, value, TypeOfLocator);
+        }
+
+        public void SetValue(string value)
+        {
+            if (this.TypeOfLocator != LocateBy.Id)
+            {
+                throw new InvalidOperationException("Can only set value for element with id locator!");
+            }
+
+            WebDriverUtility.DefaultProvider.ExecuteJavaScript(string.Format("document.getElementById('{0}').value='{1}';", this.Locator, value));
         }
 
         public void Click()
         {
-            UIUtilityProvider.UIHelper.Click(Locator, TypeOfLocator);
+            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
     }
 }

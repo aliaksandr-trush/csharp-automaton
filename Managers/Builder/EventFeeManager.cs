@@ -42,8 +42,8 @@
         {
             try
             {
-                UIUtilityProvider.UIHelper.SwitchToMainContent();
-                UIUtilityProvider.UIHelper.SelectPopUpFrameByName(this.FeeAdvancedDialogID);
+                WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(this.FeeAdvancedDialogID);
             }
             catch
             {
@@ -56,7 +56,7 @@
             // When we click the 'advanced' link in the start page, the dialogID is 'dialog',
             // while, the dialogID changes to 'dialog2' when in regtype
             this.SelectThisFrame();
-            UIUtilityProvider.UIHelper.ClickSaveAndStay();
+            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
@@ -68,18 +68,18 @@
             switch (this.StartPageFeeLocation)
             {
                 case FormDetailManager.FeeLocation.Event:
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
                     SelectBuilderWindow();
-                    UIUtilityProvider.UIHelper.WaitForPageToLoad();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.FeeLocation.RegType:
-                    UIUtilityProvider.UIHelper.ClickSaveAndClose();
+                    WebDriverUtility.DefaultProvider.ClickSaveAndClose();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SwitchToMainContent();
-                    UIUtilityProvider.UIHelper.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SwitchToMainContent();
+                    WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -94,17 +94,17 @@
             {
                 case FormDetailManager.FeeLocation.Event:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectOriginalWindow();
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 case FormDetailManager.FeeLocation.RegType:
                     this.SelectThisFrame();
-                    UIUtilityProvider.UIHelper.ClickCancel();
+                    WebDriverUtility.DefaultProvider.ClickCancel();
                     Utility.ThreadSleep(1);
-                    UIUtilityProvider.UIHelper.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
-                    UIUtilityProvider.UIHelper.WaitForAJAXRequest();
+                    WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
+                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
                     break;
                 default:
                     break;
@@ -119,13 +119,13 @@
 
         public void SetReceiptName(string name)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_cfCF_mipNam_ip1_elRptDesc_TextArea", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_cfCF_mipNam_ip1_elRptDesc_TextArea", name, LocateBy.Id);
 
         }
 
         public void SetReportName(string name)
         {
-            UIUtilityProvider.UIHelper.Type("ctl00_cphDialog_cfCF_mipNam_ip1_txtFieldName", name, LocateBy.Id);
+            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_cfCF_mipNam_ip1_txtFieldName", name, LocateBy.Id);
         }
     }
 }

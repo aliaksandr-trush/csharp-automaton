@@ -24,7 +24,7 @@
 
             Registrant reg = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg.Password = ExternalAuthenticationData.SSOPassword;
-            reg.RegType = regType;
+            reg.EventFee_Response = new EventFeeResponse(regType);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 

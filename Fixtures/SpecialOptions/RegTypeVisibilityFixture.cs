@@ -120,7 +120,7 @@
 
             // Step #17
             // Attempt to open direct link copied from builder
-            UIUtilityProvider.UIHelper.OpenUrl(this.regTypeDirectLink);
+            WebDriverUtility.DefaultProvider.OpenUrl(this.regTypeDirectLink);
 
             // Verify error message
             RegisterMgr.VerifyIncorrectURL(EventName);
@@ -417,7 +417,7 @@
             
             RegisterMgr.CheckinWithEmail(emailAddress);
             RegisterMgr.Continue();
-            RegisterMgr.EnterPassword(ConfigurationProvider.XmlConfig.AccountConfiguration.Password);
+            RegisterMgr.EnterPassword(ConfigReader.DefaultProvider.AccountConfiguration.Password);
             RegisterMgr.Continue();
 
             // Update agenda
