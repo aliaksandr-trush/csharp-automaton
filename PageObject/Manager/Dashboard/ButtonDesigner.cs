@@ -8,6 +8,14 @@
 
     public class ButtonDesigner : Frame
     {
+        public enum ProgressBarStep
+        {
+            MarketSelection,
+            GraphicType,
+            Style,
+            GetCode
+        }
+
         private MultiChoiceDropdown MarketSelection = new MultiChoiceDropdown("response_market", UIUtility.LocateBy.Id);
         private Clickable NextStep = new Clickable("market_button", UIUtility.LocateBy.Id);
         private Clickable BuildIt_Button_Preview = new Clickable("buildit_button_preview", UIUtility.LocateBy.Id);
@@ -18,32 +26,34 @@
         private Clickable BuildIt_TextLink = new Clickable("buildit_link", UIUtility.LocateBy.Id);
         private Clickable BuildIt_CountdownWidget_Preview = new Clickable("buildit_widget_preview", UIUtility.LocateBy.Id);
         private Clickable BuildIt_CountdownWidget = new Clickable("buildit_widget", UIUtility.LocateBy.Id);
-
-        
+        private Clickable ProgressBarStep_Button_MarketSelection = new Clickable("progress_step1", UIUtility.LocateBy.Id);
+        private Clickable ProgressBarStep_Button_GraphicType = new Clickable("progress_step2", UIUtility.LocateBy.Id);
+        private Clickable ProgressBarStep_Button_Style = new Clickable("progress_step3", UIUtility.LocateBy.Id);
+        private Clickable ProgressBarStep_Button_GetCode = new Clickable("progress_step4", UIUtility.LocateBy.Id);
 
         public ButtonDesigner(string name)
             : base(name)
         { }
 
-        public void BuildIt_Click(GraphicType type, bool isPreview)
+        public void BuildIt_Click(DataCollection.HtmlButton button)
         {
-            if (isPreview)
+            if (button.WithPreview)
             {
-                switch (type)
+                switch (button.Graphic_Type)
                 {
-                    case GraphicType.Button:
+                    case DataCollection.HtmlButton.GraphicType.Button:
                         this.BuildIt_Button_Preview.WaitForDisplay();
                         this.BuildIt_Button_Preview.Click();
                         break;
-                    case GraphicType.Secure:
+                    case DataCollection.HtmlButton.GraphicType.Secure:
                         this.BuildIt_Secure_Preview.WaitForDisplay();
                         this.BuildIt_Secure_Preview.Click();
                         break;
-                    case GraphicType.TextLink:
+                    case DataCollection.HtmlButton.GraphicType.TextLink:
                         this.BuildIt_TextLink_Preview.WaitForDisplay();
                         this.BuildIt_TextLink_Preview.Click();
                         break;
-                    case GraphicType.CountdownWidget:
+                    case DataCollection.HtmlButton.GraphicType.CountdownWidget:
                         this.BuildIt_CountdownWidget_Preview.WaitForDisplay();
                         this.BuildIt_CountdownWidget_Preview.Click();
                         break;
@@ -53,21 +63,21 @@
             }
             else
             {
-                switch (type)
+                switch (button.Graphic_Type)
                 {
-                    case GraphicType.Button:
+                    case DataCollection.HtmlButton.GraphicType.Button:
                         this.BuildIt_Button.WaitForDisplay();
                         this.BuildIt_Button.Click();
                         break;
-                    case GraphicType.Secure:
+                    case DataCollection.HtmlButton.GraphicType.Secure:
                         this.BuildIt_Secure.WaitForDisplay();
                         this.BuildIt_Secure.Click();
                         break;
-                    case GraphicType.TextLink:
+                    case DataCollection.HtmlButton.GraphicType.TextLink:
                         this.BuildIt_TextLink.WaitForDisplay();
                         this.BuildIt_TextLink.Click();
                         break;
-                    case GraphicType.CountdownWidget:
+                    case DataCollection.HtmlButton.GraphicType.CountdownWidget:
                         this.BuildIt_CountdownWidget.WaitForDisplay();
                         this.BuildIt_CountdownWidget.Click();
                         break;
@@ -75,6 +85,30 @@
                         break;
                 }
             }
+        }
+
+        public void ProgressBarStep_Click(ProgressBarStep step)
+        {
+            switch (step)
+            {
+                case ProgressBarStep.MarketSelection:
+                    this.ProgressBarStep_Button_MarketSelection.WaitForDisplayAndClick();
+                    break;
+                case ProgressBarStep.GraphicType:
+                    this.ProgressBarStep_Button_GraphicType.WaitForDisplayAndClick();
+                    break;
+                case ProgressBarStep.Style:
+                    this.ProgressBarStep_Button_Style.WaitForDisplayAndClick();
+                    break;
+                case ProgressBarStep.GetCode:
+                    this.ProgressBarStep_Button_GetCode.WaitForDisplayAndClick();
+                    break;
+                default:
+                    break;
+            }
+
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
         }
     }
 }

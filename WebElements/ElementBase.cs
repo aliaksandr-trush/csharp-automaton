@@ -81,6 +81,12 @@
             WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
         }
 
+        public virtual void WaitForDisplayAndClick()
+        {
+            this.WaitForDisplay();
+            this.Click();
+        }
+
         public string GetAttribute(string att)
         {
             return WebDriverUtility.DefaultProvider.GetAttribute(Locator, att, TypeOfLocator);

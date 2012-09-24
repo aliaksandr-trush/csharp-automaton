@@ -1,6 +1,4 @@
-﻿
-
-namespace RegOnline.RegressionTest.DataCollection
+﻿namespace RegOnline.RegressionTest.DataCollection
 {
     using System;
     using System.Collections.Generic;
@@ -68,6 +66,7 @@ namespace RegOnline.RegressionTest.DataCollection
 
         public MarketSelection Market_Selection { get; set; }
         public GraphicType Graphic_Type { get; set; }
+        public bool WithPreview { get; set; }
         public ButtonTheme Button_Theme { get; set; }
         public string ButtonText { get; set; }
         public Keyword Button_Keyword { get; set; }
@@ -92,6 +91,7 @@ namespace RegOnline.RegressionTest.DataCollection
         {
             this.Market_Selection = MarketSelection.Events;
             this.Graphic_Type = GraphicType.Button;
+            this.WithPreview = true;
             this.Button_Theme = ButtonTheme.OrangeWithArrow;
         }
     }
