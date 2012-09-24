@@ -15,7 +15,7 @@
 
         [Test]
         [Category(Priority.Three)]
-        [Description("")]
+        [Description("426")]
         public void TestRegTypeWithDiscountCodeAccessCode()
         {
             evt = new Event("TestRegTypeWithDiscountCodeAccessCode");

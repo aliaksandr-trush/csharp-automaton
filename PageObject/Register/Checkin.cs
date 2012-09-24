@@ -76,7 +76,7 @@
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         public RadioButton RegTypeRadio(RegType regType)
@@ -94,7 +94,7 @@
             Label label = this.GetRegTypeLabel(regType);
             bool actual = label.IsDisplay;
 
-            WebDriverUtility.DefaultProvider.VerifyValue(
+            UIUtil.DefaultProvider.VerifyValue(
                 expected,
                 actual,
                 string.Format("Check display of regtype '{0}'", regType.RegTypeName));

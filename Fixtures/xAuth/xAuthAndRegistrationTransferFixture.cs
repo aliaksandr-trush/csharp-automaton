@@ -243,7 +243,7 @@
 
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, regId2);
             int newRegistrationIdForXAuth = BackendMgr.TransferAttendee(EventIDTransferTo, EventTransferTo);
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             Assert.Greater(newRegistrationIdForXAuth, 0);
 
             //transfer regId3 to no xauth event
@@ -252,7 +252,7 @@
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, regId3);
             int newRegistrationIdForNoXAuth = BackendMgr.TransferAttendee(NoXAuthEventID, NoXAuthEvent);
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             Assert.Greater(newRegistrationIdForNoXAuth, 0);
 
             #endregion

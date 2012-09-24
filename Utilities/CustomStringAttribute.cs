@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
 
+    [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
     public class CustomStringAttribute : Attribute
     {
         public CustomStringAttribute(string value)

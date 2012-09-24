@@ -27,7 +27,7 @@
             ElementBase a = AgendaRow.GetAgendaLiElement(agenda);
             bool actual = a.IsDisplay;
             
-            WebDriverUtility.DefaultProvider.VerifyValue(
+            UIUtil.DefaultProvider.VerifyValue(
                 expected, 
                 actual,
                 string.Format("Check display of agenda item '{0}'", agenda.NameOnForm));
@@ -38,7 +38,7 @@
             ElementBase a = new ElementBase(string.Format("//*[contains(text(),'{0}')]", choice.Name), LocateBy.XPath);
             bool actual = a.IsDisplay;
             
-            WebDriverUtility.DefaultProvider.VerifyValue(
+            UIUtil.DefaultProvider.VerifyValue(
                 expected, 
                 actual,
                 string.Format("Check display of choice item '{0}'", choice.Name));

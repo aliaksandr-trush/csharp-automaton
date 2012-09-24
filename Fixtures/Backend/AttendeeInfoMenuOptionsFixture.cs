@@ -269,7 +269,7 @@
             // Transfering workflow
             int newRegistrationId = BackendMgr.TransferAttendee(eventIdToTransferTo, EventToTransferAttendee.NameForEventToTransferTo);
 
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
@@ -406,7 +406,7 @@
 
             // Open register check in page to add a new attendee
             BackendMgr.ClickMenuOptionUnderMore(BackendManager.MoreOption.CreateNewGroupByAddingANewAttendee); ;
-            WebDriverUtility.DefaultProvider.SelectWindowByName("Checkin");
+            UIUtil.DefaultProvider.SelectWindowByName("Checkin");
 
             RegisterMgr.Checkin();
             emailAddress = RegisterMgr.CurrentEmail;
@@ -421,12 +421,12 @@
                 RegisterMgr.GetConfirmationPageValueForGroupMembers(RegisterManager.ConfirmationPageField.RegistrationId, 0));
 
             BackendMgr.OpenAttendeeInfoURL(eventSessionId, registrationId2);
-            WebDriverUtility.DefaultProvider.IsTextPresent("This Attendee is part of a group");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Test McTester (primary attendee)", LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.IsTextPresent(registrationId.ToString());
-            WebDriverUtility.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.IsTextPresent("This Attendee is part of a group");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Test McTester (primary attendee)", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.IsTextPresent(registrationId.ToString());
+            UIUtil.DefaultProvider.CloseWindow();
             BackendMgr.SelectAttendeeInfoWindow();
         }
 
@@ -442,7 +442,7 @@
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, this.registrationId);
             BackendMgr.ClickMenuOptionUnderMore(BackendManager.MoreOption.DeleteThisAttendee);
 
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -452,9 +452,9 @@
 
             ManagerSiteMgr.DashboardMgr.OpenCommonReportURL(ReportManager.CommonReportType.RegistrantList, this.eventId, this.eventSessionId);
 
-            if (WebDriverUtility.DefaultProvider.IsTextPresent(registrationId.ToString()))
+            if (UIUtil.DefaultProvider.IsTextPresent(registrationId.ToString()))
             {
-                WebDriverUtility.DefaultProvider.FailTest(
+                UIUtil.DefaultProvider.FailTest(
                     "RegistrationId '" + registrationId + "' should not be shown cause it has been deleted!");
             }
 

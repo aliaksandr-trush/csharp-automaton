@@ -189,14 +189,14 @@
         public void SetStartEndDateTimeDefault()
         {
             // Start date
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(
+            UIUtil.DefaultProvider.SetDateForDatePicker(
                 StartPageLocator.StartDate,
                 (int)(DefaultStartDateTime.Year),
                 (int)(DefaultStartDateTime.Month),
                 (int)(DefaultStartDateTime.Day));
 
             // Start time
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(
+            UIUtil.DefaultProvider.SetDateForDatePicker(
                 StartPageLocator.StartTime,
                 (int)(DefaultStartDateTime.Year),
                 (int)(DefaultStartDateTime.Month),
@@ -206,14 +206,14 @@
                 (int)(DefaultStartDateTime.Second));
 
             // End date
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(
+            UIUtil.DefaultProvider.SetDateForDatePicker(
                 StartPageLocator.EndDate,
                 (int)(DefaultEndDateTime.Year),
                 (int)(DefaultEndDateTime.Month),
                 (int)(DefaultEndDateTime.Day));
 
             // End time
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(
+            UIUtil.DefaultProvider.SetDateForDatePicker(
                 StartPageLocator.EndTime,
                 (int)(DefaultEndDateTime.Year),
                 (int)(DefaultEndDateTime.Month),
@@ -225,89 +225,89 @@
 
         public void SetStartDate(DateTime startDate)
         {
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(StartPageLocator.StartDate, startDate);
+            UIUtil.DefaultProvider.SetDateForDatePicker(StartPageLocator.StartDate, startDate);
         }
 
         public void SetStartTime(DateTime startTime)
         {
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(StartPageLocator.StartTime, startTime);
+            UIUtil.DefaultProvider.SetDateForDatePicker(StartPageLocator.StartTime, startTime);
         }
 
         public void SetEndDate(DateTime endDate)
         {
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(StartPageLocator.EndDate, endDate);
+            UIUtil.DefaultProvider.SetDateForDatePicker(StartPageLocator.EndDate, endDate);
         }
 
         public void SetEndTime(DateTime endTime)
         {
-            WebDriverUtility.DefaultProvider.SetDateForDatePicker(StartPageLocator.EndTime, endTime);
+            UIUtil.DefaultProvider.SetDateForDatePicker(StartPageLocator.EndTime, endTime);
         }
 
         public void TypeLocation(string location)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.Location, location, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.Location, location, LocateBy.Id);
         }
 
         public void TypePhone(string phone)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.Phone, phone, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.Phone, phone, LocateBy.Id);
         }
 
         public void SelectCountry(string country)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(StartPageLocator.Country, country, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectWithText(StartPageLocator.Country, country, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void TypeAddressLineOne(string addressOne)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.AddressLineOne, addressOne, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.AddressLineOne, addressOne, LocateBy.Id);
         }
 
         public void TypeAddressLineTwo(string addressTwo)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.AddressLineTwo, addressTwo, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.AddressLineTwo, addressTwo, LocateBy.Id);
         }
 
         public void TypeCity(string city)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.City, city, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.City, city, LocateBy.Id);
         }
 
         public void SelectState(string state)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(StartPageLocator.State, state, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(StartPageLocator.State, state, LocateBy.Id);
         }
 
         public void TypeZip(string zip)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.ZipCode, zip, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.ZipCode, zip, LocateBy.Id);
         }
 
         public void AddContactInfo(string contactInfo)
         {
-            WebDriverUtility.DefaultProvider.Click(StartPageLocator.ContactInfo, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
-            WebDriverUtility.DefaultProvider.Type("//textarea", contactInfo, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
-            WebDriverUtility.DefaultProvider.Click("ctl00_btnSaveClose", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.Click(StartPageLocator.ContactInfo, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            UIUtil.DefaultProvider.Type("//textarea", contactInfo, LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.Click("ctl00_btnSaveClose", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         public void TypeHomepageUrl(string url)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.Homepage, url, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.Homepage, url, LocateBy.Id);
         }
 
         public void SelectEventCategory(EventCategory category)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(
+            UIUtil.DefaultProvider.SelectWithText(
                 StartPageLocator.EventCategory, 
                 CustomStringAttribute.GetCustomString(category), 
                 LocateBy.Id);
@@ -318,7 +318,7 @@
 
         public void SelectEventIndustry(EventIndustry industry)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(
+            UIUtil.DefaultProvider.SelectWithText(
                 StartPageLocator.Industry,
                 CustomStringAttribute.GetCustomString(industry),
                 LocateBy.Id);
@@ -332,9 +332,9 @@
 
         public void SetEventNameAndShortcut(string eventName, string shortcut)
         {
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.EventName, eventName, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(StartPageLocator.Shortcut, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(StartPageLocator.Shortcut, shortcut, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.EventName, eventName, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(StartPageLocator.Shortcut, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(StartPageLocator.Shortcut, shortcut, LocateBy.Id);
         }
 
         [Step]
@@ -345,11 +345,11 @@
             switch (eventType)
             {
                 case ManagerSiteManager.EventType.ProEvent:
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.Location, StartPageDefaultInfo.Location, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.AddressLineOne, StartPageDefaultInfo.AddressLineOne, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.City, StartPageDefaultInfo.City, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.State, StartPageDefaultInfo.State, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.ZipCode, StartPageDefaultInfo.ZipCode, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.Location, StartPageDefaultInfo.Location, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.AddressLineOne, StartPageDefaultInfo.AddressLineOne, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.City, StartPageDefaultInfo.City, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.State, StartPageDefaultInfo.State, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.ZipCode, StartPageDefaultInfo.ZipCode, LocateBy.Id);
                     break;
 
                 case ManagerSiteManager.EventType.ExpressEvent:
@@ -362,7 +362,7 @@
                     break;
 
                 case ManagerSiteManager.EventType.WebEvent:
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.ConferenceURL, StartPageDefaultInfo.ConferenceURL, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.ConferenceURL, StartPageDefaultInfo.ConferenceURL, LocateBy.Id);
                     break;
 
                 case ManagerSiteManager.EventType.Survey:
@@ -374,12 +374,12 @@
                 case ManagerSiteManager.EventType.CreateFromTemplate:
                     break;
                 case ManagerSiteManager.EventType.ActiveEuropeEvent:
-                    WebDriverUtility.DefaultProvider.SelectWithText(StartPageLocator.EventType, StartPageDefaultInfo.EventType, LocateBy.Id); 
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.Location, StartPageDefaultInfo.Location, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.AddressLineOne, StartPageDefaultInfo.AddressLineOne, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.City, StartPageDefaultInfo.City, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.State, StartPageDefaultInfo.State, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.Type(StartPageLocator.ZipCode, StartPageDefaultInfo.ZipCode, LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithText(StartPageLocator.EventType, StartPageDefaultInfo.EventType, LocateBy.Id); 
+                    UIUtil.DefaultProvider.Type(StartPageLocator.Location, StartPageDefaultInfo.Location, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.AddressLineOne, StartPageDefaultInfo.AddressLineOne, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.City, StartPageDefaultInfo.City, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.State, StartPageDefaultInfo.State, LocateBy.Id);
+                    UIUtil.DefaultProvider.Type(StartPageLocator.ZipCode, StartPageDefaultInfo.ZipCode, LocateBy.Id);
                     break;
                 default:
                     break;
@@ -388,16 +388,16 @@
 
         public void SetRegTypeDisplayOption(RegTypeDisplayOption displayOption)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(RegTypeDisplayOptionLocator, true, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SetCheckbox(RegTypeDisplayOptionLocator, true, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
             switch (displayOption)
             {
                 case RegTypeDisplayOption.RadioButton:
-                    WebDriverUtility.DefaultProvider.SelectWithValue(RegTypeDisplayOptions, "2", LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithValue(RegTypeDisplayOptions, "2", LocateBy.Id);
                     break;
                 case RegTypeDisplayOption.DropDownList:
-                    WebDriverUtility.DefaultProvider.SelectWithValue(RegTypeDisplayOptions, "1", LocateBy.Id);
+                    UIUtil.DefaultProvider.SelectWithValue(RegTypeDisplayOptions, "1", LocateBy.Id);
                     break;
                 default:
                     break;
@@ -406,27 +406,27 @@
 
         protected void VerifyContactEmail(bool hasValue)
         {
-            VerifyTool.VerifyValue(hasValue, WebDriverUtility.DefaultProvider.GetValue(StartPageLocator.ContactEmail, LocateBy.Id).Trim().Length > 0, "Contact email has value: {0}");
+            VerifyTool.VerifyValue(hasValue, UIUtil.DefaultProvider.GetValue(StartPageLocator.ContactEmail, LocateBy.Id).Trim().Length > 0, "Contact email has value: {0}");
         }
 
         protected void VerifyAllowGroupRegister(bool isChecked)
         {
-            VerifyTool.VerifyValue(isChecked, WebDriverUtility.DefaultProvider.IsChecked(StartPageLocator.AllowGroupRegister, LocateBy.Id), "Allow group registering is checked: {0}");
+            VerifyTool.VerifyValue(isChecked, UIUtil.DefaultProvider.IsChecked(StartPageLocator.AllowGroupRegister, LocateBy.Id), "Allow group registering is checked: {0}");
         }
 
         protected void VerifyAllowUpdate(bool isChecked)
         {
-            VerifyTool.VerifyValue(isChecked, WebDriverUtility.DefaultProvider.IsChecked(StartPageLocator.AllowUpdate, LocateBy.Id), "Allow updating is checked: {0}");
+            VerifyTool.VerifyValue(isChecked, UIUtil.DefaultProvider.IsChecked(StartPageLocator.AllowUpdate, LocateBy.Id), "Allow updating is checked: {0}");
         }
 
         protected void VerifyAllowSubstitution(bool isChecked)
         {
-            VerifyTool.VerifyValue(isChecked, WebDriverUtility.DefaultProvider.IsChecked(StartPageLocator.AllowSubstitution, LocateBy.Id), "Allow substitution is checked: {0}");
+            VerifyTool.VerifyValue(isChecked, UIUtil.DefaultProvider.IsChecked(StartPageLocator.AllowSubstitution, LocateBy.Id), "Allow substitution is checked: {0}");
         }
 
         protected void VerifyAllowCancel(bool isChecked)
         {
-            VerifyTool.VerifyValue(isChecked, WebDriverUtility.DefaultProvider.IsChecked(StartPageLocator.AllowCancel, LocateBy.Id), "Allow cancelling is checked: {0}");
+            VerifyTool.VerifyValue(isChecked, UIUtil.DefaultProvider.IsChecked(StartPageLocator.AllowCancel, LocateBy.Id), "Allow cancelling is checked: {0}");
         }
 
         [Verify]
@@ -560,52 +560,52 @@
 
         public void SetRegistrationTarget(int target)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cph_txtTargetAttendance", target);
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cph_txtTargetAttendance", target);
         }
 
         [Step]
         public void ClickStartPageEventAdvancedSettings()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("AdvSetting", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("AdvSetting", LocateBy.Id);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForRADWindow();
-            WebDriverUtility.DefaultProvider.MaximizeRADWindow();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.WaitForRADWindow();
+            UIUtil.DefaultProvider.MaximizeRADWindow();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void SetGroupRegistration(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkAllowGroups", check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkAllowGroups", check, LocateBy.Id);
         }
 
         [Step]
         public void SetEventAllowUpdateRegistration(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(StartPageLocator.AllowUpdate, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(StartPageLocator.AllowUpdate, check, LocateBy.Id);
         }
 
         [Step]
         public void SetEventAllowChangeRegistrationType(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(StartPageLocator.AllowChangeRegType, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(StartPageLocator.AllowChangeRegType, check, LocateBy.Id);
         }
 
         public void OpenDiscountRule()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//*[@id='ctl00_cph_mdDiscountRules']/a", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//*[@id='ctl00_cph_mdDiscountRules']/a", LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         public void SetEventLimit(bool check, int? limit)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkLimit", check, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkLimit", check, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
             if (check)
             {
                 string eventLimitTxtboxLocator = "ctl00_cph_txtEventCapacity";
-                WebDriverUtility.DefaultProvider.TypeRADNumericById(eventLimitTxtboxLocator, Convert.ToString(limit));
+                UIUtil.DefaultProvider.TypeRADNumericById(eventLimitTxtboxLocator, Convert.ToString(limit));
             }
         }
 
@@ -619,8 +619,8 @@
 
         public void SetEnableWaitlist(bool enable)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEnableEventWaitlist", enable, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkEnableEventWaitlist", enable, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         #region RegTypes
@@ -634,7 +634,7 @@
             foreach (T rt in regTypes)
             {
                 this.ClickAddRegType();
-                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                UIUtil.DefaultProvider.WaitForPageToLoad();
                 this.RegTypeMgr.SetName(rt.RegistantTypeName.ToString());
                 if (rt.GetType() == typeof(BibNumberingToolManager.TeamWithRegTypes))
                 {
@@ -653,7 +653,7 @@
             // OpenRadWindowByUrl( 'dialog', 'Dialogs/RegType.aspx?EventSessionId=38b2a6bfc30045948cbbd51f82a3cc7d&EventId=608931&regTypeId=10153&panelid=ctl00_cph_grdRegTypes_grd', 675, 660 )
             string regTypeLink = this.GetRegTypeLink(regTypeName);
             string regTypeHrefAttributeString = "href";
-            string regTypeHrefAttributeText = WebDriverUtility.DefaultProvider.GetAttribute(regTypeLink, regTypeHrefAttributeString, LocateBy.XPath);
+            string regTypeHrefAttributeText = UIUtil.DefaultProvider.GetAttribute(regTypeLink, regTypeHrefAttributeString, LocateBy.XPath);
 
             string tmp = regTypeHrefAttributeText.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries)[1];
             tmp = tmp.Split(new string[] { "(" }, StringSplitOptions.RemoveEmptyEntries)[1];
@@ -678,15 +678,15 @@
         public void ClickAddRegType()
         {
             // Click "Add registrant type"
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdRegTypes_"), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(GetAddGridItemLocator("ctl00_cph_grdRegTypes_"), LocateBy.Id);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
         }
 
         // To decide whether a RegType alreadly exists
         public bool HasRegType(string regTypeName)
         {
-            if (WebDriverUtility.DefaultProvider.IsElementPresent("//table[@id='ctl00_cph_grdRegTypes_tblGrid']//a[text()='" + regTypeName + "']", LocateBy.XPath))
+            if (UIUtil.DefaultProvider.IsElementPresent("//table[@id='ctl00_cph_grdRegTypes_tblGrid']//a[text()='" + regTypeName + "']", LocateBy.XPath))
             {
                 return true;
             }
@@ -697,9 +697,9 @@
         [Step]
         public void OpenRegType(string name)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(name, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(name, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(RegTypeManager.RegTypeDetailFrameID);
         }
 
         [Step]
@@ -710,7 +710,7 @@
             this.RegTypeMgr.ExpandAdvancedSection();
             this.RegTypeMgr.SetFee(eventfee);
             this.RegTypeMgr.SaveAndClose();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         [Verify]
@@ -736,20 +736,20 @@
 
         public void VerifyHasRegType(string name, bool present)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format(RegTypeLinkLocatorFormat, name), present, LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format(RegTypeLinkLocatorFormat, name), present, LocateBy.XPath);
         }
 
         public void DeleteRegType(string name)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(RegTypeDeleteLocatorFormat, name), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.GetConfirmation();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(RegTypeDeleteLocatorFormat, name), LocateBy.XPath);
+            UIUtil.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetEventsForceSameRegTypes(bool forceSameRegType)
         {
             string forceSameRegTypeCheckboxLocator = "ctl00_cph_chkEventsForceSameRegTypes";
-            WebDriverUtility.DefaultProvider.SetCheckbox(forceSameRegTypeCheckboxLocator, forceSameRegType, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(forceSameRegTypeCheckboxLocator, forceSameRegType, LocateBy.Id);
         }
         #endregion
 
@@ -758,21 +758,21 @@
         public void SetEventFee(double? eventFee)
         {
             string eventFeeTxtboxLocator = "ctl00_cph_txtEventCost";
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(eventFeeTxtboxLocator, eventFee);
+            UIUtil.DefaultProvider.TypeRADNumericById(eventFeeTxtboxLocator, eventFee);
         }
 
         [Step]
         public void ClickEventFeeAdvanced()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_mdDefineCost", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_mdDefineCost", LocateBy.Id);
             Utility.ThreadSleep(1.5);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInEventFee);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(EventFeeManager.FeeAdvancedFrameIDInEventFee);
         }
         #endregion
 
         public void SelectEventType(ActiveEuropeEventType type)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cph_ddlChannels", type.ToString(), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_cph_ddlChannels", type.ToString(), LocateBy.Id);
         }
     }
 }

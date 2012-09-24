@@ -44,7 +44,7 @@
         private void EnterMemberPassword(string password)
         {
             VerifyOnMemberLoginPage();
-            WebDriverUtility.DefaultProvider.Type(MemberPasswordLocator, password, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(MemberPasswordLocator, password, LocateBy.Id);
         }
 
         public void ClickLoginToMembership()
@@ -57,24 +57,24 @@
         public void ClickRenewNowButton()
         {
             Assert.True(OnAttendeeCheckPage(), "Not on Attendee Check Page");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(RenewNowButtonLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(RenewNowButtonLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ChooseRenewPaymentOptions(RenewalPaymentOptions paymentOption)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementPresent("//*[@id='ctl00_cphMemberships_stepVerify'][@class='rmpHiddenView']", false, LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent("//*[@id='ctl00_cphMemberships_stepVerify'][@class='rmpHiddenView']", false, LocateBy.XPath);
 
             switch (paymentOption)
             {
                 case RenewalPaymentOptions.UseExistingPaymentInfo:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(UseExistingPaymentInfoLocator, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(UseExistingPaymentInfoLocator, LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForAJAXRequest();
                     break;
                     
                 case RenewalPaymentOptions.UseNewPaymentInfo:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(UseNewPaymentInfoLocator, LocateBy.Id);
-                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(UseNewPaymentInfoLocator, LocateBy.Id);
+                    UIUtil.DefaultProvider.WaitForAJAXRequest();
                     //TO DO: add new method to enter new payment info
                     break;
             }
@@ -84,10 +84,10 @@
         {
             if (!this.OnAttendeeCheckPage())
             {
-                WebDriverUtility.DefaultProvider.FailTest("Not on Attendee Check Page");
+                UIUtil.DefaultProvider.FailTest("Not on Attendee Check Page");
             }
 
-            string renewalDate = WebDriverUtility.DefaultProvider.GetText(AttendeeCheckRenewalDateLocator, LocateBy.XPath);
+            string renewalDate = UIUtil.DefaultProvider.GetText(AttendeeCheckRenewalDateLocator, LocateBy.XPath);
             return renewalDate;
         }
 
@@ -104,7 +104,7 @@
         {
             if (!this.OnLoginPage())
             {
-                WebDriverUtility.DefaultProvider.FailTest("Not on member login page!");
+                UIUtil.DefaultProvider.FailTest("Not on member login page!");
             }
         }
 
@@ -112,13 +112,13 @@
         {
             if (!this.OnAttendeeCheckPage())
             {
-                WebDriverUtility.DefaultProvider.FailTest("Not on member account details page!");
+                UIUtil.DefaultProvider.FailTest("Not on member account details page!");
             }
         }
 
         public bool OnMemberLoginPage()
         {
-            return WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath(MemberLoginPagePath);
+            return UIUtil.DefaultProvider.UrlContainsAbsolutePath(MemberLoginPagePath);
         }
     }
 }

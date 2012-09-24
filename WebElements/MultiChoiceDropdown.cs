@@ -18,17 +18,17 @@
 
         public void SelectWithText(object text)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(Locator, text, TypeOfLocator);
+            UIUtil.DefaultProvider.SelectWithText(Locator, text, TypeOfLocator);
         }
 
         public void SelectWithIndex(int index)
         {
-            WebDriverUtility.DefaultProvider.SelectWithIndex(Locator, index, TypeOfLocator);
+            UIUtil.DefaultProvider.SelectWithIndex(Locator, index, TypeOfLocator);
         }
 
         public void SelectWithValue(string value)
         {
-            WebDriverUtility.DefaultProvider.SelectWithValue(Locator, value, TypeOfLocator);
+            UIUtil.DefaultProvider.SelectWithValue(Locator, value, TypeOfLocator);
         }
 
         private void GetOptions()

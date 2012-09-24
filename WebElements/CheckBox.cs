@@ -10,14 +10,14 @@
 
         public void Set(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(Locator, check, TypeOfLocator);
+            UIUtil.DefaultProvider.SetCheckbox(Locator, check, TypeOfLocator);
         }
 
         public virtual bool IsChecked
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.IsChecked(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.IsChecked(Locator, TypeOfLocator);
             }
         }
     }

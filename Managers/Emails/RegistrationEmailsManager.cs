@@ -164,7 +164,7 @@
         public void OpenConfirmationEmailUrl(EmailCategory category, int eventId, int registrationId)
         {
             string url = ComposeConfirmationEmailURL(category, eventId, registrationId);
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         [Step]
@@ -172,35 +172,35 @@
         {
             string emailId = FetchInvitationEmailId(emailName);
             string url = ComposeEmailInvitationURL(eventId, attendeeId.ToString(), emailId);
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         [Verify]
         public void OpenVirtualEventConfirmationLink()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(WebEventJoinLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             Assert.True(OnWebEventJoinPage());
         }
 
         public bool OnWebEventJoinPage()
         {
-            return WebDriverUtility.DefaultProvider.UrlContainsPath("register/WebEvent/join.aspx");
+            return UIUtil.DefaultProvider.UrlContainsPath("register/WebEvent/join.aspx");
         }
 
         public string GetEmailHeaderTitle()
         {
-            return WebDriverUtility.DefaultProvider.GetText(HeaderTitleLocator, LocateBy.Id);
+            return UIUtil.DefaultProvider.GetText(HeaderTitleLocator, LocateBy.Id);
         }
 
         public string GetHeaderImgPathAttribute()
         {
-            return WebDriverUtility.DefaultProvider.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
+            return UIUtil.DefaultProvider.GetAttribute(HeaderImgLocator, "src", LocateBy.XPath); 
         }
 
         public string GetBodyText()
         {
-            return WebDriverUtility.DefaultProvider.GetText(BodyTextLocator, LocateBy.Id); 
+            return UIUtil.DefaultProvider.GetText(BodyTextLocator, LocateBy.Id); 
         }
 
         public class ConfirmationEmailBody
@@ -267,14 +267,14 @@
 
         public void ClickReviewChangeUpdateLinkInConfirmationEmail()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Review, change, or update your registration", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ClickClickHereLinkInIncompleteConfirmationEmail()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("click here", LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("click here", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ModifyEmailHtmlContent(EmailCategory category, string appendedContentText)

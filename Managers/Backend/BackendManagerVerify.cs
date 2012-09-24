@@ -13,13 +13,13 @@
     {
         public void VerifyRegistrationId(int expectedRegistrationId)
         {
-            string actualRegistrationId = WebDriverUtility.DefaultProvider.GetText("tdFive", LocateBy.Id);
+            string actualRegistrationId = UIUtil.DefaultProvider.GetText("tdFive", LocateBy.Id);
             VerifyTool.VerifyValue(expectedRegistrationId.ToString(), actualRegistrationId, "RegistrationId: {0}");
         }
 
         public void VerifyHeaderIsCorrect(string header)
         {
-            string attendeeInfoHeader = WebDriverUtility.DefaultProvider.GetText("span.panelHeadTallAttendeeName", LocateBy.CssSelector);
+            string attendeeInfoHeader = UIUtil.DefaultProvider.GetText("span.panelHeadTallAttendeeName", LocateBy.CssSelector);
             VerifyTool.VerifyValue(attendeeInfoHeader, header, "AttendeeInfo header: {0}");
         }
 
@@ -60,7 +60,7 @@
 
             foreach (RegisterManager.CustomFieldResponse response in responses)
             {
-                string foundCustomFieldResponse = WebDriverUtility.DefaultProvider.GetText(String.Format(CustomFieldResponseText, response.customFieldId), LocateBy.XPath);
+                string foundCustomFieldResponse = UIUtil.DefaultProvider.GetText(String.Format(CustomFieldResponseText, response.customFieldId), LocateBy.XPath);
 
                 if (foundCustomFieldResponse.Contains("\n"))
                 {
@@ -93,7 +93,7 @@
 
             foreach (RegisterManager.CustomFieldResponse response in responses)
             {
-                string foundCustomFieldResponse = WebDriverUtility.DefaultProvider.GetText(String.Format(CustomFieldResponseText, response.customFieldId), LocateBy.XPath);
+                string foundCustomFieldResponse = UIUtil.DefaultProvider.GetText(String.Format(CustomFieldResponseText, response.customFieldId), LocateBy.XPath);
 
                 if (foundCustomFieldResponse.Contains("\n"))
                 {
@@ -111,13 +111,13 @@
 
                 if (!String.IsNullOrEmpty(response.code))
                 {
-                    string foundCustomFieldResponseCode = WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseCodeText, response.customFieldId), LocateBy.XPath);
+                    string foundCustomFieldResponseCode = UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseCodeText, response.customFieldId), LocateBy.XPath);
                     VerifyTool.VerifyValue(response.code, foundCustomFieldResponseCode, "Agenda code " + response.customFieldId + ": {0}");
                 }
 
                 if (!String.IsNullOrEmpty(response.amount))
                 {
-                    string foundCustomFieldResponseAmount = WebDriverUtility.DefaultProvider.GetText(String.Format(CustomFieldResponseAmountText, response.customFieldId), LocateBy.XPath);
+                    string foundCustomFieldResponseAmount = UIUtil.DefaultProvider.GetText(String.Format(CustomFieldResponseAmountText, response.customFieldId), LocateBy.XPath);
 
                     foundCustomFieldResponseAmount = RX.Regex.Replace(foundCustomFieldResponseAmount, NumericRegex, String.Empty);
 
@@ -147,23 +147,23 @@
             foreach (RegisterManager.MerchandiseResponse response in responses)
             {
                 //check the fee description
-                string foundMerchandiseResponse = WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseResponseText, response.merchandiseId), LocateBy.XPath);
+                string foundMerchandiseResponse = UIUtil.DefaultProvider.GetText(string.Format(MerchandiseResponseText, response.merchandiseId), LocateBy.XPath);
                 VerifyTool.VerifyValue(response.merchandiseDescription, foundMerchandiseResponse, "Merchandise description: {0}");
 
                 //check the quantity for the merchandise
-                string foundMerchandiseResponseQuantity = WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseQuantityText, response.merchandiseId), LocateBy.XPath);
+                string foundMerchandiseResponseQuantity = UIUtil.DefaultProvider.GetText(string.Format(MerchandiseQuantityText, response.merchandiseId), LocateBy.XPath);
                 int quantity = Convert.ToInt32(foundMerchandiseResponseQuantity);
                 int trackedQuantity = Convert.ToInt32(response.response);
                 VerifyTool.VerifyValue(trackedQuantity, quantity, "Merchandise quantity: {0}");
 
                 //check the amount for the merchandise
-                string foundMerchandiseResponseAmount = WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseAmountText, response.merchandiseId), LocateBy.XPath);
+                string foundMerchandiseResponseAmount = UIUtil.DefaultProvider.GetText(string.Format(MerchandiseAmountText, response.merchandiseId), LocateBy.XPath);
                 foundMerchandiseResponseAmount = RX.Regex.Replace(foundMerchandiseResponseAmount, NumericRegex, String.Empty);
                 double trackedAmount = Convert.ToDouble(response.amount);
                 VerifyTool.VerifyValue(trackedAmount, Convert.ToDouble(foundMerchandiseResponseAmount), "Merchandise amount: {0}");
 
                 //check running sub total
-                string foundMerchandiseResponseSubTotal = WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseSubTotalText, response.merchandiseId), LocateBy.XPath);
+                string foundMerchandiseResponseSubTotal = UIUtil.DefaultProvider.GetText(string.Format(MerchandiseSubTotalText, response.merchandiseId), LocateBy.XPath);
                 foundMerchandiseResponseSubTotal = RX.Regex.Replace(foundMerchandiseResponseSubTotal, NumericRegex, String.Empty);
                 double trackedSubTotal = ((double)trackedQuantity * trackedAmount);
                 VerifyTool.VerifyValue(trackedSubTotal, Convert.ToDouble(foundMerchandiseResponseSubTotal), "Merchandise subtotal: {0}");
@@ -171,11 +171,11 @@
                 merchandiseTotal += Convert.ToDouble(trackedSubTotal);
             }
 
-            string foundSubTotalFromOptions = WebDriverUtility.DefaultProvider.GetText(SubTotalLocator, LocateBy.XPath);
+            string foundSubTotalFromOptions = UIUtil.DefaultProvider.GetText(SubTotalLocator, LocateBy.XPath);
             foundSubTotalFromOptions = RX.Regex.Replace(foundSubTotalFromOptions, NumericRegex, String.Empty);
             merchandiseTotal += Convert.ToDouble(foundSubTotalFromOptions);
 
-            string foundMerchandiseTotal = WebDriverUtility.DefaultProvider.GetText(MerchandiseTotalText, LocateBy.XPath);
+            string foundMerchandiseTotal = UIUtil.DefaultProvider.GetText(MerchandiseTotalText, LocateBy.XPath);
             foundMerchandiseTotal = RX.Regex.Replace(foundMerchandiseTotal, NumericRegex, String.Empty);
             VerifyTool.VerifyValue(merchandiseTotal, Convert.ToDouble(foundMerchandiseTotal), "Merchandise total: {0}");
         }
@@ -189,13 +189,13 @@
             //DateTime foundDepartureDate = DateTime.Parse(GetText(LodgingDepartureDate));
             //Assert.AreEqual(registration.lodgingResponses.DepartureDate, foundDepartureDate);
 
-            string foundBedPreference = WebDriverUtility.DefaultProvider.GetText(LodgingBedPreference, LocateBy.XPath);
+            string foundBedPreference = UIUtil.DefaultProvider.GetText(LodgingBedPreference, LocateBy.XPath);
             Assert.AreEqual(registration.lodgingResponses.BedType, foundBedPreference);
 
-            string foundRoomPreference = WebDriverUtility.DefaultProvider.GetText(LodgingRoomPreference, LocateBy.XPath);
+            string foundRoomPreference = UIUtil.DefaultProvider.GetText(LodgingRoomPreference, LocateBy.XPath);
             Assert.AreEqual(registration.lodgingResponses.RoomType, foundRoomPreference);
 
-            string foundSmokingPreference = WebDriverUtility.DefaultProvider.GetText(LodgingSmokingPreference, LocateBy.XPath);
+            string foundSmokingPreference = UIUtil.DefaultProvider.GetText(LodgingSmokingPreference, LocateBy.XPath);
             Assert.AreEqual(registration.lodgingResponses.SmokingPreference, foundSmokingPreference);
         }
 
@@ -203,10 +203,10 @@
         {
             //TODO: need to verify all travel information
 
-            string foundArrivalAirline = WebDriverUtility.DefaultProvider.GetText(TravelArrivalAirline, LocateBy.XPath);
+            string foundArrivalAirline = UIUtil.DefaultProvider.GetText(TravelArrivalAirline, LocateBy.XPath);
             Assert.AreEqual(registration.travelResponses.ArrivalAirline, foundArrivalAirline);
 
-            string foundArrivalFlightNumber = WebDriverUtility.DefaultProvider.GetText(TravelArrivalFlightNumber, LocateBy.XPath);
+            string foundArrivalFlightNumber = UIUtil.DefaultProvider.GetText(TravelArrivalFlightNumber, LocateBy.XPath);
             Assert.AreEqual(registration.travelResponses.ArrivalFlightNumber, foundArrivalFlightNumber);
         }
 
@@ -269,20 +269,20 @@
         {
             List<TransactionResponse> actResponse = new List<TransactionResponse>();
 
-            int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(TransactionRows)) - 1;
+            int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(TransactionRows)) - 1;
 
             for (int i = 0; i < count; i++)
             {
                 TransactionResponse response = new TransactionResponse();
-                response.Id = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[1]", i + 1), LocateBy.XPath);
-                response.Date = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[2]", i + 1), LocateBy.XPath);
-                response.Type = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[3]", i + 1), LocateBy.XPath);
-                response.Notes = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[5]", i + 1), LocateBy.XPath);
-                response.Amount = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[6]", i + 1), LocateBy.XPath);
-                response.SubTotal = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[7]", i + 1), LocateBy.XPath);
-                response.AddBy = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[8]", i + 1), LocateBy.XPath);
-                response.ModBy = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[9]", i + 1), LocateBy.XPath);
-                response.Delete = WebDriverUtility.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[10]", i + 1), LocateBy.XPath);
+                response.Id = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[1]", i + 1), LocateBy.XPath);
+                response.Date = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[2]", i + 1), LocateBy.XPath);
+                response.Type = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[3]", i + 1), LocateBy.XPath);
+                response.Notes = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[5]", i + 1), LocateBy.XPath);
+                response.Amount = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[6]", i + 1), LocateBy.XPath);
+                response.SubTotal = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[7]", i + 1), LocateBy.XPath);
+                response.AddBy = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[8]", i + 1), LocateBy.XPath);
+                response.ModBy = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[9]", i + 1), LocateBy.XPath);
+                response.Delete = UIUtil.DefaultProvider.GetText(string.Format(TransactionRows + "[{0}]/td[10]", i + 1), LocateBy.XPath);
                 actResponse.Add(response);
             }
 
@@ -291,7 +291,7 @@
 
         public void VerifyRefundOptionExists(bool isRefund)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementPresent("//input[@name='Refund']", isRefund, LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent("//input[@name='Refund']", isRefund, LocateBy.XPath);
         }
 
         [Verify]
@@ -310,19 +310,19 @@
         [Verify]
         public void VerifyTotalCharges(string totalCharges)
         {
-            VerifyTool.VerifyValue(totalCharges, WebDriverUtility.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath), "Total Charges: {0}");
+            VerifyTool.VerifyValue(totalCharges, UIUtil.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath), "Total Charges: {0}");
         }
 
         [Verify]
         public void VerifyTotalTransactions(string totalTransactions)
         {
-            VerifyTool.VerifyValue(totalTransactions, WebDriverUtility.DefaultProvider.GetText(TotalTransactionsLocator, LocateBy.XPath), "Total Transactions: {0}");
+            VerifyTool.VerifyValue(totalTransactions, UIUtil.DefaultProvider.GetText(TotalTransactionsLocator, LocateBy.XPath), "Total Transactions: {0}");
         }
 
         [Verify]
         public void VerifyTotalBalanceDue(string totalBalanceDue)
         {
-            VerifyTool.VerifyValue(totalBalanceDue, WebDriverUtility.DefaultProvider.GetText(TotalBalanceDueLocator, LocateBy.XPath), "Total Balance Due: {0}");
+            VerifyTool.VerifyValue(totalBalanceDue, UIUtil.DefaultProvider.GetText(TotalBalanceDueLocator, LocateBy.XPath), "Total Balance Due: {0}");
         }
 
         [Verify]
@@ -330,7 +330,7 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(totalFees),
-                WebDriverUtility.DefaultProvider.GetText(TotalRecurringChargesLocator, LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(TotalRecurringChargesLocator, LocateBy.XPath), 
                 "Total recurring fees: {0}");
         }
 
@@ -338,13 +338,13 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(totalCharges),
-                WebDriverUtility.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath), 
                 "Total Charges: {0}");
         }
 
         public string GetTotalCharges()
         {
-            string totalCharges = WebDriverUtility.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath);
+            string totalCharges = UIUtil.DefaultProvider.GetText(TotalChargesLocator, LocateBy.XPath);
             return totalCharges; 
         }
 
@@ -352,7 +352,7 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(totalTransactions),
-                WebDriverUtility.DefaultProvider.GetText(TotalTransactionsLocator, LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(TotalTransactionsLocator, LocateBy.XPath), 
                 "Total Transactions: {0}");
         }
 
@@ -363,7 +363,7 @@
 
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(totalBalanceDue),
-                WebDriverUtility.DefaultProvider.GetText(TotalBalanceDueLocator, LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(TotalBalanceDueLocator, LocateBy.XPath), 
                 "Total Balance Due: {0}");
         }
 
@@ -371,7 +371,7 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(totalFees),
-                WebDriverUtility.DefaultProvider.GetText(MerchandiseTotalText, LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(MerchandiseTotalText, LocateBy.XPath),
                 "Total Fees: {0}");
         }
 
@@ -386,13 +386,13 @@
             {
                 VerifyTool.VerifyValue(
                     "(" + StringEnum.GetStringValue(status.Value) + ")", 
-                    WebDriverUtility.DefaultProvider.GetText(eventCostStatusLocator, LocateBy.XPath), 
+                    UIUtil.DefaultProvider.GetText(eventCostStatusLocator, LocateBy.XPath), 
                     "Event Cost Status: {0}");
             }
 
             VerifyTool.VerifyValue(
                 "Cost: " + MoneyTool.FormatMoney(eventCost),
-                WebDriverUtility.DefaultProvider.GetText(eventCostLocator, LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(eventCostLocator, LocateBy.XPath),
                 "Event Cost: {0}");
         }
 
@@ -402,7 +402,7 @@
             {
                 VerifyTool.VerifyValue(
                     "(" + StringEnum.GetStringValue(status) + ")",
-                    WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/font", LocateBy.XPath),
+                    UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/font", LocateBy.XPath),
                     "CF item '" + cfName + "'status: {0}");
             }
         }
@@ -411,7 +411,7 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(expectedFee),
-                WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseAmountText, cfId.ToString()), LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseAmountText, cfId.ToString()), LocateBy.XPath),
                 "CF item '" + cfName + "' fee: {0}");
         }
 
@@ -420,7 +420,7 @@
         {
             VerifyTool.VerifyValue(
                 check,
-                WebDriverUtility.DefaultProvider.IsElementPresent(string.Format(CustomFieldResponseText, cfId.ToString()), LocateBy.XPath), 
+                UIUtil.DefaultProvider.IsElementPresent(string.Format(CustomFieldResponseText, cfId.ToString()), LocateBy.XPath), 
                 "CF checkbox item '" + cfName + "' is present: {0}");
 
             this.VerifyCFStatus(cfId, cfName, status);
@@ -443,7 +443,7 @@
         {
             VerifyTool.VerifyValue(
                 expectedChoice,
-                WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../following-sibling::tr//b", LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../following-sibling::tr//b", LocateBy.XPath),
                 "CF multi-choice '" + cfName + "' choice: {0}");
 
             this.VerifyCFStatus(cfId, cfName, status);
@@ -466,7 +466,7 @@
         {
             VerifyTool.VerifyValue(
                 expectedParagraph,
-                WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../following-sibling::tr//b", LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../following-sibling::tr//b", LocateBy.XPath),
                 "CF paragraph item '" + cfName + "' text: {0}");
 
             this.VerifyCFStatus(cfId, cfName, status);
@@ -477,7 +477,7 @@
         {
             VerifyTool.VerifyValue(
                 expectedText,
-                WebDriverUtility.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../td/b", LocateBy.XPath),
+                UIUtil.DefaultProvider.GetText(string.Format(CustomFieldResponseText, cfId.ToString()) + "/../td/b", LocateBy.XPath),
                 "CF number/text/date/time item '" + cfName + "' text: {0}");
 
             this.VerifyCFStatus(cfId, cfName, status);
@@ -497,14 +497,14 @@
         [Verify]
         public void VerifyConfirmationOnHotelChange()
         {
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
         }
 
         [Verify]
         public void VerifyLodgingField(LodgingViewField field, object expectedValue)
         {
             string expectedValueString = Convert.ToString(expectedValue);
-            string actualValue = WebDriverUtility.DefaultProvider.GetText(this.GetLocator(field), LocateBy.XPath);
+            string actualValue = UIUtil.DefaultProvider.GetText(this.GetLocator(field), LocateBy.XPath);
 
             VerifyTool.VerifyValue(
                 expectedValueString, 
@@ -516,7 +516,7 @@
         public void VerifyTravelField(TravelViewField field, object expectedValue)
         {
             string expectedValueString = Convert.ToString(expectedValue);
-            string actualValue = WebDriverUtility.DefaultProvider.GetText(this.GetLocator(field), LocateBy.XPath);
+            string actualValue = UIUtil.DefaultProvider.GetText(this.GetLocator(field), LocateBy.XPath);
 
             VerifyTool.VerifyValue(
                 expectedValueString,
@@ -527,7 +527,7 @@
         [Verify]
         public void VerifyMerchandiseItemResponse(int merchId, string name)
         {
-            VerifyTool.VerifyValue(name, WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseResponseText, merchId), LocateBy.XPath), "Merchandise item response: {0}");
+            VerifyTool.VerifyValue(name, UIUtil.DefaultProvider.GetText(string.Format(MerchandiseResponseText, merchId), LocateBy.XPath), "Merchandise item response: {0}");
         }
 
         [Verify]
@@ -535,7 +535,7 @@
         {
             VerifyTool.VerifyValue(
                 quantity.ToString(),
-                WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseQuantityText, merchId), LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(string.Format(MerchandiseQuantityText, merchId), LocateBy.XPath), 
                 "Merchandise item quantity: {0}");
         }
 
@@ -544,7 +544,7 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(amount),
-                WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseAmountText, merchId), LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(string.Format(MerchandiseAmountText, merchId), LocateBy.XPath), 
                 "Merchandise item amount: {0}");
         }
 
@@ -553,39 +553,39 @@
         {
             VerifyTool.VerifyValue(
                 MoneyTool.FormatMoney(subTotal),
-                WebDriverUtility.DefaultProvider.GetText(string.Format(MerchandiseSubTotalText, merchId), LocateBy.XPath), 
+                UIUtil.DefaultProvider.GetText(string.Format(MerchandiseSubTotalText, merchId), LocateBy.XPath), 
                 "Merchandise item subtotal: {0}");
         }
 
         [Verify]
         public void VerifyNextRenewDate(DateTime expectedDate)
         {
-            VerifyTool.VerifyValue(expectedDate.ToString("dd-MMM-yyyy"), WebDriverUtility.DefaultProvider.GetText(NextRenewDateLinkLocator, LocateBy.XPath), "Next renew date: {0}");
+            VerifyTool.VerifyValue(expectedDate.ToString("dd-MMM-yyyy"), UIUtil.DefaultProvider.GetText(NextRenewDateLinkLocator, LocateBy.XPath), "Next renew date: {0}");
         }
 
         [Verify]
         public void VerifyNextPayDate(DateTime expectedDate)
         {
-            VerifyTool.VerifyValue(expectedDate.ToString("dd-MMM-yyyy"), WebDriverUtility.DefaultProvider.GetText("lblNextPayDate", LocateBy.Id), "Next pay date: {0}");
+            VerifyTool.VerifyValue(expectedDate.ToString("dd-MMM-yyyy"), UIUtil.DefaultProvider.GetText("lblNextPayDate", LocateBy.Id), "Next pay date: {0}");
         }
 
         public void VerifyUpdateHistory(string expectedNotes)
         {
-            if (!WebDriverUtility.DefaultProvider.IsTextPresent(expectedNotes))
+            if (!UIUtil.DefaultProvider.IsTextPresent(expectedNotes))
             {
-                WebDriverUtility.DefaultProvider.FailTest("Expected updating history notes '" + expectedNotes + "' not present!");
+                UIUtil.DefaultProvider.FailTest("Expected updating history notes '" + expectedNotes + "' not present!");
             }
         }
 
         [Verify]
         public void VerifyErrorMessage(string message)
         {
-            Assert.IsTrue(WebDriverUtility.DefaultProvider.IsElementDisplay(string.Format("//b[text()='{0}']", message), LocateBy.XPath));
+            Assert.IsTrue(UIUtil.DefaultProvider.IsElementDisplay(string.Format("//b[text()='{0}']", message), LocateBy.XPath));
         }
 
         public void VerifyPaymentMethod(RegOnline.RegressionTest.Managers.Builder.PaymentMethodManager.PaymentMethod paymentMethod)
         {
-            VerifyTool.VerifyValue(StringEnum.GetStringValue(paymentMethod), WebDriverUtility.DefaultProvider.GetText("tdPaymentMethod", LocateBy.Id), "Payment method: {0}");
+            VerifyTool.VerifyValue(StringEnum.GetStringValue(paymentMethod), UIUtil.DefaultProvider.GetText("tdPaymentMethod", LocateBy.Id), "Payment method: {0}");
         }
 
         [Verify]
@@ -598,18 +598,18 @@
         {
             List<string> types = new List<string>();
             string regTypeLocator = "//select[@id='RegTypeId']";
-            int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(regTypeLocator + "/option"));
+            int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(regTypeLocator + "/option"));
             string regTypeFormat = regTypeLocator + "/option[{0}]";
             for (int i = 2; i <= count; i++)
             {
-                types.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(regTypeFormat, i), LocateBy.XPath).Trim());
+                types.Add(UIUtil.DefaultProvider.GetText(string.Format(regTypeFormat, i), LocateBy.XPath).Trim());
             }
             return types;
         }
 
         public void VerifyPaymentInfoCCNumber(string ccNumber)
         {
-            VerifyTool.VerifyValue(ccNumber, WebDriverUtility.DefaultProvider.GetText("tdMaskedCCNumber", LocateBy.Id), "Payment Info CC number: {0}");
+            VerifyTool.VerifyValue(ccNumber, UIUtil.DefaultProvider.GetText("tdMaskedCCNumber", LocateBy.Id), "Payment Info CC number: {0}");
         }
     }
 }

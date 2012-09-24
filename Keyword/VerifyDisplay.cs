@@ -106,7 +106,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.EventContactInfo_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.SelectByIndex();
             results.EventContactInfo = PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfo.PopupContactInfo.Text;
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.WaitForPresent();
             Utility.ThreadSleep(1);
             PageObject.PageObjectProvider.Register.RegistationSite.PopupContactInfoClose.Click();

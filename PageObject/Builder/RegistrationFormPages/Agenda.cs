@@ -536,9 +536,9 @@
             this.Delete.WaitForDisplay();
             this.Delete.Click();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
             Utility.ThreadSleep(3);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.SelectTopWindow();
         }
 
         public void Copy_Click()

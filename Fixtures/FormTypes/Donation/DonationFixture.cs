@@ -389,10 +389,10 @@
             BuilderMgr.DeleteRegType(donorTypes.RegTypeInvisible);
             BuilderMgr.TogglePreviewAndEditMode();
             BuilderMgr.SetMobileViewMode(false);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameById("ctl00_cph_ifrmPreview");
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeAdminOnly), false, UIUtility.LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeVisibleToAll), false, UIUtility.LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeInvisible), false, UIUtility.LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectPopUpFrameById("ctl00_cph_ifrmPreview");
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeAdminOnly), false, UIUtility.LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeVisibleToAll), false, UIUtility.LocateBy.XPath);
+            UIUtil.DefaultProvider.VerifyElementPresent(string.Format("//*[text()='{0}']", donorTypes.RegTypeInvisible), false, UIUtility.LocateBy.XPath);
             BuilderMgr.SelectBuilderWindow();
         }
 

@@ -897,10 +897,10 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddRecurringFeeItemWithDiscount(OtherEventTypeAgendaAndCFManager.FieldType type, string name, double price, string discount, bool required, bool oneTime)
@@ -909,13 +909,13 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.AddMembershipDiscountCodes("Discount Code", discount, required);
             BuilderMgr.OldAGAndCFMgr.ApplyMembershipDiscountCodeOnce(oneTime);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
 
@@ -1083,10 +1083,10 @@
 
             rowsAffected = db.ExecuteCommand(command);
 
-            WebDriverUtility.DefaultProvider.OpenUrl(
+            UIUtil.DefaultProvider.OpenUrl(
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps + "recurringFeeProcessor.aspx?Token=E4627417-0596-427C-AC92-399F6EF5B826");
 
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

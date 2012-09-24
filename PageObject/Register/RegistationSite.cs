@@ -89,8 +89,8 @@
             this.Trustwave.WaitForDisplay();
             this.Trustwave.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void EventHome_Click()
@@ -98,8 +98,8 @@
             this.EventHome.WaitForDisplay();
             this.EventHome.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void EventContactInfo_Click()
@@ -114,8 +114,8 @@
             this.Facebook.WaitForDisplay();
             this.Facebook.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void Twitter_Click()
@@ -123,8 +123,8 @@
             this.Twitter.WaitForDisplay();
             this.Twitter.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void Linkedin_Click()
@@ -132,8 +132,8 @@
             this.Linkedin.WaitForDisplay();
             this.Linkedin.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void TermsOfUse_Click()
@@ -141,8 +141,8 @@
             this.TermsOfUse.WaitForDisplay();
             this.TermsOfUse.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void PrivacyPolicy_Click()
@@ -150,8 +150,8 @@
             this.PrivacyPolicy.WaitForDisplay();
             this.PrivacyPolicy.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void CookiePolicy_Click()
@@ -159,8 +159,8 @@
             this.CookiePolicy.WaitForDisplay();
             this.CookiePolicy.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void About_Click()
@@ -168,8 +168,8 @@
             this.About.WaitForDisplay();
             this.About.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void ActiveCom_Click()
@@ -177,8 +177,8 @@
             this.ActiveCom.WaitForDisplay();
             this.ActiveCom.Click();
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void EventDetails_Click()
@@ -222,23 +222,23 @@
             switch (page)
             {
                 case DataCollection.FormData.RegisterPage.Login:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/login.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/login.aspx");
                 case DataCollection.FormData.RegisterPage.Checkin:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkin.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/checkin.aspx");
                 case DataCollection.FormData.RegisterPage.SSOLogin:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("SSO/ssologin.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("SSO/ssologin.aspx");
                 case DataCollection.FormData.RegisterPage.PersonalInfo:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/PersonalInfo.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/PersonalInfo.aspx");
                 case DataCollection.FormData.RegisterPage.AttendeeCheck:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("Register/AttendeeCheck.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("Register/AttendeeCheck.aspx");
                 case DataCollection.FormData.RegisterPage.Agenda:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/agenda.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/agenda.aspx");
                 case DataCollection.FormData.RegisterPage.Checkout:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/checkout.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/checkout.aspx");
                 case DataCollection.FormData.RegisterPage.Confirmation:
-                    return WebDriverUtility.DefaultProvider.UrlContainsPath("register/confirmation.aspx");
+                    return UIUtil.DefaultProvider.UrlContainsPath("register/confirmation.aspx");
                 case DataCollection.FormData.RegisterPage.ConfirmationRedirect:
-                    return (WebDriverUtility.DefaultProvider.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (WebDriverUtility.DefaultProvider.IsTextPresent("Active Advantage"));
+                    return (UIUtil.DefaultProvider.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (UIUtil.DefaultProvider.IsTextPresent("Active Advantage"));
                 default:
                     return false;
             }

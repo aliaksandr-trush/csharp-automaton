@@ -12,7 +12,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.GetText(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.GetText(Locator, TypeOfLocator);
             }
         }
 
@@ -20,7 +20,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.GetValue(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.GetValue(Locator, TypeOfLocator);
             }
         }
 
@@ -28,7 +28,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.GetElementsCount(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.GetElementsCount(Locator, TypeOfLocator);
             }
         }
 
@@ -36,7 +36,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.IsElementPresent(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.IsElementPresent(Locator, TypeOfLocator);
             }
         }
 
@@ -44,7 +44,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.IsElementDisplay(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.IsElementDisplay(Locator, TypeOfLocator);
             }
         }
 
@@ -52,7 +52,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.IsElementHidden(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.IsElementHidden(Locator, TypeOfLocator);
             }
         }
 
@@ -68,17 +68,17 @@
 
         public virtual void WaitForPresent()
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(Locator, TypeOfLocator);
+            UIUtil.DefaultProvider.WaitForElementPresent(Locator, TypeOfLocator);
         }
 
         public virtual void WaitForDisplay()
         {
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(Locator, TypeOfLocator);
+            UIUtil.DefaultProvider.WaitForElementDisplay(Locator, TypeOfLocator);
         }
 
         public virtual void Click()
         {
-            WebDriverUtility.DefaultProvider.Click(Locator, TypeOfLocator);
+            UIUtil.DefaultProvider.Click(Locator, TypeOfLocator);
         }
 
         public virtual void WaitForDisplayAndClick()
@@ -89,7 +89,7 @@
 
         public string GetAttribute(string att)
         {
-            return WebDriverUtility.DefaultProvider.GetAttribute(Locator, att, TypeOfLocator);
+            return UIUtil.DefaultProvider.GetAttribute(Locator, att, TypeOfLocator);
         }
 
         public bool HasAttribute(string att)
@@ -115,23 +115,23 @@
 
         public static bool IsElementPresent(ElementBase element)
         {
-            return WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
+            return UIUtil.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
         }
 
         public static bool IsElementDisplay(ElementBase element)
         {
-            return WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
+            return UIUtil.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
         }
 
         public static void VerifyPresent(ElementBase element, bool isPresent)
         {
-            bool actual = WebDriverUtility.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
+            bool actual = UIUtil.DefaultProvider.IsElementPresent(element.Locator, element.TypeOfLocator);
             Utilities.VerifyTool.VerifyValue(isPresent, actual, "Element '" + element.Locator + "' is present: {0}");
         }
 
         public static void VerifyDisplay(ElementBase element, bool isDisplayed)
         {
-            bool actual = WebDriverUtility.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
+            bool actual = UIUtil.DefaultProvider.IsElementDisplay(element.Locator, element.TypeOfLocator);
             Utilities.VerifyTool.VerifyValue(isDisplayed, actual, "Element '" + element.Locator + "' is display: {0}");
         }
     }

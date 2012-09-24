@@ -65,8 +65,8 @@
 
             //popup separate window
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.TestRegister);
-            WebDriverUtility.DefaultProvider.SelectWindowByTitle(EventNameWithRegType);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectWindowByTitle(EventNameWithRegType);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
 
             this.regs = 0;
 
@@ -95,7 +95,7 @@
             //shut down the confirmation page / register project.
             //if we were in the same window, must navigate back. That means: relogin, reenter the Manager.
             //if Register had popped up, must close popup.
-            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            UIUtil.DefaultProvider.ClosePopUpWindow();
 
             //step 5
             ManagerSiteMgr.DashboardMgr.OpenAttendeeReportFromEventDashboard();
@@ -103,7 +103,7 @@
             ReportMgr.CloseReportPopupWindow();
 
             //step 6
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             ManagerSiteMgr.ChangeBibNumberingOption(BibNumberingToolManager.AssignNumberToMember.SameToEvery, _teams);
 
             //step 7
@@ -266,9 +266,9 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
 
             this.GoToEmailTabAddConfirmation(EventNameWithRegType);

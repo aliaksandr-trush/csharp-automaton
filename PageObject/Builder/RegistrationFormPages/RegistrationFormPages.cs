@@ -26,7 +26,7 @@
             this.YesOnSplashPage.WaitForDisplay();
             this.YesOnSplashPage.Click();
             WaitForLoad();
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void GotoPage(FormData.Page page)
@@ -71,12 +71,12 @@
             Page.WaitForDisplay();
             Page.Click();
             WaitForLoad();
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Advanced_Click()
         {
-            WebDriverUtility.DefaultProvider.ExpandAdvanced();
+            UIUtil.DefaultProvider.ExpandAdvanced();
         }
     }
 }

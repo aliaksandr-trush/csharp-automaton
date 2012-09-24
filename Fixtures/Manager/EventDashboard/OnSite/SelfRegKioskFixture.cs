@@ -157,7 +157,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -181,7 +181,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -211,7 +211,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -231,7 +231,7 @@
                     RegisterMgr.KioskEnterPassword();
                     RegisterMgr.GetPaidInFullMessage();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
 
                     this.eventSessionId = this.helper.Login();
                     ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
@@ -244,7 +244,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -266,7 +266,7 @@
                     this.KioskUpdateReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 /// <summary>
@@ -293,7 +293,7 @@
                     RegisterMgr.KioskClickCheckinReg();
                     RegisterMgr.FinishCheckin();
 
-                    WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+                    UIUtil.DefaultProvider.ClosePopUpWindow();
                     break;
 
                 default:

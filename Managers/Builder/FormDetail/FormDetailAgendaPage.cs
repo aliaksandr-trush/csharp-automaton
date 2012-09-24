@@ -30,43 +30,43 @@
             ////ReloadEvent();
 
             // Ensure "create agenda item" link is present
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(CreateAgendaItem, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForElementPresent(CreateAgendaItem, LocateBy.LinkText);
         }
 
         public void ClickAddAgendaItem()
         {
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
 
             // Click "create/add agenda item"
-            if (WebDriverUtility.DefaultProvider.IsElementDisplay(AddAgendaItemLink, LocateBy.LinkText))
+            if (UIUtil.DefaultProvider.IsElementDisplay(AddAgendaItemLink, LocateBy.LinkText))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddAgendaItemLink, LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(AddAgendaItemLink, LocateBy.LinkText);
                 Utility.ThreadSleep(1);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
             else
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CreateAgendaItem, LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(CreateAgendaItem, LocateBy.LinkText);
                 Utility.ThreadSleep(1);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
         }
 
         public void ClickAddActivities()
         {
             // Click "create/add agenda item"
-            if (WebDriverUtility.DefaultProvider.IsElementDisplay(AddActivityItemLink, LocateBy.LinkText))
+            if (UIUtil.DefaultProvider.IsElementDisplay(AddActivityItemLink, LocateBy.LinkText))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddActivityItemLink, LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(AddActivityItemLink, LocateBy.LinkText);
                 Utility.ThreadSleep(1);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
             else
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CreateActivityItem, LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(CreateActivityItem, LocateBy.LinkText);
                 Utility.ThreadSleep(1);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
         }
 
@@ -97,8 +97,8 @@
             }
 
             AGMgr.ClickSaveItem();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddActivity(AgendaItemManager.AgendaItemType type, string name, double? price)
@@ -128,8 +128,8 @@
             }
 
             AGMgr.ClickSaveItem();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
@@ -152,7 +152,7 @@
             }
 
             AGMgr.ClickSaveItem();
-            UIUtility.WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtility.UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         public void AddAgendaItemWithNoPriceNoDate(AgendaItemManager.AgendaItemType type, string name)
@@ -229,12 +229,12 @@
         public void VerifyFormView()
         {
             string locator = "formGridBody";
-            Assert.That(!WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.Id));
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FormViewLink, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            Assert.That(WebDriverUtility.DefaultProvider.IsElementPresent(locator, LocateBy.Id));
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ListViewLink, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            Assert.That(!UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.Id));
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(FormViewLink, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            Assert.That(UIUtil.DefaultProvider.IsElementPresent(locator, LocateBy.Id));
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ListViewLink, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void OpenAgendaDetailPage(int agendaNumStartFromZero)
@@ -242,25 +242,25 @@
             char[] sp1 = { '\'' };
 
             string AgNum = agendaNumStartFromZero.ToString();
-            string Link1 = WebDriverUtility.DefaultProvider.GetAttribute("//tr[@id='sdgr_" + AgNum + "']/td[1]", "onclick", LocateBy.XPath);
+            string Link1 = UIUtil.DefaultProvider.GetAttribute("//tr[@id='sdgr_" + AgNum + "']/td[1]", "onclick", LocateBy.XPath);
 
             //get agenda id
             string[] Link1_parts1 = Link1.Split(sp1, 3);
             string ID = Link1_parts1[1];
 
             //open agenda detail page
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("listGridTD" + ID + "2", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("listGridTD" + ID + "2", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetScheduleConflictChecking(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEnableScheduleConflictChecking", check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkEnableScheduleConflictChecking", check, LocateBy.Id);
         }
 
         public void SetShoppingCart(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsIsCart", check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsIsCart", check, LocateBy.Id);
         }
     }
 }

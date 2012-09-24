@@ -242,16 +242,16 @@
         [Step]
         public void ClickAddHotel()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddNewHotelLink, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddNewHotelLink, LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(HotelManager.FrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(HotelManager.FrameID);
         }
 
         public void ClickEditHotel(string hotelName)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(EditHotelLocator, hotelName), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(EditHotelLocator, hotelName), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(HotelManager.FrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(HotelManager.FrameID);
         }
 
         public void ClickAddLodgingCustomField()
@@ -263,7 +263,7 @@
         public void AddLodgingCustomField(CustomFieldManager.CustomFieldType type, string name)
         {
             this.AddCustomField(CustomFieldManager.CustomFieldLocation.LT_Lodging, type, name);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Verify]
@@ -286,12 +286,12 @@
         {
             if (visible.HasValue)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(HotelStandardFieldLink, hsf.ToString(), "V"), visible.Value, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(HotelStandardFieldLink, hsf.ToString(), "V"), visible.Value, LocateBy.XPath);
             }
 
             if (required.HasValue)
             {
-                WebDriverUtility.DefaultProvider.SetCheckbox(string.Format(HotelStandardFieldLink, hsf.ToString(), "R"), required.Value, LocateBy.XPath);
+                UIUtil.DefaultProvider.SetCheckbox(string.Format(HotelStandardFieldLink, hsf.ToString(), "R"), required.Value, LocateBy.XPath);
             }
         }
         #endregion
@@ -302,13 +302,13 @@
 
             string locator = "//tr[@class='borderBottom']";
 
-            int i = WebDriverUtility.DefaultProvider.GetElementsCount(locator, LocateBy.XPath);
+            int i = UIUtil.DefaultProvider.GetElementsCount(locator, LocateBy.XPath);
 
             string roomTypeLocator = locator + "[{0}]/td[@class='borderBottom']";
 
             for (int a = 1; a <= i; a++)
             {
-                RoomTypes.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(roomTypeLocator, a), LocateBy.XPath));
+                RoomTypes.Add(UIUtil.DefaultProvider.GetText(string.Format(roomTypeLocator, a), LocateBy.XPath));
             }
 
             return RoomTypes;
@@ -324,7 +324,7 @@
         public void AddTravelCustomField(CustomFieldManager.CustomFieldType type, string name)
         {
             AddCustomField(CustomFieldManager.CustomFieldLocation.LT_Travel, type, name);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Verify]

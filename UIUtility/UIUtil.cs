@@ -14,19 +14,20 @@
     using RegOnline.RegressionTest.Attributes;
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.Utilities;
+    using RegOnline.RegressionTest.UIUtility.BrowserUtil;
 
-    public class WebDriverUtility
+    public class UIUtil
     {
-        private static WebDriverUtility Default = new WebDriverUtility();
+        private static UIUtil Default = new UIUtil();
         private TimeSpan timeOutSpan;
         private IWebDriver driver;
         private ConfigReader.BrowserEnum browser;
 
-        public static WebDriverUtility DefaultProvider
+        public static UIUtil DefaultProvider
         {
             get
             {
-                return WebDriverUtility.Default;
+                return UIUtil.Default;
             }
         }
 
@@ -83,15 +84,15 @@
             switch (browser)
             {
                 case ConfigReader.BrowserEnum.Firefox:
-                    br = new Browser_Firefox();
+                    br = new Firefox();
                     break;
 
                 case ConfigReader.BrowserEnum.Chrome:
-                    br = new Browser_Chrome();
+                    br = new Chrome();
                     break;
 
                 case ConfigReader.BrowserEnum.HtmlUnit:
-                    br = new Browser_HtmlUnit();
+                    br = new HtmlUnit();
                     break;
 
                 default:
@@ -141,7 +142,7 @@
 
         public void SetTimeoutSpan()
         {
-            this.SetTimeoutSpan(TimeSpan.FromMilliseconds(UIUtilityHelper.DefaultTimeoutMilliSeconds));
+            this.SetTimeoutSpan(TimeSpan.FromMilliseconds(UIUtilHelper.DefaultTimeoutMilliSeconds));
         }
 
         public void SetTimeoutSpan(TimeSpan timeOut)
@@ -152,7 +153,7 @@
         public void CaptureScreenshot()
         {
             this.CaptureScreenshot(string.Format(
-                UIUtilityHelper.ScreenshotFileNameFormat, 
+                UIUtilHelper.ScreenshotFileNameFormat, 
                 DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt")));
         }
 
@@ -194,13 +195,13 @@
 
         private void ClickAdvancedHeader()
         {
-            this.WaitForDisplayAndClick(UIUtilityHelper.AdvancedHeaderLocator, LocateBy.Id);
+            this.WaitForDisplayAndClick(UIUtilHelper.AdvancedHeaderLocator, LocateBy.Id);
             WaitForAJAXRequest();
         }
 
         public void ExpandAdvanced()
         {
-            if (!this.IsElementDisplay(UIUtilityHelper.AdvancedSectionDIVLocator, LocateBy.Id))
+            if (!this.IsElementDisplay(UIUtilHelper.AdvancedSectionDIVLocator, LocateBy.Id))
             {
                 this.ClickAdvancedHeader();
             }
@@ -208,7 +209,7 @@
 
         public void CollapseAdvanced()
         {
-            if (this.IsElementDisplay(UIUtilityHelper.AdvancedSectionDIVLocator, LocateBy.Id))
+            if (this.IsElementDisplay(UIUtilHelper.AdvancedSectionDIVLocator, LocateBy.Id))
             {
                 this.ClickAdvancedHeader();
             }
@@ -402,7 +403,7 @@
         [Step]
         public void WaitForPageToLoad()
         {
-            this.WaitForPageToLoad(TimeSpan.FromMilliseconds(UIUtilityHelper.DefaultTimeoutMilliSeconds));
+            this.WaitForPageToLoad(TimeSpan.FromMilliseconds(UIUtilHelper.DefaultTimeoutMilliSeconds));
         }
 
         public void WaitForPageToLoad(TimeSpan timeOutSpan)
@@ -569,7 +570,7 @@
         public void TypeRADNumericById(string locator_Id, object value)
         {
             string stringValue = Convert.ToString(value);
-            this.Type(locator_Id + UIUtilityHelper.RADNumericLocatorSuffix_text, stringValue, LocateBy.Id);
+            this.Type(locator_Id + UIUtilHelper.RADNumericLocatorSuffix_text, stringValue, LocateBy.Id);
 
             this.SetValue(locator_Id, stringValue);
         }
@@ -1073,22 +1074,22 @@
 
         public void ClickSaveAndNew()
         {
-            this.WaitForDisplayAndClick(UIUtilityHelper.SaveAndNewButtonLocator, LocateBy.Id);
+            this.WaitForDisplayAndClick(UIUtilHelper.SaveAndNewButtonLocator, LocateBy.Id);
         }
 
         public void ClickSaveAndStay()
         {
-            this.WaitForDisplayAndClick(UIUtilityHelper.SaveAndStayButtonLocator, LocateBy.Id);
+            this.WaitForDisplayAndClick(UIUtilHelper.SaveAndStayButtonLocator, LocateBy.Id);
         }
 
         public void ClickSaveAndClose()
         {
-            this.WaitForDisplayAndClick(UIUtilityHelper.SaveAndCloseButtonLocator, LocateBy.Id);
+            this.WaitForDisplayAndClick(UIUtilHelper.SaveAndCloseButtonLocator, LocateBy.Id);
         }
 
         public void ClickCancel()
         {
-            this.WaitForDisplayAndClick(UIUtilityHelper.CancelButtonLocator, LocateBy.Id);
+            this.WaitForDisplayAndClick(UIUtilHelper.CancelButtonLocator, LocateBy.Id);
         }
 
         public string GetTable(string tableId, int rowIndex, int columnIndex)

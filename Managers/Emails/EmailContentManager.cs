@@ -23,61 +23,61 @@
         [Step]
         public void ClickCreateContentTemplate()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(CreateNewContentLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(CreateNewContentLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void OpenContent(string contentName)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(contentName, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(contentName, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void TypeContentTitle(string title)
         {
             // Click to set focus, otherwise the focus will be set on the design frame
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(TitleLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(TitleLocator, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(TitleLocator, title, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(TitleLocator, title, LocateBy.Id);
         }
 
         public void SwitchToHTMLView()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(HTMLViewLocator, LocateBy.ClassName);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(HTMLViewLocator, LocateBy.ClassName);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SwitchToPreviewMode()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(PreviewViewLocator, LocateBy.ClassName);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(PreviewViewLocator, LocateBy.ClassName);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SwitchToDesignMode()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(DesignViewLocator, LocateBy.ClassName);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(DesignViewLocator, LocateBy.ClassName);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void TypeContentInHTMLView(string HTMLcontent)
         {
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
-            WebDriverUtility.DefaultProvider.Type(HTMLContentLocator, HTMLcontent, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            UIUtil.DefaultProvider.Type(HTMLContentLocator, HTMLcontent, LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         public void TypeContentInDesignView(string content)
         {
-            WebDriverUtility.DefaultProvider.TypeContentEditorOnWindowById(DesignContentLocator, content); 
+            UIUtil.DefaultProvider.TypeContentEditorOnWindowById(DesignContentLocator, content); 
         }
 
         [Step]
         public void TypeContentInWizardHTMLView(string content)
         {
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(2);
-            WebDriverUtility.DefaultProvider.Type(HTMLContentLocator, content, LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(2);
+            UIUtil.DefaultProvider.Type(HTMLContentLocator, content, LocateBy.XPath);
             this.SelectWizardFrame();
         }
 
@@ -85,27 +85,27 @@
         {
             Utilities.Utility.ThreadSleep(2);
             string content = string.Empty;
-            WebDriverUtility.DefaultProvider.SelectIFrame(0);
-            content = WebDriverUtility.DefaultProvider.GetPageSource();
+            UIUtil.DefaultProvider.SelectIFrame(0);
+            content = UIUtil.DefaultProvider.GetPageSource();
             string[] body = Regex.Split(content, @"<body>|</body>");
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             return body[1];
         }
 
         public void SaveCloseContentTemplate()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveCloseContentTemplateLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveCloseContentTemplateLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void SaveContentAsTemplate(string name)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveAsContentTemplateLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.Type(ContentTemplateNameLocator, name, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(SaveContentTemplateLocator, LocateBy.LinkText);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveAsContentTemplateLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.Type(ContentTemplateNameLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(SaveContentTemplateLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
     }
 }

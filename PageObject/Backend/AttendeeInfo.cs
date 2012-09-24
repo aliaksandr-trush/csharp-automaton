@@ -17,7 +17,7 @@
                 FormData.EventSessionId,
                 registerId);
 
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         public Label AgendaLable(AgendaItem agenda)

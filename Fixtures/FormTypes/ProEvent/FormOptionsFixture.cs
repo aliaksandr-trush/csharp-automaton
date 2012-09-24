@@ -135,11 +135,11 @@
             }
 
             ManagerSiteMgr.SelectFolder();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.CreateFromTemplate);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.SelectTemplateToCreate(TemplateEventName);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             VerifyEvent(TemplateEventName);
             RegisterMgr.OpenRegisterPage(eventID);
             RegisterForTemplateEvent();
@@ -335,7 +335,7 @@
 
         private void NoNewRegs()
         {
-            WebDriverUtility.DefaultProvider.ClearCookiesAndRestart();
+            UIUtil.DefaultProvider.ClearCookiesAndRestart();
             RegisterMgr.OpenRegisterPage(eventID);
             RegisterMgr.EnterEmailAddress("no" + System.DateTime.Now.Ticks + "@bademail.com");
             RegisterMgr.Continue();
@@ -354,7 +354,7 @@
         [Verify]
         private void VerifyStatus(DashboardManager.EventStatus status)
         {
-            WebDriverUtility.DefaultProvider.ClearCookiesAndRestart();
+            UIUtil.DefaultProvider.ClearCookiesAndRestart();
             LoginAndGoToRegressionFolder();
             ManagerSiteMgr.OpenEventDashboard(eventID);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
@@ -363,44 +363,44 @@
             switch (status)
             {
                 case DashboardManager.EventStatus.Active:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&O=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
-                    VerifyTool.VerifyValue(false, !WebDriverUtility.DefaultProvider.IsElementHidden(TestModeLocator, LocateBy.Id), "In test mode");
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&O=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
+                    VerifyTool.VerifyValue(false, !UIUtil.DefaultProvider.IsElementHidden(TestModeLocator, LocateBy.Id), "In test mode");
                     RegisterForGoLiveEvent();
                     break;
                 case DashboardManager.EventStatus.Archived:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&P=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&P=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(true, RegisterMgr.VerifyEventIsArchivedStatus(), "Archived Page is not displayed!");
                     break;
                 case DashboardManager.EventStatus.Cancelled:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&Q=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&Q=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(false, RegisterMgr.DoesCheckinAcceptEmail(), "Email Address is visible!");
                     break;
                 case DashboardManager.EventStatus.Inactive:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&R=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&R=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(false, RegisterMgr.DoesCheckinAcceptEmail(), "Email Address is visible!");
                     break;
                 case DashboardManager.EventStatus.OnSite:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&S=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&S=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(false, RegisterMgr.DoesCheckinAcceptEmail(), "Email Address is visible!");
                     break;
                 case DashboardManager.EventStatus.SoldOut:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&T=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&T=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(false, RegisterMgr.DoesCheckinAcceptEmail(), "Email Address is visible!");
                     break;
                 case DashboardManager.EventStatus.Testing:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&U=" + Guid.NewGuid());
-                    WebDriverUtility.DefaultProvider.RefreshPage();
-                    VerifyTool.VerifyValue(true, !WebDriverUtility.DefaultProvider.IsElementHidden(TestModeLocator, LocateBy.Id), "Not in test mode");
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&U=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.RefreshPage();
+                    VerifyTool.VerifyValue(true, !UIUtil.DefaultProvider.IsElementHidden(TestModeLocator, LocateBy.Id), "Not in test mode");
                     VerifyTool.VerifyValue(true, RegisterMgr.DoesCheckinAcceptEmail(), "Email Address is NOT visible!");
                     break;
                 case DashboardManager.EventStatus.UpdateOnly:
-                    WebDriverUtility.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&V=" + Guid.NewGuid());
+                    UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&V=" + Guid.NewGuid());
                     int count = 0;
                     while (count < 5)
                     {
@@ -410,7 +410,7 @@
                         }
                         else
                         {
-                            WebDriverUtility.DefaultProvider.RefreshPage();
+                            UIUtil.DefaultProvider.RefreshPage();
                             count++;
                         }
                     }

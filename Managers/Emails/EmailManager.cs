@@ -149,21 +149,21 @@
         [Step]
         public void SaveAndClose()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & Close", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(@"Save & Close", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void SaveAndStay()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & Stay", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(@"Save & Stay", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
 
         public void SaveAndNew()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Save & New", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(@"Save & New", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
@@ -171,7 +171,7 @@
         [Step]
         public void Cancel()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(@"Cancel", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(@"Cancel", LocateBy.LinkText);
             Utility.ThreadSleep(1);
             //UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }

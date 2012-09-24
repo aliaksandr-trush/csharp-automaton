@@ -501,9 +501,7 @@
 
         public void SSOLogin(Registrant reg)
         {
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Email.SelectWithText(reg.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Password.SelectWithText(reg.Password);
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Login_Click();
+            this.SSOLogin(reg.Email, reg.Password);
         }
 
         public void SSOLogin(string email, string password)

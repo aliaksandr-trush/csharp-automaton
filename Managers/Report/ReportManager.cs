@@ -133,21 +133,21 @@
         public bool ReportHasRecords()
         {
             Utility.ThreadSleep(1);
-            return !(WebDriverUtility.DefaultProvider.IsElementPresent(Locator.NoRecordsTextLocator, LocateBy.XPath))
-                && !(WebDriverUtility.DefaultProvider.IsElementPresent(Locator.ZeroRecordsTextLocator, LocateBy.XPath));
+            return !(UIUtil.DefaultProvider.IsElementPresent(Locator.NoRecordsTextLocator, LocateBy.XPath))
+                && !(UIUtil.DefaultProvider.IsElementPresent(Locator.ZeroRecordsTextLocator, LocateBy.XPath));
         }
 
         [Step]
         public void CloseReportPopupWindow()
         {
             SelectReportPopupWindow();
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         public void SelectCommonReportType(CommonReportType type)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_reportTools_ddlSelectReport", StringEnum.GetStringValue(type), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_reportTools_ddlSelectReport", StringEnum.GetStringValue(type), LocateBy.Id);
         }
 
         [Verify]
@@ -170,16 +170,16 @@
         [Step]
         public void ClickReportsFilterButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_reportTools_linkCustomizeIcon", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_reportTools_linkCustomizeIcon", LocateBy.Id);
             Utility.ThreadSleep(2);
 
             // select the window
-            WebDriverUtility.DefaultProvider.SelectWindowByTitle("FiltersConsole"); 
+            UIUtil.DefaultProvider.SelectWindowByTitle("FiltersConsole"); 
 
             // make sure it is the a correct popup
-            if (!WebDriverUtility.DefaultProvider.IsTextPresent("Attendee Report Filter"))
+            if (!UIUtil.DefaultProvider.IsTextPresent("Attendee Report Filter"))
             {
-                WebDriverUtility.DefaultProvider.FailTest("Not on Attendee Report Filter!");
+                UIUtil.DefaultProvider.FailTest("Not on Attendee Report Filter!");
             }
         }
 
@@ -187,24 +187,24 @@
         public void SelectFilterRegType(string regTypeCaption)
         {
             // set reg types filter
-            WebDriverUtility.DefaultProvider.SelectWithText("CC_ddlRegTypes", regTypeCaption, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnApply", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("CC_ddlRegTypes", regTypeCaption, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("btnApply", LocateBy.Id);
 
             // go to the parent window
             SelectReportPopupWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void SetFilterRegStatus(string regStatusCaption)
         {
             //set reg types filter
-            WebDriverUtility.DefaultProvider.SelectWithText("CC_ddlRegStatus", regStatusCaption, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnApply", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("CC_ddlRegStatus", regStatusCaption, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("btnApply", LocateBy.Id);
 
             //go to the parent window
             SelectReportPopupWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Verify]
@@ -229,7 +229,7 @@
 
         public void VerifyReportFilteredByRegType(string regType)
         {
-            int columns = WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
+            int columns = UIUtil.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
             string regTypeLocator = "//table[@id='_rol_fixedHeader']//tr/td[{0}]/div[contains(text(),'Type')]";
             int regTypeColumn = 0;
             int i = 1;
@@ -237,7 +237,7 @@
             while (i <= columns)
             {
                 string regTypeColumnLocator = string.Format(regTypeLocator, i);
-                if (WebDriverUtility.DefaultProvider.IsElementPresent(regTypeColumnLocator, LocateBy.XPath))
+                if (UIUtil.DefaultProvider.IsElementPresent(regTypeColumnLocator, LocateBy.XPath))
                 {
                     regTypeColumn = i;
                     break;
@@ -249,7 +249,7 @@
 
             for (int j = 1; j <= regs; j++)
             {
-                string type = WebDriverUtility.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, regTypeColumn), LocateBy.XPath);
+                string type = UIUtil.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, regTypeColumn), LocateBy.XPath);
                 Assert.True(type == regType);
             }
         }
@@ -275,7 +275,7 @@
 
         public void VerifyReportFilteredByBalance(BalanceTypes balanceType)
         {
-            int columns = WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
+            int columns = UIUtil.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
             string balanceLocator = "//table[@id='_rol_fixedHeader']//tr/td[{0}]/div[contains(text(),'Balance Due')]";
             int balanceColumn = 0;
             int i = 1;
@@ -283,7 +283,7 @@
             while (i <= columns)
             {
                 string balanceColumnLocator = string.Format(balanceLocator, i);
-                if (WebDriverUtility.DefaultProvider.IsElementPresent(balanceColumnLocator, LocateBy.XPath))
+                if (UIUtil.DefaultProvider.IsElementPresent(balanceColumnLocator, LocateBy.XPath))
                 {
                     balanceColumn = i;
                     break;
@@ -295,7 +295,7 @@
 
             for (int j = 1; j <= regs; j++)
             {
-                string balance = WebDriverUtility.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, balanceColumn), LocateBy.XPath);
+                string balance = UIUtil.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, balanceColumn), LocateBy.XPath);
                 switch(balanceType)
                 {
                     case BalanceTypes.Positive:
@@ -318,7 +318,7 @@
 
         public void VerifyReportSortedByFullName(SortTypes sortType)
         {
-            int columns = WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
+            int columns = UIUtil.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
             string fullNameLocator = "//table[@id='_rol_fixedHeader']//tr/td[{0}]/div[contains(text(),'Full Name')]";
             int fullNameColumn = 0;
             int i = 1;
@@ -326,7 +326,7 @@
             while (i <= columns)
             {
                 string fullNameColumnLocator = string.Format(fullNameLocator, i);
-                if (WebDriverUtility.DefaultProvider.IsElementPresent(fullNameColumnLocator, LocateBy.XPath))
+                if (UIUtil.DefaultProvider.IsElementPresent(fullNameColumnLocator, LocateBy.XPath))
                 {
                     fullNameColumn = i;
                     break;
@@ -339,7 +339,7 @@
             
             for (int j = 0; j < regs; j++)
             {
-                string fullName = WebDriverUtility.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j + 1, fullNameColumn), LocateBy.XPath);
+                string fullName = UIUtil.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j + 1, fullNameColumn), LocateBy.XPath);
                 fullName = Regex.Replace(fullName, @"[^\d]", "");
                 fullNameSurfixNumbers.Add(Convert.ToDouble(fullName));
             }
@@ -371,7 +371,7 @@
 
         public void VerifyAllAttendeesStatus(AttendeeStatus attendeeStatus)
         {
-            int columns = WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
+            int columns = UIUtil.DefaultProvider.GetXPathCountByXPath("//table[@id='_rol_fixedHeader']//tr/td");
             string statusLocator = "//table[@id='_rol_fixedHeader']//tr/td[{0}]/div[contains(text(),'Status')]";
             int statusColumn = 0;
             int i = 1;
@@ -379,7 +379,7 @@
             while (i <= columns)
             {
                 string statusColumnLocator = string.Format(statusLocator, i);
-                if (WebDriverUtility.DefaultProvider.IsElementPresent(statusColumnLocator, LocateBy.XPath))
+                if (UIUtil.DefaultProvider.IsElementPresent(statusColumnLocator, LocateBy.XPath))
                 {
                     statusColumn = i;
                     break;
@@ -391,7 +391,7 @@
 
             for (int j = 1; j <= regs; j++)
             {
-                string status = WebDriverUtility.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, statusColumn), LocateBy.XPath);
+                string status = UIUtil.DefaultProvider.GetText(string.Format("//table[@id='rptParentTable']/tbody/tr[{0}]/td[{1}]", j, statusColumn), LocateBy.XPath);
                 if (status != StringEnum.GetStringValue(AttendeeStatus.Canceled))
                     Assert.True(status == StringEnum.GetStringValue(attendeeStatus));
             }
@@ -400,25 +400,25 @@
         [Step]
         public void ClickSmartLinkButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@id='ctl00_reportTools_divSmartlink']/a", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//div[@id='ctl00_reportTools_divSmartlink']/a", LocateBy.XPath);
             Utility.ThreadSleep(2);
 
             // select the window
-            WebDriverUtility.DefaultProvider.SelectWindowByTitle("SmartLink Options");
+            UIUtil.DefaultProvider.SelectWindowByTitle("SmartLink Options");
         }
 
         [Step]
         public string EnableSmartLinkAccess(bool withPassword)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("cbShareReport", true, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("cbShareReport", true, LocateBy.Id);
 
             if (withPassword)
             {
-                WebDriverUtility.DefaultProvider.Type("tbPassword", DefaultSmartLinkPassword, LocateBy.Id);
+                UIUtil.DefaultProvider.Type("tbPassword", DefaultSmartLinkPassword, LocateBy.Id);
             }
 
-            string link = WebDriverUtility.DefaultProvider.GetText("lblSmartLink", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnSave", LocateBy.Id);
+            string link = UIUtil.DefaultProvider.GetText("lblSmartLink", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("btnSave", LocateBy.Id);
 
             return link;
         }
@@ -426,33 +426,33 @@
         [Step]
         public void LoginToSmartLinkReport(string password)
         {
-            WebDriverUtility.DefaultProvider.Type("txtPassword", password, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("submit", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.WaitForElementPresent("//table[@id='" + ReportTableID + "']", LocateBy.XPath);
+            UIUtil.DefaultProvider.Type("txtPassword", password, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("submit", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForElementPresent("//table[@id='" + ReportTableID + "']", LocateBy.XPath);
         }
 
         public void VerifyAttendeePresentOnTheReport(string FirstName, string LastName)
         {
-            WebDriverUtility.DefaultProvider.IsTextPresent(LastName + ", " + FirstName);
+            UIUtil.DefaultProvider.IsTextPresent(LastName + ", " + FirstName);
         }
 
         [Step]
         public void ClickCheckInButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Check In", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Check In", LocateBy.LinkText);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void SelectAttendeeReportRecord(int RegisterId)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//input[@id='chkAttendee' and @value='{0}']", RegisterId), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format("//input[@id='chkAttendee' and @value='{0}']", RegisterId), LocateBy.XPath);
         }
 
         public void SelectAllAttendees()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("selectAll", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("selectAll", LocateBy.Id);
         }
 
         //actually RegisterID. AttendeeID is the contact key
@@ -479,7 +479,7 @@
                 index = index.Insert(0, "0");
             }
 
-            return WebDriverUtility.DefaultProvider.GetText(string.Format(regIdLocatorFormat, index, cellIndex), LocateBy.XPath);
+            return UIUtil.DefaultProvider.GetText(string.Format(regIdLocatorFormat, index, cellIndex), LocateBy.XPath);
         }
                 
         private string GetRegType(int rowIndex)
@@ -801,16 +801,16 @@
         public void OpenAttendeeInfoByRegId(int regId)
         {
             string locator_XPath = string.Format("//b[text()='{0}']/..", regId);
-            string here = WebDriverUtility.DefaultProvider.GetLocation();
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+            string here = UIUtil.DefaultProvider.GetLocation();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
             Utility.ThreadSleep(3);
-            WebDriverUtility.DefaultProvider.SelectWindowByTitle("Attendee Info");
+            UIUtil.DefaultProvider.SelectWindowByTitle("Attendee Info");
         }
 
         [Step]
         public void ClickOKOnCheckInConfirmationPopup()
         {
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
             Utility.ThreadSleep(3);
             ////UIUtilityProvider.UIHelper.WaitForPageToLoad();
         }
@@ -818,7 +818,7 @@
         [Step]
         public void WaitForReportToLoad()
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent("//table[@id='" + ReportTableID + "']", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForElementPresent("//table[@id='" + ReportTableID + "']", LocateBy.XPath);
         }
 
         [Verify]
@@ -829,11 +829,11 @@
             string currentStatus = string.Empty;
             for (int i = 1; i <= totalRowsInReport; i++)
             {
-                string regId = WebDriverUtility.DefaultProvider.GetTable(ReportTableID, i, 2);
+                string regId = UIUtil.DefaultProvider.GetTable(ReportTableID, i, 2);
                 //find the row first
                 if (regId == RegisterId.ToString())
                 {
-                    currentStatus = WebDriverUtility.DefaultProvider.GetTable(ReportTableID, i, 3);
+                    currentStatus = UIUtil.DefaultProvider.GetTable(ReportTableID, i, 3);
                     break;
                 }
             }
@@ -850,12 +850,12 @@
 
             for (int i = 1; i <= totalRowsInReport; i++)
             {
-                string regId = WebDriverUtility.DefaultProvider.GetTable(ReportTableID, i, 2);
+                string regId = UIUtil.DefaultProvider.GetTable(ReportTableID, i, 2);
 
                 // Find the row first
                 if (regId == RegisterId.ToString())
                 {
-                    currentStatus = WebDriverUtility.DefaultProvider.GetTable(ReportTableID, i, 6);
+                    currentStatus = UIUtil.DefaultProvider.GetTable(ReportTableID, i, 6);
                     break;
                 }
             }
@@ -868,7 +868,7 @@
         {
             try
             {
-                WebDriverUtility.DefaultProvider.OpenUrl(String.Format(
+                UIUtil.DefaultProvider.OpenUrl(String.Format(
                     "{0}activereports/ReportServer/attendeeReport.aspx?rptType={1}&EventId={2}&EventSessionId={3}",
                     ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl, 
                     reportTypeId, 
@@ -885,53 +885,53 @@
         [Step]
         public void ClickChangeStatusButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SelectWindowByName("GroupEmail");
+            UIUtil.DefaultProvider.SelectWindowByName("GroupEmail");
         }
 
         public void ClickChangeStatusButtonOnCustomReport()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Change Status", LocateBy.LinkText);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SelectWindowByName("ChangeStatus");
+            UIUtil.DefaultProvider.SelectWindowByName("ChangeStatus");
         }
 
         [Step]
         public void ChangeStatus(AttendeeStatus fromStatus, AttendeeStatus toStatus)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnChange", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("btnChange", LocateBy.Id);
             Utility.ThreadSleep(2);
         }
 
         public void ChangeStatusOnCustomReport(AttendeeStatus fromStatus, AttendeeStatus toStatus)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Submit1", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("FromStatusId", StringEnum.GetStringValue(fromStatus), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ToStatusId", StringEnum.GetStringValue(toStatus), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Submit1", LocateBy.Id);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void ClickOKOnChangeStatusConfirmationPopup()
         {
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
         }
 
         public void ClickRunReport()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_reportTools_btnRun", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_reportTools_btnRun", LocateBy.Id);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void ClickSendEmailButton()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Send Email", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Send Email", LocateBy.LinkText);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SelectWindowByName("GroupEmail");
+            UIUtil.DefaultProvider.SelectWindowByName("GroupEmail");
         }
 
         [Step]
@@ -941,17 +941,17 @@
 
             // Click subject textbox first to set focus on it
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(subjectLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(subjectLocator, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.Type(subjectLocator, emailSubject, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(subjectLocator, emailSubject, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//*[@id='htmContent_ModesWrapper']//a[@class='reMode_html']", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
-            WebDriverUtility.DefaultProvider.Type("//textarea", emailContent, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//*[@id='htmContent_ModesWrapper']//a[@class='reMode_html']", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            UIUtil.DefaultProvider.Type("//textarea", emailContent, LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
             
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("btnSend", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("btnSend", LocateBy.Id);
             Utility.ThreadSleep(1);
             SelectReportPopupWindow();
         }
@@ -1000,7 +1000,7 @@
         [Step]
         public void ClickAttendeeReportColumnHeader(int columnIndex)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(AttendeeReportColumnHeaderLocator, columnIndex + 1), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(AttendeeReportColumnHeaderLocator, columnIndex + 1), LocateBy.XPath);
         }
 
         /// <summary>
@@ -1024,10 +1024,10 @@
         public void VerifyReportTotalChargeAndBalanceDueByRegId(int regId, double expectedTotalCharge, double expectedBalanceDue)
         {
             string locator_XPath = string.Format("//b[text()='{0}']/..", regId);
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(locator_XPath, LocateBy.XPath);
-            string actualValueTotalCharge = WebDriverUtility.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[5]", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForElementPresent(locator_XPath, LocateBy.XPath);
+            string actualValueTotalCharge = UIUtil.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[5]", LocateBy.XPath);
             VerifyTool.VerifyValue(MoneyTool.FormatMoney(expectedTotalCharge), actualValueTotalCharge, "Total Charge : {0}");
-            string actualValueBalanceDue = WebDriverUtility.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[6]", LocateBy.XPath);
+            string actualValueBalanceDue = UIUtil.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[6]", LocateBy.XPath);
             VerifyTool.VerifyValue(MoneyTool.FormatMoney(expectedBalanceDue), actualValueBalanceDue, "Balance Due: {0}");
         }
 
@@ -1039,11 +1039,11 @@
             MoneyTool.CurrencyCode currencySymbol = MoneyTool.CurrencyCode.USD)
         {
             string locator_XPath = string.Format("//b[text()='{0}']/..", regId);
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(locator_XPath, LocateBy.XPath);
-            string actualValueTotalCharge = WebDriverUtility.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[8]", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForElementPresent(locator_XPath, LocateBy.XPath);
+            string actualValueTotalCharge = UIUtil.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[8]", LocateBy.XPath);
 
             VerifyTool.VerifyValue(MoneyTool.FormatMoney(expectedTotalCharge, currencySymbol), actualValueTotalCharge, "Total Charge : {0}");
-            string actualValueBalanceDue = WebDriverUtility.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[9]", LocateBy.XPath);
+            string actualValueBalanceDue = UIUtil.DefaultProvider.GetText(locator_XPath + "/../following-sibling::td[9]", LocateBy.XPath);
             VerifyTool.VerifyValue(MoneyTool.FormatMoney(expectedBalanceDue, currencySymbol), actualValueBalanceDue, "Balance Due: {0}");
         }
 
@@ -1056,16 +1056,16 @@
         /// <param name="expectedValue"></param>
         public void VerifyTableReport(string tableId, int rowIndex, int columnIndex, string expectedValue)
         {
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             //make sure the report table exists
-            Assert.IsTrue(WebDriverUtility.DefaultProvider.IsElementPresent(string.Format("//table[@id='{0}']", tableId), LocateBy.XPath));
+            Assert.IsTrue(UIUtil.DefaultProvider.IsElementPresent(string.Format("//table[@id='{0}']", tableId), LocateBy.XPath));
             
             //wait for the value to appear (it is important for the sorting)
             //string script = "return document.getElementById('{0}').getElementsByTagName('tr')[{1}].getElementsByTagName('td')[{2}].innerHTML.indexOf('{3}') > -1 ";
             //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeOutSpan));
             //wait.Until(d => (IJavaScriptExecutor)d).ExecuteScript(string.Format(script, tableId, rowIndex, columnIndex, expectedValue));
 
-            Assert.AreEqual(expectedValue, WebDriverUtility.DefaultProvider.GetTable(tableId, rowIndex, columnIndex));
+            Assert.AreEqual(expectedValue, UIUtil.DefaultProvider.GetTable(tableId, rowIndex, columnIndex));
         }
 
         /// <summary>
@@ -1075,8 +1075,8 @@
         public void ExpandTransactionFeesReportRow(int regId)
         {
             string locator_XPath = string.Format("//td[text()='{0}']/..//input", regId);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(locator_XPath, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             Utility.ThreadSleep(1);
         }
 
@@ -1093,8 +1093,8 @@
         public void VerifyExpandedTransactionFeeRowData(int regId, string[] expectedFees)
         {
             int f = 5;
-            int columnCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(string.Format(TransactionsFeesReportXPathCount, regId));
-            int rowCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(string.Format(ExpandedTransactionFeesReportLocator, regId));
+            int columnCount = UIUtil.DefaultProvider.GetXPathCountByXPath(string.Format(TransactionsFeesReportXPathCount, regId));
+            int rowCount = UIUtil.DefaultProvider.GetXPathCountByXPath(string.Format(ExpandedTransactionFeesReportLocator, regId));
             string[] actualData = new string[expectedFees.Length];
 
             for (int i = 0; i < 5; i++)
@@ -1134,7 +1134,7 @@
         public string GetTransactionFeesMainRowData(int regId, int i)
         {
             string locator_XPath = string.Format("//td[text()='{0}']/../td[" + i + "]", regId);
-            string data = WebDriverUtility.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
+            string data = UIUtil.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
             return data;
         }
 
@@ -1151,7 +1151,7 @@
         public string GetTransactionFeesExpandedRowData(int regId, int q, int i)
         {
             string locator_XPath = string.Format("//td[text()='{0}']/../following-sibling::tr[1]//tbody/tr[" + q + "]/td[" + (i) + "]",regId);
-            string data = WebDriverUtility.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
+            string data = UIUtil.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
             return data;
         }
 
@@ -1168,22 +1168,22 @@
         {
             string[] actualData = new string[expectedData.Length];
             int f = 0;
-            int rowCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(string.Format(TransactionsReportLocator, regId));
+            int rowCount = UIUtil.DefaultProvider.GetXPathCountByXPath(string.Format(TransactionsReportLocator, regId));
             string systemNotesLocator = "//*[@id='Table1']/tbody/tr[td//text()='" + regId + "'][{0}]/td[{1}]";
             string convertedAmountLocator = "//*[@id='Table1']/tbody/tr[td//text()='" + regId + "'][{0}]/td[8]";
             string xPathCountLocator = "//*[@id='Table1']/tbody/tr[td//text()='" + regId + "'][1]/td";
-            string xPathCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(xPathCountLocator).ToString();
+            string xPathCount = UIUtil.DefaultProvider.GetXPathCountByXPath(xPathCountLocator).ToString();
 
             while (f < (actualData.Length - 1))
             {
                 for (int q = 0; q < rowCount; q++)
                 {
-                    string watchMe = WebDriverUtility.DefaultProvider.GetText(string.Format(systemNotesLocator, q + 1, xPathCount), LocateBy.XPath);
-                    string convertedAmtWatch = WebDriverUtility.DefaultProvider.GetText(string.Format(convertedAmountLocator, q + 1), LocateBy.XPath);
+                    string watchMe = UIUtil.DefaultProvider.GetText(string.Format(systemNotesLocator, q + 1, xPathCount), LocateBy.XPath);
+                    string convertedAmtWatch = UIUtil.DefaultProvider.GetText(string.Format(convertedAmountLocator, q + 1), LocateBy.XPath);
 
                     for (int i = 5; i < 8; i++)
                     {
-                        actualData[f] = WebDriverUtility.DefaultProvider.GetText("//*[@id='Table1']/tbody/tr[td//text()='" + regId + "'][" + (q + 1) + "]/td[" + i + "]", LocateBy.XPath);
+                        actualData[f] = UIUtil.DefaultProvider.GetText("//*[@id='Table1']/tbody/tr[td//text()='" + regId + "'][" + (q + 1) + "]/td[" + i + "]", LocateBy.XPath);
                         f++;
                         if (xPathCount== "11" && i == 7 && convertedAmtWatch != "")
                         {
@@ -1199,7 +1199,7 @@
                 }
             }
 
-            actualData[expectedData.Length - 1] = WebDriverUtility.DefaultProvider.GetText(string.Format(systemNotesLocator, rowCount, xPathCount), LocateBy.XPath);
+            actualData[expectedData.Length - 1] = UIUtil.DefaultProvider.GetText(string.Format(systemNotesLocator, rowCount, xPathCount), LocateBy.XPath);
 
             for (f = 0; f < actualData.Length-1; f++)
             {
@@ -1215,7 +1215,7 @@
             // make sure the report table exists
             try
             {
-                WebDriverUtility.DefaultProvider.WaitForElementPresent(reportTableLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForElementPresent(reportTableLocator, LocateBy.XPath);
             }
             catch
             {
@@ -1224,12 +1224,12 @@
 
             string locator_B_NoRecordsFound = "//*[@id='rptCell']//*[text()='No Records Found']";
 
-            if (WebDriverUtility.DefaultProvider.IsElementDisplay(locator_B_NoRecordsFound, LocateBy.XPath))
+            if (UIUtil.DefaultProvider.IsElementDisplay(locator_B_NoRecordsFound, LocateBy.XPath))
             {
                 return 0;
             }
 
-            return WebDriverUtility.DefaultProvider.GetXPathCountByXPath(reportTableLocator + "/tbody/tr");
+            return UIUtil.DefaultProvider.GetXPathCountByXPath(reportTableLocator + "/tbody/tr");
         }
 
         [Verify]
@@ -1264,7 +1264,7 @@
 
         public string GetAttendeeRowIndex(int regId)
         {
-            return WebDriverUtility.DefaultProvider.GetAttribute(string.Format(GetAttendeeRowIndexLocator, regId), "id", LocateBy.XPath);
+            return UIUtil.DefaultProvider.GetAttribute(string.Format(GetAttendeeRowIndexLocator, regId), "id", LocateBy.XPath);
         }
 
         [Step]
@@ -1293,25 +1293,25 @@
         [Verify]
         public void VerifyDecryptedCCNumberPresent()
         {
-            if (!WebDriverUtility.DefaultProvider.IsTextPresent(PaymentManager.DefaultPaymentInfo.CCNumber))
+            if (!UIUtil.DefaultProvider.IsTextPresent(PaymentManager.DefaultPaymentInfo.CCNumber))
             {
-                WebDriverUtility.DefaultProvider.FailTest("Decrypted CC number not present!");
+                UIUtil.DefaultProvider.FailTest("Decrypted CC number not present!");
             }
         }
 
         [Verify]
         public void VerifyEncryptedCCNumberPresent()
         {
-            if (!WebDriverUtility.DefaultProvider.IsTextPresent(Managers.Register.PaymentManager.DefaultPaymentInfo.CCNumber_Encrypted))
+            if (!UIUtil.DefaultProvider.IsTextPresent(Managers.Register.PaymentManager.DefaultPaymentInfo.CCNumber_Encrypted))
             {
-                WebDriverUtility.DefaultProvider.FailTest("Encrypted CC number not present!");
+                UIUtil.DefaultProvider.FailTest("Encrypted CC number not present!");
             }
         }
 
         public void VerifyGroupBy(string groupBy)
         {
             string groupByLocator = string.Format(GroupByLocator, groupBy);
-            WebDriverUtility.DefaultProvider.IsElementPresent(groupByLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.IsElementPresent(groupByLocator, LocateBy.XPath);
         }
     }
 }

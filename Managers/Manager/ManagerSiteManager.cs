@@ -163,7 +163,7 @@
         [Step]
         public void OpenLogin()
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(string.Format("{0}manager/login.aspx", ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps));
+            UIUtil.DefaultProvider.OpenUrl(string.Format("{0}manager/login.aspx", ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps));
             AllowCookies();
         }
 
@@ -179,24 +179,24 @@
         [Step]
         public void Login(string username, string password)
         {
-            WebDriverUtility.DefaultProvider.Type(LoginUserNameLocator, username, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(LoginPasswordLocator, password, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(LoginButtonLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.Type(LoginUserNameLocator, username, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(LoginPasswordLocator, password, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(LoginButtonLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]
         public void Logout()
         {
-           WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(LogoutLinkLocator, LocateBy.Id);
+           UIUtil.DefaultProvider.WaitForDisplayAndClick(LogoutLinkLocator, LocateBy.Id);
         }
 
         [Step]
         public void ClickEditUserLink()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_ctl00_hpEditUser", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_ctl00_hpEditUser", LocateBy.Id);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
         }
 
         [Step]
@@ -211,46 +211,46 @@
         [Verify]
         public void VerifyInvalidLogin()
         {
-            Assert.That(WebDriverUtility.DefaultProvider.IsElementPresent("//div[@class='warningMessageFluid']", LocateBy.XPath));
+            Assert.That(UIUtil.DefaultProvider.IsElementPresent("//div[@class='warningMessageFluid']", LocateBy.XPath));
         }
 
         [Verify]
         public void VerifyCaptchaVisible()
         {
-            Assert.That(WebDriverUtility.DefaultProvider.IsElementPresent("//div[@class='captcha']", LocateBy.XPath));
+            Assert.That(UIUtil.DefaultProvider.IsElementPresent("//div[@class='captcha']", LocateBy.XPath));
         }
 
         [Step]
         public void SelectAndEnterForgotPassword(string username)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//a[text()='Password']", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.Type("//label[@for='txtUsername']/input", username, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@id='password']//span[@class='BiggerButtonBase']/a/span[text()='Submit']", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//a[text()='Password']", LocateBy.XPath);
+            UIUtil.DefaultProvider.Type("//label[@for='txtUsername']/input", username, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//div[@id='password']//span[@class='BiggerButtonBase']/a/span[text()='Submit']", LocateBy.XPath);
         }
 
         [Step]
         public void ClickOnFirstEvent()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(FirstEventLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(FirstEventLocator, LocateBy.XPath);
         }
 
         [Step]
         public void SelectAndEnterForgotLogin(string email)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//a[text()='Username']", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.Type("//label[@for='txtEmail']/input", email, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//div[@id='username']//span[@class='BiggerButtonBase']/a/span[text()='Submit']", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//a[text()='Username']", LocateBy.XPath);
+            UIUtil.DefaultProvider.Type("//label[@for='txtEmail']/input", email, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//div[@id='username']//span[@class='BiggerButtonBase']/a/span[text()='Submit']", LocateBy.XPath);
         }
 
         public void OpenManagerURL(string eventSessionId)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(this.GetManagerURL(eventSessionId));
+            UIUtil.DefaultProvider.OpenUrl(this.GetManagerURL(eventSessionId));
         }
 
         [Step]
         public void OpenEventBuilderStartPage(int eventId, string eventSessionId)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(
+            UIUtil.DefaultProvider.OpenUrl(string.Format(
                 "{0}Builder/default.aspx?EventId={1}&EventSessionID={2}",
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps,
                 eventId,
@@ -260,7 +260,7 @@
         [Verify]
         public void VerifyErrorMessage(string errorMessage)
         {
-            VerifyTool.VerifyValue(errorMessage, WebDriverUtility.DefaultProvider.GetText("ctl00_cphMaster_warning", LocateBy.Id), "Error message: {0}");
+            VerifyTool.VerifyValue(errorMessage, UIUtil.DefaultProvider.GetText("ctl00_cphMaster_warning", LocateBy.Id), "Error message: {0}");
         }
 
         public string GetManagerURL(string eventSessionID)
@@ -271,12 +271,12 @@
         [Verify]
         public void VerifyManager()
         {
-            Assert.That(WebDriverUtility.DefaultProvider.IsElementPresent("//td[@id='mgrHeader']", LocateBy.XPath) || WebDriverUtility.DefaultProvider.IsElementPresent("//div[@class='m3logo']", LocateBy.XPath));
+            Assert.That(UIUtil.DefaultProvider.IsElementPresent("//td[@id='mgrHeader']", LocateBy.XPath) || UIUtil.DefaultProvider.IsElementPresent("//div[@class='m3logo']", LocateBy.XPath));
         }
 
         public void VerifyTextPresent(string text)
         {
-            Assert.That(WebDriverUtility.DefaultProvider.IsTextPresent(text));
+            Assert.That(UIUtil.DefaultProvider.IsTextPresent(text));
         }
 
         public void SwitchToSubAccount(int customerId)
@@ -284,12 +284,12 @@
             string otherAccountDropdown = "ctl00_cphDialog_ddOtherAccounts";
             string optionLocator = string.Format("value={0}", customerId);
             string accountText = string.Format("Account: {0}", customerId);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(HeaderAccountLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForElementPresent(otherAccountDropdown, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SelectWithText(otherAccountDropdown, optionLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("OK", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(HeaderAccountLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent(otherAccountDropdown, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(otherAccountDropdown, optionLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("OK", LocateBy.LinkText);
             Utility.ThreadSleep(2);
-            Assert.AreEqual(accountText, WebDriverUtility.DefaultProvider.GetText(HeaderAccountLocator, LocateBy.Id));
+            Assert.AreEqual(accountText, UIUtil.DefaultProvider.GetText(HeaderAccountLocator, LocateBy.Id));
         }
 
         /// <summary>
@@ -300,13 +300,13 @@
         {
             string accountHeader = string.Empty;
 
-            if (WebDriverUtility.DefaultProvider.IsElementDisplay(HeaderAccountLocator, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementDisplay(HeaderAccountLocator, LocateBy.Id))
             {
-                accountHeader = WebDriverUtility.DefaultProvider.GetText(HeaderAccountLocator, LocateBy.Id);
+                accountHeader = UIUtil.DefaultProvider.GetText(HeaderAccountLocator, LocateBy.Id);
             }
             else
             {
-                string tmp = WebDriverUtility.DefaultProvider.GetText("//div[@class='titleBar']/ul/li", LocateBy.XPath).Split(
+                string tmp = UIUtil.DefaultProvider.GetText("//div[@class='titleBar']/ul/li", LocateBy.XPath).Split(
                     new char[] { ':' })[1];
 
                 accountHeader = tmp.Split(new char[] { ')' })[0].Trim();
@@ -333,13 +333,13 @@
         {
             ////UIUtilityProvider.UIHelper.WaitForPageToLoad();
             string folderLocator = string.Format(FolderLocatorFormat, folderName);
-            WebDriverUtility.DefaultProvider.WaitForElementDisplay(folderLocator, LocateBy.XPath);
-            string folderDivClassAttribute = WebDriverUtility.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForElementDisplay(folderLocator, LocateBy.XPath);
+            string folderDivClassAttribute = UIUtil.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
 
             if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(folderLocator, LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(folderLocator, LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
                 Utility.ThreadSleep(1);
             }
         }
@@ -363,8 +363,8 @@
         [Step]
         public void ClickAddEvent(EventType eventType)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddEventDropDown, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddEventDropDown, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
 
             switch (eventType)
             {
@@ -376,37 +376,37 @@
                 case EventType.Membership:
                 case EventType.Survey:
                 case EventType.WebEvent:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(AddEventDropDownType, StringEnum.GetStringValue(eventType)), LocateBy.XPath);
-                    WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(AddEventDropDownType, StringEnum.GetStringValue(eventType)), LocateBy.XPath);
+                    UIUtil.DefaultProvider.WaitForPageToLoad();
                     break;
                 case EventType.CreateFromTemplate:
-                    WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(AddEventDropDownType, StringEnum.GetStringValue(eventType)), LocateBy.XPath);
-                    WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                    UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(AddEventDropDownType, StringEnum.GetStringValue(eventType)), LocateBy.XPath);
+                    UIUtil.DefaultProvider.WaitForAJAXRequest();
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void SelectTemplateToCreate(string eventName)
         {
-            string option = WebDriverUtility.DefaultProvider.GetAttribute(string.Format(TemplateNameLocator, eventName), "value", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SelectWithText("//select[@id='lbTemplates']", eventName + " (" + option + ") - Account #" + Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//a/span[text()='OK']/..", LocateBy.XPath);
+            string option = UIUtil.DefaultProvider.GetAttribute(string.Format(TemplateNameLocator, eventName), "value", LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText("//select[@id='lbTemplates']", eventName + " (" + option + ") - Account #" + Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//a/span[text()='OK']/..", LocateBy.XPath);
         }
 
         [Step]
         public void GotoTab(Tab tab)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.ComposeTabLocator(tab), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(this.ComposeTabLocator(tab), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         private bool IsTabSelected(Tab tab)
         {
             string tabLinkLocator = string.Format("{0}/parent::span/parent::span/parent::a", this.ComposeTabLocator(tab));
-            string tabLinkClassAttribute = WebDriverUtility.DefaultProvider.GetAttribute(tabLinkLocator, "class", LocateBy.XPath);
+            string tabLinkClassAttribute = UIUtil.DefaultProvider.GetAttribute(tabLinkLocator, "class", LocateBy.XPath);
 
             if (tabLinkClassAttribute.Equals("rtsLink rtsSelected"))
             {
@@ -455,7 +455,7 @@
         {
             bool result = false;
 
-            result = WebDriverUtility.DefaultProvider.IsElementPresent(string.Format(EventExistsLocator, name), LocateBy.XPath);
+            result = UIUtil.DefaultProvider.IsElementPresent(string.Format(EventExistsLocator, name), LocateBy.XPath);
 
             return result;
         }
@@ -473,13 +473,13 @@
                 Locator_Div_EventListGridData,
                 name);
 
-            if (WebDriverUtility.DefaultProvider.IsElementPresent(locator_A_EventTitle, LocateBy.XPath))
+            if (UIUtil.DefaultProvider.IsElementPresent(locator_A_EventTitle, LocateBy.XPath))
             {
-                int eventCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(locator_A_EventTitle);
+                int eventCount = UIUtil.DefaultProvider.GetXPathCountByXPath(locator_A_EventTitle);
 
                 // Retrieve the first id
                 string locator_Tr_EventRow = string.Format("{0}/parent::td/parent::tr", locator_A_EventTitle);
-                string eventId = WebDriverUtility.DefaultProvider.GetAttribute(locator_Tr_EventRow, "data-id", LocateBy.XPath);
+                string eventId = UIUtil.DefaultProvider.GetAttribute(locator_Tr_EventRow, "data-id", LocateBy.XPath);
                 ids.Add(Convert.ToInt32(eventId));
 
                 for (int cnt = 0; cnt < eventCount - 1; cnt++)
@@ -489,7 +489,7 @@
                         locator_Tr_EventRow,
                         cnt + 1);
 
-                    eventId = WebDriverUtility.DefaultProvider.GetAttribute(locator_Tr_EventRow_Following, "data-id", LocateBy.XPath);
+                    eventId = UIUtil.DefaultProvider.GetAttribute(locator_Tr_EventRow_Following, "data-id", LocateBy.XPath);
                     ids.Add(Convert.ToInt32(eventId));
                 }
             }
@@ -512,7 +512,7 @@
             string locatorFormat =
                 "//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr[@data-id='{0}']/td/a[contains(@id,'aRegs') and contains(@href,'{0}')]";
 
-            return Convert.ToInt32(WebDriverUtility.DefaultProvider.GetText(string.Format(locatorFormat, eventId), LocateBy.XPath));
+            return Convert.ToInt32(UIUtil.DefaultProvider.GetText(string.Format(locatorFormat, eventId), LocateBy.XPath));
         }
 
         [Step]
@@ -563,7 +563,7 @@
 
             // Refresh the page to avoid dirty data,
             // cause we don't drag the event to Delete folder, but move the event to that folder directly
-            WebDriverUtility.DefaultProvider.RefreshPage();
+            UIUtil.DefaultProvider.RefreshPage();
         }
 
         [Step]
@@ -586,12 +586,12 @@
                 Locator_Div_EventListGridData,
                 eventId);
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator_A_DeleteLinkInActionsColumn, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(locator_A_DeleteLinkInActionsColumn, LocateBy.XPath);
             Utility.ThreadSleep(0.5);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']", LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectOriginalWindow();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -604,7 +604,7 @@
                 this.EnsureSortByColumnHeader(EventListGridColumnHeader.ID, SortEventList.Desc);
 
                 string eventIdAttributeLocator = "//*[@title='{0} - Details']/../..";
-                string idAsString = WebDriverUtility.DefaultProvider.GetAttribute(string.Format(eventIdAttributeLocator, name), "data-id", LocateBy.XPath);
+                string idAsString = UIUtil.DefaultProvider.GetAttribute(string.Format(eventIdAttributeLocator, name), "data-id", LocateBy.XPath);
 
                 int.TryParse(idAsString, out idAsInt);
             }
@@ -622,12 +622,12 @@
                 "{0}/following-sibling::input",
                 this.ComposeEventListGridColumnHeader_ClickToSortLink(columnHeader));
 
-            if (!WebDriverUtility.DefaultProvider.IsElementDisplay(locator_Input_SortArrow, LocateBy.XPath))
+            if (!UIUtil.DefaultProvider.IsElementDisplay(locator_Input_SortArrow, LocateBy.XPath))
             {
                 this.ClickEventListGridColumnHeaderToSort(columnHeader);
             }
 
-            if (!WebDriverUtility.DefaultProvider.GetAttribute(locator_Input_SortArrow, "class", LocateBy.XPath).Equals(
+            if (!UIUtil.DefaultProvider.GetAttribute(locator_Input_SortArrow, "class", LocateBy.XPath).Equals(
                 string.Format("rgSort{0}", sort.ToString())))
             {
                 this.ClickEventListGridColumnHeaderToSort(columnHeader);
@@ -636,12 +636,12 @@
 
         private void ClickEventListGridColumnHeaderToSort(EventListGridColumnHeader columnHeader)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(
                 this.ComposeEventListGridColumnHeader_ClickToSortLink(columnHeader),
                 LocateBy.XPath);
 
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         private string ComposeEventListGridColumnHeader_ClickToSortLink(EventListGridColumnHeader columnHeader)
@@ -664,16 +664,16 @@
                 this.DeleteEventById(ids[i]);
             }
 
-            WebDriverUtility.DefaultProvider.RefreshPage();
+            UIUtil.DefaultProvider.RefreshPage();
         }
 
         [Step]
         public void CopyEventByName(string name)
         {
             string copyEventLinkLocator = string.Format("//td/a[text()='{0}']/../..//a[@title='Copy event']", name);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(copyEventLinkLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(copyEventLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
             Utility.ThreadSleep(6);
         }
 
@@ -681,22 +681,22 @@
         public void CopyEventById(int id)
         {
             string copyEventLinkLocator = string.Format("//td[text()='{0}']/..//a[@title='Copy event']", id.ToString());
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(copyEventLinkLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(copyEventLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//span[text()='OK']/../..", LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
             Utility.ThreadSleep(6);
         }
 
         public void ClickEditRegistrationForm(string name)
         {
             string editEventLinkLocator = string.Format("//td/a[text()='{0}']/../..//a[@title='Edit registration form']", name);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(editEventLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(editEventLinkLocator, LocateBy.XPath);
         }
 
         public void ClickEditRegistrationForm(int id)
         {
             string editEventLinkLocator = string.Format("//td[text()='{0}']/..//a[@title='Edit registration form']", id.ToString());
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(editEventLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(editEventLinkLocator, LocateBy.XPath);
         }
         /// <summary>
         /// Opens dashboard for first form with this name in grid
@@ -707,7 +707,7 @@
         public void OpenEventDashboard(string formName)
         {
             string locator = string.Format("//td[a='{0}']/a", formName);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(locator, LocateBy.XPath);
         }
 
         [Step]
@@ -718,8 +718,8 @@
             //eventID.ToString());
             string dashboardLinkLocator = string.Format("//a[contains(@href, 'eventID={0}')]", eventID.ToString());
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(dashboardLinkLocator, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(dashboardLinkLocator, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         [Step]
@@ -730,14 +730,14 @@
                 sessionID,
                 eventID);
 
-            WebDriverUtility.DefaultProvider.OpenUrl(dashboardUrl);
+            UIUtil.DefaultProvider.OpenUrl(dashboardUrl);
         }
 
         public void OpenAttendeeReportFromManagerEventList(int eventID)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(this.ComposeAttendeeReportLink(eventID), LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SelectTopWindow();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(this.ComposeAttendeeReportLink(eventID), LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectTopWindow();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         // Get an event id to open the attendee report on the manager page
@@ -774,12 +774,12 @@
 
         public void OpenJobHistoryReport()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Jobs History Report", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Jobs History Report", LocateBy.LinkText);
         }
 
         public void OpenUnsubscribedReport()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Unsubscribed Report", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Unsubscribed Report", LocateBy.LinkText);
         }
 
         /// <summary>
@@ -796,9 +796,9 @@
             OpenEventDashboardUrl(eventId, sessionId);
             DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             DashboardMgr.DeleteTestReg_ClickDelete();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             DashboardMgr.ReturnToList();
             return sessionId;
         }
@@ -819,24 +819,24 @@
 
         public void CreateNewAccount(string username, string password, string currency)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(TryRegonlineButton, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(TryRegonlineButton, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
             GetStartedMgr.CreateNewAccount(username, password, currency);
         }
 
         public void SkipEmailValidation()
         {
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[text()='Skip']", LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//span[text()='Skip']", LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         #region Helper
         private void LoginIfNecessary()
         {
-            if (WebDriverUtility.DefaultProvider.UrlContainsPath("manager/login.aspx"))
+            if (UIUtil.DefaultProvider.UrlContainsPath("manager/login.aspx"))
             {
                 this.Login();
             }
@@ -880,13 +880,13 @@
             //if there are any registrants with bib numbers, this is where we need to hit the prompt btnOK
 
             this.BibNumberTool.SaveAndClose();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
 
         public void SelectBibNumberWindow()
         {
-            WebDriverUtility.DefaultProvider.SelectWindowByTitle("Bib Numbering Tool");
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SelectWindowByTitle("Bib Numbering Tool");
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
         #endregion
     }

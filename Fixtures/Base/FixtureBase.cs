@@ -68,7 +68,7 @@
 
             if (RequiresBrowser)
             {
-                WebDriverUtility.DefaultProvider.Initialize();
+                UIUtil.DefaultProvider.Initialize();
             }
 
             this.ResetManagers();
@@ -90,11 +90,11 @@
             {
                 if (ConfigReader.DefaultProvider.AllConfiguration.Browsers.DirectStartup)
                 {
-                    WebDriverUtility.DefaultProvider.CaptureScreenshot();
+                    UIUtil.DefaultProvider.CaptureScreenshot();
                 }
 
                 Utility.ThreadSleep(1);
-                WebDriverUtility.DefaultProvider.Exit();
+                UIUtil.DefaultProvider.Exit();
             }
         }
     }

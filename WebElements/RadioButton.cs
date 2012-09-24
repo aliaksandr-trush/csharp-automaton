@@ -11,7 +11,7 @@
         {
             get
             {
-                return WebDriverUtility.DefaultProvider.IsChecked(Locator, TypeOfLocator);
+                return UIUtil.DefaultProvider.IsChecked(Locator, TypeOfLocator);
             }
         }
     }

@@ -6,6 +6,21 @@
 
     public class Event
     {
+        /// <summary>
+        /// Used for event-linked-list, to indicate whether this event object is root node or not
+        /// </summary>
+        public bool Root { get; set; }
+
+        /// <summary>
+        /// Used for event-linked-list, to indicate the preceding node of this event object
+        /// </summary>
+        public Event Preceding { get; set; }
+
+        /// <summary>
+        /// Used for event-linked-list, to indicate the following node of this event object
+        /// </summary>
+        public Event Following { get; set; }
+
         public int Id;
         public string Title;
         public string Shortcut;

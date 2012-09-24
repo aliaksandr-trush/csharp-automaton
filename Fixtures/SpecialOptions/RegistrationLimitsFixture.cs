@@ -355,9 +355,9 @@
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventID, this.sessionID);
             ManagerSiteMgr.DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
         }
 

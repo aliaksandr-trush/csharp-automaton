@@ -10,7 +10,7 @@
 
         public void Type(object value)
         {
-            WebDriverUtility.DefaultProvider.Type(Locator, value, TypeOfLocator);
+            UIUtil.DefaultProvider.Type(Locator, value, TypeOfLocator);
         }
 
         public void SetValue(string value)
@@ -20,7 +20,7 @@
                 throw new InvalidOperationException("Can only set value for element with id locator!");
             }
 
-            WebDriverUtility.DefaultProvider.ExecuteJavaScript(string.Format("document.getElementById('{0}').value='{1}';", this.Locator, value));
+            UIUtil.DefaultProvider.ExecuteJavaScript(string.Format("document.getElementById('{0}').value='{1}';", this.Locator, value));
         }
     }
 }

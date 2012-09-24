@@ -46,78 +46,78 @@
         #region entry
         public void SelectPayBy(PaymentMethodManager.PaymentMethod selection)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//input[@value='{0}']", entryByMethod[selection]), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format("//input[@value='{0}']", entryByMethod[selection]), LocateBy.XPath);
         }
         
         public void SelectCreditCardType(string selection)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(CCTypeLocator, selection, LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText(CCTypeLocator, selection, LocateBy.XPath);
         }
         public void TypeCreditCardNumber(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCNumberLocator, selection, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(CCNumberLocator, selection, LocateBy.Id);
         }
         public void SelectCreditCardExpirationMonth(string selection)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(CCExpMonthLocator, selection, LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText(CCExpMonthLocator, selection, LocateBy.XPath);
         }
         public void SelectCreditCardExpirationYear(string selection)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(CCExpYearLocator, selection, LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText(CCExpYearLocator, selection, LocateBy.XPath);
         }
         public void TypeCreditCardName(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCNameLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCNameLocator, selection, LocateBy.Name);
         }
         public void SelectCreditCardCountry(string selection)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText(CCCountryLocator, selection, LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText(CCCountryLocator, selection, LocateBy.XPath);
         }
         public void TypeCreditCardAddress(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCAddressLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCAddressLocator, selection, LocateBy.Name);
         }
         public void TypeCreditCardAddress2(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCAddress2Locator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCAddress2Locator, selection, LocateBy.Name);
         }
         public void TypeCreditCardCity(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCCityLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCCityLocator, selection, LocateBy.Name);
         }
         public void TypeCreditCardState(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCStateLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCStateLocator, selection, LocateBy.Name);
         }
         public void TypeCreditCardZip(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CCZipLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CCZipLocator, selection, LocateBy.Name);
         }
 
         public void TypeCheckNumber(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CheckNumberLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CheckNumberLocator, selection, LocateBy.Name);
         }
         public void TypePONumber(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(PONumberLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(PONumberLocator, selection, LocateBy.Name);
         }
         public void TypeCostCenterCode(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CostCenterCodeLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CostCenterCodeLocator, selection, LocateBy.Name);
         }
         public void TypeCustomCode(string selection)
         {
-            WebDriverUtility.DefaultProvider.Type(CustomCodeLocator, selection, LocateBy.Name);
+            UIUtil.DefaultProvider.Type(CustomCodeLocator, selection, LocateBy.Name);
         }
 
         public void SaveAndClose()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//input[@type='submit']", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//input[@type='submit']", LocateBy.XPath);
         }
         public void Close()
         {
-            WebDriverUtility.DefaultProvider.ClosePopUpWindow();
+            UIUtil.DefaultProvider.ClosePopUpWindow();
         }
         #endregion
 

@@ -121,8 +121,8 @@
             this.CustomFieldTitle.WaitForDisplay();
             this.CustomFieldTitle.Click();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

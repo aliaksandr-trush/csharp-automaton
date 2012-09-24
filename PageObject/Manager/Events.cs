@@ -28,7 +28,7 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
-            WebDriverUtility.DefaultProvider.HideActiveSpecificFooter(true);
+            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
         public void Folder_Click(string folderName)
@@ -36,7 +36,7 @@
             string folderLocator = string.Format("//div[@id='tree']//span[text()='{0}']", folderName);
             Clickable Folder = new Clickable(folderLocator, LocateBy.XPath);
             Folder.WaitForDisplay();
-            string folderDivClassAttribute = WebDriverUtility.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
+            string folderDivClassAttribute = UIUtil.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
 
             if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
             {
@@ -84,7 +84,7 @@
 
         public static List<EventList_EventRow> GetEventRows(string eventName)
         {
-            List<IWebElement> elements = WebDriverUtility.DefaultProvider.GetElements(
+            List<IWebElement> elements = UIUtil.DefaultProvider.GetElements(
                 string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr/td/a[text()='{0}']/parent::td/parent::tr", eventName),
                 LocateBy.XPath);
 

@@ -104,9 +104,9 @@
                 AccessCode);
         }
 
-        [Test]
-        [Category(Priority.Two)]
-        [Description("426")]
+        ////[Test]
+        ////[Category(Priority.Two)]
+        ////[Description("426")]
         public void RegTypeFeeTest()
         {
             ManagerSiteMgr.OpenLogin();
