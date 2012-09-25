@@ -64,34 +64,42 @@
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.LocationName.Type(details.StartPage.Location);
             }
+
             if (details.StartPage.Phone != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.LocationPhone.Type(details.StartPage.Phone);
             }
+
             if (details.StartPage.Country != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Country_Select(details.StartPage.Country);
             }
+
             if (details.StartPage.Address1 != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddressLineOne.Type(details.StartPage.Address1);
             }
+
             if (details.StartPage.Address2 != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddressLineTwo.Type(details.StartPage.Address2);
             }
+
             if (details.StartPage.City != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.City.Type(details.StartPage.City);
             }
+
             if (details.StartPage.State != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.State.SelectWithText(details.StartPage.State);
             }
+
             if (details.StartPage.Zip != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.PostalCode.Type(details.StartPage.Zip);
             }
+
             if (details.StartPage.ContactInfo != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EditContactInfo_Click();
@@ -100,10 +108,12 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.ContactInfo.Content_Type(details.StartPage.ContactInfo);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.ContactInfo.SaveAndClose_Click();
             }
+
             if (details.StartPage.EventHome != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventHome.Type(details.StartPage.EventHome);
             }
+
             if (details.StartPage.EventLimit != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.LimitRegs_Set(true);
@@ -114,18 +124,21 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EnableWaitlist.Set(details.StartPage.EventLimit.EnableWaitList.Value);
                 }
             }
+
             if (details.StartPage.RegTypes.Count != 0)
             {
                 foreach (RegType regType in details.StartPage.RegTypes)
                 {
                     KeywordProvider.AddRegType.Add_RegType(regType, details);
+                    PageObject.Builder.RegistrationFormPages.RegTypeRow row = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType.Name);
+                    regType.Id = row.RegTypeId;
                 }
             }
 
-            if (details.StartPage.RegTypeDisplayOption.HasValue)
+            if (details.StartPage.Customize_RegType_DisplayOptions.IsCustomized)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayOption_Set(true);
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayFormat.SelectWithValue(CustomStringAttribute.GetCustomString(details.StartPage.RegTypeDisplayOption.Value));
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.CustomizeRegTypeDisplayOptions_Set(true);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDisplayFormat.SelectWithValue(CustomStringAttribute.GetCustomString(details.StartPage.Customize_RegType_DisplayOptions.DisplayOption));
             }
 
             // Set event name and shortcut after regType created to avoid bug 24560
@@ -139,7 +152,7 @@
 
                 if (details.StartPage.Event_Fee.Early_Price != null ||
                     details.StartPage.Event_Fee.Late_Price != null ||
-                    (details.StartPage.Event_Fee.DiscountCodes != null && details.StartPage.Event_Fee.DiscountCodes.Count > 0))
+                    (details.StartPage.Event_Fee.AllCustomCodes != null && details.StartPage.Event_Fee.AllCustomCodes.Count > 0))
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeAdvanced_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AdjustRADWindowPositionAndResize();
@@ -157,9 +170,9 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.NameOnReports.Type(details.StartPage.Event_Fee.Name + "_" + RegType.Default.FeeName);
                     }
 
-                    if (details.StartPage.Event_Fee.DiscountCodes.Count != 0)
+                    if (details.StartPage.Event_Fee.AllCustomCodes.Count != 0)
                     {
-                        foreach (DataCollection.DiscountCode code in details.StartPage.Event_Fee.DiscountCodes)
+                        foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.AllCustomCodes)
                         {
                             KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
                         }

@@ -43,7 +43,7 @@
         {
             try
             {
-                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchItemDetailDialogID);
+                UIUtil.DefaultProvider.SelectPopUpFrameByName(MerchItemDetailDialogID);
             }
             catch
             {
@@ -55,31 +55,31 @@
         public void SaveAndStay()
         {
             this.SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndStay();
+            UIUtil.DefaultProvider.ClickSaveAndStay();
             Utility.ThreadSleep(1);
         }
 
         public void SaveAndClose()
         {
             this.SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
+            UIUtil.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             this.SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickCancel();
+            UIUtil.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ExpandAdvanced()
         {
-            if (WebDriverUtility.DefaultProvider.IsElementHidden(MerchItemAdvancedDIVLocator, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementHidden(MerchItemAdvancedDIVLocator, LocateBy.Id))
             {
                 this.ClickAdvancedHeader();
             }
@@ -87,7 +87,7 @@
 
         public void CollapseAdvanced()
         {
-            if (!WebDriverUtility.DefaultProvider.IsElementHidden(MerchItemAdvancedDIVLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsElementHidden(MerchItemAdvancedDIVLocator, LocateBy.Id))
             {
                 this.ClickAdvancedHeader();
             }
@@ -95,8 +95,8 @@
 
         private void ClickAdvancedHeader()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(MerchItemAdvancedButton, LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(MerchItemAdvancedButton, LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetMinAndMaxLimit(int? minimum, int? maximum)
@@ -107,14 +107,14 @@
 
         public void SetMinimumLimit(int? minimum)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_feeMinAllowed", minimum);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_feeMinAllowed", minimum);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetMaximumLimit(int? maximum)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_feeMaxAllowed", maximum);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_feeMaxAllowed", maximum);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetName(string name)
@@ -126,17 +126,17 @@
 
         public void SetNameOnForm(string name)
         {
-            WebDriverUtility.DefaultProvider.Type(NameOnFormLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(NameOnFormLocator, name, LocateBy.Id);
         }
 
         public void SetNameOnReceipt(string name)
         {
-            WebDriverUtility.DefaultProvider.Type(NameOnReceiptLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(NameOnReceiptLocator, name, LocateBy.Id);
         }
 
         public void SetNameOnReports(string name)
         {
-            WebDriverUtility.DefaultProvider.Type(NameOnReportsLocator, name, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(NameOnReportsLocator, name, LocateBy.Id);
         }
 
         public void SetType(MerchandiseType merchType)
@@ -156,7 +156,7 @@
                     break;
             }
 
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_feeAmountTypeId", typeLabel, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_cphDialog_feeAmountTypeId", typeLabel, LocateBy.Id);
         }
 
         public void SetMerchItemPrice(MerchandiseType type, double? fee, double? minFee, double? maxFee)
@@ -179,7 +179,7 @@
         public void SetFixedPrice(double? price)
         {
             string feeTxtboxLocator = "ctl00_cphDialog_feeAmount";
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(feeTxtboxLocator, Convert.ToString(price));
+            UIUtil.DefaultProvider.TypeRADNumericById(feeTxtboxLocator, Convert.ToString(price));
         }
 
         public void SetVariableMinMax(double? min, double? max)
@@ -191,26 +191,26 @@
         public void SetVariableMinimum(double? min)
         {
             string minFeeTxtboxLocator = "ctl00_cphDialog_feeMinVarAmount";
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(minFeeTxtboxLocator, Convert.ToString(min));
+            UIUtil.DefaultProvider.TypeRADNumericById(minFeeTxtboxLocator, Convert.ToString(min));
         }
 
         public void SetVariableMaximum(double? max)
         {
             string maxFeeTxtboxLocator = "ctl00_cphDialog_feeMaxVarAmount";
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(maxFeeTxtboxLocator, Convert.ToString(max));
+            UIUtil.DefaultProvider.TypeRADNumericById(maxFeeTxtboxLocator, Convert.ToString(max));
         }
 
         public void SetPercentage(double? percent)
         {
             string feePercentageTxtboxLocator = "ctl00_cphDialog_feePct";
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(feePercentageTxtboxLocator, Convert.ToString(percent));
+            UIUtil.DefaultProvider.TypeRADNumericById(feePercentageTxtboxLocator, Convert.ToString(percent));
         }
 
         public void ClickAddMerchMultiChoiceItemLink()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.Id);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(MerchandiseMultiChoiceItemManager.FrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(MerchandiseMultiChoiceItemManager.FrameID);
         }
 
         public void AddMerchandiseMultipleChoiceItem(string name, int? limit)
@@ -226,12 +226,12 @@
 
         public void SetShowDate(DateTime showDate)
         {
-            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cphDialog_feeShowDate", showDate);
+            UIUtil.DefaultProvider.SetDateTimeById("ctl00_cphDialog_feeShowDate", showDate);
         }
 
         public void SetHideDate(DateTime hideDate)
         {
-            WebDriverUtility.DefaultProvider.SetDateTimeById("ctl00_cphDialog_feeHideDate", hideDate);
+            UIUtil.DefaultProvider.SetDateTimeById("ctl00_cphDialog_feeHideDate", hideDate);
         }
 
         public void SetShowAndHideDate(DateTime showDate, DateTime hideDate)
@@ -242,7 +242,7 @@
 
         public void SetMerchVisibility(bool isVisible)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_feeVisible", isVisible, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cphDialog_feeVisible", isVisible, LocateBy.Id);
         }
 
         #endregion

@@ -2,7 +2,7 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class Label : WebElement
+    public class Label : ElementBase
     {
         public Label(string locator, LocateBy locatorType)
             : base(locator, locatorType) { }

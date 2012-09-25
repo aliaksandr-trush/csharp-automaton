@@ -147,11 +147,11 @@
             agenda1.Price = 50;
             AgendaItem_CheckBox agenda2 = new AgendaItem_CheckBox("agenda2");
             agenda2.Price = 60;
-            DiscountCode discount = new DiscountCode("discount");
+            CustomFieldCode discount = new CustomFieldCode("discount");
             discount.Amount = 10;
             discount.CodeDirection = FormData.ChangePriceDirection.Decrease;
             discount.CodeKind = FormData.ChangeType.Percent;
-            discount.CodeType = FormData.DiscountCodeType.DiscountCode;
+            discount.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             agenda2.DiscountCodes.Add(discount);
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
@@ -173,7 +173,7 @@
             ((WebElements.CheckBox)(row1.AgendaType)).Set(false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
             Assert.AreEqual(agenda2.Price, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
-            row2.DiscountCodeInput.Type(discount.Code);
+            row2.DiscountCodeInput.Type(discount.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
             Assert.AreEqual(54, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
         }

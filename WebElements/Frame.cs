@@ -2,7 +2,7 @@
 {
     using RegOnline.RegressionTest.UIUtility;
 
-    public class Frame : WebElement
+    public class Frame : ElementBase
     {
         public string Name;
         public int Index;
@@ -23,32 +23,32 @@
 
         public void SelectByName()
         {
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Name);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(Name);
         }
 
         public void SelectById()
         {
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameById(Id);
+            UIUtil.DefaultProvider.SelectPopUpFrameById(Id);
         }
 
         public void SelectByIndex()
         {
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(Index);
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(Index);
         }
 
         public void SwitchToMain()
         {
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         public void WaitForAJAX()
         {
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void WaitForLoad()
         {
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

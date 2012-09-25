@@ -9,14 +9,12 @@
         public TaxRateDefine(string name) : base(name) { }
 
         #region WebElements
-        public TextBox TaxOneCaption = new TextBox("ctl00_cphDialog_ucTaxRates_txtEventsTaxCaption1", LocateBy.Id);
-        public TextBox TaxOneRate = new TextBox("ctl00_cphDialog_ucTaxRates_txtEventsTaxRate1_text", LocateBy.Id);
-        public TextBox TaxTwoCaption = new TextBox("ctl00_cphDialog_ucTaxRates_txtEventsTaxCaption2", LocateBy.Id);
-        public TextBox TaxTwoRate = new TextBox("ctl00_cphDialog_ucTaxRates_txtEventsTaxRate2_text", LocateBy.Id);
+        public Input TaxOneCaption = new Input("ctl00_cphDialog_ucTaxRates_txtEventsTaxCaption1", LocateBy.Id);
+        public Input TaxOneRate = new Input("ctl00_cphDialog_ucTaxRates_txtEventsTaxRate1_text", LocateBy.Id);
+        public Input TaxTwoCaption = new Input("ctl00_cphDialog_ucTaxRates_txtEventsTaxCaption2", LocateBy.Id);
+        public Input TaxTwoRate = new Input("ctl00_cphDialog_ucTaxRates_txtEventsTaxRate2_text", LocateBy.Id);
         public CheckBox ApplyToSelectedCountry = new CheckBox("ctl00_cphDialog_ucTaxRates_chkEventsApplyTaxesCountries", LocateBy.Id);
         #endregion
-
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
         public CheckBox ApplyToCountry(DataCollection.FormData.Countries country)
         {
@@ -27,7 +25,7 @@
         #region Basic Actions
         public void SaveAndStay_Click()
         {
-            popupFrameHelper.SaveAndStay_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndStay_Click();
         }
 
         public void ApplyToSelectedCountry_Set(bool check)
@@ -40,13 +38,13 @@
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
         #endregion

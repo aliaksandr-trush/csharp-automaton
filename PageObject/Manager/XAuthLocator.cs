@@ -7,19 +7,19 @@
     {
         public RadioButton XAuthRadio = new RadioButton("ctl00_cphDialog_xAuth_rdoXAuth", LocateBy.Id);
 
-        public ButtonOrLink Test;
-        public ButtonOrLink OK;
-        public TextBox ServiceEndpointURL;
-        public TextBox MessageToRegistration;
-        public TextBox TestEmail;
-        public TextBox TestUserName;
-        public TextBox TestPassword;
-        public TextBox DescriptionForIdentifer;
-        public TextBox ForgetPasswordUrl;
+        public Clickable Test;
+        public Clickable OK;
+        public Input ServiceEndpointURL;
+        public Input MessageToRegistration;
+        public Input TestEmail;
+        public Input TestUserName;
+        public Input TestPassword;
+        public Input DescriptionForIdentifer;
+        public Input ForgetPasswordUrl;
         public Label TestSuccessMessage;
         public CheckBox ValidateMemberRequirePassword;
         public RadioButton ValidateMemberByUserName;
         public RadioButton ValidateMemberByEmail;
-        public WebElement ErrorDIVLocator;
+        public ElementBase ErrorDIVLocator;
     }
 }

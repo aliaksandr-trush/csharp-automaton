@@ -5,11 +5,11 @@
 
     public class RegType
     {
-        public int RegTypeId;
-        public string RegTypeName;
+        public int Id;
+        public string Name;
         public string FeeName;
         public double? Price;
-        public List<DiscountCode> DiscountCode = new List<DiscountCode>();
+        public List<CustomFieldCode> AllCustomCodes = new List<CustomFieldCode>();
         public bool? RequireDC;
         public EarlyPrice EarlyPrice;
         public LatePrice LatePrice;
@@ -41,7 +41,7 @@
 
         public RegType(string regTypeName)
         {
-            this.RegTypeName = regTypeName;
+            this.Name = regTypeName;
         }
     }
 

@@ -6,6 +6,21 @@
 
     public class Event
     {
+        /// <summary>
+        /// Used for event-linked-list, to indicate whether this event object is root node or not
+        /// </summary>
+        public bool Root { get; set; }
+
+        /// <summary>
+        /// Used for event-linked-list, to indicate the preceding node of this event object
+        /// </summary>
+        public Event Preceding { get; set; }
+
+        /// <summary>
+        /// Used for event-linked-list, to indicate the following node of this event object
+        /// </summary>
+        public Event Following { get; set; }
+
         public int Id;
         public string Title;
         public string Shortcut;
@@ -43,12 +58,12 @@
         public string Name { get; set; }
         public EarlyPrice Early_Price { get; set; }
         public LatePrice Late_Price { get; set; }
-        public List<DiscountCode> DiscountCodes { get; set; }
+        public List<CustomFieldCode> AllCustomCodes { get; set; }
         public bool RequireDC { get; set; }
 
         public EventFee()
         {
-            this.DiscountCodes = new List<DiscountCode>();
+            this.AllCustomCodes = new List<CustomFieldCode>();
         }
     }
 
@@ -155,7 +170,7 @@
         public bool? ForceSelectSameRegType;
         public bool? AllowGroupReg;
         public bool? AllowChangeRegType;
-        public FormData.RegTypeDisplayOption? RegTypeDisplayOption;
+        public CustomizeRegTypeDisplayOptions Customize_RegType_DisplayOptions { get; set; }
         public DateTime? StartDate;
         public DateTime? EndDate;
         public DateTime? StartTime;
@@ -175,6 +190,23 @@
         public EventAdvancedSettings AdvancedSettings;
 
         public List<RegType> RegTypes = new List<RegType>();
+
+        public StartPage()
+        {
+            this.Customize_RegType_DisplayOptions = new CustomizeRegTypeDisplayOptions();
+        }
+    }
+
+    public class CustomizeRegTypeDisplayOptions
+    {
+        public bool IsCustomized { get; set; }
+        public FormData.RegTypeDisplayOption DisplayOption { get; set; }
+
+        public CustomizeRegTypeDisplayOptions()
+        {
+            this.IsCustomized = false;
+            this.DisplayOption = FormData.RegTypeDisplayOption.RadioButton;
+        }
     }
 
     public class PersonalInfoPage

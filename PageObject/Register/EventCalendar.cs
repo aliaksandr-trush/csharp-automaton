@@ -14,9 +14,9 @@
         public RadioButton ViewByMonth = new RadioButton("viewList_2", UIUtility.LocateBy.Id);
         public RadioButton ViewByDay = new RadioButton("viewList_3", UIUtility.LocateBy.Id);
         public RadioButton ViewByCategory = new RadioButton("viewList_4", UIUtility.LocateBy.Id);
-        public ButtonOrLink ShoppingCart_RegisterButtonOne = new ButtonOrLink("btnRegister", UIUtility.LocateBy.Id);
+        public Clickable ShoppingCart_RegisterButtonOne = new Clickable("btnRegister", UIUtility.LocateBy.Id);
 
-        private ButtonOrLink Register;
+        private Clickable Register;
 
         public void SelectView(DataCollection.FormData.EventCalendarView view)
         {
@@ -59,7 +59,7 @@
 
         public void ClickToRegister(DataCollection.Event evt)
         {
-            this.Register = new ButtonOrLink(
+            this.Register = new Clickable(
                 string.Format("//a[@href='{0}?{1}']", ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, evt.Id), 
                 UIUtility.LocateBy.XPath);
 
@@ -76,7 +76,7 @@
                 {
                     DataCollection.AgendaResponse re = resp as DataCollection.AgendaResponse;
 
-                    ButtonOrLink addToCart = new ButtonOrLink(
+                    Clickable addToCart = new Clickable(
                         string.Format("//a[contains(text(),'{0}')]/../following-sibling::td/a", re.AgendaItem.NameOnForm), 
                         UIUtility.LocateBy.XPath);
 

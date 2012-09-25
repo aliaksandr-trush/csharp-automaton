@@ -28,8 +28,8 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
 
             #region RegTypeBasics
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType.RegTypeName);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType.RegTypeName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType.Name);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType.Name);
 
             if (regType.RegTypeLimit != null)
             {
@@ -78,7 +78,7 @@
             }
             #endregion
 
-            if ((regType.DiscountCode.Count != 0) || (regType.EarlyPrice != null) ||
+            if ((regType.AllCustomCodes.Count != 0) || (regType.EarlyPrice != null) ||
                 (regType.LatePrice != null) || (evt.TaxRateOne != null) ||
                 (evt.TaxRateTwo != null))
             {
@@ -93,8 +93,8 @@
                 }
                 else
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.Name + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.Name + "_" + RegType.Default.FeeName);
                 }
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.StandardPrice.Type(regType.Price);
@@ -113,14 +113,14 @@
                 #endregion
 
                 #region AddDiscountCode
-                if (regType.DiscountCode.Count != 0)
+                if (regType.AllCustomCodes.Count != 0)
                 {
                     if (!PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddDiscountCode.IsPresent)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
-                    foreach (DiscountCode dc in regType.DiscountCode)
+                    foreach (CustomFieldCode dc in regType.AllCustomCodes)
                     {
                         KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.RegType);
                     }

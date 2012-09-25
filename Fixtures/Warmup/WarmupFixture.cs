@@ -19,13 +19,13 @@
         [Test]
         public void WarmUp()
         {
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(4));
+            UIUtil.DefaultProvider.SetTimeoutSpan(TimeSpan.FromMinutes(4));
             this.TouchManagerSite();
             this.TouchBuilderSite();
             this.TouchRegisterSite();
             this.TouchDashboardAndReportSite();
             this.TouchRegTransferPage();
-            WebDriverUtility.DefaultProvider.SetTimeoutSpan();
+            UIUtil.DefaultProvider.SetTimeoutSpan();
         }
 
         [Step]
@@ -85,7 +85,7 @@
         {
             string url__Format_regTransferPage = "{0}reports/RegTransfer.aspx?EventSessionId={1}&EventId={2}&RegisterId=0";
 
-            WebDriverUtility.DefaultProvider.OpenUrl(string.Format(
+            UIUtil.DefaultProvider.OpenUrl(string.Format(
                 url__Format_regTransferPage, 
                 Configuration.ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps, 
                 this.eventSessionId, 

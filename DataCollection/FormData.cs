@@ -21,7 +21,7 @@
             Group
         }
 
-        public enum DiscountCodeType
+        public enum CustomFieldCodeType
         {
             DiscountCode,
             AccessCode

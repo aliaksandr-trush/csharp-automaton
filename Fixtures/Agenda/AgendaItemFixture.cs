@@ -190,9 +190,9 @@
             ManagerSiteMgr.OpenEventDashboard(eventID);
             ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
             ManagerSiteMgr.DashboardMgr.ClickOption(DashboardManager.EventRegistrationFunction.DeleteTestRegistrations);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("plain");
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
         }
 
@@ -381,7 +381,7 @@
                 StringEnum.GetStringValue(CustomField.AgendaPredefinedDisagree));
 
             RegisterMgr.Continue();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader))); 
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader))); 
             RegisterMgr.VerifyAgendaItem(StringEnum.GetStringValue(CustomField.AgendaParentCheckBox), true);
             RegisterMgr.VerifyAgendaItem(StringEnum.GetStringValue(CustomField.AgendaAlwaysSelected), true);
             RegisterMgr.VerifyAgendaItem(StringEnum.GetStringValue(CustomField.AgendaRadioButtons), true);
@@ -436,7 +436,7 @@
             RegisterMgr.Continue();
             this.EnterPersonalInfo("SecondTest", MiddleName, LastName);
             RegisterMgr.Continue();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader)));
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader)));
             RegisterMgr.Continue();
             RegisterMgr.FinishRegistration();
             RegisterMgr.ConfirmRegistration();
@@ -450,7 +450,7 @@
             this.EnterPersonalInfo("ThirdTest", MiddleName, LastName);
             RegisterMgr.SetCustomFieldCheckBox(StringEnum.GetStringValue(CustomField.PICheckbox), true);
             RegisterMgr.Continue();
-            Assert.True(WebDriverUtility.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader)));
+            Assert.True(UIUtil.DefaultProvider.IsTextPresent(StringEnum.GetStringValue(CustomField.AgendaSectionHeader)));
             RegisterMgr.VerifyAgendaItem(StringEnum.GetStringValue(CustomField.AgendaParentCheckBox), true);
             RegisterMgr.SetCustomFieldCheckBox(StringEnum.GetStringValue(CustomField.AgendaParentCheckBox), true);
 
@@ -527,7 +527,7 @@
 
                 VerifyTool.VerifyValue(
                     "This item is full. To add yourself to the waitlist, select the item.",
-                    WebDriverUtility.DefaultProvider.GetText(id + "/../..//span[@class='wlist']", LocateBy.XPath), 
+                    UIUtil.DefaultProvider.GetText(id + "/../..//span[@class='wlist']", LocateBy.XPath), 
                     "Error Message: {0}");
 
             }
@@ -754,16 +754,16 @@
         {
             string locator_XPath = string.Format(AgendaReportValueLocator, agendaItemName);
 
-            locator_XPath = WebDriverUtility.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
+            locator_XPath = UIUtil.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
 
             string[] valueLocator = locator_XPath.Split(new char[] { '~' });
             locator_XPath = string.Format(AgendaReportCountLocator, valueLocator[1]);
-            int xPathCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(locator_XPath);
+            int xPathCount = UIUtil.DefaultProvider.GetXPathCountByXPath(locator_XPath);
             string[] results = new string[xPathCount];
 
             for (int i = 0; i < xPathCount; i++)
             {
-                results[i] = WebDriverUtility.DefaultProvider.GetText(string.Format("//*[contains(text(), '{0} (')]/../../following-sibling::tr[" + (i + 1) + "]//a/b", agendaItemName), LocateBy.XPath);
+                results[i] = UIUtil.DefaultProvider.GetText(string.Format("//*[contains(text(), '{0} (')]/../../following-sibling::tr[" + (i + 1) + "]//a/b", agendaItemName), LocateBy.XPath);
                 if (results[i] == regId)
                 {
                     return true;
@@ -775,15 +775,15 @@
         private bool VerifyRegIdPresentUnderAgendaItemWaitlist(string regId, string agendaItemName)
         {
             string locator_XPath = string.Format(AgendaReportValueLocator, agendaItemName);
-            locator_XPath = WebDriverUtility.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
+            locator_XPath = UIUtil.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
             string[] valueLocator = locator_XPath.Split(new char[] { '~' });
             locator_XPath = string.Format(AgendaWaitlistReportCountLocator, valueLocator[1]);
-            int xPathCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(locator_XPath);
+            int xPathCount = UIUtil.DefaultProvider.GetXPathCountByXPath(locator_XPath);
             string[] results = new string[xPathCount];
 
             for (int i = 0; i < xPathCount; i++)
             {
-                results[i] = WebDriverUtility.DefaultProvider.GetText(string.Format("//*[contains(text(), '{0}')]/../../following-sibling::tr[" + (i + 1) + "]//a/b", agendaItemName), LocateBy.XPath);
+                results[i] = UIUtil.DefaultProvider.GetText(string.Format("//*[contains(text(), '{0}')]/../../following-sibling::tr[" + (i + 1) + "]//a/b", agendaItemName), LocateBy.XPath);
                 
                 if (results[i] == regId)
                 {
@@ -796,13 +796,13 @@
         private void MoveAttendeeToTopOfAgendaWaitlist(string regId, string regId2, string agendaItemName, int offsetMove)
         {
             string locator_XPath = string.Format(AgendaReportValueLocator, agendaItemName);
-            locator_XPath = WebDriverUtility.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
+            locator_XPath = UIUtil.DefaultProvider.GetAttribute(locator_XPath, "value", LocateBy.XPath);
             string[] valueLocator = locator_XPath.Split(new char[] { '~' });
             locator_XPath = string.Format(AgendaWaitlistReportCountLocator, valueLocator[1]);
-            int xPathCount = WebDriverUtility.DefaultProvider.GetXPathCountByXPath(locator_XPath);
+            int xPathCount = UIUtil.DefaultProvider.GetXPathCountByXPath(locator_XPath);
             string startPoint = string.Format(AgendaWaitListDragAndDropLocator, valueLocator[1], regId/*, offsetMove*/);
             string endPoint = string.Format(AgendaWaitListDragAndDropLocator, valueLocator[1], regId2/*, offsetMove*/);
-            WebDriverUtility.DefaultProvider.DragAndDrop(startPoint, endPoint);
+            UIUtil.DefaultProvider.DragAndDrop(startPoint, endPoint);
         }
 
         private void VerifyAgendaReport(ConfirmedRegs regs)
@@ -898,8 +898,8 @@
 
         private void CloseAgendaReport()
         {
-            WebDriverUtility.DefaultProvider.CloseWindow();
-            WebDriverUtility.DefaultProvider.SelectOriginalWindow();
+            UIUtil.DefaultProvider.CloseWindow();
+            UIUtil.DefaultProvider.SelectOriginalWindow();
         }
         #endregion
 

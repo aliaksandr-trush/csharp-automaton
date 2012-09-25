@@ -62,10 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Browser.cs" />
+    <Compile Include="BrowserUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIUtilityHelper.cs" />
-    <Compile Include="WebDriverUtility.cs" />
+    <Compile Include="UIUtilHelper.cs" />
+    <Compile Include="UIUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Attributes\Attributes.csproj">

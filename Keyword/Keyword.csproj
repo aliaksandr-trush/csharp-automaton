@@ -51,6 +51,7 @@
     <Compile Include="AddAgendaItem.cs" />
     <Compile Include="AddAttendeeDirectory.cs" />
     <Compile Include="AddGroupDiscount.cs" />
+    <Compile Include="AddHtmlButton.cs" />
     <Compile Include="BackendUpdate.cs" />
     <Compile Include="CalculateFee.cs" />
     <Compile Include="CustomFieldCreation.cs" />

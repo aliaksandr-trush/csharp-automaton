@@ -142,7 +142,7 @@
 			// Press Send
 			EmailMgr.EmailWizardFinishClick();
 
-			Assert.IsFalse(WebDriverUtility.DefaultProvider.IsTextPresent("Job not yet scheduled"));
+			Assert.IsFalse(UIUtil.DefaultProvider.IsTextPresent("Job not yet scheduled"));
 		}
 
 		[Test]

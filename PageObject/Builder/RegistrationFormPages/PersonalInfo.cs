@@ -8,12 +8,12 @@
 
     public class PersonalInfo : Window
     {
-        public ButtonOrLink PersonalInfoPageHeader = new ButtonOrLink("//*[text()='Add Personal Information Page Header']", LocateBy.XPath);
+        public Clickable PersonalInfoPageHeader = new Clickable("//*[text()='Add Personal Information Page Header']", LocateBy.XPath);
         public HtmlEditor PersonalInfoPageHeaderEditor = new HtmlEditor("dialog");
-        public ButtonOrLink PersonalInfoPageFooter = new ButtonOrLink("//*[text()='Add Personal Information Page Footer']", LocateBy.XPath);
+        public Clickable PersonalInfoPageFooter = new Clickable("//*[text()='Add Personal Information Page Footer']", LocateBy.XPath);
         public HtmlEditor PersonalInfoPageFooterEditor = new HtmlEditor("dialog");
-        public ButtonOrLink EmptyAddCustomField = new ButtonOrLink("ctl00_cph_grdCustomFieldPersonal_lnkEmptyAdd", LocateBy.Id);
-        public ButtonOrLink AddCustomField = new ButtonOrLink("ctl00_cph_grdCustomFieldPersonal_hlAddNew", LocateBy.Id);
+        public Clickable EmptyAddCustomField = new Clickable("ctl00_cph_grdCustomFieldPersonal_lnkEmptyAdd", LocateBy.Id);
+        public Clickable AddCustomField = new Clickable("ctl00_cph_grdCustomFieldPersonal_hlAddNew", LocateBy.Id);
 
         public void SetPersonalInfoFieldVisible(FormData.PersonalInfoField field, bool checkVisibleOption)
         {
@@ -98,13 +98,13 @@
     {
         public int CustomFieldId;
         public string CustomFIeldName;
-        public ButtonOrLink CustomFieldTitle;
+        public Clickable CustomFieldTitle;
 
         public PICustomFieldRow(string name)
         {
             this.CustomFIeldName = name;
 
-            this.CustomFieldTitle = new ButtonOrLink(
+            this.CustomFieldTitle = new Clickable(
                 string.Format("//table[@id='ctl00_cph_grdCustomFieldPersonal_tblGrid']//a[text()='{0}']", this.CustomFIeldName),
                 LocateBy.XPath);
 
@@ -121,8 +121,8 @@
             this.CustomFieldTitle.WaitForDisplay();
             this.CustomFieldTitle.Click();
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
     }
 }

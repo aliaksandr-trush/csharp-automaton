@@ -241,12 +241,12 @@
             RegType regType1 = new RegType("First");
             RegType regType2 = new RegType("Second");
             regType2.Price = 50;
-            DiscountCode dc = new DiscountCode("CodeName");
-            dc.CodeType = FormData.DiscountCodeType.DiscountCode;
+            CustomFieldCode dc = new CustomFieldCode("CodeName");
+            dc.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc.Amount = 10;
             dc.CodeKind = FormData.ChangeType.Percent;
-            regType2.DiscountCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
@@ -279,12 +279,12 @@
             RegType regType1 = new RegType("First");
             RegType regType2 = new RegType("Second");
             regType2.Price = 50;
-            DiscountCode dc = new DiscountCode("CodeName");
-            dc.CodeType = FormData.DiscountCodeType.DiscountCode;
+            CustomFieldCode dc = new CustomFieldCode("CodeName");
+            dc.CodeType = FormData.CustomFieldCodeType.DiscountCode;
             dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc.Amount = 10;
             dc.CodeKind = FormData.ChangeType.FixedAmount;
-            regType2.DiscountCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType1);
             eventWithFeeDCDollar.StartPage.RegTypes.Add(regType2);
 
@@ -298,19 +298,19 @@
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
         }
 
-        public Registrant RegistrationEventFeeCodeRequired(FormData.DiscountCodeType type)
+        public Registrant RegistrationEventFeeCodeRequired(FormData.CustomFieldCodeType type)
         {
             Event eventFeeDCRequired = new Event(string.Format("RI-SingleRegistrationEventFee{0}Required", type.ToString()));
             RegType regType1 = new RegType("First");
             RegType regType2 = new RegType("Second");
             regType2.Price = 50;
-            DiscountCode dc = new DiscountCode("CodeName");
+            CustomFieldCode dc = new CustomFieldCode("CodeName");
             dc.CodeType = type;
             dc.CodeDirection = FormData.ChangePriceDirection.Decrease;
             dc.Amount = 10;
             dc.Limit = 1;
             dc.CodeKind = FormData.ChangeType.FixedAmount;
-            regType2.DiscountCode.Add(dc);
+            regType2.AllCustomCodes.Add(dc);
             regType2.RequireDC = true;
             PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
             eventFeeDCRequired.StartPage.RegTypes.Add(regType1);
@@ -339,16 +339,16 @@
         [Description("1300")]
         public void RegistrationEventFeeDCRequiredLimit()
         {
-            Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.DiscountCode);
+            Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.CustomFieldCodeType.DiscountCode);
 
-            DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
+            CustomFieldCode discountCode = new DataCollection.CustomFieldCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
             registrantWhenFull.EventFee_Response.Code = discountCode;
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.CodeString)));
         }
 
         [Test]
@@ -356,16 +356,16 @@
         [Description("1301")]
         public void RegistrationEventFeeACRequiredLimit()
         {
-            Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.DiscountCodeType.AccessCode);
+            Registrant reg = this.RegistrationEventFeeCodeRequired(FormData.CustomFieldCodeType.AccessCode);
 
-            DiscountCode discountCode = new DataCollection.DiscountCode("CodeName");
+            CustomFieldCode discountCode = new DataCollection.CustomFieldCode("CodeName");
             Registrant registrantWhenFull = new Registrant(reg.Event);
             registrantWhenFull.EventFee_Response = new EventFeeResponse(reg.Event.StartPage.RegTypes[1]);
             registrantWhenFull.EventFee_Response.Code = discountCode;
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.CodeString)));
         }
 
         [Test]

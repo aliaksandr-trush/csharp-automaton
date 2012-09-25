@@ -12,8 +12,8 @@
         [Test]
         public void CheckinXiami()
         {
-            WebDriverUtility.DefaultProvider.OpenUrl("www.xiami.com");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("top_login", LocateBy.Id);
+            UIUtil.DefaultProvider.OpenUrl("www.xiami.com");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("top_login", LocateBy.Id);
         }
     }
 }

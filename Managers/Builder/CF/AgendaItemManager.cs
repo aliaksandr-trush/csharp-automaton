@@ -253,30 +253,30 @@
 
         public void ClickSaveItem()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Save Item", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Save Item", LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickSaveAndNew()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Save & New", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Save & New", LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickCancel()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("Cancel", LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickAddPredefinedMultiChoiceItem()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddCommonlyUsedItemsLinkLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddCommonlyUsedItemsLinkLocator, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(this.PredefinedMultiChoiceItemMgr.FrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(this.PredefinedMultiChoiceItemMgr.FrameID);
         }
 
         public void AddPredefinedMultiChoiceItem(PredifinedMultiChoiceItemManagerBase.PredefinedItemType type)
@@ -284,15 +284,15 @@
             this.ClickAddPredefinedMultiChoiceItem();
             this.PredefinedMultiChoiceItemMgr.ClickPredefinedItem(type);
             this.PredefinedMultiChoiceItemMgr.SaveAndClose();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickAddMultiChoiceItem()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.LinkText);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(AddMultiChoiceItemLinkLocator, LocateBy.LinkText);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(this.MultiChoiceItemMgr.FrameID);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(this.MultiChoiceItemMgr.FrameID);
         }
 
         public void AddMultiChoiceItems(List<Custom_Field_List_Item> lst)
@@ -326,8 +326,8 @@
             this.ClickAddMultiChoiceItem();
             this.MultiChoiceItemMgr.SetMultiChoiceItem(name, price);
             this.MultiChoiceItemMgr.SaveAndClose();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void SetType(AgendaItemType type)
@@ -377,33 +377,33 @@
         #region Methods only used in Agenda
         public void SetVariableMinMax(int minValue, int maxValue)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cph_ucCF_mipPrc_rntMinVarAmount", minValue);
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount", maxValue);
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cph_ucCF_mipPrc_rntMinVarAmount", minValue);
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cph_ucCF_mipPrc_rntMaxVarAmount", maxValue);
         }
 
         public void SetStartEndDateTime(DateTime startDate, DateTime endDate)
         {
-            WebDriverUtility.DefaultProvider.WaitForElementPresent("ctl00_cph_ucCF_dtpSD_dateInput_text", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetDatesTimesForDatePickerWrapper(startDate, endDate);
+            UIUtil.DefaultProvider.WaitForElementPresent("ctl00_cph_ucCF_dtpSD_dateInput_text", LocateBy.Id);
+            UIUtil.DefaultProvider.SetDatesTimesForDatePickerWrapper(startDate, endDate);
         }
 
         public void SetLocation(string location)
         {
-            WebDriverUtility.DefaultProvider.Type("ctl00_cph_ucCF_txtRoom", location, LocateBy.Id);
+            UIUtil.DefaultProvider.Type("ctl00_cph_ucCF_txtRoom", location, LocateBy.Id);
         }
 
         public void OpenAgendaInListByOrder(int order)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//tr[@id='sdgr_" + order.ToString() + "']/td[1]", LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//tr[@id='sdgr_" + order.ToString() + "']/td[1]", LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void OpenAgendaByName(string name)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format("//span[text()='{0}']", name), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format("//span[text()='{0}']", name), LocateBy.XPath);
             Utility.ThreadSleep(1);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         /// <summary>
@@ -413,67 +413,67 @@
         /// <returns></returns>
         public int GetAgendaItemID(int orderInList)
         {
-            string id = WebDriverUtility.DefaultProvider.GetAttribute("//tr[@id='sdgr_" + orderInList.ToString() + "']/td[1]", "onclick", LocateBy.XPath).Split(new char[] { '\'' }, 3)[1];
+            string id = UIUtil.DefaultProvider.GetAttribute("//tr[@id='sdgr_" + orderInList.ToString() + "']/td[1]", "onclick", LocateBy.XPath).Split(new char[] { '\'' }, 3)[1];
             return Convert.ToInt32(id);
         }
 
         public int GetAgendaItemID(string name)
         {
-            string id = WebDriverUtility.DefaultProvider.GetAttribute("//table[@id='listGrid']/tbody/tr/td/span[text()='" + name + "']/..", "onclick", LocateBy.XPath).Split(new char[] { '\'' }, 3)[1];
+            string id = UIUtil.DefaultProvider.GetAttribute("//table[@id='listGrid']/tbody/tr/td/span[text()='" + name + "']/..", "onclick", LocateBy.XPath).Split(new char[] { '\'' }, 3)[1];
             return Convert.ToInt32(id);
         }
 
         public int GetLastAgendaItemOrder()
         {
             int order = -1;
-            order = order + WebDriverUtility.DefaultProvider.GetXPathCountByXPath("//table[@id = 'listGrid']/tbody/tr");
+            order = order + UIUtil.DefaultProvider.GetXPathCountByXPath("//table[@id = 'listGrid']/tbody/tr");
             return order;
         }
 
         public void ClickDeleteRadioButtonAllItems()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("aDeleteAll", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.VerifyConfirmation("Are you sure you want to delete all list items?\r\n( Any items already associated with registrations WILL NOT be deleted.)");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("aDeleteAll", LocateBy.Id);
+            UIUtil.DefaultProvider.VerifyConfirmation("Are you sure you want to delete all list items?\r\n( Any items already associated with registrations WILL NOT be deleted.)");
         }
 
         public void ClickOkOnDeleteRadioButtonAllMultipleChoiceItemsConfirmation()
         {
-            WebDriverUtility.DefaultProvider.GetConfirmation();
+            UIUtil.DefaultProvider.GetConfirmation();
         }
 
         public void DoNotAllowSelectionOverlappingAgendaItems(bool allow)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(OverlappingAgendaItemsLocator, allow, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(OverlappingAgendaItemsLocator, allow, LocateBy.Id);
         }
 
         public void SetLimit(int limit)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(SpacesAvailableLocator, limit);
+            UIUtil.DefaultProvider.TypeRADNumericById(SpacesAvailableLocator, limit);
         }
 
         public void UpdateLimit(int limit)
         {
-            WebDriverUtility.DefaultProvider.TypeRADNumericById(SpacesAvailableLocator, limit);
+            UIUtil.DefaultProvider.TypeRADNumericById(SpacesAvailableLocator, limit);
         }
 
         public void SetWaitlist(int limit)
         {
             this.SetLimit(limit);
             this.ExpandCapacityOptions();
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ActivateWaitlist, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(ActivateWaitlist, LocateBy.Id);
             Utility.ThreadSleep(0.5);
         }
 
         private void ClickCapacityOptions()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(LimitOptionsLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(LimitOptionsLocator, LocateBy.Id);
             Utility.ThreadSleep(0.5);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ExpandCapacityOptions()
         {
-            if (WebDriverUtility.DefaultProvider.IsElementHidden(CapacityOptionDIVLocator, LocateBy.Id))
+            if (UIUtil.DefaultProvider.IsElementHidden(CapacityOptionDIVLocator, LocateBy.Id))
             {
                 this.ClickCapacityOptions();
             }
@@ -481,7 +481,7 @@
 
         public void CollapseCapacityOptions()
         {
-            if (!WebDriverUtility.DefaultProvider.IsElementHidden(CapacityOptionDIVLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsElementHidden(CapacityOptionDIVLocator, LocateBy.Id))
             {
                 this.ClickCapacityOptions();
             }
@@ -489,14 +489,14 @@
 
         public void PrePopulateAgendaGroupSelections(bool check)
         {
-            WebDriverUtility.DefaultProvider.ExpandAdvanced();
-            WebDriverUtility.DefaultProvider.SetCheckbox(PrePopAgendItemLocator, check, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.ExpandAdvanced();
+            UIUtil.DefaultProvider.SetCheckbox(PrePopAgendItemLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void AllowAgendaGroupSelectionEditing(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(AllGroupEditingLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(AllGroupEditingLocator, check, LocateBy.Id);
         }
         #endregion
     }

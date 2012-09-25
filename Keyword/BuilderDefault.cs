@@ -14,7 +14,7 @@
 
             for (int i = 1; i <= PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Count; i++)
             {
-                ButtonOrLink choiceItem = new ButtonOrLink(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Locator + "[" + i + "]//a", LocateBy.XPath);
+                Clickable choiceItem = new Clickable(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaChoiceItemCount.Locator + "[" + i + "]//a", LocateBy.XPath);
                 ChoiceItem choice = new ChoiceItem(choiceItem.Text);
                 
                 choiceItems.Add(choice);

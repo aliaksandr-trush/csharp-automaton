@@ -7,7 +7,7 @@
 
     public class AttendeeInfo : Window
     {
-        public ButtonOrLink AgendaEdit = new ButtonOrLink("//div[@id='agenda']//a/img", LocateBy.XPath);
+        public Clickable AgendaEdit = new Clickable("//div[@id='agenda']//a/img", LocateBy.XPath);
 
         public void OpenUrl(int registerId)
         {
@@ -17,7 +17,7 @@
                 FormData.EventSessionId,
                 registerId);
 
-            WebDriverUtility.DefaultProvider.OpenUrl(url);
+            UIUtil.DefaultProvider.OpenUrl(url);
         }
 
         public Label AgendaLable(AgendaItem agenda)

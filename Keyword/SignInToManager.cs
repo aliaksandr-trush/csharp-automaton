@@ -16,7 +16,7 @@
 
         public void SignIn(string userName, string password, EventFolders.Folders folder)
         {
-            WebDriverUtility.DefaultProvider.OpenUrl(
+            UIUtil.DefaultProvider.OpenUrl(
                 string.Format("{0}manager/login.aspx", 
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps));
 
@@ -35,7 +35,14 @@
             bool deleteTestReg = false)
         {
             this.SignIn(folder);
+            this.RecreateEventAndGetEventId(evt, recreateEvent, deleteTestReg);
+        }
 
+        public void RecreateEventAndGetEventId(
+            DataCollection.Event evt,
+            bool recreateEvent = true,
+            bool deleteTestReg = false)
+        {
             if (KeywordProvider.ManagerDefault.DoesEventExist(evt.Title))
             {
                 if (recreateEvent)

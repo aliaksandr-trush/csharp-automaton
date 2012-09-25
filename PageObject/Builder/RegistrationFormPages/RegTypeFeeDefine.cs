@@ -9,8 +9,6 @@
     {
         public RegTypeFeeDefine(string name) : base(name) { }
 
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
-
         new public void AdjustRADWindowPositionAndResize()
         {
             PageObject.PageObjectHelper.AdjustRADWindowPosition("RadWindowWrapper_ctl00_dialog2", 20, 20);

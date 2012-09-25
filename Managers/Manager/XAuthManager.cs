@@ -125,13 +125,13 @@
         {
             xAuth.OK.WaitForDisplay();
             xAuth.OK.Click();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(Builder.RegTypeManager.RegTypeDetailFrameID);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName(Builder.RegTypeManager.RegTypeDetailFrameID);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void ClickCancelButton()
         {
-            WebDriverUtility.DefaultProvider.ClickCancel();
+            UIUtil.DefaultProvider.ClickCancel();
         }
 
         [Step]
@@ -347,12 +347,12 @@
 
             if (HasErrors())
             {
-                int count = Convert.ToInt32(WebDriverUtility.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
+                int count = Convert.ToInt32(UIUtil.DefaultProvider.GetXPathCountByXPath(ErrorLocator + "/li"));
                 string errorFormat = ErrorLocator + "/li[{0}]";
 
                 for (int i = 1; i <= count; i++)
                 {
-                    errorList.Add(WebDriverUtility.DefaultProvider.GetText(string.Format(errorFormat, i), LocateBy.XPath));
+                    errorList.Add(UIUtil.DefaultProvider.GetText(string.Format(errorFormat, i), LocateBy.XPath));
                 }
             }
 
@@ -361,7 +361,7 @@
 
         private bool HasErrors()
         {
-            return WebDriverUtility.DefaultProvider.GetAttribute(this.xAuth.ErrorDIVLocator.Locator, "@style", LocateBy.XPath) != "display:none;";
+            return UIUtil.DefaultProvider.GetAttribute(this.xAuth.ErrorDIVLocator.Locator, "@style", LocateBy.XPath) != "display:none;";
         }
 
         private void VerifyErrors(List<string> errorMessages, int errorsCount)

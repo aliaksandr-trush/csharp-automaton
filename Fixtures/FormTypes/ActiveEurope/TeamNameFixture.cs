@@ -190,9 +190,9 @@
         private void ValidateTeamName(string tName)
         {
             // Verify the unique Team Name displays and cannot be edited
-            Assert.IsFalse(WebDriverUtility.DefaultProvider.IsElementPresent("Team Name", LocateBy.Name));
-            Assert.IsTrue(WebDriverUtility.DefaultProvider.IsTextPresent(tName));
-            bool isEditable = WebDriverUtility.DefaultProvider.IsElementPresent("//td[text()='Team Name:']/../td/input", LocateBy.XPath);
+            Assert.IsFalse(UIUtil.DefaultProvider.IsElementPresent("Team Name", LocateBy.Name));
+            Assert.IsTrue(UIUtil.DefaultProvider.IsTextPresent(tName));
+            bool isEditable = UIUtil.DefaultProvider.IsElementPresent("//td[text()='Team Name:']/../td/input", LocateBy.XPath);
 
             Assert.IsFalse(isEditable);
         }

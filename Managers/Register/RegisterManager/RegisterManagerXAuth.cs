@@ -225,14 +225,14 @@
         [Verify]
         public void XAuth_VerifyMessageToRegistrantPresent(bool present)
         {
-            Assert.AreEqual(present, WebDriverUtility.DefaultProvider.IsElementPresent(LocatorFormat_XPath_MessageToRegistration, LocateBy.XPath));
+            Assert.AreEqual(present, UIUtil.DefaultProvider.IsElementPresent(LocatorFormat_XPath_MessageToRegistration, LocateBy.XPath));
         }
         
         [Verify]
         public void XAuth_VerifyMessageToRegistrant(string expectedMessage)
         {
             XAuth_VerifyMessageToRegistrantPresent(true);
-            string actualMessage = WebDriverUtility.DefaultProvider.GetText(LocatorFormat_XPath_MessageToRegistration, LocateBy.XPath);
+            string actualMessage = UIUtil.DefaultProvider.GetText(LocatorFormat_XPath_MessageToRegistration, LocateBy.XPath);
 
             if (!expectedMessage.Equals(actualMessage))
             {
@@ -242,7 +242,7 @@
 
         public void XAuth_VerifyEmailAddressTextboxContentInLoginPage(string expectedText)
         {
-            string actualText = WebDriverUtility.DefaultProvider.GetValue(Locator_Id_XAuthEmaiAddressTextboxInLoginPage, LocateBy.Id);
+            string actualText = UIUtil.DefaultProvider.GetValue(Locator_Id_XAuthEmaiAddressTextboxInLoginPage, LocateBy.Id);
 
             if (!expectedText.Equals(actualText))
             {
@@ -260,13 +260,13 @@
         public void XAuth_VerifyUserIdLabelVisibility(bool isVisble)
         {
             string locator_XPath = string.Format("//label[@for='{0}']", Locator_Id_XAuthUserId);
-            VerifyTool.VerifyValue(isVisble, WebDriverUtility.DefaultProvider.IsElementDisplay(locator_XPath, LocateBy.XPath), "UserId label Display: {0}");
+            VerifyTool.VerifyValue(isVisble, UIUtil.DefaultProvider.IsElementDisplay(locator_XPath, LocateBy.XPath), "UserId label Display: {0}");
         }
 
         public void XAuth_VerifyUserIdLabelText(string expectedText)
         {
             string locator_XPath = string.Format("//label[@for='{0}']", Locator_Id_XAuthUserId);
-            string actualUserIdLabel = WebDriverUtility.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
+            string actualUserIdLabel = UIUtil.DefaultProvider.GetText(locator_XPath, LocateBy.XPath);
 
             if (!expectedText.Equals(actualUserIdLabel))
             {
@@ -276,30 +276,30 @@
 
         public void XAuth_VerifyUserIDTextboxVisibility(bool isVisble)
         {
-            VerifyTool.VerifyValue(isVisble, WebDriverUtility.DefaultProvider.IsElementDisplay(Locator_Id_XAuthUserIdTextboxInLoginPage, LocateBy.Id), "UserId TextBox Display: {0}");
+            VerifyTool.VerifyValue(isVisble, UIUtil.DefaultProvider.IsElementDisplay(Locator_Id_XAuthUserIdTextboxInLoginPage, LocateBy.Id), "UserId TextBox Display: {0}");
         }
 
         [Step]
         public void XAuth_TypeUserId(string userId)
         {
-            WebDriverUtility.DefaultProvider.Type(Locator_Id_XAuthUserId, userId, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(Locator_Id_XAuthUserId, userId, LocateBy.Id);
         }
 
         public void XAuth_VerifyPasswordLabelVisibilityInLoginPage(bool isVisble)
         {
             string locator_XPath = string.Format("//label[@for='{0}']", PasswordTextboxOnLoginPage);
-            VerifyTool.VerifyValue(isVisble, WebDriverUtility.DefaultProvider.IsElementDisplay(locator_XPath, LocateBy.XPath), "Password Label Display: {0}");
+            VerifyTool.VerifyValue(isVisble, UIUtil.DefaultProvider.IsElementDisplay(locator_XPath, LocateBy.XPath), "Password Label Display: {0}");
         }
 
         public void XAuth_VerifyPasswordTextboxVisibilityInLoginPage(bool isVisble)
         {
-            VerifyTool.VerifyValue(isVisble, WebDriverUtility.DefaultProvider.IsElementDisplay(PasswordTextboxOnLoginPage, LocateBy.Id), "Password Textbox Display: {0}");
+            VerifyTool.VerifyValue(isVisble, UIUtil.DefaultProvider.IsElementDisplay(PasswordTextboxOnLoginPage, LocateBy.Id), "Password Textbox Display: {0}");
         }
 
         [Verify]
         public void XAuth_VerifyPasswordSectionPresent(bool present)
         {
-            Assert.AreEqual(present, WebDriverUtility.DefaultProvider.IsElementPresent(string.Format(LocatorFormat_XPath_FormSection, "Password"), LocateBy.XPath));
+            Assert.AreEqual(present, UIUtil.DefaultProvider.IsElementPresent(string.Format(LocatorFormat_XPath_FormSection, "Password"), LocateBy.XPath));
         }
 
         public void XAuth_VerifySubsituteVisibility(bool isVisble)
@@ -315,37 +315,37 @@
             string locator_XPath_MiddleName = string.Format(LocatorFormat_XPath_PIfield, "Middle Name:");
             string locator_XPath_LastName = string.Format(LocatorFormat_XPath_PIfield, "Last Name:");
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_EmailSpan, LocateBy.XPath))
-                Assert.AreEqual(PI.Email, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_EmailSpan, LocateBy.XPath))
+                Assert.AreEqual(PI.Email, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl02_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreEqual(PI.Email, WebDriverUtility.DefaultProvider.GetText(locator_XPath_EmailSpan, LocateBy.XPath).Trim());
+                Assert.AreEqual(PI.Email, UIUtil.DefaultProvider.GetText(locator_XPath_EmailSpan, LocateBy.XPath).Trim());
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_FirstNameSpan, LocateBy.XPath))
-                Assert.AreEqual(PI.FirstName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_FirstNameSpan, LocateBy.XPath))
+                Assert.AreEqual(PI.FirstName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreEqual(PI.FirstName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_FirstNameSpan, LocateBy.XPath).Trim());
+                Assert.AreEqual(PI.FirstName, UIUtil.DefaultProvider.GetText(locator_XPath_FirstNameSpan, LocateBy.XPath).Trim());
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_MiddleName, LocateBy.XPath))
-                Assert.AreEqual(PI.MiddleName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_MiddleName, LocateBy.XPath))
+                Assert.AreEqual(PI.MiddleName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreEqual(PI.MiddleName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_MiddleName, LocateBy.XPath).Trim());
+                Assert.AreEqual(PI.MiddleName, UIUtil.DefaultProvider.GetText(locator_XPath_MiddleName, LocateBy.XPath).Trim());
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_LastName, LocateBy.XPath))
-                Assert.AreEqual(PI.LastName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl08_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_LastName, LocateBy.XPath))
+                Assert.AreEqual(PI.LastName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl08_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreEqual(PI.LastName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_LastName, LocateBy.XPath).Trim());
+                Assert.AreEqual(PI.LastName, UIUtil.DefaultProvider.GetText(locator_XPath_LastName, LocateBy.XPath).Trim());
 
 
-            Assert.AreEqual(PI.Address1, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl14_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Address2, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl15_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.City, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Company, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl12_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Extension, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl22_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Fax, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl23_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.JobTitle, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl10_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Phone, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id));
-            Assert.AreEqual(PI.State, WebDriverUtility.DefaultProvider.GetSelectedLabel("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id));
-            Assert.AreEqual(PI.Zip, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Address1, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl14_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Address2, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl15_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.City, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Company, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl12_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Extension, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl22_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Fax, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl23_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.JobTitle, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl10_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Phone, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id));
+            Assert.AreEqual(PI.State, UIUtil.DefaultProvider.GetSelectedLabel("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id));
+            Assert.AreEqual(PI.Zip, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id));
         }
 
         public void XAuth_VerifyPINotEqual(XAuthPersonalInfo PI)
@@ -354,85 +354,85 @@
             string locator_XPath_MiddleName = string.Format(LocatorFormat_XPath_PIfield, "Middle Name:");
             string locator_XPath_LastName = string.Format(LocatorFormat_XPath_PIfield, "Last Name:");            
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_FirstNameSpan, LocateBy.XPath))
-                Assert.AreNotEqual(PI.FirstName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_FirstNameSpan, LocateBy.XPath))
+                Assert.AreNotEqual(PI.FirstName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl06_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreNotEqual(PI.FirstName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_FirstNameSpan, LocateBy.XPath).Trim());
+                Assert.AreNotEqual(PI.FirstName, UIUtil.DefaultProvider.GetText(locator_XPath_FirstNameSpan, LocateBy.XPath).Trim());
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_MiddleName, LocateBy.XPath))
-                Assert.AreNotEqual(PI.MiddleName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_MiddleName, LocateBy.XPath))
+                Assert.AreNotEqual(PI.MiddleName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl07_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreNotEqual(PI.MiddleName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_MiddleName, LocateBy.XPath).Trim());
+                Assert.AreNotEqual(PI.MiddleName, UIUtil.DefaultProvider.GetText(locator_XPath_MiddleName, LocateBy.XPath).Trim());
 
-            if (!WebDriverUtility.DefaultProvider.IsElementPresent(locator_XPath_LastName, LocateBy.XPath))
-                Assert.AreNotEqual(PI.LastName, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl08_sf_txtResponse", LocateBy.Id));
+            if (!UIUtil.DefaultProvider.IsElementPresent(locator_XPath_LastName, LocateBy.XPath))
+                Assert.AreNotEqual(PI.LastName, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl08_sf_txtResponse", LocateBy.Id));
             else
-                Assert.AreNotEqual(PI.LastName, WebDriverUtility.DefaultProvider.GetText(locator_XPath_LastName, LocateBy.XPath).Trim());
+                Assert.AreNotEqual(PI.LastName, UIUtil.DefaultProvider.GetText(locator_XPath_LastName, LocateBy.XPath).Trim());
 
-            Assert.AreNotEqual(PI.Address1, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl14_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Address2, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl15_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.City, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Company, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl12_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Extension, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl22_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Fax, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl23_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.JobTitle, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl10_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Phone, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.State, WebDriverUtility.DefaultProvider.GetSelectedLabel("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id));
-            Assert.AreNotEqual(PI.Zip, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Address1, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl14_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Address2, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl15_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.City, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl16_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Company, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl12_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Extension, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl22_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Fax, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl23_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.JobTitle, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl10_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Phone, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl21_sf_txtResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.State, UIUtil.DefaultProvider.GetSelectedLabel("ctl00_cph_personalInfoStandardFields_rptFields_ctl17_sf_ddlResponse", LocateBy.Id));
+            Assert.AreNotEqual(PI.Zip, UIUtil.DefaultProvider.GetValue("ctl00_cph_personalInfoStandardFields_rptFields_ctl19_sf_txtResponse", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyRegisteredBeforeNoteIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("//div[@id='pageContent']/div[@class='pageInstructions']/p[text()='You have registered before with our system. To automatically recall your personal information, enter your password.']", LocateBy.XPath));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("//div[@id='pageContent']/div[@class='pageInstructions']/p[text()='You have registered before with our system. To automatically recall your personal information, enter your password.']", LocateBy.XPath));
         }
 
         [Verify]
         public void XAuth_VerifyAlreadyBeenUsedErrorMessageIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("//div[@id='ctl00_valSummary']/ul/li[text()='Our records show that this email address has already been used to register for this event. Each registrant must use a unique email address.']", LocateBy.XPath));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("//div[@id='ctl00_valSummary']/ul/li[text()='Our records show that this email address has already been used to register for this event. Each registrant must use a unique email address.']", LocateBy.XPath));
         }
 
         [Verify]
         public void XAuth_VerifyStartNewRegistrationLinkIsDisplay(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cph_lnkNotRegistered", LocateBy.Id));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("ctl00_cph_lnkNotRegistered", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyEmailAddressFieldValue(string email)
         {
-            Assert.AreEqual(email, WebDriverUtility.DefaultProvider.GetValue("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
+            Assert.AreEqual(email, UIUtil.DefaultProvider.GetValue("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyEmailAddressFieldIsEditable(bool editable)
         {
-            Assert.AreEqual(editable, WebDriverUtility.DefaultProvider.IsEditable("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
+            Assert.AreEqual(editable, UIUtil.DefaultProvider.IsEditable("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyEmailAddressFieldIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("ctl00_cph_ctlEmailMemID_txtEmail", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyPasswordFieldIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cph_txtPassword", LocateBy.Id));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("ctl00_cph_txtPassword", LocateBy.Id));
         }
 
         [Verify]
         public void XAuth_VerifyUserNameFieldIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cph_txtXAuthUserID", LocateBy.Id));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("ctl00_cph_txtXAuthUserID", LocateBy.Id));
         }
 
         [Step]
         public void XAuth_EnterUserName(string userName)
         {
-            WebDriverUtility.DefaultProvider.Type("ctl00_cph_txtXAuthUserID", userName, LocateBy.Id);
+            UIUtil.DefaultProvider.Type("ctl00_cph_txtXAuthUserID", userName, LocateBy.Id);
         }
 
         /// <summary>

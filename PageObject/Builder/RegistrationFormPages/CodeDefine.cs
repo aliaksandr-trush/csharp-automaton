@@ -11,15 +11,13 @@
         #region WebElements
         public RadioButton Discount = new RadioButton("ctl00_cphDialog_rblCodeTypes_0", LocateBy.Id);
         public RadioButton Access = new RadioButton("ctl00_cphDialog_rblCodeTypes_1", LocateBy.Id);
-        public TextBox Code = new TextBox("ctl00_cphDialog_txtDiscountCodeTitle", LocateBy.Id);
+        public Input Code = new Input("ctl00_cphDialog_txtDiscountCodeTitle", LocateBy.Id);
         public MultiChoiceDropdown CodeDirection = new MultiChoiceDropdown("ctl00_cphDialog_ddlChangePriceByDirection", LocateBy.Id);
-        public TextBox Amount = new TextBox("ctl00_cphDialog_radNChangePriceBy_text", LocateBy.Id);
+        public Input Amount = new Input("ctl00_cphDialog_radNChangePriceBy_text", LocateBy.Id);
         public RadioButton Percentage = new RadioButton("ctl00_cphDialog_rblChangeTypePercent", LocateBy.Id);
         public RadioButton FixAmount = new RadioButton("ctl00_cphDialog_rblChangeTypeFixed", LocateBy.Id);
-        public TextBox UseLimit = new TextBox("ctl00_cphDialog_radNCodeUseLimit_text", LocateBy.Id);
+        public Input UseLimit = new Input("ctl00_cphDialog_radNCodeUseLimit_text", LocateBy.Id);
         #endregion
-
-        private PopupFrameHelper popupFrameHelper = new PopupFrameHelper();
 
         #region Basic Actions
         public void Discount_Click()
@@ -54,18 +52,18 @@
 
         public void SaveAndNew_Click()
         {
-            popupFrameHelper.SaveAndNew_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndNew_Click();
         }
 
         public void SaveAndClose_Click()
         {
-            popupFrameHelper.SaveAndClose_Click();
+            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
             SwitchToMain();
         }
 
         public void Cancel_Click()
         {
-            popupFrameHelper.Cancel_Click();
+            PageObjectHelper.PopupFrame_Helper.Cancel_Click();
             SwitchToMain();
         }
         #endregion

@@ -8,7 +8,7 @@
     {
         public static void VerifyOnPage(FormData.RegisterPage page, bool onPage)
         {
-            Assert.AreEqual(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(page), onPage);
+            Assert.AreEqual(onPage, PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(page));
         }
     }
 }

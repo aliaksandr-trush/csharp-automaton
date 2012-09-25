@@ -13,12 +13,12 @@
         public void SetEventConfirmationPage()
         {
             // enable schedule download
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsEnableScheduleDownload", true, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsEnableScheduleDownload", true, LocateBy.Id);
         }
 
         public void SetEnableHotelSearchFeature(bool check)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsHotelSearch", check, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cph_chkEventsHotelSearch", check, LocateBy.Id);
         }
 
         [Verify]
@@ -42,16 +42,16 @@
 
         public void AddConfirmationMessage(string message)
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_elConfirmationText_linkCheckmarkfrmEventTextsConfirm_Info", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
-            WebDriverUtility.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
-            WebDriverUtility.DefaultProvider.Type("//textarea", message + "<br>", LocateBy.XPath);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.SelectPopUpFrameByName("dialog");
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cph_elConfirmationText_linkCheckmarkfrmEventTextsConfirm_Info", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_ucContent_radHtml", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.SelectIFrameOnCurrentIFrame(1);
+            UIUtil.DefaultProvider.Type("//textarea", message + "<br>", LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("dialog");
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_btnSaveClose", LocateBy.Id);
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
     }

@@ -8,8 +8,8 @@
 
     public class EventWebsite : Window
     {
-        public ButtonOrLink RegisterNow = new ButtonOrLink("aRegBtn", UIUtility.LocateBy.Id);
-        public ButtonOrLink Agenda = new ButtonOrLink("ctl00_hpTab2", UIUtility.LocateBy.Id);
+        public Clickable RegisterNow = new Clickable("aRegBtn", UIUtility.LocateBy.Id);
+        public Clickable Agenda = new Clickable("ctl00_hpTab2", UIUtility.LocateBy.Id);
 
         public Label Text(string text)
         {

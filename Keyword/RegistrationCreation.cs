@@ -51,26 +51,8 @@
 
                 if (group.Secondaries[i].EventFee_Response != null)
                 {
-                    if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.HasValue)
-                    {
-                        if (group.Secondaries[i].Event.StartPage.RegTypeDisplayOption.Value == FormData.RegTypeDisplayOption.DropDownList)
-                        {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(group.Secondaries[i].EventFee_Response.RegType.RegTypeName);
-                        }
-                        else
-                        {
-                            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].EventFee_Response.RegType);
-                        }
-                    }
-                    else
-                    {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group.Secondaries[i].EventFee_Response.RegType);
-                    }
-
-                    if (group.Secondaries[i].EventFee_Response.Code != null)
-                    {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(group.Secondaries[i].EventFee_Response.Code.Code);
-                    }
+                    KeywordProvider.RegisterDefault.SelectRegType(group.Secondaries[i]);
+                    KeywordProvider.RegisterDefault.TypeEventFeeDiscountCode(group.Secondaries[i]);
                 }
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -114,15 +96,8 @@
 
             if ((reg.EventFee_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
             {
-                if (reg.EventFee_Response.RegType != null)
-                {
-                    KeywordProvider.RegisterDefault.SelectRegType(reg.EventFee_Response.RegType);
-                }
-
-                if (reg.EventFee_Response.Code != null)
-                {
-                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.EventFee_Response.Code.Code);
-                }
+                KeywordProvider.RegisterDefault.SelectRegType(reg);
+                KeywordProvider.RegisterDefault.TypeEventFeeDiscountCode(reg);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -305,7 +280,7 @@
 
                                 if (resp.Code != null)
                                 {
-                                    row.DiscountCodeInput.Type(resp.Code.Code);
+                                    row.DiscountCodeInput.Type(resp.Code.CodeString);
                                 }
                             }
                             break;
@@ -318,7 +293,7 @@
 
                                 if (resp.Code != null)
                                 {
-                                    row.DiscountCodeInput.Type(resp.Code.Code);
+                                    row.DiscountCodeInput.Type(resp.Code.CodeString);
                                 }
                             }
                             break;
@@ -335,7 +310,7 @@
 
                                 if (resp.Code != null)
                                 {
-                                    row.DiscountCodeInput.Type(resp.Code.Code);
+                                    row.DiscountCodeInput.Type(resp.Code.CodeString);
                                 }
                             }
                             break;
@@ -350,7 +325,7 @@
 
                                 if (resp.Code != null)
                                 {
-                                    row.DiscountCodeInput.Type(resp.Code.Code);
+                                    row.DiscountCodeInput.Type(resp.Code.CodeString);
                                 }
                             }
                             break;
@@ -360,7 +335,7 @@
                         case FormData.CustomFieldType.Paragraph:
                             {
                                 AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(resp.CharToInput);
                             }
                             break;
@@ -368,7 +343,7 @@
                         case FormData.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(resp.ContributionAmount);
                             }
                             break;
@@ -377,7 +352,7 @@
                             {
                                 AgendaResponse_Date resp = response as AgendaResponse_Date;
                                 string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(date);
                             }
                             break;
@@ -386,7 +361,7 @@
                             {
                                 AgendaResponse_Time resp = response as AgendaResponse_Time;
                                 string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Type(time);
                             }
                             break;
@@ -394,7 +369,7 @@
                         case FormData.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
-                                ((ButtonOrLink)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
+                                ((Clickable)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
                                     response.AgendaItem).AgendaType).Click();
                                 AutoIt.UploadFile.UploadAFile("File Upload", resp.FileSource);
                             }
@@ -403,7 +378,7 @@
                         case FormData.CustomFieldType.Duration:
                             {
                                 AgendaResponse_Duration resp = response as AgendaResponse_Duration;
-                                ((TextBox)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
+                                ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
                             }
                             break;
 
@@ -434,7 +409,7 @@
 
                     if (resp.Discount_Code != null)
                     {
-                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.Code);
+                        PageObject.PageObjectProvider.Register.RegistationSite.Merchandise.MerchDiscountCode(resp.Merchandise_Item).Type(resp.Discount_Code.CodeString);
                     }
                 }
 
@@ -503,9 +478,7 @@
 
         public void SSOLogin(Registrant reg)
         {
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Email.SelectWithText(reg.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Password.SelectWithText(reg.Password);
-            PageObject.PageObjectProvider.Register.RegistationSite.SSOLogin.Login_Click();
+            this.SSOLogin(reg.Email, reg.Password);
         }
 
         public void SSOLogin(string email, string password)
@@ -520,6 +493,10 @@
             string actual_Total = PageObject.PageObjectProvider.Register.RegistationSite.Checkout.FeeSummary_Total.Text;
             reg.ReCalculateFee();
             Utilities.VerifyTool.VerifyValue(Utilities.MoneyTool.FormatMoney(reg.Fee_Summary.Total), actual_Total, "Checkout total: {0}");
+        }
+
+        public void VerifyFeeSummary(Registrant reg, int rowIndex)
+        {
         }
     }
 }

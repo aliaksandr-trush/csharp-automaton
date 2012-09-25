@@ -110,10 +110,10 @@
             BuilderMgr.OldAGAndCFMgr.SetQuestionDescription(name);
             BuilderMgr.OldAGAndCFMgr.SelectType(type);
             BuilderMgr.OldAGAndCFMgr.SetRegularPrice(price);
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
             BuilderMgr.OldAGAndCFMgr.SaveAndCloseAgendaOrCFItem();
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForPageToLoad();
         }
 
         [Step]

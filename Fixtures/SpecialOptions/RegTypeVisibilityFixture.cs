@@ -120,7 +120,7 @@
 
             // Step #17
             // Attempt to open direct link copied from builder
-            WebDriverUtility.DefaultProvider.OpenUrl(this.regTypeDirectLink);
+            UIUtil.DefaultProvider.OpenUrl(this.regTypeDirectLink);
 
             // Verify error message
             RegisterMgr.VerifyIncorrectURL(EventName);

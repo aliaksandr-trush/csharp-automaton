@@ -25,34 +25,34 @@
 
         public void CreateNewAccount(string username, string password, string currency)
         {
-            WebDriverUtility.DefaultProvider.Type(FirstNameLocator, "Selenium", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(LastNameLocator, "Regression", LocateBy.Id);
+            UIUtil.DefaultProvider.Type(FirstNameLocator, "Selenium", LocateBy.Id);
+            UIUtil.DefaultProvider.Type(LastNameLocator, "Regression", LocateBy.Id);
             
-            WebDriverUtility.DefaultProvider.Type(EmailLocator, string.Format("selenium{0}@regonline.com", DateTime.Now.Ticks), LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(TryRegOnlineFreeButtonLocator, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.Type(EmailLocator, string.Format("selenium{0}@regonline.com", DateTime.Now.Ticks), LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(TryRegOnlineFreeButtonLocator, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
 
-            WebDriverUtility.DefaultProvider.Type(UsernameLocator, username, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(PasswordLocator, password, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(ConfirmedPasswordLocator, password, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(CompanyLocator, "RegOnline", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(PhoneLocator, "303-577-5100", LocateBy.Id);
+            UIUtil.DefaultProvider.Type(UsernameLocator, username, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(PasswordLocator, password, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(ConfirmedPasswordLocator, password, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(CompanyLocator, "RegOnline", LocateBy.Id);
+            UIUtil.DefaultProvider.Type(PhoneLocator, "303-577-5100", LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.SelectWithText(EstimatedTotalAttendeesAnnually, "0-50 Total Attendees", LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText(EstimatedTotalAttendeesAnnually, "0-50 Total Attendees", LocateBy.Id);
             ////UIUtilityProvider.UIHelper.Type(RegPerYearLocator, 50, LocateBy.Id);
             ////UIUtilityProvider.UIHelper.SelectWithText(AccountCurrencyLocator, currency, LocateBy.Id);
             ////UIUtilityProvider.UIHelper.SelectWithText(HowDidYouFindUsLocator, "Other", LocateBy.Id);
             ////UIUtilityProvider.UIHelper.Type(HowDidYouFindUs_OtherInpuLocatort, "Internal testing", LocateBy.Id);
-            WebDriverUtility.DefaultProvider.SetCheckbox(TermsOfServiceLocator, true, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(TermsOfServiceLocator, true, LocateBy.Id);
 
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(GoToMyAccount, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(GoToMyAccount, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForPageToLoad();
 
-            if (WebDriverUtility.DefaultProvider.UrlContainsAbsolutePath("__lab/track.aspx"))
+            if (UIUtil.DefaultProvider.UrlContainsAbsolutePath("__lab/track.aspx"))
             {
                 // Click 'Start Building'
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_site_content_body_lnkEnter", LocateBy.Id);
-                WebDriverUtility.DefaultProvider.WaitForPageToLoad();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_site_content_body_lnkEnter", LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForPageToLoad();
             }
         }
     }

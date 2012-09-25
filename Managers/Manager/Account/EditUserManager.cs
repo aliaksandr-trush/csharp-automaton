@@ -13,23 +13,23 @@
         [Step]
         public void SaveAndClose()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_btnSaveUser", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_btnSaveUser", LocateBy.Id);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         [Step]
         public void Cancel()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_btnUserCancel", LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_btnUserCancel", LocateBy.Id);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         [Step]
         public void TypeCurrentPasswordToValidate()
         {
-            WebDriverUtility.DefaultProvider.Type(
+            UIUtil.DefaultProvider.Type(
                 Locator_Id_Checkbox_CurrentPasswordValidation,
                 ConfigReader.DefaultProvider.AccountConfiguration.Password, 
                 LocateBy.Id);
@@ -40,24 +40,24 @@
         [Verify]
         public void VerifyCurrentPasswordValidationVisible(bool visible)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementDisplay("CurrentPasswordValidation checkbox", visible, WebDriverUtility.DefaultProvider.IsElementDisplay(Locator_Id_Checkbox_CurrentPasswordValidation, LocateBy.Id));
+            UIUtil.DefaultProvider.VerifyElementDisplay("CurrentPasswordValidation checkbox", visible, UIUtil.DefaultProvider.IsElementDisplay(Locator_Id_Checkbox_CurrentPasswordValidation, LocateBy.Id));
         }
 
         [Verify]
         public void VerifyIsPasswordEditable(bool editable)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementEditable("Password", editable, this.IsPasswordEditable());
+            UIUtil.DefaultProvider.VerifyElementEditable("Password", editable, this.IsPasswordEditable());
         }
 
         private bool IsPasswordEditable()
         {
-            bool passwordEditable = WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_ucPassword_txtPwd", LocateBy.Id);
+            bool passwordEditable = UIUtil.DefaultProvider.IsEditable("ctl00_cphDialog_ucPassword_txtPwd", LocateBy.Id);
 
-            bool confirmPasswordEditable = WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_ucPassword_txtPwdConfirm", LocateBy.Id);
+            bool confirmPasswordEditable = UIUtil.DefaultProvider.IsEditable("ctl00_cphDialog_ucPassword_txtPwdConfirm", LocateBy.Id);
 
             if (passwordEditable != confirmPasswordEditable)
             {
-                WebDriverUtility.DefaultProvider.FailTest(string.Format(
+                UIUtil.DefaultProvider.FailTest(string.Format(
                     "Password editable capability and confirm password's do not match! Password:{0}, confirm:{1}",
                     passwordEditable,
                     confirmPasswordEditable));
@@ -69,12 +69,12 @@
         [Verify]
         public void VerifyIsUserRoleEditable(bool editable)
         {
-            WebDriverUtility.DefaultProvider.VerifyElementEditable("UserRole", editable, this.IsUserRoleEditable());
+            UIUtil.DefaultProvider.VerifyElementEditable("UserRole", editable, this.IsUserRoleEditable());
         }
 
         private bool IsUserRoleEditable()
         {
-            return WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_ddlRoles", LocateBy.Id);
+            return UIUtil.DefaultProvider.IsEditable("ctl00_cphDialog_ddlRoles", LocateBy.Id);
         }
     }
 }

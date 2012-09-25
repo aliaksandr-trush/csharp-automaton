@@ -68,41 +68,41 @@
 
         public void SetEnableRule(bool enable)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox(EnableGroupDiscountRule, enable, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(EnableGroupDiscountRule, enable, LocateBy.Id);
         }
 
         public void SetRuleGroupSize(int groupSize, GroupSizeOption sizeOrMore)
         {
             // Enter group size
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_GroupSizeTextBox", groupSize);
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_GroupSizeTextBox", groupSize);
 
             // Select group size or more
             if (sizeOrMore == GroupSizeOption.SizeOrMore)
             {
-                WebDriverUtility.DefaultProvider.SelectWithText(GroupSizeOrMoreLocator, "or more", LocateBy.Id);
+                UIUtil.DefaultProvider.SelectWithText(GroupSizeOrMoreLocator, "or more", LocateBy.Id);
             }
             else if (sizeOrMore == GroupSizeOption.JustSize)
             {
-                WebDriverUtility.DefaultProvider.SelectWithText(GroupSizeOrMoreLocator, "", LocateBy.Id);
+                UIUtil.DefaultProvider.SelectWithText(GroupSizeOrMoreLocator, "", LocateBy.Id);
             }
         }
 
         public void SetDiscount(double price, DiscountType type)
         {
             // Enter discount amount
-            WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_AmountTextBox", price);
+            UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_AmountTextBox", price);
 
             // Select group rule type
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlGroupRuleType", CustomStringAttribute.GetCustomString(type), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlGroupRuleType", CustomStringAttribute.GetCustomString(type), LocateBy.Id);
         }
 
         public void SetAdditionalRegOption(AdditionalRegOption additionalOrAll, int? additionalNumber)
         {
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_AdditionalAllDropDownList", additionalOrAll.ToString(), LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_cphDialog_AdditionalAllDropDownList", additionalOrAll.ToString(), LocateBy.Id);
             
             if (additionalOrAll == AdditionalRegOption.Additional)
             {
-                WebDriverUtility.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_EffectedSizeTextBox", additionalNumber);
+                UIUtil.DefaultProvider.TypeRADNumericById("ctl00_cphDialog_EffectedSizeTextBox", additionalNumber);
             }
         }
 
@@ -114,9 +114,9 @@
             //{
             //    UIUtilityProvider.UIHelper.ClickAndWaitAJAX(ApplyToAllLinkLocator);
             //}
-            if (!WebDriverUtility.DefaultProvider.IsChecked(ApplyToAllLinkLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsChecked(ApplyToAllLinkLocator, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ApplyToAllLinkLocator, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(ApplyToAllLinkLocator, LocateBy.Id);
             }
         }
 
@@ -129,9 +129,9 @@
             //    UIUtilityProvider.UIHelper.ClickAndWaitAJAX(ApplyToAllLinkLocator);
             //}
 
-            if (!WebDriverUtility.DefaultProvider.IsChecked(ApplyToOnlySelectedLocator, LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsChecked(ApplyToOnlySelectedLocator, LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ApplyToOnlySelectedLocator, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(ApplyToOnlySelectedLocator, LocateBy.Id);
             }
 
         }
@@ -140,13 +140,13 @@
         {
             if (applyToAll)
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ApplyToAllLinkLocator, LocateBy.Id);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(ApplyToAllLinkLocator, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
             else
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(ApplyToOnlySelectedLocator, LocateBy.Id);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick(ApplyToOnlySelectedLocator, LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
                 SetApplyRuleToItemByName(false, "All");
             }
             //string applyToAllCheckboxLocator = string.Format("//div[@id='{0}']/ul/li/div[@class='rtTop']/input[@class='rtChk']", ItemListLocator);
@@ -158,36 +158,36 @@
         {
             string itemLocator = string.Format("//span[text() = '{0}']/../input", itemName);
 
-            if(WebDriverUtility.DefaultProvider.IsElementPresent("//span[@class='rtPlus']", LocateBy.XPath))
+            if(UIUtil.DefaultProvider.IsElementPresent("//span[@class='rtPlus']", LocateBy.XPath))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("//span[@class='rtPlus']", LocateBy.XPath);
-                WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+                UIUtil.DefaultProvider.WaitForDisplayAndClick("//span[@class='rtPlus']", LocateBy.XPath);
+                UIUtil.DefaultProvider.WaitForAJAXRequest();
             }
 
-            WebDriverUtility.DefaultProvider.SetCheckbox(itemLocator, check, LocateBy.XPath);
+            UIUtil.DefaultProvider.SetCheckbox(itemLocator, check, LocateBy.XPath);
         }
         
         public void SetRuleExpireTime(bool check, DateTime expireTime)
         {
             string ruleExpireCheckboxLocator = "ctl00_cphDialog_chkExpireRule";
 
-            WebDriverUtility.DefaultProvider.SetCheckbox(ruleExpireCheckboxLocator, check, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.WaitForElementPresent("ctl00_cphDialog_dtpRuleExpireDate_dateInput_wrapper", LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox(ruleExpireCheckboxLocator, check, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForElementPresent("ctl00_cphDialog_dtpRuleExpireDate_dateInput_wrapper", LocateBy.Id);
 
             // Set expire time
             string date = string.Format("{0}/{1}/{2}", expireTime.Month, expireTime.Day, expireTime.Year);
             string datetime = expireTime.ToString("yyyy-MM-dd-00-00-00");
             
             string expireTimeboxLocator = "ctl00_cphDialog_dtpRuleExpireDate";
-            WebDriverUtility.DefaultProvider.Type(expireTimeboxLocator + "_dateInput_text", date, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(expireTimeboxLocator + "_dateInput", datetime, LocateBy.Id);
-            WebDriverUtility.DefaultProvider.Type(expireTimeboxLocator, datetime, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(expireTimeboxLocator + "_dateInput_text", date, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(expireTimeboxLocator + "_dateInput", datetime, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(expireTimeboxLocator, datetime, LocateBy.Id);
         }
 
         public void SetGroupDiscountMessage(string message)
         {
             string groupDiscountMessageLocator = "ctl00_cphDialog_RegIntroTextBox";
-            WebDriverUtility.DefaultProvider.Type(groupDiscountMessageLocator, message, LocateBy.Id);
+            UIUtil.DefaultProvider.Type(groupDiscountMessageLocator, message, LocateBy.Id);
         }
 
         public void SetGroupDiscountPopUpMessage(int eventID, string message)
@@ -195,7 +195,7 @@
             // If there is no custom pop up message use default message
             if (message == null)
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("restore default", LocateBy.LinkText);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick("restore default", LocateBy.LinkText);
             }
             else
             {
@@ -226,7 +226,7 @@
         {
             try
             {
-                WebDriverUtility.DefaultProvider.SelectPopUpFrameByName(FrameID);
+                UIUtil.DefaultProvider.SelectPopUpFrameByName(FrameID);
             }
             catch
             {
@@ -237,19 +237,19 @@
         public void SaveAndClose()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickSaveAndClose();
+            UIUtil.DefaultProvider.ClickSaveAndClose();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
 
         public void Cancel()
         {
             SelectThisFrame();
-            WebDriverUtility.DefaultProvider.ClickCancel();
+            UIUtil.DefaultProvider.ClickCancel();
             Utility.ThreadSleep(1);
             SelectBuilderWindow();
-            WebDriverUtility.DefaultProvider.WaitForAJAXRequest();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
         }
     }
 }

@@ -588,6 +588,5 @@
             public AgendaResponse Agenda_Response;
             public int count;
         }
-
     }
 }

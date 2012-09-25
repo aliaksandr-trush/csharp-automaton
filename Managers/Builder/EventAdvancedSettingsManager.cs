@@ -40,40 +40,40 @@
 
         public void ClickCancel()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnCancel"), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnCancel"), LocateBy.XPath);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void ClickSaveAndClose()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveClose"), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveClose"), LocateBy.XPath);
             Utility.ThreadSleep(2);
-            WebDriverUtility.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.SwitchToMainContent();
         }
 
         public void ClickSaveAndStay()
         {
-            WebDriverUtility.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveStay"), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(string.Format(DialogButtonLocator, "ctl00_btnSaveStay"), LocateBy.XPath);
             Utility.ThreadSleep(2);
         }
 
         [Step]
         public void SetInternalCode(string code)
         {
-            WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsClientEventID", code, LocateBy.Id);
+            UIUtil.DefaultProvider.Type("ctl00_cphDialog_txtEventsClientEventID", code, LocateBy.Id);
         }
 
         [Verify]
         public void VerifyAuthernticationMethodDropDownListIsEditable(bool enabled)
         {
-            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
+            Assert.AreEqual(enabled, UIUtil.DefaultProvider.IsEditable("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyAuthernticationMethodType(AuthenicationMothedType type)
         {
-            Assert.AreEqual(StringEnum.GetStringValue(type), WebDriverUtility.DefaultProvider.GetSelectedLabel("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
+            Assert.AreEqual(StringEnum.GetStringValue(type), UIUtil.DefaultProvider.GetSelectedLabel("ctl00_cphDialog_ddlEventsAuthenticationTypeID", LocateBy.Id));
         }
 
         //public void VerifyEventsRequirePasswordOnRecallIsEnable(bool enabled)
@@ -95,19 +95,19 @@
 
         public void VerifyEventsEnableCrossAccountOnRecallIsEnable(bool enabled)
         {
-            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(enabled, UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyEventsEnableCrossAccountOnRecallIsEditable(bool enabled)
         {
-            Assert.AreEqual(enabled, WebDriverUtility.DefaultProvider.IsEditable("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(enabled, UIUtil.DefaultProvider.IsEditable("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         [Verify]
         public void VerifyEventsEnableCrossAccountOnRecallIsDisplayed(bool displayed)
         {
-            Assert.AreEqual(displayed, WebDriverUtility.DefaultProvider.IsElementDisplay("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
+            Assert.AreEqual(displayed, UIUtil.DefaultProvider.IsElementDisplay("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", LocateBy.Id));
         }
 
         //public void CheckEventsRequirePasswordOnRecall(bool enable)
@@ -118,33 +118,33 @@
         [Step]
         public void CheckEventsEnableCrossAccountOnRecall(bool enable)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", enable, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableCrossAccountRecall", enable, LocateBy.Id);
         }
 
         [Step]
         public void EnableRecall(bool enable)
         {
-            WebDriverUtility.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableRecall", enable, LocateBy.Id);
+            UIUtil.DefaultProvider.SetCheckbox("ctl00_cphDialog_chkEventsEnableRecall", enable, LocateBy.Id);
         }
 
         [Step]
         public void SetInvitationCodeAndList(string code, string list)
         {
-            if (!WebDriverUtility.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id))
+            if (!UIUtil.DefaultProvider.IsChecked("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id))
             {
-                WebDriverUtility.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id);
+                UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_cphDialog_chkEventsInvitationOnly", LocateBy.Id);
             }
 
             if (string.IsNullOrEmpty(code))
             {
-                WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", string.Empty, LocateBy.Id);
+                UIUtil.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", string.Empty, LocateBy.Id);
             }
             else
             {
-                WebDriverUtility.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", code, LocateBy.Id);
+                UIUtil.DefaultProvider.Type("ctl00_cphDialog_txtEventsInvitationPassword", code, LocateBy.Id);
             }
 
-            WebDriverUtility.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlEventsInvitationListId", list, LocateBy.Id);
+            UIUtil.DefaultProvider.SelectWithText("ctl00_cphDialog_ddlEventsInvitationListId", list, LocateBy.Id);
         }
 
         #region Locators

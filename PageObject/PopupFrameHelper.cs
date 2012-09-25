@@ -6,10 +6,10 @@
 
     public class PopupFrameHelper : Window
     {
-        public static ButtonOrLink SaveAndStay = new ButtonOrLink("ctl00_btnSaveStay", LocateBy.Id);
-        public static ButtonOrLink SaveAndNew = new ButtonOrLink("ctl00_btnSaveNew", LocateBy.Id);
-        public static ButtonOrLink SaveAndClose = new ButtonOrLink("ctl00_btnSaveClose", LocateBy.Id);
-        public static ButtonOrLink Cancel = new ButtonOrLink("ctl00_btnCancel", LocateBy.Id);
+        private Clickable SaveAndStay = new Clickable("ctl00_btnSaveStay", LocateBy.Id);
+        private Clickable SaveAndNew = new Clickable("ctl00_btnSaveNew", LocateBy.Id);
+        private Clickable SaveAndClose = new Clickable("ctl00_btnSaveClose", LocateBy.Id);
+        private Clickable Cancel = new Clickable("ctl00_btnCancel", LocateBy.Id);
 
         public void SaveAndStay_Click()
         {
