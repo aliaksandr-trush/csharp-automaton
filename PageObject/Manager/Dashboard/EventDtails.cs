@@ -14,6 +14,8 @@
         public Clickable TotalRegs = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkTotalRegs", LocateBy.Id);
         public Clickable SelfKiosk = new Clickable("//a[@class='frmDashLink kiosk']", LocateBy.XPath);
         public LaunchSelfKiosk LaunchSelfKiosk = new LaunchSelfKiosk("plain");
+        public Clickable Link_ButtonDesigner = new Clickable("ctl00_ctl00_cphDialog_cpMgrMain_lnkButtonDesigner", LocateBy.Id);
+        public ButtonDesigner Frame_ButtonDesigner = new ButtonDesigner("dialog");
 
         public void SelfKiosk_Click()
         {
@@ -46,6 +48,14 @@
         {
             this.ThirdParty.WaitForDisplay();
             this.ThirdParty.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
+        public void Link_ButtonDesigner_Click()
+        {
+            this.Link_ButtonDesigner.WaitForDisplayAndClick();
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();

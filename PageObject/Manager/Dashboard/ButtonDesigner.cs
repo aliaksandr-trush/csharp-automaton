@@ -30,10 +30,25 @@
         private Clickable ProgressBarStep_Button_GraphicType = new Clickable("progress_step2", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_Style = new Clickable("progress_step3", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_GetCode = new Clickable("progress_step4", UIUtility.LocateBy.Id);
+        private Clickable Link_ButtonKeyword = new Clickable("//div[@id='btn_foot']/a", UIUtility.LocateBy.XPath);
 
         public ButtonDesigner(string name)
             : base(name)
         { }
+
+        public void MarketSelection_Select(DataCollection.HtmlButton.MarketSelection market)
+        {
+            this.MarketSelection.WaitForDisplay();
+            this.MarketSelection.SelectWithText(market.ToString());
+        }
+
+        public void NextStep_Click()
+        {
+            this.NextStep.WaitForDisplayAndClick();
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
 
         public void BuildIt_Click(DataCollection.HtmlButton button)
         {
@@ -85,6 +100,9 @@
                         break;
                 }
             }
+
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
         }
 
         public void ProgressBarStep_Click(ProgressBarStep step)
