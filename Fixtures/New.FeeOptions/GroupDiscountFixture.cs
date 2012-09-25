@@ -250,7 +250,10 @@
             this.evt1.MerchandisePage.Merchandises.Add(this.merch2);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt1, recreate);
+        }
 
+        private Group GenerateGroup(int groupSize)
+        {
             this.resp1.RegType = this.regType1;
             this.resp1.Fee = 20;
             this.resp2.RegType = this.regType2;
@@ -263,12 +266,11 @@
             this.resp4.Fee = 50;
             this.resp5.Merchandise_Item = this.merch1;
             this.resp5.Quantity = 1;
+            this.resp5.Fee = 60;
             this.resp6.Merchandise_Item = this.merch2;
             this.resp6.Amount = 70;
-        }
+            this.resp6.Fee = 70;
 
-        private Group GenerateGroup(int groupSize)
-        {
             Registrant reg1 = new Registrant(evt1);
             reg1.Payment_Method = paymentMethod;
             reg1.EventFee_Response = resp1;

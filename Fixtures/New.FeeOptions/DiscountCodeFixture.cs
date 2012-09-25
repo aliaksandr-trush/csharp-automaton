@@ -60,31 +60,37 @@
             reg1.Payment_Method = paymentMethod;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
             reg1.EventFee_Response.Code = dc1;
+            reg1.EventFee_Response.Fee = regType1.Price.Value;
             System.Threading.Thread.Sleep(10);
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
             reg2.EventFee_Response.Code = dc3;
+            reg2.EventFee_Response.Fee = regType2.Price.Value;
             Group group1 = new Group();
             group1.Primary = reg1;
             group1.Secondaries.Add(reg2);
 
             KeywordProvider.RegistrationCreation.GroupRegistration(group1);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 135);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(group1));
 
             Registrant reg3 = new Registrant(evt);
             reg3.Payment_Method = paymentMethod;
             reg3.EventFee_Response = new EventFeeResponse(regType1);
             reg3.EventFee_Response.Code = dc2;
+            reg3.EventFee_Response.Fee = regType1.Price.Value;
             System.Threading.Thread.Sleep(10);
             Registrant reg4 = new Registrant(evt);
             reg4.EventFee_Response = new EventFeeResponse(regType2);
             reg4.EventFee_Response.Code = dc4;
+            reg4.EventFee_Response.Fee = regType2.Price.Value;
             Group group2 = new Group();
             group2.Primary = reg3;
             group2.Secondaries.Add(reg4);
 
             KeywordProvider.RegistrationCreation.GroupRegistration(group2);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 118);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(group2));
         }
 
         [Test]
@@ -279,12 +285,15 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffDcEvt, false);
 
-            this.GenerateRegDiffDc(dc1, dc5, dc9);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 120);
-            this.GenerateRegDiffDc(dc3, dc4, dc8);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 85);
-            this.GenerateRegDiffDc(dc2, dc6, dc7);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 95);
+            Registrant reg1 = this.GenerateRegDiffDc(dc1, dc5, dc9);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
+            Registrant reg2 = this.GenerateRegDiffDc(dc3, dc4, dc8);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg2));
+            Registrant reg3 = this.GenerateRegDiffDc(dc2, dc6, dc7);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg3));
         }
 
         [Test]
@@ -713,24 +722,29 @@
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 408);
         }
 
-        private void GenerateRegDiffDc(DiscountCode regTypeDc, DiscountCode agendaDc, DiscountCode merchDc)
+        private Registrant GenerateRegDiffDc(DiscountCode regTypeDc, DiscountCode agendaDc, DiscountCode merchDc)
         {
             Registrant reg = new Registrant(diffDcEvt);
             reg.Payment_Method = diffDcPaymentMethod;
             reg.EventFee_Response = new EventFeeResponse(diffDcRegType);
             reg.EventFee_Response.Code = regTypeDc;
+            reg.EventFee_Response.Fee = diffDcRegType.Price.Value;
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = diffDcAgenda;
             resp1.Checked = true;
             resp1.Code = agendaDc;
+            resp1.Fee = diffDcAgenda.Price.Value;
             MerchResponse_FixedPrice resp2 = new MerchResponse_FixedPrice();
             resp2.Merchandise_Item = diffDcMerch;
             resp2.Quantity = 1;
             resp2.Discount_Code = merchDc;
+            resp2.Fee = diffDcMerch.Price.Value;
             reg.CustomField_Responses.Add(resp1);
             reg.Merchandise_Responses.Add(resp2);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+
+            return reg;
         }
     }
 }

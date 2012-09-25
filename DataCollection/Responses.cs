@@ -310,11 +310,13 @@
     public class MerchandiseResponse
     {
         public MerchandiseItem Merchandise_Item;
+        public double Fee { get; set; }
 
         public virtual MerchandiseResponse Clone()
         {
             MerchandiseResponse copy = new MerchandiseResponse();
             copy.Merchandise_Item = this.Merchandise_Item;
+            copy.Fee = this.Fee;
             return copy;
         }
     }
@@ -330,6 +332,7 @@
             copy.Merchandise_Item = this.Merchandise_Item;
             copy.Quantity = this.Quantity;
             copy.Discount_Code = this.Discount_Code;
+            copy.Fee = this.Fee;
             return copy;
         }
     }
@@ -343,6 +346,7 @@
             MerchResponse_VariableAmount copy = new MerchResponse_VariableAmount();
             copy.Merchandise_Item = this.Merchandise_Item;
             copy.Amount = this.Amount;
+            copy.Fee = this.Fee;
             return copy;
         }
     }
