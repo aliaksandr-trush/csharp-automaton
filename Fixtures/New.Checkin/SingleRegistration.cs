@@ -348,7 +348,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.CodeString)));
         }
 
         [Test]
@@ -365,7 +365,7 @@
 
             KeywordProvider.RegistrationCreation.Checkin(registrantWhenFull);
 
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReachedAndRequired, discountCode.CodeString)));
         }
 
         [Test]

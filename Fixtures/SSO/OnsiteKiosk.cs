@@ -8,7 +8,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class OnsiteKiosk : ExternalAuthenticationFixtureBase
+    public class OnsiteKiosk : SSOFixtureBase
     {
         [Test]
         public void SSOOnsiteKiosk()

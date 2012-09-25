@@ -166,7 +166,7 @@
         public bool? ForceSelectSameRegType;
         public bool? AllowGroupReg;
         public bool? AllowChangeRegType;
-        public FormData.RegTypeDisplayOption? RegTypeDisplayOption;
+        public CustomizeRegTypeDisplayOptions Customize_RegType_DisplayOptions { get; set; }
         public DateTime? StartDate;
         public DateTime? EndDate;
         public DateTime? StartTime;
@@ -186,6 +186,23 @@
         public EventAdvancedSettings AdvancedSettings;
 
         public List<RegType> RegTypes = new List<RegType>();
+
+        public StartPage()
+        {
+            this.Customize_RegType_DisplayOptions = new CustomizeRegTypeDisplayOptions();
+        }
+    }
+
+    public class CustomizeRegTypeDisplayOptions
+    {
+        public bool IsCustomized { get; set; }
+        public FormData.RegTypeDisplayOption DisplayOption { get; set; }
+
+        public CustomizeRegTypeDisplayOptions()
+        {
+            this.IsCustomized = false;
+            this.DisplayOption = FormData.RegTypeDisplayOption.RadioButton;
+        }
     }
 
     public class PersonalInfoPage

@@ -106,17 +106,17 @@
         #region Generate Some Elements
         public CheckBox VisibleToRegType(RegType regType)
         {
-            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Active')]", regType.RegTypeName), LocateBy.XPath);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Active')]", regType.Name), LocateBy.XPath);
         }
 
         public CheckBox RequiredByRegType(RegType regType)
         {
-            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Required')]", regType.RegTypeName), LocateBy.XPath);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'Required')]", regType.Name), LocateBy.XPath);
         }
 
         public CheckBox AdminOnlyToRegType(RegType regType)
         {
-            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'AdminOnly')]", regType.RegTypeName), LocateBy.XPath);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input[contains(@id,'AdminOnly')]", regType.Name), LocateBy.XPath);
         }
 
         public CheckBox ConditionalLogicParent(string name)
@@ -556,7 +556,7 @@
 
         public CodeRow(CustomFieldCode code)
         {
-            this.Code = new Clickable(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.Code), LocateBy.XPath);
+            this.Code = new Clickable(string.Format("//table[@id='tblCodes']//*[contains(text(),'{0}')]", code.CodeString), LocateBy.XPath);
 
             string OnClickAttributeOfCode = this.Code.GetAttribute("onclick");
 

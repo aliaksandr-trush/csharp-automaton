@@ -50,15 +50,26 @@
             return Convert.ToDouble(a);
         }
 
-        public void SelectRegType(RegType regType)
+        public void SelectRegType(Registrant reg)
         {
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent)
+            if (reg.EventFee_Response.RegType != null)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType);
+                if (reg.Event.StartPage.Customize_RegType_DisplayOptions.DisplayOption == FormData.RegTypeDisplayOption.DropDownList)
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(reg.EventFee_Response.RegType.Name);
+                }
+                else
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
+                }
             }
-            else
+        }
+
+        public void TypeEventFeeDiscountCode(Registrant reg)
+        {
+            if (reg.EventFee_Response.Code != null)
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(regType.RegTypeName);
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EventFeeDiscountCode.Type(reg.EventFee_Response.Code.CodeString);
             }
         }
 

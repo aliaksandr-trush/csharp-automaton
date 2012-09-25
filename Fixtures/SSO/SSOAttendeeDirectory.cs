@@ -8,7 +8,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class SSOAttendeeDirectory : ExternalAuthenticationFixtureBase
+    public class SSOAttendeeDirectory : SSOFixtureBase
     {
        
         [Test]

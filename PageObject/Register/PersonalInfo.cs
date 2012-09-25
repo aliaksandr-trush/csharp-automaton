@@ -53,7 +53,7 @@
         public RadioButton RegTypeRadio(RegType regType)
         {
             return new RadioButton(
-                string.Format("//input[@value='{0}']", regType.RegTypeId), LocateBy.XPath);
+                string.Format("//input[@value='{0}']", regType.Id), LocateBy.XPath);
         }
 
         public void OK_Click()

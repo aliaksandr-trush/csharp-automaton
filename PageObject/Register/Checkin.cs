@@ -7,6 +7,8 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.WebElements;
+    using OpenQA.Selenium;
+    using System.Collections.Generic;
 
     public class Checkin : Window
     {
@@ -52,13 +54,13 @@
 
                 case RegisterMethod.RegTypeDirectUrl:
 
-                    reg.EventFee_Response.RegType.RegTypeId = AccessData.FetchRegTypeId(reg.Event.Id, reg.EventFee_Response.RegType.RegTypeName);
+                    reg.EventFee_Response.RegType.Id = AccessData.FetchRegTypeId(reg.Event.Id, reg.EventFee_Response.RegType.Name);
 
                     url = string.Format(string.Format(
                         "{0}?eventID={1}&rTypeID={2}", 
                         ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
                         reg.Event.Id, 
-                        reg.EventFee_Response.RegType.RegTypeId));
+                        reg.EventFee_Response.RegType.Id));
 
                     break;
 
@@ -79,42 +81,6 @@
             UIUtil.DefaultProvider.OpenUrl(url);
         }
 
-        public RadioButton RegTypeRadio(RegType regType)
-        {
-            Label label = this.GetRegTypeLabel(regType);
-            string attribute_For = label.GetAttribute("for");
-            string tmp = attribute_For.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
-            regType.RegTypeId = Convert.ToInt32(tmp);
-
-            return new RadioButton(attribute_For, LocateBy.Id);
-        }
-
-        public void VerifyRegTypeDisplay(RegType regType, bool expected)
-        {
-            Label label = this.GetRegTypeLabel(regType);
-            bool actual = label.IsDisplay;
-
-            UIUtil.DefaultProvider.VerifyValue(
-                expected,
-                actual,
-                string.Format("Check display of regtype '{0}'", regType.RegTypeName));
-        }
-
-        private Label GetRegTypeLabel(RegType regType)
-        {
-            return new Label(
-                string.Format("//ol[@id='radRegTypes']//label[contains(text(),'{0}')]", regType.RegTypeName), 
-                LocateBy.XPath);
-        }
-
-        public void SelectRegTypeRadioButton(RegType regType)
-        {
-            RadioButton RegTypeRadioButton = this.RegTypeRadio(regType);
-
-            RegTypeRadioButton.WaitForDisplay();
-            RegTypeRadioButton.Click();
-        }
-
         public void ViewExistingRegistration_Click()
         {
             this.ViewExistingRegistration.WaitForDisplay();
@@ -131,19 +97,35 @@
             WaitForLoad();
         }
 
-        public void RegTypeDetails_Click(RegType regType)
+        public void VerifyRegTypeDisplay(RegType regType, bool expected)
         {
-            Clickable detailsLink = new Clickable(string.Format(
-                "//label[contains(text(),'AdditionalDetails')]//a", regType.RegTypeName), LocateBy.XPath);
+            RegTypeRow row = new RegTypeRow(regType);
+            bool actual = true;
 
-            detailsLink.WaitForDisplay();
-            detailsLink.Click();
-            Utility.ThreadSleep(1);
-            WaitForAJAX();
-            WaitForLoad();
+            if (row.Label_RegTypeName == null)
+            {
+                actual = false;
+            }
+
+            UIUtil.DefaultProvider.VerifyValue(
+                expected,
+                actual,
+                string.Format("Check display of regtype '{0}'", regType.Name));
         }
 
-        public void AdditionalDetailsClose_Click()
+        public void SelectRegTypeRadioButton(RegType regType)
+        {
+            RegTypeRow row = new RegTypeRow(regType);
+            row.Radio_Button.WaitForDisplayAndClick();
+        }
+
+        public void RegTypeDetails_Click(RegType regType)
+        {
+            RegTypeRow row = new RegTypeRow(regType);
+            row.Details_ClickToOpen();
+        }
+
+        public void RegTypeDetails_Close_Click()
         {
             this.AdditionalDetailsClose.WaitForDisplay();
             this.AdditionalDetailsClose.Click();
@@ -159,6 +141,46 @@
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
+        }
+    }
+
+    public class RegTypeRow
+    {
+        public Label Label_RegTypeName { get; set; }
+        public RadioButton Radio_Button { get; set; }
+        public Clickable Link_Details { get; set; }
+
+        public RegTypeRow(DataCollection.RegType regType)
+        {
+            List<IWebElement> labels = UIUtil.DefaultProvider.GetElements(
+                string.Format("//ol[@id='radRegTypes']//label[contains(text(),'{0}')]", regType.Name),
+                LocateBy.XPath);
+
+            foreach (IWebElement label in labels)
+            {
+                // Note that a regtype with fee should be displayed like "RegType1: $80"
+                if (label.Text.Trim().Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0].Equals(regType.Name))
+                {
+                    string forAttribute = label.GetAttribute("for");
+                    regType.Id = Convert.ToInt32(forAttribute.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1]);
+
+                    this.Label_RegTypeName = new Label(
+                        string.Format("//ol[@id='radRegTypes']//label[@for='radRegType_{0}']", regType.Id),
+                        LocateBy.XPath);
+
+                    this.Radio_Button = new RadioButton(string.Format("radRegType_{0}", regType.Id), LocateBy.Id);
+                    this.Link_Details = new Clickable(string.Format("//a[@data-id='details_{0}']", regType.Id), LocateBy.XPath);
+                }
+            }
+        }
+
+        public void Details_ClickToOpen()
+        {
+            this.Link_Details.WaitForDisplay();
+            this.Link_Details.Click();
+            Utility.ThreadSleep(1);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.WaitForAJAX();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.WaitForLoad();
         }
     }
 }

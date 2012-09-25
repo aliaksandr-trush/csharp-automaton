@@ -9,7 +9,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class AdminRegistrationFixture : ExternalAuthenticationFixtureBase
+    public class AdminRegistrationFixture : SSOFixtureBase
     {
         [Test]
         public void AdminRegister()
@@ -26,10 +26,9 @@
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
+            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
 

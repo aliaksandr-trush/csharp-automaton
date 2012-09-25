@@ -5,8 +5,8 @@
 
     public class RegType
     {
-        public int RegTypeId;
-        public string RegTypeName;
+        public int Id;
+        public string Name;
         public string FeeName;
         public double? Price;
         public List<CustomFieldCode> AllCustomCodes = new List<CustomFieldCode>();
@@ -41,7 +41,7 @@
 
         public RegType(string regTypeName)
         {
-            this.RegTypeName = regTypeName;
+            this.Name = regTypeName;
         }
     }
 

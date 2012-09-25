@@ -22,7 +22,7 @@
 
         public CheckBox RegTypeEnabled(RegType regType)
         {
-            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input", regType.RegTypeName), LocateBy.XPath);
+            return new CheckBox(string.Format("//td[text()='{0}']/following-sibling::td/input", regType.Name), LocateBy.XPath);
         }
 
         public void SaveAndClose_Click()

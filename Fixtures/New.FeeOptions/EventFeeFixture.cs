@@ -14,7 +14,7 @@
         private PaymentMethod paymentMethod;
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("426")]
         public void TestRegTypeWithDiscountCodeAccessCode()
         {
@@ -67,8 +67,8 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
-        [Description("")]
+        [Category(Priority.Two)]
+        [Description("425")]
         public void TestEventFeeWithDiscountCodeAccessCode()
         {
             evt = new Event("TestEventFeeWithDiscountCodeAccessCode");

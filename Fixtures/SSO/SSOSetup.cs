@@ -9,7 +9,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class SSOSetup : ExternalAuthenticationFixtureBase
+    public class SSOSetup : SSOFixtureBase
     {
         [Test]
         public void SetupSSO()
@@ -34,8 +34,8 @@
             KeywordProvider.EventCreator.ClickAddEventAndGetEventId(evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EmptyAddRegType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType1.RegTypeName);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType1.RegTypeName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType1.Name);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType1.Name);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthentication_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SSORadio.Click();
@@ -53,9 +53,9 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SaveAndClose_Click();
-            PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.RegTypeName);
+            PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.Name);
             KeywordProvider.AddRegType.Add_RegType(regType2, evt);
-            PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.RegTypeName);
+            PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.Name);
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();

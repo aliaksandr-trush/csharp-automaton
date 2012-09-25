@@ -1249,7 +1249,10 @@
 
         public void VerifyValue(string expectedValue, string actualValue, string message)
         {
-            FailTest(string.Format("{0} Expected value:{1} Actual value:{2}", message, expectedValue, actualValue));
+            if (!expectedValue.Equals(actualValue))
+            {
+                FailTest(string.Format("{0} Expected value:{1} Actual value:{2}", message, expectedValue, actualValue));
+            }
         }
 
         public void VerifyValue(bool expectedValue, bool actualValue, string message)

@@ -34,7 +34,7 @@
         public Clickable AddRegType = new Clickable("ctl00_cph_grdRegTypes_hlAddNew", LocateBy.Id);
         public Clickable EmptyAddRegType = new Clickable("ctl00_cph_grdRegTypes_lnkEmptyAdd", LocateBy.Id);
         public RegTypeDefine RegTypeDefine = new RegTypeDefine("dialog");
-        public CheckBox RegTypeDisplayOption = new CheckBox("ctl00_cph_chkShowRegTypeOptions", LocateBy.Id);
+        public CheckBox CustomizeRegistrantTypeDisplayOptions = new CheckBox("ctl00_cph_chkShowRegTypeOptions", LocateBy.Id);
         public MultiChoiceDropdown RegTypeDisplayFormat = new MultiChoiceDropdown("ctl00_cph_ddlEventsRegTypeTypeID", LocateBy.Id);
         public CheckBox AllGroupReg = new CheckBox("ctl00_cph_chkAllowGroups", LocateBy.Id);
         public CheckBox ForceSameGroupType = new CheckBox("ctl00_cph_chkEventsForceSameRegTypes", LocateBy.Id);
@@ -120,9 +120,9 @@
             WaitForLoad();
         }
 
-        public void RegTypeDisplayOption_Set(bool check)
+        public void CustomizeRegTypeDisplayOptions_Set(bool check)
         {
-            this.RegTypeDisplayOption.Set(check);
+            this.CustomizeRegistrantTypeDisplayOptions.Set(check);
             Utility.ThreadSleep(1);
             WaitForAJAX();
         }

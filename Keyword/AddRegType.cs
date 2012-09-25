@@ -28,8 +28,8 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
 
             #region RegTypeBasics
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType.RegTypeName);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType.RegTypeName);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType.Name);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnReports.Type(regType.Name);
 
             if (regType.RegTypeLimit != null)
             {
@@ -93,8 +93,8 @@
                 }
                 else
                 {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.RegTypeName + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReceipt.Type(regType.Name + "_" + RegType.Default.FeeName);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.NameOnReports.Type(regType.Name + "_" + RegType.Default.FeeName);
                 }
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.StandardPrice.Type(regType.Price);

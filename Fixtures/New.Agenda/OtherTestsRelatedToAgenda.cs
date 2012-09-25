@@ -173,7 +173,7 @@
             ((WebElements.CheckBox)(row1.AgendaType)).Set(false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
             Assert.AreEqual(agenda2.Price, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
-            row2.DiscountCodeInput.Type(discount.Code);
+            row2.DiscountCodeInput.Type(discount.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
             Assert.AreEqual(54, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
         }

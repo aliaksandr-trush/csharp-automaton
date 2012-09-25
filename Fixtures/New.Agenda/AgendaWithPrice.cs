@@ -234,7 +234,7 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg);
             KeywordProvider.RegistrationCreation.Agenda(reg);
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(DataCollection.Messages.RegisterError.DiscountCodeNotFilled));
-            PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.Code);
+            PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.Checkout(reg);
             double expectedTotal = agendaDCPercent.Price.Value * 0.9 + (agendaDCFix.Price.Value - 10) + agendaDCPercentUnderZero.Price.Value

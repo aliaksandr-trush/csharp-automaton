@@ -4,5 +4,6 @@ obj/
 *.user
 *log.txt
 *.log
+*.tss
 *Publish.xml
 Output/

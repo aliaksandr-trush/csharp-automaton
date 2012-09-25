@@ -7,7 +7,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class GroupRegistration : ExternalAuthenticationFixtureBase
+    public class GroupRegistration : SSOFixtureBase
     {
         [Test]
         public void GroupRegisterSSO()
@@ -38,10 +38,11 @@
             KeywordProvider.RegistrationCreation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType1).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType2).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType3).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType4).IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType4, true);
+
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -58,20 +59,20 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(0);
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.ChangeRegType_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.SelectByIndex();
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType1).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType2).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType3).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType4).IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType4, false);
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.Cancel_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(1);
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.ChangeRegType_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.SelectByIndex();
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType1).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType2).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType3).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.RegTypeList.RegTypeRadio(regType4).IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType4, true);
         }
 
         [Test]
@@ -99,10 +100,10 @@
             KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType1).IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType2).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType3).IsPresent);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadio(regType4).IsPresent);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType2, false);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType3, true);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType4, true);
 
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType4);
@@ -136,8 +137,10 @@
             reg1.Password = ExternalAuthenticationData.SSOPassword;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg1);
             KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg1.EventFee_Response.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
@@ -157,8 +160,10 @@
             reg2.Password = ExternalAuthenticationData.SSOPassword;
             reg2.EventFee_Response = new EventFeeResponse(regType3);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             KeywordProvider.RegistrationCreation.SSOLogin(reg2);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);

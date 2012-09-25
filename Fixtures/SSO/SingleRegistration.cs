@@ -7,7 +7,7 @@
 
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class SingleRegistration : ExternalAuthenticationFixtureBase
+    public class SingleRegistration : SSOFixtureBase
     {
         [Test]
         public void SingleRegisterSSO()
@@ -23,13 +23,14 @@
             reg.Password = ExternalAuthenticationData.SSOPassword;
             reg.EventFee_Response = new EventFeeResponse(regType);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
             KeywordProvider.RegistrationCreation.SSOLogin(ExternalAuthenticationData.SSOJustNameEmail, ExternalAuthenticationData.SSOPassword);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.YouMustEnterValidEmailAddress));
-            KeywordProvider.RegistrationCreation.Checkin(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
             KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.IsPresent);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(FormData.PersonalInfoField.Email).HasAttribute("value"));
@@ -47,9 +48,6 @@
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(0);
             Assert.True(reg.JobTitle == PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Value);
-
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.EmailAlreadyUsed));
         }
 
         [Test]

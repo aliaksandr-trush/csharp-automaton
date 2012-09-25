@@ -8,7 +8,7 @@
    
     [TestFixture]
     [Category(FixtureCategory.SSO)]
-    public class SSOEventActivate : ExternalAuthenticationFixtureBase
+    public class SSOEventActivate : SSOFixtureBase
     {
         [Test]
         public void ActivateSSOEvent()
@@ -16,15 +16,17 @@
             RegOnline.RegressionTest.DataAccess.AccessData.ApprovedXAuthRoleForCustomer(true);
 
             Event evt = new Event("ActivateSSOEvent");
-            RegType regType = new RegType("SSORegType");
-            regType.IsSSO = true;
-            evt.StartPage.RegTypes.Add(regType);
+            RegType ssoRegType = new RegType("SSORegType");
+            ssoRegType.IsSSO = true;
+            RegType nonSSORegType = new RegType("NonSSORegType");
+            evt.StartPage.RegTypes.Add(ssoRegType);
+            evt.StartPage.RegTypes.Add(nonSSORegType);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt);
 
             Registrant reg = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
             reg.Password = ExternalAuthenticationData.SSOPassword;
-            reg.EventFee_Response = new EventFeeResponse(regType);
+            reg.EventFee_Response = new EventFeeResponse(ssoRegType);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
 
@@ -38,10 +40,10 @@
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();
-            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL + "add");
+            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
             PageObject.PageObjectProvider.Manager.SSOBase.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.Refresh();
-            Assert.AreEqual(Convert.ToInt32(PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.TotalRegs.Text), 0);
+            Assert.AreEqual(0, Convert.ToInt32(PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.TotalRegs.Text));
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();

@@ -6,7 +6,7 @@
     public class ExternalAuthenticationFixtureBase : FixtureBase
     {
         [SetUp]
-        public void RemoveXAuthAndSSOLiveReg()
+        public void RemoveXAuthLiveReg()
         {
             DataHelperTool.RemoveXAuthLiveRegistration(ConfigReader.DefaultProvider.AccountConfiguration.Id); 
         }

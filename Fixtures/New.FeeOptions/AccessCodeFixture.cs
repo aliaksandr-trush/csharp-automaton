@@ -66,7 +66,7 @@
             Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 240);
             Registrant reg3 = this.GenerateReg(ac1, ac4, ac5);
             KeywordProvider.RegistrationCreation.Checkin(reg3);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, ac1.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, ac1.CodeString)));
             Registrant reg4 = this.GenerateReg(ac2, ac3, ac5);
             KeywordProvider.RegistrationCreation.Checkin(reg4);
             KeywordProvider.RegistrationCreation.PersonalInfo(reg4);

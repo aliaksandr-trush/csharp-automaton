@@ -8,14 +8,14 @@
         public int Id;
         public FormData.CustomFieldCodeType CodeType;
         public FormData.ChangePriceDirection? CodeDirection;
-        public string Code;
+        public string CodeString;
         public double Amount;
         public FormData.ChangeType CodeKind;
         public int? Limit;
 
         public CustomFieldCode(string code)
         {
-            this.Code = code;
+            this.CodeString = code;
         }
 
         public double CalculateDiscountedPrice(double originalPrice)
@@ -59,7 +59,7 @@
 
             for (int i = 0; i < codes.Count; i++)
             {
-                discountCodeString += codes[i].Code;
+                discountCodeString += codes[i].CodeString;
 
                 if (codes[i].CodeType != FormData.CustomFieldCodeType.AccessCode)
                 {

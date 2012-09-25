@@ -12,7 +12,7 @@
                 case FormData.Location.EventFee:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.AddDiscountCode_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Code.Type(code.Code);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.Code_Define.Code.Type(code.CodeString);
 
                     switch (code.CodeType)
                     {
@@ -53,7 +53,7 @@
                 case FormData.Location.RegType:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddDiscountCode_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Code.Type(code.Code);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Code_Define.Code.Type(code.CodeString);
 
                     switch (code.CodeType)
                     {
@@ -94,7 +94,7 @@
                 case FormData.Location.Agenda:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddDiscountCode_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.SelectByName();
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.Code.Type(code.Code);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CodeDefine.Code.Type(code.CodeString);
 
                     switch (code.CodeType)
                     {

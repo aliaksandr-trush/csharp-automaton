@@ -378,7 +378,7 @@
             reg3.EventFee_Response = resp1;
 
             KeywordProvider.RegistrationCreation.Checkin(reg3);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, dc1.Code)));
+            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, dc1.CodeString)));
 
             Registrant reg4 = new Registrant(evt);
             reg4.EventFee_Response = resp2;
