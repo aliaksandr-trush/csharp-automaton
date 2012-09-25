@@ -21,8 +21,9 @@
         public void RegWithTaxOne()
         {
             this.GenerateEventForTaxRate(true, false, null);
-            this.GenerateRegForTaxRate(null);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 375);
+            Registrant reg = this.GenerateRegForTaxRate(null);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg));
         }
 
         [Test]
@@ -31,8 +32,9 @@
         public void RegWithTaxTwo()
         {
             this.GenerateEventForTaxRate(false, true, null);
-            this.GenerateRegForTaxRate(null);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 275);
+            Registrant reg = this.GenerateRegForTaxRate(null);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg));
         }
 
         [Test]
@@ -41,8 +43,9 @@
         public void RegWithTaxOneandTaxTwo()
         {
             this.GenerateEventForTaxRate(true, true, null);
-            this.GenerateRegForTaxRate(null);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 400);
+            Registrant reg = this.GenerateRegForTaxRate(null);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg));
         }
 
         [Test]
@@ -51,8 +54,9 @@
         public void RegWithNoTax()
         {
             this.GenerateEventForTaxRate(false, false, null);
-            this.GenerateRegForTaxRate(null);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 250);
+            Registrant reg = this.GenerateRegForTaxRate(null);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg));
         }
 
         [Test]
@@ -61,10 +65,12 @@
         public void TaxOnlyInOneCountry()
         {
             this.GenerateEventForTaxRate(true, true, FormData.Countries.UnitedStates);
-            this.GenerateRegForTaxRate(FormData.Countries.UnitedStates);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 400);
-            this.GenerateRegForTaxRate(FormData.Countries.Canada);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 250);
+            Registrant reg1 = this.GenerateRegForTaxRate(FormData.Countries.UnitedStates);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                            KeywordProvider.CalculateFee.CalculateTotalFee(reg1)); 
+            Registrant reg2 = this.GenerateRegForTaxRate(FormData.Countries.Canada);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                            KeywordProvider.CalculateFee.CalculateTotalFee(reg2));
         }
 
         [Test]
@@ -73,10 +79,12 @@
         public void TaxVerifyEUCountry()
         {
             this.GenerateEventForTaxRate(true, true, FormData.Countries.EU);
-            this.GenerateRegForTaxRate(FormData.Countries.Austria);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 400);
-            this.GenerateRegForTaxRate(FormData.Countries.UnitedStates);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation) == 250);
+            Registrant reg1 = this.GenerateRegForTaxRate(FormData.Countries.Austria);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                            KeywordProvider.CalculateFee.CalculateTotalFee(reg1)); 
+            Registrant reg2 = this.GenerateRegForTaxRate(FormData.Countries.UnitedStates);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                            KeywordProvider.CalculateFee.CalculateTotalFee(reg2)); 
         }
 
         private void GenerateEventForTaxRate(bool applyTaxOne, bool applyTaxTwo, FormData.Countries? country)
@@ -116,10 +124,11 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
         }
 
-        private void GenerateRegForTaxRate(FormData.Countries? country)
+        private Registrant GenerateRegForTaxRate(FormData.Countries? country)
         {
             Registrant reg = new Registrant(evt);
             reg.EventFee_Response = new EventFeeResponse(regType);
+            reg.EventFee_Response.Fee = regType.Price.Value;
             reg.Payment_Method = paymentMethod;
             if (country.HasValue)
             {
@@ -128,13 +137,17 @@
             AgendaResponse_Checkbox agResp = new AgendaResponse_Checkbox();
             agResp.AgendaItem = agenda;
             agResp.Checked = true;
+            agResp.Fee = agenda.Price.Value;
             MerchResponse_FixedPrice merchResp = new MerchResponse_FixedPrice();
             merchResp.Merchandise_Item = merch;
             merchResp.Quantity = 2;
+            merchResp.Fee = merch.Price.Value * merchResp.Quantity;
             reg.CustomField_Responses.Add(agResp);
             reg.Merchandise_Responses.Add(merchResp);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+
+            return reg;
         }
     }
 }

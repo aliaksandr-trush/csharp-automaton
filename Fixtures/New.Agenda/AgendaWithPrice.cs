@@ -184,41 +184,51 @@
             resp1.AgendaItem = agendaDCPercent;
             resp1.Checked = true;
             resp1.Code = dCPercent;
+            resp1.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp2 = new DataCollection.AgendaResponse_Checkbox();
             resp2.AgendaItem = agendaDCFix;
             resp2.Checked = true;
             resp2.Code = dCFix;
+            resp2.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp3 = new DataCollection.AgendaResponse_Checkbox();
             resp3.AgendaItem = agendaDCPercentUnderZero;
             resp3.Checked = true;
             resp3.Code = dCPercentUnderZero;
+            resp3.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp4 = new DataCollection.AgendaResponse_Checkbox();
             resp4.AgendaItem = agendaDCFixUnderZero;
             resp4.Checked = true;
             resp4.Code = dCFixUnderZero;
+            resp4.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp5 = new DataCollection.AgendaResponse_Checkbox();
             resp5.AgendaItem = agendaDCPercentIncreace;
             resp5.Checked = true;
             resp5.Code = dCPercentIncreace;
+            resp5.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp6 = new DataCollection.AgendaResponse_Checkbox();
             resp6.AgendaItem = agendaDCFixIncreace;
             resp6.Checked = true;
             resp6.Code = dCFixIncreace;
+            resp6.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp7 = new DataCollection.AgendaResponse_Checkbox();
             resp7.AgendaItem = agendaDCPercentIncreaceUnderZero;
             resp7.Checked = true;
             resp7.Code = dCPercentIncreaceUnderZero;
+            resp7.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp8 = new DataCollection.AgendaResponse_Checkbox();
             resp8.AgendaItem = agendaDCFixIncreaceUnderZero;
             resp8.Checked = true;
             resp8.Code = dCFixIncreaceUnderZero;
+            resp8.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp9 = new DataCollection.AgendaResponse_Checkbox();
             resp9.AgendaItem = agendaDCWithLimit;
             resp9.Checked = true;
             resp9.Code = dCWithLimit;
+            resp9.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp10 = new DataCollection.AgendaResponse_Checkbox();
             resp10.AgendaItem = agendaDCRequired;
             resp10.Checked = true;
+            resp10.Fee = 50;
             reg.CustomField_Responses.Add(resp1);
             reg.CustomField_Responses.Add(resp2);
             reg.CustomField_Responses.Add(resp3);
@@ -237,11 +247,8 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.Checkout(reg);
-            double expectedTotal = agendaDCPercent.Price.Value * 0.9 + (agendaDCFix.Price.Value - 10) + agendaDCPercentUnderZero.Price.Value
-                + agendaDCFixUnderZero.Price.Value + agendaDCPercentIncreace.Price.Value * 1.1 + (agendaDCFixIncreace.Price.Value + 10)
-                + agendaDCPercentIncreaceUnderZero.Price.Value + agendaDCFixIncreaceUnderZero.Price.Value + agendaDCWithLimit.Price.Value * 0.9
-                + agendaDCRequired.Price.Value * 0.9;
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), expectedTotal);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg) - 5);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             DataCollection.AgendaResponse_Checkbox resp11 = new DataCollection.AgendaResponse_Checkbox();
