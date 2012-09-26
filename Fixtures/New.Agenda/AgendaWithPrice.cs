@@ -69,8 +69,8 @@
             reg1.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
-                + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.EarlyPrice.earlyPrice + aGLatePrice.LatePrice.latePrice);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
             reg2.CustomField_Responses.Add(resp1);
@@ -80,8 +80,8 @@
             reg2.Payment_Method = paymentMethod;
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), aGStandardPrice.Price
-                + aGEarlyPriceDateTime.EarlyPrice.earlyPrice + aGEarlyPriceRegs.Price + aGLatePrice.LatePrice.latePrice);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
         }
 
         [Test]
@@ -184,41 +184,51 @@
             resp1.AgendaItem = agendaDCPercent;
             resp1.Checked = true;
             resp1.Code = dCPercent;
+            resp1.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp2 = new DataCollection.AgendaResponse_Checkbox();
             resp2.AgendaItem = agendaDCFix;
             resp2.Checked = true;
             resp2.Code = dCFix;
+            resp2.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp3 = new DataCollection.AgendaResponse_Checkbox();
             resp3.AgendaItem = agendaDCPercentUnderZero;
             resp3.Checked = true;
             resp3.Code = dCPercentUnderZero;
+            resp3.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp4 = new DataCollection.AgendaResponse_Checkbox();
             resp4.AgendaItem = agendaDCFixUnderZero;
             resp4.Checked = true;
             resp4.Code = dCFixUnderZero;
+            resp4.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp5 = new DataCollection.AgendaResponse_Checkbox();
             resp5.AgendaItem = agendaDCPercentIncreace;
             resp5.Checked = true;
             resp5.Code = dCPercentIncreace;
+            resp5.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp6 = new DataCollection.AgendaResponse_Checkbox();
             resp6.AgendaItem = agendaDCFixIncreace;
             resp6.Checked = true;
             resp6.Code = dCFixIncreace;
+            resp6.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp7 = new DataCollection.AgendaResponse_Checkbox();
             resp7.AgendaItem = agendaDCPercentIncreaceUnderZero;
             resp7.Checked = true;
             resp7.Code = dCPercentIncreaceUnderZero;
+            resp7.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp8 = new DataCollection.AgendaResponse_Checkbox();
             resp8.AgendaItem = agendaDCFixIncreaceUnderZero;
             resp8.Checked = true;
             resp8.Code = dCFixIncreaceUnderZero;
+            resp8.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp9 = new DataCollection.AgendaResponse_Checkbox();
             resp9.AgendaItem = agendaDCWithLimit;
             resp9.Checked = true;
             resp9.Code = dCWithLimit;
+            resp9.Fee = 50;
             DataCollection.AgendaResponse_Checkbox resp10 = new DataCollection.AgendaResponse_Checkbox();
             resp10.AgendaItem = agendaDCRequired;
             resp10.Checked = true;
+            resp10.Fee = 50;
             reg.CustomField_Responses.Add(resp1);
             reg.CustomField_Responses.Add(resp2);
             reg.CustomField_Responses.Add(resp3);
@@ -237,11 +247,8 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.RegistrationCreation.Checkout(reg);
-            double expectedTotal = agendaDCPercent.Price.Value * 0.9 + (agendaDCFix.Price.Value - 10) + agendaDCPercentUnderZero.Price.Value
-                + agendaDCFixUnderZero.Price.Value + agendaDCPercentIncreace.Price.Value * 1.1 + (agendaDCFixIncreace.Price.Value + 10)
-                + agendaDCPercentIncreaceUnderZero.Price.Value + agendaDCFixIncreaceUnderZero.Price.Value + agendaDCWithLimit.Price.Value * 0.9
-                + agendaDCRequired.Price.Value * 0.9;
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), expectedTotal);
+            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.CalculateFee.CalculateTotalFee(reg) - 5);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             DataCollection.AgendaResponse_Checkbox resp11 = new DataCollection.AgendaResponse_Checkbox();
@@ -304,130 +311,6 @@
             Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(DataCollection.Messages.RegisterError.AgendaCodeLimitReached));
             PageObject.Register.AgendaRow row = new PageObject.Register.AgendaRow(accessBulkCode);
             Assert.True(row.DiscountCodeInput.IsPresent);
-        }
-
-        [Test]
-        [Category(Priority.Three)]
-        [Description("1365")]
-        public void AgendaGroupDiscountCode()
-        {
-            DataCollection.Event evt = new DataCollection.Event("AgendaGroupDiscountCode");
-            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethod.Check);
-            evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
-            DataCollection.GroupDiscount groupDiscount = new DataCollection.GroupDiscount();
-            groupDiscount.GroupSize = 2;
-            groupDiscount.GroupSizeOption = DataCollection.GroupDiscount_GroupSizeOption.SizeOrMore;
-            groupDiscount.DiscountAmount = 5;
-            groupDiscount.GroupDiscountType = DataCollection.GroupDiscount_DiscountType.USDollar;
-            groupDiscount.AddtionalRegOption = DataCollection.GroupDiscount_AdditionalRegOption.All;
-            evt.StartPage.GroupDiscount = groupDiscount;
-            DataCollection.AgendaItem_CheckBox fee1 = new DataCollection.AgendaItem_CheckBox("Fee1");
-            fee1.Price = 50;
-            DataCollection.AgendaItem_CheckBox fee2 = new DataCollection.AgendaItem_CheckBox("Fee2");
-            fee2.Price = 100;
-            evt.AgendaPage = new DataCollection.AgendaPage();
-            evt.AgendaPage.AgendaItems.Add(fee1);
-            evt.AgendaPage.AgendaItems.Add(fee2);
-
-            KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SelectByName();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToSelectedFees.Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.All.Set(true);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
-
-            DataCollection.AgendaResponse_Checkbox resp1 = new DataCollection.AgendaResponse_Checkbox();
-            resp1.AgendaItem = fee1;
-            resp1.Checked = true;
-            DataCollection.AgendaResponse_Checkbox resp2 = new DataCollection.AgendaResponse_Checkbox();
-            resp2.AgendaItem = fee2;
-            resp2.Checked = true;
-            DataCollection.AgendaResponse_Checkbox resp3 = new DataCollection.AgendaResponse_Checkbox();
-            resp3.AgendaItem = fee1;
-            resp3.Checked = true;
-            DataCollection.AgendaResponse_Checkbox resp4 = new DataCollection.AgendaResponse_Checkbox();
-            resp4.AgendaItem = fee2;
-            resp4.Checked = true;
-            DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
-            reg1.Payment_Method = paymentMethod;
-            reg1.CustomField_Responses.Add(resp1);
-            reg1.CustomField_Responses.Add(resp2);
-            System.Threading.Thread.Sleep(10);
-            DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
-            reg2.CustomField_Responses.Add(resp3);
-            reg2.CustomField_Responses.Add(resp4);
-            DataCollection.Group group1 = new DataCollection.Group();
-            group1.Primary = reg1;
-            group1.Secondaries.Add(reg2);
-
-            KeywordProvider.RegistrationCreation.GroupRegistration(group1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 280);
-
-            KeywordProvider.SignIn.SignIn(DataCollection.EventFolders.Folders.RegistrationInventory);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SelectByName();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountAmount.Type(10);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
-
-            DataCollection.Registrant reg3 = new DataCollection.Registrant(evt);
-            reg3.Payment_Method = paymentMethod;
-            reg3.CustomField_Responses.Add(resp1);
-            reg3.CustomField_Responses.Add(resp2);
-            System.Threading.Thread.Sleep(10);
-            DataCollection.Registrant reg4 = new DataCollection.Registrant(evt);
-            reg4.CustomField_Responses.Add(resp3);
-            reg4.CustomField_Responses.Add(resp4);
-            DataCollection.Group group2 = new DataCollection.Group();
-            group2.Primary = reg3;
-            group2.Secondaries.Add(reg4);
-
-            KeywordProvider.RegistrationCreation.GroupRegistration(group2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 10 * 4);
-
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.Login(reg1);
-
-            DataCollection.Registrant reg5 = new DataCollection.Registrant(evt);
-            reg5.Payment_Method = paymentMethod;
-            reg5.CustomField_Responses.Add(resp1);
-            reg5.CustomField_Responses.Add(resp2);
-
-            PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg5.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg5);
-            KeywordProvider.RegistrationCreation.Agenda(reg5);
-            KeywordProvider.RegistrationCreation.Checkout(reg5);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 450 - 5 * 6);
-
-            DataCollection.Registrant reg6 = new DataCollection.Registrant(evt);
-            reg6.CustomField_Responses.Add(resp1);
-            reg6.CustomField_Responses.Add(resp2);
-
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.Login(reg1);
-            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(1);
-            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(2);
-            PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg1);
-            PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(reg1);
-            PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg6.Email);
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg6);
-            KeywordProvider.RegistrationCreation.Agenda(reg6);
-            KeywordProvider.RegistrationCreation.Checkout(reg1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation), 300 - 10 * 4);
         }
     }
 }

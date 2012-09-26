@@ -28,6 +28,7 @@
         public FormData.FormType FormType;
         public TaxRate TaxRateOne;
         public TaxRate TaxRateTwo;
+        public List<Registrant> Registrants = new List<Registrant>();
         
         public StartPage StartPage = new StartPage();
         public PersonalInfoPage PersonalInfoPage = new PersonalInfoPage();
@@ -119,9 +120,12 @@
         public GroupDiscount_GroupSizeOption GroupSizeOption;
         public double DiscountAmount;
         public GroupDiscount_DiscountType GroupDiscountType;
-        public GroupDiscount_AdditionalRegOption AddtionalRegOption;
+        public GroupDiscount_AdditionalRegOption? AddtionalRegOption;
         public int? NumberOfAdditionalReg;
         public GroupDiscount_ApplyOption? ApplyOption;
+        public List<AgendaItem> ApplyToAgendaItems = new List<AgendaItem>();
+        public List<RegType> ApplyToRegTypes = new List<RegType>();
+        public bool ShowAndApply = true;
     }
 
     public class PaymentMethod

@@ -26,7 +26,12 @@
             }
             else
             {
-                double discountAmount = this.Amount;
+                double discountAmount = 0;
+
+                if (this.Amount >= 0)
+                {
+                    discountAmount = this.Amount;
+                }
 
                 if (this.CodeDirection.Value == FormData.ChangePriceDirection.Decrease)
                 {

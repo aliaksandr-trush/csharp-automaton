@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
 
-  <Environments EnvironmentChosen="Beta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
+  <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
 	<Environment Name="Alpha"
 		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"

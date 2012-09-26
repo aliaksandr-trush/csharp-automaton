@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="AccessCodeFixture.cs" />
     <Compile Include="DiscountCodeFixture.cs" />
+    <Compile Include="FeeOptionsCombination.cs" />
+    <Compile Include="GroupDiscountFixture.cs" />
     <Compile Include="EventFeeFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaxFixture.cs" />

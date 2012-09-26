@@ -11,13 +11,9 @@
     {
         static void Main(string[] args)
         {
-            ////string input = Console.ReadLine();
-            ////string[] eventIds = input.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
-            ////foreach (string eventId in eventIds)
-            ////{
-            ////    AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
-            ////}
             Console.WriteLine(Path.GetFullPath("ButtonDesigner/CustomCode.html").Replace('\\', '/'));
+            Console.WriteLine(98 / 100.0);
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
             Console.Read();
         }
     }

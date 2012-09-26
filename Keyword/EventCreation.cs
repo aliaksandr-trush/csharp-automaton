@@ -200,40 +200,6 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AllowChangeRegType.Set(details.StartPage.AllowChangeRegType.Value);
             }
 
-            if (details.StartPage.GroupDiscount != null)
-            {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdjustRADWindowPositionAndResize();
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SelectByName();
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.GroupSize.Type(details.StartPage.GroupDiscount.GroupSize);
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.GroupSizeOption.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupSizeOption));
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountAmount.Type(details.StartPage.GroupDiscount.DiscountAmount);
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountType.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupDiscountType));
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AddtionalRegOption.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.AddtionalRegOption));
-                
-                if (details.StartPage.GroupDiscount.NumberOfAdditionalReg.HasValue)
-                {
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(details.StartPage.GroupDiscount.NumberOfAdditionalReg.Value);
-                }
-
-                switch (details.StartPage.GroupDiscount.ApplyOption)
-                {
-                    case GroupDiscount_ApplyOption.ToAllEventFees:
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToAllEventFees.Click();
-                        break;
-
-                    case GroupDiscount_ApplyOption.ToOnlySelectedFees:
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToSelectedFees.Click();
-                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.All.Set(true);
-                        break;
-
-                    default:
-                        break;
-                }
-
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
-            }
-
             if (details.StartPage.AdvancedSettings != null)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AdvancedSettings_Click();
@@ -382,6 +348,61 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaPageFooterEditor.Content_Type(details.AgendaPage.PageFooter);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaPageFooterEditor.SaveAndClose_Click();
                 }
+            }
+
+            if (details.StartPage.GroupDiscount != null)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Start);
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdjustRADWindowPositionAndResize();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.GroupSize.Type(details.StartPage.GroupDiscount.GroupSize);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.GroupSizeOption.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupSizeOption));
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountAmount.Type(details.StartPage.GroupDiscount.DiscountAmount);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.DiscountType.SelectWithText(CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.GroupDiscountType));
+
+                if ((details.StartPage.GroupDiscount.GroupSizeOption == GroupDiscount_GroupSizeOption.JustSize)
+                    && details.StartPage.GroupDiscount.AddtionalRegOption.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AddtionalRegOption.SelectWithText(
+                        CustomStringAttribute.GetCustomString(details.StartPage.GroupDiscount.AddtionalRegOption.Value));
+
+                    if ((details.StartPage.GroupDiscount.AddtionalRegOption.Value == GroupDiscount_AdditionalRegOption.Additional)
+                        && (details.StartPage.GroupDiscount.NumberOfAdditionalReg.HasValue))
+                    {
+                        PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdditionalNumber.Type(
+                            details.StartPage.GroupDiscount.NumberOfAdditionalReg.Value);
+                    }
+                }
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToSelectedFees_Click();
+
+                if ((details.StartPage.GroupDiscount.ApplyToAgendaItems.Count != 0) || (details.StartPage.GroupDiscount.ApplyToRegTypes.Count != 0))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.All.Set(false);
+
+                    if (details.StartPage.GroupDiscount.ApplyToAgendaItems.Count != 0)
+                    {
+                        foreach (AgendaItem agenda in details.StartPage.GroupDiscount.ApplyToAgendaItems)
+                        {
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToAgendaItem(agenda).Set(true);
+                        }
+                    }
+
+                    if (details.StartPage.GroupDiscount.ApplyToRegTypes.Count != 0)
+                    {
+                        foreach (RegType regType in details.StartPage.GroupDiscount.ApplyToRegTypes)
+                        {
+                            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ApplyToRegType(regType).Set(true);
+                        }
+                    }
+                }
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.ShowAndApply.Set(
+                    details.StartPage.GroupDiscount.ShowAndApply);
+
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SaveAndClose_Click();
             }
         }
 
