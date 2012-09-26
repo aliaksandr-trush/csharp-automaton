@@ -83,6 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Client.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Client.designer.cs</LastGenOutput>

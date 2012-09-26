@@ -38,7 +38,8 @@
         {
             this.ChangeRegType.WaitForDisplay();
             this.ChangeRegType.Click();
-            Utility.ThreadSleep(1);
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
             WaitForLoad();
         }
     }
@@ -60,7 +61,7 @@
         {
             this.OK.WaitForDisplay();
             this.OK.Click();
-            Utility.ThreadSleep(1);
+            Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
             SwitchToMain();
@@ -70,7 +71,7 @@
         {
             this.Cancel.WaitForDisplay();
             this.Cancel.Click();
-            Utility.ThreadSleep(1);
+            Utility.ThreadSleep(2);
             WaitForAJAX();
             SwitchToMain();
         }

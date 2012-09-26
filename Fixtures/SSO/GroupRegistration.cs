@@ -27,8 +27,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt, true, false);
 
-            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
-            reg1.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg1 = new Registrant(evt, SSOData.SSOTestEmail);
+            reg1.Password = SSOData.SSOPassword;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
 
             Registrant reg2 = new Registrant(evt);
@@ -133,8 +133,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt1, true, false);
 
-            Registrant reg1 = new Registrant(evt1, ExternalAuthenticationData.SSOTestEmail);
-            reg1.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg1 = new Registrant(evt1, SSOData.SSOTestEmail);
+            reg1.Password = SSOData.SSOPassword;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg1);
@@ -156,14 +156,12 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt2, true, false);
 
-            Registrant reg2 = new Registrant(evt2, ExternalAuthenticationData.SSOTestEmail);
-            reg2.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg2 = new Registrant(evt2, SSOData.SSOTestEmail);
+            reg2.Password = SSOData.SSOPassword;
             reg2.EventFee_Response = new EventFeeResponse(regType3);
 
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
+            KeywordProvider.RegistrationCreation.Checkin(reg2);
             KeywordProvider.RegistrationCreation.SSOLogin(reg2);
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
-            PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);

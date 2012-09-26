@@ -24,8 +24,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt);
 
-            Registrant reg = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
-            reg.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg = new Registrant(evt, SSOData.SSOTestEmail);
+            reg.Password = SSOData.SSOPassword;
             reg.EventFee_Response = new EventFeeResponse(ssoRegType);
 
             KeywordProvider.RegistrationCreation.CreateRegistration(reg);
@@ -40,14 +40,14 @@
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();
-            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
+            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(SSOData.SSOEndpointURL + "add");
             PageObject.PageObjectProvider.Manager.SSOBase.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.Refresh();
             Assert.AreEqual(0, Convert.ToInt32(PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.TotalRegs.Text));
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();
-            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
+            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(SSOData.SSOEndpointURL);
             PageObject.PageObjectProvider.Manager.SSOBase.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();

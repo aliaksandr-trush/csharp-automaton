@@ -1,11 +1,12 @@
 ﻿namespace RegOnline.RegressionTest.Keyword
 {
     using System;
+    using System.IO;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public class AddHtmlButton
+    public class HtmlButton
     {
         public void CreateButton(DataCollection.HtmlButton button)
         {
@@ -20,8 +21,15 @@
             }
 
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.BuildIt_Click(button);
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.SetKeyPhrase(button);
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.GenerateCode_Click();
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.SetGeneratedCodeHtml(button);
+        }
 
-            Enum.TryParse<DataCollection.HtmlButton.Keyword>(PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.Link_ButtonKeyword.Text, out button.Button_Keyword);
+        public void OpenSavedCodeHtmlInBrowserAndVerify(DataCollection.HtmlButton button, string fileName)
+        {
+            string fileUrl = string.Format("file:///{0}", button.CodeHtmlFile_FullPath.Replace('\\', '/'));
+
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Beta" Class="ClientDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ws0034devsql01\qa1rom;Initial Catalog=Beta;Integrated Security=True" SettingsObjectName="RegOnline.RegressionTest.DataAccess.Properties.Settings" SettingsPropertyName="BetaConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=qasql\qa1rom;Initial Catalog=Beta;Persist Security Info=True;User ID=regonlinebrowser" SettingsObjectName="RegOnline.RegressionTest.DataAccess.Properties.Settings" SettingsPropertyName="BetaConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Custom_Field_Responses" Member="Custom_Field_Responses">
     <Type Name="Custom_Field_Response">
       <Column Name="CFId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -1241,6 +1241,30 @@
       <Column Name="priceOption" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Custom_Field_Custom_Fields_Pricing" Member="Custom_Field" ThisKey="eventId,cfId" OtherKey="EventId,Id" Type="Custom_Field" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.XAuthConfiguration" Member="XAuthConfigurations">
+    <Type Name="XAuthConfiguration">
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Approved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceEndpointUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="EmailAddressNeeded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MembershipNumberNeeded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordNeeded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ForgetPasswordUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TestEmailAddress" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TestUserName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TestPassword" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AddBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MembershipNumberLabel" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MessageToRegistrant" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="SSOServiceEndpointUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SSOLoginPageUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="XAuthTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

@@ -31,6 +31,7 @@
         private Clickable ProgressBarStep_Button_Style = new Clickable("progress_step3", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_GetCode = new Clickable("progress_step4", UIUtility.LocateBy.Id);
         private Clickable Link_ButtonKeyword = new Clickable("//div[@id='btn_foot']/a", UIUtility.LocateBy.XPath);
+        private Clickable Button_GenerateCode = new Clickable("generate_code", UIUtility.LocateBy.Id);
 
         public ButtonDesigner(string name)
             : base(name)
@@ -127,6 +128,40 @@
 
             Utilities.Utility.ThreadSleep(2);
             WaitForAJAX();
+        }
+
+        public void SetKeyPhrase(DataCollection.HtmlButton button)
+        {
+            string text = this.Link_ButtonKeyword.Text;
+
+            foreach (DataCollection.HtmlButton.KeyPhrase phrase in Enum.GetValues(typeof(DataCollection.HtmlButton.KeyPhrase)))
+            {
+                if (text.Equals(Utilities.CustomStringAttribute.GetCustomString(button.Button_KeyPhrase)))
+                {
+                    button.Button_KeyPhrase = phrase;
+                }
+            }
+
+            UIUtility.UIUtil.DefaultProvider.FailTest(string.Format("No matching key phrase for '{0}'", text));
+        }
+
+        public void GenerateCode_Click()
+        {
+            this.Button_GenerateCode.WaitForDisplayAndClick();
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
+        }
+
+        public void SetGeneratedCodeHtml(DataCollection.HtmlButton button)
+        {
+            ElementBase TextArea_GeneratedCode = new ElementBase(string.Format("code_{0}", (int)button.Graphic_Type), UIUtility.LocateBy.Id);
+
+            StringBuilder script = new StringBuilder();
+            script.Append(string.Format("var textArea_GeneratedCode = document.getElementById('{0}');", TextArea_GeneratedCode.Locator));
+            script.Append(string.Format("textArea_GeneratedCode.setAttribute('value', textArea_GeneratedCode.value);", TextArea_GeneratedCode.Locator));
+
+            UIUtility.UIUtil.DefaultProvider.ExecuteJavaScript(script.ToString());
+            button.CodeHtml = TextArea_GeneratedCode.GetAttribute("value");
         }
     }
 }

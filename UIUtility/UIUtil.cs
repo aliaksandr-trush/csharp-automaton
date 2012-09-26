@@ -1145,6 +1145,10 @@
             driver.SwitchTo().Frame("plain");
         }
 
+        public void OpenNewBrowserTab()
+        {
+        }
+
         #region Verify
         public void VerifyConfirmation(string confirmation)
         {

@@ -17,7 +17,7 @@
             ////{
             ////    AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
             ////}
-            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
+            Console.WriteLine(Path.GetFullPath("ButtonDesigner/CustomCode.html").Replace('\\', '/'));
             Console.Read();
         }
     }

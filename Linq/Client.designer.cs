@@ -105,6 +105,9 @@ namespace RegOnline.RegressionTest.DataAccess
     partial void InsertCustom_Fields_Pricing(Custom_Fields_Pricing instance);
     partial void UpdateCustom_Fields_Pricing(Custom_Fields_Pricing instance);
     partial void DeleteCustom_Fields_Pricing(Custom_Fields_Pricing instance);
+    partial void InsertXAuthConfiguration(XAuthConfiguration instance);
+    partial void UpdateXAuthConfiguration(XAuthConfiguration instance);
+    partial void DeleteXAuthConfiguration(XAuthConfiguration instance);
     #endregion
 		
 		public ClientDataContext(string connection) : 
@@ -328,6 +331,14 @@ namespace RegOnline.RegressionTest.DataAccess
 			get
 			{
 				return this.GetTable<Custom_Fields_Pricing>();
+			}
+		}
+		
+		public System.Data.Linq.Table<XAuthConfiguration> XAuthConfigurations
+		{
+			get
+			{
+				return this.GetTable<XAuthConfiguration>();
 			}
 		}
 	}
@@ -29351,6 +29362,524 @@ namespace RegOnline.RegressionTest.DataAccess
 						this._cfId = default(int);
 					}
 					this.SendPropertyChanged("Custom_Field");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.XAuthConfiguration")]
+	public partial class XAuthConfiguration : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CustomerId;
+		
+		private bool _Approved;
+		
+		private string _ServiceEndpointUrl;
+		
+		private bool _EmailAddressNeeded;
+		
+		private bool _MembershipNumberNeeded;
+		
+		private bool _PasswordNeeded;
+		
+		private string _ForgetPasswordUrl;
+		
+		private string _TestEmailAddress;
+		
+		private string _TestUserName;
+		
+		private string _TestPassword;
+		
+		private string _AddBy;
+		
+		private System.DateTime _AddDate;
+		
+		private string _ModBy;
+		
+		private System.DateTime _ModDate;
+		
+		private System.Nullable<System.DateTime> _ApprovedDate;
+		
+		private string _MembershipNumberLabel;
+		
+		private string _MessageToRegistrant;
+		
+		private string _SSOServiceEndpointUrl;
+		
+		private string _SSOLoginPageUrl;
+		
+		private int _XAuthTypeId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerIdChanging(int value);
+    partial void OnCustomerIdChanged();
+    partial void OnApprovedChanging(bool value);
+    partial void OnApprovedChanged();
+    partial void OnServiceEndpointUrlChanging(string value);
+    partial void OnServiceEndpointUrlChanged();
+    partial void OnEmailAddressNeededChanging(bool value);
+    partial void OnEmailAddressNeededChanged();
+    partial void OnMembershipNumberNeededChanging(bool value);
+    partial void OnMembershipNumberNeededChanged();
+    partial void OnPasswordNeededChanging(bool value);
+    partial void OnPasswordNeededChanged();
+    partial void OnForgetPasswordUrlChanging(string value);
+    partial void OnForgetPasswordUrlChanged();
+    partial void OnTestEmailAddressChanging(string value);
+    partial void OnTestEmailAddressChanged();
+    partial void OnTestUserNameChanging(string value);
+    partial void OnTestUserNameChanged();
+    partial void OnTestPasswordChanging(string value);
+    partial void OnTestPasswordChanged();
+    partial void OnAddByChanging(string value);
+    partial void OnAddByChanged();
+    partial void OnAddDateChanging(System.DateTime value);
+    partial void OnAddDateChanged();
+    partial void OnModByChanging(string value);
+    partial void OnModByChanged();
+    partial void OnModDateChanging(System.DateTime value);
+    partial void OnModDateChanged();
+    partial void OnApprovedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApprovedDateChanged();
+    partial void OnMembershipNumberLabelChanging(string value);
+    partial void OnMembershipNumberLabelChanged();
+    partial void OnMessageToRegistrantChanging(string value);
+    partial void OnMessageToRegistrantChanged();
+    partial void OnSSOServiceEndpointUrlChanging(string value);
+    partial void OnSSOServiceEndpointUrlChanged();
+    partial void OnSSOLoginPageUrlChanging(string value);
+    partial void OnSSOLoginPageUrlChanged();
+    partial void OnXAuthTypeIdChanging(int value);
+    partial void OnXAuthTypeIdChanged();
+    #endregion
+		
+		public XAuthConfiguration()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CustomerId
+		{
+			get
+			{
+				return this._CustomerId;
+			}
+			set
+			{
+				if ((this._CustomerId != value))
+				{
+					this.OnCustomerIdChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerId = value;
+					this.SendPropertyChanged("CustomerId");
+					this.OnCustomerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved", DbType="Bit NOT NULL")]
+		public bool Approved
+		{
+			get
+			{
+				return this._Approved;
+			}
+			set
+			{
+				if ((this._Approved != value))
+				{
+					this.OnApprovedChanging(value);
+					this.SendPropertyChanging();
+					this._Approved = value;
+					this.SendPropertyChanged("Approved");
+					this.OnApprovedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceEndpointUrl", DbType="NVarChar(200)")]
+		public string ServiceEndpointUrl
+		{
+			get
+			{
+				return this._ServiceEndpointUrl;
+			}
+			set
+			{
+				if ((this._ServiceEndpointUrl != value))
+				{
+					this.OnServiceEndpointUrlChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceEndpointUrl = value;
+					this.SendPropertyChanged("ServiceEndpointUrl");
+					this.OnServiceEndpointUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailAddressNeeded", DbType="Bit NOT NULL")]
+		public bool EmailAddressNeeded
+		{
+			get
+			{
+				return this._EmailAddressNeeded;
+			}
+			set
+			{
+				if ((this._EmailAddressNeeded != value))
+				{
+					this.OnEmailAddressNeededChanging(value);
+					this.SendPropertyChanging();
+					this._EmailAddressNeeded = value;
+					this.SendPropertyChanged("EmailAddressNeeded");
+					this.OnEmailAddressNeededChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MembershipNumberNeeded", DbType="Bit NOT NULL")]
+		public bool MembershipNumberNeeded
+		{
+			get
+			{
+				return this._MembershipNumberNeeded;
+			}
+			set
+			{
+				if ((this._MembershipNumberNeeded != value))
+				{
+					this.OnMembershipNumberNeededChanging(value);
+					this.SendPropertyChanging();
+					this._MembershipNumberNeeded = value;
+					this.SendPropertyChanged("MembershipNumberNeeded");
+					this.OnMembershipNumberNeededChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordNeeded", DbType="Bit NOT NULL")]
+		public bool PasswordNeeded
+		{
+			get
+			{
+				return this._PasswordNeeded;
+			}
+			set
+			{
+				if ((this._PasswordNeeded != value))
+				{
+					this.OnPasswordNeededChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordNeeded = value;
+					this.SendPropertyChanged("PasswordNeeded");
+					this.OnPasswordNeededChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForgetPasswordUrl", DbType="NVarChar(200)")]
+		public string ForgetPasswordUrl
+		{
+			get
+			{
+				return this._ForgetPasswordUrl;
+			}
+			set
+			{
+				if ((this._ForgetPasswordUrl != value))
+				{
+					this.OnForgetPasswordUrlChanging(value);
+					this.SendPropertyChanging();
+					this._ForgetPasswordUrl = value;
+					this.SendPropertyChanged("ForgetPasswordUrl");
+					this.OnForgetPasswordUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestEmailAddress", DbType="NVarChar(100)")]
+		public string TestEmailAddress
+		{
+			get
+			{
+				return this._TestEmailAddress;
+			}
+			set
+			{
+				if ((this._TestEmailAddress != value))
+				{
+					this.OnTestEmailAddressChanging(value);
+					this.SendPropertyChanging();
+					this._TestEmailAddress = value;
+					this.SendPropertyChanged("TestEmailAddress");
+					this.OnTestEmailAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestUserName", DbType="NVarChar(100)")]
+		public string TestUserName
+		{
+			get
+			{
+				return this._TestUserName;
+			}
+			set
+			{
+				if ((this._TestUserName != value))
+				{
+					this.OnTestUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._TestUserName = value;
+					this.SendPropertyChanged("TestUserName");
+					this.OnTestUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestPassword", DbType="NVarChar(100)")]
+		public string TestPassword
+		{
+			get
+			{
+				return this._TestPassword;
+			}
+			set
+			{
+				if ((this._TestPassword != value))
+				{
+					this.OnTestPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._TestPassword = value;
+					this.SendPropertyChanged("TestPassword");
+					this.OnTestPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddBy", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string AddBy
+		{
+			get
+			{
+				return this._AddBy;
+			}
+			set
+			{
+				if ((this._AddBy != value))
+				{
+					this.OnAddByChanging(value);
+					this.SendPropertyChanging();
+					this._AddBy = value;
+					this.SendPropertyChanged("AddBy");
+					this.OnAddByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddDate", DbType="DateTime NOT NULL")]
+		public System.DateTime AddDate
+		{
+			get
+			{
+				return this._AddDate;
+			}
+			set
+			{
+				if ((this._AddDate != value))
+				{
+					this.OnAddDateChanging(value);
+					this.SendPropertyChanging();
+					this._AddDate = value;
+					this.SendPropertyChanged("AddDate");
+					this.OnAddDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModBy", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ModBy
+		{
+			get
+			{
+				return this._ModBy;
+			}
+			set
+			{
+				if ((this._ModBy != value))
+				{
+					this.OnModByChanging(value);
+					this.SendPropertyChanging();
+					this._ModBy = value;
+					this.SendPropertyChanged("ModBy");
+					this.OnModByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModDate
+		{
+			get
+			{
+				return this._ModDate;
+			}
+			set
+			{
+				if ((this._ModDate != value))
+				{
+					this.OnModDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModDate = value;
+					this.SendPropertyChanged("ModDate");
+					this.OnModDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ApprovedDate
+		{
+			get
+			{
+				return this._ApprovedDate;
+			}
+			set
+			{
+				if ((this._ApprovedDate != value))
+				{
+					this.OnApprovedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ApprovedDate = value;
+					this.SendPropertyChanged("ApprovedDate");
+					this.OnApprovedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MembershipNumberLabel", DbType="NVarChar(100)")]
+		public string MembershipNumberLabel
+		{
+			get
+			{
+				return this._MembershipNumberLabel;
+			}
+			set
+			{
+				if ((this._MembershipNumberLabel != value))
+				{
+					this.OnMembershipNumberLabelChanging(value);
+					this.SendPropertyChanging();
+					this._MembershipNumberLabel = value;
+					this.SendPropertyChanged("MembershipNumberLabel");
+					this.OnMembershipNumberLabelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageToRegistrant", DbType="NVarChar(1000)")]
+		public string MessageToRegistrant
+		{
+			get
+			{
+				return this._MessageToRegistrant;
+			}
+			set
+			{
+				if ((this._MessageToRegistrant != value))
+				{
+					this.OnMessageToRegistrantChanging(value);
+					this.SendPropertyChanging();
+					this._MessageToRegistrant = value;
+					this.SendPropertyChanged("MessageToRegistrant");
+					this.OnMessageToRegistrantChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSOServiceEndpointUrl", DbType="NVarChar(200)")]
+		public string SSOServiceEndpointUrl
+		{
+			get
+			{
+				return this._SSOServiceEndpointUrl;
+			}
+			set
+			{
+				if ((this._SSOServiceEndpointUrl != value))
+				{
+					this.OnSSOServiceEndpointUrlChanging(value);
+					this.SendPropertyChanging();
+					this._SSOServiceEndpointUrl = value;
+					this.SendPropertyChanged("SSOServiceEndpointUrl");
+					this.OnSSOServiceEndpointUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSOLoginPageUrl", DbType="NVarChar(200)")]
+		public string SSOLoginPageUrl
+		{
+			get
+			{
+				return this._SSOLoginPageUrl;
+			}
+			set
+			{
+				if ((this._SSOLoginPageUrl != value))
+				{
+					this.OnSSOLoginPageUrlChanging(value);
+					this.SendPropertyChanging();
+					this._SSOLoginPageUrl = value;
+					this.SendPropertyChanged("SSOLoginPageUrl");
+					this.OnSSOLoginPageUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XAuthTypeId", DbType="Int NOT NULL")]
+		public int XAuthTypeId
+		{
+			get
+			{
+				return this._XAuthTypeId;
+			}
+			set
+			{
+				if ((this._XAuthTypeId != value))
+				{
+					this.OnXAuthTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._XAuthTypeId = value;
+					this.SendPropertyChanged("XAuthTypeId");
+					this.OnXAuthTypeIdChanged();
 				}
 			}
 		}

@@ -44,5 +44,13 @@
             var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
             return (from r in db.EventRegTypes where r.EventId == eventId && r.Description == regTypeName select r.Id).Single();
         }
+
+        public static void SetSSOEndpointUrl(int customerId, string endpointUrl)
+        {
+            var db = new ClientDataContext();
+            var config = db.XAuthConfigurations.Single(c => c.CustomerId == customerId);
+            config.SSOServiceEndpointUrl = endpointUrl;
+            db.SubmitChanges();
+        }
     }
 }

@@ -76,6 +76,10 @@
       <Project>{2E1AE510-459D-489B-AAB7-420EAFF75BDB}</Project>
       <Name>Keyword</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Linq\DataAccess.csproj">
+      <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Managers\Managers.csproj">
       <Project>{800A556B-1D98-4847-A30A-2EF1E0A2AEC8}</Project>
       <Name>Managers</Name>

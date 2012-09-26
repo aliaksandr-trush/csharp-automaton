@@ -19,8 +19,8 @@
             regType.IsSSO = true;
             evt.StartPage.RegTypes.Add(regType);
 
-            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.ExternalAuthenticationData.SSOTestEmail);
-            reg.Password = DataCollection.ExternalAuthenticationData.SSOPassword;
+            DataCollection.Registrant reg = new DataCollection.Registrant(evt, DataCollection.SSOData.SSOTestEmail);
+            reg.Password = DataCollection.SSOData.SSOPassword;
             reg.EventFee_Response = new DataCollection.EventFeeResponse(regType);
             reg.Register_Method = DataCollection.RegisterMethod.Admin;
 

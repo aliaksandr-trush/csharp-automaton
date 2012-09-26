@@ -1,6 +1,6 @@
 ﻿namespace RegOnline.RegressionTest.DataCollection
 {
-    public class ExternalAuthenticationData
+    public class SSOData
     {
         public static string SSOEndpointURL = "https://beta.regonline.com/WebServiceFakes/SSO/XIDValidationService.asmx/ValidateXID";
         public static string SSOLoginURL = "https://beta.regonline.com/WebServiceFakes/SSO/ssologin.aspx";
