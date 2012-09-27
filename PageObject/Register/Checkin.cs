@@ -158,8 +158,21 @@
 
             foreach (IWebElement label in labels)
             {
-                // Note that a regtype with fee should be displayed like "RegType1: $80"
-                if (label.Text.Trim().Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0].Equals(regType.Name))
+                string labelText = label.Text.Trim();
+
+                // Note that a regtype with fee and additional details should be displayed like "RegType1: $80 Details"
+                if (!string.IsNullOrEmpty(regType.AdditionalDetails))
+                {
+                    labelText = labelText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                }
+
+                if (regType.Price.HasValue)
+                {
+                    labelText = labelText.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                }
+
+
+                if (labelText.Equals(regType.Name))
                 {
                     string forAttribute = label.GetAttribute("for");
                     regType.Id = Convert.ToInt32(forAttribute.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1]);

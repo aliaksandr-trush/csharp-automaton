@@ -73,6 +73,7 @@
         public KeyPhrase Button_KeyPhrase { get; set; }
         public string CodeHtml { get; set; }
         public string CodeHtmlFile_FullPath { get; set; }
+        public Event Evt { get; set; }
         
         public string Button_KeyPhrase_Text
         {
@@ -100,7 +101,10 @@
 
         public void SaveCodeHtmlToFile()
         {
-            string fileRelativePath = string.Format("ButtonDesigner/{0}", this.Graphic_Type.ToString());
+            string fileRelativePath = string.Format(
+                "ButtonDesigner/{0}_{1}.html", 
+                this.Graphic_Type.ToString(), 
+                DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
 
             FileStream fileStream = new FileStream(
                 fileRelativePath, 

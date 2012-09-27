@@ -555,8 +555,6 @@
         [Step]
         public void ChangeStatusIfNecessary(EventStatus status, string statusMessage = null)
         {
-            
-
             string StatusToChangeTo = StringEnum.GetStringValue(status);
 
             if (this.GetEventStatusFromDashboard().Equals(StatusToChangeTo))

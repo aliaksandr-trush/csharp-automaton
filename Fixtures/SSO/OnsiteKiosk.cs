@@ -67,7 +67,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
-            DataAccess.AccessData.RemoveLiveRegForEvent(evt.Id);
+            DataAccess.AccessData.SetLiveRegToTest(evt.Id);
         }
     }
 }

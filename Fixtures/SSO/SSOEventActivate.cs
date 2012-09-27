@@ -13,7 +13,7 @@
         [Test]
         public void ActivateSSOEvent()
         {
-            RegOnline.RegressionTest.DataAccess.AccessData.ApprovedXAuthRoleForCustomer(true);
+            RegOnline.RegressionTest.DataAccess.AccessData.ApprovedXAuthRoleForCurrentCustomer(true);
 
             Event evt = new Event("ActivateSSOEvent");
             RegType ssoRegType = new RegType("SSORegType");

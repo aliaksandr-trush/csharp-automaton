@@ -11,9 +11,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Path.GetFullPath("ButtonDesigner/CustomCode.html").Replace('\\', '/'));
-            Console.WriteLine(98 / 100.0);
-            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
+            AccessData.SetLiveRegToTest(new List<int>() { 633997, 634931 });
             Console.Read();
         }
     }

@@ -12,6 +12,8 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.Utilities;
     using RegOnline.RegressionTest.Attributes;
+    using RegOnline.RegressionTest.DataAccess;
+    using System.Collections.Generic;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -64,10 +66,11 @@
         public void ChangeStatuses()
         {
             this.LoginAndGoToRegressionFolder();
+            AccessData.SetLiveRegToTest(ManagerSiteMgr.GetEventIds(ChangeStatusEventName));
             ManagerSiteMgr.DeleteEventByName(ChangeStatusEventName);
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
             this.eventID = BuilderMgr.GetEventId();
-            this.SetStartPage(ChangeStatusEventName);
+            this.SetEventDetails(ChangeStatusEventName);
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventID, this.sessionId);
             ManagerSiteMgr.DashboardMgr.ActiveEvent();
             ManagerSiteMgr.DashboardMgr.ReturnToList();
@@ -114,10 +117,11 @@
         private void CreateNewEventToActivate()
         {
             this.LoginAndGoToRegressionFolder();
+            AccessData.SetLiveRegToTest(ManagerSiteMgr.GetEventIds(GoLiveEventName));
             ManagerSiteMgr.DeleteEventByName(GoLiveEventName);
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
             this.eventID = BuilderMgr.GetEventId();
-            this.SetStartPage(GoLiveEventName);
+            this.SetEventDetails(GoLiveEventName);
         }
 
         [Step]
@@ -160,7 +164,7 @@
             RegisterForTemplateEvent();
         }
 
-        private void SetStartPage(string eventName)
+        private void SetEventDetails(string eventName)
         {
             BuilderMgr.VerifyStartPageInitialDefaults(ManagerSiteManager.EventType.ProEvent);
             BuilderMgr.SetEventNameAndShortcut(eventName);
@@ -366,6 +370,7 @@
                     UIUtil.DefaultProvider.OpenUrl(ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl + "Register/Checkin.aspx?EventID=" + eventID + "&O=" + Guid.NewGuid());
                     UIUtil.DefaultProvider.RefreshPage();
                     VerifyTool.VerifyValue(false, !UIUtil.DefaultProvider.IsElementHidden(TestModeLocator, LocateBy.Id), "In test mode");
+                    ////VerifyTool.VerifyValue(false, !UIUtil.DefaultProvider.IsElementDisplay(TestModeLocator, LocateBy.Id), "Verify 'In test mode' display:{0}");
                     RegisterForGoLiveEvent();
                     break;
                 case DashboardManager.EventStatus.Archived:
