@@ -14,7 +14,7 @@
 
     internal class UIUtilHelper
     {
-        internal const string ScreenshotFileNameFormat = "FailureScreenshot_{0}.png";
+        internal const string ScreenshotFileNameFormat = "Screenshot_{0}.png";
         internal const string SaveAndNewButtonLocator = "ctl00_btnSaveNew";
         internal const string SaveAndStayButtonLocator = "ctl00_btnSaveStay";
         internal const string SaveAndCloseButtonLocator = "ctl00_btnSaveClose";

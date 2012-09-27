@@ -244,9 +244,9 @@
             RegisterMgr.FillOutCustomParagraphField("TRV-Paragraph", "Testing");
             RegisterMgr.FillOutCustomDateField("TRV-Date", "04/15/1996");
             List<string> custFields = RegisterMgr.GetLAndTCustomFieldNames(RegisterManager.Section.Lodging);
-            Assert.IsTrue(custFields.Count == 12);
+            Assert.AreEqual(6, custFields.Count);
             custFields = RegisterMgr.GetLAndTCustomFieldNames(RegisterManager.Section.Travel);
-            Assert.IsTrue(custFields.Count == 12);
+            Assert.AreEqual(6, custFields.Count);
             RegisterMgr.Continue();
         }
 

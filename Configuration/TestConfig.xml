@@ -231,7 +231,7 @@
   </WebServices>
 	
   <!-- "DirectStartup": whether to startup browser directly (i.e. without selenium server) -->
-  <Browsers Current="Firefox" DirectStartup="true">
+  <Browsers Current="Firefox" DirectStartup="false">
 	  <Browser Name="Firefox">
 	    <Server Path="" Host="127.0.0.1" Port="9999"/>
 	    <BinaryPath Enable="true">D:\FirefoxStuff\Program\FF13.0.1\firefox.exe</BinaryPath>
@@ -249,5 +249,5 @@
     </Browser>
   </Browsers>
 
-  <NUnitAddin ReportBack="false" />
+  <NUnitAddin ReportBack="true" />
 </TestConfig>

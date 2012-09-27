@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RegOnline.RegressionTest.UIUtility;
 
     public class HtmlButton
     {
@@ -12,6 +13,7 @@
         {
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Link_ButtonDesigner_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.SelectByName();
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.OpenInnerFrameUrl();
 
             if (button.Market_Selection != DataCollection.HtmlButton.MarketSelection.Events)
             {
@@ -29,7 +31,24 @@
         public void OpenSavedCodeHtmlInBrowserAndVerify(DataCollection.HtmlButton button, string fileName)
         {
             string fileUrl = string.Format("file:///{0}", button.CodeHtmlFile_FullPath.Replace('\\', '/'));
+            PageObject.PageObjectHelper.NavigateTo(fileUrl);
 
+            UIUtil.DefaultProvider.VerifyValue(
+                button.Button_KeyPhrase_Text, 
+                PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.Link_ButtonKeyword.Text,
+                "Verify button key-phrase text.");
+
+            UIUtil.DefaultProvider.VerifyValue(
+                button.Button_KeyPhrase_Link,
+                PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.Link_ButtonKeyword.GetAttribute("href"),
+                "Verify button key-phrase href.");
+
+            PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.RegisterNow_ClickToOpen();
+
+            UIUtil.DefaultProvider.VerifyValue(
+                button.Evt.Id.ToString(), 
+                UIUtil.DefaultProvider.GetQueryStringValue("EventID"), 
+                "Verify event id in url after click 'Register now'");
         }
     }
 }

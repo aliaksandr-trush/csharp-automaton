@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RegOnline.RegressionTest.WebElements;
+    using RegOnline.RegressionTest.UIUtility;
 
     public class ButtonDesigner : Frame
     {
@@ -30,8 +31,9 @@
         private Clickable ProgressBarStep_Button_GraphicType = new Clickable("progress_step2", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_Style = new Clickable("progress_step3", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_GetCode = new Clickable("progress_step4", UIUtility.LocateBy.Id);
-        private Clickable Link_ButtonKeyword = new Clickable("//div[@id='btn_foot']/a", UIUtility.LocateBy.XPath);
+        public Clickable Link_ButtonKeyword = new Clickable("//div[@id='btn_foot']/a", UIUtility.LocateBy.XPath);
         private Clickable Button_GenerateCode = new Clickable("generate_code", UIUtility.LocateBy.Id);
+        private Clickable RegisterNow = new Clickable("btn_txt", UIUtility.LocateBy.Id);
 
         public ButtonDesigner(string name)
             : base(name)
@@ -162,6 +164,24 @@
 
             UIUtility.UIUtil.DefaultProvider.ExecuteJavaScript(script.ToString());
             button.CodeHtml = TextArea_GeneratedCode.GetAttribute("value");
+        }
+
+        public void RegisterNow_ClickToOpen()
+        {
+            this.RegisterNow.WaitForDisplayAndClick();
+            UIUtil.DefaultProvider.SelectTopWindow();
+        }
+
+        /// <summary>
+        /// There's another iframe inside the 'Button Designer' rad window, which is the emarketing page really in use,
+        /// since we're executing js to get te generated code, it would be better to open that frame directly to do the test.
+        /// </summary>
+        public void OpenInnerFrameUrl()
+        {
+            Frame innerFrame = new Frame();
+            innerFrame.Id = innerFrame.Locator = "ctl00_cphDialog_iframeBD";
+            innerFrame.TypeOfLocator = LocateBy.Id;
+            PageObjectHelper.NavigateTo(innerFrame.GetAttribute("src"));
         }
     }
 }
