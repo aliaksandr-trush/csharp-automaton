@@ -26,9 +26,10 @@
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.SetKeyPhrase(button);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.GenerateCode_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.Frame_ButtonDesigner.SetGeneratedCodeHtml(button);
+            this.OpenSavedCodeHtmlInBrowserAndVerify(button);
         }
 
-        public void OpenSavedCodeHtmlInBrowserAndVerify(DataCollection.HtmlButton button, string fileName)
+        public void OpenSavedCodeHtmlInBrowserAndVerify(DataCollection.HtmlButton button)
         {
             string fileUrl = string.Format("file:///{0}", button.CodeHtmlFile_FullPath.Replace('\\', '/'));
             PageObject.PageObjectHelper.NavigateTo(fileUrl);
@@ -48,7 +49,7 @@
             UIUtil.DefaultProvider.VerifyValue(
                 button.Evt.Id.ToString(), 
                 UIUtil.DefaultProvider.GetQueryStringValue("EventID"), 
-                "Verify event id in url after click 'Register now'");
+                "Verify event id in url after clicking 'Register now'");
         }
     }
 }
