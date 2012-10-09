@@ -179,9 +179,8 @@
                         if (a.SpacesAvailable.HasValue)
                         {
                             element_Li.Locator = string.Format(
-                                "//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[contains(text(),'{0}')]]]", 
-                                agenda.NameOnForm, 
-                                a.SpacesAvailable.Value);
+                                "//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[starts-with(text(),'{0}')]]]", 
+                                agenda.NameOnForm);
                         }
                     }
 
