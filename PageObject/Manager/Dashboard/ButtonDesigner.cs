@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RegOnline.RegressionTest.WebElements;
+    using RegOnline.RegressionTest.UIUtility;
 
     public class ButtonDesigner : Frame
     {
@@ -30,10 +31,27 @@
         private Clickable ProgressBarStep_Button_GraphicType = new Clickable("progress_step2", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_Style = new Clickable("progress_step3", UIUtility.LocateBy.Id);
         private Clickable ProgressBarStep_Button_GetCode = new Clickable("progress_step4", UIUtility.LocateBy.Id);
+        public Clickable Link_ButtonKeyword = new Clickable("//div[@id='btn_foot']/a", UIUtility.LocateBy.XPath);
+        private Clickable Button_GenerateCode = new Clickable("generate_code", UIUtility.LocateBy.Id);
+        private Clickable RegisterNow = new Clickable("btn_txt", UIUtility.LocateBy.Id);
 
         public ButtonDesigner(string name)
             : base(name)
         { }
+
+        public void MarketSelection_Select(DataCollection.HtmlButton.MarketSelection market)
+        {
+            this.MarketSelection.WaitForDisplay();
+            this.MarketSelection.SelectWithText(market.ToString());
+        }
+
+        public void NextStep_Click()
+        {
+            this.NextStep.WaitForDisplayAndClick();
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
 
         public void BuildIt_Click(DataCollection.HtmlButton button)
         {
@@ -85,6 +103,9 @@
                         break;
                 }
             }
+
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
         }
 
         public void ProgressBarStep_Click(ProgressBarStep step)
@@ -109,6 +130,58 @@
 
             Utilities.Utility.ThreadSleep(2);
             WaitForAJAX();
+        }
+
+        public void SetKeyPhrase(DataCollection.HtmlButton button)
+        {
+            string text = this.Link_ButtonKeyword.Text;
+
+            foreach (DataCollection.HtmlButton.KeyPhrase phrase in Enum.GetValues(typeof(DataCollection.HtmlButton.KeyPhrase)))
+            {
+                if (text.Equals(Utilities.CustomStringAttribute.GetCustomString(button.Button_KeyPhrase)))
+                {
+                    button.Button_KeyPhrase = phrase;
+                }
+            }
+
+            UIUtility.UIUtil.DefaultProvider.FailTest(string.Format("No matching key phrase for '{0}'", text));
+        }
+
+        public void GenerateCode_Click()
+        {
+            this.Button_GenerateCode.WaitForDisplayAndClick();
+            Utilities.Utility.ThreadSleep(2);
+            WaitForAJAX();
+        }
+
+        public void SetGeneratedCodeHtml(DataCollection.HtmlButton button)
+        {
+            ElementBase TextArea_GeneratedCode = new ElementBase(string.Format("code_{0}", (int)button.Graphic_Type), UIUtility.LocateBy.Id);
+
+            StringBuilder script = new StringBuilder();
+            script.Append(string.Format("var textArea_GeneratedCode = document.getElementById('{0}');", TextArea_GeneratedCode.Locator));
+            script.Append(string.Format("textArea_GeneratedCode.setAttribute('value', textArea_GeneratedCode.value);", TextArea_GeneratedCode.Locator));
+
+            UIUtility.UIUtil.DefaultProvider.ExecuteJavaScript(script.ToString());
+            button.CodeHtml = TextArea_GeneratedCode.GetAttribute("value");
+        }
+
+        public void RegisterNow_ClickToOpen()
+        {
+            this.RegisterNow.WaitForDisplayAndClick();
+            UIUtil.DefaultProvider.SelectTopWindow();
+        }
+
+        /// <summary>
+        /// There's another iframe inside the 'Button Designer' rad window, which is the emarketing page really in use,
+        /// since we're executing js to get te generated code, it would be better to open that frame directly to do the test.
+        /// </summary>
+        public void OpenInnerFrameUrl()
+        {
+            Frame innerFrame = new Frame();
+            innerFrame.Id = innerFrame.Locator = "ctl00_cphDialog_iframeBD";
+            innerFrame.TypeOfLocator = LocateBy.Id;
+            PageObjectHelper.NavigateTo(innerFrame.GetAttribute("src"));
         }
     }
 }

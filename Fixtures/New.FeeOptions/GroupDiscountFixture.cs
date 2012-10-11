@@ -25,7 +25,7 @@
         MerchResponse_VariableAmount resp6 = new MerchResponse_VariableAmount();
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1373")]
         public void OrMore()
         {
@@ -41,7 +41,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1374")]
         public void JustSizeAndAll()
         {
@@ -60,7 +60,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1378")]
         public void JustSizeAndAnyAdditional()
         {
@@ -78,7 +78,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1375")]
         public void JustSizeAndAdditional()
         {
@@ -97,7 +97,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1383")]
         public void ApplyToSelectedFee()
         {
@@ -115,7 +115,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1379")]
         public void OneHundredPercent()
         {
@@ -132,7 +132,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1384")]
         public void ShowAndApply()
         {
@@ -150,7 +150,7 @@
         }
 
         [Test]
-        [Category(Priority.Three)]
+        [Category(Priority.Two)]
         [Description("1381")]
         public void ChangeDiscount()
         {

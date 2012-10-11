@@ -1145,6 +1145,12 @@
             driver.SwitchTo().Frame("plain");
         }
 
+        public void OpenNewBrowserTab()
+        {
+            Actions action = new Actions(this.driver);
+            action.KeyDown(Keys.LeftControl).KeyDown("T").KeyUp("T").KeyUp(Keys.LeftControl).Build().Perform();
+        }
+
         #region Verify
         public void VerifyConfirmation(string confirmation)
         {

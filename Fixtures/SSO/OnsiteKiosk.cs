@@ -23,8 +23,8 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.SSO, evt);
 
-            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
-            reg1.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg1 = new Registrant(evt, SSOData.SSOTestEmail);
+            reg1.Password = SSOData.SSOPassword;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
@@ -54,7 +54,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.NewSearch_Click();
 
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.OnsiteRegister_Click();
-            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(ExternalAuthenticationData.SSOJustNameEmail);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(SSOData.SSOJustNameEmail);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType1);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
@@ -67,7 +67,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
-            DataAccess.AccessData.RemoveLiveRegForEvent(evt.Id);
+            DataAccess.AccessData.SetLiveRegToTest(evt.Id);
         }
     }
 }

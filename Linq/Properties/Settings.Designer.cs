@@ -54,5 +54,16 @@ namespace RegOnline.RegressionTest.DataAccess.Properties {
                 return ((string)(this["ROWarehouseConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=qasql\\qa1rom;Initial Catalog=Beta;Persist Security Info=True;User ID=" +
+            "regonlinebrowser;Password=eguest")]
+        public string BetaConnectionString1 {
+            get {
+                return ((string)(this["BetaConnectionString1"]));
+            }
+        }
     }
 }

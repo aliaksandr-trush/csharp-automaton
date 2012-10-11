@@ -9,7 +9,6 @@
     <assembly path="RegOnline.RegressionTest.Fixtures.Agenda.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.LodgingAndTravel.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.Merchandise.dll" />
-    <assembly path="RegOnline.RegressionTest.Fixtures.FeeOptions.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.SpecialOptions.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.Reports.dll" />
 	  <assembly path="RegOnline.RegressionTest.Fixtures.Backend.dll" />

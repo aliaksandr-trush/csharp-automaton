@@ -40,7 +40,7 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SSORadio.Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.Type(wrongFormatURL1);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.LoginURL.Type(ExternalAuthenticationData.SSOLoginURL);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.LoginURL.Type(SSOData.SSOLoginURL);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SelectByName();
             Assert.True(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.ErrorMessage(Messages.BuilderError.ServiceEndPointFormatError).IsPresent);
@@ -48,7 +48,7 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SelectByName();
             Assert.True(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.ErrorMessage(Messages.BuilderError.ServiceEndPointFormatError).IsPresent);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.EndpointURL.Type(SSOData.SSOEndpointURL);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.SaveAndClose_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
@@ -56,14 +56,16 @@
             PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.Name);
             KeywordProvider.AddRegType.Add_RegType(regType2, evt);
             PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.Name);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(evt.Title);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(evt.Shortcut);
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();
             Assert.True(PageObject.PageObjectProvider.Manager.SSOBase.SSORadio.IsChecked);
-            Assert.AreEqual(PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Value, ExternalAuthenticationData.SSOEndpointURL);
-            Assert.AreEqual(PageObject.PageObjectProvider.Manager.SSOBase.LoginURL.Value, ExternalAuthenticationData.SSOLoginURL);
+            Assert.AreEqual(PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Value, SSOData.SSOEndpointURL);
+            Assert.AreEqual(PageObject.PageObjectProvider.Manager.SSOBase.LoginURL.Value, SSOData.SSOLoginURL);
             Assert.True(PageObject.PageObjectProvider.Manager.SSOBase.RegTypeEnabled(regType1).IsChecked);
             Assert.True(PageObject.PageObjectProvider.Manager.SSOBase.RegTypeEnabled(regType2).IsChecked);
             PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(wrongFormatURL1);
@@ -74,7 +76,7 @@
             PageObject.PageObjectProvider.Manager.SSOBase.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.SSOBase.SelectByName();
             Assert.True(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.ExternalAuthenticationSetup.ErrorMessage(Messages.BuilderError.ServiceEndPointFormatError).IsPresent);
-            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(ExternalAuthenticationData.SSOEndpointURL);
+            PageObject.PageObjectProvider.Manager.SSOBase.EndpointURL.Type(SSOData.SSOEndpointURL);
             PageObject.PageObjectProvider.Manager.SSOBase.RegTypeEnabled(regType2).Set(false);
             regType2.IsSSO = false;
             PageObject.PageObjectProvider.Manager.SSOBase.SaveAndClose_Click();
@@ -86,8 +88,8 @@
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
-            Registrant reg1 = new Registrant(evt, ExternalAuthenticationData.SSOTestEmail);
-            reg1.Password = ExternalAuthenticationData.SSOPassword;
+            Registrant reg1 = new Registrant(evt, SSOData.SSOTestEmail);
+            reg1.Password = SSOData.SSOPassword;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);

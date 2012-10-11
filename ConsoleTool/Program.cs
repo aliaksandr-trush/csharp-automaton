@@ -11,14 +11,7 @@
     {
         static void Main(string[] args)
         {
-            ////string input = Console.ReadLine();
-            ////string[] eventIds = input.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
-            ////foreach (string eventId in eventIds)
-            ////{
-            ////    AccessData.RemoveLiveRegForEvent(Convert.ToInt32(eventId));
-            ////}
-            Console.WriteLine(98 / 100.0);
-            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
+            AccessData.SetLiveRegToTest(new List<int>() { 633997, 634931 });
             Console.Read();
         }
     }

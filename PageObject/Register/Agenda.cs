@@ -30,7 +30,7 @@
             UIUtil.DefaultProvider.VerifyValue(
                 expected, 
                 actual,
-                string.Format("Check display of agenda item '{0}'", agenda.NameOnForm));
+                string.Format("Verify display of agenda item '{0}'", agenda.NameOnForm));
         }
 
         public void VerifyChoiceItemDisplay(ChoiceItem choice, bool expected)
@@ -41,7 +41,7 @@
             UIUtil.DefaultProvider.VerifyValue(
                 expected, 
                 actual,
-                string.Format("Check display of choice item '{0}'", choice.Name));
+                string.Format("Verify display of choice item '{0}'", choice.Name));
         }
 
         public void CloseDetailsPopup_Click()
@@ -179,9 +179,8 @@
                         if (a.SpacesAvailable.HasValue)
                         {
                             element_Li.Locator = string.Format(
-                                "//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[contains(text(),'{0}')]]]", 
-                                agenda.NameOnForm, 
-                                a.SpacesAvailable.Value);
+                                "//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[starts-with(text(),'{0}')]]]", 
+                                agenda.NameOnForm);
                         }
                     }
 

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RegOnline.RegressionTest.Utilities;
+    using System.IO;
 
     public class HtmlButton
     {
@@ -16,7 +17,7 @@
 
         public enum GraphicType
         {
-            Button,
+            Button = 0,
             Secure,
             TextLink,
             CountdownWidget
@@ -33,7 +34,7 @@
             Green
         }
 
-        public enum Keyword
+        public enum KeyPhrase
         {
             [CustomStringAttribute("event management software")]
             [CustomStringAttribute("http://www.regonline.com/__articles/products/event-management-software?utm_source=RegOnline&utm_medium=Button&utm_campaign=Event%2BManagement")]
@@ -69,21 +70,24 @@
         public bool WithPreview { get; set; }
         public ButtonTheme Button_Theme { get; set; }
         public string ButtonText { get; set; }
-        public Keyword Button_Keyword { get; set; }
+        public KeyPhrase Button_KeyPhrase { get; set; }
+        public string CodeHtml { get; set; }
+        public string CodeHtmlFile_FullPath { get; set; }
+        public Event Evt { get; set; }
         
-        public string Button_Keyword_Text
+        public string Button_KeyPhrase_Text
         {
             get
             {
-                return CustomStringAttribute.GetCustomString(this.Button_Keyword);
+                return CustomStringAttribute.GetCustomString(this.Button_KeyPhrase);
             }
         }
 
-        public string Button_Keyword_Link
+        public string Button_KeyPhrase_Link
         {
             get
             {
-                return CustomStringAttribute.GetCustomStrings(this.Button_Keyword)[1];
+                return CustomStringAttribute.GetCustomStrings(this.Button_KeyPhrase)[1];
             }
         }
 
@@ -93,6 +97,25 @@
             this.Graphic_Type = GraphicType.Button;
             this.WithPreview = true;
             this.Button_Theme = ButtonTheme.OrangeWithArrow;
+        }
+
+        public void SaveCodeHtmlToFile()
+        {
+            string fileRelativePath = string.Format(
+                "ButtonDesigner/{0}_{1}.html", 
+                this.Graphic_Type.ToString(), 
+                DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss tt"));
+
+            FileStream fileStream = new FileStream(
+                fileRelativePath, 
+                FileMode.Create, 
+                FileAccess.ReadWrite, 
+                FileShare.None);
+
+            StreamWriter writer = new StreamWriter(fileStream);
+            writer.Write(this.CodeHtml);
+            writer.Close();
+            this.CodeHtmlFile_FullPath = Path.GetFullPath(fileRelativePath);
         }
     }
 }
