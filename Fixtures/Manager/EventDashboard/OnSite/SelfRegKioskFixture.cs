@@ -565,7 +565,7 @@
 
             ReportMgr.CloseReportPopupWindow();
             ManagerSiteMgr.SelectManagerWindow();
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         [Step]

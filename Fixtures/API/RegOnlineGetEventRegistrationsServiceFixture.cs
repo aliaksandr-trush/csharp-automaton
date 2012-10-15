@@ -61,7 +61,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             ManagerSiteMgr.DeleteEventByName(EventName);
 

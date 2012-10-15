@@ -316,7 +316,7 @@
         }
 
         [Step]
-        public void ReturnToList()
+        public void ReturnToManagerScreenEventList()
         {
             UIUtil.DefaultProvider.WaitForDisplayAndClick("ctl00_ctl00_cphDialog_cpMgrMain_hplBack", LocateBy.Id);
             UIUtil.DefaultProvider.WaitForPageToLoad();
@@ -571,6 +571,8 @@
             UIUtil.DefaultProvider.WaitForDisplayAndClick(ChangeStatusNow, LocateBy.Id);
             UIUtil.DefaultProvider.WaitForAJAXRequest();
             UIUtil.DefaultProvider.SelectWithText(SetStatusNowLocator, StatusToChangeTo, LocateBy.Id);
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            Utility.ThreadSleep(3);
 
             if (!string.IsNullOrEmpty(statusMessage))
             {

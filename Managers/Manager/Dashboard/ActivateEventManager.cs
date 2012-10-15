@@ -42,6 +42,7 @@
             UIUtil.DefaultProvider.WaitForDisplayAndClick(ActivateButton, LocateBy.XPath);
             UIUtil.DefaultProvider.SwitchToMainContent();
             UIUtil.DefaultProvider.WaitForAJAXRequest();
+            Utilities.Utility.ThreadSleep(2);
         }
         
         /// <summary>

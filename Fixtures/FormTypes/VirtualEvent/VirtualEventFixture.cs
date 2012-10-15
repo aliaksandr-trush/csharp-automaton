@@ -169,7 +169,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             this.CreateEvent();
         }
@@ -182,7 +182,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             eventId = ManagerSiteMgr.GetFirstEventId(EventName);
 
             CreateRegistration();
@@ -199,7 +199,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
 
             if (!ManagerSiteMgr.EventExists(EventName))
@@ -297,7 +297,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             if (ManagerSiteMgr.EventExists(UpdateRegName))
             {
                 ManagerSiteMgr.DeleteEventByName(UpdateRegName);
@@ -390,7 +390,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             if (ManagerSiteMgr.EventExists(AdminRegName))
             {
                 ManagerSiteMgr.DeleteEventByName(AdminRegName);
@@ -540,7 +540,7 @@
             this.eventId = ManagerSiteMgr.GetFirstEventId(CopiedEventName);
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.sessionId);
             ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(CopiedTwiceEventName);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         #region build event methods

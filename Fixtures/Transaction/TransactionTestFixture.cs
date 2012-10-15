@@ -464,7 +464,7 @@
             ManagerSiteMgr.GoToEventsTabIfNeeded();
 
             // click "Regression" folder
-            ManagerSiteMgr.SelectFolder(); 
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount(); 
         }
         #endregion
     }

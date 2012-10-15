@@ -490,7 +490,7 @@
         {
             ManagerSiteMgr.SelectManagerWindow();
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         #region Event creation
@@ -500,7 +500,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.sessionID = BuilderMgr.GetEventSessionId();
         }
 

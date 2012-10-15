@@ -47,7 +47,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName, 0);
 

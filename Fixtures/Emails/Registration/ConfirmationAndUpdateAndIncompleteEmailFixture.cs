@@ -112,7 +112,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(eventName);
             ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
             this.eventId = BuilderMgr.GetEventId();
@@ -196,7 +196,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             this.eventSessionId = ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.OpenEventBuilderStartPage(this.eventId, this.eventSessionId);
             BuilderMgr.GotoTab(Managers.Builder.FormDetailManager.Tab.Emails);
             this.EditEmail(category, appendedEmailBodyText);

@@ -193,7 +193,7 @@
             UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             ManagerSiteMgr.DashboardMgr.DeleteTestReg_ClickDelete();
             UIUtil.DefaultProvider.SwitchToMainContent();
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void SetStartPage(string EventName)
@@ -802,6 +802,7 @@
             int xPathCount = UIUtil.DefaultProvider.GetXPathCountByXPath(locator_XPath);
             string startPoint = string.Format(AgendaWaitListDragAndDropLocator, valueLocator[1], regId/*, offsetMove*/);
             string endPoint = string.Format(AgendaWaitListDragAndDropLocator, valueLocator[1], regId2/*, offsetMove*/);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick(startPoint, LocateBy.XPath);
             UIUtil.DefaultProvider.DragAndDrop(startPoint, endPoint);
         }
 
@@ -908,7 +909,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.sessionID = ManagerSiteMgr.GetEventSessionId();
         }
     }

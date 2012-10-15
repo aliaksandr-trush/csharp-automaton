@@ -20,7 +20,8 @@
     public class FormOptionsFixture : FixtureBase
     {
         private const string GoLiveEventName = "GoLiveAndCheckDate";
-        private const string TemplateEventName = "FullEventBuildTemplate";
+        private const string EventName_ToCreateTemplateFrom = BuildEventFixture.EventName;
+        private const string EventName_CreatedFromTemplate = BuildEventFixture.EventName + " (from template)";
         private const string TestModeLocator = "warningTestMode";
         private const string CopiedEventName = BuildEventFixture.EventName + " (Copy)";
         private const string ChangeStatusEventName = "FormOptionsFixture_ChangeStatus";
@@ -47,7 +48,39 @@
         [Description("369")]
         public void CreateFromTemplate()
         {
-            this.CreateNewEventFromTemplate();
+            this.LoginAndGoToRegressionFolder();
+            ManagerSiteMgr.DeleteEventByName(EventName_CreatedFromTemplate);
+
+            // Go to Templates folder and delete old template event
+            ManagerSiteMgr.SelectFolder_PreBuilt(ManagerSiteManager.PreBuiltFolderName.Templates);
+            ManagerSiteMgr.DeleteEventByName(EventName_ToCreateTemplateFrom);
+            ManagerSiteMgr.DeleteEventByName(EventName_ToCreateTemplateFrom + " (Copy)");
+
+            // Go back to default folder, drag and drop to create an event template
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
+
+            if (!ManagerSiteMgr.EventExists(EventName_ToCreateTemplateFrom))
+            {
+                BuildEventFixture buildEventFixture = new BuildEventFixture();
+                buildEventFixture.FullEventBuild();
+            }
+
+            ManagerSiteMgr.DragAndDropToCreateTemplate(ManagerSiteMgr.GetFirstEventId(EventName_ToCreateTemplateFrom));
+
+            // Remove the '(Copy)' suffix for the event template
+            ManagerSiteMgr.SelectFolder_PreBuilt(ManagerSiteManager.PreBuiltFolderName.Templates);
+            ManagerSiteMgr.OpenEventBuilderStartPage(ManagerSiteMgr.GetFirstEventId(EventName_ToCreateTemplateFrom + " (Copy)"), this.sessionId);
+            BuilderMgr.SetEventNameAndShortcut(EventName_ToCreateTemplateFrom);
+            BuilderMgr.SaveAndClose();
+
+            // Create event from template, register, and verify
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
+            ManagerSiteMgr.AddEventFromTemplate(EventName_ToCreateTemplateFrom);
+            BuilderMgr.SetEventNameAndShortcut(EventName_CreatedFromTemplate);
+            this.eventID = BuilderMgr.GetEventId();
+            BuilderMgr.SaveAndClose();
+            RegisterMgr.OpenRegisterPage(this.eventID);
+            this.RegisterForCopiedOrTemplateEvent();
         }
 
         [Test]
@@ -55,11 +88,19 @@
         [Description("581")]
         public void CopyEvent()
         {
-            this.CopyAnEvent();
+            LoginAndGoToRegressionFolder();
+            ManagerSiteMgr.DeleteEventByName(CopiedEventName);
+            eventID = ManagerSiteMgr.GetFirstEventId(BuildEventFixture.EventName);
+            ManagerSiteMgr.OpenEventDashboard(eventID);
+            ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(CopiedEventName);
+            LoginAndGoToRegressionFolder();
+            this.eventID = ManagerSiteMgr.GetFirstEventId(CopiedEventName);
+            ManagerSiteMgr.OpenEventBuilderStartPage(eventID, sessionId);
+            this.VerifyEvent(CopiedEventName);
+            this.RegisterForCopiedOrTemplateEvent();
         }
 
-        // This is done in theory but due to a bug in our system, 23438 it will never really work. Unless we can find a way to clear browser cache
-        // Webdriver has no way to clear cache that I know of or can find that works... 
+        // Related to bug #23438
         [Test]
         [Category(Priority.Two)]
         [Description("371")]
@@ -73,7 +114,7 @@
             this.SetEventDetails(ChangeStatusEventName);
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventID, this.sessionId);
             ManagerSiteMgr.DashboardMgr.ActiveEvent();
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
 
             this.ChangeStatus(DashboardManager.EventStatus.Cancelled);
             this.VerifyStatus(DashboardManager.EventStatus.Cancelled);
@@ -109,7 +150,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
         }
 
@@ -122,46 +163,6 @@
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
             this.eventID = BuilderMgr.GetEventId();
             this.SetEventDetails(GoLiveEventName);
-        }
-
-        [Step]
-        private void CreateNewEventFromTemplate()
-        {
-            LoginAndGoToRegressionFolder();
-            ManagerSiteMgr.DeleteEventByName(TemplateEventName);
-            ManagerSiteMgr.SelectFolder("Templates");
-
-            // TODO: make this create template not throw exception
-            // Drag and Drop is wonky, will need to be worked on.
-            if (!ManagerSiteMgr.EventExists(TemplateEventName))
-            {
-                throw new Exception("Template does not exist, copy 'BuildEventFixture' to templates and rename it to 'FullEventBuildTemplate'");
-            }
-
-            ManagerSiteMgr.SelectFolder();
-            UIUtil.DefaultProvider.WaitForAJAXRequest();
-            ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.CreateFromTemplate);
-            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
-            ManagerSiteMgr.SelectTemplateToCreate(TemplateEventName);
-            UIUtil.DefaultProvider.SwitchToMainContent();
-            VerifyEvent(TemplateEventName);
-            RegisterMgr.OpenRegisterPage(eventID);
-            RegisterForTemplateEvent();
-        }
-
-        [Step]
-        private void CopyAnEvent()
-        {
-            LoginAndGoToRegressionFolder();
-            ManagerSiteMgr.DeleteEventByName(CopiedEventName);
-            eventID = ManagerSiteMgr.GetFirstEventId(BuildEventFixture.EventName);
-            ManagerSiteMgr.OpenEventDashboard(eventID);
-            ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(CopiedEventName);
-            LoginAndGoToRegressionFolder();
-            eventID = ManagerSiteMgr.GetFirstEventId(CopiedEventName); 
-            ManagerSiteMgr.OpenEventBuilderStartPage(eventID, sessionId);
-            VerifyEvent(CopiedEventName);
-            RegisterForTemplateEvent();
         }
 
         private void SetEventDetails(string eventName)
@@ -178,6 +179,8 @@
             ManagerSiteMgr.DashboardMgr.ClickManagerActivateEventButton();
             ManagerSiteMgr.DashboardMgr.SelectActivateEventFrame();
             ManagerSiteMgr.DashboardMgr.ActivateEventMgr.ActivateEvent();
+            ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         [Verify]
@@ -217,7 +220,7 @@
             BuilderMgr.SaveAndStay();
             BuilderMgr.SetStartEndDateTimeDefault();
             BuilderMgr.SaveAndStay();
-            eventID = BuilderMgr.GetEventId();
+            this.eventID = BuilderMgr.GetEventId();
             BuilderMgr.VerifyStartPageSettingsAreSaved(ManagerSiteManager.EventType.ProEvent, eventName);
             BuilderMgr.VerifyHasRegTypeInDatabase("First");
             BuilderMgr.VerifyHasRegTypeInDatabase("Second");
@@ -316,7 +319,7 @@
         #endregion
 
         #region register methods
-        private void RegisterForTemplateEvent()
+        private void RegisterForCopiedOrTemplateEvent()
         {
             this.helper.Checkin(eventID);
             this.helper.PersonalInfo();

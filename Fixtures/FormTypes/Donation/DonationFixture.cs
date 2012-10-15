@@ -74,7 +74,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.DonationForm);
 
@@ -104,7 +104,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (!ManagerSiteMgr.EventExists(EventName))
             {
@@ -173,7 +173,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(copiedEventName_TheFirstTime);
             ManagerSiteMgr.DeleteEventByName(copiedEventName_TheSecondTime);
 
@@ -190,7 +190,7 @@
 
             // Copy from form dashboard
             ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(copiedEventName_TheSecondTime);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void CreateDonationFormForAdminRegister()
@@ -198,7 +198,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(AdminRegName);
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.DonationForm);

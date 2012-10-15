@@ -109,7 +109,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ActiveEuropeEvent);
             BuilderMgr.SetEventNameAndShortcut(EventName);
@@ -155,7 +155,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             ManagerSiteMgr.DeleteEventByName(EventName);
 
@@ -204,7 +204,7 @@
 
             this.reportId = ManagerSiteMgr.DashboardMgr.GetCustomReportId(CustomReportName);
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
     }
 }

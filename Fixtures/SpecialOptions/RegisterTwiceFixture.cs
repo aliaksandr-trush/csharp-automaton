@@ -67,7 +67,7 @@
             ManagerSiteMgr.GoToEventsTabIfNeeded();
 
             // click "Regression" folder
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             // delete the event
             ManagerSiteMgr.DeleteEventByName(eventName);

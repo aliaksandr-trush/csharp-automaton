@@ -78,7 +78,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 

@@ -77,7 +77,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             this.eventId = ManagerSiteMgr.GetFirstEventId(MenuOptionsEvent.EventName);
 
@@ -97,7 +97,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
 
             // Open attendee info screen
@@ -152,7 +152,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             int eventIdToTransferFrom = ManagerSiteMgr.GetFirstEventId(EventToTransferAttendee.NameForEventToTransferFrom);
             int eventIdToTransferTo = ManagerSiteMgr.GetFirstEventId(EventToTransferAttendee.NameForEventToTransferTo);
 
@@ -362,7 +362,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             this.eventId = ManagerSiteMgr.GetFirstEventId(MenuOptionsEvent.EventName);
 
@@ -400,7 +400,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, this.registrationId);
 
@@ -436,7 +436,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
 
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, this.registrationId);
@@ -447,7 +447,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
 
             ManagerSiteMgr.DashboardMgr.OpenCommonReportURL(ReportManager.CommonReportType.RegistrantList, this.eventId, this.eventSessionId);

@@ -59,8 +59,6 @@
             BuilderMgr.VerifyPersonalInfoCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Paragraph, "CF-Paragraph");
             BuilderMgr.VerifyPersonalInfoCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.Date, "CF-Date");
             BuilderMgr.VerifyPersonalInfoCustomFieldInDatabase(Managers.Builder.CustomFieldManager.CustomFieldType.FileUpload, "CF-File");
-
-            //BuilderMgr.fie
         }
 
         public void VerifyAgedaPage()

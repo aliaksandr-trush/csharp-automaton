@@ -151,7 +151,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 

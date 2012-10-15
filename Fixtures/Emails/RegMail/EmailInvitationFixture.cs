@@ -293,7 +293,7 @@
 
 		private void CreateNewEventForEmailInvitation()
 		{
-			ManagerSiteMgr.SelectFolder();
+			ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
 			if (!ManagerSiteMgr.EventExists(EventName))
 			{

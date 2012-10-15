@@ -23,7 +23,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder("xAuth");
+            ManagerSiteMgr.SelectFolder_UserDefined("xAuth");
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.DeleteEventByName(EventNameExistEmail);
 
@@ -74,7 +74,7 @@
             ManagerSiteMgr.Login();
             //ManagerSiteMgr.Dashboard.ReturnToList();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder("xAuth");
+            ManagerSiteMgr.SelectFolder_UserDefined("xAuth");
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
             this.eventID = BuilderMgr.GetEventId();
             BuilderMgr.SetEventNameAndShortcut(EventName);

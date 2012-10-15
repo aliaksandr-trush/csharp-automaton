@@ -23,12 +23,12 @@
         private const string LoginButtonLocator = "//span[@class='BiggerButtonBase']/a";
         private const string LogoutLinkLocator = "ctl00_ctl00_hplLogout";
         private const string TabLocatorFormat = "//div[@id='ctl00_ctl00_cphDialog_RadMainManu']//span[text()='{0}']";
-        private const string FolderLocatorFormat = "//div[@id='tree']//span[text()='{0}']";
+        private const string UserDefinedFolderLocatorFormat = "//div[@id='ctl00_ctl00_cphDialog_cpMgrMain_trUserNodes']/ul/li[1]//div/span[text()='{0}']";
         private const string AddEventDropDown = "//div[@id='createNewEvent']//img[@class='rmLeftImage'][1]";
         private const string AddEventDropDownType = "//div[@id='createNewEvent']//span[text()='{0}']";
-        private const string EventExistsLocator = "//*[text()='{0}']/..";
         private const string HeaderAccountLocator = "ctl00_ctl00_hplAccount";
         private const string TemplateNameLocator = "//option[contains(text(),'{0}')]";
+        private const string TemplatesFolderLocator = "//div[@id='ctl00_ctl00_cphDialog_cpMgrMain_trUserNodes']/ul/li[2]/div/span[text()='Templates']";
         
         private const string FirstEventLocator = 
             "//tr[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00__0']//a[@class='listEventTile']";
@@ -60,6 +60,18 @@
                 "An email has been sent to your account with instructions to reset your password.";
 
             public const string ForgotPasswordProblemOccur = "There was a problem resetting your password.";
+        }
+
+        public enum PreBuiltFolderName
+        {
+            [CustomString("Events")]
+            Events,
+
+            [CustomString("Templates")]
+            Templates,
+
+            [CustomString("Deleted Events")]
+            DeletedEvents
         }
 
         public enum EventListGridColumnHeader
@@ -322,21 +334,52 @@
             return accountId;
         }
 
-        [Step]
-        public void SelectFolder_xAuth()
+        public void SelectFolder_PreBuilt(PreBuiltFolderName folder)
         {
-            this.SelectFolder(FolderName_xAuth);
+            string folderLocator = null;
+
+            switch (folder)
+            {
+                case PreBuiltFolderName.Events:
+                    folderLocator = "//div[@id='ctl00_ctl00_cphDialog_cpMgrMain_trUserNodes']/ul/li[1]/div/span[text()='Events']";
+                    break;
+                case PreBuiltFolderName.Templates:
+                    folderLocator = TemplatesFolderLocator;
+                    break;
+                case PreBuiltFolderName.DeletedEvents:
+                    folderLocator = "//div[@id='ctl00_ctl00_cphDialog_cpMgrMain_trUserNodes']/ul/li[3]/div/span[text()='Deleted Events']";
+                    break;
+                default:
+                    break;
+            }
+
+            this.SelectFolder(folderLocator);
         }
 
         [Step]
-        public void SelectFolder(string folderName)
+        public void SelectFolder_UserDefined(string folderName)
         {
-            ////UIUtilityProvider.UIHelper.WaitForPageToLoad();
-            string folderLocator = string.Format(FolderLocatorFormat, folderName);
+            this.SelectFolder(string.Format(UserDefinedFolderLocatorFormat, folderName));
+        }
+
+        [Step]
+        public void SelectFolder_DefaultForCurrentAccount()
+        {
+            this.SelectFolder_UserDefined(ConfigReader.DefaultProvider.AccountConfiguration.Folder);
+        }
+
+        [Step]
+        public void SelectFolder_xAuth()
+        {
+            this.SelectFolder_UserDefined(FolderName_xAuth);
+        }
+
+        private void SelectFolder(string folderLocator)
+        {
             UIUtil.DefaultProvider.WaitForElementDisplay(folderLocator, LocateBy.XPath);
             string folderDivClassAttribute = UIUtil.DefaultProvider.GetAttribute(string.Format("{0}/parent::div", folderLocator), "class", LocateBy.XPath);
 
-            if (!folderDivClassAttribute.Equals("rtMid rtSelected"))
+            if (!IsFolderSelected(folderDivClassAttribute))
             {
                 UIUtil.DefaultProvider.WaitForDisplayAndClick(folderLocator, LocateBy.XPath);
                 UIUtil.DefaultProvider.WaitForAJAXRequest();
@@ -344,20 +387,31 @@
             }
         }
 
-        [Step]
-        public void SelectFolder()
+        private bool IsFolderSelected(string folderDivClassAttribute)
         {
-            this.SelectFolder(ConfigReader.DefaultProvider.AccountConfiguration.Folder);
+            string[] attributes = folderDivClassAttribute.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return attributes.Contains("rtSelected");
         }
 
-        public void SelectTemplatesFolder()
+        public void DragAndDropToCreateTemplate(int eventIdToCreateTemplateFrom)
         {
-            this.SelectFolder("Templates");
+            UIUtil.DefaultProvider.DragAndDrop(
+                string.Format("//tr[@data-id='{0}']/td/a[@class='listEventTile']", eventIdToCreateTemplateFrom.ToString()), 
+                TemplatesFolderLocator);
+
+            Utility.ThreadSleep(2);
         }
 
-        public void SelectDeletedEventsFolder()
+        public void AddEventFromTemplate(string templateName)
         {
-            this.SelectFolder("Deleted Events");
+            this.ClickAddEvent(ManagerSiteManager.EventType.CreateFromTemplate);
+            UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
+            string option = UIUtil.DefaultProvider.GetAttribute(string.Format(TemplateNameLocator, templateName), "value", LocateBy.XPath);
+            UIUtil.DefaultProvider.SelectWithText("//select[@id='lbTemplates']", templateName + " (" + option + ") - Account #" + Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), LocateBy.XPath);
+            UIUtil.DefaultProvider.WaitForDisplayAndClick("//a/span[text()='OK']/..", LocateBy.XPath);
+            UIUtil.DefaultProvider.SwitchToMainContent();
+            UIUtil.DefaultProvider.WaitForAJAXRequest();
+            Utility.ThreadSleep(3);
         }
 
         [Step]
@@ -386,13 +440,6 @@
             }
 
             UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
-        }
-
-        public void SelectTemplateToCreate(string eventName)
-        {
-            string option = UIUtil.DefaultProvider.GetAttribute(string.Format(TemplateNameLocator, eventName), "value", LocateBy.XPath);
-            UIUtil.DefaultProvider.SelectWithText("//select[@id='lbTemplates']", eventName + " (" + option + ") - Account #" + Convert.ToInt32(ConfigReader.DefaultProvider.AccountConfiguration.Id), LocateBy.XPath);
-            UIUtil.DefaultProvider.WaitForDisplayAndClick("//a/span[text()='OK']/..", LocateBy.XPath);
         }
 
         [Step]
@@ -455,7 +502,9 @@
         {
             bool result = false;
 
-            result = UIUtil.DefaultProvider.IsElementPresent(string.Format(EventExistsLocator, name), LocateBy.XPath);
+            result = UIUtil.DefaultProvider.IsElementPresent(
+                string.Format("//table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr/td/a[text()='{0}']", name), 
+                LocateBy.XPath);
 
             return result;
         }
@@ -713,9 +762,6 @@
         [Step]
         public void OpenEventDashboard(int eventID)
         {
-            //string dashboardLinkLocator = string.Format(
-            //"table[@id='ctl00_ctl00_cphDialog_cpMgrMain_rdgrdgrdForms_ctl00']/tbody/tr[@data-id='{0}']/td[@class='rgSorted']/a", 
-            //eventID.ToString());
             string dashboardLinkLocator = string.Format("//a[contains(@href, 'eventID={0}')]", eventID.ToString());
 
             UIUtil.DefaultProvider.WaitForDisplayAndClick(dashboardLinkLocator, LocateBy.XPath);
@@ -791,7 +837,7 @@
             OpenLogin();
             Login();
             GoToEventsTabIfNeeded();
-            SelectFolder(folderName);
+            SelectFolder_UserDefined(folderName);
             string sessionId = GetEventSessionId();
             OpenEventDashboardUrl(eventId, sessionId);
             DashboardMgr.ChooseTabAndVerify(DashboardManager.DashboardTab.EventDetails);
@@ -799,7 +845,7 @@
             UIUtil.DefaultProvider.SelectPopUpFrameByName("plain");
             DashboardMgr.DeleteTestReg_ClickDelete();
             UIUtil.DefaultProvider.SwitchToMainContent();
-            DashboardMgr.ReturnToList();
+            DashboardMgr.ReturnToManagerScreenEventList();
             return sessionId;
         }
 
@@ -807,14 +853,14 @@
         {
             this.OpenEventDashboard(eventId);
             this.DashboardMgr.DeleteTestRegs();
-            this.DashboardMgr.ReturnToList();
+            this.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         public void OpenEventDashboardUrlAndDeleteTestRegsAndReturnToManagerScreen(int eventId, string sessionId)
         {
             this.OpenEventDashboardUrl(eventId, sessionId);
             this.DashboardMgr.DeleteTestRegs();
-            this.DashboardMgr.ReturnToList();
+            this.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         public void CreateNewAccount(string username, string password, string currency)

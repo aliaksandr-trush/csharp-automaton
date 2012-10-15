@@ -13,7 +13,9 @@
             USD,
 
             [CustomString("£")]
-            GBP
+            GBP,
+
+            AUD
         }
 
         public static string FormatMoney(

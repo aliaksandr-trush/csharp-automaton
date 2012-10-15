@@ -28,7 +28,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             htmlButtons = NewFile(string.Format(@"\\ws0034qaauto01\C$\QA\ButtonDesigner\ChecklistTest_{0}.html", DateTime.Now.ToString("yyMMdd_HHmm")));
             ManagerSiteMgr.OpenEventDashboard(formName);
 
@@ -67,7 +67,7 @@
                 // login to regression testing account
                 ManagerSiteMgr.Login();
                 ManagerSiteMgr.GoToEventsTabIfNeeded();
-                ManagerSiteMgr.SelectFolder();
+                ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
                 ManagerSiteMgr.DeleteEventByName(formName);
                 BuildBasicMembership(formName);
 

@@ -58,7 +58,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             this.eventId = ManagerSiteMgr.GetFirstEventId(MembershipEvent.EventName);
             RegisterMgr.CurrentEventId = this.eventId;

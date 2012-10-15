@@ -307,7 +307,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.ClickEditRegistrationForm(EventHotelName);
 
             BuilderMgr.GotoPage(FormDetailManager.Page.LodgingTravel);
@@ -352,7 +352,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.ClickEditRegistrationForm(EventHotelName);
 
             BuilderMgr.GotoPage(FormDetailManager.Page.LodgingTravel);
@@ -634,7 +634,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (ManagerSiteMgr.EventExists(eventName))
             {

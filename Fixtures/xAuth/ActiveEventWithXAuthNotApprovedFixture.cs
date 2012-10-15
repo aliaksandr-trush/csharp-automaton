@@ -17,7 +17,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder("xAuth");
+            ManagerSiteMgr.SelectFolder_UserDefined("xAuth");
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.ClickAddEvent(Managers.Manager.ManagerSiteManager.EventType.ProEvent);
             BuilderMgr.SetEventNameAndShortcut(EventName);

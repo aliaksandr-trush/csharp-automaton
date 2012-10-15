@@ -192,7 +192,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventWithoutRegType/*, 0*/);
 
@@ -219,7 +219,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventWithRegType);
 

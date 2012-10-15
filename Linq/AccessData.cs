@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.Configuration;
     using System.Collections.Generic;
     using System.Text;
+    using System;
 
     public class AccessData
     {
@@ -32,18 +33,29 @@
 
         public static void SetLiveRegToTest(List<int> eventIds)
         {
-            var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
-
-            StringBuilder command = new StringBuilder("update Registrations set Test = 1 where Event_Id in (");
-
-            foreach (int id in eventIds)
+            if (eventIds.Count == 0)
             {
-                command.Append(string.Format("{0},", id.ToString()));
+                return;
             }
+            else if (eventIds.Count == 1)
+            {
+                SetLiveRegToTest(eventIds[0]);
+            }
+            else
+            {
+                var db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
 
-            command.Replace(',', ')', command.Length - 1, 1);
+                StringBuilder command = new StringBuilder("update Registrations set Test = 1 where Event_Id in (");
 
-            db.ExecuteCommand(command.ToString());
+                foreach (int id in eventIds)
+                {
+                    command.Append(string.Format("{0},", id.ToString()));
+                }
+
+                command.Replace(',', ')', command.Length - 1, 1);
+
+                db.ExecuteCommand(command.ToString());
+            }
         }
 
         public static string GetEncryptString(string strToEncrypt)
