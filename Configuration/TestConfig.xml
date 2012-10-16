@@ -3,11 +3,13 @@
 
   <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
-	<Environment Name="Alpha"
-		   ClientDbConnection="server=WS0034DEVSQL01\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
-		   ROMasterConnection="server=WS0034DEVSQL01\QA2ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-		   ROWarehouseConnection="server=WS0034DEVSQL01\QA2;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
-		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+	  <!-- 10.119.33.70 WS0034DEVSQL01-->
+    <!-- 10.119.33.69 WS0034QAAUTO01-->
+    <Environment Name="Alpha"
+		   ClientDbConnection="server=10.119.33.70\QA2;uid=regonlinebrowser;pwd=eguest;database=Alpha"
+		   ROMasterConnection="server=10.119.33.70\QA2ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=10.119.33.70\QA2;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
+		   DataPath="\\10.119.33.69\QA\RegressionTestData\">
 
 	  <Account Name="Default">
 		  <DomainName>alpha.regonline.com</DomainName>
@@ -32,10 +34,10 @@
 	</Environment>
 
 	<Environment Name="Beta"
-		   ClientDbConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=Beta"
-		   ROMasterConnection="server=ws0034devsql01\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-		   ROWarehouseConnection="server=ws0034devsql01\QA1ROM;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
-		   DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+		   ClientDbConnection="server=10.119.33.70\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=Beta"
+		   ROMasterConnection="server=10.119.33.70\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=10.119.33.70\QA1ROM;uid=DATAWH_REPORTER;pwd=Testme3!;Database=ROWarehouse"
+		   DataPath="\\10.119.33.69\QA\RegressionTestData\">
 
 	  <Account Name="Default">
 		  <DomainName>beta.regonline.com</DomainName>
@@ -78,10 +80,12 @@
 	  </Account>
 	</Environment>
 
+  <!-- 10.109.2.22 WD00060064-->
+  <!-- 10.109.0.80 WD00060043-->
 	<Environment Name="CBeta"
-		   ClientDbConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;database=Beta"
-		   ROMasterConnection="server=WD00060064\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
-		   ROWarehouseConnection="server=WD00060064\QA1;uid=regonlinebrowser;pwd=eguest;Database=ROWarehouse"
+		   ClientDbConnection="server=10.109.2.22\QA1;uid=regonlinebrowser;pwd=eguest;database=Beta"
+		   ROMasterConnection="server=10.109.2.22\QA1ROM;uid=regonlinebrowser;pwd=eguest;database=RoMaster"
+		   ROWarehouseConnection="server=10.109.2.22\QA1;uid=regonlinebrowser;pwd=eguest;Database=ROWarehouse"
 		   DataPath="\\10.109.0.80\QA\RegressionTestData\">
 
 	  <Account Name="Default">
@@ -129,7 +133,7 @@
 			 ClientDbConnection=""
 			 ROMasterConnection=""
 			 ROWarehouseConnection=""
-			 DataPath="\\ws0034qaauto01\QA\RegressionTestData\">
+			 DataPath="\\10.119.33.69\QA\RegressionTestData\">
 
 	  <Account Name="Default">
 		  <DomainName>www.regonline.com</DomainName>
