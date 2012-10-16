@@ -36,7 +36,7 @@
             this.CreateEvent(eventName_Guid);
             ManagerSiteMgr.SearchMgr.SearchEvent(this.eventId.ToString());
             ManagerSiteMgr.DashboardMgr.VerifyOnDashboard(this.eventId);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
             ManagerSiteMgr.DeleteEventByName(eventName_Guid);
 
             ManagerSiteMgr.DeleteEventByName(EventName_EventSearch);
@@ -49,7 +49,7 @@
             ManagerSiteMgr.SearchMgr.SearchEvent(EventName_EventSearch);
             ManagerSiteMgr.SearchMgr.VerifyOnSearchPage(SearchManager.SearchMode.Event);
             ManagerSiteMgr.SearchMgr.ClickEventLinkOnSearchResultPage(this.eventId);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         [Test]
@@ -80,7 +80,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = BuilderMgr.GetEventSessionId();
         }
 

@@ -167,7 +167,7 @@
             this.VerifyReportData(EventType.ProEvent, ProEvent.FeeCalculation_SimpleReg.Default);
 
             ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
 
             ////VerifyTransactionDataInDB(
             ////    TxnIntegrityConstants.BackEndTransactionAmount,
@@ -212,7 +212,7 @@
             this.VerifyReportData(EventType.Membership, Membership.FeeCalculation_InitialReg.Default);
 
             ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
 
             ////VerifyTransactionDataInDB(
             ////    TxnIntegrityConstants.MembershipTransactionAmounts,
@@ -355,7 +355,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GotoTab(ManagerSiteManager.Tab.Events);
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
         }
 
@@ -369,7 +369,7 @@
         {
             ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
             this.ChangeRegistrationsToTestStatusAndDelete();
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void LoginAndOpenEventDashboardAndSwitchToReportTab()

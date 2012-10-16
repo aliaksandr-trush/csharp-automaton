@@ -18,6 +18,7 @@
         private const string FixedRenewalLocator = "ctl00_cph_rdoFixedRenewal";
         private const string PaymentFrequencyLocator = "ctl00_cph_ddlEventDefaultPayRate";
         private const string ProratePaymentsLocator = "ctl00_cph_chkProrateMembershipUpdates";
+        private const string EventCurrencyDropdownLocator = "ctl00_cph_roEventsCurrencyCode";
         #endregion
 
         #region enums
@@ -213,6 +214,7 @@
                 }
             }
         }
+
         public void SetMembershipRenewalOptions(AutoRenewals renewal, Frequency frequency, bool fixedDate, bool prorate)
         {
             UIUtil.DefaultProvider.SelectWithText(AutoRenewalLocator, StringEnum.GetStringValue(renewal), LocateBy.Id);
@@ -227,6 +229,11 @@
             }
 
             UIUtil.DefaultProvider.SetCheckbox(ProratePaymentsLocator, prorate, LocateBy.Id);
+        }
+
+        public void SelectEventCurrency(MoneyTool.CurrencyCode currency)
+        {
+            UIUtil.DefaultProvider.SelectWithValue(EventCurrencyDropdownLocator, currency.ToString(), LocateBy.Id);
         }
     }
 }

@@ -48,7 +48,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             this.eventId = ManagerSiteMgr.GetFirstEventId(BackendFixtureHelper.AttendeeInfoEvent.EventName);
 
@@ -1051,7 +1051,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = BuilderMgr.GetEventSessionId();
         }
 

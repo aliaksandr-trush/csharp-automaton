@@ -86,7 +86,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.AddNewSurvey(EventName, true);
             this.AddNewSurvey(EventNameAlternative, false);
         }
@@ -100,7 +100,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 
             if (!ManagerSiteMgr.EventExists(EventName))
@@ -167,7 +167,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventNameAlternative);
 
@@ -311,7 +311,7 @@
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             this.CopySurveyFromManagerSite();
             this.CopySurveyFromDashboard();
@@ -335,7 +335,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (ManagerSiteMgr.EventExists(SurveyAdminReg))
             {
@@ -452,7 +452,7 @@
             this.eventId = ManagerSiteMgr.GetFirstEventId(CopiedEventName);
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.eventSessionId);
             ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(CopiedTwiceEventName);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         [Step]

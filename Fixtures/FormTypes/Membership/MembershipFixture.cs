@@ -200,7 +200,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             this.CreateEvent();
         }
@@ -213,7 +213,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             eventId = ManagerSiteMgr.GetFirstEventId(EventName);
 
             CreateRegistrations();
@@ -227,7 +227,7 @@
             ManagerSiteMgr.OpenLogin();
             sessionId = ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             eventId = ManagerSiteMgr.GetFirstEventId(EventName);
 
             regs = DataHelperTool.GetEventRegistrations(eventId);
@@ -257,7 +257,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (!ManagerSiteMgr.EventExists(EventName))
             {
@@ -277,7 +277,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             this.CopyMembershipFromManagerSite();
             this.CopyMembershipFromDashboard();
@@ -410,7 +410,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (ManagerSiteMgr.EventExists(UpdateRegName))
             {
@@ -550,7 +550,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             if (ManagerSiteMgr.EventExists(AdminRegName))
             {
@@ -713,7 +713,7 @@
             this.eventId = ManagerSiteMgr.GetFirstEventId(CopiedEventName);
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventId, this.sessionId);
             ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(CopiedTwiceEventName);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void PreviewWithRegTypes()
@@ -1058,7 +1058,7 @@
             ManagerSiteMgr.OpenLogin();
             sessionId = ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             BackendMgr.OpenAttendeeInfoURL(sessionId, registrantId);
             BackendMgr.VerifyNextRenewDate(DateTime.Now.AddYears(1));
             BackendMgr.VerifyTransactionHistory(null, Managers.Backend.BackendManager.TransactionTypeString.OnlineCCPayment, PaymentManager.DefaultPaymentInfo.CCNumber, -50.00, eventId);

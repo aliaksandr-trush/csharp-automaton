@@ -981,7 +981,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 
@@ -1016,7 +1016,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventNameForIncompleteReg);
 
@@ -1042,7 +1042,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventNameForPublishing);
 
             // Create event
@@ -1063,7 +1063,7 @@
             ManagerSiteMgr.DashboardMgr.ChooseTab(DashboardManager.DashboardTab.EventDetails);
 
             // Return to event list, so that browser will not go to dashboard(after login) directly when running other tests next
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
 
             // Publish event
             ClientDataContext db = new ClientDataContext(ConfigReader.DefaultProvider.EnvironmentConfiguration.ClientDbConnection);
@@ -1197,7 +1197,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventId = ManagerSiteMgr.GetFirstEventId(EventName);
             this.eventRegCount = ManagerSiteMgr.GetEventRegCount(this.eventId);
         }

@@ -164,7 +164,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.eventSessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);

@@ -33,7 +33,7 @@
         {
             ManagerSiteMgr.OpenLogin();
             this.eventSessionId = ManagerSiteMgr.Login();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);           
         }
 
@@ -72,7 +72,7 @@
             ManagerSiteMgr.DashboardMgr.OpenCommonReport(Managers.Report.ReportManager.CommonReportType.RegistrantList);
             ReportMgr.CloseReportPopupWindow();
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
             BackendMgr.OpenAttendeeInfoURL(this.eventSessionId, this.registrationId);
         }
 

@@ -351,7 +351,7 @@
         {
             ManagerSiteMgr.SelectManagerWindow();
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void PrepareEventForReport()
@@ -509,7 +509,7 @@
             ManagerSiteMgr.Login();
             this.sessionId = ManagerSiteMgr.GetEventSessionId();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 
             if (!ManagerSiteMgr.EventExists(EventName))
@@ -533,7 +533,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.ClickEditRegistrationForm(EventName);
             this.eventId = BuilderMgr.GetEventId();
             return ManagerSiteMgr.Fetch_RegTypeID(this.eventId, regType);

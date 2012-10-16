@@ -11,7 +11,7 @@
     {
         static void Main(string[] args)
         {
-            AccessData.SetLiveRegToTest(new List<int>() { 633997, 634931 });
+            AccessData.SetLiveRegToTest(new List<int>() { 639231 });
             Console.Read();
         }
     }

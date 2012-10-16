@@ -76,7 +76,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             if (ManagerSiteMgr.EventExists(EventName))
             {
                 ManagerSiteMgr.DeleteEventByName(EventName);

@@ -137,7 +137,7 @@
 
             ReportMgr.CloseReportPopupWindow();
             ManagerSiteMgr.DashboardMgr.ChooseTab(Managers.Manager.Dashboard.DashboardManager.DashboardTab.EventDetails);
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
         }
 
         private void LoginAndSelectFolder(bool withAccess)
@@ -145,12 +145,12 @@
             if (withAccess)
             {
                 ManagerSiteMgr.Login();
-                ManagerSiteMgr.SelectFolder();
+                ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             }
             else
             {
                 ManagerSiteMgr.Login("internaluser", "Abcd1234");
-                ManagerSiteMgr.SelectFolder("InternalTest");
+                ManagerSiteMgr.SelectFolder_UserDefined("InternalTest");
             }
         }
     }

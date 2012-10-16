@@ -66,7 +66,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder("xAuth");
+            ManagerSiteMgr.SelectFolder_UserDefined("xAuth");
             ManagerSiteMgr.DeleteEventByName(EventName);
 
             //create existing email address event
@@ -252,7 +252,7 @@
         private void SetXAuthType()
         {
             string sessionId = ManagerSiteMgr.LoginAndDeleteTestRegsReturnToManagerScreen(this.eventId, "xAuth");
-            ManagerSiteMgr.SelectFolder("xAuth");
+            ManagerSiteMgr.SelectFolder_UserDefined("xAuth");
             ManagerSiteMgr.OpenEventBuilderStartPage(this.eventId, sessionId);
 
             //create existing email address event

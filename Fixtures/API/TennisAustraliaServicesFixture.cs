@@ -26,6 +26,8 @@
 
         public TennisAustraliaServicesFixture()
         {
+            RequiresBrowser = true;
+
             // Because the provided user and password only exist on beta, we have to run this test against beta
             ConfigReader.DefaultProvider.ReloadAccount(ConfigReader.AccountEnum.Default);
 
@@ -103,6 +105,7 @@
         public void TennisAustraliaWebservice()
         {
             int newEventId = -1;
+
             using (ES.EventServiceSoapClient eventService = new ES.EventServiceSoapClient())
             {
                 //eventService.Url = "https://beta.regonline.com/webservices/Events/EventService.asmx";
@@ -145,6 +148,15 @@
                 Assert.IsTrue(result.Success);
                 Assert.AreEqual(eventTitle, result.Data[0].Title);
                 Assert.AreEqual(RegOnline.RegressionTest.Managers.Manager.Dashboard.DashboardManager.EventStatus.Active.ToString(), result.Data[0].Status);
+
+                // Change gateway from AMS(USD) to AMS(AUD)
+                ManagerSiteMgr.OpenLogin();
+                ManagerSiteMgr.Login(User, Password);
+                ManagerSiteMgr.SelectFolder_PreBuilt(Managers.Manager.ManagerSiteManager.PreBuiltFolderName.Events);
+                ManagerSiteMgr.OpenEventBuilderStartPage(newEventId, ManagerSiteMgr.GetEventSessionId());
+                BuilderMgr.GotoPage(Managers.Builder.FormDetailManager.Page.Checkout);
+                BuilderMgr.SelectEventCurrency(Utilities.MoneyTool.CurrencyCode.AUD);
+                BuilderMgr.SaveAndClose();
 
                 using (RegistrationService.RegistrationServiceSoapClient regService = new RegistrationService.RegistrationServiceSoapClient())
                 {

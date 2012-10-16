@@ -26,7 +26,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             ManagerSiteMgr.DeleteEventByName(EventName);
             ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ExpressEvent);
             this.SetEventStartPage();
@@ -49,7 +49,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             this.eventID = ManagerSiteMgr.GetFirstEventId(EventName);
 
@@ -80,7 +80,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             this.sessionID = ManagerSiteMgr.GetEventSessionId();
 
             this.CopyFromManagerSite();
@@ -106,7 +106,7 @@
             this.eventID = ManagerSiteMgr.GetFirstEventId(EventName + " (Copy)");
             ManagerSiteMgr.OpenEventDashboardUrl(this.eventID, this.sessionID);
             ManagerSiteMgr.DashboardMgr.CopyEventFromDashboard(EventName + " (Copy) (Copy)");
-            ManagerSiteMgr.DashboardMgr.ReturnToList();
+            ManagerSiteMgr.DashboardMgr.ReturnToManagerScreenEventList();
             Assert.True(ManagerSiteMgr.EventExists(EventName + " (Copy) (Copy)"));
         }
 

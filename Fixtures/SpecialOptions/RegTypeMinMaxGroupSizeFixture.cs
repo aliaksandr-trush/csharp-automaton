@@ -41,7 +41,7 @@
             ManagerSiteMgr.GoToEventsTabIfNeeded();
 
             // click "Regression" folder
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
 
             //do not need build event if event exists and been created in the last a few minutes
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(eventName, 0);

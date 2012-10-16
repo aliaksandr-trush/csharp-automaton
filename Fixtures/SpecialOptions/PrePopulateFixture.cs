@@ -75,7 +75,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             if (ManagerSiteMgr.EventExists(PrePopulateEventName))
             {
                 this.eventID = ManagerSiteMgr.GetFirstEventId(PrePopulateEventName);
@@ -93,7 +93,7 @@
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder();
+            ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
             if (ManagerSiteMgr.EventExists(PreFillEventName))
             {
                 eventID = ManagerSiteMgr.GetFirstEventId(PreFillEventName);
@@ -103,7 +103,7 @@
                 ManagerSiteMgr.ClickAddEvent(ManagerSiteManager.EventType.ProEvent);
                 CreatePreFillEvent();
                 ManagerSiteMgr.GoToEventsTabIfNeeded();
-                ManagerSiteMgr.SelectFolder();
+                ManagerSiteMgr.SelectFolder_DefaultForCurrentAccount();
                 eventID = ManagerSiteMgr.GetFirstEventId(PreFillEventName);
             }
         }

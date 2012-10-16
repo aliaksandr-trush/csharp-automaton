@@ -1124,7 +1124,6 @@
         public void DragAndDrop(string initialLocator, string endLocator)
         {
             Actions action = new Actions(driver);
-            WaitForDisplayAndClick(initialLocator, LocateBy.XPath);
             IWebElement start = WaitForElementPresent(By.XPath(initialLocator));
             IWebElement end = WaitForElementPresent(By.XPath(endLocator));
             action.DragAndDrop(start, end).Build().Perform();

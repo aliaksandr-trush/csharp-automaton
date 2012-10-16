@@ -860,7 +860,7 @@
             ManagerSiteMgr.Login();
             ret.Add(ManagerSiteMgr.GetEventSessionId());
             ManagerSiteMgr.GoToEventsTabIfNeeded();
-            ManagerSiteMgr.SelectFolder(folderName);
+            ManagerSiteMgr.SelectFolder_UserDefined(folderName);
             ManagerSiteMgr.DeleteExpiredDuplicateEvents(EventName);
 
             if (ManagerSiteMgr.EventExists(EventName))
