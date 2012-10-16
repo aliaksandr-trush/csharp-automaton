@@ -1,6 +1,6 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" binpathtype="Auto">
+  <Settings activeconfig="Debug" processModel="Default" domainUsage="Default" />
+  <Config name="Debug" binpathtype="Auto" runtimeFramework="v4.0.21006" configfile="RegOnline.RegressionTest.All.config">
 	<assembly path="RegOnline.RegressionTest.Fixtures.Backend.dll" />
     <assembly path="RegOnline.RegressionTest.Fixtures.New.FeeOptions.dll" />
     <assembly path="RegOnline.RegressionTest.NUnitAddin.dll" />
