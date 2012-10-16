@@ -250,4 +250,6 @@
   </Browsers>
 
   <NUnitAddin ReportBack="false" />
+  
+  <ScreenResolution Enable="false" Width="1680" Height="1010" />
 </TestConfig>

@@ -114,7 +114,7 @@
 
             // Cos preferred environment and private-label must be read from xml first, 
             // we cannot call this.ReloadAllConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel)
-            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.EnvironmentChosen, this.AllConfiguration.Environments.AccountChosen);
+            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments_Config.Environment_Chosen, this.AllConfiguration.Environments_Config.Account_Chosen);
             
             this.LoadWebServiceConfiguration();
             this.LoadBrowser();
@@ -163,7 +163,7 @@
 
         private void LoadEnvironmentConfiguration(string environment)
         {
-            foreach (Environment en in this.AllConfiguration.Environments.Environment)
+            foreach (Environment en in this.AllConfiguration.Environments_Config.Environment_Config)
             {
                 if (en.Name.Equals(environment))
                 {
@@ -174,7 +174,7 @@
 
         private void LoadAccountConfiguration(string accountType)
         {
-            foreach (Account account in this.EnvironmentConfiguration.Account)
+            foreach (Account account in this.EnvironmentConfiguration.Account_Config)
             {
                 if (account.Name.Equals(accountType))
                 {
@@ -215,7 +215,7 @@
 
         private void AddWebServiceToDictionary(WebServiceEnum webService)
         {
-            foreach (WebService service in this.AllConfiguration.WebServices.WebService)
+            foreach (WebService service in this.AllConfiguration.WebServices_Config.WebService_Config)
             {
                 if (service.Name.Equals(webService.ToString()))
                 {
@@ -226,7 +226,7 @@
 
         private void LoadBrowser()
         {
-            this.LoadBrowser(this.AllConfiguration.Browsers.Current);
+            this.LoadBrowser(this.AllConfiguration.Browsers_Config.Current);
         }
 
         private void LoadBrowser(string browserString)
@@ -238,7 +238,7 @@
         {
             Browser targetBrowser = null;
 
-            foreach (Browser br in this.AllConfiguration.Browsers.Browser)
+            foreach (Browser br in this.AllConfiguration.Browsers_Config.Browser_Config)
             {
                 if (br.Name.Equals(browserString))
                 {

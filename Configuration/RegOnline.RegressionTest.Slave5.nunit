@@ -1,0 +1,9 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+	<assembly path="RegOnline.RegressionTest.Fixtures.FormTypes.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.Agenda.dll" />
+    <assembly path="RegOnline.RegressionTest.NUnitAddin.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>

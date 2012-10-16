@@ -19,7 +19,7 @@
 
         public void TestFinished(TestResult result)
         {
-            if (ConfigReader.DefaultProvider.AllConfiguration.NUnitAddin.ReportBack)
+            if (ConfigReader.DefaultProvider.AllConfiguration.NUnitAddin_Config.ReportBack)
             {
                 Communicator.ReportResultToSpiraTeam(result);
             }

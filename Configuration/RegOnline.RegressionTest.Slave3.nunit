@@ -1,0 +1,10 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+	<assembly path="RegOnline.RegressionTest.Fixtures.API.dll" />
+    <assembly path="RegOnline.RegressionTest.Fixtures.Merchandise.dll" />
+	<!--<assembly path="RegOnline.RegressionTest.Fixtures.Marketing.dll" />-->
+    <assembly path="RegOnline.RegressionTest.NUnitAddin.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>

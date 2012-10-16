@@ -88,7 +88,7 @@
         {
             if (RequiresBrowser)
             {
-                if (ConfigReader.DefaultProvider.AllConfiguration.Browsers.DirectStartup)
+                if (ConfigReader.DefaultProvider.AllConfiguration.Browsers_Config.DirectStartup)
                 {
                     UIUtil.DefaultProvider.CaptureScreenshot();
                 }
