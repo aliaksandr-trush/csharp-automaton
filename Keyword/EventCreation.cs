@@ -425,6 +425,14 @@
                     }
                 }
 
+                if (details.LodgingTravelPage.Lodging.Hotels.Count != 0)
+                {
+                    foreach (Hotel hotel in details.LodgingTravelPage.Lodging.Hotels)
+                    {
+                        KeywordProvider.AddHotel.Add_Hotel(hotel);
+                    }
+                }
+
                 if (details.LodgingTravelPage.PageHeader != null)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.LTPageHeader_Click();

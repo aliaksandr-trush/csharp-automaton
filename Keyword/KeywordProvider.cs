@@ -29,5 +29,6 @@
         public static BackendUpdate BackendUpdate = new BackendUpdate();
         public static AddGroupDiscount AddGroupDiscount = new AddGroupDiscount();
         public static CalculateFee CalculateFee = new CalculateFee();
+        public static AddHotel AddHotel = new AddHotel();
     }
 }

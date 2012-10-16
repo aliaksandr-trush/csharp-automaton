@@ -1,9 +1,9 @@
 ﻿namespace RegOnline.RegressionTest.Fixtures.New.FeeOptions
 {
+    using System;
     using NUnit.Framework;
-    using RegOnline.RegressionTest.Fixtures.Base;
     using RegOnline.RegressionTest.DataCollection;
-    using RegOnline.RegressionTest.Keyword;
+    using RegOnline.RegressionTest.Fixtures.Base;
 
     [TestFixture]
     [Category(FixtureCategory.Regression)]
@@ -93,7 +93,20 @@
 
             //Set up L&T page
             evt.LodgingTravelPage = new LodgingTravelPage();
-            Hotel hotel = new Hotel();
+            Hotel hotel = new Hotel("AutoHotel");
+            RoomType roomType1 = new RoomType("roomType1");
+            roomType1.RoomRate = 100;
+            RoomType roomType2 = new RoomType("roomType2");
+            roomType2.RoomRate = 200;
+            RoomType roomType3 = new RoomType("roomType3");
+            roomType3.RoomRate = 300;
+            hotel.RoomTypes.Add(roomType1);
+            hotel.RoomTypes.Add(roomType2);
+            hotel.RoomTypes.Add(roomType3);
+            RoomBlock roomBlock = new RoomBlock();
+            roomBlock.Date = DateTime.Today.AddDays(1);
+            hotel.RoomBlocks.Add(roomBlock);
+            evt.LodgingTravelPage.Lodging.Hotels.Add(hotel);
         }
     }
 }
