@@ -12,8 +12,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width);
-            Console.WriteLine(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 40);
+            Console.WriteLine(Path.Combine(new StreamReader(@"\\10.107.100.63\AutomationStuff\Output\ConfigLocation.txt").ReadLine(), "TestConfig.xml"));
+            Console.WriteLine(Path.Combine("", "TestConfig.xml"));
             Console.Read();
         }
     }

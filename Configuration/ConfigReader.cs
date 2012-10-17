@@ -3,16 +3,18 @@
     using System.Collections.Generic;
     using System.Xml;
     using System.Xml.Serialization;
+    using System.IO;
 
     public class ConfigReader
     {
-        private readonly string XmlConfigFilePath = "TestConfig.xml";
         private static ConfigReader Default = new ConfigReader();
+        private string XmlConfigFilePath;
 
         public enum EnvironmentEnum
         {
             Alpha,
             Beta,
+            CBeta,
             Production
         }
 
@@ -92,6 +94,8 @@
 
         public ConfigReader()
         {
+            
+            
             this.ReloadAllConfiguration();
         }
 
@@ -150,6 +154,17 @@
 
         private void DeserializeFromXml()
         {
+            XmlConfigFilePath = "TestConfig.xml";
+            XmlDocument configPath = new XmlDocument();
+            configPath.Load("ConfigPath.xml");
+            string enableValue = configPath.SelectSingleNode("/ConfigPath").Attributes["Enable"].Value;
+            bool enable = false;
+
+            if (bool.TryParse(enableValue, out enable) && enable)
+            {
+                XmlConfigFilePath = Path.Combine(configPath.SelectSingleNode("/ConfigPath").Attributes["Path"].Value, XmlConfigFilePath);
+            }
+
             XmlSerializer serializer = new XmlSerializer(typeof(TestConfig));
             XmlTextReader reader = new XmlTextReader(XmlConfigFilePath);
             this.AllConfiguration = (TestConfig)serializer.Deserialize(reader);

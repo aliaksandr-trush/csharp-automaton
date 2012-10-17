@@ -182,9 +182,9 @@
             this.merchFees.Add(MerchandiseItem.Shoes, 60);
         }
 
-        [Test]
-        [Category(Priority.One)]
-        [Description("708")]
+        ////[Test]
+        ////[Category(Priority.One)]
+        ////[Description("708")]
         public void CanCreateRegistrationForEventWithNoRegTypesAndPayWithCheck()
         {
             this.withRegType = false;
@@ -247,9 +247,9 @@
             //VerifyTool.VerifyValue(attendee.RegisterId, registerID, "RegisterID: {0}");
         }
 
-        [Test]
-        [Category(Priority.Three)]
-        [Description("749")]
+        ////[Test]
+        ////[Category(Priority.Three)]
+        ////[Description("749")]
         public void CanCreateRegistrationWithoutRegTypesAndAttendeeInfoShowCorrectInformation()
         {
             this.CanCreateRegistrationForEventWithNoRegTypesAndPayWithCheck();
