@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TestConfig>
 
-  <Environments EnvironmentChosen="CBeta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
+  <Environments EnvironmentChosen="Beta" AccountChosen="Default" CurrentMachineTimeZoneOffset="8">
 
 	  <!-- 10.119.33.70 WS0034DEVSQL01-->
     <!-- 10.119.33.69 WS0034QAAUTO01-->

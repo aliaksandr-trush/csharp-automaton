@@ -130,12 +130,12 @@
 
     public class PaymentMethod
     {
-        public FormData.PaymentMethod PMethod;
+        public FormData.PaymentMethodEnum PMethod;
         public bool? isPublic;
         public bool? isAdmin;
         public bool? isOnSite;
 
-        public PaymentMethod(FormData.PaymentMethod pMethod)
+        public PaymentMethod(FormData.PaymentMethodEnum pMethod)
         {
             this.PMethod = pMethod;
         }
@@ -240,11 +240,44 @@
         public string PageFooter;
     }
 
+    public enum CCType
+    {
+        [CustomString("Visa Debit Card")]
+        VisaDebitCard,
+
+        [CustomString("Mastercard Debit Card")]
+        MastercardDebitCard,
+
+        [CustomString("Visa")]
+        Visa,
+
+        [CustomString("Mastercard")]
+        Mastercard,
+
+        [CustomString("American Express")]
+        AmericanExpress
+    }
+
+    public class CCOptions
+    {
+        public FormData.Gateway Payment_Gateway { get; set; }
+    }
+
     public class CheckoutPage
     {
+        public Utilities.MoneyTool.CurrencyCode? Event_Currency;
+        public CCOptions CC_Options { get; set; }
         public List<PaymentMethod> PaymentMethods = new List<PaymentMethod>();
+
         public string PageHeader;
         public string PageFooter;
+
+        public void ApplySettings_AMS_USD()
+        {
+            Event_Currency = MoneyTool.CurrencyCode.USD;
+            CC_Options = new CCOptions();
+            CC_Options.Payment_Gateway = FormData.Gateway.AMS_USD;
+        }
     }
 
     public class EventWebsite

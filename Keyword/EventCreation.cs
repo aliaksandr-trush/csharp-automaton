@@ -129,7 +129,7 @@
             {
                 foreach (RegType regType in details.StartPage.RegTypes)
                 {
-                    KeywordProvider.AddRegType.Add_RegType(regType, details);
+                    KeywordProvider.Add_RegType.Add_RegType(regType, details);
                     PageObject.Builder.RegistrationFormPages.RegTypeRow row = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType.Name);
                     regType.Id = row.RegTypeId;
                 }
@@ -174,7 +174,7 @@
                     {
                         foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.AllCustomCodes)
                         {
-                            KeywordProvider.AddDiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
+                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
                         }
 
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.RequireCode.Set(details.StartPage.Event_Fee.RequireDC);
@@ -298,7 +298,7 @@
 
                 for (int i = 0; i < details.PersonalInfoPage.CustomFields.Count; i++)
                 {
-                    KeywordProvider.CustomFieldCreation.AddCustomField(details.PersonalInfoPage.CustomFields[i]);
+                    KeywordProvider.CustomField_Creation.AddCustomField(details.PersonalInfoPage.CustomFields[i]);
                     PageObject.Builder.RegistrationFormPages.PICustomFieldRow row = new PageObject.Builder.RegistrationFormPages.PICustomFieldRow(details.PersonalInfoPage.CustomFields[i].NameOnForm);
 
                     if (i < details.PersonalInfoPage.CustomFields.Count - 1)
@@ -318,7 +318,7 @@
 
                 foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
                 {
-                    KeywordProvider.AddAgendaItem.AddAgendaItems(agendaItem, details);
+                    KeywordProvider.Add_AgendaItem.AddAgendaItems(agendaItem, details);
                 }
 
                 if (details.AgendaPage.DoNotAllowOverlapping.HasValue)
@@ -453,7 +453,7 @@
 
                 foreach (DataCollection.MerchandiseItem merch in details.MerchandisePage.Merchandises)
                 {
-                    KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
+                    KeywordProvider.Add_Merchandise.AddMerchandises(merch, details);
                     PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
                 }
 
@@ -501,14 +501,30 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CheckoutPageFooterEditor.SaveAndClose_Click();
                 }
             }
+
             if (details.CheckoutPage.PaymentMethods.Count != 0)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
 
                 foreach (PaymentMethod method in details.CheckoutPage.PaymentMethods)
                 {
-                    KeywordProvider.AddPaymentMethod.AddPaymentMethods(method);
+                    KeywordProvider.Add_PaymentMethod.AddPaymentMethods(method);
                 }
+            }
+
+            if (details.CheckoutPage.Event_Currency.HasValue)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.EventCurrency_Select(details.CheckoutPage.Event_Currency.Value);
+            }
+
+            if (details.CheckoutPage.CC_Options != null)
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.Row_CreditCard.EditCCOptions_Link_ClickToOpen();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.SelectByName();
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.GatewaySelection_Select(details.CheckoutPage.CC_Options.Payment_Gateway);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.SaveAndClose_Click();
             }
         }
 
@@ -540,7 +556,7 @@
         {
             if (details.IsActive)
             {
-                KeywordProvider.ManagerDefault.OpenFormDashboard(details.Title);
+                KeywordProvider.Manager_Common.OpenFormDashboard(details.Title);
                 PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.Activate_Click();

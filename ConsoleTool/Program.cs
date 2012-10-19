@@ -10,10 +10,19 @@
 
     public class Program
     {
+        enum abc
+        {
+            a,
+            b,
+            c
+        }
+
+        static abc tmp { get; set; }
+
         static void Main(string[] args)
         {
-            Console.WriteLine(Path.Combine(new StreamReader(@"\\10.107.100.63\AutomationStuff\Output\ConfigLocation.txt").ReadLine(), "TestConfig.xml"));
-            Console.WriteLine(Path.Combine("", "TestConfig.xml"));
+            if (tmp != null)
+            Console.WriteLine("not null");
             Console.Read();
         }
     }

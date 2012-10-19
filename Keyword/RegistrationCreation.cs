@@ -33,7 +33,7 @@
                 Merchandise(reg);
             }
 
-            Checkout(reg);
+            CheckoutAndConfirmation(reg);
         }
 
         public void GroupRegistration(Group group)
@@ -51,8 +51,8 @@
 
                 if (group.Secondaries[i].EventFee_Response != null)
                 {
-                    KeywordProvider.RegisterDefault.SelectRegType(group.Secondaries[i]);
-                    KeywordProvider.RegisterDefault.TypeEventFeeDiscountCode(group.Secondaries[i]);
+                    KeywordProvider.Register_Common.SelectRegType(group.Secondaries[i]);
+                    KeywordProvider.Register_Common.TypeEventFeeDiscountCode(group.Secondaries[i]);
                 }
 
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -69,7 +69,7 @@
                 }
             }
 
-            Checkout(group.Primary);
+            CheckoutAndConfirmation(group.Primary);
         }
 
         public void Checkin(Registrant reg)
@@ -96,8 +96,8 @@
 
             if ((reg.EventFee_Response != null) && (reg.Register_Method != RegisterMethod.RegTypeDirectUrl))
             {
-                KeywordProvider.RegisterDefault.SelectRegType(reg);
-                KeywordProvider.RegisterDefault.TypeEventFeeDiscountCode(reg);
+                KeywordProvider.Register_Common.SelectRegType(reg);
+                KeywordProvider.Register_Common.TypeEventFeeDiscountCode(reg);
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
@@ -448,12 +448,11 @@
                 }
 
                 switch (reg.Payment_Method.PMethod)
-                { 
-                    /*****
-                     To implement
-                     *****/
-                    case FormData.PaymentMethod.CreditCard:
+                {
+                    case FormData.PaymentMethodEnum.CreditCard:
+                        PageObject.PageObjectProvider.Register.RegistationSite.Checkout.BillingInfo_Type(reg.Billing_Info);
                         break;
+
                     default:
                         break;
                 }
@@ -465,6 +464,17 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
+
+            // Staying on checkout page after clicking Finish button means we got errors
+            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.DoesCurrentUrlContainsAbsolutePath("register/checkout.aspx"))
+            {
+                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.FailTestWithErrorMessages();
+            }
+        }
+
+        public void CheckoutAndConfirmation(Registrant reg)
+        {
+            this.Checkout(reg);
 
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.ConfirmationRedirect))
             {

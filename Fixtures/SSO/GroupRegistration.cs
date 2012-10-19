@@ -34,8 +34,8 @@
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType3);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, false);
@@ -47,12 +47,12 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.Value == "");
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            KeywordProvider.RegistrationCreation.Checkout(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            KeywordProvider.Registration_Creation.SSOLogin(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(1).IsPresent);
@@ -95,9 +95,9 @@
             Registrant reg1 = new Registrant(evt);
             reg1.EventFee_Response = new EventFeeResponse(regType3);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.VerifyRegTypeDisplay(regType1, false);
@@ -111,16 +111,16 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg2.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            KeywordProvider.RegistrationCreation.Checkout(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
-            KeywordProvider.RegistrationCreation.Login(reg1);
+            KeywordProvider.Registration_Creation.Login(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(1).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg2);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
         }
 
         [Test]
@@ -138,13 +138,13 @@
             reg1.EventFee_Response = new EventFeeResponse(regType1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg1);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg1.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
-            KeywordProvider.RegistrationCreation.Checkout(reg1);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg1);
 
             RegType regType3 = new RegType("SSORegType");
             regType3.IsSSO = true;
@@ -160,12 +160,12 @@
             reg2.Password = SSOData.SSOPassword;
             reg2.EventFee_Response = new EventFeeResponse(regType3);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.SSOLogin(reg2);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
-            KeywordProvider.RegistrationCreation.Checkout(reg2);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
         }
     }
 }

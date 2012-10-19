@@ -59,7 +59,7 @@
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
 
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
@@ -85,8 +85,8 @@
             AgendaItem_CheckBox AG3 = new AgendaItem_CheckBox("AG3");
             AG3.ConditionalLogic.Add(AG2.NameOnForm);
 
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG2, evt);
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG3, evt);
+            KeywordProvider.Add_AgendaItem.AddAgendaItems(AG2, evt);
+            KeywordProvider.Add_AgendaItem.AddAgendaItems(AG3, evt);
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(AG2);
             row1.Delete_Click();
             PageObject.Builder.RegistrationFormPages.AgendaRow row2 = new PageObject.Builder.RegistrationFormPages.AgendaRow(AG1);
@@ -99,7 +99,7 @@
 
             AgendaItem_CheckBox AG4 = new AgendaItem_CheckBox("AG4");
             AG4.ConditionalLogic.Add(AG3.NameOnForm);
-            KeywordProvider.AddAgendaItem.AddAgendaItems(AG4, evt);
+            KeywordProvider.Add_AgendaItem.AddAgendaItems(AG4, evt);
 
             Registrant reg1 = new Registrant(evt);
             CFResponse_Checkbox resp = new CFResponse_Checkbox();
@@ -107,8 +107,8 @@
             resp.Checked = true;
             reg1.CustomField_Responses.Add(resp);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
             PageObject.Register.AgendaRow row4 = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG1);
             Assert.True(row4.AgendaType.IsPresent);
             ((CheckBox)(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(AG3).AgendaType)).Set(true);
@@ -116,8 +116,8 @@
 
             Registrant reg2 = new Registrant(evt);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             Assert.False(row4.AgendaType.IsPresent);
         }
 
@@ -162,34 +162,34 @@
             reg3.EventFee_Response = new EventFeeResponse(regType1);
             reg3.Register_Method = RegisterMethod.Admin;
 
-            KeywordProvider.RegistrationCreation.Checkin(reg3);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
+            KeywordProvider.Registration_Creation.Checkin(reg3);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg3);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToAll, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToType1, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(reqByType2, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(adminOnly, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(adminAndReq, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToAll, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToType1, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(reqByType2, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(adminOnly, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(adminAndReq, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.RequiredCheckBoxNotChecked));
 
             Registrant reg1 = new Registrant(evt);
             reg1.EventFee_Response = new EventFeeResponse(regType1);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToAll, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(visToType1, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(reqByType2, false);
@@ -225,8 +225,8 @@
 
             Registrant reg = new Registrant(evt);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showInPast, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showInFuture, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(hideInPast, false);
@@ -262,8 +262,8 @@
             reg1.Gender = FormData.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showToMale, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showToFemale, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showOver20, true);
@@ -273,8 +273,8 @@
             reg2.Gender = FormData.Gender.Female;
             reg2.BirthDate = DateTime.Today.AddYears(-18);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showToMale, false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showToFemale, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showOver20, false);

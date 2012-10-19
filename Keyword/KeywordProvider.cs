@@ -8,26 +8,26 @@
     public class KeywordProvider
     {
         public static SignInToManager SignIn = new SignInToManager();
-        public static EventCreation EventCreator = new EventCreation();
-        public static VerifyDisplay Display = new VerifyDisplay();
-        public static RegistrationCreation RegistrationCreation = new RegistrationCreation();
-        public static AddRegType AddRegType = new AddRegType();
-        public static AddDiscountCode AddDiscountCode = new AddDiscountCode();
-        public static AddEarlyLatePrice AddEarlyLatePrice = new AddEarlyLatePrice();
-        public static AddTaxRate AddTaxRate = new AddTaxRate();
-        public static AddAgendaItem AddAgendaItem = new AddAgendaItem();
-        public static AddMerchandise AddMerchandise = new AddMerchandise();
-        public static AddPaymentMethod AddPaymentMethod = new AddPaymentMethod();
-        public static ManagerDefault ManagerDefault = new ManagerDefault();
-        public static RegisterDefault RegisterDefault = new RegisterDefault();
-        public static BuilderDefault BuilderDefault = new BuilderDefault();
-        public static AddAttendeeDirectory AddAttendeeDirectory = new AddAttendeeDirectory();
-        public static ChangeEventStatus ChangeEventStatus = new ChangeEventStatus();
-        public static LaunchKiosk LaunchKiosk = new LaunchKiosk();
-        public static VerifyStandardReports VerifyStandardReports = new VerifyStandardReports();
-        public static CustomFieldCreation CustomFieldCreation = new CustomFieldCreation();
-        public static BackendUpdate BackendUpdate = new BackendUpdate();
-        public static AddGroupDiscount AddGroupDiscount = new AddGroupDiscount();
-        public static CalculateFee CalculateFee = new CalculateFee();
+        public static EventCreation Event_Creator = new EventCreation();
+        public static VerifyDisplay Verify_Display = new VerifyDisplay();
+        public static RegistrationCreation Registration_Creation = new RegistrationCreation();
+        public static AddRegType Add_RegType = new AddRegType();
+        public static AddDiscountCode Add_DiscountCode = new AddDiscountCode();
+        public static AddEarlyLatePrice Add_EarlyLatePrice = new AddEarlyLatePrice();
+        public static AddTaxRate Add_TaxRate = new AddTaxRate();
+        public static AddAgendaItem Add_AgendaItem = new AddAgendaItem();
+        public static AddMerchandise Add_Merchandise = new AddMerchandise();
+        public static AddPaymentMethod Add_PaymentMethod = new AddPaymentMethod();
+        public static ManagerCommon Manager_Common = new ManagerCommon();
+        public static RegisterCommon Register_Common = new RegisterCommon();
+        public static BuilderCommon Builder_Common = new BuilderCommon();
+        public static AddAttendeeDirectory Add_AttendeeDirectory = new AddAttendeeDirectory();
+        public static ChangeEventStatus Change_EventStatus = new ChangeEventStatus();
+        public static LaunchKiosk Launch_Kiosk = new LaunchKiosk();
+        public static VerifyStandardReports Verify_StandardReports = new VerifyStandardReports();
+        public static CustomFieldCreation CustomField_Creation = new CustomFieldCreation();
+        public static BackendUpdate Backend_Update = new BackendUpdate();
+        public static AddGroupDiscount Add_GroupDiscount = new AddGroupDiscount();
+        public static CalculateFee Calculate_Fee = new CalculateFee();
     }
 }

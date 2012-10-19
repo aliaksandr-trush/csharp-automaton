@@ -5,7 +5,7 @@
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
 
-    public class RegisterDefault
+    public class RegisterCommon
     {
         public string GenerateCurrentRegistrantLastName()
         {

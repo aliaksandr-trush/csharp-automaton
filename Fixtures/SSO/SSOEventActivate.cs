@@ -28,10 +28,10 @@
             reg.Password = SSOData.SSOPassword;
             reg.EventFee_Response = new EventFeeResponse(ssoRegType);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();
             Assert.True(PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.RemoveTestReg.IsChecked);
@@ -55,10 +55,10 @@
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();

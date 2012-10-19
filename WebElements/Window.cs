@@ -14,7 +14,7 @@
             this.Name = name;
         }
 
-        public string CurrentURL
+        public string CurrentUrl
         {
             get
             {
@@ -22,9 +22,14 @@
             }
         }
 
-        public bool URLContains(string url)
+        public bool DoesCurrentUrlContainsPath(string url)
         {
             return UIUtil.DefaultProvider.UrlContainsPath(url);
+        }
+
+        public bool DoesCurrentUrlContainsAbsolutePath(string url)
+        {
+            return UIUtil.DefaultProvider.UrlContainsAbsolutePath(url);
         }
 
         public string GetQueryStringValue(string queryString)
@@ -72,6 +77,14 @@
         public void Refresh()
         {
             UIUtil.DefaultProvider.RefreshPage();
+        }
+
+        public void ConsumeAlert()
+        {
+            if (UIUtil.DefaultProvider.IsAlertPresent())
+            {
+                UIUtil.DefaultProvider.GetConfirmation();
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
     using RegOnline.RegressionTest.UIUtility;
     using RegOnline.RegressionTest.WebElements;
 
-    public class BuilderDefault
+    public class BuilderCommon
     {
         public List<ChoiceItem> GetAgendaChoiceItem()
         {

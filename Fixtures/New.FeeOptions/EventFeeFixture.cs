@@ -19,7 +19,7 @@
         public void TestRegTypeWithDiscountCodeAccessCode()
         {
             evt = new Event("TestRegTypeWithDiscountCodeAccessCode");
-            paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             //regtype1 no price
             RegType regType1 = new RegType("RegType1");
@@ -45,25 +45,25 @@
             Registrant reg1 = new Registrant(evt);
             reg1.Payment_Method = paymentMethod;
             reg1.EventFee_Response = new EventFeeResponse(regType1);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.IsPresent);
             Registrant reg2 = new Registrant(evt);
             reg2.Payment_Method = paymentMethod;
             reg2.EventFee_Response = new EventFeeResponse(regType2);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 10);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 10);
             Registrant reg3 = new Registrant(evt);
             reg3.Payment_Method = paymentMethod;
             reg3.EventFee_Response = new EventFeeResponse(regType3);
             reg3.EventFee_Response.Code = dc1;
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg3);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 90);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg3);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 90);
             Registrant reg4 = new Registrant(evt);
             reg4.Payment_Method = paymentMethod;
             reg4.EventFee_Response = new EventFeeResponse(regType3);
             reg4.EventFee_Response.Code = ac1;
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg4);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 100);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg4);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 100);
         }
 
         [Test]
@@ -72,7 +72,7 @@
         public void TestEventFeeWithDiscountCodeAccessCode()
         {
             evt = new Event("TestEventFeeWithDiscountCodeAccessCode");
-            paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             EventFee ef = new EventFee();
             ef.StandardPrice = 100;
@@ -92,14 +92,14 @@
             reg1.Payment_Method = paymentMethod;
             reg1.EventFee_Response = new EventFeeResponse();
             reg1.EventFee_Response.Code = dc1;
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 90);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 90);
             Registrant reg2 = new Registrant(evt);
             reg2.Payment_Method = paymentMethod;
             reg2.EventFee_Response = new EventFeeResponse();
             reg2.EventFee_Response.Code = ac1;
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 100);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 100);
         }
     }
 }

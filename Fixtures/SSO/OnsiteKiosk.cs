@@ -29,23 +29,23 @@
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
-            KeywordProvider.ChangeEventStatus.EventStatusChange(evt, FormData.EventStatus.OnSite);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
+            KeywordProvider.Change_EventStatus.EventStatusChange(evt, FormData.EventStatus.OnSite);
 
             DataCollection.OnsiteKiosk kiosk = new DataCollection.OnsiteKiosk();
             kiosk.RequireAuthentication = true;
             kiosk.AllowOnsiteReg = true;
 
-            KeywordProvider.LaunchKiosk.LaunchOnsiteKiosk(kiosk);
+            KeywordProvider.Launch_Kiosk.LaunchOnsiteKiosk(kiosk);
 
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg1.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Enter_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.NewSearch_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Enter_Click();

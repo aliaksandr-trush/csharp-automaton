@@ -512,8 +512,8 @@
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                         }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                            && (reg.Country.Value == FormData.Countries.Austria))
+                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                            && (reg.Country.Value == FormData.Country.Austria))
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                         }
@@ -533,8 +533,8 @@
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                         }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                            && (reg.Country.Value == FormData.Countries.Austria))
+                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                            && (reg.Country.Value == FormData.Country.Austria))
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                         }
@@ -567,8 +567,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
@@ -586,8 +586,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
@@ -611,8 +611,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
@@ -630,8 +630,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
@@ -655,8 +655,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
@@ -674,8 +674,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
@@ -699,8 +699,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
@@ -718,8 +718,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
@@ -743,8 +743,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                             }
@@ -762,8 +762,8 @@
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                                && (reg.Country.Value == FormData.Countries.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                                && (reg.Country.Value == FormData.Country.Austria))
                                             {
                                                 taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                             }
@@ -799,8 +799,8 @@
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                            && (reg.Country.Value == FormData.Countries.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                            && (reg.Country.Value == FormData.Country.Austria))
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                         }
@@ -819,8 +819,8 @@
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                            && (reg.Country.Value == FormData.Countries.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                            && (reg.Country.Value == FormData.Country.Austria))
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                         }
@@ -844,8 +844,8 @@
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                            && (reg.Country.Value == FormData.Countries.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                            && (reg.Country.Value == FormData.Country.Austria))
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                                         }
@@ -864,8 +864,8 @@
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                                            && (reg.Country.Value == FormData.Countries.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
+                                            && (reg.Country.Value == FormData.Country.Austria))
                                         {
                                             total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                                         }

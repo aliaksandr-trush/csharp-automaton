@@ -43,19 +43,19 @@
             bool recreateEvent = true,
             bool deleteTestReg = false)
         {
-            if (KeywordProvider.ManagerDefault.DoesEventExist(evt.Title))
+            if (KeywordProvider.Manager_Common.DoesEventExist(evt.Title))
             {
                 if (recreateEvent)
                 {
-                    KeywordProvider.ManagerDefault.DeleteEvent(evt.Title);
-                    KeywordProvider.EventCreator.CreateEvent(evt);
+                    KeywordProvider.Manager_Common.DeleteEvent(evt.Title);
+                    KeywordProvider.Event_Creator.CreateEvent(evt);
                 }
                 else
                 {
                     if (deleteTestReg)
                     {
-                        evt.Id = KeywordProvider.ManagerDefault.GetLatestEventId(evt.Title);
-                        KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+                        evt.Id = KeywordProvider.Manager_Common.GetLatestEventId(evt.Title);
+                        KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
                         PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.DeleteTestReg_Click();
                         PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.DeleteTestRegFrame.SelectByName();
                         PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.DeleteTestRegFrame.Delete_Click();
@@ -65,10 +65,10 @@
             }
             else
             {
-                KeywordProvider.EventCreator.CreateEvent(evt);
+                KeywordProvider.Event_Creator.CreateEvent(evt);
             }
 
-            evt.Id = KeywordProvider.ManagerDefault.GetLatestEventId(evt.Title);
+            evt.Id = KeywordProvider.Manager_Common.GetLatestEventId(evt.Title);
         }
     }
 }

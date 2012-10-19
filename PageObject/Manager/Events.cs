@@ -78,7 +78,7 @@
                 LocateBy.XPath);
 
             this.EventURL = new Clickable(
-                string.Format("{0}/td//a[contains(@title,'regonline.com')]", this.Tr.Locator),
+                string.Format("{0}/td/a[starts-with(@title,'{1}')]", this.Tr.Locator, Configuration.ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps),
                 LocateBy.XPath).GetAttribute("href");
         }
 

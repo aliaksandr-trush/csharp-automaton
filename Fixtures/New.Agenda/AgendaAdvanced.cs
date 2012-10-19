@@ -30,7 +30,7 @@
             resp.Checked = true;
             reg.CustomField_Responses.Add(resp);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             PageObject.PageObjectProvider.Builder.EmailViewer.OpenURL(evt.Id, reg.Id);
             Assert.True(PageObject.PageObjectHelper.IsTextPresent(agendaWithEmailAddendum.ConfirmationAddendum));
@@ -79,9 +79,9 @@
             PageObject.PageObjectProvider.Register.RegistationSite.EventWebsite.RegisterNow_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            KeywordProvider.RegistrationCreation.Agenda(reg);
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Agenda(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.AddToCalendar(agendaAddToCalenda).IsPresent);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.AddToCalendar(includeOnEventWeb).IsPresent);
         }
@@ -118,8 +118,8 @@
             reg.CustomField_Responses.Add(resp1);
             reg.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(agendaDetails);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(agendaDetailsURL);
             row1.Details.Click();
@@ -129,10 +129,10 @@
             row2.Details.Click();
             System.Threading.Thread.Sleep(1500);
             PageObject.PageObjectHelper.SelectTopWindow();
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.AgendaDetailsWindow.URLContains(agendaDetailsURL.DetailsURL));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Agenda.AgendaDetailsWindow.DoesCurrentUrlContainsPath(agendaDetailsURL.DetailsURL));
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.AgendaDetailsWindow.CloseAndBackToPrevious();
-            KeywordProvider.RegistrationCreation.Agenda(reg);
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.Agenda(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
             List<WebElements.Label> selectedAgenda = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
             Assert.IsNull(selectedAgenda.Find(a => a.Text == agendaGroup1.NameOnForm));
             Assert.IsNotNull(selectedAgenda.Find(a => a.Text == agendaGroup2.NameOnForm));
@@ -206,9 +206,9 @@
             reg1.CustomField_Responses.Add(resp6);
             reg1.CustomField_Responses.Add(resp7);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.PerformDefaultActions_Agenda(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.PerformDefaultActions_Agenda(reg1);
 
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(ag1);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(ag2);
@@ -225,7 +225,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             Assert.True(((WebElements.CheckBox)(row1.AgendaType)).IsChecked);
             Assert.True(((WebElements.CheckBox)(row1.AgendaType)).HasAttribute("disabled"));
             Assert.True(((WebElements.CheckBox)(row2.AgendaType)).IsChecked);
@@ -248,7 +248,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg3);
             Assert.False(((WebElements.CheckBox)(row2.AgendaType)).IsPresent);
             Assert.True(((WebElements.CheckBox)(row3.AgendaType)).IsChecked);
             Assert.True(((WebElements.CheckBox)(row3.AgendaType)).HasAttribute("disabled"));
@@ -258,9 +258,9 @@
             reg4.BirthDate = DateTime.Today.AddYears(-22);
             reg4.CustomField_Responses.Add(resp4);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg4);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg4);
-            KeywordProvider.RegistrationCreation.Agenda(reg4);
+            KeywordProvider.Registration_Creation.Checkin(reg4);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg4);
+            KeywordProvider.Registration_Creation.Agenda(reg4);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg5 = new Registrant(evt);
@@ -269,7 +269,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg5.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg5);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg5);
             Assert.True(((WebElements.CheckBox)(row4.AgendaType)).IsChecked);
             Assert.True(((WebElements.CheckBox)(row4.AgendaType)).HasAttribute("disabled"));
             Assert.False(((WebElements.CheckBox)(row5.AgendaType)).IsChecked);
@@ -337,10 +337,10 @@
             reg.CustomField_Responses.Add(resp6);
             reg.CustomField_Responses.Add(resp7);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Reports);
             PageObject.PageObjectProvider.Manager.Dashboard.Reports.AgendaReportLink_Click();
 

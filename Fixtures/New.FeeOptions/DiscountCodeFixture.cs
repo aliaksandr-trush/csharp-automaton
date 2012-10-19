@@ -21,7 +21,7 @@
         public void RegTypeDiscount()
         {
             Event evt = new Event("RegTypeDiscount");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType1 = new RegType("RegType1");
             regType1.Price = 80;
@@ -70,9 +70,9 @@
             group1.Primary = reg1;
             group1.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(group1));
+            KeywordProvider.Registration_Creation.GroupRegistration(group1);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(group1));
 
             Registrant reg3 = new Registrant(evt);
             reg3.Payment_Method = paymentMethod;
@@ -88,9 +88,9 @@
             group2.Primary = reg3;
             group2.Secondaries.Add(reg4);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(group2));
+            KeywordProvider.Registration_Creation.GroupRegistration(group2);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(group2));
         }
 
         [Test]
@@ -99,7 +99,7 @@
         public void GroupRegWithHalfDiscount()
         {
             Event evt = new Event("GroupRegWithHalfDiscount");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType1 = new RegType("RegType1");
             regType1.Price = 50;
@@ -204,8 +204,8 @@
             group.Secondaries.Add(reg2);
             group.Secondaries.Add(reg3);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 430);
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 430);
         }
 
         [Test]
@@ -214,7 +214,7 @@
         public void DifferentDiscountCode()
         {
             diffDcEvt = new Event("DifferentDiscountCode");
-            diffDcPaymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            diffDcPaymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             diffDcEvt.CheckoutPage.PaymentMethods.Add(diffDcPaymentMethod);
             diffDcRegType = new RegType("RegType");
             diffDcRegType.Price = 50;
@@ -286,14 +286,14 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffDcEvt, false);
 
             Registrant reg1 = this.GenerateRegDiffDc(dc1, dc5, dc9);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
             Registrant reg2 = this.GenerateRegDiffDc(dc3, dc4, dc8);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg2));
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg2));
             Registrant reg3 = this.GenerateRegDiffDc(dc2, dc6, dc7);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg3));
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg3));
         }
 
         [Test]
@@ -302,7 +302,7 @@
         public void DiscountCodeLimitTest()
         {
             Event evt = new Event("DiscountCodeLimitTest");
-            PaymentMethod paymenMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymenMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymenMethod);
             RegType regType = new RegType("RegType");
             regType.Price = 50;
@@ -378,25 +378,25 @@
             reg2.CustomField_Responses.Add(resp3);
             reg2.Merchandise_Responses.Add(resp5);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 0);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 0);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 0);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 0);
 
             Registrant reg3 = new Registrant(evt);
             reg3.EventFee_Response = resp1;
 
-            KeywordProvider.RegistrationCreation.Checkin(reg3);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, dc1.CodeString)));
+            KeywordProvider.Registration_Creation.Checkin(reg3);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(string.Format(Messages.RegisterError.RegTypeCodeLimitHasReached, dc1.CodeString)));
 
             Registrant reg4 = new Registrant(evt);
             reg4.EventFee_Response = resp2;
             reg4.CustomField_Responses.Add(resp3);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg4);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg4);
-            KeywordProvider.RegistrationCreation.Agenda(reg4);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.AgendaCodeLimitReached));
+            KeywordProvider.Registration_Creation.Checkin(reg4);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg4);
+            KeywordProvider.Registration_Creation.Agenda(reg4);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.AgendaCodeLimitReached));
 
             Registrant reg5 = new Registrant(evt);
             reg5.Payment_Method = paymenMethod;
@@ -404,8 +404,8 @@
             reg5.CustomField_Responses.Add(resp4);
             reg5.Merchandise_Responses.Add(resp5);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg5);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 55);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg5);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 55);
         }
 
         [Test]
@@ -492,7 +492,7 @@
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merch);
 
-            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethod.Check));
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethodEnum.Check));
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
@@ -532,9 +532,9 @@
             reg_NoCodes.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_NoCodes.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_NoCodes.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_NoCodes.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg_NoCodes.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg_NoCodes);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg_NoCodes);
 
             // Second registration: discount code - half
             evtFeeResponse.Code = half;
@@ -552,9 +552,9 @@
             reg_Code_Half.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_Half.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_Half.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_Half.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg_Code_Half.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_Half);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_Half);
 
             // Third registration: discount code - free
             evtFeeResponse.Code = free;
@@ -572,9 +572,9 @@
             reg_Code_Free.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_Free.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_Free.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_Free.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg_Code_Free.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_Free);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_Free);
 
             // Fourth registration: discount code - fixed amount
             evtFeeResponse.Code = fixedAmount;
@@ -592,9 +592,9 @@
             reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_FixedAmount.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_FixedAmount.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_FixedAmount.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg_Code_FixedAmount.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_FixedAmount);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_FixedAmount);
 
             // Fifth registration: access code - enter
             evtFeeResponse.Code = enter;
@@ -612,9 +612,9 @@
             reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_AccessCode.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_AccessCode.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_AccessCode.Payment_Method = new PaymentMethod(FormData.PaymentMethod.Check);
+            reg_Code_AccessCode.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg_Code_AccessCode);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_AccessCode);
         }
 
         [Test]
@@ -623,7 +623,7 @@
         public void DiscountCodeSetting()
         {
             Event evt = new Event("DiscountCodeSetting");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType = new RegType("RegType");
             regType.Price = 50;
@@ -707,8 +707,8 @@
             reg1.CustomField_Responses.Add(resp5);
             reg1.Merchandise_Responses.Add(resp6);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 398);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 398);
 
             Registrant reg2 = new Registrant(evt);
             reg2.Payment_Method = paymentMethod;
@@ -718,8 +718,8 @@
             reg2.CustomField_Responses.Add(resp5);
             reg2.Merchandise_Responses.Add(resp6);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation) == 408);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 408);
         }
 
         private Registrant GenerateRegDiffDc(CustomFieldCode regTypeDc, CustomFieldCode agendaDc, CustomFieldCode merchDc)
@@ -742,7 +742,7 @@
             reg.CustomField_Responses.Add(resp1);
             reg.Merchandise_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             return reg;
         }

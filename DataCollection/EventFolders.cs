@@ -6,7 +6,8 @@
         {
             RegistrationInventory,
             Regression,
-            SSO
+            SSO,
+            AMS
         }
     }
 }

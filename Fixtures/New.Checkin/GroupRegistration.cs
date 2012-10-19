@@ -29,7 +29,7 @@
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
         }
 
         [Test]
@@ -41,18 +41,18 @@
 
             Registrant registrant = new Registrant(this.groupUniqueEmailEvent, this.emailAddress);
 
-            KeywordProvider.RegistrationCreation.Checkin(registrant);
+            KeywordProvider.Registration_Creation.Checkin(registrant);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnDupEmail.IsPresent);
 
-            KeywordProvider.RegistrationCreation.Login(registrant);
+            KeywordProvider.Registration_Creation.Login(registrant);
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
-            KeywordProvider.RegistrationCreation.Checkout(registrant);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(registrant);
         }
 
         [Test]
@@ -68,12 +68,12 @@
 
             Registrant registrant = new Registrant(groupUsedEmailDiffEvent, this.emailAddress);
 
-            KeywordProvider.RegistrationCreation.Checkin(registrant);
+            KeywordProvider.Registration_Creation.Checkin(registrant);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnAutoRecall.IsPresent);
 
-            KeywordProvider.RegistrationCreation.Login(registrant);
+            KeywordProvider.Registration_Creation.Login(registrant);
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
@@ -103,7 +103,7 @@
             RegType regType = new RegType("First");
             regType.Price = 50;
             groupEventFeeGroupDiscount.StartPage.RegTypes.Add(regType);
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             groupEventFeeGroupDiscount.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupEventFeeGroupDiscount);
@@ -117,7 +117,7 @@
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
         }
 
         [Test]
@@ -135,8 +135,8 @@
             Registrant reg1 = new Registrant(groupEventLimitReached);
             Registrant reg2 = new Registrant(groupEventLimitReached);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AddPersonToWaitlist.IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.AddPersonToWaitlist_Click();
@@ -145,7 +145,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg2.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AddToWaitlist_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg1);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg1);
         }
 
         [Test]
@@ -158,12 +158,12 @@
             Registrant reg1 = new Registrant(this.groupUniqueEmailEvent, this.emailAddress);
             Registrant reg2 = new Registrant(this.groupUniqueEmailEvent);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.Password.IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Login.PasswordOnDupEmail.IsPresent);
 
-            KeywordProvider.RegistrationCreation.Login(reg1);
+            KeywordProvider.Registration_Creation.Login(reg1);
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
 
@@ -171,7 +171,7 @@
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Checkin, true);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
 
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
         }
@@ -195,18 +195,18 @@
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(reg1);
+            KeywordProvider.Registration_Creation.Login(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg3 = new Registrant(evt);
             reg3.EventFee_Response = new EventFeeResponse(regType);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg3);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg3);
-            KeywordProvider.RegistrationCreation.Checkout(reg3);
+            KeywordProvider.Registration_Creation.Checkin(reg3);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg3);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg3);
         }
 
         [Test]
@@ -228,17 +228,17 @@
             group.Primary = reg1;
             group.Secondaries.Add(reg2);
 
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(reg1);
+            KeywordProvider.Registration_Creation.Login(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg3 = new Registrant(evt);
 
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeRadioButton.IsPresent);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.IsPresent);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg3);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg3);
         }
 
         [Test]
@@ -254,7 +254,7 @@
 
             Registrant reg = new Registrant(this.groupUniqueEmailEvent, emailAddress);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
 
@@ -276,8 +276,8 @@
 
             Registrant reg = new Registrant(GoBackLink);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.GoBack_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Agenda, true);
@@ -285,7 +285,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.GoBack_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.Checkout, true);
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
     }
 }

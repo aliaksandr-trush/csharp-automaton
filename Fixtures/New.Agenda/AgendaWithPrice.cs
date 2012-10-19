@@ -44,7 +44,7 @@
             evt.AgendaPage.AgendaItems.Add(aGEarlyPriceDateTime);
             evt.AgendaPage.AgendaItems.Add(aGEarlyPriceRegs);
             evt.AgendaPage.AgendaItems.Add(aGLatePrice);
-            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethod.Check);
+            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
@@ -68,9 +68,9 @@
             reg1.CustomField_Responses.Add(resp4);
             reg1.Payment_Method = paymentMethod;
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
             reg2.CustomField_Responses.Add(resp1);
@@ -79,9 +79,9 @@
             reg2.CustomField_Responses.Add(resp4);
             reg2.Payment_Method = paymentMethod;
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg1));
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
         }
 
         [Test]
@@ -90,7 +90,7 @@
         public void AgendaDiscountCode()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaDiscountCode");
-            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethod.Check);
+            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             evt.AgendaPage = new DataCollection.AgendaPage();
             DataCollection.AgendaItem_CheckBox agendaDCPercent = new DataCollection.AgendaItem_CheckBox("AgendaDCPercent");
@@ -240,15 +240,15 @@
             reg.CustomField_Responses.Add(resp9);
             reg.CustomField_Responses.Add(resp10);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            KeywordProvider.RegistrationCreation.Agenda(reg);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(DataCollection.Messages.RegisterError.DiscountCodeNotFilled));
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Agenda(reg);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(DataCollection.Messages.RegisterError.DiscountCodeNotFilled));
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(reg) - 5);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(reg) - 5);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             DataCollection.AgendaResponse_Checkbox resp11 = new DataCollection.AgendaResponse_Checkbox();
@@ -257,10 +257,10 @@
             resp11.Code = dCWithLimit;
             reg1.CustomField_Responses.Add(resp11);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.Agenda(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(DataCollection.Messages.RegisterError.AgendaCodeLimitReached));
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Agenda(reg1);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(DataCollection.Messages.RegisterError.AgendaCodeLimitReached));
         }
 
         [Test]
@@ -299,16 +299,16 @@
             reg1.CustomField_Responses.Add(resp1);
             reg1.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg2);
-            KeywordProvider.RegistrationCreation.Agenda(reg2);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(DataCollection.Messages.RegisterError.AgendaCodeLimitReached));
+            KeywordProvider.Registration_Creation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg2);
+            KeywordProvider.Registration_Creation.Agenda(reg2);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(DataCollection.Messages.RegisterError.AgendaCodeLimitReached));
             PageObject.Register.AgendaRow row = new PageObject.Register.AgendaRow(accessBulkCode);
             Assert.True(row.DiscountCodeInput.IsPresent);
         }
