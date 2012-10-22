@@ -164,6 +164,17 @@
                 }
             }
 
+            foreach (LodgingResponse response in reg.Lodging_Responses)
+            {
+                foreach (RoomBlock block in response.Hotel.RoomBlocks)
+                {
+                    if ((block.Date >= response.CheckinDate) && (block.Date <= response.CheckoutDate))
+                    {
+                        reg.Fee_Summary.Total += response.RoomType.RoomRate;
+                    }
+                }
+            }
+
             return reg.Fee_Summary.Total;
         }
 
@@ -176,6 +187,11 @@
             foreach (Registrant reg in group.Secondaries)
             {
                 total += this.CalculateSingleReg(reg);
+            }
+
+            if (group.Primary.Event.MerchandisePage.ShippingFee.HasValue)
+            {
+                total += group.Primary.Event.MerchandisePage.ShippingFee.Value;
             }
 
             List<Registrant> regs = new List<Registrant>();
@@ -220,95 +236,104 @@
                 }
             }
 
-            List<EventFeeResponseCount> eventFeeResponseCount = new List<EventFeeResponseCount>();
-            List<AgendaResponseCount> agendaResponseCount = new List<AgendaResponseCount>();
+            Dictionary<RegType, List<EventFeeResponse>> responseDic = new Dictionary<RegType, List<EventFeeResponse>>();
+            Dictionary<AgendaItem, List<AgendaResponse>> agendaDic = new Dictionary<AgendaItem, List<AgendaResponse>>();
 
             foreach (EventFeeResponse resp in regEventFeeResponses)
             {
-                if (eventFeeResponseCount.Exists(e => e.EventFee_Response.RegType == resp.RegType))
+                if (responseDic.ContainsKey(resp.RegType))
                 {
-                    eventFeeResponseCount.Find(e => e.EventFee_Response.RegType == resp.RegType).count += 1;
+                    responseDic[resp.RegType].Add(resp);
                 }
-                else if ((group.Primary.Event.StartPage.GroupDiscount != null) 
+                else if ((group.Primary.Event.StartPage.GroupDiscount != null)
                     && group.Primary.Event.StartPage.GroupDiscount.ApplyToRegTypes.Count != 0)
                 {
                     if (group.Primary.Event.StartPage.GroupDiscount.ApplyToRegTypes.Exists(r => r == resp.RegType))
                     {
-                        EventFeeResponseCount responseCount = new EventFeeResponseCount();
-                        responseCount.EventFee_Response = resp;
-                        responseCount.count = 1;
-                        eventFeeResponseCount.Add(responseCount);
+                        List<EventFeeResponse> regTypeResponse = new List<EventFeeResponse>();
+                        regTypeResponse.Add(resp);
+                        responseDic.Add(resp.RegType, regTypeResponse);
                     }
                 }
                 else
                 {
-                    EventFeeResponseCount responseCount = new EventFeeResponseCount();
-                    responseCount.EventFee_Response = resp;
-                    responseCount.count = 1;
-                    eventFeeResponseCount.Add(responseCount);
+                    List<EventFeeResponse> regTypeResponse = new List<EventFeeResponse>();
+                    regTypeResponse.Add(resp);
+                    responseDic.Add(resp.RegType, regTypeResponse);
                 }
             }
 
             foreach (AgendaResponse resp in regAgendaResponses)
             {
-                if (agendaResponseCount.Exists(a => a.Agenda_Response.AgendaItem == resp.AgendaItem))
+                if (agendaDic.ContainsKey(resp.AgendaItem))
                 {
-                    agendaResponseCount.Find(a => a.Agenda_Response.AgendaItem == resp.AgendaItem).count += 1;
+                    agendaDic[resp.AgendaItem].Add(resp);
                 }
-                else if ((group.Primary.Event.StartPage.GroupDiscount != null) 
+                else if ((group.Primary.Event.StartPage.GroupDiscount != null)
                     && group.Primary.Event.StartPage.GroupDiscount.ApplyToAgendaItems.Count != 0)
                 {
                     if (group.Primary.Event.StartPage.GroupDiscount.ApplyToAgendaItems.Exists(a => a == resp.AgendaItem))
                     {
-                        AgendaResponseCount responseCount = new AgendaResponseCount();
-                        responseCount.Agenda_Response = resp;
-                        responseCount.count = 1;
-                        agendaResponseCount.Add(responseCount);
+                        List<AgendaResponse> agendaResponse = new List<AgendaResponse>();
+                        agendaResponse.Add(resp);
+                        agendaDic.Add(resp.AgendaItem, agendaResponse);
                     }
                 }
                 else
                 {
-                    AgendaResponseCount responseCount = new AgendaResponseCount();
-                    responseCount.Agenda_Response = resp;
-                    responseCount.count = 1;
-                    agendaResponseCount.Add(responseCount);
+                    List<AgendaResponse> agendaResponse = new List<AgendaResponse>();
+                    agendaResponse.Add(resp);
+                    agendaDic.Add(resp.AgendaItem, agendaResponse);
                 }
+                
             }
 
-            foreach (EventFeeResponseCount count in eventFeeResponseCount)
+            foreach(KeyValuePair<RegType, List<EventFeeResponse>> dic in responseDic)
             {
                 if ((group.Primary.Event.StartPage.GroupDiscount != null) && 
-                    (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize) &&
+                    (dic.Value.Count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize) &&
                     (group.Primary.Event.StartPage.GroupDiscount.ShowAndApply))
                 {
                     if (group.Primary.Event.StartPage.GroupDiscount.GroupSizeOption == GroupDiscount_GroupSizeOption.SizeOrMore)
                     {
                         if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                         {
-                            total -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * count.count;
-                            count.EventFee_Response.Fee -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * count.count;
+                            total -= dic.Value[0].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * dic.Value.Count;
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                dic.Value[i].Fee -= dic.Value[i].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
+                            }
                         }
                         else
                         {
-                            total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * count.count;
-                            count.EventFee_Response.Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * count.count;
+                            total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * dic.Value.Count;
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                dic.Value[i].Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
+                            }
                         }
                     }
                     else if (group.Primary.Event.StartPage.GroupDiscount.AddtionalRegOption == GroupDiscount_AdditionalRegOption.All)
                     {
-                        for (int i = 1; i <= count.count; i++)
+                        for (int i = 1; i <= dic.Value.Count; i++)
                         {
                             if (i % group.Primary.Event.StartPage.GroupDiscount.GroupSize == 0)
                             {
                                 if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                                 {
-                                    total -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * group.Primary.Event.StartPage.GroupDiscount.GroupSize;
-                                    count.EventFee_Response.Fee -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * group.Primary.Event.StartPage.GroupDiscount.GroupSize;
+                                    total -= dic.Value[0].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * group.Primary.Event.StartPage.GroupDiscount.GroupSize;
+                                    for (int j = 0; j < dic.Value.Count; j++)
+                                    {
+                                        dic.Value[j].Fee -= dic.Value[j].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
+                                    }
                                 }
                                 else
                                 {
                                     total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * group.Primary.Event.StartPage.GroupDiscount.GroupSize;
-                                    count.EventFee_Response.Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * group.Primary.Event.StartPage.GroupDiscount.GroupSize;
+                                    for (int j = 0; j < dic.Value.Count; j++)
+                                    {
+                                        dic.Value[j].Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
+                                    }
                                 }
                             }
                         }
@@ -317,30 +342,36 @@
                     {
                         if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                         {
-                            total -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
-                            count.EventFee_Response.Fee -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                            total -= dic.Value[0].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * (dic.Value.Count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                dic.Value[i].Fee -= dic.Value[1].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
+                            }
                         }
                         else
                         {
-                            total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
-                            count.EventFee_Response.Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                            total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * (dic.Value.Count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                dic.Value[i].Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
+                            }
                         } 
                     }
                     else if (group.Primary.Event.StartPage.GroupDiscount.AddtionalRegOption == GroupDiscount_AdditionalRegOption.Additional)
                     {
-                        for (int i = 1; i <= count.count; i++)
+                        for (int i = 1; i <= dic.Value.Count; i++)
                         {
                             if ((i > group.Primary.Event.StartPage.GroupDiscount.GroupSize) && (i <= group.Primary.Event.StartPage.GroupDiscount.NumberOfAdditionalReg.Value))
                             {
                                 if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                                 {
-                                    total -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
-                                    count.EventFee_Response.Fee -= count.EventFee_Response.Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
+                                    total -= dic.Value[i].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
+                                    dic.Value[i].Fee -= dic.Value[i].Fee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0;
                                 }
                                 else
                                 { 
                                     total -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
-                                    count.EventFee_Response.Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
+                                    dic.Value[i].Fee -= group.Primary.Event.StartPage.GroupDiscount.DiscountAmount;
                                 }
                             }
                         }
@@ -348,37 +379,67 @@
                 }
             }
 
-            foreach (AgendaResponseCount count in agendaResponseCount)
+            foreach (KeyValuePair<AgendaItem, List<AgendaResponse>> dic in agendaDic)
             {
                 if ((group.Primary.Event.StartPage.GroupDiscount != null)
-                    && (count.count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize)
+                    && (dic.Value.Count >= group.Primary.Event.StartPage.GroupDiscount.GroupSize)
                     && (group.Primary.Event.StartPage.GroupDiscount.ShowAndApply))
                 {
-                    switch(count.Agenda_Response.AgendaItem.Type)
+                    switch(dic.Value[0].AgendaItem.Type)
                     {
                         case FormData.CustomFieldType.AlwaysSelected:
-                            AgendaResponse_AlwaysSelected respAlways = count.Agenda_Response as AgendaResponse_AlwaysSelected;
-                            respAlways.Fee = total -= this.CalculateAgendaGroupDiscount(respAlways.Fee, group, count);
+                            AgendaResponse_AlwaysSelected respAlways = dic.Value[0] as AgendaResponse_AlwaysSelected;
+                            total -= this.CalculateAgendaGroupDiscount(respAlways.Fee, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_AlwaysSelected resp = dic.Value[i] as AgendaResponse_AlwaysSelected;
+                                resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         case FormData.CustomFieldType.CheckBox:
-                            AgendaResponse_Checkbox respCheck = count.Agenda_Response as AgendaResponse_Checkbox;
-                            respCheck.Fee = total -= this.CalculateAgendaGroupDiscount(respCheck.Fee, group, count);
+                            AgendaResponse_Checkbox respCheck = dic.Value[0] as AgendaResponse_Checkbox;
+                            total -= this.CalculateAgendaGroupDiscount(respCheck.Fee, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_Checkbox resp = dic.Value[i] as AgendaResponse_Checkbox;
+                                resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         case FormData.CustomFieldType.RadioButton:
-                            AgendaResponse_MultipleChoice_RadioButton respRadio = count.Agenda_Response as AgendaResponse_MultipleChoice_RadioButton;
-                            respRadio.Fee = total -= this.CalculateAgendaGroupDiscount(respRadio.Fee, group, count);
+                            AgendaResponse_MultipleChoice_RadioButton respRadio = dic.Value[0] as AgendaResponse_MultipleChoice_RadioButton;
+                            total -= this.CalculateAgendaGroupDiscount(respRadio.Fee, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_MultipleChoice_RadioButton resp = dic.Value[i] as AgendaResponse_MultipleChoice_RadioButton;
+                                resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         case FormData.CustomFieldType.Dropdown:
-                            AgendaResponse_MultipleChoice_DropDown respDrop = count.Agenda_Response as AgendaResponse_MultipleChoice_DropDown;
-                            respDrop.Fee = total -= this.CalculateAgendaGroupDiscount(respDrop.Fee, group, count);
+                            AgendaResponse_MultipleChoice_DropDown respDrop = dic.Value[0] as AgendaResponse_MultipleChoice_DropDown;
+                            total -= this.CalculateAgendaGroupDiscount(respDrop.Fee, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_MultipleChoice_DropDown resp = dic.Value[i] as AgendaResponse_MultipleChoice_DropDown;
+                                resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         case FormData.CustomFieldType.Contribution:
-                            AgendaResponse_Contribution respContri = count.Agenda_Response as AgendaResponse_Contribution;
-                            respContri.ContributionAmount = total -= this.CalculateAgendaGroupDiscount(respContri.ContributionAmount, group, count);
+                            AgendaResponse_Contribution respContri = dic.Value[0] as AgendaResponse_Contribution;
+                            total -= this.CalculateAgendaGroupDiscount(respContri.ContributionAmount, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_Contribution resp = dic.Value[i] as AgendaResponse_Contribution;
+                                resp.ContributionAmount -= this.CalculateAgendaGroupDiscount(resp.ContributionAmount, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         case FormData.CustomFieldType.FileUpload:
-                            AgendaResponse_FileUpload respFile = count.Agenda_Response as AgendaResponse_FileUpload;
-                            respFile.Fee = total -= this.CalculateAgendaGroupDiscount(respFile.Fee, group, count);
+                            AgendaResponse_FileUpload respFile = dic.Value[0] as AgendaResponse_FileUpload;
+                            total -= this.CalculateAgendaGroupDiscount(respFile.Fee, group, dic.Value);
+                            for (int i = 0; i < dic.Value.Count; i++)
+                            {
+                                AgendaResponse_FileUpload resp = dic.Value[i] as AgendaResponse_FileUpload;
+                                resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
+                            }
                             break;
                         default:
                             break;
@@ -405,7 +466,8 @@
             {
                 if ((reg.EventFee_Response != null) && (reg.EventFee_Response.Code != null))
                 {
-                    reg.EventFee_Response.Fee = total -= reg.EventFee_Response.Fee - reg.EventFee_Response.Code.CalculateDiscountedPrice(reg.EventFee_Response.Fee);
+                    total -= reg.EventFee_Response.Fee - reg.EventFee_Response.Code.CalculateDiscountedPrice(reg.EventFee_Response.Fee);
+                    reg.EventFee_Response.Fee -= reg.EventFee_Response.Fee - reg.EventFee_Response.Code.CalculateDiscountedPrice(reg.EventFee_Response.Fee);
                 }
 
                 foreach (CustomFieldResponse responses in reg.CustomField_Responses)
@@ -421,7 +483,8 @@
                                     AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                     if (resp.Code != null)
                                     {
-                                        resp.Fee = total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        resp.Fee -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
                                     }
                                 }
                                 break;
@@ -430,7 +493,8 @@
                                     AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                     if (resp.Code != null)
                                     {
-                                        resp.Fee = total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        resp.Fee -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
                                     }
                                 }
                                 break;
@@ -439,7 +503,8 @@
                                     AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                     if (resp.Code != null)
                                     {
-                                        resp.Fee = total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        resp.Fee -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
                                     }
                                 }
                                 break;
@@ -448,7 +513,8 @@
                                     AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                     if (resp.Code != null)
                                     {
-                                        resp.Fee = total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        resp.Fee -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
                                     }
                                 }
                                 break;
@@ -457,7 +523,8 @@
                                     AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                     if (resp.Code != null)
                                     {
-                                        resp.Fee = total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        total -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
+                                        resp.Fee -= resp.Fee - resp.Code.CalculateDiscountedPrice(resp.Fee);
                                     }
                                 }
                                 break;
@@ -476,7 +543,8 @@
                                 MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                                 if (resp.Discount_Code != null)
                                 {
-                                    resp.Fee = total -= (resp.Fee - resp.Discount_Code.CalculateDiscountedPrice(resp.Fee)) * resp.Quantity;
+                                    total -= (resp.Fee - resp.Discount_Code.CalculateDiscountedPrice(resp.Fee)) * resp.Quantity;
+                                    resp.Fee -= resp.Fee - resp.Discount_Code.CalculateDiscountedPrice(resp.Fee);
                                 }
                             }
                             break;
@@ -492,6 +560,10 @@
         private double CalculateTaxRates(Group group)
         {
             double total = this.CalculateDiscountCode(group);
+            double amountApplyTax1 = 0;
+            double amountApplyTax2 = 0;
+            double tax1 = 0;
+            double tax2 = 0;
 
             List<Registrant> regs = new List<Registrant>();
             regs.Add(group.Primary);
@@ -506,43 +578,12 @@
                 if ((reg.EventFee_Response != null) && (reg.EventFee_Response.RegType.ApplyTaxOne.HasValue)
                     && (reg.EventFee_Response.RegType.ApplyTaxOne.Value))
                 {
-                    if ((group.Primary.Event.TaxRateOne.Country.HasValue) && (reg.Country.HasValue))
-                    {
-                        if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
-                        {
-                            total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
-                        }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                            && (reg.Country.Value == FormData.Countries.Austria))
-                        {
-                            total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
-                        }
-                    }
-                    else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
-                    {
-                        total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
-                    }
+                    amountApplyTax1 += reg.EventFee_Response.Fee;
                 }
-
                 if ((reg.EventFee_Response != null) && (reg.EventFee_Response.RegType.ApplyTaxTwo.HasValue)
                     && (reg.EventFee_Response.RegType.ApplyTaxTwo.Value))
                 {
-                    if ((group.Primary.Event.TaxRateOne.Country.HasValue) && (reg.Country.HasValue))
-                    {
-                        if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
-                        {
-                            total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
-                        }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
-                            && (reg.Country.Value == FormData.Countries.Austria))
-                        {
-                            total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
-                        }
-                    }
-                    else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
-                    {
-                        total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
-                    }
+                    amountApplyTax2 += reg.EventFee_Response.Fee;
                 }
 
                 foreach (CustomFieldResponse responses in reg.CustomField_Responses)
@@ -550,8 +591,6 @@
                     if (responses is AgendaResponse)
                     {
                         AgendaResponse response = responses as AgendaResponse;
-
-                        double taxAmount = 0;
 
                         switch (response.AgendaItem.Type)
                         {
@@ -565,17 +604,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     if ((agenda.ApplyTaxTwo.HasValue) && (agenda.ApplyTaxTwo.Value))
@@ -584,17 +623,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                 }
@@ -609,17 +648,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     if ((agenda.ApplyTaxTwo.HasValue) && (agenda.ApplyTaxTwo.Value))
@@ -628,17 +667,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                 }
@@ -653,17 +692,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     if ((agenda.ApplyTaxTwo.HasValue) && (agenda.ApplyTaxTwo.Value))
@@ -672,17 +711,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                 }
@@ -697,17 +736,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     if ((agenda.ApplyTaxTwo.HasValue) && (agenda.ApplyTaxTwo.Value))
@@ -716,17 +755,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                 }
@@ -741,17 +780,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                                amountApplyTax1 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     if ((agenda.ApplyTaxTwo.HasValue) && (agenda.ApplyTaxTwo.Value))
@@ -760,17 +799,17 @@
                                         {
                                             if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                             if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                                 && (reg.Country.Value == FormData.Countries.Austria))
                                             {
-                                                taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                                amountApplyTax2 += resp.Fee;
                                             }
                                         }
                                         else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                         {
-                                            taxAmount += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                 }
@@ -778,8 +817,6 @@
                             default:
                                 break;
                         }
-
-                        total += taxAmount;
                     }
                 }
 
@@ -797,17 +834,17 @@
                                     {
                                         if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee * resp.Quantity;
                                         }
                                         if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                             && (reg.Country.Value == FormData.Countries.Austria))
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee * resp.Quantity;
                                         }
                                     }
                                     else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                     {
-                                        total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                        amountApplyTax1 += resp.Fee * resp.Quantity;
                                     }
                                 }
                                 if ((resp.Merchandise_Item.ApplyTaxTwo.HasValue)
@@ -817,17 +854,17 @@
                                     {
                                         if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee * resp.Quantity;
                                         }
                                         if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                             && (reg.Country.Value == FormData.Countries.Austria))
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee * resp.Quantity;
                                         }
                                     }
                                     else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                     {
-                                        total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                        amountApplyTax2 += resp.Fee * resp.Quantity;
                                     }
                                 }
                             }
@@ -842,17 +879,17 @@
                                     {
                                         if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                         if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                             && (reg.Country.Value == FormData.Countries.Austria))
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                            amountApplyTax1 += resp.Fee;
                                         }
                                     }
                                     else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                     {
-                                        total += resp.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
+                                        amountApplyTax1 += resp.Fee;
                                     }
                                 }
                                 if ((resp.Merchandise_Item.ApplyTaxTwo.HasValue)
@@ -862,17 +899,17 @@
                                     {
                                         if (group.Primary.Event.TaxRateOne.Country.Value == reg.Country.Value)
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                         if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Countries.EU)
                                             && (reg.Country.Value == FormData.Countries.Austria))
                                         {
-                                            total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                            amountApplyTax2 += resp.Fee;
                                         }
                                     }
                                     else if (!group.Primary.Event.TaxRateOne.Country.HasValue)
                                     {
-                                        total += resp.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
+                                        amountApplyTax2 += resp.Fee;
                                     }
                                 }
                             }
@@ -882,6 +919,20 @@
                     }
                 }
             }
+
+
+
+            if (group.Primary.Event.TaxRateOne != null)
+            {
+                tax1 = Math.Round(amountApplyTax1 * group.Primary.Event.TaxRateOne.Rate / 100.0, 2, MidpointRounding.AwayFromZero);
+            }
+
+            if (group.Primary.Event.TaxRateTwo != null)
+            {
+                tax2 = Math.Round(amountApplyTax2 * group.Primary.Event.TaxRateTwo.Rate / 100.0, 2, MidpointRounding.AwayFromZero);
+            }
+
+            total = Math.Round(total, 2, MidpointRounding.AwayFromZero) + tax1 + tax2;
 
             return total;
         }
@@ -940,7 +991,7 @@
             return agendaFee;
         }
 
-        private double CalculateAgendaGroupDiscount(double agendaFee, Group group, AgendaResponseCount count)
+        private double CalculateAgendaGroupDiscount(double agendaFee, Group group, List<AgendaResponse> agendaresponses)
         {
             double total = 0;
 
@@ -948,16 +999,16 @@
             {
                 if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                 {
-                    total += agendaFee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * count.count;
+                    total += agendaFee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * agendaresponses.Count;
                 }
                 else
                 {
-                    total += group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * count.count;
+                    total += group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * agendaresponses.Count;
                 }
             }
             else if (group.Primary.Event.StartPage.GroupDiscount.AddtionalRegOption == GroupDiscount_AdditionalRegOption.All)
             {
-                for (int i = 1; i <= count.count; i++)
+                for (int i = 1; i <= agendaresponses.Count; i++)
                 {
                     if (i % group.Primary.Event.StartPage.GroupDiscount.GroupSize == 0)
                     {
@@ -976,18 +1027,18 @@
             {
                 if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                 {
-                    total += agendaFee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                    total += agendaFee * group.Primary.Event.StartPage.GroupDiscount.DiscountAmount / 100.0 * (agendaresponses.Count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
                 }
                 else
                 {
-                    total += group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * (count.count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
+                    total += group.Primary.Event.StartPage.GroupDiscount.DiscountAmount * (agendaresponses.Count - group.Primary.Event.StartPage.GroupDiscount.GroupSize);
                 }
             }
             else if (group.Primary.Event.StartPage.GroupDiscount.AddtionalRegOption == GroupDiscount_AdditionalRegOption.Additional)
             {
-                for (int i = 1; i <= count.count; i++)
+                for (int i = 1; i <= agendaresponses.Count; i++)
                 {
-                    if ((i > group.Primary.Event.StartPage.GroupDiscount.GroupSize) && (i <= group.Primary.Event.StartPage.GroupDiscount.NumberOfAdditionalReg.Value + count.count))
+                    if ((i > group.Primary.Event.StartPage.GroupDiscount.GroupSize) && (i <= group.Primary.Event.StartPage.GroupDiscount.NumberOfAdditionalReg.Value + agendaresponses.Count))
                     {
                         if (group.Primary.Event.StartPage.GroupDiscount.GroupDiscountType == GroupDiscount_DiscountType.Percent)
                         {
@@ -1002,18 +1053,6 @@
             }
 
             return total;
-        }
-
-        private class EventFeeResponseCount
-        {
-            public EventFeeResponse EventFee_Response;
-            public int count;
-        }
-
-        private class AgendaResponseCount
-        {
-            public AgendaResponse Agenda_Response;
-            public int count;
         }
     }
 }

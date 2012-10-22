@@ -12,6 +12,7 @@
         public HtmlEditor CheckoutPageHeaderEditor = new HtmlEditor("dialog");
         public Clickable CheckoutPageFooter = new Clickable("//*[text()='Add Checkout Page Footer']", LocateBy.XPath);
         public HtmlEditor CheckoutPageFooterEditor = new HtmlEditor("dialog");
+        public RadioButton AddServiceFee = new RadioButton("ctl00_cph_radShare", LocateBy.Id);
 
         public void AddPaymentMethod_Click()
         {

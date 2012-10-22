@@ -12,8 +12,9 @@
         public HtmlEditor LTPageHeaderEditor = new HtmlEditor("dialog");
         public Clickable LTPageFooter = new Clickable("//*[text()='Add Lodging & Travel Page Footer']", LocateBy.XPath);
         public HtmlEditor LTPageFooterEditor = new HtmlEditor("dialog");
-        public Clickable AddNewHotel = new Clickable("//div[@id='ctl00_cph_divAddNewHotel']/a", LocateBy.XPath);
+        public Clickable AddNewHotel = new Clickable("//a[text()='Add New Hotel']", LocateBy.XPath);
         public AddHotelFrame AddHotelFrame = new AddHotelFrame("dialog");
+        public RadioButton ChargeLodgingFee = new RadioButton("ctl00_cph_radCharge", LocateBy.Id);
 
         public void SetLodgingStandardFieldVisible(FormData.LodgingStandardFields field, bool visible)
         {
@@ -31,6 +32,15 @@
         {
             this.AddNewHotel.WaitForDisplay();
             this.AddNewHotel.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
+        }
+
+        public void ChargeLodgingFee_Click()
+        {
+            this.ChargeLodgingFee.WaitForDisplay();
+            this.ChargeLodgingFee.Click();
             Utility.ThreadSleep(2);
             WaitForAJAX();
             WaitForLoad();
@@ -71,8 +81,8 @@
 
             List<OpenQA.Selenium.IWebElement> roomBlocks = UIUtil.DefaultProvider.GetElements(roomTypeTrLabel.Locator, roomTypeTrLabel.TypeOfLocator);
 
-            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(29, 4);
-            string index = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(34, 1);
+            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(28, 4);
+            string index = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(33, 1);
 
             return new Input(string.Format("ctl00_cphDialog_rntBlockSize_{0}_{1}", id, index), LocateBy.Id);
         }
@@ -84,8 +94,8 @@
 
             List<OpenQA.Selenium.IWebElement> roomBlocks = UIUtil.DefaultProvider.GetElements(roomTypeTrLabel.Locator, roomTypeTrLabel.TypeOfLocator);
 
-            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(29, 4);
-            string index = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(34, 1);
+            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(28, 4);
+            string index = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(33, 1);
 
             return new Input(string.Format("ctl00_cphDialog_rntRoomRate_{0}_{1}", id, index), LocateBy.Id);
         }
@@ -97,9 +107,9 @@
 
             List<OpenQA.Selenium.IWebElement> roomBlocks = UIUtil.DefaultProvider.GetElements(roomTypeTrLabel.Locator, roomTypeTrLabel.TypeOfLocator);
 
-            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(29, 4);
+            string id = roomBlocks[roomBlockIndex].GetAttribute("id").Substring(28, 4);
 
-            return new Input(string.Format("ctl00_cphDialog_dtpRoomBlockDate{0}_dateInput_text", id), LocateBy.XPath);
+            return new Input(string.Format("ctl00_cphDialog_dtpRoomBlockDate{0}_dateInput_text", id), LocateBy.Id);
         }
 
         public void AddRoomBlock_Click()
@@ -133,6 +143,7 @@
 
         public Input HotelName = new Input("ctl00_cphDialog_tbHotelName", LocateBy.Id);
         public Clickable AddRoomType = new Clickable("ctl00_cphDialog_lbNewRoomType", LocateBy.Id);
+        public Clickable SaveAndClose = new Clickable("//span[@class='BiggerButtonBase']/a/span[text()='Save & Close']", LocateBy.XPath);
 
         public Input RoomType(int index)
         {
@@ -161,9 +172,13 @@
             WaitForLoad();
         }
 
-        public void SaveAndClose()
+        public void SaveAndClose_Click()
         {
-            PageObjectHelper.PopupFrame_Helper.SaveAndClose_Click();
+            this.SaveAndClose.WaitForDisplay();
+            this.SaveAndClose.Click();
+            Utility.ThreadSleep(2);
+            WaitForAJAX();
+            WaitForLoad();
             SwitchToMain();
         }
     }

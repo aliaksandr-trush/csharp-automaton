@@ -33,7 +33,7 @@
                     }
                 }
 
-                PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.AddHotelFrame.HotelDefine.SaveAndClose();
+                PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.AddHotelFrame.HotelDefine.SaveAndClose_Click();
                 PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.AddHotelFrame.SelectByName();
             }
 

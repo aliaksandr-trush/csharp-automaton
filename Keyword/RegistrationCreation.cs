@@ -28,6 +28,11 @@
                 Agenda(reg);
             }
 
+            if (reg.Event.LodgingTravelPage != null)
+            {
+                LodgingTravel(reg);
+            }
+
             if (reg.Event.MerchandisePage != null)
             {
                 Merchandise(reg);
@@ -41,6 +46,7 @@
             Checkin(group.Primary);
             PersonalInfo(group.Primary);
             Agenda(group.Primary);
+            LodgingTravel(group.Primary);
             Merchandise(group.Primary);
 
             for (int i = 0; i <= group.Secondaries.Count - 1; i++)
@@ -58,6 +64,15 @@
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
                 PersonalInfo(group.Secondaries[i]);
                 Agenda(group.Secondaries[i]);
+
+                if (group.Secondaries[i].Lodging_Responses.Count != 0)
+                {
+                    LodgingTravel(group.Secondaries[i]);
+                }
+                else if (group.Primary.Event.LodgingTravelPage != null)
+                {
+                    PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+                }
 
                 if (group.Secondaries[i].Merchandise_Responses.Count != 0)
                 {
@@ -189,6 +204,7 @@
             if (reg.BirthDate.HasValue)
             {
                 string date = string.Format("{0}/{1}/{2}", reg.BirthDate.Value.Month, reg.BirthDate.Value.Day, reg.BirthDate.Value.Year);
+                PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.Type(date);
                 PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.DateOfBirth.SetValue(date);
             }
 
@@ -394,6 +410,37 @@
             if (reg.CustomField_Responses.Count != 0 && reg.CustomField_Responses.HasAgendaResponse())
             {
                 this.PerformDefaultActions_Agenda(reg);
+                PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
+            }
+        }
+
+        public void LodgingTravel(Registrant reg)
+        {
+            if (reg.Lodging_Responses.Count != 0)
+            {
+                foreach (LodgingResponse response in reg.Lodging_Responses)
+                {
+                    if (response.Hotel != null)
+                    {
+                        PageObject.PageObjectProvider.Register.RegistationSite.LodgingAndTravel.CollectLodging.WaitForDisplayAndClick();
+
+                        if (response.CheckinDate.HasValue)
+                        {
+                            PageObject.PageObjectProvider.Register.RegistationSite.LodgingAndTravel.CheckinDate_Type(response.CheckinDate.Value);
+                        }
+
+                        if (response.CheckoutDate.HasValue)
+                        {
+                            PageObject.PageObjectProvider.Register.RegistationSite.LodgingAndTravel.CheckoutDate_Type(response.CheckoutDate.Value);
+                        }
+
+                        if (response.RoomType != null)
+                        {
+                            PageObject.PageObjectProvider.Register.RegistationSite.LodgingAndTravel.RoomPreference.SelectWithText(response.RoomType.RoomTypeName);
+                        }
+                    }
+                }
+
                 PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             }
         }

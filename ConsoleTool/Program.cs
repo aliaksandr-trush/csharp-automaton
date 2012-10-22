@@ -13,6 +13,8 @@
         {
             AccessData.SetLiveRegToTest(new List<int>() { 639231 });
             Console.Read();
+            Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.AwayFromZero));
+            Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.ToEven));
         }
     }
 }

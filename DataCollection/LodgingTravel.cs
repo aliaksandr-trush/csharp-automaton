@@ -7,6 +7,7 @@
     {
         public List<Hotel> Hotels = new List<Hotel>();
         public List<LodgingStandardFields> StandardFields = new List<LodgingStandardFields>();
+        public bool? ChargeLodgingFee;
     }
 
     public class Hotel

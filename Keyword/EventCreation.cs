@@ -433,6 +433,11 @@
                     }
                 }
 
+                if ((details.LodgingTravelPage.Lodging.ChargeLodgingFee.HasValue) && (details.LodgingTravelPage.Lodging.ChargeLodgingFee.Value))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.ChargeLodgingFee_Click();
+                }
+
                 if (details.LodgingTravelPage.PageHeader != null)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.LTPageHeader_Click();
@@ -463,6 +468,12 @@
                 {
                     KeywordProvider.AddMerchandise.AddMerchandises(merch, details);
                     PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
+                }
+
+                if (details.MerchandisePage.ShippingFee.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.AddShippingFee.Set(true);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.ShippingFee.Type(details.MerchandisePage.ShippingFee.Value);
                 }
 
                 if (details.MerchandisePage.PageHeader != null)
@@ -509,6 +520,7 @@
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CheckoutPageFooterEditor.SaveAndClose_Click();
                 }
             }
+
             if (details.CheckoutPage.PaymentMethods.Count != 0)
             {
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
@@ -517,6 +529,11 @@
                 {
                     KeywordProvider.AddPaymentMethod.AddPaymentMethods(method);
                 }
+            }
+
+            if ((details.CheckoutPage.AddServiceFee.HasValue) && (details.CheckoutPage.AddServiceFee.Value))
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.AddServiceFee.Click();
             }
         }
 

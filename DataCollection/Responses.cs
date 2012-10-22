@@ -373,4 +373,32 @@
             return copy;
         }
     }
+
+    public class LodgingResponse
+    {
+        public Hotel Hotel;
+        public RoomType RoomType;
+        public DateTime? CheckinDate;
+        public DateTime? CheckoutDate;
+        public double Fee { get; set; }
+
+        public LodgingResponse Clone()
+        {
+            LodgingResponse copy = new LodgingResponse();
+            copy.Hotel = this.Hotel;
+            copy.RoomType = this.RoomType;
+            copy.CheckinDate = this.CheckinDate;
+            copy.CheckoutDate = this.CheckoutDate;
+            copy.Fee = this.Fee;
+            return copy;
+        }
+    }
+
+    public class LodgingResponseList : List<LodgingResponse>
+    {
+        public new void Add(LodgingResponse response)
+        {
+            base.Add(response.Clone());
+        }
+    }
 }

@@ -236,6 +236,7 @@
     public class MerchandisePage
     {
         public List<MerchandiseItem> Merchandises = new List<MerchandiseItem>();
+        public double? ShippingFee;
         public string PageHeader;
         public string PageFooter;
     }
@@ -243,6 +244,7 @@
     public class CheckoutPage
     {
         public List<PaymentMethod> PaymentMethods = new List<PaymentMethod>();
+        public bool? AddServiceFee;
         public string PageHeader;
         public string PageFooter;
     }
