@@ -143,7 +143,7 @@
             discountCode7.CodeKind = FormData.ChangeType.FixedAmount;
             discountCode7.CodeType = FormData.CustomFieldCodeType.DiscountCode;
 
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
 
             evt.StartPage.RegTypes.Add(regType1);
             evt.StartPage.RegTypes.Add(regType2);
@@ -159,15 +159,15 @@
             reg1.EventFee_Response = new EventFeeResponse(regType1);
             reg1.Payment_Method = paymentMethod;
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            Assert.True(reg1.EventFee_Response.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            Assert.True(reg1.EventFee_Response.RegType.EarlyPrice.earlyPrice.Equals(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType1);
             reg2.Payment_Method = paymentMethod;
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
-            Assert.True(reg2.EventFee_Response.RegType.Price.Value.Equals(KeywordProvider.RegisterDefault.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
+            Assert.True(reg2.EventFee_Response.RegType.Price.Value.Equals(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation)));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
@@ -204,11 +204,11 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Click(reg.EventFee_Response.RegType);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.Checkin.AdditionalDetails.Text.Trim().Equals(regType.AdditionalDetails));
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDetails_Close_Click();
-            KeywordProvider.RegistrationCreation.Checkin(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson.IsPresent);
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
 
         [Test]

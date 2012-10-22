@@ -103,12 +103,12 @@
                 #region AddEarlyLatePrice
                 if (regType.EarlyPrice != null)
                 {
-                    KeywordProvider.AddEarlyLatePrice.AddEarlyPrice(regType.EarlyPrice, FormData.Location.RegType);
+                    KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(regType.EarlyPrice, FormData.Location.RegType);
                 }
 
                 if (regType.LatePrice != null)
                 {
-                    KeywordProvider.AddEarlyLatePrice.AddLatePrice(regType.LatePrice, FormData.Location.RegType);
+                    KeywordProvider.Add_EarlyLatePrice.AddLatePrice(regType.LatePrice, FormData.Location.RegType);
                 }
                 #endregion
 
@@ -122,7 +122,7 @@
 
                     foreach (CustomFieldCode dc in regType.AllCustomCodes)
                     {
-                        KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.RegType);
+                        KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, FormData.Location.RegType);
                     }
 
                     if (regType.RequireDC.HasValue)
@@ -140,7 +140,7 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
-                    KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.RegType);
+                    KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.RegType);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SaveAndStay_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
 

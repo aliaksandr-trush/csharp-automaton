@@ -26,12 +26,12 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
 
-            if (KeywordProvider.ManagerDefault.DoesEventExist(evt.Title))
+            if (KeywordProvider.Manager_Common.DoesEventExist(evt.Title))
             {
-                KeywordProvider.ManagerDefault.DeleteEvent(evt.Title);
+                KeywordProvider.Manager_Common.DeleteEvent(evt.Title);
             }
 
-            KeywordProvider.EventCreator.ClickAddEventAndGetEventId(evt);
+            KeywordProvider.Event_Creator.ClickAddEventAndGetEventId(evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EmptyAddRegType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.NameOnForm.Type(regType1.Name);
@@ -54,12 +54,12 @@
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.EnableExternalAuthentication.Set(true);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SaveAndClose_Click();
             PageObject.Builder.RegistrationFormPages.RegTypeRow row1 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType1.Name);
-            KeywordProvider.AddRegType.Add_RegType(regType2, evt);
+            KeywordProvider.Add_RegType.Add_RegType(regType2, evt);
             PageObject.Builder.RegistrationFormPages.RegTypeRow row2 = new PageObject.Builder.RegistrationFormPages.RegTypeRow(regType2.Name);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Title.Type(evt.Title);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.Shortcut.Type(evt.Shortcut);
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdParty_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.ThirdPartyIntegrations.ExternalAuthentication_Click();
@@ -94,11 +94,11 @@
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
             row1.Title_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.SelectByName();

@@ -276,7 +276,7 @@
             Header = 9,
         }
 
-        public enum PaymentMethod
+        public enum PaymentMethodEnum
         {
             [CustomString("Credit Cards")]
             [PaymentMethodCheckouLabel("Credit Card")]
@@ -284,7 +284,7 @@
 
             [CustomString("Check")]
             [PaymentMethodCheckouLabel("Check")]
-            Check,
+            Check = 6,
 
             [CustomString("Purchase Order")]
             [PaymentMethodCheckouLabel("Purchase Order")]
@@ -292,7 +292,7 @@
 
             [CustomString("Cash (On-Site & Admin Only)")]
             [PaymentMethodCheckouLabel("Cash")]
-            Cash,
+            Cash = 9,
 
             [CustomString("Pay at the Event")]
             [PaymentMethodCheckouLabel("Will Call (At The Event)")]
@@ -466,7 +466,7 @@
             Active
         }
 
-        public enum Countries
+        public enum Country
         {
             [CustomString("United States")]
             UnitedStates,
@@ -482,6 +482,12 @@
 
             [CustomString("Austria")]
             Austria
+        }
+
+        public enum Gateway
+        {
+            [CustomString("Active Network Gateway (USD)")]
+            AMS_USD
         }
         #endregion
 
@@ -501,7 +507,7 @@
                 set;
             }
 
-            public static string GetPaymentMethodCheckouLabel(PaymentMethod value)
+            public static string GetPaymentMethodCheckouLabel(PaymentMethodEnum value)
             {
                 string label = null;
                 Type type = value.GetType();

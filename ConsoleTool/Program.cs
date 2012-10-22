@@ -5,13 +5,24 @@
     using System.Xml.Serialization;
     using System.Xml;
     using System.Collections.Generic;
+    using System.Drawing.Imaging;
     using RegOnline.RegressionTest.DataAccess;
 
     public class Program
     {
+        enum abc
+        {
+            a,
+            b,
+            c
+        }
+
+        static abc? tmp { get; set; }
+
         static void Main(string[] args)
         {
-            AccessData.SetLiveRegToTest(new List<int>() { 639231 });
+            if (tmp != null)
+            Console.WriteLine("not null");
             Console.Read();
             Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.AwayFromZero));
             Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.ToEven));

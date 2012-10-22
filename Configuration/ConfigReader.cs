@@ -3,16 +3,18 @@
     using System.Collections.Generic;
     using System.Xml;
     using System.Xml.Serialization;
+    using System.IO;
 
     public class ConfigReader
     {
-        private readonly string XmlConfigFilePath = "TestConfig.xml";
         private static ConfigReader Default = new ConfigReader();
+        private string XmlConfigFilePath;
 
         public enum EnvironmentEnum
         {
             Alpha,
             Beta,
+            CBeta,
             Production
         }
 
@@ -92,6 +94,8 @@
 
         public ConfigReader()
         {
+            
+            
             this.ReloadAllConfiguration();
         }
 
@@ -114,7 +118,7 @@
 
             // Cos preferred environment and private-label must be read from xml first, 
             // we cannot call this.ReloadAllConfiguration(this.AllConfiguration.Environments.Preferred.Environment, this.AllConfiguration.Environments.Preferred.PrivateLabel)
-            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments.EnvironmentChosen, this.AllConfiguration.Environments.AccountChosen);
+            this.LoadEnvironmentAndAccountConfiguration(this.AllConfiguration.Environments_Config.Environment_Chosen, this.AllConfiguration.Environments_Config.Account_Chosen);
             
             this.LoadWebServiceConfiguration();
             this.LoadBrowser();
@@ -150,6 +154,17 @@
 
         private void DeserializeFromXml()
         {
+            XmlConfigFilePath = "TestConfig.xml";
+            XmlDocument configPath = new XmlDocument();
+            configPath.Load("ConfigPath.xml");
+            string enableValue = configPath.SelectSingleNode("/ConfigPath").Attributes["Enable"].Value;
+            bool enable = false;
+
+            if (bool.TryParse(enableValue, out enable) && enable)
+            {
+                XmlConfigFilePath = Path.Combine(configPath.SelectSingleNode("/ConfigPath").Attributes["Path"].Value, XmlConfigFilePath);
+            }
+
             XmlSerializer serializer = new XmlSerializer(typeof(TestConfig));
             XmlTextReader reader = new XmlTextReader(XmlConfigFilePath);
             this.AllConfiguration = (TestConfig)serializer.Deserialize(reader);
@@ -163,7 +178,7 @@
 
         private void LoadEnvironmentConfiguration(string environment)
         {
-            foreach (Environment en in this.AllConfiguration.Environments.Environment)
+            foreach (Environment en in this.AllConfiguration.Environments_Config.Environment_Config)
             {
                 if (en.Name.Equals(environment))
                 {
@@ -174,7 +189,7 @@
 
         private void LoadAccountConfiguration(string accountType)
         {
-            foreach (Account account in this.EnvironmentConfiguration.Account)
+            foreach (Account account in this.EnvironmentConfiguration.Account_Config)
             {
                 if (account.Name.Equals(accountType))
                 {
@@ -215,7 +230,7 @@
 
         private void AddWebServiceToDictionary(WebServiceEnum webService)
         {
-            foreach (WebService service in this.AllConfiguration.WebServices.WebService)
+            foreach (WebService service in this.AllConfiguration.WebServices_Config.WebService_Config)
             {
                 if (service.Name.Equals(webService.ToString()))
                 {
@@ -226,7 +241,7 @@
 
         private void LoadBrowser()
         {
-            this.LoadBrowser(this.AllConfiguration.Browsers.Current);
+            this.LoadBrowser(this.AllConfiguration.Browsers_Config.Current);
         }
 
         private void LoadBrowser(string browserString)
@@ -238,7 +253,7 @@
         {
             Browser targetBrowser = null;
 
-            foreach (Browser br in this.AllConfiguration.Browsers.Browser)
+            foreach (Browser br in this.AllConfiguration.Browsers_Config.Browser_Config)
             {
                 if (br.Name.Equals(browserString))
                 {

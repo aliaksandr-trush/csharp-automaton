@@ -9,7 +9,7 @@
     {
         public Label Total = new Label("//td[text()='Total:']/following-sibling::td[@class='currency']", LocateBy.XPath);
         public Clickable ChangeMyRegistration = new Clickable("ctl00_cphNoForm_btnRegEdit", LocateBy.Id);
-        public Label RegistrationId = new Label("//th[@scope='row'][text()='Registration ID:']/../td", LocateBy.XPath);
+        public Label RegistrationId = new Label("//th[@scope='row'][text()='Registration ID:' or text()='Reservation ID:']/../td", LocateBy.XPath);
 
         public Clickable AddToCalendar(DataCollection.AgendaItem agendaItem)
         {

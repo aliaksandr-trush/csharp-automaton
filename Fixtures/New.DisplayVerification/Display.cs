@@ -64,9 +64,9 @@
             Registrant reg = new Registrant(Event);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            VerifyFooterResults footerResults = KeywordProvider.Display.VerifyCompanyFooter();
-            VerifyEventDetailsResult eventDetailsResults = KeywordProvider.Display.VerifyEventDetails();
-            VerifyPageResults pageResults = KeywordProvider.Display.VerifyPage();
+            VerifyFooterResults footerResults = KeywordProvider.Verify_Display.VerifyCompanyFooter();
+            VerifyEventDetailsResult eventDetailsResults = KeywordProvider.Verify_Display.VerifyEventDetails();
+            VerifyPageResults pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(footerResults.Trustwave);
             Assert.True(footerResults.Facebook);
@@ -93,32 +93,32 @@
             Assert.True(pageResults.PageHeader.Contains(Event.StartPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.StartPage.PageFooter));
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            pageResults = KeywordProvider.Display.VerifyPage();
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.PersonalInfoPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.PersonalInfoPage.PageFooter));
 
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            pageResults = KeywordProvider.Display.VerifyPage();
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
+            pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.AgendaPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.AgendaPage.PageFooter));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            pageResults = KeywordProvider.Display.VerifyPage();
+            pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.LodgingTravelPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.LodgingTravelPage.PageFooter));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            pageResults = KeywordProvider.Display.VerifyPage();
+            pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.MerchandisePage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.MerchandisePage.PageFooter));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            pageResults = KeywordProvider.Display.VerifyPage();
+            pageResults = KeywordProvider.Verify_Display.VerifyPage();
 
             Assert.True(pageResults.PageHeader.Contains(Event.CheckoutPage.PageHeader));
             Assert.True(pageResults.PageFooter.Contains(Event.CheckoutPage.PageFooter));

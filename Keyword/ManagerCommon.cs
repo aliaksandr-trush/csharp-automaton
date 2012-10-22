@@ -4,7 +4,7 @@
     using RegOnline.RegressionTest.PageObject.Manager;
     using RegOnline.RegressionTest.UIUtility;
 
-    public class ManagerDefault
+    public class ManagerCommon
     {
         public bool DoesEventExist(string eventName)
         {
@@ -41,7 +41,15 @@
         public void DeleteEvent(string eventName)
         {
             List<EventList_EventRow> eventRows = EventList_EventRow.GetEventRows(eventName);
+            List<int> eventIds = new List<int>();
+            
+            foreach (EventList_EventRow eventRow in eventRows)
+            {
+                eventIds.Add(eventRow.EventId);
+            }
 
+            DataAccess.AccessData.SetLiveRegToTest(eventIds);
+            
             foreach (EventList_EventRow eventRow in eventRows)
             {
                 eventRow.DeleteEvent();
@@ -63,13 +71,13 @@
         {
             bool found = false;
 
-            int count = PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaErrorMessage.Count;
+            int count = PageObject.PageObjectProvider.Builder.EventDetails.FormPages.ErrorMessage.Count;
             string[] errorList = new string[count];
 
             for (int i = 1; i <= count; i++)
             {
                 errorList[i - 1] = UIUtil.DefaultProvider.GetText(string.Format(
-                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaErrorMessage.Locator + "[{0}]", i), LocateBy.XPath);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.ErrorMessage.Locator + "[{0}]", i), LocateBy.XPath);
             }
 
             foreach (string error in errorList)

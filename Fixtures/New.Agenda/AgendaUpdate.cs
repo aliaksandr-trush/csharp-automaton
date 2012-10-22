@@ -39,17 +39,17 @@
             reg.CustomField_Responses.Add(resp1);
             reg.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(reg);
+            KeywordProvider.Registration_Creation.Login(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Agenda_Click(0);
             resp2.Checked = false;
             reg.CustomField_Responses.Add(resp2);
             reg.CustomField_Responses.Add(resp3);
-            KeywordProvider.RegistrationCreation.Agenda(reg);
+            KeywordProvider.Registration_Creation.Agenda(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
 
             List<WebElements.Label> selectedAgendas = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.GetSelectedAgendaItems();
             Assert.IsNotNull(selectedAgendas.Find(s => s.Text == agenda1.NameOnForm));
@@ -102,14 +102,14 @@
             reg1.CustomField_Responses.Add(resp4);
             reg1.CustomField_Responses.Add(resp5);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
 
             Registrant reg2 = new Registrant(evt);
             reg2.Gender = FormData.Gender.Female;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
 
             PageObject.Backend.AttendeeInfo attendeeInfo = new PageObject.Backend.AttendeeInfo();
             attendeeInfo.OpenUrl(reg2.Id);
@@ -119,7 +119,7 @@
             reg2.CustomField_Responses.Add(resp4);
             resp5.Checked = true;
             reg2.CustomField_Responses.Add(resp5);
-            KeywordProvider.BackendUpdate.UpdateCustomField(reg2);
+            KeywordProvider.Backend_Update.UpdateCustomField(reg2);
             Assert.True(attendeeInfo.AgendaLable(agenda1).IsPresent);
             Assert.False(attendeeInfo.AgendaLable(agenda2).IsPresent);
             Assert.True(attendeeInfo.AgendaLable(agenda3).IsPresent);

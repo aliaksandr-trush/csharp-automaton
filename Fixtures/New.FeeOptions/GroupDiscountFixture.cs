@@ -10,7 +10,7 @@
     public class GroupDiscountFixture : FixtureBase
     {
         Event evt1;
-        PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+        PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
         RegType regType1 = new RegType("regType1");
         RegType regType2 = new RegType("regType2");
         AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
@@ -172,7 +172,7 @@
             groupDiscount2.DiscountAmount = 10;
             groupDiscount2.GroupDiscountType = GroupDiscount_DiscountType.Percent;
 
-            KeywordProvider.AddGroupDiscount.Add_GroupDiscount(evt1, groupDiscount2);
+            KeywordProvider.Add_GroupDiscount.Add_GroupDiscount(evt1, groupDiscount2);
 
             Registrant reg = new Registrant(evt1);
             reg.Payment_Method = paymentMethod;
@@ -180,29 +180,29 @@
             reg.CustomField_Responses.Add(resp4);
             group.Secondaries.Add(reg);
 
-            KeywordProvider.RegistrationCreation.Checkin(group.Primary);
-            KeywordProvider.RegistrationCreation.Login(group.Primary);
+            KeywordProvider.Registration_Creation.Checkin(group.Primary);
+            KeywordProvider.Registration_Creation.Login(group.Primary);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
-            KeywordProvider.RegistrationCreation.Agenda(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Agenda(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
 
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(group));
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(group));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(group.Primary);
+            KeywordProvider.Registration_Creation.Login(group.Primary);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(1);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Cancel_Click(2);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.OK_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(group.Primary);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(group.Primary);
 
             Group group1 = this.GenerateGroup(2);
             group1.Primary.Email = group.Primary.Email;
@@ -210,18 +210,18 @@
             evt1.StartPage.GroupDiscount = groupDiscount2;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            KeywordProvider.RegistrationCreation.Login(group1.Primary);
+            KeywordProvider.Registration_Creation.Login(group1.Primary);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(group1.Secondaries[0].Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(group1.Secondaries[0].EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.PersonalInfo(group1.Secondaries[0]);
-            KeywordProvider.RegistrationCreation.Agenda(group1.Secondaries[0]);
+            KeywordProvider.Registration_Creation.PersonalInfo(group1.Secondaries[0]);
+            KeywordProvider.Registration_Creation.Agenda(group1.Secondaries[0]);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(group1.Primary);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(group1.Primary);
 
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation),
-                KeywordProvider.CalculateFee.CalculateTotalFee(group1));
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(group1));
 
             this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
         }
@@ -317,9 +317,9 @@
 
         private void GroupRegistrationAndVerifyTotal(Group group)
         {
-            KeywordProvider.RegistrationCreation.GroupRegistration(group);
-            Assert.AreEqual(KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation), 
-                KeywordProvider.CalculateFee.CalculateTotalFee(group));
+            KeywordProvider.Registration_Creation.GroupRegistration(group);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation), 
+                KeywordProvider.Calculate_Fee.CalculateTotalFee(group));
         }
     }
 }

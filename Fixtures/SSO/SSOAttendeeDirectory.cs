@@ -29,18 +29,18 @@
             Registrant reg2 = new Registrant(evt);
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg1);
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg1);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Title);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Directories);
 
             AttendeeDirectory attendeeDirectory = new AttendeeDirectory("SSODirectory");
             attendeeDirectory.ShareDirectory = true;
             attendeeDirectory.RequireLogin = true;
 
-            string directoryURL = KeywordProvider.AddAttendeeDirectory.CreateAttendeeDirectory(attendeeDirectory);
+            string directoryURL = KeywordProvider.Add_AttendeeDirectory.CreateAttendeeDirectory(attendeeDirectory);
             PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
@@ -48,7 +48,7 @@
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.EmailAddress.Type(reg1.Email);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.Continue_Click();
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.SSOLogin));
-            KeywordProvider.RegistrationCreation.SSOLogin(reg1);
+            KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.SignOut_Click();
 
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.EmailAddress.Type(reg2.Email);

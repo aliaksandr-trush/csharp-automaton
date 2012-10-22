@@ -43,7 +43,7 @@
 
             if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
             {
-                KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Merchandise);
+                KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Merchandise);
             }
 
             if ((evt.TaxRateOne != null) && (merch.ApplyTaxOne.HasValue))

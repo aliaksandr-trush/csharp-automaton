@@ -24,9 +24,9 @@
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);            
+            Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);            
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
 
         [Test]
@@ -43,10 +43,10 @@
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
 
         [Test]
@@ -64,11 +64,11 @@
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
 
         [Test]
@@ -89,11 +89,11 @@
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.SSO, evt);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.EventWebsite.RegisterNow_Click();
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
 
         [Test]
@@ -128,11 +128,11 @@
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(DataCollection.FormData.EventCalendarView.Day);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ClickToRegister(evt_Child);
             PageObject.PageObjectHelper.SelectTopWindow();
-            Keyword.KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(reg.EventFee_Response.RegType);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            Keyword.KeywordProvider.RegistrationCreation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
     }
 }

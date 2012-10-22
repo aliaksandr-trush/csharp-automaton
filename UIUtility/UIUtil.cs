@@ -180,11 +180,21 @@
 
         public void MaximizeWindow()
         {
-            driver.Manage().Window.Position = new System.Drawing.Point(0, 0);
-            
-            driver.Manage().Window.Size = new System.Drawing.Size(
-                System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, 
-                System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 40);
+            this.driver.Manage().Window.Position = new System.Drawing.Point(0, 0);
+
+            if (ConfigReader.DefaultProvider.AllConfiguration.ScreenResolution_Config.Enable)
+            {
+                this.driver.Manage().Window.Size = new System.Drawing.Size(
+                    ConfigReader.DefaultProvider.AllConfiguration.ScreenResolution_Config.Width,
+                    ConfigReader.DefaultProvider.AllConfiguration.ScreenResolution_Config.Height);
+            }
+            else
+            {
+                // Minus 40 to height, regarding the taskbar of WindowsOS
+                this.driver.Manage().Window.Size = new System.Drawing.Size(
+                    System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width,
+                    System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 40);
+            }
         }
 
         public void MaximizeRADWindow()

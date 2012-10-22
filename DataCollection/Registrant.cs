@@ -15,27 +15,26 @@
         Admin
     }
 
-    public abstract class DefaultPaymentInfo
+    public class DefaultPaymentInfo
     {
-        public const string CCType = "Visa";
+        public const CCType CCType = DataCollection.CCType.Visa;
         public const string CCNumber = "4444444444444448";
         public readonly static string CCNumber_Encrypted = Utility.GetEncryptedCCNumber("4444444444444448");
         public const string CCNumberAlternative = "4012888888881881";
         public const string CVV = "123";// CVV is the namely 'Security Code'
-        public const string ExpirationMonth = "12 - Dec";
-        public const string ExpirationYear = "2019";
+        public const int ExpirationDate_Year = 2019;
+        public const int ExpirationDate_Month = 12;
         public const string HolderName = "test test";
-        public const string HolderCountry = "United States";
         public const string BillingPhone = "3035775100";
         public const string BillingAddressLineOne = "4750 Walnut Street";
         public const string BillingAddressLineTwo = "suite 100";
         public const string BillingCity = "Boulder";
         public const string BillingState = "CO";
         public const string ZipCode = "99701";
-        public const string Country = "United States";
+        public const FormData.Country Payment_Country = FormData.Country.UnitedStates;
     }
 
-    public abstract class DefaultPersonalInfo
+    public class DefaultPersonalInfo
     {
         public const string FirstName = "Selenium";
         public const string MiddleName = "M";
@@ -51,6 +50,36 @@
         public const string Extension = "113";
         public const string Fax = "303.987.3524";
         public readonly static string Password = ConfigReader.DefaultProvider.AccountConfiguration.Password;
+    }
+
+    public class BillingInfo
+    {
+        public CCType CC_Type { get; set; }
+        public string CC_Number { get; set; }
+        public string SecurityCode { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public string CardholderName { get; set; }
+        public FormData.Country CC_Country { get; set; }
+        public string BillingAddressLineOne { get; set; }
+        public string BillingAddressLineTwo { get; set; }
+        public string BillingCity { get; set; }
+        public string BillingStateOrProvince { get; set; }
+        public string BillingZip { get; set; }
+
+        public void SetWithDefaultValue()
+        {
+            this.CC_Type = DefaultPaymentInfo.CCType;
+            this.CC_Number = DefaultPaymentInfo.CCNumber;
+            this.SecurityCode = DefaultPaymentInfo.CVV;
+            this.ExpirationDate = new DateTime(DefaultPaymentInfo.ExpirationDate_Year, DefaultPaymentInfo.ExpirationDate_Month, 1);
+            this.CardholderName = DefaultPaymentInfo.HolderName;
+            this.CC_Country = DefaultPaymentInfo.Payment_Country;
+            this.BillingAddressLineOne = DefaultPaymentInfo.BillingAddressLineOne;
+            this.BillingAddressLineTwo = DefaultPaymentInfo.BillingAddressLineTwo;
+            this.BillingCity = DefaultPaymentInfo.BillingCity;
+            this.BillingStateOrProvince = DefaultPaymentInfo.BillingState;
+            this.BillingZip = DefaultPaymentInfo.ZipCode;
+        }
     }
 
     public class FeeSummary
@@ -82,7 +111,7 @@
         public string AddressLineOne;
         public string AddressLineTwo;
         public string City;
-        public FormData.Countries? Country;
+        public FormData.Country? Country;
         public string State;
         public string NonUSState;
         public string ZipCode;
@@ -100,6 +129,7 @@
 
         public bool WhetherToVerifyFeeOnCheckoutPage { get; set; }
         public FeeSummary Fee_Summary { get; set; }
+        public BillingInfo Billing_Info { get; set; }
 
         public Registrant(Event evt)
         {

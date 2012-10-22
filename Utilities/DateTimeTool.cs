@@ -36,7 +36,7 @@
         {
             Account targetAccountConfig = null;
 
-            foreach (Account ac in ConfigReader.DefaultProvider.EnvironmentConfiguration.Account)
+            foreach (Account ac in ConfigReader.DefaultProvider.EnvironmentConfiguration.Account_Config)
             {
                 if (ac.Name.Equals(targetAccount.ToString()))
                 {
@@ -46,7 +46,7 @@
 
             return dateTimeToConvert.AddHours(
                 targetAccountConfig.TimeZoneOffset - 
-                ConfigReader.DefaultProvider.AllConfiguration.Environments.CurrentMachineTimeZoneOffset);
+                ConfigReader.DefaultProvider.AllConfiguration.Environments_Config.CurrentMachine_TimeZoneOffset);
         }
 
         /// <summary>

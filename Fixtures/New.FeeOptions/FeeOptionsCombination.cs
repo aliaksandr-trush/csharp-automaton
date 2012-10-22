@@ -142,7 +142,7 @@
             evt.MerchandisePage.ShippingFee = 20;
 
             //Set up checkout page
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethod.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             evt.CheckoutPage.AddServiceFee = true;
 
@@ -231,7 +231,7 @@
 
             Keyword.KeywordProvider.RegistrationCreation.GroupRegistration(group1);
             Assert.AreEqual(Keyword.KeywordProvider.CalculateFee.CalculateTotalFee(group1),
-                Keyword.KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Confirmation));
+                Keyword.KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation));
         }
     }
 }

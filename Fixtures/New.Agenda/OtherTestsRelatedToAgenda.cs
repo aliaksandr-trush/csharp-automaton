@@ -21,21 +21,21 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
 
-            if (KeywordProvider.ManagerDefault.DoesEventExist(evt.Title))
+            if (KeywordProvider.Manager_Common.DoesEventExist(evt.Title))
             {
-                KeywordProvider.ManagerDefault.DeleteEvent(evt.Title);
+                KeywordProvider.Manager_Common.DeleteEvent(evt.Title);
             }
 
-            KeywordProvider.EventCreator.ClickAddEventAndGetEventId(evt);
-            KeywordProvider.EventCreator.StartPage(evt);
+            KeywordProvider.Event_Creator.ClickAddEventAndGetEventId(evt);
+            KeywordProvider.Event_Creator.StartPage(evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
-            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda1, evt);
+            KeywordProvider.Add_AgendaItem.AddAgendaItems(agenda1, evt);
             int id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(agenda1);
             Assert.True(row1.Agenda.IsPresent);
             Assert.AreEqual(row1.Agenda.GetAttribute("class"), "hs colwidth1");
-            KeywordProvider.AddAgendaItem.AddAgendaItems(agenda2, evt);
+            KeywordProvider.Add_AgendaItem.AddAgendaItems(agenda2, evt);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveAndNew_Click();
             Assert.AreNotEqual(id, Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value));
             Assert.AreEqual(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Text, "");
@@ -70,9 +70,9 @@
             resp.Checked = true;
             reg.CustomField_Responses.Add(resp);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg);
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
 
@@ -117,13 +117,13 @@
             reg1.CustomField_Responses.Add(resp1);
             reg1.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.Agenda(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.AgendaOverlapped));
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.Agenda(reg1);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.AgendaOverlapped));
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
@@ -133,7 +133,7 @@
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 
-            KeywordProvider.RegistrationCreation.CreateRegistration(reg2);
+            KeywordProvider.Registration_Creation.CreateRegistration(reg2);
         }
 
         [Test]
@@ -160,22 +160,22 @@
 
             Registrant reg = new Registrant(evt);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg);
+            KeywordProvider.Registration_Creation.Checkin(reg);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg);
             PageObject.Register.AgendaRow row1 = new PageObject.Register.AgendaRow(agenda1);
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(agenda2);
             ((WebElements.CheckBox)(row1.AgendaType)).Set(true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda1.Price, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda1.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
             ((WebElements.CheckBox)(row2.AgendaType)).Set(true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda1.Price + agenda2.Price, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda1.Price + agenda2.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
             ((WebElements.CheckBox)(row1.AgendaType)).Set(false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda2.Price, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda2.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
             row2.DiscountCodeInput.Type(discount.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(54, KeywordProvider.RegisterDefault.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(54, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
         }
     }
 }

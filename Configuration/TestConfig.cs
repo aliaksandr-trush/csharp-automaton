@@ -6,31 +6,34 @@
     public class TestConfig
     {
         [XmlElement(ElementName = "Environments")]
-        public Environments Environments { get; set; }
+        public Environments Environments_Config { get; set; }
 
         [XmlElement(ElementName = "WebServices")]
-        public WebServices WebServices { get; set; }
+        public WebServices WebServices_Config { get; set; }
 
         [XmlElement(ElementName = "Browsers")]
-        public Browsers Browsers { get; set; }
+        public Browsers Browsers_Config { get; set; }
 
         [XmlElement(ElementName = "NUnitAddin")]
-        public NUnitAddin NUnitAddin { get; set; }
+        public NUnitAddin NUnitAddin_Config { get; set; }
+
+        [XmlElement(ElementName = "ScreenResolution")]
+        public ScreenResolution ScreenResolution_Config { get; set; }
     }
 
     public class Environments
     {
         [XmlAttribute("EnvironmentChosen")]
-        public string EnvironmentChosen { get; set; }
+        public string Environment_Chosen { get; set; }
 
         [XmlAttribute("AccountChosen")]
-        public string AccountChosen { get; set; }
+        public string Account_Chosen { get; set; }
 
         [XmlAttribute("CurrentMachineTimeZoneOffset")]
-        public int CurrentMachineTimeZoneOffset { get; set; }
+        public int CurrentMachine_TimeZoneOffset { get; set; }
 
         [XmlElement(ElementName = "Environment")]
-        public Environment[] Environment { get; set; }
+        public Environment[] Environment_Config { get; set; }
     }
 
     public class Environment
@@ -51,7 +54,7 @@
         public string DataPath { get; set; }
 
         [XmlElement(ElementName = "Account")]
-        public Account[] Account { get; set; }
+        public Account[] Account_Config { get; set; }
     }
 
     public class Account
@@ -100,7 +103,7 @@
     public class WebServices
     {
         [XmlElement(ElementName = "WebService")]
-        public WebService[] WebService { get; set; }
+        public WebService[] WebService_Config { get; set; }
     }
 
     public class WebService
@@ -121,7 +124,7 @@
     public class Browsers
     {
         [XmlElement(ElementName = "Browser")]
-        public Browser[] Browser { get; set; }
+        public Browser[] Browser_Config { get; set; }
 
         [XmlAttribute("Current")]
         public string Current { get; set; }
@@ -133,13 +136,13 @@
     public class Browser
     {
         [XmlElementAttribute(ElementName = "Server")]
-        public Server Server { get; set; }
+        public Server Server_Config { get; set; }
 
         [XmlElementAttribute(ElementName = "BinaryPath")]
-        public BinaryPath BinaryPath { get; set; }
+        public BinaryPath Binary_Path { get; set; }
 
         [XmlElementAttribute(ElementName = "ProfilePath")]
-        public ProfilePath ProfilePath { get; set; }
+        public ProfilePath Profile_Path { get; set; }
 
         [XmlAttribute("Name")]
         public string Name { get; set; }
@@ -180,5 +183,17 @@
     {
         [XmlAttributeAttribute("ReportBack")]
         public bool ReportBack { get; set; }
+    }
+
+    public class ScreenResolution
+    {
+        [XmlAttributeAttribute("Enable")]
+        public bool Enable { get; set; }
+
+        [XmlAttributeAttribute("Width")]
+        public int Width { get; set; }
+
+        [XmlAttributeAttribute("Height")]
+        public int Height { get; set; }
     }
 }

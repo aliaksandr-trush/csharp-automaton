@@ -8,7 +8,7 @@
     {
         public void Add_GroupDiscount(Event evt, GroupDiscount groupDiscount)
         {
-            KeywordProvider.ManagerDefault.OpenFormDashboard(evt.Id);
+            KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
             PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
             PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.SelectByName();

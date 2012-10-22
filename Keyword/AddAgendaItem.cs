@@ -183,19 +183,19 @@
 
                     if (ag.EarlyPrice != null)
                     {
-                        KeywordProvider.AddEarlyLatePrice.AddEarlyPrice(ag.EarlyPrice, FormData.Location.Agenda);
+                        KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(ag.EarlyPrice, FormData.Location.Agenda);
                     }
 
                     if (ag.LatePrice != null)
                     {
-                        KeywordProvider.AddEarlyLatePrice.AddLatePrice(ag.LatePrice, FormData.Location.Agenda);
+                        KeywordProvider.Add_EarlyLatePrice.AddLatePrice(ag.LatePrice, FormData.Location.Agenda);
                     }
 
                     if ((ag.DiscountCodes.Count != 0) && (ag.BulkCodes == null))
                     {
                         foreach (CustomFieldCode dc in ag.DiscountCodes)
                         {
-                            KeywordProvider.AddDiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
+                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
                             PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);
                         }
                     }
@@ -215,7 +215,7 @@
 
                     if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                     {
-                        KeywordProvider.AddTaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Agenda);
+                        KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Agenda);
                     }
 
                     if ((evt.TaxRateOne != null) && (ag.ApplyTaxOne.HasValue))
@@ -371,7 +371,7 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CommonlyUsedItemsDefine.SaveAndClose_Click();
                     }
 
-                    List<ChoiceItem> choiceItems = KeywordProvider.BuilderDefault.GetAgendaChoiceItem();
+                    List<ChoiceItem> choiceItems = KeywordProvider.Builder_Common.GetAgendaChoiceItem();
 
                     for (int i = count; i < choiceItems.Count; i++)
                     {

@@ -19,7 +19,7 @@
         public XAuthOld XAuthOld = new XAuthOld();
 
         public Clickable YesOnSplashPage = new Clickable("//div[@id='splashChoicePage']//span[text()='Yes']", LocateBy.XPath);
-        public Label AgendaErrorMessage = new Label("//div[@id='ctl00_cph_valSummaryCF']/ul/li", LocateBy.XPath);
+        public Label ErrorMessage = new Label("//div[@id='ctl00_cph_valSummaryCF']/ul/li", LocateBy.XPath);
 
         public void YesOnSplashPage_Click()
         {
@@ -68,10 +68,14 @@
             }
 
             Clickable Page = new Clickable(string.Format("//a[@accesskey='{0}']", accesskey), LocateBy.XPath);
-            Page.WaitForDisplay();
-            Page.Click();
-            WaitForLoad();
-            UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
+            
+            if (!Page.GetAttribute("class").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Contains("rtsSelected"))
+            {
+                Page.WaitForDisplay();
+                Page.Click();
+                WaitForLoad();
+                UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
+            }
         }
 
         public void Advanced_Click()

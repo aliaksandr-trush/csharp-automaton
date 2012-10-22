@@ -25,11 +25,11 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
-            KeywordProvider.RegistrationCreation.SSOLogin(SSOData.SSOJustNameEmail, SSOData.SSOPassword);
+            KeywordProvider.Registration_Creation.SSOLogin(SSOData.SSOJustNameEmail, SSOData.SSOPassword);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.IsPresent);
@@ -40,10 +40,10 @@
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type("Automation");
             reg.JobTitle = "Automation";
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            KeywordProvider.RegistrationCreation.Checkout(reg);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
             AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
-            KeywordProvider.RegistrationCreation.SSOLogin(reg);
+            KeywordProvider.Registration_Creation.SSOLogin(reg);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(0);
@@ -69,20 +69,20 @@
             reg2.Password = SSOData.SSOPassword;
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
+            KeywordProvider.Registration_Creation.Checkin(reg1);
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
-            KeywordProvider.RegistrationCreation.PersonalInfo(reg1);
-            KeywordProvider.RegistrationCreation.Checkout(reg1);
+            KeywordProvider.Registration_Creation.PersonalInfo(reg1);
+            KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg1);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg2);
+            KeywordProvider.Registration_Creation.Checkin(reg2);
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
             }
             AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
 
-            KeywordProvider.RegistrationCreation.Checkin(reg1);
-            Assert.True(KeywordProvider.RegisterDefault.HasErrorMessage(Messages.RegisterError.EmailAlreadyUsed));
+            KeywordProvider.Registration_Creation.Checkin(reg1);
+            Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.EmailAlreadyUsed));
         }
     }
 }

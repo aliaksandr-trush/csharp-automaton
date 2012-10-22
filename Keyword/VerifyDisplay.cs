@@ -11,43 +11,43 @@
             VerifyFooterResults results = new VerifyFooterResults();
 
             PageObject.PageObjectProvider.Register.RegistationSite.Trustwave_Click();
-            results.Trustwave = PageObject.PageObjectProvider.Register.RegistationSite.TrustwaveWeb.URLContains("sealserver.trustwave.com");
+            results.Trustwave = PageObject.PageObjectProvider.Register.RegistationSite.TrustwaveWeb.DoesCurrentUrlContainsPath("sealserver.trustwave.com");
             PageObject.PageObjectProvider.Register.RegistationSite.TrustwaveWeb.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.Facebook_Click();
-            results.Facebook = PageObject.PageObjectProvider.Register.RegistationSite.FacebookWeb.URLContains("facebook.com");
+            results.Facebook = PageObject.PageObjectProvider.Register.RegistationSite.FacebookWeb.DoesCurrentUrlContainsPath("facebook.com");
             PageObject.PageObjectProvider.Register.RegistationSite.FacebookWeb.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.Twitter_Click();
-            results.Twitter = PageObject.PageObjectProvider.Register.RegistationSite.TwitterWeb.URLContains("twitter.com");
+            results.Twitter = PageObject.PageObjectProvider.Register.RegistationSite.TwitterWeb.DoesCurrentUrlContainsPath("twitter.com");
             PageObject.PageObjectProvider.Register.RegistationSite.TwitterWeb.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.Linkedin_Click();
-            results.Linkedin = PageObject.PageObjectProvider.Register.RegistationSite.LinkedinWeb.URLContains("linkedin.com");
+            results.Linkedin = PageObject.PageObjectProvider.Register.RegistationSite.LinkedinWeb.DoesCurrentUrlContainsPath("linkedin.com");
             PageObject.PageObjectProvider.Register.RegistationSite.LinkedinWeb.CloseAndBackToPrevious();
 
             results.Copyright = PageObject.PageObjectProvider.Register.RegistationSite.Copyright.Text;
 
             PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUse_Click();
-            results.TermsOfUse = PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUseWindow.URLContains("www.activenetwork.com/information/terms-of-use");
+            results.TermsOfUse = PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUseWindow.DoesCurrentUrlContainsPath("www.activenetwork.com/information/terms-of-use");
             PageObject.PageObjectProvider.Register.RegistationSite.TermsOfUseWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicy_Click();
-            results.PrivacyPolicy = PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicyWindow.URLContains("regonline.com/privacy");
+            results.PrivacyPolicy = PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicyWindow.DoesCurrentUrlContainsPath("regonline.com/privacy");
             PageObject.PageObjectProvider.Register.RegistationSite.PrivacyPolicyWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicy_Click();
-            results.CookiePolicy = PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicyWindow.URLContains("activenetwork.com/information/cookie-policy");
+            results.CookiePolicy = PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicyWindow.DoesCurrentUrlContainsPath("activenetwork.com/information/cookie-policy");
             PageObject.PageObjectProvider.Register.RegistationSite.CookiePolicyWindow.CloseAndBackToPrevious();
 
             string Href = PageObject.PageObjectProvider.Register.RegistationSite.About.GetAttribute("href");
             PageObject.PageObjectProvider.Register.RegistationSite.About_Click();
-            results.About = (PageObject.PageObjectProvider.Register.RegistationSite.AboutWindow.URLContains("activenetwork.com/software/solutions"))
+            results.About = (PageObject.PageObjectProvider.Register.RegistationSite.AboutWindow.DoesCurrentUrlContainsPath("activenetwork.com/software/solutions"))
                 && (Href == "http://www.activenetwork.com/technology/overview.htm");
             PageObject.PageObjectProvider.Register.RegistationSite.AboutWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.ActiveCom_Click();
-            results.ActiveCom = PageObject.PageObjectProvider.Register.RegistationSite.ActiveComWeb.URLContains("www.active.com");
+            results.ActiveCom = PageObject.PageObjectProvider.Register.RegistationSite.ActiveComWeb.DoesCurrentUrlContainsPath("www.active.com");
             PageObject.PageObjectProvider.Register.RegistationSite.ActiveComWeb.CloseAndBackToPrevious();
 
             return results;
@@ -100,7 +100,7 @@
             }
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventHome_Click();
-            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CurrentURL;
+            results.EventHome = PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CurrentUrl;
             PageObject.PageObjectProvider.Register.RegistationSite.EventHomeWindow.CloseAndBackToPrevious();
 
             PageObject.PageObjectProvider.Register.RegistationSite.EventContactInfo_Click();
