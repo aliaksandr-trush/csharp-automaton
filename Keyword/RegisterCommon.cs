@@ -4,6 +4,7 @@
     using RegOnline.RegressionTest.Configuration;
     using RegOnline.RegressionTest.DataCollection;
     using RegOnline.RegressionTest.UIUtility;
+    using System.Text;
 
     public class RegisterCommon
     {
@@ -77,22 +78,66 @@
         {
             bool found = false;
 
-            int count = PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Count;
-            string[] errorList = new string[count];
-
-            for (int i = 1; i <= count; i++)
-            {
-                errorList[i - 1] = UIUtil.DefaultProvider.GetText(string.Format(
-                    PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Locator + "[{0}]", i), LocateBy.XPath);
-            }
-
-            foreach (string error in errorList)
+            foreach (string error in PageObject.PageObjectProvider.Register.RegistationSite.GetErrorMessages())
             {
                 if (error.Contains(errorMessage))
+                {
                     found = true;
+                    break;
+                }
             }
 
             return found;
+        }
+
+        public void VerifyErrorMessages(string[] expectedErrorMessages)
+        {
+            string[] actualErrorMessages = PageObject.PageObjectProvider.Register.RegistationSite.GetErrorMessages();
+
+            if (expectedErrorMessages.Length != actualErrorMessages.Length)
+            {
+                this.FailTestWithExpectedAndActualErrorMessages("Expected and actual error COUNT don't match!", expectedErrorMessages, actualErrorMessages);
+            }
+
+            for (int cnt = 0; cnt < actualErrorMessages.Length; cnt++ )
+            {
+                if (!expectedErrorMessages[cnt].Equals(actualErrorMessages[cnt]))
+                {
+                    this.FailTestWithExpectedAndActualErrorMessages("Expected and actual error messages don't match!", expectedErrorMessages, actualErrorMessages);
+                }
+            }
+        }
+
+        internal void FailTestWithErrorMessages()
+        {
+            string[] errorMessages = PageObject.PageObjectProvider.Register.RegistationSite.GetErrorMessages();
+            UIUtility.UIUtil.DefaultProvider.FailTest(this.ComposeFailTestErrorMessage(errorMessages));
+        }
+
+        private void FailTestWithExpectedAndActualErrorMessages(string precedingMessage, string[] expectedErrorMessages, string[] actualErrorMessages)
+        {
+            string expectedErrorMessage_CombinedString = this.ComposeFailTestErrorMessage(expectedErrorMessages);
+            string actualErrorMessage_CombinedString = this.ComposeFailTestErrorMessage(actualErrorMessages);
+
+            UIUtility.UIUtil.DefaultProvider.FailTest(string.Format(
+                "{0} Expected:{1} Actual:{2}", 
+                precedingMessage, 
+                expectedErrorMessage_CombinedString, 
+                actualErrorMessage_CombinedString));
+        }
+
+        private string ComposeFailTestErrorMessage(string[] errorMessages)
+        {
+            StringBuilder errorMessage = new StringBuilder();
+
+            for (int cnt = 1; cnt <= errorMessages.Length; cnt++)
+            {
+                errorMessage.Append(string.Format("Error{0}:'", cnt));
+                errorMessage.Append(errorMessages[cnt]);
+                errorMessage.Append("';");
+            }
+
+            return errorMessage.Replace(';', '.', errorMessage.Length - 1, 1).ToString();
         }
     }
 }

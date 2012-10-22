@@ -2,7 +2,7 @@
 {
     public class Messages
     {
-        public static class RegisterError
+        public class RegisterError
         {
             public const string RegTypeCodeLimitHasReachedAndRequired = "No more \"{0}\" codes are being accepted for this registrant type. Enter another code or contact your event administrator.";
             public const string RegTypeCodeLimitHasReached = "No more \"{0}\" codes are being accepted for this registrant type. Enter another code or leave the field blank.";
@@ -16,9 +16,10 @@
             public const string AgendaCodeLimitReached = "The limit for the discount code you entered has been reached and is no longer being accepted.";
             public const string RequiredCheckBoxNotChecked = "You must select all required check boxes.";
             public const string AgendaOverlapped = "Some of the items you selected have overlapping times.";
+            public const string MustEnterValidCC = "You must enter a valid credit card number.";
         }
 
-        public static class BuilderError
+        public class BuilderError
         {
             public const string AgendaNoMultipleChoice = "You must have at least one item in the multiple choice list when the \"Field Type\" is set to Multiple Choice";
             public const string ServiceEndPointFormatError = "\"Service Endpoint URL\" must start with \"https://\"";

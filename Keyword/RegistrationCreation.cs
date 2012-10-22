@@ -432,7 +432,7 @@
             }
         }
 
-        public void Checkout(Registrant reg)
+        public void Checkout(Registrant reg, bool continueWithErrors = false)
         {
             if (reg.WhetherToVerifyFeeOnCheckoutPage)
             {
@@ -466,16 +466,14 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
 
             // Staying on checkout page after clicking Finish button means we got errors
-            if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.DoesCurrentUrlContainsAbsolutePath("register/checkout.aspx"))
+            if (continueWithErrors && PageObject.PageObjectProvider.Register.RegistationSite.Checkout.DoesCurrentUrlContainsAbsolutePath("register/checkout.aspx"))
             {
-                PageObject.PageObjectProvider.Register.RegistationSite.Checkout.FailTestWithErrorMessages();
+                Keyword.KeywordProvider.Register_Common.FailTestWithErrorMessages();
             }
         }
 
-        public void CheckoutAndConfirmation(Registrant reg)
+        public void Confirmation(Registrant reg)
         {
-            this.Checkout(reg);
-
             if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.ConfirmationRedirect))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AANoThanks_Click();
@@ -484,6 +482,12 @@
             reg.Id = Convert.ToInt32(PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.RegistrationId.Text);
 
             reg.Event.Registrants.Add(reg);
+        }
+
+        public void CheckoutAndConfirmation(Registrant reg)
+        {
+            this.Checkout(reg);
+            this.Confirmation(reg);
         }
 
         public void SSOLogin(Registrant reg)

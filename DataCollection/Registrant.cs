@@ -21,6 +21,7 @@
         public const string CCNumber = "4444444444444448";
         public readonly static string CCNumber_Encrypted = Utility.GetEncryptedCCNumber("4444444444444448");
         public const string CCNumberAlternative = "4012888888881881";
+        public const string CCNumber_AMS_Visa = "4112344112344113";
         public const string CVV = "123";// CVV is the namely 'Security Code'
         public const int ExpirationDate_Year = 2019;
         public const int ExpirationDate_Month = 12;

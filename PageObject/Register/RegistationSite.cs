@@ -65,6 +65,21 @@
         public Label ErrorMessages = new Label("//div[@id='ctl00_valSummary']/ul/li", LocateBy.XPath);
         #endregion
 
+        public string[] GetErrorMessages()
+        {
+            int count = this.ErrorMessages.Count;
+            string[] errorList = new string[count];
+
+            for (int i = 1; i <= count; i++)
+            {
+                errorList[i - 1] = UIUtil.DefaultProvider.GetText(
+                    string.Format("{0}[{1}]", PageObject.PageObjectProvider.Register.RegistationSite.ErrorMessages.Locator, i), 
+                    LocateBy.XPath);
+            }
+
+            return errorList;
+        }
+
         #region Basic Actions
         public void GoToPage(DataCollection.FormData.RegisterPage registerPage)
         {

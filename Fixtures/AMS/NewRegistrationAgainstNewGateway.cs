@@ -51,14 +51,18 @@
             reg.Payment_Method = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.CreditCard);
             reg.Billing_Info = new DataCollection.BillingInfo();
             reg.Billing_Info.SetWithDefaultValue();
-            reg.Billing_Info.CC_Number = "";
+            reg.Billing_Info.CC_Number = DataCollection.DefaultPaymentInfo.CCNumber_AMS_Visa.Replace('3', '4');
 
             Keyword.KeywordProvider.SignIn.SignIn("sprint08", "sprint08", DataCollection.EventFolders.Folders.AMS);
             Keyword.KeywordProvider.Manager_Common.DeleteEvent(eventName);
             Keyword.KeywordProvider.Event_Creator.CreateEvent(evt);
             Keyword.KeywordProvider.Registration_Creation.Checkin(reg);
             Keyword.KeywordProvider.Registration_Creation.PersonalInfo(reg);
-            Keyword.KeywordProvider.Registration_Creation.Checkout(reg);
+            Keyword.KeywordProvider.Registration_Creation.Checkout(reg, true);
+            Keyword.KeywordProvider.Register_Common.VerifyErrorMessages(new string[] { DataCollection.Messages.RegisterError.MustEnterValidCC });
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkout.BillingInfo_CCNumber.Type(DataCollection.DefaultPaymentInfo.CCNumber_AMS_Visa);
+            PageObject.PageObjectProvider.Register.RegistationSite.Checkout.Finish_Click();
+            Keyword.KeywordProvider.Registration_Creation.Confirmation(reg);
         }
     }
 }
