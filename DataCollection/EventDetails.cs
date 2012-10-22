@@ -236,6 +236,7 @@
     public class MerchandisePage
     {
         public List<MerchandiseItem> Merchandises = new List<MerchandiseItem>();
+        public double? ShippingFee;
         public string PageHeader;
         public string PageFooter;
     }
@@ -268,6 +269,7 @@
         public Utilities.MoneyTool.CurrencyCode? Event_Currency;
         public CCOptions CC_Options { get; set; }
         public List<PaymentMethod> PaymentMethods = new List<PaymentMethod>();
+        public bool? AddServiceFee;
 
         public string PageHeader;
         public string PageFooter;

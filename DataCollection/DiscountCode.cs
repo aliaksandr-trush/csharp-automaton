@@ -47,7 +47,7 @@
                         break;
 
                     case FormData.ChangeType.Percent:
-                        discountedPrice = discountedPrice * (100 + discountAmount) / 100;
+                        discountedPrice = discountedPrice * (100 + discountAmount) / 100.0;
                         break;
 
                     default:

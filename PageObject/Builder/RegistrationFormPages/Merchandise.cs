@@ -14,6 +14,8 @@
         public HtmlEditor MerchandisePageHeaderEditor = new HtmlEditor("dialog");
         public Clickable MerchandisePageFooter = new Clickable("//*[text()='Add Merchandise Page Footer']", LocateBy.XPath);
         public HtmlEditor MerchandisePageFooterEditor = new HtmlEditor("dialog");
+        public CheckBox AddShippingFee = new CheckBox("ctl00_cph_chkEnableShippingFee", LocateBy.Id);
+        public Input ShippingFee = new Input("ctl00_cph_txtShippingFee_text", LocateBy.Id);
 
         public void EmptyAddMerchandise_Click()
         {

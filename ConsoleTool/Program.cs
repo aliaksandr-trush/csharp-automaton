@@ -17,13 +17,15 @@
             c
         }
 
-        static abc tmp { get; set; }
+        static abc? tmp { get; set; }
 
         static void Main(string[] args)
         {
             if (tmp != null)
             Console.WriteLine("not null");
             Console.Read();
+            Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.AwayFromZero));
+            Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.ToEven));
         }
     }
 }

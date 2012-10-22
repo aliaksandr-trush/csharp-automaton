@@ -171,7 +171,6 @@
                     labelText = labelText.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
                 }
 
-
                 if (labelText.Equals(regType.Name))
                 {
                     string forAttribute = label.GetAttribute("for");

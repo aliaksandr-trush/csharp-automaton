@@ -425,6 +425,19 @@
                     }
                 }
 
+                if (details.LodgingTravelPage.Lodging.Hotels.Count != 0)
+                {
+                    foreach (Hotel hotel in details.LodgingTravelPage.Lodging.Hotels)
+                    {
+                        KeywordProvider.AddHotel.Add_Hotel(hotel);
+                    }
+                }
+
+                if ((details.LodgingTravelPage.Lodging.ChargeLodgingFee.HasValue) && (details.LodgingTravelPage.Lodging.ChargeLodgingFee.Value))
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.ChargeLodgingFee_Click();
+                }
+
                 if (details.LodgingTravelPage.PageHeader != null)
                 {
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.LodgingTravelPage.LTPageHeader_Click();
@@ -455,6 +468,12 @@
                 {
                     KeywordProvider.Add_Merchandise.AddMerchandises(merch, details);
                     PageObject.Builder.RegistrationFormPages.MerchandiseRow row = new PageObject.Builder.RegistrationFormPages.MerchandiseRow(merch);
+                }
+
+                if (details.MerchandisePage.ShippingFee.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.AddShippingFee.Set(true);
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.ShippingFee.Type(details.MerchandisePage.ShippingFee.Value);
                 }
 
                 if (details.MerchandisePage.PageHeader != null)
@@ -510,6 +529,11 @@
                 {
                     KeywordProvider.Add_PaymentMethod.AddPaymentMethods(method);
                 }
+            }
+
+            if ((details.CheckoutPage.AddServiceFee.HasValue) && (details.CheckoutPage.AddServiceFee.Value))
+            {
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.AddServiceFee.Click();
             }
 
             if (details.CheckoutPage.Event_Currency.HasValue)

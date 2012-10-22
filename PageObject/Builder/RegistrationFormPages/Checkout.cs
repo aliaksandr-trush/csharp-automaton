@@ -13,10 +13,10 @@
         public HtmlEditor CheckoutPageHeaderEditor = new HtmlEditor("dialog");
         public Clickable CheckoutPageFooter = new Clickable("//*[text()='Add Checkout Page Footer']", LocateBy.XPath);
         public HtmlEditor CheckoutPageFooterEditor = new HtmlEditor("dialog");
+        public RadioButton AddServiceFee = new RadioButton("ctl00_cph_radShare", LocateBy.Id);
         public CCOptions CC_Options_Popup_Frame = new CCOptions("dialog");
         public PaymentMethodRow Row_CreditCard = new PaymentMethodRow(DataCollection.FormData.PaymentMethodEnum.CreditCard);
         public PaymentMethodRow Row_Check = new PaymentMethodRow(DataCollection.FormData.PaymentMethodEnum.Check);
-
         private MultiChoiceDropdown EventCurrency = new MultiChoiceDropdown("ctl00_cph_roEventsCurrencyCode", LocateBy.Id);
 
         public void AddPaymentMethod_Click()
@@ -141,25 +141,18 @@
 
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PurchaseOrder:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.Cash:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PayAtTheEvent:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.CostCenter:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.WireTransfer:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.Custom:
                     throw new NotImplementedException();
-                    break;
                 case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PayPal:
                     throw new NotImplementedException();
-                    break;
                 default:
                     break;
             }

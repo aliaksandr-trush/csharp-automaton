@@ -102,6 +102,7 @@
     <Compile Include="Register\Confirmation.cs" />
     <Compile Include="Register\EventCalendar.cs" />
     <Compile Include="Register\EventWebsite.cs" />
+    <Compile Include="Register\LodgingAndTravel.cs" />
     <Compile Include="Register\Login.cs" />
     <Compile Include="Register\Merchandise.cs" />
     <Compile Include="Register\OnsiteKiosk.cs" />

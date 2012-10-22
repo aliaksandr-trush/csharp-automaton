@@ -124,6 +124,7 @@
         public RegisterMethod Register_Method = RegisterMethod.EventId;
         public CustomFieldResponseList CustomField_Responses = new CustomFieldResponseList();
         public MerchandiseResponseList Merchandise_Responses = new MerchandiseResponseList();
+        public LodgingResponseList Lodging_Responses = new LodgingResponseList();
         public FormData.Gender? Gender;
         public DateTime? BirthDate;
 

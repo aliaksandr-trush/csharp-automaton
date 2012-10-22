@@ -19,6 +19,7 @@
         public PageObject.Register.PersonalInfo PersonalInfo = new PageObject.Register.PersonalInfo();
         public PageObject.Register.SSOLogin SSOLogin = new PageObject.Register.SSOLogin();
         public PageObject.Register.Merchandise Merchandise = new PageObject.Register.Merchandise();
+        public PageObject.Register.LodgingAndTravel LodgingAndTravel = new PageObject.Register.LodgingAndTravel();
         #endregion
 
         #region WebElements
