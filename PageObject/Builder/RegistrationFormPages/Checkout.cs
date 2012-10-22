@@ -83,6 +83,7 @@
     {
         private MultiChoiceDropdown GatewaySelection = new MultiChoiceDropdown("ctl00_cphDialog_ddlEventsCustomerMerchantID", LocateBy.Id);
         private Input DynamicDescriptor = new Input("ctl00_cphDialog_txtEventsDynamicDescriptor", LocateBy.Id);
+        public CheckBox NoChargeOnInitialReg = new CheckBox("ctl00_cphDialog_chkDoNotCharge", LocateBy.Id);
 
         public CCOptions(string name)
             : base(name)

@@ -65,22 +65,5 @@
             this.BillingInfo_State.Type(info.BillingStateOrProvince);
             this.BillingInfo_Zip.Type(info.BillingZip);
         }
-
-        public void FailTestWithErrorMessages()
-        {
-            int messages_Count = UIUtility.UIUtil.DefaultProvider.GetXPathCountByXPath("//div[@id='ctl00_valSummary']/ul/li");
-            StringBuilder errorMessage = new StringBuilder();
-            
-            for (int cnt = 1; cnt <= messages_Count; cnt++)
-            {
-                errorMessage.Append(string.Format("Error{0}:'", cnt));
-                errorMessage.Append(UIUtility.UIUtil.DefaultProvider.GetText(string.Format("//div[@id='ctl00_valSummary']/ul/li[{0}]", cnt), LocateBy.XPath));
-                errorMessage.Append("';");
-            }
-
-            errorMessage.Replace(';', '.', errorMessage.Length - 1, 1);
-
-            UIUtility.UIUtil.DefaultProvider.FailTest(errorMessage.ToString());
-        }
     }
 }
