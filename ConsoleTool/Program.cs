@@ -26,6 +26,9 @@
             Console.Read();
             Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.AwayFromZero));
             Console.WriteLine(Math.Round(419.90, 2, MidpointRounding.ToEven));
+            Console.WriteLine("************4113".Substring(12, 4));
+            Console.WriteLine("4112344112344113".Substring(12, 4));
+            Console.WriteLine(Convert.ToDateTime("22-Oct-2012").ToString());
         }
     }
 }

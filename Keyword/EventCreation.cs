@@ -548,6 +548,13 @@
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.Row_CreditCard.EditCCOptions_Link_ClickToOpen();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.SelectByName();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.GatewaySelection_Select(details.CheckoutPage.CC_Options.Payment_Gateway);
+
+                if (details.CheckoutPage.CC_Options.ChargeInitialReg.HasValue)
+                {
+                    PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.NoChargeOnInitialReg.Set(
+                        details.CheckoutPage.CC_Options.ChargeInitialReg.Value);
+                }
+
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.SaveAndClose_Click();
             }
         }

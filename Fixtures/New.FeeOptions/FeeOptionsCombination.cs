@@ -229,8 +229,8 @@
             group1.Secondaries.Add(reg3);
             group1.Secondaries.Add(reg4);
 
-            Keyword.KeywordProvider.RegistrationCreation.GroupRegistration(group1);
-            Assert.AreEqual(Keyword.KeywordProvider.CalculateFee.CalculateTotalFee(group1),
+            Keyword.KeywordProvider.Registration_Creation.GroupRegistration(group1);
+            Assert.AreEqual(Keyword.KeywordProvider.Calculate_Fee.CalculateTotalFee(group1),
                 Keyword.KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation));
         }
     }

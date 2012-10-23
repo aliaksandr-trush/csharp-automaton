@@ -62,6 +62,10 @@
       <Project>{F50173D0-55CE-432D-B6F3-A9024C81E1B0}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PageObject\PageObject.csproj">
+      <Project>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</Project>
+      <Name>PageObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

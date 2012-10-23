@@ -111,8 +111,7 @@
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg2);
 
-            PageObject.Backend.AttendeeInfo attendeeInfo = new PageObject.Backend.AttendeeInfo();
-            attendeeInfo.OpenUrl(reg2.Id);
+            PageObject.PageObjectProvider.Backend.AttendeeInfo.OpenUrl(reg2.Id);
             resp2.Checked = false;
             reg2.CustomField_Responses.Add(resp2);
             reg2.CustomField_Responses.Add(resp3);
@@ -120,11 +119,11 @@
             resp5.Checked = true;
             reg2.CustomField_Responses.Add(resp5);
             KeywordProvider.Backend_Update.UpdateCustomField(reg2);
-            Assert.True(attendeeInfo.AgendaLable(agenda1).IsPresent);
-            Assert.False(attendeeInfo.AgendaLable(agenda2).IsPresent);
-            Assert.True(attendeeInfo.AgendaLable(agenda3).IsPresent);
-            Assert.True(attendeeInfo.AgendaLable(agenda4).IsPresent);
-            Assert.True(attendeeInfo.AgendaLable(agenda5).IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaLable(agenda1).IsPresent);
+            Assert.False(PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaLable(agenda2).IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaLable(agenda3).IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaLable(agenda4).IsPresent);
+            Assert.True(PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaLable(agenda5).IsPresent);
         }
     }
 }

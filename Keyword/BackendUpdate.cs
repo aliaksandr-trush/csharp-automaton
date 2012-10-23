@@ -5,9 +5,6 @@
 
     public class BackendUpdate
     {
-        PageObject.Backend.AttendeeInfo attendeeInfo = new PageObject.Backend.AttendeeInfo();
-        PageObject.Backend.AgendaEdit agendaEdit = new PageObject.Backend.AgendaEdit();
-
         public void UpdateCustomField(Registrant reg)
         {
             if (reg.CustomField_Responses.Count != 0)
@@ -17,7 +14,7 @@
                     if (resp is AgendaResponse)
                     {
                         AgendaResponse respAgenda = resp as AgendaResponse;
-                        attendeeInfo.AgendaEdit_Click();
+                        PageObject.PageObjectProvider.Backend.AttendeeInfo.AgendaEdit_Click();
                         PageObject.PageObjectHelper.SelectTopWindow();
 
                         switch (respAgenda.AgendaItem.Type)
@@ -25,14 +22,14 @@
                             case FormData.CustomFieldType.CheckBox:
                                 {
                                     AgendaResponse_Checkbox ckresp = respAgenda as AgendaResponse_Checkbox;
-                                    ((agendaEdit.AgendaType(ckresp.AgendaItem)) as CheckBox).Set(ckresp.Checked.Value);
+                                    ((PageObject.PageObjectProvider.Backend.AgendaEdit.AgendaType(ckresp.AgendaItem)) as CheckBox).Set(ckresp.Checked.Value);
                                 }
                                 break;
                             default:
                                 break;
                         }
 
-                        agendaEdit.SaveAndClose_Click();
+                        PageObject.PageObjectProvider.Backend.AgendaEdit.SaveAndClose_Click();
                         PageObject.PageObjectHelper.SelectTopWindow();
                     }
                 }

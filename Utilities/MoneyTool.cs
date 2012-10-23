@@ -18,6 +18,22 @@
             AUD
         }
 
+        public static double RemoveMoneyCurrencyCode(string money)
+        {
+            string tmp = money;
+            string amountString = string.Empty;
+
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                if (Char.IsNumber(tmp, i) || (tmp.Substring(i, 1) == ".") || (tmp.Substring(i, 1) == "-"))
+                {
+                    amountString += tmp.Substring(i, 1);
+                }
+            }
+
+            return Convert.ToDouble(amountString);
+        }
+
         public static string FormatMoney(
             double amount, 
             CurrencyCode currencyCode = CurrencyCode.USD, 

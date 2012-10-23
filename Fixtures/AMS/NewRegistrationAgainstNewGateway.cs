@@ -74,7 +74,7 @@
             Keyword.KeywordProvider.Registration_Creation.Checkin(reg2);
             Keyword.KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             Keyword.KeywordProvider.Registration_Creation.Checkout(reg2, true);
-            Assert.True(Keyword.KeywordProvider.Register_Common.HasErrorMessage(DataCollection.Messages.RegisterError.MustEnterValidDate));
+            Assert.True(Keyword.KeywordProvider.Register_Common.HasErrorMessage(DataCollection.Messages.RegisterError.MustEnterValidDate));      
         }
     }
 }

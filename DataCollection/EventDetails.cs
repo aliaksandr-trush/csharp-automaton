@@ -262,6 +262,7 @@
     public class CCOptions
     {
         public FormData.Gateway Payment_Gateway { get; set; }
+        public bool? ChargeInitialReg { get; set; }
     }
 
     public class CheckoutPage

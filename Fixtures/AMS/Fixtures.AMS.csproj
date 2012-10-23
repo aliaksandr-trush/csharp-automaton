@@ -60,6 +60,10 @@
       <Project>{A09A40F3-5A10-4913-AA98-6F40939EFA08}</Project>
       <Name>PageObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj">
+      <Project>{087015A2-0209-4BB2-A8F6-A9E950C5E4D6}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WebElements\WebElements.csproj">
       <Project>{58A621EF-54DC-418C-B002-A8083712B243}</Project>
       <Name>WebElements</Name>
