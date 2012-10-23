@@ -7,5 +7,6 @@
         public Dashboard.Dashboard Dashboard = new Dashboard.Dashboard();
         public XAuth XAuth = new XAuth();
         public SSOBase SSOBase = new SSOBase("plain");
+        public Account.Default Account_Default = new Account.Default();
     }
 }

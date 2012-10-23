@@ -18,6 +18,8 @@
             PaymentGateways
         }
 
+        public PaymentGateways Tab_PaymentGateways = new PaymentGateways();
+
         public void SwitchTab(Tab tab)
         {
             Clickable linkToSwitchTab = new Clickable(

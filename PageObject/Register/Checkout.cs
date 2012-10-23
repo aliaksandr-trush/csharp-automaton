@@ -55,6 +55,7 @@
             this.BillingInfo_CVV.Type(info.SecurityCode);
             this.BillingInfo_ExpirationDate_Month.WaitForDisplay();
             this.BillingInfo_ExpirationDate_Month.SelectWithValue(info.ExpirationDate.Month.ToString());
+            this.BillingInfo_ExpirationDate_Year.WaitForDisplay();
             this.BillingInfo_ExpirationDate_Year.SelectWithValue(info.ExpirationDate.Year.ToString());
             this.BillingInfo_CardholderName.Type(info.CardholderName);
             this.BillingInfo_Country.WaitForDisplay();
