@@ -1615,7 +1615,9 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         
         private System.Nullable<bool> discountCodeCreditSavedField;
         
-        private string customFieldNameField;
+        private string customFieldNameOnReportField;
+        
+        private string customFieldNameOnFormField;
         
         private System.Nullable<System.DateTime> customFieldStartDateField;
         
@@ -1915,18 +1917,30 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public string CustomFieldName {
+        public string CustomFieldNameOnReport {
             get {
-                return this.customFieldNameField;
+                return this.customFieldNameOnReportField;
             }
             set {
-                this.customFieldNameField = value;
-                this.RaisePropertyChanged("CustomFieldName");
+                this.customFieldNameOnReportField = value;
+                this.RaisePropertyChanged("CustomFieldNameOnReport");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=25)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public string CustomFieldNameOnForm {
+            get {
+                return this.customFieldNameOnFormField;
+            }
+            set {
+                this.customFieldNameOnFormField = value;
+                this.RaisePropertyChanged("CustomFieldNameOnForm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=26)]
         public System.Nullable<System.DateTime> CustomFieldStartDate {
             get {
                 return this.customFieldStartDateField;
@@ -1938,7 +1952,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=26)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=27)]
         public System.Nullable<System.DateTime> CustomFieldEndDate {
             get {
                 return this.customFieldEndDateField;
@@ -1950,7 +1964,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
         public string CustomFieldLocation {
             get {
                 return this.customFieldLocationField;
@@ -1962,7 +1976,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
         public int CustomFieldTypeID {
             get {
                 return this.customFieldTypeIDField;
@@ -2277,6 +2291,8 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         
         private string nameOnFormField;
         
+        private string nameOnReportField;
+        
         private string detailsField;
         
         private string locationField;
@@ -2343,6 +2359,18 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string NameOnReport {
+            get {
+                return this.nameOnReportField;
+            }
+            set {
+                this.nameOnReportField = value;
+                this.RaisePropertyChanged("NameOnReport");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string Details {
             get {
                 return this.detailsField;
@@ -2354,7 +2382,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string Location {
             get {
                 return this.locationField;
@@ -2366,7 +2394,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
         public System.Nullable<System.DateTime> StartDate {
             get {
                 return this.startDateField;
@@ -2378,7 +2406,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string StartDateString {
             get {
                 return this.startDateStringField;
@@ -2390,7 +2418,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=9)]
         public System.Nullable<System.DateTime> EndDate {
             get {
                 return this.endDateField;
@@ -2402,7 +2430,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=10)]
         public System.Nullable<decimal> Amount {
             get {
                 return this.amountField;
@@ -2414,7 +2442,7 @@ namespace RegOnline.RegressionTest.Fixtures.API.RegOnlineAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=11)]
         public System.Nullable<int> Capacity {
             get {
                 return this.capacityField;

@@ -69,6 +69,7 @@
     </None>
     <None Include="RegOnline.RegressionTest.Slave2.nunit">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="RegOnline.RegressionTest.Slave3.nunit">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

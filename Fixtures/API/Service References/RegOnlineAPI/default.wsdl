@@ -631,6 +631,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="PageSectionID" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="NameOnForm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameOnReport" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Details" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="StartDate" nillable="true" type="s:dateTime" />
@@ -783,7 +784,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="GroupDiscountCredit" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="DiscountCodeCredit" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="DiscountCodeCreditSaved" nillable="true" type="s:boolean" />
-          <s:element minOccurs="0" maxOccurs="1" name="CustomFieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomFieldNameOnReport" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomFieldNameOnForm" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="CustomFieldStartDate" nillable="true" type="s:dateTime" />
           <s:element minOccurs="1" maxOccurs="1" name="CustomFieldEndDate" nillable="true" type="s:dateTime" />
           <s:element minOccurs="0" maxOccurs="1" name="CustomFieldLocation" type="s:string" />

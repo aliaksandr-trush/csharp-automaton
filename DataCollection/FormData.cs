@@ -487,7 +487,19 @@
         public enum Gateway
         {
             [CustomString("Active Network Gateway (USD)")]
-            AMS_USD
+            AMS_USD,
+
+            [CustomString("Active Network Gateway (AUD)")]
+            AMS_AUD
+        }
+
+        public enum GatewayCategory
+        {
+            [CustomString("Active Network Gateway")]
+            AMS,
+
+            [CustomString("Authorize.Net")]
+            AuthorizeDotNet
         }
         #endregion
 
