@@ -36,9 +36,9 @@
             AgendaItem_FileUpload AGUpload = new AgendaItem_FileUpload("AGUpload");
             AgendaItem_CheckBox AGCheckBox = new AgendaItem_CheckBox("AGCheckBox");
             AgendaItem_MultipleChoice_RadioButton AGRadio = new AgendaItem_MultipleChoice_RadioButton("AGRadio");
-            AGRadio.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.YesOrNo);
+            AGRadio.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.YesOrNo);
             AgendaItem_MultipleChoice_DropDown AGDropDown = new AgendaItem_MultipleChoice_DropDown("AGDropDown");
-            AGDropDown.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.Agreement);
+            AGDropDown.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.Agreement);
             AgendaItem_AlwaysSelected AGAlways = new AgendaItem_AlwaysSelected("AGAlways");
             AgendaItem_CheckBox AG1 = new AgendaItem_CheckBox("AG1");
             AG1.ConditionalLogic.Add(PICustomField.NameOnForm);
@@ -61,7 +61,7 @@
 
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ExpandConditionalLogic_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ExpandConditionalLogic_Click();
@@ -242,9 +242,9 @@
             Event evt = new Event("AgendaShowIf");
             evt.AgendaPage = new AgendaPage();
             AgendaItem_CheckBox showToMale = new AgendaItem_CheckBox("ShowToMale");
-            showToMale.Gender = FormData.Gender.Male;
+            showToMale.Gender = DataCollection.EventData_Common.Gender.Male;
             AgendaItem_CheckBox showToFemale = new AgendaItem_CheckBox("ShowToFemale");
-            showToFemale.Gender = FormData.Gender.Female;
+            showToFemale.Gender = DataCollection.EventData_Common.Gender.Female;
             AgendaItem_CheckBox showOver20 = new AgendaItem_CheckBox("ShowOver20");
             showOver20.AgeGreaterThan = 20;
             showOver20.AgeGreaterThanDate = DateTime.Today;
@@ -259,7 +259,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.Gender = FormData.Gender.Male;
+            reg1.Gender = DataCollection.EventData_Common.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
 
             KeywordProvider.Registration_Creation.Checkin(reg1);
@@ -270,7 +270,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.VerifyAgendaItemDisplay(showLT20, false);
 
             Registrant reg2 = new Registrant(evt);
-            reg2.Gender = FormData.Gender.Female;
+            reg2.Gender = DataCollection.EventData_Common.Gender.Female;
             reg2.BirthDate = DateTime.Today.AddYears(-18);
 
             KeywordProvider.Registration_Creation.Checkin(reg2);

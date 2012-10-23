@@ -5,7 +5,7 @@
 
     public class ChangeEventStatus
     {
-        public void EventStatusChange(Event details, FormData.EventStatus status)
+        public void EventStatusChange(Event details, DataCollection.EventData_Common.EventStatus status)
         {
             PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatus_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ChangeStatusFrame.SelectByName();

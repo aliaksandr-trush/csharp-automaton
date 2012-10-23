@@ -77,7 +77,7 @@
             directory.Cancel();
         }
 
-        private void addRegTypeAndXauth(FormData.XAuthType xauthType, string forgotPasswordUrl = "")
+        private void addRegTypeAndXauth(DataCollection.EventData_Common.XAuthType xauthType, string forgotPasswordUrl = "")
         {
             ManagerSiteMgr.OpenEventBuilderStartPage(eventID, eventSessionId);
 
@@ -97,13 +97,13 @@
             Managers.ManagerProvider.XAuthMgr.SetXAuthType(xauthType);
             Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(xauthType);
 
-            if (xauthType == FormData.XAuthType.ByUserName ||
-                xauthType == FormData.XAuthType.ByUserNamePassword)
+            if (xauthType == DataCollection.EventData_Common.XAuthType.ByUserName ||
+                xauthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
             {
                 Managers.ManagerProvider.XAuthMgr.TypeDescriptionForIdentifer("User Label");
             }
 
-            if (xauthType == FormData.XAuthType.ByUserNamePassword)
+            if (xauthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
             {
                 Managers.ManagerProvider.XAuthMgr.TypeForgetPasswordUrl(forgotPasswordUrl);
             }
@@ -118,16 +118,16 @@
             BuilderMgr.RegTypeMgr.SaveAndClose();
         }
 
-        [TestCase(FormData.XAuthType.ByUserName)]
-        [TestCase(FormData.XAuthType.ByUserNamePassword)]
-        [TestCase(FormData.XAuthType.ByEmail)]
-        [TestCase(FormData.XAuthType.ByEmailPassword)]
-        public void XAuthRegistration(FormData.XAuthType xauthType)
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserName)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserNamePassword)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmail)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmailPassword)]
+        public void XAuthRegistration(DataCollection.EventData_Common.XAuthType xauthType)
         {
             Start();
             Managers.ManagerProvider.XAuthMgr.RemoveXAuthTestRegisterAndAttendeeForCustomer();
 
-            addRegTypeAndXauth(xauthType, xauthType == FormData.XAuthType.ByUserNamePassword ? xauthForgotPasswordURL : "");
+            addRegTypeAndXauth(xauthType, xauthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword ? xauthForgotPasswordURL : "");
 
             Managers.Register.RegisterManager.XAuthPersonalInfo personalInfo = RegisterMgr.TestAccounts[Managers.Register.RegisterManager.TestAccountType.DefaultAccount1];
 
@@ -148,11 +148,11 @@
             Start();
             Managers.ManagerProvider.XAuthMgr.RemoveXAuthTestRegisterAndAttendeeForCustomer();
 
-            addRegTypeAndXauth(FormData.XAuthType.ByUserName);
+            addRegTypeAndXauth(DataCollection.EventData_Common.XAuthType.ByUserName);
 
             Managers.Register.RegisterManager.XAuthPersonalInfo personalInfo = RegisterMgr.TestAccounts[Managers.Register.RegisterManager.TestAccountType.DefaultAccount1];
 
-            RegisterMgr.ProcessRegistration(personalInfo, eventID, FormData.XAuthType.ByUserName, SelectRegType);
+            RegisterMgr.ProcessRegistration(personalInfo, eventID, DataCollection.EventData_Common.XAuthType.ByUserName, SelectRegType);
 
             RegisterMgr.ClickViewDirectory(directoryName);
 
@@ -200,13 +200,13 @@
         {
             Managers.ManagerProvider.XAuthMgr.RemoveXAuthTestRegisterAndAttendeeForCustomer();
             Start();
-            addRegTypeAndXauth(FormData.XAuthType.ByUserName);
+            addRegTypeAndXauth(DataCollection.EventData_Common.XAuthType.ByUserName);
 
             BuilderMgr.AddRegType(nonXAuthRegTypeName);
 
             Managers.Register.RegisterManager.PersonalInfo personalInfo = RegisterMgr.NormalAccount;
 
-            RegisterMgr.ProcessRegistration(personalInfo, eventID, FormData.XAuthType.NotUse, SelectRegType);
+            RegisterMgr.ProcessRegistration(personalInfo, eventID, DataCollection.EventData_Common.XAuthType.NotUse, SelectRegType);
 
             RegisterMgr.ClickViewDirectory(directoryName);
 
@@ -234,9 +234,9 @@
 
         }
 
-        public void SelectRegType(FormData.XAuthType xAuthType)
+        public void SelectRegType(DataCollection.EventData_Common.XAuthType xAuthType)
         {
-            if (xAuthType == FormData.XAuthType.NotUse)
+            if (xAuthType == DataCollection.EventData_Common.XAuthType.NotUse)
             {
                 RegisterMgr.SelectRegType(nonXAuthRegTypeName);
             }
@@ -246,7 +246,7 @@
             }
         }
 
-        private void processDirectoryVerify(FormData.XAuthType authType,
+        private void processDirectoryVerify(DataCollection.EventData_Common.XAuthType authType,
             Managers.Register.RegisterManager.XAuthPersonalInfo personalInfo)
         {
             drManager.EnterEmailAddressOnLogin(personalInfo.Email);
@@ -254,13 +254,13 @@
             drManager.Continue();
 
             drManager.VerifyEmailTextboxIsPresent();
-            if (authType == FormData.XAuthType.ByUserName ||
-                authType == FormData.XAuthType.ByUserNamePassword)
+            if (authType == DataCollection.EventData_Common.XAuthType.ByUserName ||
+                authType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
             {
                 drManager.VerifyUserIDTextboxIsPresent();
                 drManager.EnterUserIDOnLogin(personalInfo.UserName);
             }
-            if (authType == FormData.XAuthType.ByUserNamePassword)
+            if (authType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
             {
                 drManager.VerifyXAuthForgotPasswordLinkIsPresent(true);
             }

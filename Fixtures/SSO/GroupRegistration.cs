@@ -51,9 +51,9 @@
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             KeywordProvider.Registration_Creation.SSOLogin(reg1);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(1).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(0);
@@ -96,7 +96,7 @@
             reg1.EventFee_Response = new EventFeeResponse(regType3);
 
             KeywordProvider.Registration_Creation.Checkin(reg1);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
             KeywordProvider.Registration_Creation.PersonalInfo(reg1);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
@@ -114,9 +114,9 @@
             KeywordProvider.Registration_Creation.PersonalInfo(reg2);
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg2);
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.Login, true);
             KeywordProvider.Registration_Creation.Login(reg1);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(1).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();

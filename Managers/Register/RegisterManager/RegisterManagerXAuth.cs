@@ -475,9 +475,9 @@
             this.TypePersonalInfoExtension(personalInfo.Extension);
             this.TypePersonalInfoFax(personalInfo.Fax);
         }
-        public delegate void SelectRegTypeFunc(FormData.XAuthType xAuthType);
+        public delegate void SelectRegTypeFunc(DataCollection.EventData_Common.XAuthType xAuthType);
         public void ProcessRegistration(PersonalInfo personalInfo,
-            int eventID, FormData.XAuthType xAuthType, SelectRegTypeFunc regTypeFunc = null)
+            int eventID, DataCollection.EventData_Common.XAuthType xAuthType, SelectRegTypeFunc regTypeFunc = null)
         {
             OpenRegisterPage(eventID);
             CheckinWithEmail(personalInfo.Email);
@@ -493,19 +493,19 @@
             {
                 switch (xAuthType)
                 {
-                    case FormData.XAuthType.ByEmail:
+                    case DataCollection.EventData_Common.XAuthType.ByEmail:
                         break;
-                    case FormData.XAuthType.ByEmailPassword:
+                    case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                         TypeLoginPagePassword(((XAuthPersonalInfo)personalInfo).XAuthPassword);
                         break;
-                    case FormData.XAuthType.ByUserName:
+                    case DataCollection.EventData_Common.XAuthType.ByUserName:
                         XAuth_TypeUserId(((XAuthPersonalInfo)personalInfo).UserName);
                         break;
-                    case FormData.XAuthType.ByUserNamePassword:
+                    case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                         XAuth_TypeUserId(((XAuthPersonalInfo)personalInfo).UserName);
                         TypeLoginPagePassword(((XAuthPersonalInfo)personalInfo).XAuthPassword);
                         break;
-                    case FormData.XAuthType.NotUse:
+                    case DataCollection.EventData_Common.XAuthType.NotUse:
                         TypeLoginPagePassword(personalInfo.Password);
                         break;
                     default: break;
@@ -513,7 +513,7 @@
                 Continue();
             }
             //PI  
-            if (xAuthType != FormData.XAuthType.NotUse)
+            if (xAuthType != DataCollection.EventData_Common.XAuthType.NotUse)
             {
                 XAuth_SetDefaultStandardPersonalInfoFields((XAuthPersonalInfo)personalInfo, false);
             }
@@ -523,17 +523,17 @@
             }
             switch (xAuthType)
             {
-                case FormData.XAuthType.ByEmail:
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     TypePersonalInfoPassword(((XAuthPersonalInfo)personalInfo).XAuthPassword);
                     TypePersonalInfoVerifyPassword(((XAuthPersonalInfo)personalInfo).XAuthPassword);
                     break;
-                case FormData.XAuthType.NotUse:
+                case DataCollection.EventData_Common.XAuthType.NotUse:
                     TypePersonalInfoPassword(personalInfo.Password);
                     TypePersonalInfoVerifyPassword(personalInfo.Password);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     break;
                 default: break;
             }

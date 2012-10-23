@@ -29,37 +29,37 @@
             UIUtil.DefaultProvider.HideActiveSpecificFooter(true);
         }
 
-        public void GotoPage(FormData.Page page)
+        public void GotoPage(DataCollection.EventData_Common.Page page)
         {
             string accesskey = string.Empty;
 
             switch (page)
             {
-                case FormData.Page.Start:
+                case DataCollection.EventData_Common.Page.Start:
                     accesskey = "S";
                     break;
 
-                case FormData.Page.PI:
+                case DataCollection.EventData_Common.Page.PI:
                     accesskey = "I";
                     break;
 
-                case FormData.Page.Agenda:
+                case DataCollection.EventData_Common.Page.Agenda:
                     accesskey = "H";
                     break;
 
-                case FormData.Page.LodgingTravel:
+                case DataCollection.EventData_Common.Page.LodgingTravel:
                     accesskey = "L";
                     break;
 
-                case FormData.Page.Merchandise:
+                case DataCollection.EventData_Common.Page.Merchandise:
                     accesskey = "M";
                     break;
 
-                case FormData.Page.Checkout:
+                case DataCollection.EventData_Common.Page.Checkout:
                     accesskey = "K";
                     break;
 
-                case FormData.Page.Confirmation:
+                case DataCollection.EventData_Common.Page.Confirmation:
                     accesskey = "C";
                     break;
 

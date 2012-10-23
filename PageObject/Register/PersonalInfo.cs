@@ -28,7 +28,7 @@
         public Clickable ChangeRegType = new Clickable("ctl00_cph_lnkChangeRegType", LocateBy.Id);
         public RegTypeList RegTypeList = new RegTypeList(0);
 
-        public Label PersonalInfoFields(FormData.PersonalInfoField field)
+        public Label PersonalInfoFields(DataCollection.EventData_Common.PersonalInfoField field)
         {
             return new Label(string.Format("//ol[@class='fieldList']//*[contains(text(),'{0}')]/../following-sibling::*",
                 CustomStringAttribute.GetCustomString(field)), LocateBy.XPath);

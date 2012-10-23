@@ -13,7 +13,7 @@
 
         public List<AgendaReportRow> AgendaReportRows = new List<AgendaReportRow>();
 
-        public StandardReports(FormData.StandardReports reportType)
+        public StandardReports(DataCollection.EventData_Common.StandardReports reportType)
         {
             Name = string.Format(WindowNameFormat, CustomStringAttribute.GetCustomString(reportType), 
                 GetQueryStringValue("EventSessionID"),
@@ -23,10 +23,10 @@
 
             switch (reportType)
             {
-                case FormData.StandardReports.AgendaReport:
+                case DataCollection.EventData_Common.StandardReports.AgendaReport:
                     this.GetAgendaReportRows();
                     break;
-                case FormData.StandardReports.AttendeeReport:
+                case DataCollection.EventData_Common.StandardReports.AttendeeReport:
                     break;
                 default:
                     break;

@@ -32,7 +32,7 @@
         public const string BillingCity = "Boulder";
         public const string BillingState = "CO";
         public const string ZipCode = "99701";
-        public const FormData.Country Payment_Country = FormData.Country.UnitedStates;
+        public const EventData_Common.Country Payment_Country = EventData_Common.Country.UnitedStates;
     }
 
     public class DefaultPersonalInfo
@@ -60,7 +60,7 @@
         public string SecurityCode { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string CardholderName { get; set; }
-        public FormData.Country CC_Country { get; set; }
+        public EventData_Common.Country CC_Country { get; set; }
         public string BillingAddressLineOne { get; set; }
         public string BillingAddressLineTwo { get; set; }
         public string BillingCity { get; set; }
@@ -112,7 +112,7 @@
         public string AddressLineOne;
         public string AddressLineTwo;
         public string City;
-        public FormData.Country? Country;
+        public EventData_Common.Country? Country;
         public string State;
         public string NonUSState;
         public string ZipCode;
@@ -125,7 +125,7 @@
         public CustomFieldResponseList CustomField_Responses = new CustomFieldResponseList();
         public MerchandiseResponseList Merchandise_Responses = new MerchandiseResponseList();
         public LodgingResponseList Lodging_Responses = new LodgingResponseList();
-        public FormData.Gender? Gender;
+        public EventData_Common.Gender? Gender;
         public DateTime? BirthDate;
 
         public bool WhetherToVerifyFeeOnCheckoutPage { get; set; }
@@ -150,29 +150,29 @@
         {
             switch (this.Event.FormType)
             {
-                case FormData.FormType.ProEvent:
+                case EventData_Common.FormType.ProEvent:
                     this.SetWithDefaultPersonalInfo_ProEvent();
                     break;
 
-                case FormData.FormType.ActiveEuropeEvent:
+                case EventData_Common.FormType.ActiveEuropeEvent:
                     this.SetWithDefaultPersonalInfo_ProEvent();
                     this.State = null;
                     this.NonUSState = DefaultPersonalInfo.NonUSState;
                     break;
 
-                case FormData.FormType.ExpressEvent:
+                case EventData_Common.FormType.ExpressEvent:
                     break;
-                case FormData.FormType.LiteEvent:
+                case EventData_Common.FormType.LiteEvent:
                     break;
-                case FormData.FormType.Membership:
+                case EventData_Common.FormType.Membership:
                     break;
-                case FormData.FormType.WebEvent:
+                case EventData_Common.FormType.WebEvent:
                     break;
-                case FormData.FormType.Survey:
+                case EventData_Common.FormType.Survey:
                     break;
-                case FormData.FormType.DonationForm:
+                case EventData_Common.FormType.DonationForm:
                     break;
-                case FormData.FormType.CreateFromTemplate:
+                case EventData_Common.FormType.CreateFromTemplate:
                     break;
                 default:
                     break;
@@ -224,42 +224,42 @@
 
                     switch (response.AgendaItem.Type)
                     {
-                        case FormData.CustomFieldType.AlwaysSelected:
+                        case EventData_Common.CustomFieldType.AlwaysSelected:
                             {
                                 AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                 this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
-                        case FormData.CustomFieldType.CheckBox:
+                        case EventData_Common.CustomFieldType.CheckBox:
                             {
                                 AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                 this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
-                        case FormData.CustomFieldType.RadioButton:
+                        case EventData_Common.CustomFieldType.RadioButton:
                             {
                                 AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                 this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
 
-                        case FormData.CustomFieldType.Dropdown:
+                        case EventData_Common.CustomFieldType.Dropdown:
                             {
                                 AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                 this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
                             }
                             break;
                         
-                        case FormData.CustomFieldType.Contribution:
+                        case EventData_Common.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
                                 this.Fee_Summary.Total += resp.ContributionAmount;
                             }
                             break;
 
-                        case FormData.CustomFieldType.FileUpload:
+                        case EventData_Common.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                 this.Fee_Summary.Total += (resp.Code == null) ? resp.Fee : resp.Code.CalculateDiscountedPrice(resp.Fee);
@@ -276,7 +276,7 @@
             {
                 switch (response.Merchandise_Item.Type)
                 {
-                    case FormData.MerchandiseType.Fixed:
+                    case EventData_Common.MerchandiseType.Fixed:
                         {
                             MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                             double price = (resp.Merchandise_Item.Price.HasValue ? resp.Merchandise_Item.Price.Value : 0);
@@ -284,7 +284,7 @@
                         }
                         break;
 
-                    case FormData.MerchandiseType.Variable:
+                    case EventData_Common.MerchandiseType.Variable:
                         {
                             MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
                             this.Fee_Summary.Total += resp.Amount;

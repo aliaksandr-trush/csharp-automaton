@@ -18,35 +18,35 @@
 
         private Clickable Register;
 
-        public void SelectView(DataCollection.FormData.EventCalendarView view)
+        public void SelectView(DataCollection.EventData_Common.EventCalendarView view)
         {
             switch (view)
             {
-                case RegOnline.RegressionTest.DataCollection.FormData.EventCalendarView.Calendar:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.EventCalendarView.Calendar:
                     this.CalendarView.WaitForDisplay();
                     this.CalendarView.Click();
                     WaitForLoad();
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.EventCalendarView.Location:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.EventCalendarView.Location:
                     this.ViewByLocation.WaitForDisplay();
                     this.ViewByLocation.Click();
                     WaitForLoad();
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.EventCalendarView.Month:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.EventCalendarView.Month:
                     this.ViewByMonth.WaitForDisplay();
                     this.ViewByMonth.Click();
                     WaitForLoad();
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.EventCalendarView.Day:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.EventCalendarView.Day:
                     this.ViewByDay.WaitForDisplay();
                     this.ViewByDay.Click();
                     WaitForLoad();
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.EventCalendarView.Category:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.EventCalendarView.Category:
                     this.ViewByCategory.WaitForDisplay();
                     this.ViewByCategory.Click();
                     WaitForLoad();

@@ -174,7 +174,7 @@
                     {
                         foreach (DataCollection.CustomFieldCode code in details.StartPage.Event_Fee.AllCustomCodes)
                         {
-                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(code, FormData.Location.EventFee);
+                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(code, DataCollection.EventData_Common.Location.EventFee);
                         }
 
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.EventFeeDefine.RequireCode.Set(details.StartPage.Event_Fee.RequireDC);
@@ -221,7 +221,7 @@
 
             if ((details.StartPage.PageHeader != null) || (details.StartPage.PageFooter != null))
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Start);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Start);
 
                 if (details.StartPage.PageHeader != null)
                 {
@@ -247,7 +247,7 @@
         {
             if ((details.PersonalInfoPage.PageHeader != null) || (details.PersonalInfoPage.PageFooter != null))
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.PI);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.PI);
 
                 if (details.PersonalInfoPage.PageHeader != null)
                 {
@@ -269,7 +269,7 @@
             }
             if (details.PersonalInfoPage.StandardFields.Count != 0)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.PI);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.PI);
 
                 foreach (PersonalInfoPageStandardField field in details.PersonalInfoPage.StandardFields)
                 {
@@ -285,7 +285,7 @@
             }
             if (details.PersonalInfoPage.CustomFields.Count != 0)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.PI);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.PI);
 
                 if (PageObject.PageObjectProvider.Builder.EventDetails.FormPages.PersonalInfoPage.EmptyAddCustomField.IsPresent)
                 {
@@ -313,7 +313,7 @@
         {
             if (details.AgendaPage != null)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
 
                 foreach (AgendaItem agendaItem in details.AgendaPage.AgendaItems)
@@ -352,7 +352,7 @@
 
             if (details.StartPage.GroupDiscount != null)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Start);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Start);
 
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.AddGroupDiscount_Click();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.GroupDiscountDefine.AdjustRADWindowPositionAndResize();
@@ -410,7 +410,7 @@
         {
             if (details.LodgingTravelPage != null)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.LodgingTravel);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.LodgingTravel);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
 
                 foreach (LodgingStandardFields field in details.LodgingTravelPage.Lodging.StandardFields)
@@ -462,7 +462,7 @@
         {
             if (details.MerchandisePage != null)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Merchandise);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Merchandise);
 
                 foreach (DataCollection.MerchandiseItem merch in details.MerchandisePage.Merchandises)
                 {
@@ -500,7 +500,7 @@
         {
             if ((details.CheckoutPage.PageHeader != null) || (details.CheckoutPage.PageFooter != null))
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Checkout);
 
                 if (details.CheckoutPage.PageHeader != null)
                 {
@@ -523,7 +523,7 @@
 
             if (details.CheckoutPage.PaymentMethods.Count != 0)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Checkout);
 
                 foreach (PaymentMethod method in details.CheckoutPage.PaymentMethods)
                 {
@@ -538,13 +538,13 @@
 
             if (details.CheckoutPage.Event_Currency.HasValue)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Checkout);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.EventCurrency_Select(details.CheckoutPage.Event_Currency.Value);
             }
 
             if (details.CheckoutPage.CC_Options != null)
             {
-                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Checkout);
+                PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Checkout);
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.Row_CreditCard.EditCCOptions_Link_ClickToOpen();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.SelectByName();
                 PageObject.PageObjectProvider.Builder.EventDetails.FormPages.CheckoutPage.CC_Options_Popup_Frame.GatewaySelection_Select(details.CheckoutPage.CC_Options.Payment_Gateway);
@@ -591,7 +591,7 @@
                 PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();
                 PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.Activate_Click();
-                PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
+                PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.EventDetails);
                 PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
             }
         }

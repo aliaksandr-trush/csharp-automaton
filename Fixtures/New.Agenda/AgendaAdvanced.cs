@@ -149,7 +149,7 @@
             ag1.ForceGroupToMatch = true;
             AgendaItem_CheckBox ag2 = new AgendaItem_CheckBox("ag2");
             ag2.ForceGroupToMatch = true;
-            ag2.Gender = FormData.Gender.Male;
+            ag2.Gender = DataCollection.EventData_Common.Gender.Male;
             AgendaItem_CheckBox ag3 = new AgendaItem_CheckBox("ag3");
             ag3.ForceGroupToMatch = true;
             ag3.AgeGreaterThan = 20;
@@ -196,7 +196,7 @@
             resp7.Checked = true;
 
             Registrant reg1 = new Registrant(evt);
-            reg1.Gender = FormData.Gender.Male;
+            reg1.Gender = DataCollection.EventData_Common.Gender.Male;
             reg1.BirthDate = DateTime.Today.AddYears(-22);
             reg1.CustomField_Responses.Add(resp1);
             reg1.CustomField_Responses.Add(resp2);
@@ -219,7 +219,7 @@
             PageObject.Register.AgendaRow row7 = new PageObject.Register.AgendaRow(ag7);
 
             Registrant reg2 = new Registrant(evt);
-            reg2.Gender = FormData.Gender.Male;
+            reg2.Gender = DataCollection.EventData_Common.Gender.Male;
             reg2.BirthDate = DateTime.Today.AddYears(-18);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
@@ -243,7 +243,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg3 = new Registrant(evt);
-            reg3.Gender = FormData.Gender.Female;
+            reg3.Gender = DataCollection.EventData_Common.Gender.Female;
             reg3.BirthDate = DateTime.Today.AddYears(-22);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
@@ -254,7 +254,7 @@
             Assert.True(((WebElements.CheckBox)(row3.AgendaType)).HasAttribute("disabled"));
 
             Registrant reg4 = new Registrant(evt);
-            reg4.Gender = FormData.Gender.Male;
+            reg4.Gender = DataCollection.EventData_Common.Gender.Male;
             reg4.BirthDate = DateTime.Today.AddYears(-22);
             reg4.CustomField_Responses.Add(resp4);
 
@@ -264,7 +264,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
             Registrant reg5 = new Registrant(evt);
-            reg5.Gender = FormData.Gender.Male;
+            reg5.Gender = DataCollection.EventData_Common.Gender.Male;
             reg5.BirthDate = DateTime.Today.AddYears(-22);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg5.Email);
@@ -285,17 +285,17 @@
             evt.AgendaPage = new AgendaPage();
             AgendaItem_CheckBox ag1 = new AgendaItem_CheckBox("ag1");
             AgendaItem_CheckBox ag2 = new AgendaItem_CheckBox("ag2");
-            ag2.InitialStatus = FormData.AgendaInitialStatus.Pending;
+            ag2.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.Pending;
             AgendaItem_CheckBox ag3 = new AgendaItem_CheckBox("ag3");
-            ag3.InitialStatus = FormData.AgendaInitialStatus.Confirmed;
+            ag3.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.Confirmed;
             AgendaItem_CheckBox ag4 = new AgendaItem_CheckBox("ag4");
-            ag4.InitialStatus = FormData.AgendaInitialStatus.Approved;
+            ag4.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.Approved;
             AgendaItem_CheckBox ag5 = new AgendaItem_CheckBox("ag5");
-            ag5.InitialStatus = FormData.AgendaInitialStatus.Declined;
+            ag5.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.Declined;
             AgendaItem_CheckBox ag6 = new AgendaItem_CheckBox("ag6");
-            ag6.InitialStatus = FormData.AgendaInitialStatus.NoShow;
+            ag6.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.NoShow;
             AgendaItem_CheckBox ag7 = new AgendaItem_CheckBox("ag7");
-            ag7.InitialStatus = FormData.AgendaInitialStatus.FollowUp;
+            ag7.InitialStatus = DataCollection.EventData_Common.AgendaInitialStatus.FollowUp;
             evt.AgendaPage.AgendaItems.Add(ag1);
             evt.AgendaPage.AgendaItems.Add(ag2);
             evt.AgendaPage.AgendaItems.Add(ag3);
@@ -341,10 +341,10 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
-            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Reports);
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.Reports);
             PageObject.PageObjectProvider.Manager.Dashboard.Reports.AgendaReportLink_Click();
 
-            PageObject.Reports.StandardReports agendaReport = new PageObject.Reports.StandardReports(FormData.StandardReports.AgendaReport);
+            PageObject.Reports.StandardReports agendaReport = new PageObject.Reports.StandardReports(DataCollection.EventData_Common.StandardReports.AgendaReport);
 
             Assert.AreEqual(agendaReport.AgendaReportRows.Find(r => r.AgendaName.Text.Contains(ag1.NameOnForm)).Attendees[0].AgendaStatus.Text.Trim(), "");
             Assert.AreEqual(agendaReport.AgendaReportRows.Find(r => r.AgendaName.Text.Contains(ag2.NameOnForm)).Attendees[0].AgendaStatus.Text.Trim(), "Pending");

@@ -38,8 +38,8 @@
         private void SetupAndEnableXauth()
         {
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();
             //Utilities.Utility.ThreadSleep(3);

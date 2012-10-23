@@ -52,7 +52,7 @@
             PageObject.PageObjectProvider.Manager.Dashboard.Activate_Click();
             PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.SelectByName();
             PageObject.PageObjectProvider.Manager.Dashboard.ActivateEvent.Activate_Click();
-            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.EventDetails);
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg);

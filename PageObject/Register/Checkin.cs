@@ -69,7 +69,7 @@
                     url = string.Format(
                         "{0}register/checkin.aspx?MethodId=1&eventsessionId={1}&eventID={2}",
                         ConfigReader.DefaultProvider.AccountConfiguration.BaseUrlWithHttps,
-                        DataCollection.FormData.EventSessionId,
+                        DataCollection.CrossSiteData.EventSessionId,
                         reg.Event.Id);
 
                     break;

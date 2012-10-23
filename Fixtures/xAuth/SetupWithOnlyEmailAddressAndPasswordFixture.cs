@@ -29,8 +29,8 @@
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
             //4.1
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
 
             if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "Old")
             {
@@ -44,8 +44,8 @@
             }        
 
             //4.2 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.VerifyPassTest();
             

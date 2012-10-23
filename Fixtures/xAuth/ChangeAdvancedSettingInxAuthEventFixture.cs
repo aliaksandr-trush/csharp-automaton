@@ -12,17 +12,17 @@
         private const string EventName = "XAuthFixture_ChangeAdvancedSettingInxAuthEvent";
         private const string OtherEventName = "XAuthFixture_ChangeAdvancedSettingInxAuthEvent_Prepare";
 
-        [TestCase(FormData.XAuthType.ByEmailPassword, false)]
-        [TestCase(FormData.XAuthType.ByUserNamePassword, false)]
-        [TestCase(FormData.XAuthType.ByEmail, false)]
-        [TestCase(FormData.XAuthType.ByUserName, false)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmailPassword, false)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserNamePassword, false)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmail, false)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserName, false)]
         [Test]
-        public void TestChangeAdvancedSettingInxAuthEvent(FormData.XAuthType xAuthType, bool onSite)
+        public void TestChangeAdvancedSettingInxAuthEvent(DataCollection.EventData_Common.XAuthType xAuthType, bool onSite)
         {
             this.ChangeAdvancedSettingInxAuthEvent(xAuthType, onSite);
         }
 
-        public int ChangeAdvancedSettingInxAuthEvent(FormData.XAuthType xAuthType, bool onSite)
+        public int ChangeAdvancedSettingInxAuthEvent(DataCollection.EventData_Common.XAuthType xAuthType, bool onSite)
         {
             RegisterManager.XAuthPersonalInfo testAccount = RegisterMgr.TestAccounts[RegisterManager.TestAccountType.DefaultAccount1];
 
@@ -44,7 +44,7 @@
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
             Managers.ManagerProvider.XAuthMgr.SetXAuthType(xAuthType);
-            if (xAuthType == FormData.XAuthType.ByUserName || xAuthType == FormData.XAuthType.ByUserNamePassword)
+            if (xAuthType == DataCollection.EventData_Common.XAuthType.ByUserName || xAuthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
             {
                 Managers.ManagerProvider.XAuthMgr.TypeDescriptionForIdentifer("USERID");
             }
@@ -78,16 +78,16 @@
             RegisterMgr.Continue();
             switch (xAuthType)
             {
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     RegisterMgr.XAuth_EnterUserName(testAccount.UserName);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     RegisterMgr.XAuth_EnterUserName(testAccount.UserName);
                     RegisterMgr.EnterPassword(testAccount.XAuthPassword);
                     break;
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.EnterPassword(testAccount.XAuthPassword);
                     break;
                 default:
@@ -96,13 +96,13 @@
             RegisterMgr.Continue();
             switch (xAuthType)
             {
-                case FormData.XAuthType.ByUserName:
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     RegisterMgr.XAuth_SetDefaultStandardPersonalInfoFields(testAccount, false);
                     RegisterMgr.EnterPersonalInfoPassword(testAccount.Password);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(false);
                     break;
                 default:
@@ -175,21 +175,21 @@
             RegisterMgr.XAuth_VerifyPasswordFieldIsDisplayed(true);
             switch (xAuthType)
             {
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     RegisterMgr.XAuth_VerifyUserNameFieldIsDisplayed(true);
                     RegisterMgr.XAuth_EnterUserName(testAccount.UserName);
                     RegisterMgr.EnterPassword(testAccount.Password);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     RegisterMgr.XAuth_VerifyUserNameFieldIsDisplayed(true);
                     RegisterMgr.XAuth_EnterUserName(testAccount.UserName);
                     RegisterMgr.EnterPassword(testAccount.XAuthPassword);
                     break;
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     RegisterMgr.XAuth_VerifyUserNameFieldIsDisplayed(false);
                     RegisterMgr.EnterPassword(testAccount.Password);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.XAuth_VerifyUserNameFieldIsDisplayed(false);
                     RegisterMgr.EnterPassword(testAccount.XAuthPassword);
                     break;
@@ -201,13 +201,13 @@
             RegisterMgr.Continue();
             switch (xAuthType)
             {
-                case FormData.XAuthType.ByUserName:
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(true);
                     RegisterMgr.EnterPersonalInfoPassword(testAccount.Password);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(false);
                     break;
                 default:

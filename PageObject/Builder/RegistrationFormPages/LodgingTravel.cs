@@ -16,13 +16,13 @@
         public AddHotelFrame AddHotelFrame = new AddHotelFrame("dialog");
         public RadioButton ChargeLodgingFee = new RadioButton("ctl00_cph_radCharge", LocateBy.Id);
 
-        public void SetLodgingStandardFieldVisible(FormData.LodgingStandardFields field, bool visible)
+        public void SetLodgingStandardFieldVisible(DataCollection.EventData_Common.LodgingStandardFields field, bool visible)
         {
             CheckBox LodgingStandardFieldVisible = new CheckBox(string.Format("ctl00_cph_chk{0}V", field.ToString()), LocateBy.Id);
             LodgingStandardFieldVisible.Set(visible);
         }
 
-        public void SetLodgingStandardFieldRequired(FormData.LodgingStandardFields field, bool requied)
+        public void SetLodgingStandardFieldRequired(DataCollection.EventData_Common.LodgingStandardFields field, bool requied)
         {
             CheckBox LodgingStandardFieldRequired = new CheckBox(string.Format("ctl00_cph_chk{0}R", field.ToString()), LocateBy.Id);
             LodgingStandardFieldRequired.Set(requied);

@@ -10,12 +10,12 @@
     {
         string eventName = "XAuth_TestAccountWithBadAndGoodData";
 
-        [TestCase(FormData.XAuthType.ByEmail)]
-        [TestCase(FormData.XAuthType.ByEmailPassword)]
-        [TestCase(FormData.XAuthType.ByUserName)]
-        [TestCase(FormData.XAuthType.ByUserNamePassword)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmail)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmailPassword)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserName)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserNamePassword)]
         [Test]
-        public void TestAccountWithBadAndGoodData(FormData.XAuthType type)
+        public void TestAccountWithBadAndGoodData(DataCollection.EventData_Common.XAuthType type)
         {
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -36,105 +36,105 @@
 
             switch (type)
             {
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredEmail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredEmail);
                     
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("test@user.com12345");
-                    ClickTestAndVerify(FormData.TestAccountResult.InvalidEmail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.InvalidEmail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("bad@user.com");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(type);
-                    ClickTestAndVerify(FormData.TestAccountResult.Success);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.Success);
                     break;
 
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword(DefaultPassword);
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredEmail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredEmail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail(DefaultEmail);
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredPassword);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredPassword);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredEmailPassword);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredEmailPassword);
                     
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("test@user.com12345");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword(DefaultPassword);
-                    ClickTestAndVerify(FormData.TestAccountResult.InvalidEmail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.InvalidEmail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("test@user.com12345");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("badPassword");
-                    ClickTestAndVerify(FormData.TestAccountResult.InvalidEmail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.InvalidEmail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("bad@user.com");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword(DefaultPassword);
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail("bad@user.com");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("badPassword");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestEmail(DefaultEmail);
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("badPassword");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(type);
-                    ClickTestAndVerify(FormData.TestAccountResult.Success);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.Success);
                     break;
 
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredUsername);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredUsername);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("badUserName");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(type);
-                    ClickTestAndVerify(FormData.TestAccountResult.Success);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.Success);
                     break;
 
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword(DefaultPassword);
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredUsername);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredUsername);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName(DefaultUserName);
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredPassword);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredPassword);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("");
-                    ClickTestAndVerify(FormData.TestAccountResult.RequiredUsernamePassword);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.RequiredUsernamePassword);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("badUserName");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword(DefaultPassword);
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName("badUserName");
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("badPassword");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.TypeTestUserName(DefaultUserName);
                     Managers.ManagerProvider.XAuthMgr.TypeTestPassword("badPassword");
-                    ClickTestAndVerify(FormData.TestAccountResult.AuthenticateFail);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.AuthenticateFail);
 
                     Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(type);
-                    ClickTestAndVerify(FormData.TestAccountResult.Success);
+                    ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult.Success);
                     break;
             }
         }
 
         [Verify]
-        private void ClickTestAndVerify(FormData.TestAccountResult result)
+        private void ClickTestAndVerify(DataCollection.EventData_Common.TestAccountResult result)
         {
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.VerifyErrorMessages(result);

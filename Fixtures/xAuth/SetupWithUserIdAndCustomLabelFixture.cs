@@ -31,9 +31,9 @@
             BuilderMgr.RegTypeMgr.SetName("regtype1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.TypeDescriptionForIdentifer(DescriptionForIdentifer);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();            
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();

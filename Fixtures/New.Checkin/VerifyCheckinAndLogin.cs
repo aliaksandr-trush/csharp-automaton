@@ -120,7 +120,7 @@
         {
             Event evt = new Event("RI-VerifyEmail");
             PersonalInfoPageStandardField VerifyEmail = new PersonalInfoPageStandardField();
-            VerifyEmail.StandardField = FormData.PersonalInfoField.VerifyEmail;
+            VerifyEmail.StandardField = DataCollection.EventData_Common.PersonalInfoField.VerifyEmail;
             VerifyEmail.Visible = true;
             evt.PersonalInfoPage.StandardFields.Add(VerifyEmail);
 

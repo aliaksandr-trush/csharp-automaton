@@ -5,7 +5,7 @@
     public class MerchandiseItem
     {
         public int Id;
-        public FormData.MerchandiseType Type;
+        public EventData_Common.MerchandiseType Type;
         public double? Price;
         public double? MinPrice;
         public double? MaxPrice;

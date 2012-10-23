@@ -5,13 +5,13 @@
 
     public class AddTaxRate
     {
-        public void AddTaxRates(TaxRate taxRateOne, TaxRate taxRateTwo, FormData.Location location)
+        public void AddTaxRates(TaxRate taxRateOne, TaxRate taxRateTwo, DataCollection.EventData_Common.Location location)
         {
             if (((taxRateOne != null) && taxRateOne.ToBeAdded ) || ((taxRateTwo != null) && taxRateTwo.ToBeAdded))
             {
                 switch (location)
                 {
-                    case FormData.Location.RegType:
+                    case DataCollection.EventData_Common.Location.RegType:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.AddTaxRate_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.SelectByName();
 
@@ -47,7 +47,7 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.TaxRate_Define.SaveAndClose_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SelectByName();
                         break;
-                    case FormData.Location.Agenda:
+                    case DataCollection.EventData_Common.Location.Agenda:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddTaxRate_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.SelectByName();
 
@@ -82,7 +82,7 @@
 
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.TaxRateDefine.SaveAndClose_Click();
                         break;
-                    case FormData.Location.Merchandise:
+                    case DataCollection.EventData_Common.Location.Merchandise:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.AddTaxRate_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.TaxRate_Define.SelectByName();
 

@@ -20,7 +20,7 @@
             WaitForLoad();
         }
 
-        public void CFType_Select(DataCollection.FormData.CustomFieldType type)
+        public void CFType_Select(DataCollection.EventData_Common.CustomFieldType type)
         {
             Clickable Type = new Clickable(
                 string.Format("//div[@id='divMoreFormats']//span[text()='{0}']", CustomStringAttribute.GetCustomString(type)),

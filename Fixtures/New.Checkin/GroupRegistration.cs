@@ -48,7 +48,7 @@
 
             KeywordProvider.Registration_Creation.Login(registrant);
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
 
@@ -75,16 +75,16 @@
 
             KeywordProvider.Registration_Creation.Login(registrant);
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.FirstName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.FirstName));
+                DataCollection.EventData_Common.PersonalInfoField.FirstName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.FirstName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.MiddleName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.MiddleName));
+                DataCollection.EventData_Common.PersonalInfoField.MiddleName).Text.Trim().Equals(DataCollection.DefaultPersonalInfo.MiddleName));
 
             Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(
-                FormData.PersonalInfoField.Password).Text != null);
+                DataCollection.EventData_Common.PersonalInfoField.Password).Text != null);
         }
 
         [Test]
@@ -103,7 +103,7 @@
             RegType regType = new RegType("First");
             regType.Price = 50;
             groupEventFeeGroupDiscount.StartPage.RegTypes.Add(regType);
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             groupEventFeeGroupDiscount.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, groupEventFeeGroupDiscount);
@@ -165,15 +165,15 @@
 
             KeywordProvider.Registration_Creation.Login(reg1);
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
 
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.Checkin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.Checkin, true);
 
             KeywordProvider.Registration_Creation.Checkin(reg2);
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
         }
 
         [Test]
@@ -250,7 +250,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.Login, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.Login, true);
 
             Registrant reg = new Registrant(this.groupUniqueEmailEvent, emailAddress);
 
@@ -258,7 +258,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
 
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
         }
 
         [Test]
@@ -280,11 +280,11 @@
             KeywordProvider.Registration_Creation.PersonalInfo(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.GoBack_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.Agenda, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.Agenda, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.AddAnotherPerson_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.GoBack_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.Checkout, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.Checkout, true);
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }
     }

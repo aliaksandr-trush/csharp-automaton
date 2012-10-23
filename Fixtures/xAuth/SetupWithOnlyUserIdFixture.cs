@@ -36,8 +36,8 @@
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
             //5
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmail);
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserName);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmail);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserName);
 
             if (Configuration.ConfigReader.DefaultProvider.AccountConfiguration.XAuthVersion == "Old")
             {
@@ -53,8 +53,8 @@
             Assert.AreEqual(false, UIUtil.DefaultProvider.IsElementDisplay("spForgetPasswordUrl", LocateBy.Id));
 
             //5.1 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserName);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByUserName);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserName);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByUserName);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.VerifyPassTest();
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();

@@ -6,11 +6,11 @@
     public class CustomFieldCode
     {
         public int Id;
-        public FormData.CustomFieldCodeType CodeType;
-        public FormData.ChangePriceDirection? CodeDirection;
+        public EventData_Common.CustomFieldCodeType CodeType;
+        public EventData_Common.ChangePriceDirection? CodeDirection;
         public string CodeString;
         public double Amount;
-        public FormData.ChangeType CodeKind;
+        public EventData_Common.ChangeType CodeKind;
         public int? Limit;
 
         public CustomFieldCode(string code)
@@ -20,7 +20,7 @@
 
         public double CalculateDiscountedPrice(double originalPrice)
         {
-            if (this.CodeType == FormData.CustomFieldCodeType.AccessCode)
+            if (this.CodeType == EventData_Common.CustomFieldCodeType.AccessCode)
             {
                 return originalPrice;
             }
@@ -33,7 +33,7 @@
                     discountAmount = this.Amount;
                 }
 
-                if (this.CodeDirection.Value == FormData.ChangePriceDirection.Decrease)
+                if (this.CodeDirection.Value == EventData_Common.ChangePriceDirection.Decrease)
                 {
                     discountAmount = -discountAmount;
                 }
@@ -42,11 +42,11 @@
 
                 switch (CodeKind)
                 {
-                    case FormData.ChangeType.FixedAmount:
+                    case EventData_Common.ChangeType.FixedAmount:
                         discountedPrice += discountAmount;
                         break;
 
-                    case FormData.ChangeType.Percent:
+                    case EventData_Common.ChangeType.Percent:
                         discountedPrice = discountedPrice * (100 + discountAmount) / 100.0;
                         break;
 
@@ -66,11 +66,11 @@
             {
                 discountCodeString += codes[i].CodeString;
 
-                if (codes[i].CodeType != FormData.CustomFieldCodeType.AccessCode)
+                if (codes[i].CodeType != EventData_Common.CustomFieldCodeType.AccessCode)
                 {
                     discountCodeString += "=";
 
-                    if (codes[i].CodeDirection == FormData.ChangePriceDirection.Decrease)
+                    if (codes[i].CodeDirection == EventData_Common.ChangePriceDirection.Decrease)
                     {
                         discountCodeString += "-";
                     }
@@ -84,7 +84,7 @@
                         discountCodeString += codes[i].Amount.ToString();
                     }
 
-                    if (codes[i].CodeKind == FormData.ChangeType.Percent)
+                    if (codes[i].CodeKind == EventData_Common.ChangeType.Percent)
                     {
                         discountCodeString += "%";
                     }

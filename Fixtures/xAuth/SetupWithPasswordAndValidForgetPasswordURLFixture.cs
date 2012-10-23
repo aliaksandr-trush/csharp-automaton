@@ -33,9 +33,9 @@
             BuilderMgr.RegTypeMgr.SetName("regtype1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.TypeForgetPasswordUrl(ForgotPasswordURL);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.VerifyPassTest();
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
@@ -72,9 +72,9 @@
             BuilderMgr.OpenRegType("regtype1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.TypeForgetPasswordUrl(url);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByUserNamePassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByUserNamePassword);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.VerifyPassTest();
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();

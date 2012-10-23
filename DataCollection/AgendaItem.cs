@@ -8,7 +8,7 @@
         public AgendaItem(string name) : base(name) { }
 
         public bool? IncludeOnEventWeb;
-        public FormData.Gender? Gender;
+        public EventData_Common.Gender? Gender;
         public int? AgeGreaterThan;
         public DateTime? AgeGreaterThanDate;
         public int? AgeLessThan;
@@ -34,14 +34,14 @@
         public bool? ApplyTaxTwo;
         public int? SpacesAvailable;
         public bool? ShowCapacity;
-        public FormData.AgendaLimitReachedOption? LimitReachedOption;
+        public EventData_Common.AgendaLimitReachedOption? LimitReachedOption;
         public string LimitReachedMessage;
         public string WaitlistConfirmationText;
         public bool? AddToCalendar;
-        public FormData.DateFormat? DateFormat;
+        public EventData_Common.DateFormat? DateFormat;
         public string DetailsPopup;
         public string DetailsURL;
-        public FormData.AgendaInitialStatus? InitialStatus;
+        public EventData_Common.AgendaInitialStatus? InitialStatus;
         public string ConfirmationAddendum;
     }
 
@@ -61,7 +61,7 @@
         public AgendaItem_MultipleChoice(string name) : base(name) { }
 
         public List<ChoiceItem> ChoiceItems = new List<ChoiceItem>();
-        public List<FormData.CommonlyUsedMultipleChoice> CommonlyUsedItems = new List<FormData.CommonlyUsedMultipleChoice>();
+        public List<EventData_Common.CommonlyUsedMultipleChoice> CommonlyUsedItems = new List<EventData_Common.CommonlyUsedMultipleChoice>();
         public string GroupName;
         public bool? ForceGroupToMatch;
     }
@@ -71,7 +71,7 @@
         public AgendaItem_CheckBox(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.CheckBox;
+            Type = EventData_Common.CustomFieldType.CheckBox;
         }
 
         public string GroupName;
@@ -83,7 +83,7 @@
         public AgendaItem_MultipleChoice_RadioButton(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.RadioButton;
+            Type = EventData_Common.CustomFieldType.RadioButton;
         }
     }
 
@@ -92,7 +92,7 @@
         public AgendaItem_MultipleChoice_DropDown(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Dropdown;
+            Type = EventData_Common.CustomFieldType.Dropdown;
         }
     }
 
@@ -101,7 +101,7 @@
         public AgendaItem_Time(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Time;
+            Type = EventData_Common.CustomFieldType.Time;
         }
 
         public string GroupName;
@@ -113,7 +113,7 @@
         public AgendaItem_Header(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.SectionHeader;
+            Type = EventData_Common.CustomFieldType.SectionHeader;
         }
 
         public string DetailsPopup;
@@ -125,7 +125,7 @@
         public AgendaItem_AlwaysSelected(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.AlwaysSelected;
+            Type = EventData_Common.CustomFieldType.AlwaysSelected;
         }
     }
 
@@ -134,7 +134,7 @@
         public AgendaItem_ContinueButton(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.ContinueButton;
+            Type = EventData_Common.CustomFieldType.ContinueButton;
         }
     }
 
@@ -143,7 +143,7 @@
         public AgendaItem_Date(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Date;
+            Type = EventData_Common.CustomFieldType.Date;
         }
 
         public string GroupName;
@@ -155,7 +155,7 @@
         public AgendaItem_FileUpload(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.FileUpload;
+            Type = EventData_Common.CustomFieldType.FileUpload;
         }
 
         public string GroupName;
@@ -166,7 +166,7 @@
         public AgendaItem_Number(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Number;
+            Type = EventData_Common.CustomFieldType.Number;
         }
     }
 
@@ -175,7 +175,7 @@
         public AgendaItem_OneLineText(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.OneLineText;
+            Type = EventData_Common.CustomFieldType.OneLineText;
         }
     }
 
@@ -184,7 +184,7 @@
         public AgendaItem_Paragraph(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Paragraph;
+            Type = EventData_Common.CustomFieldType.Paragraph;
         }
     }
 
@@ -193,7 +193,7 @@
         public AgendaItem_Contribution(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Contribution;
+            Type = EventData_Common.CustomFieldType.Contribution;
         }
 
         public double MinAmount;
@@ -205,7 +205,7 @@
         public AgendaItem_Duration(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Duration;
+            Type = EventData_Common.CustomFieldType.Duration;
         }
     }
 }

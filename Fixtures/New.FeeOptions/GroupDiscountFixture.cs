@@ -10,7 +10,7 @@
     public class GroupDiscountFixture : FixtureBase
     {
         Event evt1;
-        PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+        PaymentMethod paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
         RegType regType1 = new RegType("regType1");
         RegType regType2 = new RegType("regType2");
         AgendaItem_CheckBox agenda1 = new AgendaItem_CheckBox("agenda1");
@@ -191,7 +191,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
 
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(group));
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
@@ -220,7 +220,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(group1.Primary);
 
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(group1));
 
             this.GroupRegistrationAndVerifyTotal(this.GenerateGroup(3));
@@ -241,9 +241,9 @@
             this.evt1.AgendaPage.AgendaItems.Add(this.agenda1);
             this.evt1.AgendaPage.AgendaItems.Add(this.agenda2);
             this.evt1.MerchandisePage = new MerchandisePage();
-            merch1.Type = FormData.MerchandiseType.Fixed;
+            merch1.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             merch1.Price = 60;
-            merch2.Type = FormData.MerchandiseType.Variable;
+            merch2.Type = DataCollection.EventData_Common.MerchandiseType.Variable;
             merch2.MinPrice = 65;
             merch2.MaxPrice = 100;
             this.evt1.MerchandisePage.Merchandises.Add(this.merch1);
@@ -318,7 +318,7 @@
         private void GroupRegistrationAndVerifyTotal(Group group)
         {
             KeywordProvider.Registration_Creation.GroupRegistration(group);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation), 
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation), 
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(group));
         }
     }

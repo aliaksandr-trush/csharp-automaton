@@ -15,8 +15,8 @@
         public HtmlEditor CheckoutPageFooterEditor = new HtmlEditor("dialog");
         public RadioButton AddServiceFee = new RadioButton("ctl00_cph_radShare", LocateBy.Id);
         public CCOptions CC_Options_Popup_Frame = new CCOptions("dialog");
-        public PaymentMethodRow Row_CreditCard = new PaymentMethodRow(DataCollection.FormData.PaymentMethodEnum.CreditCard);
-        public PaymentMethodRow Row_Check = new PaymentMethodRow(DataCollection.FormData.PaymentMethodEnum.Check);
+        public PaymentMethodRow Row_CreditCard = new PaymentMethodRow(DataCollection.EventData_Common.PaymentMethodEnum.CreditCard);
+        public PaymentMethodRow Row_Check = new PaymentMethodRow(DataCollection.EventData_Common.PaymentMethodEnum.Check);
         private MultiChoiceDropdown EventCurrency = new MultiChoiceDropdown("ctl00_cph_roEventsCurrencyCode", LocateBy.Id);
 
         public void AddPaymentMethod_Click()
@@ -90,7 +90,7 @@
         {
         }
 
-        public void GatewaySelection_Select(DataCollection.FormData.Gateway gateway)
+        public void GatewaySelection_Select(DataCollection.EventData_Common.Gateway gateway)
         {
             this.GatewaySelection.WaitForDisplay();
             this.GatewaySelection.SelectWithText(CustomStringAttribute.GetCustomString(gateway));
@@ -121,11 +121,11 @@
         public CheckBox Visible_OnSite;
         public Clickable Delete;
 
-        public PaymentMethodRow(DataCollection.FormData.PaymentMethodEnum method)
+        public PaymentMethodRow(DataCollection.EventData_Common.PaymentMethodEnum method)
         {
             switch (method)
             {
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.CreditCard:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.CreditCard:
                     this.EditCCOptions_Link = new Clickable("//tr[@id='ctl00_cph_trCreditCard']/td/a[text()='Credit Cards']", LocateBy.XPath);
                     this.Visible_Public = new CheckBox("ctl00_cph_chkCreditCardsPublic", LocateBy.Id);
                     this.Visible_Admin = new CheckBox("ctl00_cph_chkCreditCardsAdmin", LocateBy.Id);
@@ -133,48 +133,48 @@
                     this.Delete = new Clickable("//tr[@id='ctl00_cph_trCreditCard']/td/a/img[@alt='Delete']", LocateBy.XPath);
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.Check:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.Check:
                     this.Visible_Public = new CheckBox(this.Compose_Locator_Visible_Public(method), LocateBy.XPath);
                     this.Visible_Admin = new CheckBox(this.Compose_Locator_Visible_Admin(method), LocateBy.XPath);
                     this.Visible_OnSite = new CheckBox(this.Compose_Locator_Visible_OnSite(method), LocateBy.XPath);
                     this.Delete = new Clickable(this.Compose_Locator_Delete(method), LocateBy.XPath);
                     break;
 
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PurchaseOrder:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.PurchaseOrder:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.Cash:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.Cash:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PayAtTheEvent:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.PayAtTheEvent:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.CostCenter:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.CostCenter:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.WireTransfer:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.WireTransfer:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.Custom:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.Custom:
                     throw new NotImplementedException();
-                case RegOnline.RegressionTest.DataCollection.FormData.PaymentMethodEnum.PayPal:
+                case RegOnline.RegressionTest.DataCollection.EventData_Common.PaymentMethodEnum.PayPal:
                     throw new NotImplementedException();
                 default:
                     break;
             }
         }
 
-        private string Compose_Locator_Visible_Public(DataCollection.FormData.PaymentMethodEnum method)
+        private string Compose_Locator_Visible_Public(DataCollection.EventData_Common.PaymentMethodEnum method)
         {
             return string.Format(Tr_Locator_Format_MethodRow, (int)method) + "/td[2]/input";
         }
 
-        private string Compose_Locator_Visible_Admin(DataCollection.FormData.PaymentMethodEnum method)
+        private string Compose_Locator_Visible_Admin(DataCollection.EventData_Common.PaymentMethodEnum method)
         {
             return string.Format(Tr_Locator_Format_MethodRow, (int)method) + "/td[3]/input";
         }
 
-        private string Compose_Locator_Visible_OnSite(DataCollection.FormData.PaymentMethodEnum method)
+        private string Compose_Locator_Visible_OnSite(DataCollection.EventData_Common.PaymentMethodEnum method)
         {
             return string.Format(Tr_Locator_Format_MethodRow, (int)method) + "/td[4]/input";
         }
 
-        private string Compose_Locator_Delete(DataCollection.FormData.PaymentMethodEnum method)
+        private string Compose_Locator_Delete(DataCollection.EventData_Common.PaymentMethodEnum method)
         {
             return string.Format(Tr_Locator_Format_MethodRow, (int)method) + "/td[5]/a/img[@alt='Delete']";
         }

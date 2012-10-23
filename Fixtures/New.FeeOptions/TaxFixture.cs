@@ -22,7 +22,7 @@
         {
             this.GenerateEventForTaxRate(true, false, null);
             Registrant reg = this.GenerateRegForTaxRate(null);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg));
         }
 
@@ -33,7 +33,7 @@
         {
             this.GenerateEventForTaxRate(false, true, null);
             Registrant reg = this.GenerateRegForTaxRate(null);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg));
         }
 
@@ -44,7 +44,7 @@
         {
             this.GenerateEventForTaxRate(true, true, null);
             Registrant reg = this.GenerateRegForTaxRate(null);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg));
         }
 
@@ -55,7 +55,7 @@
         {
             this.GenerateEventForTaxRate(false, false, null);
             Registrant reg = this.GenerateRegForTaxRate(null);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg));
         }
 
@@ -64,12 +64,12 @@
         [Description("526")]
         public void TaxOnlyInOneCountry()
         {
-            this.GenerateEventForTaxRate(true, true, FormData.Country.UnitedStates);
-            Registrant reg1 = this.GenerateRegForTaxRate(FormData.Country.UnitedStates);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            this.GenerateEventForTaxRate(true, true, DataCollection.EventData_Common.Country.UnitedStates);
+            Registrant reg1 = this.GenerateRegForTaxRate(DataCollection.EventData_Common.Country.UnitedStates);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                             KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1)); 
-            Registrant reg2 = this.GenerateRegForTaxRate(FormData.Country.Canada);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Registrant reg2 = this.GenerateRegForTaxRate(DataCollection.EventData_Common.Country.Canada);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                             KeywordProvider.Calculate_Fee.CalculateTotalFee(reg2));
         }
 
@@ -78,20 +78,20 @@
         [Description("527")]
         public void TaxVerifyEUCountry()
         {
-            this.GenerateEventForTaxRate(true, true, FormData.Country.EU);
-            Registrant reg1 = this.GenerateRegForTaxRate(FormData.Country.Austria);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            this.GenerateEventForTaxRate(true, true, DataCollection.EventData_Common.Country.EU);
+            Registrant reg1 = this.GenerateRegForTaxRate(DataCollection.EventData_Common.Country.Austria);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                             KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1)); 
-            Registrant reg2 = this.GenerateRegForTaxRate(FormData.Country.UnitedStates);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Registrant reg2 = this.GenerateRegForTaxRate(DataCollection.EventData_Common.Country.UnitedStates);
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                             KeywordProvider.Calculate_Fee.CalculateTotalFee(reg2)); 
         }
 
-        private void GenerateEventForTaxRate(bool applyTaxOne, bool applyTaxTwo, FormData.Country? country)
+        private void GenerateEventForTaxRate(bool applyTaxOne, bool applyTaxTwo, DataCollection.EventData_Common.Country? country)
         {
             this.evt = new Event("TaxFixture");
             this.regType = new RegType("regType");
-            this.paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            this.paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             TaxRate tax1 = new TaxRate("tax1");
             if (country.HasValue)
             {
@@ -114,7 +114,7 @@
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
             this.merch = new MerchandiseItem("merch");
-            merch.Type = FormData.MerchandiseType.Fixed;
+            merch.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             merch.Price = 70;
             merch.ApplyTaxOne = applyTaxOne;
             merch.ApplyTaxTwo = applyTaxTwo;
@@ -124,7 +124,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
         }
 
-        private Registrant GenerateRegForTaxRate(FormData.Country? country)
+        private Registrant GenerateRegForTaxRate(DataCollection.EventData_Common.Country? country)
         {
             Registrant reg = new Registrant(evt);
             reg.EventFee_Response = new EventFeeResponse(regType);

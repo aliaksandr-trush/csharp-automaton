@@ -22,16 +22,16 @@
             return lastName;
         }
 
-        public double GetTotal(FormData.RegisterPage page)
+        public double GetTotal(DataCollection.EventData_Common.RegisterPage page)
         {
             string amount = string.Empty;
 
             switch (page)
             {
-                case FormData.RegisterPage.Agenda:
+                case DataCollection.EventData_Common.RegisterPage.Agenda:
                     amount = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.Total.Text;
                     break;
-                case FormData.RegisterPage.Confirmation:
+                case DataCollection.EventData_Common.RegisterPage.Confirmation:
                     amount = PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.Total.Text;
                     break;
                 default:
@@ -55,7 +55,7 @@
         {
             if (reg.EventFee_Response.RegType != null)
             {
-                if (reg.Event.StartPage.Customize_RegType_DisplayOptions.DisplayOption == FormData.RegTypeDisplayOption.DropDownList)
+                if (reg.Event.StartPage.Customize_RegType_DisplayOptions.DisplayOption == DataCollection.EventData_Common.RegTypeDisplayOption.DropDownList)
                 {
                     PageObject.PageObjectProvider.Register.RegistationSite.Checkin.RegTypeDropDown.SelectWithText(reg.EventFee_Response.RegType.Name);
                 }

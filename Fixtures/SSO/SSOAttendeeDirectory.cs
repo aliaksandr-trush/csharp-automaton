@@ -34,20 +34,20 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Title);
-            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Directories);
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.Directories);
 
             AttendeeDirectory attendeeDirectory = new AttendeeDirectory("SSODirectory");
             attendeeDirectory.ShareDirectory = true;
             attendeeDirectory.RequireLogin = true;
 
             string directoryURL = KeywordProvider.Add_AttendeeDirectory.CreateAttendeeDirectory(attendeeDirectory);
-            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.EventDetails);
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.EventDetails);
             PageObject.PageObjectProvider.Manager.Dashboard.ReturnToList_Click();
 
             PageObject.PageObjectHelper.NavigateTo(directoryURL);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.EmailAddress.Type(reg1.Email);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.Continue_Click();
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.SSOLogin));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin));
             KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Reports.AttendeeDirectory.SignOut_Click();
 

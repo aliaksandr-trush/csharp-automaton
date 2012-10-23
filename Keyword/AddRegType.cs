@@ -37,11 +37,11 @@
 
                 switch (regType.RegTypeLimit.LimitType)
                 {
-                    case FormData.RegLimitType.Individual:
+                    case DataCollection.EventData_Common.RegLimitType.Individual:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.LimitToIndividual_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.IndividualLimit.Type(regType.RegTypeLimit.LimitTo);
                         break;
-                    case FormData.RegLimitType.Group:
+                    case DataCollection.EventData_Common.RegLimitType.Group:
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.LimitToGroup_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.GroupLimit.Type(regType.RegTypeLimit.LimitTo);
                         break;
@@ -103,12 +103,12 @@
                 #region AddEarlyLatePrice
                 if (regType.EarlyPrice != null)
                 {
-                    KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(regType.EarlyPrice, FormData.Location.RegType);
+                    KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(regType.EarlyPrice, DataCollection.EventData_Common.Location.RegType);
                 }
 
                 if (regType.LatePrice != null)
                 {
-                    KeywordProvider.Add_EarlyLatePrice.AddLatePrice(regType.LatePrice, FormData.Location.RegType);
+                    KeywordProvider.Add_EarlyLatePrice.AddLatePrice(regType.LatePrice, DataCollection.EventData_Common.Location.RegType);
                 }
                 #endregion
 
@@ -122,7 +122,7 @@
 
                     foreach (CustomFieldCode dc in regType.AllCustomCodes)
                     {
-                        KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, FormData.Location.RegType);
+                        KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, DataCollection.EventData_Common.Location.RegType);
                     }
 
                     if (regType.RequireDC.HasValue)
@@ -140,7 +140,7 @@
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
                     }
 
-                    KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.RegType);
+                    KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, DataCollection.EventData_Common.Location.RegType);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.SaveAndStay_Click();
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.StartPage.RegTypeDefine.RegTypeFee_Define.Options_Click();
 

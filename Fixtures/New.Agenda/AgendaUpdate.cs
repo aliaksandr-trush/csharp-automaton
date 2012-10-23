@@ -70,7 +70,7 @@
             AgendaItem_CheckBox agenda4 = new AgendaItem_CheckBox("Agenda4");
             agenda4.SpacesAvailable = 1;
             AgendaItem_CheckBox agenda5 = new AgendaItem_CheckBox("Agenda5");
-            agenda5.Gender = FormData.Gender.Male;
+            agenda5.Gender = DataCollection.EventData_Common.Gender.Male;
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
             evt.AgendaPage.AgendaItems.Add(agenda3);
@@ -80,7 +80,7 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
             Registrant reg1 = new Registrant(evt);
-            reg1.Gender = FormData.Gender.Male;
+            reg1.Gender = DataCollection.EventData_Common.Gender.Male;
             AgendaResponse_Checkbox resp1 = new AgendaResponse_Checkbox();
             resp1.AgendaItem = agenda1;
             resp1.Checked = true;
@@ -105,7 +105,7 @@
             KeywordProvider.Registration_Creation.CreateRegistration(reg1);
 
             Registrant reg2 = new Registrant(evt);
-            reg2.Gender = FormData.Gender.Female;
+            reg2.Gender = DataCollection.EventData_Common.Gender.Female;
             reg2.CustomField_Responses.Add(resp1);
             reg2.CustomField_Responses.Add(resp2);
 

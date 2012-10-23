@@ -28,7 +28,7 @@
 
             KeywordProvider.Event_Creator.ClickAddEventAndGetEventId(evt);
             KeywordProvider.Event_Creator.StartPage(evt);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
             KeywordProvider.Add_AgendaItem.AddAgendaItems(agenda1, evt);
             int id = Convert.ToInt32(PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaItemId.Value);
@@ -74,7 +74,7 @@
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
 
             PageObject.Builder.RegistrationFormPages.AgendaRow row1 = new PageObject.Builder.RegistrationFormPages.AgendaRow(agenda1);
             PageObject.Builder.RegistrationFormPages.AgendaRow row2 = new PageObject.Builder.RegistrationFormPages.AgendaRow(agenda2);
@@ -125,7 +125,7 @@
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.DoNotAllowOverlapping.Set(false);
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
@@ -149,9 +149,9 @@
             agenda2.Price = 60;
             CustomFieldCode discount = new CustomFieldCode("discount");
             discount.Amount = 10;
-            discount.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            discount.CodeKind = FormData.ChangeType.Percent;
-            discount.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            discount.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            discount.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            discount.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             agenda2.DiscountCodes.Add(discount);
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
@@ -166,16 +166,16 @@
             PageObject.Register.AgendaRow row2 = new PageObject.Register.AgendaRow(agenda2);
             ((WebElements.CheckBox)(row1.AgendaType)).Set(true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda1.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda1.Price, KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Agenda));
             ((WebElements.CheckBox)(row2.AgendaType)).Set(true);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda1.Price + agenda2.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda1.Price + agenda2.Price, KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Agenda));
             ((WebElements.CheckBox)(row1.AgendaType)).Set(false);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(agenda2.Price, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(agenda2.Price, KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Agenda));
             row2.DiscountCodeInput.Type(discount.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.RecalculateTotal_Click();
-            Assert.AreEqual(54, KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Agenda));
+            Assert.AreEqual(54, KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Agenda));
         }
     }
 }

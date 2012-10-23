@@ -24,7 +24,7 @@
 
     public class LodgingStandardFields
     {
-        public FormData.LodgingStandardFields Field;
+        public EventData_Common.LodgingStandardFields Field;
         public bool? Visible;
         public bool? Required;
     }

@@ -9,12 +9,12 @@
     [TestFixture]
     public class OnsiteKioskWithxAuthRegTypeFixture : ExternalAuthenticationFixtureBase
     {
-        [TestCase(FormData.XAuthType.ByEmailPassword)]
-        [TestCase(FormData.XAuthType.ByUserNamePassword)]
-        [TestCase(FormData.XAuthType.ByEmail)]
-        [TestCase(FormData.XAuthType.ByUserName)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmailPassword)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserNamePassword)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByEmail)]
+        [TestCase(DataCollection.EventData_Common.XAuthType.ByUserName)]
         [Test]
-        public void TestOnsiteKioskWithxAuthRegTypeFixture(FormData.XAuthType xAuthType)
+        public void TestOnsiteKioskWithxAuthRegTypeFixture(DataCollection.EventData_Common.XAuthType xAuthType)
         {
             ChangeAdvancedSettingInxAuthEventFixture changeAdvancedSettingInxAuthEvent = 
                 new ChangeAdvancedSettingInxAuthEventFixture();
@@ -96,7 +96,7 @@
             bool allowUpdates,
             bool allowGroupCheckIn,
             bool allowBadgePrinting,
-            FormData.XAuthType xAuthType, 
+            DataCollection.EventData_Common.XAuthType xAuthType, 
             int eventId, 
             string email, 
             string userName, 
@@ -127,7 +127,7 @@
 
             if (requirePassword)
             {
-                if (xAuthType == FormData.XAuthType.ByUserName || xAuthType == FormData.XAuthType.ByUserNamePassword)
+                if (xAuthType == DataCollection.EventData_Common.XAuthType.ByUserName || xAuthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
                 {
                     RegisterMgr.KioskEnterUserId("WRONGID");
                     RegisterMgr.KioskEnterPassword("WRONG PASSWORD");
@@ -144,18 +144,18 @@
                     RegisterMgr.KioskEnterUserId(userName);
 
 
-                    if (xAuthType == FormData.XAuthType.ByUserName)
+                    if (xAuthType == DataCollection.EventData_Common.XAuthType.ByUserName)
                     {
                         RegisterMgr.KioskEnterPassword(password);
                     }
 
-                    if (xAuthType == FormData.XAuthType.ByUserNamePassword)
+                    if (xAuthType == DataCollection.EventData_Common.XAuthType.ByUserNamePassword)
                     {
                         RegisterMgr.KioskEnterPassword(xAuthPassword);
                     }
                 }
 
-                if (xAuthType == FormData.XAuthType.ByEmail || xAuthType == FormData.XAuthType.ByEmailPassword)
+                if (xAuthType == DataCollection.EventData_Common.XAuthType.ByEmail || xAuthType == DataCollection.EventData_Common.XAuthType.ByEmailPassword)
                 {
                     RegisterMgr.KioskEnterPassword("WRONG PASSWORD");
                     VerifyIncorrectMessageShowUp();
@@ -163,12 +163,12 @@
 
                     RegisterMgr.KioskSearch(email);
 
-                    if (xAuthType == FormData.XAuthType.ByEmail)
+                    if (xAuthType == DataCollection.EventData_Common.XAuthType.ByEmail)
                     {
                         RegisterMgr.KioskEnterPassword(password);
                     }
 
-                    if (xAuthType == FormData.XAuthType.ByEmailPassword)
+                    if (xAuthType == DataCollection.EventData_Common.XAuthType.ByEmailPassword)
                     {
                         RegisterMgr.KioskEnterPassword(xAuthPassword);
                     }

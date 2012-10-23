@@ -21,7 +21,7 @@
             DataCollection.Registrant reg = new DataCollection.Registrant(evt);
             reg.EventFee_Response = new DataCollection.EventFeeResponse();
             reg.EventFee_Response.Fee = fee;
-            reg.Payment_Method = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.CreditCard);
+            reg.Payment_Method = new DataCollection.PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.CreditCard);
             reg.Billing_Info = new DataCollection.BillingInfo();
             reg.Billing_Info.SetWithDefaultValue();
 
@@ -29,7 +29,7 @@
             Keyword.KeywordProvider.Manager_Common.DeleteEvent(eventName);
             Keyword.KeywordProvider.Event_Creator.CreateEvent(evt);
             Keyword.KeywordProvider.Registration_Creation.CreateRegistration(reg);
-            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.FormData.RegisterPage.Confirmation));
+            Assert.True(PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.EventData_Common.RegisterPage.Confirmation));
         }
 
         [Test]
@@ -46,7 +46,7 @@
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
             reg1.EventFee_Response = new DataCollection.EventFeeResponse();
             reg1.EventFee_Response.Fee = fee;
-            reg1.Payment_Method = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.CreditCard);
+            reg1.Payment_Method = new DataCollection.PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.CreditCard);
             reg1.Billing_Info = new DataCollection.BillingInfo();
             reg1.Billing_Info.SetWithDefaultValue();
             reg1.Billing_Info.CC_Number = DataCollection.DefaultPaymentInfo.CCNumber_AMS_Visa.Replace('3', '4');
@@ -66,7 +66,7 @@
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
             reg2.EventFee_Response = new DataCollection.EventFeeResponse();
             reg2.EventFee_Response.Fee = fee;
-            reg2.Payment_Method = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.CreditCard);
+            reg2.Payment_Method = new DataCollection.PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.CreditCard);
             reg2.Billing_Info = new DataCollection.BillingInfo();
             reg2.Billing_Info.SetWithDefaultValue();
             reg2.Billing_Info.ExpirationDate = new DateTime(2012, 1, 1);

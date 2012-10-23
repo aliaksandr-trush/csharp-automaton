@@ -24,7 +24,7 @@
             PageObject.PageObjectProvider.Manager.SignIn.UserName.Type(userName);
             PageObject.PageObjectProvider.Manager.SignIn.Password.Type(password);
             PageObject.PageObjectProvider.Manager.SignIn.SignInButton_Click();
-            DataCollection.FormData.EventSessionId = PageObject.PageObjectProvider.Manager.SignIn.GetQueryStringValue("EventSessionId");
+            DataCollection.CrossSiteData.EventSessionId = PageObject.PageObjectProvider.Manager.SignIn.GetQueryStringValue("EventSessionId");
             PageObject.PageObjectProvider.Manager.Events.Folder_Click(folder.ToString());
         }
 

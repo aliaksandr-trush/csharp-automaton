@@ -81,7 +81,7 @@
 
             switch (agenda.Type)
             {
-                case FormData.CustomFieldType.AlwaysSelected:
+                case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                     this.AgendaType = new CheckBox(agenda.Id.ToString(), LocateBy.Id);
                     this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
@@ -89,7 +89,7 @@
                     this.GetAgendaPrice(agenda);
                     break;
 
-                case FormData.CustomFieldType.CheckBox:
+                case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                     this.AgendaType = new CheckBox(agenda.Id.ToString(), LocateBy.Id);
                     this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.LimitFullMessage = new Label(string.Format("//li[@data-id='{0}']//div[@class='capacityMsg']", agenda.Id.ToString()), LocateBy.XPath);
@@ -100,14 +100,14 @@
                     this.GetAgendaPrice(agenda);
                     break;
 
-                case FormData.CustomFieldType.RadioButton:
+                case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                     this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
                     this.GetAgendaLocation(agenda);
                     this.GetAgendaPrice(agenda);
                     break;
 
-                case FormData.CustomFieldType.Dropdown:
+                case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                     this.AgendaType = new MultiChoiceDropdown(string.Format("//select[@id='{0}']", agenda.Id.ToString()), LocateBy.XPath);
                     this.DiscountCodeInput = new Input("dc" + agenda.Id.ToString(), LocateBy.Id);
                     this.GetAgendaDate(agenda);
@@ -115,17 +115,17 @@
                     this.GetAgendaPrice(agenda);
                     break;
 
-                case FormData.CustomFieldType.Number:
-                case FormData.CustomFieldType.OneLineText:
-                case FormData.CustomFieldType.Contribution:
-                case FormData.CustomFieldType.Paragraph:
-                case FormData.CustomFieldType.Date:
-                case FormData.CustomFieldType.Time:
-                case FormData.CustomFieldType.Duration:
+                case DataCollection.EventData_Common.CustomFieldType.Number:
+                case DataCollection.EventData_Common.CustomFieldType.OneLineText:
+                case DataCollection.EventData_Common.CustomFieldType.Contribution:
+                case DataCollection.EventData_Common.CustomFieldType.Paragraph:
+                case DataCollection.EventData_Common.CustomFieldType.Date:
+                case DataCollection.EventData_Common.CustomFieldType.Time:
+                case DataCollection.EventData_Common.CustomFieldType.Duration:
                     this.AgendaType = new Input(agenda.Id.ToString(), LocateBy.Id);
                     break;
 
-                case FormData.CustomFieldType.FileUpload:
+                case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                     this.AgendaType = new Clickable(
                         string.Format("//li[@data-id='{0}']//a[@class='add_button']", agenda.Id.ToString()),
                         LocateBy.XPath);
@@ -134,10 +134,10 @@
                     this.GetAgendaPrice(agenda);
                     break;
 
-                case FormData.CustomFieldType.SectionHeader:
+                case DataCollection.EventData_Common.CustomFieldType.SectionHeader:
                     break;
 
-                case FormData.CustomFieldType.ContinueButton:
+                case DataCollection.EventData_Common.CustomFieldType.ContinueButton:
                     this.AgendaType = new Clickable(string.Format("ctl00${0}", agenda.Id.ToString()), LocateBy.Name);
                     break;
 
@@ -157,16 +157,16 @@
 
             switch (agenda.Type)
             {
-                case FormData.CustomFieldType.OneLineText:
-                case FormData.CustomFieldType.CheckBox:
-                case FormData.CustomFieldType.Paragraph:
-                case FormData.CustomFieldType.Date:
-                case FormData.CustomFieldType.Time:
-                case FormData.CustomFieldType.AlwaysSelected:
-                case FormData.CustomFieldType.Contribution:
-                case FormData.CustomFieldType.Number:
-                case FormData.CustomFieldType.Dropdown:
-                case FormData.CustomFieldType.Duration:
+                case DataCollection.EventData_Common.CustomFieldType.OneLineText:
+                case DataCollection.EventData_Common.CustomFieldType.CheckBox:
+                case DataCollection.EventData_Common.CustomFieldType.Paragraph:
+                case DataCollection.EventData_Common.CustomFieldType.Date:
+                case DataCollection.EventData_Common.CustomFieldType.Time:
+                case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
+                case DataCollection.EventData_Common.CustomFieldType.Contribution:
+                case DataCollection.EventData_Common.CustomFieldType.Number:
+                case DataCollection.EventData_Common.CustomFieldType.Dropdown:
+                case DataCollection.EventData_Common.CustomFieldType.Duration:
 
                     element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[label[text()='{0}']]]", agenda.NameOnForm),
@@ -186,16 +186,16 @@
 
                     break;
 
-                case FormData.CustomFieldType.SectionHeader:
+                case DataCollection.EventData_Common.CustomFieldType.SectionHeader:
                     element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[contains(text(),'{0}')]]", agenda.NameOnForm),
                         LocateBy.XPath);
 
                     break;
 
-                case FormData.CustomFieldType.RadioButton:
-                case FormData.CustomFieldType.FileUpload:
-                case FormData.CustomFieldType.ContinueButton:
+                case DataCollection.EventData_Common.CustomFieldType.RadioButton:
+                case DataCollection.EventData_Common.CustomFieldType.FileUpload:
+                case DataCollection.EventData_Common.CustomFieldType.ContinueButton:
                     element_Li = new ElementBase(
                         string.Format("//div[@id='pageContent']//legend/following-sibling::ol/li[div[p[text()='{0}']]]", agenda.NameOnForm),
                         LocateBy.XPath);
@@ -213,28 +213,28 @@
         {
             switch (agenda.Type)
             {
-                case FormData.CustomFieldType.OneLineText:
-                case FormData.CustomFieldType.CheckBox:
-                case FormData.CustomFieldType.Paragraph:
-                case FormData.CustomFieldType.Date:
-                case FormData.CustomFieldType.Time:
-                case FormData.CustomFieldType.AlwaysSelected:
-                case FormData.CustomFieldType.Contribution:
-                case FormData.CustomFieldType.Number:
-                case FormData.CustomFieldType.Dropdown:
-                case FormData.CustomFieldType.Duration:
+                case DataCollection.EventData_Common.CustomFieldType.OneLineText:
+                case DataCollection.EventData_Common.CustomFieldType.CheckBox:
+                case DataCollection.EventData_Common.CustomFieldType.Paragraph:
+                case DataCollection.EventData_Common.CustomFieldType.Date:
+                case DataCollection.EventData_Common.CustomFieldType.Time:
+                case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
+                case DataCollection.EventData_Common.CustomFieldType.Contribution:
+                case DataCollection.EventData_Common.CustomFieldType.Number:
+                case DataCollection.EventData_Common.CustomFieldType.Dropdown:
+                case DataCollection.EventData_Common.CustomFieldType.Duration:
                     return new Label(
                         string.Format("//li[@data-id='{0}']//label[@for='{0}']", agenda.Id.ToString()),
                         LocateBy.XPath);
 
-                case FormData.CustomFieldType.SectionHeader:
+                case DataCollection.EventData_Common.CustomFieldType.SectionHeader:
                     return new Label(
                         string.Format("//li[@data-id='{0}']//div[contains(text(),'{1}')]", agenda.Id.ToString(), agenda.NameOnForm),
                         LocateBy.XPath);
 
-                case FormData.CustomFieldType.RadioButton:
-                case FormData.CustomFieldType.FileUpload:
-                case FormData.CustomFieldType.ContinueButton:
+                case DataCollection.EventData_Common.CustomFieldType.RadioButton:
+                case DataCollection.EventData_Common.CustomFieldType.FileUpload:
+                case DataCollection.EventData_Common.CustomFieldType.ContinueButton:
                     return new Label(
                         string.Format("//li[@data-id='{0}']//p[text()='{1}']", agenda.Id.ToString(), agenda.NameOnForm),
                         LocateBy.XPath);

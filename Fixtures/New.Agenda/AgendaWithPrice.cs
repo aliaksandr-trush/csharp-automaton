@@ -22,7 +22,7 @@
             aGEarlyPriceDateTime.Price = 110;
             DataCollection.EarlyPrice earlyPrice1 = new DataCollection.EarlyPrice();
             earlyPrice1.earlyPrice = 90;
-            earlyPrice1.EarlyPriceType = DataCollection.FormData.EarlyPriceType.DateAndTime;
+            earlyPrice1.EarlyPriceType = DataCollection.EventData_Common.EarlyPriceType.DateAndTime;
             earlyPrice1.EarlyPriceDate = System.DateTime.Today.AddDays(3);
             earlyPrice1.EarlyPriceTime = System.DateTime.Now;
             aGEarlyPriceDateTime.EarlyPrice = earlyPrice1;
@@ -30,7 +30,7 @@
             aGEarlyPriceRegs.Price = 150;
             DataCollection.EarlyPrice earlyPrice2 = new DataCollection.EarlyPrice();
             earlyPrice2.earlyPrice = 140;
-            earlyPrice2.EarlyPriceType = DataCollection.FormData.EarlyPriceType.Registrants;
+            earlyPrice2.EarlyPriceType = DataCollection.EventData_Common.EarlyPriceType.Registrants;
             earlyPrice2.FirstNRegistrants = 1;
             aGEarlyPriceRegs.EarlyPrice = earlyPrice2;
             DataCollection.AgendaItem_CheckBox aGLatePrice = new DataCollection.AgendaItem_CheckBox("AGLatePrice");
@@ -44,7 +44,7 @@
             evt.AgendaPage.AgendaItems.Add(aGEarlyPriceDateTime);
             evt.AgendaPage.AgendaItems.Add(aGEarlyPriceRegs);
             evt.AgendaPage.AgendaItems.Add(aGLatePrice);
-            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.Check);
+            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
 
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(DataCollection.EventFolders.Folders.RegistrationInventory, evt);
@@ -69,7 +69,7 @@
             reg1.Payment_Method = paymentMethod;
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg1);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
 
             DataCollection.Registrant reg2 = new DataCollection.Registrant(evt);
@@ -80,7 +80,7 @@
             reg2.Payment_Method = paymentMethod;
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg2);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
         }
 
@@ -90,79 +90,79 @@
         public void AgendaDiscountCode()
         {
             DataCollection.Event evt = new DataCollection.Event("AgendaDiscountCode");
-            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.FormData.PaymentMethodEnum.Check);
+            DataCollection.PaymentMethod paymentMethod = new DataCollection.PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             evt.AgendaPage = new DataCollection.AgendaPage();
             DataCollection.AgendaItem_CheckBox agendaDCPercent = new DataCollection.AgendaItem_CheckBox("AgendaDCPercent");
             agendaDCPercent.Price = 50;
             DataCollection.CustomFieldCode dCPercent = new DataCollection.CustomFieldCode("DCPercent");
-            dCPercent.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCPercent.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCPercent.Amount = 10;
-            dCPercent.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCPercent.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCPercent.DiscountCodes.Add(dCPercent);
             DataCollection.AgendaItem_CheckBox agendaDCFix = new DataCollection.AgendaItem_CheckBox("AgendaDCFix");
             agendaDCFix.Price = 50;
             DataCollection.CustomFieldCode dCFix = new DataCollection.CustomFieldCode("DCFix");
-            dCFix.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCFix.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCFix.Amount = 10;
-            dCFix.CodeKind = DataCollection.FormData.ChangeType.FixedAmount;
+            dCFix.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFix.DiscountCodes.Add(dCFix);
             DataCollection.AgendaItem_CheckBox agendaDCPercentUnderZero = new DataCollection.AgendaItem_CheckBox("AgendaDCPercentUnderZero");
             agendaDCPercentUnderZero.Price = 50;
             DataCollection.CustomFieldCode dCPercentUnderZero = new DataCollection.CustomFieldCode("DCPercentUnderZero");
-            dCPercentUnderZero.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCPercentUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCPercentUnderZero.Amount = -10;
-            dCPercentUnderZero.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCPercentUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCPercentUnderZero.DiscountCodes.Add(dCPercentUnderZero);
             DataCollection.AgendaItem_CheckBox agendaDCFixUnderZero = new DataCollection.AgendaItem_CheckBox("AgendaDCFixUnderZero");
             agendaDCFixUnderZero.Price = 50;
             DataCollection.CustomFieldCode dCFixUnderZero = new DataCollection.CustomFieldCode("DCFixUnderZero");
-            dCFixUnderZero.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCFixUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCFixUnderZero.Amount = -10;
-            dCFixUnderZero.CodeKind = DataCollection.FormData.ChangeType.FixedAmount;
+            dCFixUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFixUnderZero.DiscountCodes.Add(dCFixUnderZero);
             DataCollection.AgendaItem_CheckBox agendaDCPercentIncreace = new DataCollection.AgendaItem_CheckBox("AgendaDCPercentIncreace");
             agendaDCPercentIncreace.Price = 50;
             DataCollection.CustomFieldCode dCPercentIncreace = new DataCollection.CustomFieldCode("DCPercentIncreace");
-            dCPercentIncreace.CodeDirection = DataCollection.FormData.ChangePriceDirection.Increase;
+            dCPercentIncreace.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCPercentIncreace.Amount = 10;
-            dCPercentIncreace.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCPercentIncreace.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCPercentIncreace.DiscountCodes.Add(dCPercentIncreace);
             DataCollection.AgendaItem_CheckBox agendaDCFixIncreace = new DataCollection.AgendaItem_CheckBox("AgendaDCFixIncreace");
             agendaDCFixIncreace.Price = 50;
             DataCollection.CustomFieldCode dCFixIncreace = new DataCollection.CustomFieldCode("DCFixIncreace");
-            dCFixIncreace.CodeDirection = DataCollection.FormData.ChangePriceDirection.Increase;
+            dCFixIncreace.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCFixIncreace.Amount = 10;
-            dCFixIncreace.CodeKind = DataCollection.FormData.ChangeType.FixedAmount;
+            dCFixIncreace.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFixIncreace.DiscountCodes.Add(dCFixIncreace);
             DataCollection.AgendaItem_CheckBox agendaDCPercentIncreaceUnderZero = new DataCollection.AgendaItem_CheckBox("AgendaDCPercentIncreaceUnderZero");
             agendaDCPercentIncreaceUnderZero.Price = 50;
             DataCollection.CustomFieldCode dCPercentIncreaceUnderZero = new DataCollection.CustomFieldCode("PercentIncreace0");
-            dCPercentIncreaceUnderZero.CodeDirection = DataCollection.FormData.ChangePriceDirection.Increase;
+            dCPercentIncreaceUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCPercentIncreaceUnderZero.Amount = -10;
-            dCPercentIncreaceUnderZero.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCPercentIncreaceUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCPercentIncreaceUnderZero.DiscountCodes.Add(dCPercentIncreaceUnderZero);
             DataCollection.AgendaItem_CheckBox agendaDCFixIncreaceUnderZero = new DataCollection.AgendaItem_CheckBox("AgendaDCFixIncreaceUnderZero");
             agendaDCFixIncreaceUnderZero.Price = 50;
             DataCollection.CustomFieldCode dCFixIncreaceUnderZero = new DataCollection.CustomFieldCode("FixIncreace0");
-            dCFixIncreaceUnderZero.CodeDirection = DataCollection.FormData.ChangePriceDirection.Increase;
+            dCFixIncreaceUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCFixIncreaceUnderZero.Amount = -10;
-            dCFixIncreaceUnderZero.CodeKind = DataCollection.FormData.ChangeType.FixedAmount;
+            dCFixIncreaceUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFixIncreaceUnderZero.DiscountCodes.Add(dCFixIncreaceUnderZero);
             DataCollection.AgendaItem_CheckBox agendaDCWithLimit = new DataCollection.AgendaItem_CheckBox("AgendaDCWithLimit");
             agendaDCWithLimit.Price = 50;
             DataCollection.CustomFieldCode dCWithLimit = new DataCollection.CustomFieldCode("DCWithLimit");
-            dCWithLimit.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCWithLimit.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCWithLimit.Amount = 10;
-            dCWithLimit.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCWithLimit.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             dCWithLimit.Limit = 1;
             agendaDCWithLimit.DiscountCodes.Add(dCWithLimit);
             DataCollection.AgendaItem_CheckBox agendaDCRequired = new DataCollection.AgendaItem_CheckBox("AgendaDCRequired");
             agendaDCRequired.Price = 50;
             DataCollection.CustomFieldCode dCRequired = new DataCollection.CustomFieldCode("DCRequired");
-            dCRequired.CodeDirection = DataCollection.FormData.ChangePriceDirection.Decrease;
+            dCRequired.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCRequired.Amount = 10;
-            dCRequired.CodeKind = DataCollection.FormData.ChangeType.Percent;
+            dCRequired.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCRequired.DiscountCodes.Add(dCRequired);
             agendaDCRequired.RequireDC = true;
             evt.AgendaPage.AgendaItems.Add(agendaDCPercent);
@@ -247,7 +247,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(agendaDCRequired).DiscountCodeInput.Type(dCRequired.CodeString);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg) - 5);
 
             DataCollection.Registrant reg1 = new DataCollection.Registrant(evt);
@@ -272,11 +272,11 @@
             evt.AgendaPage = new DataCollection.AgendaPage();
             DataCollection.AgendaItem_CheckBox accessNoLimit = new DataCollection.AgendaItem_CheckBox("AccessNoLimit");
             DataCollection.CustomFieldCode accessCodeNoLimit = new DataCollection.CustomFieldCode("AccessNoLimit");
-            accessCodeNoLimit.CodeType = DataCollection.FormData.CustomFieldCodeType.AccessCode;
+            accessCodeNoLimit.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.AccessCode;
             accessNoLimit.DiscountCodes.Add(accessCodeNoLimit);
             DataCollection.AgendaItem_CheckBox accessWithLimit = new DataCollection.AgendaItem_CheckBox("AccessWithLimit");
             DataCollection.CustomFieldCode accessCodeWithLimit = new DataCollection.CustomFieldCode("AccessWithLimit");
-            accessCodeWithLimit.CodeType = DataCollection.FormData.CustomFieldCodeType.AccessCode;
+            accessCodeWithLimit.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.AccessCode;
             accessCodeWithLimit.Limit = 1;
             accessWithLimit.DiscountCodes.Add(accessCodeWithLimit);
             DataCollection.AgendaItem_CheckBox accessBulkCode = new DataCollection.AgendaItem_CheckBox("AccessBulkCode");

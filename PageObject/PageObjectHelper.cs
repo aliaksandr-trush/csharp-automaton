@@ -64,9 +64,9 @@
             UIUtil.DefaultProvider.SelectTopWindow();
         }
 
-        public static void ClickConfirmation(DataCollection.FormData.ConfirmationOptions option)
+        public static void ClickConfirmation(DataCollection.EventData_Common.ConfirmationOptions option)
         {
-            if (option == DataCollection.FormData.ConfirmationOptions.OK)
+            if (option == DataCollection.EventData_Common.ConfirmationOptions.OK)
             {
                 UIUtil.DefaultProvider.GetConfirmation();
                 Utility.ThreadSleep(3);
@@ -74,7 +74,7 @@
                 UIUtil.DefaultProvider.WaitForPageToLoad();
             }
 
-            if (option == DataCollection.FormData.ConfirmationOptions.Cancel)
+            if (option == DataCollection.EventData_Common.ConfirmationOptions.Cancel)
             {
                 UIUtil.DefaultProvider.ChooseCancelOnNextConfirmation();
                 Utility.ThreadSleep(3);

@@ -39,7 +39,7 @@
             Event.AgendaPage = agendaPage;
 
             LodgingStandardFields field = new LodgingStandardFields();
-            field.Field = FormData.LodgingStandardFields.RoomType;
+            field.Field = DataCollection.EventData_Common.LodgingStandardFields.RoomType;
             field.Visible = true;
             Lodging lodging = new Lodging();
             lodging.StandardFields.Add(field);
@@ -50,7 +50,7 @@
             Event.LodgingTravelPage = lodgingTravelPage;
 
             MerchandiseItem merchandise = new MerchandiseItem(DateTime.Now.AddSeconds(1).Ticks.ToString());
-            merchandise.Type = FormData.MerchandiseType.Header;
+            merchandise.Type = DataCollection.EventData_Common.MerchandiseType.Header;
             MerchandisePage merchandisePage = new MerchandisePage();
             merchandisePage.Merchandises.Add(merchandise);
             merchandisePage.PageHeader = "This is merchandise Page Header.";

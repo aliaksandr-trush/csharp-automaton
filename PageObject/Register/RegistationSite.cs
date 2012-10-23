@@ -82,7 +82,7 @@
         }
 
         #region Basic Actions
-        public void GoToPage(DataCollection.FormData.RegisterPage registerPage)
+        public void GoToPage(DataCollection.EventData_Common.RegisterPage registerPage)
         {
             Clickable pageLink = new Clickable(
                 string.Format("//a[contains(@id,'StepBar')][text()='{0}']",
@@ -233,27 +233,27 @@
         #endregion
 
         #region OnPageDistinguish
-        public bool IsOnPage(DataCollection.FormData.RegisterPage page)
+        public bool IsOnPage(DataCollection.EventData_Common.RegisterPage page)
         {
             switch (page)
             {
-                case DataCollection.FormData.RegisterPage.Login:
+                case DataCollection.EventData_Common.RegisterPage.Login:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/login.aspx");
-                case DataCollection.FormData.RegisterPage.Checkin:
+                case DataCollection.EventData_Common.RegisterPage.Checkin:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/checkin.aspx");
-                case DataCollection.FormData.RegisterPage.SSOLogin:
+                case DataCollection.EventData_Common.RegisterPage.SSOLogin:
                     return UIUtil.DefaultProvider.UrlContainsPath("SSO/ssologin.aspx");
-                case DataCollection.FormData.RegisterPage.PersonalInfo:
+                case DataCollection.EventData_Common.RegisterPage.PersonalInfo:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/PersonalInfo.aspx");
-                case DataCollection.FormData.RegisterPage.AttendeeCheck:
+                case DataCollection.EventData_Common.RegisterPage.AttendeeCheck:
                     return UIUtil.DefaultProvider.UrlContainsPath("Register/AttendeeCheck.aspx");
-                case DataCollection.FormData.RegisterPage.Agenda:
+                case DataCollection.EventData_Common.RegisterPage.Agenda:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/agenda.aspx");
-                case DataCollection.FormData.RegisterPage.Checkout:
+                case DataCollection.EventData_Common.RegisterPage.Checkout:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/checkout.aspx");
-                case DataCollection.FormData.RegisterPage.Confirmation:
+                case DataCollection.EventData_Common.RegisterPage.Confirmation:
                     return UIUtil.DefaultProvider.UrlContainsPath("register/confirmation.aspx");
-                case DataCollection.FormData.RegisterPage.ConfirmationRedirect:
+                case DataCollection.EventData_Common.RegisterPage.ConfirmationRedirect:
                     return (UIUtil.DefaultProvider.UrlContainsPath("regonline.com/register/ConfirmationRedirector.aspx")) && (UIUtil.DefaultProvider.IsTextPresent("Active Advantage"));
                 default:
                     return false;

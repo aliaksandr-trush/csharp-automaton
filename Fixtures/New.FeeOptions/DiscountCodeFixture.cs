@@ -21,7 +21,7 @@
         public void RegTypeDiscount()
         {
             Event evt = new Event("RegTypeDiscount");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType1 = new RegType("RegType1");
             regType1.Price = 80;
@@ -29,24 +29,24 @@
             regType2.Price = 90;
             CustomFieldCode dc1 = new CustomFieldCode("dc1");
             dc1.Amount = 10;
-            dc1.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc1.CodeKind = FormData.ChangeType.Percent;
-            dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc1.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc1.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc1.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc2 = new CustomFieldCode("dc2");
             dc2.Amount = 20;
-            dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc2.CodeKind = FormData.ChangeType.Percent;
-            dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc2.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc2.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc2.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc3 = new CustomFieldCode("dc3");
             dc3.Amount = 30;
-            dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc3.CodeKind = FormData.ChangeType.Percent;
-            dc3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc3.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc3.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc3.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc4 = new CustomFieldCode("dc4");
             dc4.Amount = 40;
-            dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc4.CodeKind = FormData.ChangeType.Percent;
-            dc4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc4.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc4.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc4.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             regType1.AllCustomCodes.Add(dc1);
             regType1.AllCustomCodes.Add(dc2);
             regType2.AllCustomCodes.Add(dc3);
@@ -71,7 +71,7 @@
             group1.Secondaries.Add(reg2);
 
             KeywordProvider.Registration_Creation.GroupRegistration(group1);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(group1));
 
             Registrant reg3 = new Registrant(evt);
@@ -89,7 +89,7 @@
             group2.Secondaries.Add(reg4);
 
             KeywordProvider.Registration_Creation.GroupRegistration(group2);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(group2));
         }
 
@@ -99,7 +99,7 @@
         public void GroupRegWithHalfDiscount()
         {
             Event evt = new Event("GroupRegWithHalfDiscount");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType1 = new RegType("RegType1");
             regType1.Price = 50;
@@ -107,14 +107,14 @@
             regType2.Price = 60;
             CustomFieldCode dc1 = new CustomFieldCode("dc1");
             dc1.Amount = 50;
-            dc1.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc1.CodeKind = FormData.ChangeType.Percent;
-            dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc1.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc1.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc1.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc2 = new CustomFieldCode("dc2");
             dc2.Amount = 50;
-            dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc2.CodeKind = FormData.ChangeType.Percent;
-            dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc2.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc2.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc2.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             regType1.AllCustomCodes.Add(dc1);
             regType2.AllCustomCodes.Add(dc2);
             evt.StartPage.RegTypes.Add(regType1);
@@ -125,35 +125,35 @@
             agenda2.Price = 100;
             CustomFieldCode dc3 = new CustomFieldCode("dc3");
             dc3.Amount = 50;
-            dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc3.CodeKind = FormData.ChangeType.Percent;
-            dc3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc3.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc3.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc3.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc4 = new CustomFieldCode("dc4");
             dc4.Amount = 50;
-            dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc4.CodeKind = FormData.ChangeType.Percent;
-            dc4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc4.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc4.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc4.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             agenda1.DiscountCodes.Add(dc3);
             agenda2.DiscountCodes.Add(dc4);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda1);
             evt.AgendaPage.AgendaItems.Add(agenda2);
             MerchandiseItem merch1 = new MerchandiseItem("Merch1");
-            merch1.Type = FormData.MerchandiseType.Fixed;
+            merch1.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             merch1.Price = 110;
             MerchandiseItem merch2 = new MerchandiseItem("Merch2");
-            merch2.Type = FormData.MerchandiseType.Fixed;
+            merch2.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             merch2.Price = 150;
             CustomFieldCode dc5 = new CustomFieldCode("dc5");
             dc5.Amount = 50;
-            dc5.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc5.CodeKind = FormData.ChangeType.Percent;
-            dc5.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc5.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc5.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc5.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc6 = new CustomFieldCode("dc6");
             dc6.Amount = 50;
-            dc6.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc6.CodeKind = FormData.ChangeType.Percent;
-            dc6.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc6.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc6.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc6.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             merch1.DiscountCodes.Add(dc5);
             merch2.DiscountCodes.Add(dc6);
             evt.MerchandisePage = new MerchandisePage();
@@ -205,7 +205,7 @@
             group.Secondaries.Add(reg3);
 
             KeywordProvider.Registration_Creation.GroupRegistration(group);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 430);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 430);
         }
 
         [Test]
@@ -214,25 +214,25 @@
         public void DifferentDiscountCode()
         {
             diffDcEvt = new Event("DifferentDiscountCode");
-            diffDcPaymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            diffDcPaymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             diffDcEvt.CheckoutPage.PaymentMethods.Add(diffDcPaymentMethod);
             diffDcRegType = new RegType("RegType");
             diffDcRegType.Price = 50;
             CustomFieldCode dc1 = new CustomFieldCode("free");
             dc1.Amount = 100;
-            dc1.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc1.CodeKind = FormData.ChangeType.Percent;
-            dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc1.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc1.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc1.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc2 = new CustomFieldCode("half");
             dc2.Amount = 50;
-            dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc2.CodeKind = FormData.ChangeType.Percent;
-            dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc2.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc2.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc2.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc3 = new CustomFieldCode("fixAmount");
             dc3.Amount = 10;
-            dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc3.CodeKind = FormData.ChangeType.FixedAmount;
-            dc3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc3.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc3.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
+            dc3.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             diffDcRegType.AllCustomCodes.Add(dc1);
             diffDcRegType.AllCustomCodes.Add(dc2);
             diffDcRegType.AllCustomCodes.Add(dc3);
@@ -241,19 +241,19 @@
             diffDcAgenda.Price = 80;
             CustomFieldCode dc4 = new CustomFieldCode("free");
             dc4.Amount = 100;
-            dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc4.CodeKind = FormData.ChangeType.Percent;
-            dc4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc4.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc4.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc4.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc5 = new CustomFieldCode("half");
             dc5.Amount = 50;
-            dc5.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc5.CodeKind = FormData.ChangeType.Percent;
-            dc5.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc5.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc5.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc5.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc6 = new CustomFieldCode("fixAmount");
             dc6.Amount = 10;
-            dc6.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc6.CodeKind = FormData.ChangeType.FixedAmount;
-            dc6.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc6.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc6.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
+            dc6.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             diffDcAgenda.DiscountCodes.Add(dc4);
             diffDcAgenda.DiscountCodes.Add(dc5);
             diffDcAgenda.DiscountCodes.Add(dc6);
@@ -261,22 +261,22 @@
             diffDcEvt.AgendaPage.AgendaItems.Add(diffDcAgenda);
             diffDcMerch = new MerchandiseItem("Merch");
             diffDcMerch.Price = 90;
-            diffDcMerch.Type = FormData.MerchandiseType.Fixed;
+            diffDcMerch.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             CustomFieldCode dc7 = new CustomFieldCode("free");
             dc7.Amount = 100;
-            dc7.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc7.CodeKind = FormData.ChangeType.Percent;
-            dc7.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc7.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc7.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc7.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc8 = new CustomFieldCode("half");
             dc8.Amount = 50;
-            dc8.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc8.CodeKind = FormData.ChangeType.Percent;
-            dc8.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc8.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc8.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc8.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode dc9 = new CustomFieldCode("fixAmount");
             dc9.Amount = 10;
-            dc9.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc9.CodeKind = FormData.ChangeType.FixedAmount;
-            dc9.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc9.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc9.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
+            dc9.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             diffDcMerch.DiscountCodes.Add(dc7);
             diffDcMerch.DiscountCodes.Add(dc8);
             diffDcMerch.DiscountCodes.Add(dc9);
@@ -286,13 +286,13 @@
             KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, diffDcEvt, false);
 
             Registrant reg1 = this.GenerateRegDiffDc(dc1, dc5, dc9);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg1));
             Registrant reg2 = this.GenerateRegDiffDc(dc3, dc4, dc8);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg2));
             Registrant reg3 = this.GenerateRegDiffDc(dc2, dc6, dc7);
-            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation),
+            Assert.AreEqual(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation),
                 KeywordProvider.Calculate_Fee.CalculateTotalFee(reg3));
         }
 
@@ -302,21 +302,21 @@
         public void DiscountCodeLimitTest()
         {
             Event evt = new Event("DiscountCodeLimitTest");
-            PaymentMethod paymenMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            PaymentMethod paymenMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymenMethod);
             RegType regType = new RegType("RegType");
             regType.Price = 50;
             CustomFieldCode dc1 = new CustomFieldCode("dc1");
             dc1.Amount = 100;
-            dc1.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc1.CodeKind = FormData.ChangeType.Percent;
-            dc1.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc1.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc1.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc1.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             dc1.Limit = 2;
             CustomFieldCode dc2 = new CustomFieldCode("dc2");
             dc2.Amount = 50;
-            dc2.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc2.CodeKind = FormData.ChangeType.Percent;
-            dc2.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc2.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc2.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc2.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             regType.AllCustomCodes.Add(dc1);
             regType.AllCustomCodes.Add(dc2);
             evt.StartPage.RegTypes.Add(regType);
@@ -324,27 +324,27 @@
             agenda.Price = 60;
             CustomFieldCode dc3 = new CustomFieldCode("dc3");
             dc3.Amount = 100;
-            dc3.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc3.CodeKind = FormData.ChangeType.Percent;
-            dc3.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc3.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc3.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc3.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             dc3.Limit = 2;
             CustomFieldCode dc4 = new CustomFieldCode("dc4");
             dc4.Amount = 50;
-            dc4.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc4.CodeKind = FormData.ChangeType.Percent;
-            dc4.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc4.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc4.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc4.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             agenda.DiscountCodes.Add(dc3);
             agenda.DiscountCodes.Add(dc4);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agenda);
             MerchandiseItem merchandise = new MerchandiseItem("Merchandise");
             merchandise.Price = 80;
-            merchandise.Type = FormData.MerchandiseType.Fixed;
+            merchandise.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             CustomFieldCode dc5 = new CustomFieldCode("dc5");
             dc5.Amount = 100;
-            dc5.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            dc5.CodeKind = FormData.ChangeType.Percent;
-            dc5.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            dc5.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            dc5.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            dc5.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             merchandise.DiscountCodes.Add(dc5);
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merchandise);
@@ -379,9 +379,9 @@
             reg2.Merchandise_Responses.Add(resp5);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg1);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 0);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 0);
             KeywordProvider.Registration_Creation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 0);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 0);
 
             Registrant reg3 = new Registrant(evt);
             reg3.EventFee_Response = resp1;
@@ -405,7 +405,7 @@
             reg5.Merchandise_Responses.Add(resp5);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg5);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 55);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 55);
         }
 
         [Test]
@@ -417,21 +417,21 @@
 
             CustomFieldCode half = new CustomFieldCode("Half");
             half.Amount = 50;
-            half.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            half.CodeKind = FormData.ChangeType.Percent;
-            half.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            half.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            half.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            half.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode fixedAmount = new CustomFieldCode("FixedAmount");
             fixedAmount.Amount = 25;
-            fixedAmount.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            fixedAmount.CodeKind = FormData.ChangeType.FixedAmount;
-            fixedAmount.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            fixedAmount.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            fixedAmount.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
+            fixedAmount.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
             CustomFieldCode enter = new CustomFieldCode("Enter");
-            enter.CodeType = FormData.CustomFieldCodeType.AccessCode;
+            enter.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.AccessCode;
             CustomFieldCode free = new CustomFieldCode("Free");
             free.Amount = 100;
-            free.CodeDirection = FormData.ChangePriceDirection.Decrease;
-            free.CodeKind = FormData.ChangeType.Percent;
-            free.CodeType = FormData.CustomFieldCodeType.DiscountCode;
+            free.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
+            free.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
+            free.CodeType = DataCollection.EventData_Common.CustomFieldCodeType.DiscountCode;
 
             evt.StartPage.Event_Fee = new EventFee();
             evt.StartPage.Event_Fee.StandardPrice = 100;
@@ -482,7 +482,7 @@
             evt.AgendaPage.AgendaItems.Add(multipleChoiceRadioButton);
 
             DataCollection.MerchandiseItem merch = new MerchandiseItem("MerchWithFixedPrice");
-            merch.Type = FormData.MerchandiseType.Fixed;
+            merch.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             merch.Price = 25;
             merch.DiscountCodes.Add(half);
             merch.DiscountCodes.Add(fixedAmount);
@@ -492,7 +492,7 @@
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merch);
 
-            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethodEnum.Check));
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check));
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt, false, true);
 
@@ -532,7 +532,7 @@
             reg_NoCodes.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_NoCodes.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_NoCodes.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_NoCodes.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg_NoCodes.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg_NoCodes);
 
@@ -552,7 +552,7 @@
             reg_Code_Half.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_Half.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_Half.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_Half.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg_Code_Half.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_Half);
 
@@ -572,7 +572,7 @@
             reg_Code_Free.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_Free.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_Free.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_Free.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg_Code_Free.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_Free);
 
@@ -592,7 +592,7 @@
             reg_Code_FixedAmount.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_FixedAmount.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_FixedAmount.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_FixedAmount.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg_Code_FixedAmount.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_FixedAmount);
 
@@ -612,7 +612,7 @@
             reg_Code_AccessCode.CustomField_Responses.Add(agendaResponse_MultiChoiceRadioButton);
             reg_Code_AccessCode.Merchandise_Responses.Add(merchandiseResponse_FixedPrice);
             reg_Code_AccessCode.WhetherToVerifyFeeOnCheckoutPage = true;
-            reg_Code_AccessCode.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg_Code_AccessCode.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg_Code_AccessCode);
         }
@@ -623,18 +623,18 @@
         public void DiscountCodeSetting()
         {
             Event evt = new Event("DiscountCodeSetting");
-            PaymentMethod paymentMethod = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            PaymentMethod paymentMethod = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
             evt.CheckoutPage.PaymentMethods.Add(paymentMethod);
             RegType regType = new RegType("RegType");
             regType.Price = 50;
             CustomFieldCode dCFix = new CustomFieldCode("DCFix");
-            dCFix.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dCFix.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCFix.Amount = 10;
-            dCFix.CodeKind = FormData.ChangeType.FixedAmount;
+            dCFix.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             CustomFieldCode dCPercentUnderZero = new CustomFieldCode("DCPercentUnderZero");
-            dCPercentUnderZero.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dCPercentUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCPercentUnderZero.Amount = -10;
-            dCPercentUnderZero.CodeKind = FormData.ChangeType.Percent;
+            dCPercentUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             regType.AllCustomCodes.Add(dCFix);
             regType.AllCustomCodes.Add(dCPercentUnderZero);
             evt.StartPage.RegTypes.Add(regType);
@@ -642,23 +642,23 @@
             AgendaItem_CheckBox agendaDCFixUnderZero = new AgendaItem_CheckBox("AgendaDCFixUnderZero");
             agendaDCFixUnderZero.Price = 60;
             CustomFieldCode dCFixUnderZero = new CustomFieldCode("DCFixUnderZero");
-            dCFixUnderZero.CodeDirection = FormData.ChangePriceDirection.Decrease;
+            dCFixUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Decrease;
             dCFixUnderZero.Amount = -10;
-            dCFixUnderZero.CodeKind = FormData.ChangeType.FixedAmount;
+            dCFixUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFixUnderZero.DiscountCodes.Add(dCFixUnderZero);
             AgendaItem_CheckBox agendaDCPercentIncreace = new AgendaItem_CheckBox("AgendaDCPercentIncreace");
             agendaDCPercentIncreace.Price = 80;
             CustomFieldCode dCPercentIncreace = new CustomFieldCode("DCPercentIncreace");
-            dCPercentIncreace.CodeDirection = FormData.ChangePriceDirection.Increase;
+            dCPercentIncreace.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCPercentIncreace.Amount = 10;
-            dCPercentIncreace.CodeKind = FormData.ChangeType.Percent;
+            dCPercentIncreace.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             agendaDCPercentIncreace.DiscountCodes.Add(dCPercentIncreace);
             AgendaItem_CheckBox agendaDCFixIncreace = new AgendaItem_CheckBox("AgendaDCFixIncreace");
             agendaDCFixIncreace.Price = 90;
             CustomFieldCode dCFixIncreace = new CustomFieldCode("DCFixIncreace");
-            dCFixIncreace.CodeDirection = FormData.ChangePriceDirection.Increase;
+            dCFixIncreace.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCFixIncreace.Amount = 10;
-            dCFixIncreace.CodeKind = FormData.ChangeType.FixedAmount;
+            dCFixIncreace.CodeKind = DataCollection.EventData_Common.ChangeType.FixedAmount;
             agendaDCFixIncreace.DiscountCodes.Add(dCFixIncreace);
             evt.AgendaPage = new AgendaPage();
             evt.AgendaPage.AgendaItems.Add(agendaDCFixUnderZero);
@@ -667,11 +667,11 @@
 
             MerchandiseItem merchDCPercentIncreaceUnderZero = new MerchandiseItem("MerchDCPercentIncreaceUZ");
             merchDCPercentIncreaceUnderZero.Price = 110;
-            merchDCPercentIncreaceUnderZero.Type = FormData.MerchandiseType.Fixed;
+            merchDCPercentIncreaceUnderZero.Type = DataCollection.EventData_Common.MerchandiseType.Fixed;
             CustomFieldCode dCPercentIncreaceUnderZero = new CustomFieldCode("PercentIncreace0");
-            dCPercentIncreaceUnderZero.CodeDirection = FormData.ChangePriceDirection.Increase;
+            dCPercentIncreaceUnderZero.CodeDirection = DataCollection.EventData_Common.ChangePriceDirection.Increase;
             dCPercentIncreaceUnderZero.Amount = -10;
-            dCPercentIncreaceUnderZero.CodeKind = FormData.ChangeType.Percent;
+            dCPercentIncreaceUnderZero.CodeKind = DataCollection.EventData_Common.ChangeType.Percent;
             merchDCPercentIncreaceUnderZero.DiscountCodes.Add(dCPercentIncreaceUnderZero);
             evt.MerchandisePage = new MerchandisePage();
             evt.MerchandisePage.Merchandises.Add(merchDCPercentIncreaceUnderZero);
@@ -708,7 +708,7 @@
             reg1.Merchandise_Responses.Add(resp6);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg1);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 398);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 398);
 
             Registrant reg2 = new Registrant(evt);
             reg2.Payment_Method = paymentMethod;
@@ -719,7 +719,7 @@
             reg2.Merchandise_Responses.Add(resp6);
 
             KeywordProvider.Registration_Creation.CreateRegistration(reg2);
-            Assert.True(KeywordProvider.Register_Common.GetTotal(FormData.RegisterPage.Confirmation) == 408);
+            Assert.True(KeywordProvider.Register_Common.GetTotal(DataCollection.EventData_Common.RegisterPage.Confirmation) == 408);
         }
 
         private Registrant GenerateRegDiffDc(CustomFieldCode regTypeDc, CustomFieldCode agendaDc, CustomFieldCode merchDc)

@@ -34,7 +34,7 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.SSO);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
-            KeywordProvider.Change_EventStatus.EventStatusChange(evt, FormData.EventStatus.OnSite);
+            KeywordProvider.Change_EventStatus.EventStatusChange(evt, DataCollection.EventData_Common.EventStatus.OnSite);
 
             DataCollection.OnsiteKiosk kiosk = new DataCollection.OnsiteKiosk();
             kiosk.RequireAuthentication = true;
@@ -44,7 +44,7 @@
 
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg1.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.Enter_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             KeywordProvider.Registration_Creation.SSOLogin(reg1);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.NewSearch_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.SearchCondition.Type(reg2.Email);
@@ -57,7 +57,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(SSOData.SSOJustNameEmail);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType1);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.GoBackToPreviousPage();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.GoBackToPreviousPage();
             PageObject.PageObjectProvider.Register.RegistationSite.OnsiteKiosk.OnsiteRegister_Click();
@@ -65,7 +65,7 @@
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.EmailAddress.Type(reg3.Email);
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.SelectRegTypeRadioButton(regType2);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
 
             DataAccess.AccessData.SetLiveRegToTest(evt.Id);
         }

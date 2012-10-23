@@ -5,7 +5,7 @@
     public class EarlyPrice
     {
         public double earlyPrice;
-        public FormData.EarlyPriceType EarlyPriceType;
+        public EventData_Common.EarlyPriceType EarlyPriceType;
         public DateTime? EarlyPriceDate;
         public DateTime? EarlyPriceTime;
         public int? FirstNRegistrants;

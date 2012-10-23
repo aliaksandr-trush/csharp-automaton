@@ -47,7 +47,7 @@
 
     public class RegTypeLimit
     {
-        public FormData.RegLimitType LimitType;
+        public EventData_Common.RegLimitType LimitType;
         public int LimitTo;
         public string SoldOutMessage;
     }

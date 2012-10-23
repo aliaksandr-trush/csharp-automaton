@@ -1,13 +1,11 @@
-﻿namespace RegOnline.RegressionTest.DataCollection
+﻿namespace RegOnline.RegressionTest.DataCollection.EventData_Common
 {
     using System;
     using System.Reflection;
     using RegOnline.RegressionTest.Utilities;
-
-    public class FormData
-    {
-        public static string EventSessionId;
-
+    
+    //public class EventData_Common
+    //{
         #region Enums
         public enum EarlyPriceType
         {
@@ -503,9 +501,6 @@
         }
         #endregion
 
-        public static DateTime DefaultStartDate = new DateTime(2020, 10, 10);
-        public static DateTime DefaultEndDate = new DateTime(2020, 10, 15);
-
         public class PaymentMethodCheckouLabelAttribute : Attribute
         {
             public PaymentMethodCheckouLabelAttribute(string value)
@@ -532,5 +527,5 @@
                 return label;
             }
         }
-    }
+    //}
 }

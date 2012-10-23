@@ -28,14 +28,14 @@
             {
                 if (reg.EventFee_Response.RegType.EarlyPrice != null)
                 {
-                    if ((reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.DateAndTime)
+                    if ((reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == DataCollection.EventData_Common.EarlyPriceType.DateAndTime)
                         && (reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceDate.Value > DateTime.Now))
                     {
                         reg.Fee_Summary.Total += reg.EventFee_Response.RegType.EarlyPrice.earlyPrice;
                         reg.EventFee_Response.Fee = reg.EventFee_Response.RegType.EarlyPrice.earlyPrice;
                     }
 
-                    if (reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.Registrants)
+                    if (reg.EventFee_Response.RegType.EarlyPrice.EarlyPriceType == DataCollection.EventData_Common.EarlyPriceType.Registrants)
                     {
                         int previousRegsForThisRegType = 0;
 
@@ -80,7 +80,7 @@
 
                     switch (response.AgendaItem.Type)
                     {
-                        case FormData.CustomFieldType.AlwaysSelected:
+                        case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                             {
                                 AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -89,7 +89,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.CheckBox:
+                        case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                             {
                                 AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -98,7 +98,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.RadioButton:
+                        case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                             {
                                 AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -107,7 +107,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Dropdown:
+                        case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                             {
                                 AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -116,7 +116,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Contribution:
+                        case DataCollection.EventData_Common.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -125,7 +125,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.FileUpload:
+                        case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                 agenda = resp.AgendaItem as AgendaItem_Common;
@@ -144,7 +144,7 @@
             {
                 switch (response.Merchandise_Item.Type)
                 {
-                    case FormData.MerchandiseType.Fixed:
+                    case DataCollection.EventData_Common.MerchandiseType.Fixed:
                         {
                             MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                             double price = (resp.Merchandise_Item.Price.HasValue ? resp.Merchandise_Item.Price.Value : 0);
@@ -152,7 +152,7 @@
                         }
                         break;
 
-                    case FormData.MerchandiseType.Variable:
+                    case DataCollection.EventData_Common.MerchandiseType.Variable:
                         {
                             MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
                             reg.Fee_Summary.Total += resp.Amount;
@@ -221,12 +221,12 @@
 
                         switch (response.AgendaItem.Type)
                         {
-                            case FormData.CustomFieldType.AlwaysSelected:
-                            case FormData.CustomFieldType.CheckBox:
-                            case FormData.CustomFieldType.RadioButton:
-                            case FormData.CustomFieldType.Dropdown:
-                            case FormData.CustomFieldType.Contribution:
-                            case FormData.CustomFieldType.FileUpload:
+                            case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
+                            case DataCollection.EventData_Common.CustomFieldType.CheckBox:
+                            case DataCollection.EventData_Common.CustomFieldType.RadioButton:
+                            case DataCollection.EventData_Common.CustomFieldType.Dropdown:
+                            case DataCollection.EventData_Common.CustomFieldType.Contribution:
+                            case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                                 regAgendaResponses.Add(response);
                                 break;
                             default:
@@ -387,7 +387,7 @@
                 {
                     switch(dic.Value[0].AgendaItem.Type)
                     {
-                        case FormData.CustomFieldType.AlwaysSelected:
+                        case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                             AgendaResponse_AlwaysSelected respAlways = dic.Value[0] as AgendaResponse_AlwaysSelected;
                             total -= this.CalculateAgendaGroupDiscount(respAlways.Fee, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -396,7 +396,7 @@
                                 resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
                             }
                             break;
-                        case FormData.CustomFieldType.CheckBox:
+                        case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                             AgendaResponse_Checkbox respCheck = dic.Value[0] as AgendaResponse_Checkbox;
                             total -= this.CalculateAgendaGroupDiscount(respCheck.Fee, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -405,7 +405,7 @@
                                 resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
                             }
                             break;
-                        case FormData.CustomFieldType.RadioButton:
+                        case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                             AgendaResponse_MultipleChoice_RadioButton respRadio = dic.Value[0] as AgendaResponse_MultipleChoice_RadioButton;
                             total -= this.CalculateAgendaGroupDiscount(respRadio.Fee, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -414,7 +414,7 @@
                                 resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
                             }
                             break;
-                        case FormData.CustomFieldType.Dropdown:
+                        case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                             AgendaResponse_MultipleChoice_DropDown respDrop = dic.Value[0] as AgendaResponse_MultipleChoice_DropDown;
                             total -= this.CalculateAgendaGroupDiscount(respDrop.Fee, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -423,7 +423,7 @@
                                 resp.Fee -= this.CalculateAgendaGroupDiscount(resp.Fee, group, dic.Value) / dic.Value.Count;
                             }
                             break;
-                        case FormData.CustomFieldType.Contribution:
+                        case DataCollection.EventData_Common.CustomFieldType.Contribution:
                             AgendaResponse_Contribution respContri = dic.Value[0] as AgendaResponse_Contribution;
                             total -= this.CalculateAgendaGroupDiscount(respContri.ContributionAmount, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -432,7 +432,7 @@
                                 resp.ContributionAmount -= this.CalculateAgendaGroupDiscount(resp.ContributionAmount, group, dic.Value) / dic.Value.Count;
                             }
                             break;
-                        case FormData.CustomFieldType.FileUpload:
+                        case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                             AgendaResponse_FileUpload respFile = dic.Value[0] as AgendaResponse_FileUpload;
                             total -= this.CalculateAgendaGroupDiscount(respFile.Fee, group, dic.Value);
                             for (int i = 0; i < dic.Value.Count; i++)
@@ -478,7 +478,7 @@
                         
                         switch (response.AgendaItem.Type)
                         {
-                            case FormData.CustomFieldType.AlwaysSelected:
+                            case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                                 {
                                     AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                     if (resp.Code != null)
@@ -488,7 +488,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.CheckBox:
+                            case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                                 {
                                     AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                     if (resp.Code != null)
@@ -498,7 +498,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.RadioButton:
+                            case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                                 {
                                     AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                     if (resp.Code != null)
@@ -508,7 +508,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.Dropdown:
+                            case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                                 {
                                     AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                     if (resp.Code != null)
@@ -518,7 +518,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.FileUpload:
+                            case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                                 {
                                     AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                     if (resp.Code != null)
@@ -538,7 +538,7 @@
                 {
                     switch (response.Merchandise_Item.Type)
                     {
-                        case FormData.MerchandiseType.Fixed:
+                        case DataCollection.EventData_Common.MerchandiseType.Fixed:
                             {
                                 MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                                 if (resp.Discount_Code != null)
@@ -586,8 +586,8 @@
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                         }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                            && (reg.Country.Value == FormData.Country.Austria))
+                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateOne.Rate / 100.00;
                         }
@@ -608,8 +608,8 @@
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                         }
-                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                            && (reg.Country.Value == FormData.Country.Austria))
+                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                         {
                             total += reg.EventFee_Response.Fee * group.Primary.Event.TaxRateTwo.Rate / 100.00;
                         }
@@ -628,7 +628,7 @@
 
                         switch (response.AgendaItem.Type)
                         {
-                            case FormData.CustomFieldType.AlwaysSelected:
+                            case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                                 {
                                     AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                     AgendaItem_AlwaysSelected agenda = resp.AgendaItem as AgendaItem_AlwaysSelected;
@@ -640,8 +640,8 @@
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
@@ -659,8 +659,8 @@
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
@@ -672,7 +672,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.CheckBox:
+                            case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                                 {
                                     AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                     AgendaItem_CheckBox agenda = resp.AgendaItem as AgendaItem_CheckBox;
@@ -684,8 +684,8 @@
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
@@ -703,8 +703,8 @@
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
@@ -716,7 +716,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.RadioButton:
+                            case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                                 {
                                     AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                     AgendaItem_MultipleChoice_RadioButton agenda = resp.AgendaItem as AgendaItem_MultipleChoice_RadioButton;
@@ -728,8 +728,8 @@
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
@@ -747,8 +747,8 @@
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
@@ -760,7 +760,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.Dropdown:
+                            case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                                 {
                                     AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
                                     AgendaItem_MultipleChoice_DropDown agenda = resp.AgendaItem as AgendaItem_MultipleChoice_DropDown;
@@ -772,8 +772,8 @@
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
@@ -791,8 +791,8 @@
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
@@ -804,7 +804,7 @@
                                     }
                                 }
                                 break;
-                            case FormData.CustomFieldType.FileUpload:
+                            case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                                 {
                                     AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                     AgendaItem_FileUpload agenda = resp.AgendaItem as AgendaItem_FileUpload;
@@ -816,8 +816,8 @@
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax1 += resp.Fee;
                                             }
@@ -835,8 +835,8 @@
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
-                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                                && (reg.Country.Value == FormData.Country.Austria))
+                                            if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                                && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                             {
                                                 amountApplyTax2 += resp.Fee;
                                             }
@@ -858,7 +858,7 @@
                 {
                     switch (response.Merchandise_Item.Type)
                     {
-                        case FormData.MerchandiseType.Fixed:
+                        case DataCollection.EventData_Common.MerchandiseType.Fixed:
                             {
                                 MerchResponse_FixedPrice resp = response as MerchResponse_FixedPrice;
                                 if ((resp.Merchandise_Item.ApplyTaxOne.HasValue)
@@ -870,8 +870,8 @@
                                         {
                                             amountApplyTax1 += resp.Fee * resp.Quantity;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                            && (reg.Country.Value == FormData.Country.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                         {
                                             amountApplyTax1 += resp.Fee * resp.Quantity;
                                         }
@@ -890,8 +890,8 @@
                                         {
                                             amountApplyTax2 += resp.Fee * resp.Quantity;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                            && (reg.Country.Value == FormData.Country.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                         {
                                             amountApplyTax2 += resp.Fee * resp.Quantity;
                                         }
@@ -903,7 +903,7 @@
                                 }
                             }
                             break;
-                        case FormData.MerchandiseType.Variable:
+                        case DataCollection.EventData_Common.MerchandiseType.Variable:
                             {
                                 MerchResponse_VariableAmount resp = response as MerchResponse_VariableAmount;
                                 if ((resp.Merchandise_Item.ApplyTaxOne.HasValue)
@@ -915,8 +915,8 @@
                                         {
                                             amountApplyTax1 += resp.Fee;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                            && (reg.Country.Value == FormData.Country.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                         {
                                             amountApplyTax1 += resp.Fee;
                                         }
@@ -935,8 +935,8 @@
                                         {
                                             amountApplyTax2 += resp.Fee;
                                         }
-                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.FormData.Country.EU)
-                                            && (reg.Country.Value == FormData.Country.Austria))
+                                        if ((group.Primary.Event.TaxRateOne.Country.Value == DataCollection.EventData_Common.Country.EU)
+                                            && (reg.Country.Value == DataCollection.EventData_Common.Country.Austria))
                                         {
                                             amountApplyTax2 += resp.Fee;
                                         }
@@ -977,12 +977,12 @@
 
             if (agenda.EarlyPrice != null)
             {
-                if ((agenda.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.DateAndTime)
+                if ((agenda.EarlyPrice.EarlyPriceType == DataCollection.EventData_Common.EarlyPriceType.DateAndTime)
                     && (agenda.EarlyPrice.EarlyPriceDate.Value > DateTime.Now))
                 {
                     agendaFee = agenda.EarlyPrice.earlyPrice;
                 }
-                else if (agenda.EarlyPrice.EarlyPriceType == FormData.EarlyPriceType.Registrants)
+                else if (agenda.EarlyPrice.EarlyPriceType == DataCollection.EventData_Common.EarlyPriceType.Registrants)
                 {
                     int previousRegsForThisAgenda = 0;
 

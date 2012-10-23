@@ -96,7 +96,7 @@
                 this.ShoppingCart(reg);
             }
 
-            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
+            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.EventData_Common.RegisterPage.Login))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
             }
@@ -120,7 +120,7 @@
 
         private void ShoppingCart(DataCollection.Registrant reg)
         {
-            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(FormData.EventCalendarView.Location);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(DataCollection.EventData_Common.EventCalendarView.Location);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.AddToCart(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ShoppingCart_RegisterButtonOne_Click();
         }
@@ -237,24 +237,24 @@
 
                         switch (response.CustomField.Type)
                         {
-                            case FormData.CustomFieldType.CheckBox:
+                            case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                                 {
                                     CFResponse_Checkbox resp = response as CFResponse_Checkbox;
                                     PageObject.Register.CustomFieldRow row = new CustomFieldRow(resp.CustomField);
                                     ((CheckBox)row.CustomFieldType).Set(resp.Checked.Value);
                                 }
                                 break;
-                            case FormData.CustomFieldType.RadioButton:
-                            case FormData.CustomFieldType.Dropdown:
-                            case FormData.CustomFieldType.Number:
-                            case FormData.CustomFieldType.OneLineText:
-                            case FormData.CustomFieldType.Paragraph:
-                            case FormData.CustomFieldType.Contribution:
-                            case FormData.CustomFieldType.Date:
-                            case FormData.CustomFieldType.Time:
+                            case DataCollection.EventData_Common.CustomFieldType.RadioButton:
+                            case DataCollection.EventData_Common.CustomFieldType.Dropdown:
+                            case DataCollection.EventData_Common.CustomFieldType.Number:
+                            case DataCollection.EventData_Common.CustomFieldType.OneLineText:
+                            case DataCollection.EventData_Common.CustomFieldType.Paragraph:
+                            case DataCollection.EventData_Common.CustomFieldType.Contribution:
+                            case DataCollection.EventData_Common.CustomFieldType.Date:
+                            case DataCollection.EventData_Common.CustomFieldType.Time:
                                 // To implement
                                 break;
-                            case FormData.CustomFieldType.FileUpload:
+                            case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                                 // Impossible
                                 break;
                             default:
@@ -289,7 +289,7 @@
 
                     switch (response.AgendaItem.Type)
                     {
-                        case FormData.CustomFieldType.AlwaysSelected:
+                        case DataCollection.EventData_Common.CustomFieldType.AlwaysSelected:
                             {
                                 AgendaResponse_AlwaysSelected resp = response as AgendaResponse_AlwaysSelected;
                                 AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
@@ -301,7 +301,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.CheckBox:
+                        case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                             {
                                 AgendaResponse_Checkbox resp = response as AgendaResponse_Checkbox;
                                 AgendaRow row = PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem);
@@ -314,7 +314,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.RadioButton:
+                        case DataCollection.EventData_Common.CustomFieldType.RadioButton:
                             {
                                 AgendaResponse_MultipleChoice_RadioButton resp = response as AgendaResponse_MultipleChoice_RadioButton;
                                 Label choiceItemLabel = new Label(string.Format("//*[contains(text(),'{0}')]", resp.ChoiceItem.Name), LocateBy.XPath);
@@ -331,7 +331,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Dropdown:
+                        case DataCollection.EventData_Common.CustomFieldType.Dropdown:
                             {
                                 AgendaResponse_MultipleChoice_DropDown resp = response as AgendaResponse_MultipleChoice_DropDown;
 
@@ -346,9 +346,9 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Number:
-                        case FormData.CustomFieldType.OneLineText:
-                        case FormData.CustomFieldType.Paragraph:
+                        case DataCollection.EventData_Common.CustomFieldType.Number:
+                        case DataCollection.EventData_Common.CustomFieldType.OneLineText:
+                        case DataCollection.EventData_Common.CustomFieldType.Paragraph:
                             {
                                 AgendaResponse_TextInput resp = response as AgendaResponse_TextInput;
                                 ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
@@ -356,7 +356,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Contribution:
+                        case DataCollection.EventData_Common.CustomFieldType.Contribution:
                             {
                                 AgendaResponse_Contribution resp = response as AgendaResponse_Contribution;
                                 ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
@@ -364,7 +364,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Date:
+                        case DataCollection.EventData_Common.CustomFieldType.Date:
                             {
                                 AgendaResponse_Date resp = response as AgendaResponse_Date;
                                 string date = string.Format("{0}/{1}/{2}", resp.Date.Value.Month, resp.Date.Value.Day, resp.Date.Value.Year);
@@ -373,7 +373,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Time:
+                        case DataCollection.EventData_Common.CustomFieldType.Time:
                             {
                                 AgendaResponse_Time resp = response as AgendaResponse_Time;
                                 string time = string.Format("{0}:{1}", resp.Time.Value.Hour, resp.Time.Value.Minute);
@@ -382,7 +382,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.FileUpload:
+                        case DataCollection.EventData_Common.CustomFieldType.FileUpload:
                             {
                                 AgendaResponse_FileUpload resp = response as AgendaResponse_FileUpload;
                                 ((Clickable)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(
@@ -391,7 +391,7 @@
                             }
                             break;
 
-                        case FormData.CustomFieldType.Duration:
+                        case DataCollection.EventData_Common.CustomFieldType.Duration:
                             {
                                 AgendaResponse_Duration resp = response as AgendaResponse_Duration;
                                 ((Input)PageObject.PageObjectProvider.Register.RegistationSite.Agenda.GetAgendaItem(response.AgendaItem).AgendaType).Type(resp.Duration.ToString("c"));
@@ -491,12 +491,12 @@
                 if (PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.IsPresent)
                 {
                     PageObject.PageObjectProvider.Register.RegistationSite.Checkout.PaymentMethodList.SelectWithText(
-                        FormData.PaymentMethodCheckouLabelAttribute.GetPaymentMethodCheckouLabel(reg.Payment_Method.PMethod));
+                        DataCollection.EventData_Common.PaymentMethodCheckouLabelAttribute.GetPaymentMethodCheckouLabel(reg.Payment_Method.PMethod));
                 }
 
                 switch (reg.Payment_Method.PMethod)
                 {
-                    case FormData.PaymentMethodEnum.CreditCard:
+                    case DataCollection.EventData_Common.PaymentMethodEnum.CreditCard:
                         PageObject.PageObjectProvider.Register.RegistationSite.Checkout.BillingInfo_Type(reg.Billing_Info);
                         break;
 
@@ -521,7 +521,7 @@
 
         public void Confirmation(Registrant reg)
         {
-            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.ConfirmationRedirect))
+            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.EventData_Common.RegisterPage.ConfirmationRedirect))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Checkout.AANoThanks_Click();
             }

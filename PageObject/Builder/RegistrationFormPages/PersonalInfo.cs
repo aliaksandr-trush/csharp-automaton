@@ -15,19 +15,19 @@
         public Clickable EmptyAddCustomField = new Clickable("ctl00_cph_grdCustomFieldPersonal_lnkEmptyAdd", LocateBy.Id);
         public Clickable AddCustomField = new Clickable("ctl00_cph_grdCustomFieldPersonal_hlAddNew", LocateBy.Id);
 
-        public void SetPersonalInfoFieldVisible(FormData.PersonalInfoField field, bool checkVisibleOption)
+        public void SetPersonalInfoFieldVisible(DataCollection.EventData_Common.PersonalInfoField field, bool checkVisibleOption)
         {
             switch (field)
             {
-                case FormData.PersonalInfoField.OptOut:
+                case DataCollection.EventData_Common.PersonalInfoField.OptOut:
                     CheckBox OptOutVisible = new CheckBox(string.Format("//*[contains(text(),'{0}')]/../../td[2]/input", CustomStringAttribute.GetCustomString(field)), LocateBy.XPath);
                     OptOutVisible.Set(checkVisibleOption);
                     break;
-                case FormData.PersonalInfoField.SocialSecurityNumber:
+                case DataCollection.EventData_Common.PersonalInfoField.SocialSecurityNumber:
                     CheckBox SSNVisible = new CheckBox("ctl00_cph_chkCollectionFieldscSSNID", LocateBy.Id);
                     SSNVisible.Set(checkVisibleOption);
                     break;
-                case FormData.PersonalInfoField.ContactInfo:
+                case DataCollection.EventData_Common.PersonalInfoField.ContactInfo:
                     CheckBox ContactInfoVisible = new CheckBox(string.Format("//*[contains(text(),'{0}')]/../td[2]/input", StringEnum.GetStringValue(field)), LocateBy.XPath);
                     ContactInfoVisible.Set(checkVisibleOption);
                     break;
@@ -38,15 +38,15 @@
             }
         }
 
-        public void SetPersonalInfoFieldRequired(FormData.PersonalInfoField field, bool checkRequiredOption)
+        public void SetPersonalInfoFieldRequired(DataCollection.EventData_Common.PersonalInfoField field, bool checkRequiredOption)
         {
             switch (field)
             {
-                case FormData.PersonalInfoField.SocialSecurityNumber:
+                case DataCollection.EventData_Common.PersonalInfoField.SocialSecurityNumber:
                     CheckBox SSNVisible = new CheckBox("ctl00_cph_chkCollectionFieldsrSSNID", LocateBy.Id);
                     SSNVisible.Set(checkRequiredOption);
                     break;
-                case FormData.PersonalInfoField.ContactInfo:
+                case DataCollection.EventData_Common.PersonalInfoField.ContactInfo:
                     CheckBox ContactInfoVisible = new CheckBox(string.Format("//*[contains(text(),'{0}')]/../td[3]/input", StringEnum.GetStringValue(field)), LocateBy.XPath);
                     ContactInfoVisible.Set(checkRequiredOption);
                     break;

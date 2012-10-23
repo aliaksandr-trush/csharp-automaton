@@ -25,7 +25,7 @@
         public string Title;
         public string Shortcut;
         public bool IsActive;
-        public FormData.FormType FormType;
+        public EventData_Common.FormType FormType;
         public TaxRate TaxRateOne;
         public TaxRate TaxRateTwo;
         public List<Registrant> Registrants = new List<Registrant>();
@@ -43,7 +43,7 @@
         {
             this.Title = title;
             this.ReSetShortcut();
-            FormType = FormData.FormType.ProEvent;
+            FormType = EventData_Common.FormType.ProEvent;
         }
 
         public void ReSetShortcut()
@@ -130,12 +130,12 @@
 
     public class PaymentMethod
     {
-        public FormData.PaymentMethodEnum PMethod;
+        public EventData_Common.PaymentMethodEnum PMethod;
         public bool? isPublic;
         public bool? isAdmin;
         public bool? isOnSite;
 
-        public PaymentMethod(FormData.PaymentMethodEnum pMethod)
+        public PaymentMethod(EventData_Common.PaymentMethodEnum pMethod)
         {
             this.PMethod = pMethod;
         }
@@ -143,7 +143,7 @@
 
     public class PersonalInfoPageStandardField
     {
-        public FormData.PersonalInfoField StandardField;
+        public EventData_Common.PersonalInfoField StandardField;
         public bool? Visible;
         public bool? Required;
     }
@@ -200,12 +200,12 @@
     public class CustomizeRegTypeDisplayOptions
     {
         public bool IsCustomized { get; set; }
-        public FormData.RegTypeDisplayOption DisplayOption { get; set; }
+        public EventData_Common.RegTypeDisplayOption DisplayOption { get; set; }
 
         public CustomizeRegTypeDisplayOptions()
         {
             this.IsCustomized = false;
-            this.DisplayOption = FormData.RegTypeDisplayOption.RadioButton;
+            this.DisplayOption = EventData_Common.RegTypeDisplayOption.RadioButton;
         }
     }
 
@@ -261,7 +261,7 @@
 
     public class CCOptions
     {
-        public FormData.Gateway Payment_Gateway { get; set; }
+        public EventData_Common.Gateway Payment_Gateway { get; set; }
         public bool? ChargeInitialReg { get; set; }
     }
 
@@ -279,7 +279,7 @@
         {
             Event_Currency = MoneyTool.CurrencyCode.USD;
             CC_Options = new CCOptions();
-            CC_Options.Payment_Gateway = FormData.Gateway.AMS_USD;
+            CC_Options.Payment_Gateway = EventData_Common.Gateway.AMS_USD;
         }
     }
 

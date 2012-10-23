@@ -33,7 +33,7 @@
             Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            AssertHelper.VerifyOnPage(DataCollection.FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             Keyword.KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
         }

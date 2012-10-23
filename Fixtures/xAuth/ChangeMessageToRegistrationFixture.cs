@@ -27,9 +27,9 @@
             BuilderMgr.RegTypeMgr.SetName("regType1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.TypeForgetPasswordUrl("http://www.regonline.com");
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             // Change the MessageToRegistration
             string modifiedMessage = string.Format(customizedMessageToRegistration, Guid.NewGuid().ToString());
             Managers.ManagerProvider.XAuthMgr.TypeMessageToRegistration(modifiedMessage);

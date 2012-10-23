@@ -15,7 +15,7 @@
         public string NameOnReceipt;
         public string NameOnReports;
         public string NameOnBadge;
-        public FormData.CustomFieldType Type;
+        public EventData_Common.CustomFieldType Type;
         public List<CustomFieldVisibleOption> CustomFieldVisibleOption = new List<CustomFieldVisibleOption>();
         public List<string> ConditionalLogic = new List<string>();
         public DateTime? ShowStarting;
@@ -28,7 +28,7 @@
 
         public int? SpacesAvailable;
         public bool? ShowCapacity;
-        public FormData.AgendaLimitReachedOption? LimitReachedOption;
+        public EventData_Common.AgendaLimitReachedOption? LimitReachedOption;
         public string LimitReachedMessage;
         public string DetailsPopup;
         public string DetailsURL;
@@ -50,7 +50,7 @@
         public CFMultipleChoice(string name) : base(name) { }
 
         public List<ChoiceItem> ChoiceItems = new List<ChoiceItem>();
-        public List<FormData.CommonlyUsedMultipleChoice> CommonlyUsedItems = new List<FormData.CommonlyUsedMultipleChoice>();
+        public List<EventData_Common.CommonlyUsedMultipleChoice> CommonlyUsedItems = new List<EventData_Common.CommonlyUsedMultipleChoice>();
         public string GroupName;
         public bool? ForceGroupToMatch;
     }
@@ -60,7 +60,7 @@
         public CFCheckBox(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.CheckBox;
+            Type = EventData_Common.CustomFieldType.CheckBox;
         }
 
         public string GroupName;
@@ -72,7 +72,7 @@
         public CFRadioButton(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.RadioButton;
+            Type = EventData_Common.CustomFieldType.RadioButton;
         }
     }
 
@@ -81,7 +81,7 @@
         public CFDropDown(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Dropdown;
+            Type = EventData_Common.CustomFieldType.Dropdown;
         }
     }
 
@@ -90,7 +90,7 @@
         public CFTime(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Time;
+            Type = EventData_Common.CustomFieldType.Time;
         }
 
         public string GroupName;
@@ -102,7 +102,7 @@
         public CFHeader(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.SectionHeader;
+            Type = EventData_Common.CustomFieldType.SectionHeader;
         }
 
         public string DetailsPopup;
@@ -114,7 +114,7 @@
         public CFAlways(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.AlwaysSelected;
+            Type = EventData_Common.CustomFieldType.AlwaysSelected;
         }
     }
 
@@ -123,7 +123,7 @@
         public CFContinue(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.ContinueButton;
+            Type = EventData_Common.CustomFieldType.ContinueButton;
         }
     }
 
@@ -132,7 +132,7 @@
         public CFDate(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Time;
+            Type = EventData_Common.CustomFieldType.Time;
         }
 
         public string GroupName;
@@ -144,7 +144,7 @@
         public CFUpload(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.FileUpload;
+            Type = EventData_Common.CustomFieldType.FileUpload;
         }
 
         public string GroupName;
@@ -155,7 +155,7 @@
         public CFNumber(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Number;
+            Type = EventData_Common.CustomFieldType.Number;
         }
     }
 
@@ -164,7 +164,7 @@
         public CFOneLineText(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Number;
+            Type = EventData_Common.CustomFieldType.Number;
         }
     }
 
@@ -173,7 +173,7 @@
         public CFParagraph(string name)
             : base(name)
         {
-            Type = FormData.CustomFieldType.Paragraph;
+            Type = EventData_Common.CustomFieldType.Paragraph;
         }
     }
 

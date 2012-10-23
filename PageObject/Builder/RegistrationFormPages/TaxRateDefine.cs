@@ -16,7 +16,7 @@
         public CheckBox ApplyToSelectedCountry = new CheckBox("ctl00_cphDialog_ucTaxRates_chkEventsApplyTaxesCountries", LocateBy.Id);
         #endregion
 
-        public CheckBox ApplyToCountry(DataCollection.FormData.Country country)
+        public CheckBox ApplyToCountry(DataCollection.EventData_Common.Country country)
         {
             return new CheckBox(string.Format("//table[@class='countryTable']//input[following-sibling::label[text()='{0}']]",
                 CustomStringAttribute.GetCustomString(country)), LocateBy.XPath);

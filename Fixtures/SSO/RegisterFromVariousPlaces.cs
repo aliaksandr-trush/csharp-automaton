@@ -104,8 +104,8 @@
             evt_Parent.StartPage.AdvancedSettings.ThisIsAParentEvent = true;
 
             DataCollection.Event evt_Child = new DataCollection.Event("SSO_RegisterFromVariousPlaces_ParentChildEvent_Child");
-            evt_Child.StartPage.StartDate = DataCollection.FormData.DefaultStartDate;
-            evt_Child.StartPage.EndDate = DataCollection.FormData.DefaultEndDate;
+            evt_Child.StartPage.StartDate = DataCollection.CrossSiteData.DefaultStartDate;
+            evt_Child.StartPage.EndDate = DataCollection.CrossSiteData.DefaultEndDate;
             evt_Child.StartPage.AdvancedSettings = new DataCollection.EventAdvancedSettings();
             evt_Child.StartPage.AdvancedSettings.ThisIsAChildEvent = true;
             evt_Child.StartPage.AdvancedSettings.ParentEvent = evt_Parent;
@@ -125,7 +125,7 @@
             reg2.Register_Method = DataCollection.RegisterMethod.Shortcut;
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg2);
-            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(DataCollection.FormData.EventCalendarView.Day);
+            PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.SelectView(DataCollection.EventData_Common.EventCalendarView.Day);
             PageObject.PageObjectProvider.Register.RegistationSite.EventCalendar.ClickToRegister(evt_Child);
             PageObject.PageObjectHelper.SelectTopWindow();
             Keyword.KeywordProvider.Registration_Creation.SSOLogin(reg);

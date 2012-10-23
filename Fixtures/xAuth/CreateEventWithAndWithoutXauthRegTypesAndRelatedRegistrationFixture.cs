@@ -833,7 +833,7 @@
             BackendMgr.VerifyCustomFieldPresent(CFName6, false);
         }
 
-        private void SetupRegtypes(string regTypeName, bool enableXAuth, FormData.XAuthType xAuthType)
+        private void SetupRegtypes(string regTypeName, bool enableXAuth, DataCollection.EventData_Common.XAuthType xAuthType)
         {
             BuilderMgr.ClickAddRegType();
             BuilderMgr.RegTypeMgr.SetName(regTypeName);
@@ -879,16 +879,16 @@
                 BuilderMgr.SetEventNameAndShortcut(EventName);
 
                 // reg type 1 with xAuth
-                SetupRegtypes(Regtypes.xAuthType1.ToString(), true, FormData.XAuthType.ByEmailPassword);
+                SetupRegtypes(Regtypes.xAuthType1.ToString(), true, DataCollection.EventData_Common.XAuthType.ByEmailPassword);
 
                 // reg type 2 with xAuth
-                SetupRegtypes(Regtypes.xAuthType2.ToString(), true, FormData.XAuthType.ByEmailPassword);
+                SetupRegtypes(Regtypes.xAuthType2.ToString(), true, DataCollection.EventData_Common.XAuthType.ByEmailPassword);
 
                 // reg type 3 without xAuth
-                SetupRegtypes(Regtypes.NonxAuthType1.ToString(), false, FormData.XAuthType.NotUse);
+                SetupRegtypes(Regtypes.NonxAuthType1.ToString(), false, DataCollection.EventData_Common.XAuthType.NotUse);
 
                 // reg type 4 without xAuth
-                SetupRegtypes(Regtypes.NonxAuthType2.ToString(), false, FormData.XAuthType.NotUse);
+                SetupRegtypes(Regtypes.NonxAuthType2.ToString(), false, DataCollection.EventData_Common.XAuthType.NotUse);
 
                 BuilderMgr.SaveAndStay();
                 BuilderMgr.Next();
@@ -1025,15 +1025,15 @@
             ManagerSiteMgr.OpenEventBuilderStartPage(eventID, eventSessionID);
             BuilderMgr.OpenRegType(regTypeName);
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmail);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmail);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmail);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmail);
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();
             BuilderMgr.RegTypeMgr.SaveAndStay();
 
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();
             BuilderMgr.RegTypeMgr.SaveAndClose();

@@ -84,9 +84,9 @@
 
             KeywordProvider.SignIn.SignIn(EventFolders.Folders.RegistrationInventory);
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
-            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(FormData.DashboardTab.Reports);
+            PageObject.PageObjectProvider.Manager.Dashboard.DashboardTab_Click(DataCollection.EventData_Common.DashboardTab.Reports);
             PageObject.PageObjectProvider.Manager.Dashboard.Reports.AgendaReportLink_Click();
-            List<string> results = KeywordProvider.Verify_StandardReports.VerifyStandardReport(FormData.StandardReports.AgendaReport);
+            List<string> results = KeywordProvider.Verify_StandardReports.VerifyStandardReport(DataCollection.EventData_Common.StandardReports.AgendaReport);
             Assert.True(results.Find(r => r.Contains(AgendaItem1.NameOnReports)) != null);
             Assert.True(results.Find(r => r.Contains(expectOnReports)) != null);
             Assert.True(results.Find(r => r.Contains(AgendaItem3.NameOnReports)) != null);
@@ -128,27 +128,27 @@
             AgendaItem1.StartTime = now;
             AgendaItem1.EndDate = now.AddDays(3);
             AgendaItem1.EndTime = now;
-            AgendaItem1.DateFormat = FormData.DateFormat.Default;
+            AgendaItem1.DateFormat = DataCollection.EventData_Common.DateFormat.Default;
             AgendaItem2.StartDate = now;
             AgendaItem2.StartTime = now;
             AgendaItem2.EndDate = now.AddDays(3);
             AgendaItem2.EndTime = now;
-            AgendaItem2.DateFormat = FormData.DateFormat.DateTime;
+            AgendaItem2.DateFormat = DataCollection.EventData_Common.DateFormat.DateTime;
             AgendaItem3.StartDate = nowDate;
             AgendaItem3.StartTime = nowDate;
             AgendaItem3.EndDate = nowDate.AddDays(3);
             AgendaItem3.EndTime = nowDate;
-            AgendaItem3.DateFormat = FormData.DateFormat.Date;
+            AgendaItem3.DateFormat = DataCollection.EventData_Common.DateFormat.Date;
             AgendaItem4.StartDate = now;
             AgendaItem4.StartTime = now;
             AgendaItem4.EndDate = now.AddDays(3);
             AgendaItem4.EndTime = now;
-            AgendaItem4.DateFormat = FormData.DateFormat.Time;
+            AgendaItem4.DateFormat = DataCollection.EventData_Common.DateFormat.Time;
             AgendaItem5.StartDate = now;
             AgendaItem5.StartTime = now;
             AgendaItem5.EndDate = now.AddDays(3);
             AgendaItem5.EndTime = now;
-            AgendaItem5.DateFormat = FormData.DateFormat.None;
+            AgendaItem5.DateFormat = DataCollection.EventData_Common.DateFormat.None;
             AgendaPage.AgendaItems.Add(AgendaItem1);
             AgendaPage.AgendaItems.Add(AgendaItem2);
             AgendaPage.AgendaItems.Add(AgendaItem3);
@@ -191,8 +191,8 @@
             AG1Choice1.SingleLimit = 2;
             AG1.ChoiceItems.Add(AG1Choice1);
             AG1.ChoiceItems.Add(AG1Choice2);
-            AG2.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.Agreement);
-            AG3.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.YesOrNo);
+            AG2.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.Agreement);
+            AG3.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.YesOrNo);
             ChoiceItem AG4Choice1 = new ChoiceItem("AG4Choice1");
             AG4Choice1.GroupLimit = 2;
             AG4.ChoiceItems.Add(AG4Choice1);
@@ -207,11 +207,11 @@
 
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddAgendaItem_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.NameOnForm.Type("NoMultipleChoice");
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(FormData.CustomFieldType.RadioButton);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(DataCollection.EventData_Common.CustomFieldType.RadioButton);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
             Assert.True(KeywordProvider.Manager_Common.HasErrorMessage(Messages.BuilderError.AgendaNoMultipleChoice));
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.Cancel_Click();
@@ -273,9 +273,9 @@
             AgendaItem_FileUpload AGUpload = new AgendaItem_FileUpload("AGUpload");
             AgendaItem_CheckBox AGCheckBox = new AgendaItem_CheckBox("AGCheckBox");
             AgendaItem_MultipleChoice_RadioButton AGRadio = new AgendaItem_MultipleChoice_RadioButton("AGRadio");
-            AGRadio.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.YesOrNo);
+            AGRadio.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.YesOrNo);
             AgendaItem_MultipleChoice_DropDown AGDropDown = new AgendaItem_MultipleChoice_DropDown("AGDropDown");
-            AGDropDown.CommonlyUsedItems.Add(FormData.CommonlyUsedMultipleChoice.Agreement);
+            AGDropDown.CommonlyUsedItems.Add(DataCollection.EventData_Common.CommonlyUsedMultipleChoice.Agreement);
             AgendaItem_AlwaysSelected AGAlways = new AgendaItem_AlwaysSelected("AGAlways");
             AgendaItem_CheckBox ChangeToHeader = new AgendaItem_CheckBox("ChangeToHeader");
             ChangeToHeader.StartDate = DateTime.Today.AddDays(-5);
@@ -310,34 +310,34 @@
 
             KeywordProvider.Event_Creator.ClickAddEventAndGetEventId(evt);
             KeywordProvider.Event_Creator.StartPage(evt);
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.YesOnSplashPage_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CreateAgendaItem_Click();
-            this.SelectAgendaType(FormData.CustomFieldType.Number);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Number);
             this.VerifyAgendaSettings(false, false, false, false, true, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.OneLineText);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.OneLineText);
             this.VerifyAgendaSettings(false, false, false, false, true, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.Paragraph);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Paragraph);
             this.VerifyAgendaSettings(false, false, false, false, false, true, false);
-            this.SelectAgendaType(FormData.CustomFieldType.Date);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Date);
             this.VerifyAgendaSettings(false, false, false, false, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.Time);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Time);
             this.VerifyAgendaSettings(false, false, false, false, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.SectionHeader);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.SectionHeader);
             this.VerifyAgendaSettings(false, false, false, false, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.ContinueButton);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.ContinueButton);
             this.VerifyAgendaSettings(false, false, false, false, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.Contribution);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Contribution);
             this.VerifyAgendaSettings(false, false, false, false, false, false, true);
-            this.SelectAgendaType(FormData.CustomFieldType.FileUpload);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.FileUpload);
             this.VerifyAgendaSettings(false, true, true, true, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.CheckBox);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.CheckBox);
             this.VerifyAgendaSettings(true, true, true, true, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.RadioButton);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.RadioButton);
             this.VerifyAgendaSettings(true, true, true, true, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.Dropdown);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.Dropdown);
             this.VerifyAgendaSettings(true, true, true, true, false, false, false);
-            this.SelectAgendaType(FormData.CustomFieldType.AlwaysSelected);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.AlwaysSelected);
             this.VerifyAgendaSettings(true, true, true, true, false, false, false);
 
             evt.ReSetShortcut();
@@ -345,15 +345,15 @@
 
             KeywordProvider.Manager_Common.OpenFormDashboard(evt.Id);
             PageObject.PageObjectProvider.Manager.Dashboard.EventDetails.EditForm_Click();
-            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(FormData.Page.Agenda);
+            PageObject.PageObjectProvider.Builder.EventDetails.FormPages.GotoPage(DataCollection.EventData_Common.Page.Agenda);
             PageObject.Builder.RegistrationFormPages.AgendaRow row = new PageObject.Builder.RegistrationFormPages.AgendaRow(ChangeToHeader);
             row.Agenda_Click();
-            this.SelectAgendaType(FormData.CustomFieldType.SectionHeader);
+            this.SelectAgendaType(DataCollection.EventData_Common.CustomFieldType.SectionHeader);
             //There is a bug here, location is not cleared after changed to section header.
             //So will uncomment this step after the bug is resolved.
             //this.VerifyAgendaSettings(false, false, false, false, false, false, false);
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.SaveItem_Click();
-            ChangeToHeader.Type = FormData.CustomFieldType.SectionHeader;
+            ChangeToHeader.Type = DataCollection.EventData_Common.CustomFieldType.SectionHeader;
             PageObject.PageObjectProvider.Builder.EventDetails.SaveAndClose_Click();
 
             Registrant reg = new Registrant(evt);
@@ -432,7 +432,7 @@
         {
             Configuration.ConfigReader.DefaultProvider.ReloadAccount(Configuration.ConfigReader.AccountEnum.ActiveEurope);
             Event evt = new Event("RI_Agenda_Duration");
-            evt.FormType = FormData.FormType.ActiveEuropeEvent;
+            evt.FormType = DataCollection.EventData_Common.FormType.ActiveEuropeEvent;
             evt.StartPage.EventType = EventType.Running;
             evt.AgendaPage = new AgendaPage();
             DataCollection.AgendaItem_Duration duration = new AgendaItem_Duration("AG_Duration");
@@ -483,7 +483,7 @@
             evt.AgendaPage.AgendaItems.Add(sessionTwo);
             evt.AgendaPage.AgendaItems.Add(sessionThree);
 
-            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(FormData.PaymentMethodEnum.Check));
+            evt.CheckoutPage.PaymentMethods.Add(new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check));
 
             Registrant reg = new Registrant(evt);
 
@@ -498,7 +498,7 @@
             reg.CustomField_Responses.Add(responseTwo);
             reg.CustomField_Responses.Add(responseThree);
 
-            reg.Payment_Method = new PaymentMethod(FormData.PaymentMethodEnum.Check);
+            reg.Payment_Method = new PaymentMethod(DataCollection.EventData_Common.PaymentMethodEnum.Check);
 
             Keyword.KeywordProvider.SignIn.SignInAndRecreateEventAndGetEventId(EventFolders.Folders.RegistrationInventory, evt);
             Keyword.KeywordProvider.Registration_Creation.CreateRegistration(reg);
@@ -538,14 +538,14 @@
             AgendaShowCapacity.ShowCapacity = true;
             AgendaItem_CheckBox AgendaHideReached = new AgendaItem_CheckBox("AgendaHideReached");
             AgendaHideReached.SpacesAvailable = 1;
-            AgendaHideReached.LimitReachedOption = FormData.AgendaLimitReachedOption.HideItem;
+            AgendaHideReached.LimitReachedOption = DataCollection.EventData_Common.AgendaLimitReachedOption.HideItem;
             AgendaItem_CheckBox AgendaShowMessage = new AgendaItem_CheckBox("AgendaShowMessage");
             AgendaShowMessage.SpacesAvailable = 1;
-            AgendaShowMessage.LimitReachedOption = FormData.AgendaLimitReachedOption.ShowMessage;
+            AgendaShowMessage.LimitReachedOption = DataCollection.EventData_Common.AgendaLimitReachedOption.ShowMessage;
             AgendaShowMessage.LimitReachedMessage = "Full";
             AgendaItem_CheckBox AgendaWaitlist = new AgendaItem_CheckBox("AgendaWaitlist");
             AgendaWaitlist.SpacesAvailable = 1;
-            AgendaWaitlist.LimitReachedOption = FormData.AgendaLimitReachedOption.Waitlist;
+            AgendaWaitlist.LimitReachedOption = DataCollection.EventData_Common.AgendaLimitReachedOption.Waitlist;
             AgendaWaitlist.WaitlistConfirmationText = "WaitlistConfirmationText";
             evt.AgendaPage.AgendaItems.Add(AgendaShowCapacity);
             evt.AgendaPage.AgendaItems.Add(AgendaHideReached);
@@ -597,7 +597,7 @@
             Assert.True(PageObject.PageObjectHelper.IsTextPresent(AgendaWaitlist.WaitlistConfirmationText));
         }
 
-        private void SelectAgendaType(FormData.CustomFieldType type)
+        private void SelectAgendaType(DataCollection.EventData_Common.CustomFieldType type)
         {
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.FieldType_Click();
             PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AgendaType_Select(type);

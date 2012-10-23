@@ -33,10 +33,10 @@
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
             //update xAuth type as EmailPassword
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
-            Managers.ManagerProvider.XAuthMgr.VerifyErrorMessages(FormData.TestAccountResult.Success);
+            Managers.ManagerProvider.XAuthMgr.VerifyErrorMessages(DataCollection.EventData_Common.TestAccountResult.Success);
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();
             Utilities.Utility.ThreadSleep(2);

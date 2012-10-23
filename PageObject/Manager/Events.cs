@@ -19,7 +19,7 @@
             WaitForAJAX();
         }
 
-        public void EventType_Select(DataCollection.FormData.FormType formType)
+        public void EventType_Select(DataCollection.EventData_Common.FormType formType)
         {
             Clickable EventType = new Clickable(string.Format("//div[@id='createNewEvent']//span[text()='{0}']", CustomStringAttribute.GetCustomString(formType)), LocateBy.XPath);
 

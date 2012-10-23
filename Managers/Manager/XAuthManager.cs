@@ -135,25 +135,25 @@
         }
 
         [Step]
-        public void SetXAuthType(FormData.XAuthType type)
+        public void SetXAuthType(DataCollection.EventData_Common.XAuthType type)
         {
             switch (type)
             {
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     SetValidateMemberByUserName();
                     TypeDescriptionForIdentifer("User ID");
                     SetValidateMemberRequirePassword(false);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     SetValidateMemberByUserName();
                     TypeDescriptionForIdentifer("User ID");
                     SetValidateMemberRequirePassword(true);
                     break;
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     SetValidateMemberByEmail();
                     SetValidateMemberRequirePassword(false);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     SetValidateMemberByEmail();
                     SetValidateMemberRequirePassword(true);
                     break;
@@ -163,21 +163,21 @@
         }
 
         [Step]
-        public void SetDefaultAccount(FormData.XAuthType type)
+        public void SetDefaultAccount(DataCollection.EventData_Common.XAuthType type)
         {
             switch (type)
             {
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     TypeTestUserName(DefaultAccount_UserName);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     TypeTestUserName(DefaultAccount_UserName);
                     TypeTestPassword(DefaultAccount_Password);
                     break;
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     TypeTestEmail(DefaultAccount_Email);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     TypeTestEmail(DefaultAccount_Email);
                     TypeTestPassword(DefaultAccount_Password);
                     break;
@@ -228,60 +228,60 @@
 
         // Verify Error Message Functions
         [Verify]
-        public void VerifyErrorMessages(FormData.TestAccountResult errorType)
+        public void VerifyErrorMessages(DataCollection.EventData_Common.TestAccountResult errorType)
         {
             List<string> errors = new List<string>();
             switch (errorType)
             {
-                case FormData.TestAccountResult.InvalidEmail:
+                case DataCollection.EventData_Common.TestAccountResult.InvalidEmail:
                     errors.Add(ErrorMsg_InvalidEmail);
                     break;
-                case FormData.TestAccountResult.AuthenticateFail:
+                case DataCollection.EventData_Common.TestAccountResult.AuthenticateFail:
                     errors.Add(ErrorMsg_AuthenticateFail);
                     break;
-                case FormData.TestAccountResult.RequiredUsername:
+                case DataCollection.EventData_Common.TestAccountResult.RequiredUsername:
                     errors.Add(ErrorMsg_RequiredUsername);
                     break;
-                case FormData.TestAccountResult.RequiredEmail:
+                case DataCollection.EventData_Common.TestAccountResult.RequiredEmail:
                     errors.Add(ErrorMsg_RequiredEmail);
                     break;
-                case FormData.TestAccountResult.RequiredPassword:
+                case DataCollection.EventData_Common.TestAccountResult.RequiredPassword:
                     errors.Add(ErrorMsg_RequiredPassword);
                     break;
-                case FormData.TestAccountResult.RequiredUsernamePassword:
-                    errors.Add(ErrorMsg_RequiredUsername);
-                    errors.Add(ErrorMsg_RequiredPassword);
-                    break;
-                case FormData.TestAccountResult.RequiredEmailPassword:
-                    errors.Add(ErrorMsg_RequiredEmail);
-                    errors.Add(ErrorMsg_RequiredPassword);
-                    break;
-                case FormData.TestAccountResult.UrlStartWithHttps:
-                    errors.Add(ErrorMsg_UrlStartWithHttps);
-                    break;
-                case FormData.TestAccountResult.RequiredUsernameAndUrlStartWithHttps:
-                    errors.Add(ErrorMsg_UrlStartWithHttps);
-                    errors.Add(ErrorMsg_RequiredUsername);
-                    break;
-                case FormData.TestAccountResult.RequiredEmailAndUrlStartWithHttps:
-                    errors.Add(ErrorMsg_UrlStartWithHttps);
-                    errors.Add(ErrorMsg_RequiredEmail);
-                    break;
-                case FormData.TestAccountResult.RequiredPasswordAndUrlStartWithHttps:
-                    errors.Add(ErrorMsg_UrlStartWithHttps);
-                    errors.Add(ErrorMsg_RequiredPassword);
-                    break;
-                case FormData.TestAccountResult.RequiredUsernamePasswordAndUrlStartWithHttps:
-                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                case DataCollection.EventData_Common.TestAccountResult.RequiredUsernamePassword:
                     errors.Add(ErrorMsg_RequiredUsername);
                     errors.Add(ErrorMsg_RequiredPassword);
                     break;
-                case FormData.TestAccountResult.RequiredEmailPasswordAndUrlStartWithHttps:
+                case DataCollection.EventData_Common.TestAccountResult.RequiredEmailPassword:
+                    errors.Add(ErrorMsg_RequiredEmail);
+                    errors.Add(ErrorMsg_RequiredPassword);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.UrlStartWithHttps:
+                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.RequiredUsernameAndUrlStartWithHttps:
+                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                    errors.Add(ErrorMsg_RequiredUsername);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.RequiredEmailAndUrlStartWithHttps:
+                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                    errors.Add(ErrorMsg_RequiredEmail);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.RequiredPasswordAndUrlStartWithHttps:
+                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                    errors.Add(ErrorMsg_RequiredPassword);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.RequiredUsernamePasswordAndUrlStartWithHttps:
+                    errors.Add(ErrorMsg_UrlStartWithHttps);
+                    errors.Add(ErrorMsg_RequiredUsername);
+                    errors.Add(ErrorMsg_RequiredPassword);
+                    break;
+                case DataCollection.EventData_Common.TestAccountResult.RequiredEmailPasswordAndUrlStartWithHttps:
                     errors.Add(ErrorMsg_UrlStartWithHttps);
                     errors.Add(ErrorMsg_RequiredEmail);
                     errors.Add(ErrorMsg_RequiredPassword);
                     break;
-                case FormData.TestAccountResult.Success:
+                case DataCollection.EventData_Common.TestAccountResult.Success:
                     break;
             }
 
@@ -322,20 +322,20 @@
             xAuth.ValidateMemberByEmail.Click();
         }
 
-        private void TypeServiceEndpointURL(FormData.XAuthType type)
+        private void TypeServiceEndpointURL(DataCollection.EventData_Common.XAuthType type)
         {
             switch (type)
             {
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     TypeServiceEndpointURL(ServiceEndpointURL_By_UserName);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     TypeServiceEndpointURL(ServiceEndpointURL_By_UserName_Password);
                     break;
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     TypeServiceEndpointURL(ServiceEndpointURL_By_Email);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     TypeServiceEndpointURL(ServiceEndpointURL_By_Email_Password);
                     break;
             }

@@ -22,14 +22,14 @@
 
             switch (merch.Type)
             {
-                case FormData.MerchandiseType.Fixed:
+                case DataCollection.EventData_Common.MerchandiseType.Fixed:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.FeeAmount.Type(merch.Price.Value);
                     break;
-                case FormData.MerchandiseType.Variable:
+                case DataCollection.EventData_Common.MerchandiseType.Variable:
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMinAmount.Type(merch.MinPrice.Value);
                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.MerchandisePage.MerchandiseDefine.VariableFeeMaxAmount.Type(merch.MaxPrice.Value);
                     break;
-                case FormData.MerchandiseType.Header:
+                case DataCollection.EventData_Common.MerchandiseType.Header:
                     break;
                 default:
                     break;
@@ -43,7 +43,7 @@
 
             if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
             {
-                KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Merchandise);
+                KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, DataCollection.EventData_Common.Location.Merchandise);
             }
 
             if ((evt.TaxRateOne != null) && (merch.ApplyTaxOne.HasValue))

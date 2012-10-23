@@ -11,7 +11,7 @@
         {
             switch (agenda.Type)
             {
-                case FormData.CustomFieldType.CheckBox:
+                case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                     return new CheckBox(string.Format("CF{0}", agenda.Id), UIUtility.LocateBy.Id);
                 default:
                     return null;

@@ -20,7 +20,7 @@
         public Label LastModified;
         public Clickable VerifyCCProcessing;
 
-        public GatewayRow(DataCollection.FormData.Gateway gateway, DataCollection.FormData.GatewayCategory category)
+        public GatewayRow(DataCollection.EventData_Common.Gateway gateway, DataCollection.EventData_Common.GatewayCategory category)
         {
 
         }

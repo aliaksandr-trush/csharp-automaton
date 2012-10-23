@@ -174,7 +174,7 @@
             WaitForAJAX();
         }
 
-        public void AgendaType_Select(DataCollection.FormData.CustomFieldType type)
+        public void AgendaType_Select(DataCollection.EventData_Common.CustomFieldType type)
         {
             Clickable Type = new Clickable(
                 string.Format("//div[@id='divMoreFormats']//span[text()='{0}']", CustomStringAttribute.GetCustomString(type)), 
@@ -483,7 +483,7 @@
     {
         public CommonlyUsedItemsDefine(string name) : base(name) { }
 
-        public void CommonlyUsedItem_Click(FormData.CommonlyUsedMultipleChoice choiceItem)
+        public void CommonlyUsedItem_Click(DataCollection.EventData_Common.CommonlyUsedMultipleChoice choiceItem)
         {
             Clickable item = new Clickable(string.Format("//div[@id='divPredefinedTypes']/div[text()='{0}']",
                 CustomStringAttribute.GetCustomString(choiceItem)), LocateBy.XPath);

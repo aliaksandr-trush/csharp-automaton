@@ -33,8 +33,8 @@
             BuilderMgr.RegTypeMgr.SetName("regtype1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmail);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmail);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmail);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmail);
             Managers.ManagerProvider.XAuthMgr.ClickTestButton();
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();

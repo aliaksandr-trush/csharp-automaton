@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AgendaItem.cs" />
     <Compile Include="AttendeeDirectory.cs" />
+    <Compile Include="CrossSiteData.cs" />
     <Compile Include="HtmlButton.cs" />
     <Compile Include="CustomField.cs" />
     <Compile Include="DiscountCode.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Messages.cs" />
     <Compile Include="EventDetails.cs" />
     <Compile Include="EventFolders.cs" />
-    <Compile Include="FormData.cs" />
+    <Compile Include="EventData_Common.cs" />
     <Compile Include="LodgingTravel.cs" />
     <Compile Include="Merchandise.cs" />
     <Compile Include="OnsiteKiosk.cs" />

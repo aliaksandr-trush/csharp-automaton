@@ -19,7 +19,7 @@
 
                         switch (respAgenda.AgendaItem.Type)
                         {
-                            case FormData.CustomFieldType.CheckBox:
+                            case DataCollection.EventData_Common.CustomFieldType.CheckBox:
                                 {
                                     AgendaResponse_Checkbox ckresp = respAgenda as AgendaResponse_Checkbox;
                                     ((PageObject.PageObjectProvider.Backend.AgendaEdit.AgendaType(ckresp.AgendaItem)) as CheckBox).Set(ckresp.Checked.Value);

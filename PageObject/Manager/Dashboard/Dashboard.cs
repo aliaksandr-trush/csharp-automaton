@@ -44,7 +44,7 @@
             WaitForLoad();
         }
 
-        public void DashboardTab_Click(FormData.DashboardTab tab)
+        public void DashboardTab_Click(DataCollection.EventData_Common.DashboardTab tab)
         {
             Clickable targetTab = new Clickable(CustomStringAttribute.GetCustomString(tab), LocateBy.LinkText);
             targetTab.WaitForDisplay();

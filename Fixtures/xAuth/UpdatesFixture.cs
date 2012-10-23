@@ -36,7 +36,7 @@
         
         private List<String> errorMessageList = new List<string>();
         private int eventId;
-        private FormData.XAuthType currentType = FormData.XAuthType.NotUse;
+        private DataCollection.EventData_Common.XAuthType currentType = DataCollection.EventData_Common.XAuthType.NotUse;
 
         [Test]
         public void UpdatesTest()
@@ -61,7 +61,7 @@
             this.errorMessageList.Add("You must sign in with the correct values.");
 
             //Test Case 19     
-            this.currentType = FormData.XAuthType.ByUserName;
+            this.currentType = DataCollection.EventData_Common.XAuthType.ByUserName;
 
             ManagerSiteMgr.OpenLogin();
             ManagerSiteMgr.Login();
@@ -129,7 +129,7 @@
             VerifyCancelLink();
 
             //19.8
-            this.currentType = FormData.XAuthType.ByUserNamePassword;
+            this.currentType = DataCollection.EventData_Common.XAuthType.ByUserNamePassword;
             SetXAuthType();
 
             //19.9
@@ -145,7 +145,7 @@
             VerifyCancelLink();
 
             //19.11
-            this.currentType = FormData.XAuthType.ByEmail;
+            this.currentType = DataCollection.EventData_Common.XAuthType.ByEmail;
             SetXAuthType();
 
             //19.12
@@ -159,7 +159,7 @@
             VerifyCancelLink();
 
             //19.14
-            this.currentType = FormData.XAuthType.ByEmailPassword;
+            this.currentType = DataCollection.EventData_Common.XAuthType.ByEmailPassword;
             SetXAuthType();
 
             //19.15
@@ -178,8 +178,8 @@
         {
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByUserName:
-                case FormData.XAuthType.ByUserNamePassword: 
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword: 
                     RegisterMgr.XAuth_TypeUserId(Managers.ManagerProvider.XAuthMgr.DefaultAccount_UserName);
                     RegisterMgr.TypeLoginPagePassword(WrongPassword);
                     RegisterMgr.Continue();
@@ -190,8 +190,8 @@
                     this.errorMessageList[0] = "You must sign in with the correct values.";
                     RegisterMgr.VerifyErrorMessages(this.errorMessageList);
                     break;
-                case FormData.XAuthType.ByEmail:
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.TypeLoginPagePassword(WrongPassword);
                     RegisterMgr.Continue();
                     RegisterMgr.VerifyErrorMessages(this.errorMessageList);
@@ -216,26 +216,26 @@
             VerifyFailWithWrongInfoInLoginPage();
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByUserName:
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     RegisterMgr.XAuth_VerifyUserIdLabel(DescriptionForIdentifer + ":");
                     RegisterMgr.XAuth_VerifyUserIDTextboxVisibility(true);
                     RegisterMgr.XAuth_TypeUserId(Managers.ManagerProvider.XAuthMgr.DefaultAccount_UserName);
                     break;
-                case FormData.XAuthType.ByEmail:
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.XAuth_VerifyUserIDTextboxVisibility(false);
                     break;
                 default: break;
             }
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByEmail:
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     RegisterMgr.TypeLoginPagePassword(InputPassword);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     RegisterMgr.TypeLoginPagePassword(Managers.ManagerProvider.XAuthMgr.DefaultAccount_Password);
                     break;
                 default: break;
@@ -280,15 +280,15 @@
             RegisterMgr.Continue();
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     RegisterMgr.TypeLoginPagePassword(Managers.ManagerProvider.XAuthMgr.DefaultAccount_Password);
                     break;
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     RegisterMgr.XAuth_TypeUserId(Managers.ManagerProvider.XAuthMgr.DefaultAccount_UserName);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     RegisterMgr.XAuth_TypeUserId(Managers.ManagerProvider.XAuthMgr.DefaultAccount_UserName);
                     RegisterMgr.TypeLoginPagePassword(Managers.ManagerProvider.XAuthMgr.DefaultAccount_Password);
                     break;
@@ -299,23 +299,23 @@
             RegisterMgr.XAuth_SetDefaultStandardPersonalInfoFields(personalInfo, false);
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
                     personalInfo.Country = string.Empty;
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(true);
                     RegisterMgr.TypePersonalInfoPassword(InputPassword);
                     RegisterMgr.TypePersonalInfoVerifyPassword(InputPassword);
                     break;
-                case FormData.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
                     personalInfo.Country = "USA";
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(false);
                     break;
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     personalInfo.Country = string.Empty;
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(true);
                     RegisterMgr.TypePersonalInfoPassword(InputPassword);
                     RegisterMgr.TypePersonalInfoVerifyPassword(InputPassword);
                     break;
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     personalInfo.Country = "USA";
                     RegisterMgr.XAuth_VerifyPasswordSectionPresent(false);
                     break;
@@ -349,12 +349,12 @@
             //PI
             switch (this.currentType)
             {
-                case FormData.XAuthType.ByEmail:
-                case FormData.XAuthType.ByUserName:
+                case DataCollection.EventData_Common.XAuthType.ByEmail:
+                case DataCollection.EventData_Common.XAuthType.ByUserName:
                     personalInfo.Country = string.Empty;                    
                     break;
-                case FormData.XAuthType.ByEmailPassword:
-                case FormData.XAuthType.ByUserNamePassword:
+                case DataCollection.EventData_Common.XAuthType.ByEmailPassword:
+                case DataCollection.EventData_Common.XAuthType.ByUserNamePassword:
                     personalInfo.Country = "USA";                    
                     break;
                 default: break;

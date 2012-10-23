@@ -24,27 +24,27 @@
             reg.EventFee_Response = new EventFeeResponse(regType);
 
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             KeywordProvider.Registration_Creation.SSOLogin(SSOData.SSOJustNameEmail, SSOData.SSOPassword);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             PageObject.PageObjectProvider.Register.RegistationSite.Checkin.OpenUrl(reg);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             KeywordProvider.Registration_Creation.SSOLogin(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.Password.IsPresent);
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(FormData.PersonalInfoField.Email).HasAttribute("value"));
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(FormData.PersonalInfoField.FirstName).HasAttribute("value"));
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(FormData.PersonalInfoField.MiddleName).HasAttribute("value"));
-            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(FormData.PersonalInfoField.LastName).HasAttribute("value"));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(DataCollection.EventData_Common.PersonalInfoField.Email).HasAttribute("value"));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(DataCollection.EventData_Common.PersonalInfoField.FirstName).HasAttribute("value"));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(DataCollection.EventData_Common.PersonalInfoField.MiddleName).HasAttribute("value"));
+            Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.PersonalInfoFields(DataCollection.EventData_Common.PersonalInfoField.LastName).HasAttribute("value"));
             PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Type("Automation");
             reg.JobTitle = "Automation";
             PageObject.PageObjectProvider.Register.RegistationSite.Continue_Click();
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg);
             PageObject.PageObjectProvider.Register.RegistationSite.Confirmation.ChangeMyRegistration_Click();
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.SSOLogin, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.SSOLogin, true);
             KeywordProvider.Registration_Creation.SSOLogin(reg);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.AttendeeCheck, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.AttendeeCheck, true);
             Assert.False(PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.Substitute(0).IsPresent);
             PageObject.PageObjectProvider.Register.RegistationSite.AttendeeCheck.PersonalInfoLink_Click(0);
             Assert.True(reg.JobTitle == PageObject.PageObjectProvider.Register.RegistationSite.PersonalInfo.JobTitle.Value);
@@ -70,16 +70,16 @@
             reg2.EventFee_Response = new EventFeeResponse(regType2);
 
             KeywordProvider.Registration_Creation.Checkin(reg1);
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
             KeywordProvider.Registration_Creation.PersonalInfo(reg1);
             KeywordProvider.Registration_Creation.CheckoutAndConfirmation(reg1);
 
             KeywordProvider.Registration_Creation.Checkin(reg2);
-            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(FormData.RegisterPage.Login))
+            if (PageObject.PageObjectProvider.Register.RegistationSite.IsOnPage(DataCollection.EventData_Common.RegisterPage.Login))
             {
                 PageObject.PageObjectProvider.Register.RegistationSite.Login.StartNewRegistration_Click();
             }
-            AssertHelper.VerifyOnPage(FormData.RegisterPage.PersonalInfo, true);
+            AssertHelper.VerifyOnPage(DataCollection.EventData_Common.RegisterPage.PersonalInfo, true);
 
             KeywordProvider.Registration_Creation.Checkin(reg1);
             Assert.True(KeywordProvider.Register_Common.HasErrorMessage(Messages.RegisterError.EmailAlreadyUsed));

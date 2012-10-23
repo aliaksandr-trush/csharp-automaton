@@ -27,8 +27,8 @@
             BuilderMgr.RegTypeMgr.SetName("regType1");
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
 
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByUserName);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByUserName);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByUserName);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByUserName);
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();
 
             BuilderMgr.RegTypeMgr.SelectRegTypeFrame();
@@ -36,8 +36,8 @@
             BuilderMgr.RegTypeMgr.VerifyUnableToActivateEventWhenXAuthNotApprovedMessageShown(true);
 
             BuilderMgr.RegTypeMgr.ClickOpenXAuthSetup();
-            Managers.ManagerProvider.XAuthMgr.SetXAuthType(FormData.XAuthType.ByEmailPassword);
-            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(FormData.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetXAuthType(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
+            Managers.ManagerProvider.XAuthMgr.SetDefaultAccount(DataCollection.EventData_Common.XAuthType.ByEmailPassword);
             Managers.ManagerProvider.XAuthMgr.TypeForgetPasswordUrl("http://beta.regonline.com");
             Managers.ManagerProvider.XAuthMgr.TypeMessageToRegistration("This is it.");
             Managers.ManagerProvider.XAuthMgr.ClickOKButton();

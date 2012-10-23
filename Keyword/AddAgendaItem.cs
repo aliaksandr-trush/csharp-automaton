@@ -183,19 +183,19 @@
 
                     if (ag.EarlyPrice != null)
                     {
-                        KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(ag.EarlyPrice, FormData.Location.Agenda);
+                        KeywordProvider.Add_EarlyLatePrice.AddEarlyPrice(ag.EarlyPrice, DataCollection.EventData_Common.Location.Agenda);
                     }
 
                     if (ag.LatePrice != null)
                     {
-                        KeywordProvider.Add_EarlyLatePrice.AddLatePrice(ag.LatePrice, FormData.Location.Agenda);
+                        KeywordProvider.Add_EarlyLatePrice.AddLatePrice(ag.LatePrice, DataCollection.EventData_Common.Location.Agenda);
                     }
 
                     if ((ag.DiscountCodes.Count != 0) && (ag.BulkCodes == null))
                     {
                         foreach (CustomFieldCode dc in ag.DiscountCodes)
                         {
-                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, FormData.Location.Agenda);
+                            KeywordProvider.Add_DiscountCode.AddDiscountCodes(dc, DataCollection.EventData_Common.Location.Agenda);
                             PageObject.Builder.RegistrationFormPages.CodeRow row = new PageObject.Builder.RegistrationFormPages.CodeRow(dc);
                         }
                     }
@@ -215,7 +215,7 @@
 
                     if ((evt.TaxRateOne != null) || (evt.TaxRateTwo != null))
                     {
-                        KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, FormData.Location.Agenda);
+                        KeywordProvider.Add_TaxRate.AddTaxRates(evt.TaxRateOne, evt.TaxRateTwo, DataCollection.EventData_Common.Location.Agenda);
                     }
 
                     if ((evt.TaxRateOne != null) && (ag.ApplyTaxOne.HasValue))
@@ -246,10 +246,10 @@
                         {
                             switch (ag.LimitReachedOption.Value)
                             {
-                                case FormData.AgendaLimitReachedOption.HideItem:
+                                case DataCollection.EventData_Common.AgendaLimitReachedOption.HideItem:
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.HideWhenLimitReached.Click();
                                     break;
-                                case FormData.AgendaLimitReachedOption.ShowMessage:
+                                case DataCollection.EventData_Common.AgendaLimitReachedOption.ShowMessage:
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.ShowMessageWhenLimitReached.Click();
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddLimitReachedMessage_Click();
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LimitReachedMessageEditor.SelectByName();
@@ -257,7 +257,7 @@
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LimitReachedMessageEditor.Content_Type(ag.LimitReachedMessage);
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.LimitReachedMessageEditor.SaveAndClose_Click();
                                     break;
-                                case FormData.AgendaLimitReachedOption.Waitlist:
+                                case DataCollection.EventData_Common.AgendaLimitReachedOption.Waitlist:
                                     PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.WaitlistWhenLimitReached.Click();
 
                                     if (ag.WaitlistConfirmationText != null)
@@ -363,7 +363,7 @@
                 {
                     int count = ag.ChoiceItems.Count;
 
-                    foreach (FormData.CommonlyUsedMultipleChoice item in ag.CommonlyUsedItems)
+                    foreach (DataCollection.EventData_Common.CommonlyUsedMultipleChoice item in ag.CommonlyUsedItems)
                     {
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.AddCommonlyUsedItem_Click();
                         PageObject.PageObjectProvider.Builder.EventDetails.FormPages.AgendaPage.CommonlyUsedItemsDefine.SelectByName();

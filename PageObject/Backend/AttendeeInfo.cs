@@ -17,7 +17,7 @@
             string url = string.Format(
                 "{0}reports/Attendee.aspx?EventSessionId={1}&registerId={2}",
                 ConfigReader.DefaultProvider.AccountConfiguration.BaseUrl,
-                FormData.EventSessionId,
+                CrossSiteData.EventSessionId,
                 registerId);
 
             UIUtil.DefaultProvider.OpenUrl(url);
